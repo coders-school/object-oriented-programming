@@ -10,15 +10,15 @@ ___
 
 ## SHM — Symulator Handlu Morskiego
 
-<img height="500" data-src="img/statek.png" alt="Statek" class="plain">
+<img height="500" data-src="https://github.com/coders-school/object-oriented-programming/raw/master/module1/img/statek.png" alt="Statek" class="plain">
 
 ___
 <!-- .slide: data-background="#eeeeee" -->
 
 ## SHM - Diagram UML
 
-<a href="../shm-uml.svg">
-    <img height="500" data-src="../shm-uml.svg" alt="Diagram klas - SHM" class="plain">
+<a href="https://raw.githubusercontent.com/coders-school/object-oriented-programming/master/shm-uml.svg">
+    <img height="500" data-src="https://raw.githubusercontent.com/coders-school/object-oriented-programming/master/shm-uml.svg" alt="Diagram klas - SHM" class="plain">
 </a>
 
 ___
@@ -109,7 +109,7 @@ ___
 
 ## Diagram klas - kompozycja, agregacja
 
-<img height="250" data-src="img/composition_aggregation.png" alt="Statek" class="plain">
+<img height="250" data-src="https://github.com/coders-school/object-oriented-programming/raw/master/module1/img/composition_aggregation.png" alt="Kompozycja i agregacja" class="plain">
 
 * <!-- .element: class="fragment fade-in" --> Kompozycja: Samochód (Car) zawiera dokładnie 1 Gaźnik (Carburetor). Gaźnik jest częścią dokładnie jednego samochodu. Bez samochodu gaźnik nic nie robi, nie może więc działać bez niego.
 * <!-- .element: class="fragment fade-in" --> Agregacja: Staw (Pond) może zawierać dowolną liczbę (0..*) Kaczek (Duck). Kaczka może być w danej chwili tylko w jednym stawie lub w żadnych (0..1). Kaczka może żyć poza stawem.
