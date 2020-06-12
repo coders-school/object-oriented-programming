@@ -258,7 +258,7 @@ ___
 ## class Computer
 
 ```C++
-Class Computer {
+class Computer {
 public:
     void TurnOn();
     void PowerOff();
@@ -270,7 +270,7 @@ private:
     Motherboard motherboard_;
     GraphicsCard graphics_card_;
     Memory memory_;
-}
+};
 ```
 
 ___
@@ -278,7 +278,7 @@ ___
 ## class Laptop 
 
 ```C++
-Class Laptop {
+class Laptop {
 public:
     void TurnOn();
     void PowerOff();
@@ -294,7 +294,7 @@ private:
     Memory memory_;
     Screen screen_;
     Keyboard keyboard_;
-}
+};
 ```
 
 ___
@@ -302,7 +302,7 @@ ___
 ## class Tablet
 
 ```C++
-Class Tablet {
+class Tablet {
 public:
     void TurnOn();
     void PowerOff();
@@ -318,7 +318,7 @@ private:
     Memory memory_;
     Screen screen_;
     Keyboard keyboard_;
-}
+};
 ```
 
 ___
@@ -329,7 +329,7 @@ ___
 ___
 
 ```C++
-Class Computer {
+class Computer {
 public:
     void TurnOn();
     void PowerOff();
@@ -341,7 +341,7 @@ protected:
     Motherboard motherboard_;
     GraphicsCard graphics_card_;
     Memory memory_;
-}
+};
 
 class Laptop : public Computer {
 public:
@@ -351,7 +351,7 @@ public:
 private:
     Screen screen_;
     Keyboard keyboard_;
-}
+};
 
 class Tablet : public Computer {
 public:
@@ -360,7 +360,7 @@ public:
 
 private:
     Screen screen_;
-}
+};
 ```
 ___
 
@@ -384,7 +384,7 @@ private:
     void Process();
 
     Monitor monitor_;
-}
+};
 ```
 
 Chcemy teraz stworzyć klasę Ekran dotykowy, który również umożliwia odczyt akcji od użytkownika i ich wyświetlanie.
@@ -400,7 +400,7 @@ private:
     void DispalyKeyboard();
 
     Monitor monitor_;
-}
+};
 ```
 
 -Pytanie: Jak uprościć powyższy kod?
@@ -414,7 +414,7 @@ private:
     void Process();
 
     Monitor monitor_;
-}
+};
 
 class TouchableScreen : public Screen {
 public:
@@ -422,7 +422,7 @@ public:
 
 private:
     void DispalyKeyboard();
-}
+};
 ```
 
 ### Wielodziedziczenie:
@@ -436,7 +436,7 @@ private:
     void Process();
 
     Monitor monitor_;
-}
+};
 
 class TouchableScreen : public Screen {
 public:
@@ -444,7 +444,7 @@ public:
 
 private:
     void DispalyKeyboard();
-}
+};
 
 Class Computer {
 public:
@@ -458,19 +458,19 @@ protected:
     Motherboard motherboard_;
     GraphicsCard graphics_card_;
     Memory memory_;
-}
+};
 
 class Laptop : public Computer, public Screen {
 public:
 private:
     Keyboard keyboard_;
-}
+};
 
 class Tablet : public Computer,
                public TouchableScreen {
 public:
 private:
-}
+};
 ```
 
 Wybór implementacji zależy od programisty. Nie zawsze wielodziedziczenie będzie lepszym rozwiązaniem. Należy się zawsze zastanowić
@@ -482,20 +482,20 @@ class Bird {
 public:
     Fly();
     MakeSound();
-}
+};
 
 class Penguin {
 public:
     Swim();
     MakeSound();
-}
+};
 
 // Hummingbird is the type of bird which produces so little sound so it can be said that it makes no sound.
 // They do not have large proper voice box so they cannot create sounds like other birds.
 //They can communicate in a different manner or nonetheless.
 class Hummingbird {
     Fly();
-}
+};
 ```
 
 Jeżeli sprobujemy teraz uprościć klasę poprzez dziedziczenie pojawi się problem:
@@ -505,19 +505,19 @@ class Bird {
 public:
     Fly();
     MakeSound();
-}
+};
 
 class Penguin : public Bird {
 public:
     Fly();  // But I can't fly!
     Swim();
     MakeSound();
-}
+};
 
 class Hummingbird : public Bird {
     Fly();
     MakeSound();  // But I don't make sound!
-}
+};
 ```
 Jeszcze bardziej utrudnimy sytuacje, gdy w przyszłości dodamy sobie kolejne klasy jak Struś.
 Zawsze przed implementacją musimy się zastanowić jak podzielić odpowiedzialność na poszczególne klasy, aby
@@ -539,7 +539,7 @@ public:
     protectd : size_t weight_;
     size_t height_;
     std::sting name_;
-}
+};
 ```
 
 ```C++
@@ -549,17 +549,17 @@ public:
 
 private:
     Wings wings_;
-}
+};
 
 class Swimmable {
 public:
     virtual void Swim() = 0;
-}
+};
 
 class Singingable {
 public:
     virtual void MakeSound() = 0;
-}
+};
 ```
 
 ```C++
@@ -571,7 +571,7 @@ public:
 
     // Override from Swimmable
     void Swim() override;
-}
+};
 
 class Hummingbird : public Bird,
                     public Flyable,
@@ -586,7 +586,7 @@ public:
 
     // Override from Flyable
     void Fly() override;
-}
+};
 
 class Goose : public Bird,
               public Flyable,
@@ -605,7 +605,7 @@ public:
 
     // Override from Swimmable
     void Swim() override;
-}
+};
 ```
 
 *WAŻNE* Klasa, która posiada co najmniej jedną czysto wirtualną metodę nie może być zainicjalizowana.
@@ -628,11 +628,13 @@ public:
 class SomeClass : public Interface {
 public:
     DoSth() override;
-}
+};
 
-Interface interface;                // Wrong, class Interface is pure virtual!
-SmomeClass someClass;               // Good!
-Interface* interface = &someClass;  // Good! We hold pointer!
+int main() {
+    Interface interface;                // Wrong, class Interface is pure virtual!
+    SmomeClass someClass;               // Good!
+    Interface* interface = &someClass;  // Good! We hold pointer!
+}
 ```
 
 # 3 Polimorfizm
@@ -651,7 +653,7 @@ Przeciążanie takich metod powoduje, że możemy zmienić nieco implementacje k
 class Singingable {
 public:
     virtual void MakeSound() = 0;
-}
+};
 ```
 
 ```C++
@@ -659,7 +661,7 @@ class Goose : public Singingable {
 public:
     // Override from Singingable
     void MakeSound() override { std::cout << "Honk! Honk!"; }
-}
+};
 ```
 
 ```C++
@@ -667,7 +669,7 @@ class Hen : public Singingable {
 public:
     // Override from Singingable
     void MakeSound() override { std::cout << "Cluck! Cluck!"; }
-}
+};
 ```
 
 ```C++
@@ -675,7 +677,7 @@ class Duck : public Singingable {
 public:
     // Override from Singingable
     void MakeSound() override { std::cout << "Quack! Quack!"; }
-}
+};
 ```
 
 Ponieważ wspólnym rodzicem wszystkich klas jest klasa `Singingable` możemy przechowywać w kontenerze wskaźniki typu `Singingable`.
@@ -831,7 +833,7 @@ public:
 
 private:
     const std::string name_ = "Object";
-}
+};
 ```
 
 W celu otrzymania nazwy tego obiektu, musimy najpierw utworzyć obiekt, a następnie zawołać `GetName()`.
