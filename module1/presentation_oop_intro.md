@@ -47,6 +47,7 @@ ___
 ### Czym jest klasa?
 
 Klasa to typ.
+<!-- .element: class="fragment fade-in" -->
 
 Klasa w C++ nieco różni się od rzeczywistej klasy :) W C++ (czy też programowaniu obiektowym ogólnie) klasa określa cechy obiektu:
 <!-- .element: class="fragment fade-in" -->
