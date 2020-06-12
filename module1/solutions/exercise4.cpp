@@ -5,9 +5,9 @@ public:
     Cargo() = default;
     Cargo(size_t amount, std::string name, size_t base_price);
 
-    std::string GetName();
-    size_t GetAmount();
-    size_t GetBasePrice();
+    std::string getName();
+    size_t getAmount();
+    size_t getBasePrice();
     Cargo& operator+=(size_t amount) {
         amount_ += amount;
         return *this;

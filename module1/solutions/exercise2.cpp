@@ -14,13 +14,13 @@ public:
         capacity_ = capacity;
     }
 
-    void SetName(const std::string& name) { name_ = name; }
+    void setName(const std::string& name) { name_ = name; }
 
-    size_t GetCapacity() const { return capacity_; }
-    size_t GetCrew() const { return crew_; }
-    size_t GetSpeed() const { return speed_; }
-    std::string GetName() const { return name_; }
-    size_t GetId() const { return id_; }
+    size_t getCapacity() const { return capacity_; }
+    size_t getCrew() const { return crew_; }
+    size_t getSpeed() const { return speed_; }
+    std::string getName() const { return name_; }
+    size_t getId() const { return id_; }
 
 private:
     size_t capacity_;
