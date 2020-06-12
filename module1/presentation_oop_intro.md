@@ -20,6 +20,7 @@ ___
 <a href="../shm-uml.svg">
     <img height="500" data-src="../shm-uml.svg" alt="Diagram klas - SHM" class="plain">
 </a>
+
 ___
 
 ## Wprowadzenie do programowania obiektowego

@@ -19,7 +19,7 @@ ___
 2. <!-- .element: class="fragment fade-in" --> obiekty
 3. <!-- .element: class="fragment fade-in" --> pola, właściwości
 4. <!-- .element: class="fragment fade-in" --> metody, funkcje klasy
-5. <!-- .element: class="fragment fade-in" --> modyfikatory dostepu - `public`, `private`
+5. <!-- .element: class="fragment fade-in" --> modyfikatory dostępu - `public`, `private`
 6. <!-- .element: class="fragment fade-in" --> konstruktory
 7. <!-- .element: class="fragment fade-in" --> destruktory
 8. <!-- .element: class="fragment fade-in" --> hermetyzacja
