@@ -1,10 +1,12 @@
-class Ship  {
+#include <string>
+
+class Ship {
 public:
-  size_t GetCapacity() const { return capacity_; }
-  size_t GetCrew() const { return crew_; }
-  size_t GetSpeed() const { return speed_; }
-  std::string GetName() const { return name_; }
-  size_t GetId() const { return id_; }
+    size_t GetCapacity() const { return capacity_; }
+    size_t GetCrew() const { return crew_; }
+    size_t GetSpeed() const { return speed_; }
+    std::string GetName() const { return name_; }
+    size_t GetId() const { return id_; }
 
 private:
     size_t capacity_;

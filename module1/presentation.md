@@ -13,9 +13,13 @@ ___
 <img height="500" data-src="img/statek.png" alt="Statek" class="plain">
 
 ___
+<!-- .slide: data-background="#eeeeee" -->
 
-[Zdjęcia diagramu UML, który podeśle] krótkie omówienie niektórych zagadnień na przykładzie UML'a.
+## SHM - Diagram UML
 
+<a href="../shm-uml.svg">
+    <img height="500" data-src="../shm-uml.svg" alt="Diagram klas - SHM" class="plain">
+</a>
 ___
 
 ## Wprowadzenie do programowania obiektowego
@@ -26,16 +30,17 @@ ___
 
 Obiekt w C++ niczym się nie różni od rzeczywistego obiektu. Obiekt to "konkretny" obiekt. Możemy mieć wiele identycznych obiektów. Niektórym dla rozróżnienia możemy nadać nazwy. W C++ możemy mieć obiekty takie jak:
 
-* komputer HP, komputer Lenovo, komputer MacBook
-* drukarka HP, drukarka Epson
-* ołówek Stabilo Schwan 306 HB = 2 1/2
-* kalkulator Casio
-* ...
+* <!-- .element: class="fragment fade-in" --> komputer HP, komputer Lenovo, komputer MacBook
+* <!-- .element: class="fragment fade-in" --> drukarka HP, drukarka Epson
+* <!-- .element: class="fragment fade-in" --> ołówek Stabilo Schwan 306 HB = 2 1/2
+* <!-- .element: class="fragment fade-in" --> kalkulator Casio
+* <!-- .element: class="fragment fade-in" --> ...
 
 Obiekt istnieje w pamięci komputera podczas wykonywania programu. Możemy mieć wiele obiektów tego samego typu.
+<!-- .element: class="fragment fade-in" -->
 
-* Typ: `Pies`
-* Obiekty typu `Pies`: `Azor`, `Burek`, `Decybel`, ...
+* <!-- .element: class="fragment fade-in" --> Typ: <code>Pies</code>
+* <!-- .element: class="fragment fade-in" --> Obiekty typu <code>Pies</code>: <code>Azor</code>, <code>Burek</code>, <code>Decybel</code>, ...
 
 ___
 
@@ -44,20 +49,21 @@ ___
 Klasa to typ.
 
 Klasa w C++ nieco różni się od rzeczywistej klasy :) W C++ (czy też programowaniu obiektowym ogólnie) klasa określa cechy obiektu:
+<!-- .element: class="fragment fade-in" -->
 
-* jakie właściwości będzie miał ten obiekt (pola)
-* jakie będzie miał metody działania (metody, funkcje)
+* <!-- .element: class="fragment fade-in" --> jakie właściwości będzie miał ten obiekt (pola)
+* <!-- .element: class="fragment fade-in" --> jakie będzie miał metody działania (metody, funkcje)
 
 ___
 
 ### Pytania
 
-* jakie właściwości mógłby mieć obiekt komputer?
-* jakie metody mógłby mieć komputer?
+* <!-- .element: class="fragment fade-in" --> jakie właściwości mógłby mieć obiekt komputer?
+* <!-- .element: class="fragment fade-in" --> jakie metody mógłby mieć komputer?
 
 ```cpp
 class Computer {
-    // fields (pola)
+    // fields (pola, właściwości)
     Processor processor_;
     Drive drive_;
     Motherboard motherboard_;
@@ -70,6 +76,7 @@ class Computer {
     void shutdown();
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -78,6 +85,7 @@ ___
 Nic nie stoi na przeszkodzie, by jeden obiekt składał się z innych obiektów. W ten sposób sprawiamy, że struktura naszego kodu staje się bardziej zrozumiała.
 
 Zawieranie się jednego obiektu w drugim nazywa się kompozycją lub agregacją. Nie są to synonimy, są to dwa trochę inne typy zawierania obiektów, ale obecnie to nie jest istotne. Dla przykładu z komputerem:
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Computer {
@@ -89,8 +97,10 @@ class Computer {
     // ...
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 Komputer składa się (jest skomponowany) z procesora, napędu, płyty głównej, karty graficznej, pamięci.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 <!-- .slide: data-background="#eeeeee" -->
@@ -99,20 +109,24 @@ ___
 
 <img height="250" data-src="img/composition_aggregation.png" alt="Statek" class="plain">
 
-* Kompozycja: Samochód (Car) zawiera dokładnie 1 Gaźnik (Carburetor). Gaźnik jest częścią dokładnie jednego samochodu. Bez samochodu gaźnik nic nie robi, nie może więc działać bez niego.
-* Agregacja: Staw (Pond) może zawierać dowolną liczbę (0..*) Kaczek (Duck). Kaczka może być w danej chwili tylko w jednym stawie lub w żadnych (0..1). Kaczka może żyć poza stawem.
+* <!-- .element: class="fragment fade-in" --> Kompozycja: Samochód (Car) zawiera dokładnie 1 Gaźnik (Carburetor). Gaźnik jest częścią dokładnie jednego samochodu. Bez samochodu gaźnik nic nie robi, nie może więc działać bez niego.
+* <!-- .element: class="fragment fade-in" --> Agregacja: Staw (Pond) może zawierać dowolną liczbę (0..*) Kaczek (Duck). Kaczka może być w danej chwili tylko w jednym stawie lub w żadnych (0..1). Kaczka może żyć poza stawem.
 
 [Diagram klas - wikipedia](https://en.wikipedia.org/wiki/Class_diagram)
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## `class` vs `struct`
 
 Do reprezentacji typów poza klasami (`class`) mamy jeszcze struktury (`struct`).
+<!-- .element: class="fragment fade-in" -->
 
 Podstawowa różnica polega na tym, że wszystkie elementy struktury - jej metody i zmienne są domyślnie publiczne. Natomiast w klasie są domyślnie prywatne.
+<!-- .element: class="fragment fade-in" -->
 
 Słowo `private` oznacza, że tylko wewnątrz klasy mamy dostęp do tych pól. Nie możemy się do nich odwoływać poza tą klasą. Słowo `public` oznacza, że mamy dostęp z zewnątrz do danych.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -129,6 +143,7 @@ private:
 Computer computer;
 computer.restart(); // Forbidden, restart is a private member
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Computer {
@@ -139,6 +154,7 @@ public:
 Computer computer;
 computer.restart(); // Ok
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -153,10 +169,13 @@ ___
 ## Konstruktor
 
 Konstruktor klasy jest to przepis określający jak ma wyglądać nasza klasa w chwili stworzenia.
+<!-- .element: class="fragment fade-in" -->
 
 Jest to specjalna funkcja, która nazywa się tak samo jak klasa.
+<!-- .element: class="fragment fade-in" -->
 
 Do konstruktora możemy podać wszelkie potrzebne dla nas informacje, np. rozmiar tablicy, datę zakupu etc.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Ship {
@@ -168,14 +187,17 @@ private:
     const size_t capacity_;
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## Konstruktory
 
 Klasa może posiadać wiele konstruktorów. Muszą się od siebie różnić listą parametrów, bo są to przeciążenia funkcji.
+<!-- .element: class="fragment fade-in" -->
 
-Klasa może mieć m.in. konstruktor bezargumentowy np. `Ship()`, który jest generowany automatycznie, jeżeli nie ma ona zdefiniowanego żadnego innego konstruktora.
+Klasa może mieć m.in. konstruktor bezargumentowy (domyślny) np. `Ship()`, który jest generowany automatycznie, jeżeli nie ma ona zdefiniowanego żadnego innego konstruktora.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Ship {
@@ -184,14 +206,17 @@ class Ship {
     const size_t capacity_;
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## Lista inicjalizacyjna konstruktora
 
 Do inicjalizacji danych w konstruktorze możemy wykorzystać listę inicjalizacyjną.
+<!-- .element: class="fragment fade-in" -->
 
 Listę inicjalizacyjną pisze się za sygnaturą konstruktora po dwukropku.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Processor {
@@ -211,12 +236,14 @@ private:
     size_t cores_;
 }
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## Delegowanie konstruktorów
 
 Elementem listy inicjalizacyjnej może być nawet inny konstruktor naszej klasy.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Ship {
@@ -235,6 +262,7 @@ private:
     size_t crew_;
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 <!-- .slide: style="font-size: 0.9em" -->
@@ -242,10 +270,13 @@ ___
 ## Destruktor
 
 Destruktor jest specjalną funkcją sprzątającą naszą klasę.
+<!-- .element: class="fragment fade-in" -->
 
 Musi nazywać się tak samo jak klasa, ale jej nazwa poprzedzona jest znakiem tyldy `~`.
+<!-- .element: class="fragment fade-in" -->
 
 Możemy ją wykorzystać, jeżeli chcemy wywołać konkretne akcje podczas niszczenia obiektu, np. zarejestrowanie tego faktu w dzienniku itp.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Ship {
@@ -255,7 +286,7 @@ public:
     {}
 
     ~Ship() {   // d-tor, destruktor
-        std::cout << "Ship destoryed\n";
+        std::cout << "Ship destroyed\n";
     }
 
 private:
@@ -264,34 +295,43 @@ private:
     size_t crew_;
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## Hermetyzacja
 
 Aby zabezpieczyć nasz obiekt, przez niepożądanymi modyfikacjami, możemy dokonać, tzw. hermetyzacji lub enkapsulacji.
+<!-- .element: class="fragment fade-in" -->
 
 Polega ona na umieszczeniu wszystkich właściwości (pól) w sekcji prywatnej, a ich modyfikacje umożliwiać przez publiczne funkcje.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## settery i gettery
 
 Najprostszymi funkcjami umożliwiającymi modyfikacje są tzw. settery.
+<!-- .element: class="fragment fade-in" -->
 
 Setter to funkcja, która przypisuje daną wartość konkretnej zmiennej.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 void setName(const std::string& name) { name_ = name; }
 ```
+<!-- .element: class="fragment fade-in" -->
 
 Ponieważ dane są prywatne, ich odczyt również nie jest możliwy, więc dokonujemy go przez tzw. gettery.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 std::string getName() const { return name_ }
 ```
+<!-- .element: class="fragment fade-in" -->
 
 Oczywiście nie zawsze musimy umożliwiać modyfikacje wszystkich zmiennych, tak samo, jak nie wszystkie zmienne mogą mieć swoje gettery. Wybór zależy od programisty.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
