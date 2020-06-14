@@ -128,7 +128,7 @@ ___
 
 Napisz klasę `Player`, która posiadać będzie 3 pola:
 
-* `std::unique_ptr<Ship> ship_`
+* `std::shared_ptr<Ship> ship_` (dla chętnych, spróbój użyć std::unique_ptr<>)
 * `money_`
 * `availableSpace_`
 
