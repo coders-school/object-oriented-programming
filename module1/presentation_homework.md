@@ -81,7 +81,7 @@ ___
 
 ## Zadanie 1
 
-W klasie `Cargo` napisz operator porównania (`operator ==`), kóry będzie sprawdzał, czy towary są takie same.
+W klasie `Cargo` napisz operator porównania (`operator==`), który będzie sprawdzał, czy towary są takie same.
 
 ___
 
