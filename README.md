@@ -4,12 +4,12 @@ https://github.com/Marcinati/object-oriented-programming/projects/1
 
 # Uwagi odnośnie współpracy:
 
-## 1. Przypisujemy do siebie jedno zadanie na raz. Aktualizujemy status w planie projektu (link powyżej):
+## 1. Projekt (link powyżej):
 * przypisujemy zadanie (Issue) do siebie;
 * wpisujemy zakładany czas wymagany do wykonania zadania;
 * przesuwamy zadania (najpierw do In progress), nie zapominamy o aktualizacji.
 
-## 2. Jak pracujemy:
+## 2. Jak pracujemy z gitem i GH:
 * robimy git clone tego forka, bądź tworzymy własny fork z oryginalnego repo;
 * tworzymy własny branch, na którym rozwiązujemy zadania;
 * UWAGA! podczas pracy warto aktualizować repo (bo ktoś mógł wprowadzić zmiany);
