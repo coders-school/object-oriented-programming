@@ -706,7 +706,7 @@ ___
 
 Co to za słowa? Co one robią? O tym w kolejnej lekcji ;)
 
-Zostawiamy was z tym niedopowiedzeniem, abyście sami zechcieli poszukać o tym informacji lub przejrzeli wideo pana Zelenta.
+Zostawiamy was z tym niedopowiedzeniem, abyście sami zechcieli poszukać o tym informacji lub przejrzeli wideo pana Zelenta. `virtual` tam znajdziecie, ale `override` nie, bo to zbyt nowa rzecz, bo weszła 9 lat temu ;)
 
 ___
 
@@ -736,17 +736,21 @@ int main() {
 
 ___
 
-## Polimorfizm
+## Nadpisywanie metod - `override`
 
-Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` to klasy pochodne, które dziedziczą po pewnych klasach bazowych jak `Bird`, `Flyable`, `Soundable`, `Swimmable` oraz przeciążają kilka ich metod jak:
+Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` to klasy pochodne, które dziedziczą po pewnych klasach bazowych jak `Bird`, `Flyable`, `Soundable`, `Swimmable` oraz nadpisują kilka ich metod jak:
 
 * `void eat() override`
 * `void sleep() override`
 * `void makeSound() override`
 * `void fly() override`
 * `void swim() override`
-  
-Przeciążanie takich metod powoduje, że możemy zmienić nieco implementacje konkretnych metod:
+
+Nadpisanie takich metod powoduje, że możemy zmienić ich implementacje
+
+___
+
+## `override`
 
 ```cpp
 class Soundable {
@@ -758,7 +762,6 @@ public:
 ```cpp
 class Goose : public Soundable {
 public:
-    // Override from Soundable
     void makeSound() override { std::cout << "Honk! Honk!"; }
 };
 ```
@@ -766,7 +769,6 @@ public:
 ```cpp
 class Hen : public Soundable {
 public:
-    // Override from Soundable
     void makeSound() override { std::cout << "Cluck! Cluck!"; }
 };
 ```
@@ -774,13 +776,19 @@ public:
 ```cpp
 class Duck : public Soundable {
 public:
-    // Override from Soundable
     void makeSound() override { std::cout << "Quack! Quack!"; }
 };
 ```
 
+___
+
+## Wspólna klasa bazowa
+
 Ponieważ wspólnym rodzicem wszystkich klas jest klasa `Soundable` możemy przechowywać w kontenerze wskaźniki typu `Soundable`.
-`std::vector<std::shared_ptr<Soundable>> birds_;`
+
+```cpp
+std::vector<std::shared_ptr<Soundable>> birds_;
+```
 
 ### Jakie dane otrzymamy na wyjściu?
 
@@ -790,17 +798,26 @@ birds_.push_back(std::make_shared<Goose>());
 birds_.push_back(std::make_shared<Hen>());
 birds_.push_back(std::make_shared<Duck>());
 
-std::cout << birds_[0]->MakeSound() << '\n';
-std::cout << birds_[1]->MakeSound() << '\n';
-std::cout << birds_[2]->MakeSound() << '\n';
+std::cout << birds_[0]->makeSound() << '\n';
+std::cout << birds_[1]->makeSound() << '\n';
+std::cout << birds_[2]->makeSound() << '\n';
 ```
 
-Zjawisko, które właśnie obserwowaliśmy, nazywa się polimorfizmem.
-Polimorfizm pozwala funkcji przybrać różne formy jak na przykładzie.
-Dlatego, jeżeli utworzymy kolejno obiekty `Goose`, `Hen` i `Duck` w zależności
-od obiektu zostanie wywołana jego wersja metody `MakeSound`.
+___
+
+## Polimorfizm
+
+Zjawisko, które właśnie zaobserwowaliśmy, nazywa się polimorfizmem.
+
+Polimorfizm pozwala funkcji przybrać różne formy (implementacje), tak jak na przykładzie.
+
+Dlatego, jeżeli utworzymy kolejno obiekty `Goose`, `Hen` i `Duck` w zależności od obiektu zostanie wywołana jego wersja metody `makeSound`.
 
 ### Kto grał lub czytał Wiedźmina?
+
+___
+
+## Doppler :)
 
 W uniwersum wykreowanym przez naszego rodzimego pisarza Andrzeja Sapkowskiego, występuje pewna
 intrygująca i ciekawa rasa zwana Dopplerami. Rasa ta potrafi przyjąć, postać różnych form życia,
@@ -808,30 +825,28 @@ może stać się człowiekiem, elfem, krasnoludem. Zmienia w ten sposób swoje c
 Pomimo że rasa ta jest typu Doppler, potrafi w różnych okolicznościach podszywać się pod inne rasy jak elf, krasnolud czy człowiek.
 Z punktu widzenia C++ nasz Doppler podlega zjawisku polimorfizmu.
 
+___
+<!-- .slide: style="font-size: 0.9em" -->
+
 ```cpp
 class Doppler {
 public:
-    virtual SayHallo() {
-        std::cout << "I'm Doppler!";
-    }
+    virtual sayHello() { std::cout << "I'm Doppler!"; }
 };
 
 class Dwarf : public Doppler {
-    virtual SayHallo() {
-        std::cout << "I'm Dwarf!";
-    }
+public:
+    virtual sayHello() { std::cout << "I'm Dwarf!"; }
 };
 
 class Elf : public Doppler {
-    virtual SayHallo() {
-        std::cout << "I'm Elf!";
-    }
+public:
+    virtual sayHello() { std::cout << "I'm Elf!"; }
 };
 
 class Human : public Doppler {
-    virtual SayHallo() {
-        std::cout << "I'm Human!";
-    }
+public:
+    virtual sayHello() { std::cout << "I'm Human!"; }
 };
 
 int main() {
@@ -839,19 +854,23 @@ int main() {
     std::shared_ptr<Doppler> doppler2 = std::make_shared<Elf>();
     std::shared_ptr<Doppler> doppler3 = std::make_shared<Human>();
 
-    std::cout << doppler1->SayHallo() << '\n';
-    std::cout << doppler2->SayHallo() << '\n';
-    std::cout << doppler3->SayHallo() << '\n';
+    std::cout << doppler1->sayHello() << '\n';
+    std::cout << doppler2->sayHello() << '\n';
+    std::cout << doppler3->sayHello() << '\n';
 }
 ```
 
 <!-- TODO: Pokazać, że bez słowa virtual też kod się skompiluje, ale zachowa się inaczej -->
 
-Jak widzimy, nasz Doppler może przyjąć różne formy i zachowywać się tak jak one. Pomimo że wskaźnik jest typu Doppler.
-Program dobrze wie, kiedy Doppler podszywa się pod człowieka, kiedy pod krasnoluda, a kiedy pod elfa.
+Jak widzimy, nasz Doppler może przyjąć różne formy i zachowywać się tak jak one. Wskaźnik jest typu Doppler, ale program dobrze wie, kiedy Doppler podszywa się pod człowieka, kiedy pod krasnoluda, a kiedy pod elfa.
+
+___
+<!-- .slide: style="font-size: 0.9em" -->
+
+## Wirtualne destruktory
 
 Bardzo ważne w przypadku tworzenia metod wirtualnych i dziedziczenia jest tworzenie wirtualnych destruktorów.
-Jeżeli korzystamy z dobroci polimorfizmu i nie oznaczymy destruktor jako `virtual` lub w klasach pochodnych jako `override`, to destruktor ten nie zostanie wywołany.
+Jeżeli korzystamy z dobroci polimorfizmu i nie oznaczymy destruktor jako `virtual` to destruktor ten nie zostanie wywołany.
 
 ```cpp
 #include <iostream>
@@ -870,9 +889,11 @@ public:
 };
 
 int main() {
-    Child child;
+    Child child;    // ok, object on stack, not a pointer
 }
 ```
+
+___
 
 ```cpp
 #include <iostream>
@@ -893,12 +914,14 @@ public:
 
 int main() {
     // Problem
-    std::unique_ptr<Parent> child2 = std::make_unique<Child>();
+    std::unique_ptr<Parent> child = std::make_unique<Child>();
 
-    // But shared_ptr will clenup propelry
+    // But shared_ptr will cleanup properly
     std::shared_ptr<Parent> child2 = std::make_shared<Child>();
 }
 ```
+
+___
 
 ```cpp
 #include <iostream>
@@ -923,6 +946,7 @@ int main() {
 ```
 
 ___
+<!-- .slide: style="font-size: 0.9em" -->
 
 ## Zmienne i funkcje statyczne
 
@@ -949,7 +973,12 @@ int main() {
 
 Nawet jeżeli obiekt zajmowałby dużo miejsca w pamięci a my chcielibyśmy tylko jego nazwę i tak musimy go utworzyć, ponieważ tylko na nim możemy zawołać metodę `getName()`.
 
-Rozwiązaniem tej uciążliwości jest `static`. Co więcej, problem ten możemy rozwiązać na 2 sposoby:
+___
+<!-- .slide: style="font-size: 0.9em" -->
+
+## `static`
+
+Rozwiązaniem tej uciążliwości jest `static`. Co więcej, problem ten możemy rozwiązać na 2 sposoby. Nie musimy w ten sposób tworzyć specjalnie obiektu, aby dostać się do cechy klasy, jaką jest jej nazwa.
 
 ```cpp
 class Object {
@@ -971,8 +1000,6 @@ int main() {
     return 0;
 }
 ```
-
-Nie musimy w ten sposób tworzyć specjalnie obiektu, aby dostać się do cechy klasy, jaką jest jej nazwa.
 
 <!-- TODO: Brakuje tu motywacji na jakimś konkretnym przykładzie -->
 
