@@ -1,12 +1,15 @@
 #pragma once
 
+#include <string>
+
 class Cargo {
 public:
+    Cargo();
     Cargo& operator+=(const size_t ammount) {
         ammount_ += ammount;
         return *this;
     }
-    Cargo& operator -=(const int ammount) {
+    Cargo& operator -=(const size_t ammount) {
         if (ammount_ - ammount >= 0) {
             ammount_ -= ammount;
         }

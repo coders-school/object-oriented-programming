@@ -14,13 +14,13 @@ public:
     size_t getMaxCrew();
     size_t getCapacity();
     void setName(const std::string& name);
-    Ship& operator +=(const int crew) {
+    Ship& operator +=(const size_t crew) {
         if (crew_ + crew <= maxCrew_) {
             crew_ += crew;
         }
         return *this;
     }
-    Ship& operator -=(const int crew) {
+    Ship& operator -=(const size_t crew) {
         if (crew_ - crew >= 0) {
             crew_ -= crew;
         }
