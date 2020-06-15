@@ -1,60 +1,68 @@
-# 0 Krótkie przypomnienie, co już wiemy.
+<!-- .slide: data-background="#111111" -->
 
-- Co zapamiętaliście z poprzednich zajęć?
-- Co sprawiło największą trudność?
-- Co najłatwiej było Wam zrozumieć?
+# Programowanie obiektowe
 
-# 1 Omówienie problemów, przykładowe rozwiązania.
+## Hermetyzacja
+
+<a href="https://coders.school">
+    <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
+</a>
 
 ___
 
-## Zadanie1:
+## Omówienie problemów
 
-Cargo.h
+___
 
-```C++
+## Przykładowe rozwiązania
+
+### Zadanie 1
+
+Cargo.hpp
+
+```cpp
 bool operator==(const Cargo& cargo) const;
 ```
 
-Cargo.cc
+Cargo.cpp
 
-```C++
+```cpp
 bool Cargo::operator==(const Cargo& cargo) const {
-    return Cargo.GetBasePrice() == base_price_ && Cargo.GetName() == name_;
+    return Cargo.getBasePrice() == base_price_ && Cargo.getName() == name_;
 }
 ```
 
 ___
 
-## Zadanie2:
+### Zadanie 2
 
-Cargo.h
+Cargo.hpp
 
-```C++
-std::string GetName() const;
-size_t GetAmount() const;
-size_t GetBasePrice() const;
+```cpp
+std::string getName() const;
+size_t getAmount() const;
+size_t getBasePrice() const;
 ```
 
-Cargo.cc
+Cargo.cpp
 
-```C++
-std::string Cargo::GetName() const { return name_; }
-size_t Cargo::GetAmount() const { return amount_; }
-size_t Cargo::GetBasePrice() const { return base_price_; }
+```cpp
+std::string Cargo::getName() const { return name_; }
+size_t Cargo::getAmount() const { return amount_; }
+size_t Cargo::getBasePrice() const { return base_price_; }
 ```
 
 ___
 
-## Zadanie3 #1
+### Zadanie 3 #1
 
-Island.h
+Island.hpp
 
-```C++
+```cpp
 #include <iostream>
 #include <memory>
 
-#include "Store.h"
+#include "Store.hpp"
 
 class Time;
 
@@ -78,8 +86,8 @@ public:
 
     Island() {}
     Island(size_t pos_x, size_t pos_y, Time* time);
-    Coordinates GetCoordinates() const { return position_; }
-    Store* GetStore() const { return store_.get(); }
+    Coordinates getCoordinates() const { return position_; }
+    Store* getStore() const { return store_.get(); }
 
 private:
     std::unique_ptr<Store> store_;
@@ -89,12 +97,13 @@ private:
 
 ___
 
-## Zadanie3 #2
-Island.cc
+### Zadanie 3 #2
 
-```C++
-#include "GTime.h"
-#include "Island.h"
+Island.cpp
+
+```cpp
+#include "GTime.hpp"
+#include "Island.hpp"
 
 Island::Island(size_t pos_x, size_t pos_y, Time* time)
     : position_(Coordinates(pos_x, pos_y)),
@@ -104,20 +113,20 @@ Island::Island(size_t pos_x, size_t pos_y, Time* time)
 
 ___
 
-## Zadanie4/5/6 #1
+## Zadanie 4/5/6 #1
 
-Map.h
+Map.hpp
 
-```C++
+```cpp
 class Time;
 
-// Class responsible for generation map which will be used to travel.
+// Class responsible for map generation which will be used to travel.
 class Map {
 public:
     Map(Time* time);
-    void Travel(Island* destination);
-    Island* GetIsland(const Island::Coordinates& coordinate);
-    Island* GetCurrentPosition() const { return current_position_; }
+    void travel(Island* destination);
+    Island* getIsland(const Island::Coordinates& coordinate);
+    Island* getCurrentPosition() const { return current_position_; }
     friend std::ostream& operator<<(std::ostream& out, const Map& map);
 
 private:
@@ -126,13 +135,13 @@ private:
 };
 ```
 
-____
+___
 
-## Zadanie 4/5/6 #2
+### Zadanie 4/5/6 #2
 
-Map.cc
+Map.cpp
 
-```C++
+```cpp
 constexpr size_t kIslandNum = 10;
 constexpr size_t kWidth = 50;
 constexpr size_t kHeight = 50;
@@ -140,21 +149,22 @@ constexpr size_t kHeight = 50;
 Map::Map(Time* time) {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> width_gen(0, kWidth);
-    std::uniform_int_distribution<> height_gen(0, kHeight);
+    std::uniform_int_distribution<> widthGen(0, kWidth);
+    std::uniform_int_distribution<> heightGen(0, kHeight);
     std::vector<Island> islands(kIslandNum);
-    std::vector<std::pair<size_t, size_t>> used_position;
+    std::vector<std::pair<size_t, size_t>> usedPositions;
 
     // Generate map
     for (size_t i = 0; i < kIslandNum; ++i) {
         while (true) {
-            size_t x = width_gen(gen);
-            size_t y = height_gen(gen);
-            if (std::find_if(begin(used_position), end(used_position),
+            size_t x = widthGen(gen);
+            size_t y = heightGen(gen);
+            if (std::find_if(begin(usedPositions),
+                             end(usedPositions),
                              [x, y](const auto& pos) {
                                  return pos.first == x && pos.second == y;
-                             }) == std::end(used_position)) {
-                used_position.push_back({x, y});
+                             }) == std::end(usedPositions)) {
+                usedPositions.push_back({x, y});
                 islands_.push_back(Island(x, y, time));
                 break;
             }
@@ -164,30 +174,31 @@ Map::Map(Time* time) {
     current_position_ = &islands_.front();
 }
 
-Island* Map::GetIsland(const Island::Coordinates& coordinate) {
-    auto island = std::find_if(std::begin(islands_), std::end(islands_),
+Island* Map::getIsland(const Island::Coordinates& coordinate) {
+    auto island = std::find_if(std::begin(islands_),
+                               std::end(islands_),
                                [&coordinate](const Island& island) {
                                    return coordinate == island.GetCoordinates();
                                });
     return island != std::end(islands_) ? &*island : nullptr;
 }
 
-void Map::Travel(Island* destination) {
+void Map::travel(Island* destination) {
     current_position_ = destination;
 }
 ```
 
 ___
 
-## Zadanie7/8 #1
+### Zadanie7/8 #1
 
-Player.h
+Player.hpp
 
-```C++
+```cpp
 #include <memory>
 
-#include "Cargo.h"
-#include "Ship.h"
+#include "Cargo.hpp"
+#include "Ship.hpp"
 
 class Time;
 
@@ -197,10 +208,10 @@ public:
     Player(size_t money, Time* time);
     virtual ~Player() = default;
 
-    virtual size_t GetAvailableSpace() const;
-    virtual size_t GetMoney() const { return money_; }
-    virtual size_t GetSpeed() const;
-    virtual Cargo* GetCargo(size_t index) const;
+    virtual size_t getAvailableSpace() const;
+    virtual size_t getMoney() const;
+    virtual size_t getSpeed() const;
+    virtual Cargo* getCargo(size_t index) const;
 
 private:
     std::unique_ptr<Ship> ship_;
@@ -210,13 +221,13 @@ private:
 
 ```
 
-____
+___
 
-## Zadanie 7/8 #2
+### Zadanie 7/8 #2
 
-Player.cc
+Player.cpp
 
-```C++
+```cpp
 constexpr size_t kCapacity = 100;
 constexpr size_t kCrew = 50;
 constexpr size_t kSpeed = 10;
@@ -229,40 +240,46 @@ Player::Player(size_t money, Time* time)
       available_space_(kCapacity) {
 }
 
-size_t Player::GetSpeed() const {
-    return ship_->GetSpeed();
+size_t Player::getMoney() const {
+    return money_;
 }
 
-Cargo* Player::GetCargo(size_t index) const {
-    return ship_->GetCargo(index);
+size_t Player::getSpeed() const {
+    return ship_->getSpeed();
 }
 
-size_t Player::GetAvailableSpace() const {
+Cargo* Player::getCargo(size_t index) const {
+    return ship_->getCargo(index);
+}
+
+size_t Player::getAvailableSpace() const {
     available_space_ = 0;
-    for (const auto cargo : ship_->GetCargos()) {
-        available_space_ += cargo->GetAmount();
+    for (const auto cargo : ship_->getCargos()) {
+        available_space_ += cargo->getAmount();
     }
 
     return available_space_;
 }
 ```
+
 ___
 
-## 2 Wprowadzenie do dziedziczenia:
+## Wprowadzenie do dziedziczenia
 
 Podczas implementacji klas, często możemy zauważyć, że część cech składowych klasy można wykorzystać także w innych klasach.
-Weźmy pod lupę klasę Komputer. Jeżeli chcielibyśmy utworzyć klasy: laptop, PC, tablet. Część metod oraz składowych klasy musielibyśmy niepotrzebnie powielić.
+
+Weźmy pod lupę klasę Komputer. Jeżeli chcielibyśmy utworzyć klasy: laptop, PC, tablet, to część metod oraz składowych klasy musielibyśmy niepotrzebnie powielić.
 
 ___
 
-## class Computer
+## `class Computer`
 
-```C++
+```cpp
 class Computer {
 public:
-    void TurnOn();
-    void PowerOff();
-    void Restart();
+    void turnOn();
+    void powerOff();
+    void restart();
 
 private:
     Processor processor_;
@@ -275,16 +292,16 @@ private:
 
 ___
 
-## class Laptop 
+## `class Laptop`
 
-```C++
+```cpp
 class Laptop {
 public:
-    void TurnOn();
-    void PowerOff();
-    void Restart();
-    void Display();
-    void GetUserInput();
+    void turnOn();
+    void powerOff();
+    void restart();
+    void display();
+    void getUserInput();
 
 private:
     Processor processor_;
@@ -299,16 +316,16 @@ private:
 
 ___
 
-## class Tablet
+## `class Tablet`
 
-```C++
+```cpp
 class Tablet {
 public:
-    void TurnOn();
-    void PowerOff();
-    void Restart();
-    void Display();
-    void GetUserInput();
+    void turnOn();
+    void powerOff();
+    void restart();
+    void display();
+    void getUserInput();
 
 private:
     Processor processor_;
@@ -322,18 +339,16 @@ private:
 ```
 
 ___
+<!-- .slide: style="font-size: 0.9em" -->
 
-## Pytanie
-- Jak uprościć strukturę naszego programu?
+## Jak uprościć strukturę naszego programu?
 
-___
-
-```C++
+```cpp
 class Computer {
 public:
-    void TurnOn();
-    void PowerOff();
-    void Restart();
+    void turnOn();
+    void powerOff();
+    void restart();
 
 protected:
     Processor processor_;
@@ -342,115 +357,161 @@ protected:
     GraphicsCard graphics_card_;
     Memory memory_;
 };
+
 
 class Laptop : public Computer {
 public:
-    void Display();
-    void GetUserInput();
+    void display();
+    void getUserInput();
 
 private:
     Screen screen_;
     Keyboard keyboard_;
 };
 
+
 class Tablet : public Computer {
 public:
-    void Display();
-    void GetUserInput();
+    void display();
+    void getUserInput();
 
 private:
     Screen screen_;
+    Keyboard keyboard_;
 };
 ```
+
 ___
 
-Klasa, po której dziedziczymy, nazywają się klasą bazową. Klasy, które dziedziczą, nazywa się klasami pochodnymi. Inaczej klasa, po której dziedziczymy to rodzic (parent class). Klasa, która dziedziczy to dziecko (child class).
+## Klasy bazowe i pochodne
 
-- Pytanie: Co z metodami klasy Laptop i Tablet, czy można wydzielić kolejną klasę?
+Klasa, po której dziedziczymy, nazywają się  <span class="fragment highlight-green">**klasą bazową**</span>.
 
-```C++
-void Display();
-void GetUserInput();
+Klasy, które dziedziczą nazywa się  <span class="fragment highlight-green">**klasami pochodnymi**</span>.
+
+Inaczej, klasa, po której dziedziczymy to rodzic (parent class).
+
+Klasa, która dziedziczy to dziecko (child class).
+
+___
+
+### Co z metodami klas `Laptop` i `Tablet`, czy można wydzielić kolejną klasę?
+
+```cpp
+void display();
+void getUserInput();
 ```
 
-Załóżmy, że dodajemy klasę Ekran. Klasa ta wyświetla na bieżąco interfejs użytkownika.
+___
 
-```C++
+## Klasa `Screen` i `TouchScreen`
+
+Załóżmy, że dodajemy klasę `Screen`. Klasa ta wyświetla na bieżąco interfejs użytkownika.
+
+Chcemy też stworzyć klasę reprezentującą ekran dotykowy, który również umożliwia odczyt akcji od użytkownika i ich wyświetlanie.
+
+<style>
+.container {
+    display: flex;
+}
+.col {
+    flex: 1;
+    margin: 1%;
+}
+</style>
+
+<div class="container">
+
+<div class="col">
+
+```cpp
 class Screen {
 public:
-    void Display();
+    void display();
 
 private:
-    void Process();
+    void process();
 
     Monitor monitor_;
 };
 ```
 
-Chcemy teraz stworzyć klasę Ekran dotykowy, który również umożliwia odczyt akcji od użytkownika i ich wyświetlanie.
+</div>
 
-```C++
-class TouchableScreen {
+<div class="col">
+
+```cpp
+class TouchScreen {
 public:
-    void Display();
-    void GetUserInput();
+    void display();
+    void getUserInput();
 
 private:
-    void Process();
-    void DispalyKeyboard();
+    void process();
+    void displayKeyboard();
 
     Monitor monitor_;
 };
 ```
 
--Pytanie: Jak uprościć powyższy kod?
+</div>
 
-```C++
+</div>
+
+### Jak uprościć powyższy kod?
+
+___
+
+## Wykorzystanie dziedziczenia do uproszczenia kodu
+
+```cpp
 class Screen {
 public:
-    void Display();
+    void display();
 
 private:
-    void Process();
+    void process();
 
     Monitor monitor_;
 };
 
-class TouchableScreen : public Screen {
+class TouchScreen : public Screen {
 public:
-    void GetUserInput();
+    void getUserInput();
 
 private:
-    void DispalyKeyboard();
+    void displayKeyboard();
 };
 ```
 
-### Wielodziedziczenie:
+___
 
-```C++
+## Wielodziedziczenie #1
+
+```cpp
 class Screen {
 public:
-    void Display();
+    void display();
 
 private:
-    void Process();
+    void process();
 
     Monitor monitor_;
 };
 
-class TouchableScreen : public Screen {
+class TouchScreen : public Screen {
 public:
-    void GetUserInput();
+    void getUserInput();
 
 private:
-    void DispalyKeyboard();
+    void displayKeyboard();
 };
 
-Class Computer {
+class Computer {
 public:
-    void TurnOn();
-    void PowerOff();
-    void Restart();
+    void turnOn();
+    void powerOff();
+    void restart();
 
 protected:
     Processor processor_;
@@ -460,92 +521,107 @@ protected:
     Memory memory_;
 };
 
-class Laptop : public Computer, public Screen {
-public:
-private:
+class Laptop : public Computer,
+               public Screen {
     Keyboard keyboard_;
 };
 
 class Tablet : public Computer,
-               public TouchableScreen {
-public:
-private:
+               public TouchScreen {
 };
 ```
 
-Wybór implementacji zależy od programisty. Nie zawsze wielodziedziczenie będzie lepszym rozwiązaniem. Należy się zawsze zastanowić
-czy dziedziczenie po konkretnej klasie uprości nam program i czy nie będzie powodować żadnych komplikacji w dalszym procesie
-rozbudowy naszego programu.
+___
 
-```C++
-class Bird {
-public:
-    Fly();
-    MakeSound();
+## Wielodziedziczenie #2
+
+Wybór implementacji zależy od programisty. Nie zawsze wielodziedziczenie będzie lepszym rozwiązaniem. Należy się zawsze zastanowić czy dziedziczenie po konkretnej klasie uprości nam program i czy nie będzie powodować żadnych komplikacji w dalszym procesie rozbudowy naszego programu.
+
+___
+
+## Wielodziedziczenie - problemy #1
+
+```cpp
+struct Bird {
+    fly();
+    makeSound();
 };
 
-class Penguin {
-public:
-    Swim();
-    MakeSound();
+struct Penguin {
+    swim();
+    makeSound();
 };
 
-// Hummingbird is the type of bird which produces so little sound so it can be said that it makes no sound.
-// They do not have large proper voice box so they cannot create sounds like other birds.
-//They can communicate in a different manner or nonetheless.
-class Hummingbird {
-    Fly();
+// Hummingbird is the type of bird which makes so little sound so it
+// can be said that it makes no sound.
+struct Hummingbird {
+    fly();
+};
+```
+
+___
+<!-- .slide: style="font-size: 0.9em" -->
+
+## Wielodziedziczenie - problemy #2
+
+Jeżeli spróbujemy teraz uprościć klasę poprzez dziedziczenie pojawi się problem:
+
+```cpp
+struct Bird {
+    fly();
+    makeSound();
+};
+
+struct Penguin : public Bird {
+    fly();  // But I can't fly!
+    swim();
+    makeSound();
+};
+
+struct Hummingbird : public Bird {
+    fly();
+    makeSound();  // But I don't make sound!
 };
 ```
 
-Jeżeli sprobujemy teraz uprościć klasę poprzez dziedziczenie pojawi się problem:
-
-```C++
-class Bird {
-public:
-    Fly();
-    MakeSound();
-};
-
-class Penguin : public Bird {
-public:
-    Fly();  // But I can't fly!
-    Swim();
-    MakeSound();
-};
-
-class Hummingbird : public Bird {
-    Fly();
-    MakeSound();  // But I don't make sound!
-};
-```
-Jeszcze bardziej utrudnimy sytuacje, gdy w przyszłości dodamy sobie kolejne klasy jak Struś.
-Zawsze przed implementacją musimy się zastanowić jak podzielić odpowiedzialność na poszczególne klasy, aby
+Jeszcze bardziej utrudnimy sytuacje, gdy w przyszłości dodamy sobie kolejne klasy jak Struś. Zawsze przed implementacją musimy się zastanowić jak podzielić odpowiedzialność na poszczególne klasy, aby
 uniknąć podobnych problemów.
 
-Jednym z pomysłów jest tworzenie interfejsów ich dziedziczenie oraz przeciążanie implementacji metod z klas bazowych.
+___
 
-```C++
+## Metody czysto wirtualne
+
+```cpp
 class Bird {
 public:
-    size_t GetWeight();
-    size_t GetHeight();
-    size_t GetName();
+    size_t getWeight();
+    size_t getHeight();
+    size_t getName();
 
     // Pure virtual function without implementation
-    virtual void Eat() = 0;
-    virtual void Sleep() = 0;
+    virtual void eat() = 0;
+    virtual void sleep() = 0;
 
-    protectd : size_t weight_;
+protected:
+    size_t weight_;
     size_t height_;
-    std::sting name_;
+    std::string name_;
 };
 ```
 
-```C++
+Metody `eat()` oraz `sleep()` to tzw. metody czysto wirtualne. Świadczy o tym `= 0;`. Oznacza to, że nigdzie nie znajdziemy ich implementacji dla klasy `Bird`. Klasy które dziedziczą po `Bird` będą ją musiały zaimplementować same.
+
+___
+<!-- .slide: style="font-size: 0.9em" -->
+
+## Interfejsy
+
+Jednym z pomysłów na rozwiązanie problemu wielodziedziczenia jest tworzenie tzw. interfejsów, ich dziedziczenie oraz przeciążanie implementacji metod z klas bazowych. Interfejsy określają "umiejętności" i łatwo je ze sobą łączyć.
+
+```cpp
 class Flyable {
 public:
-    virtual void Fly() = 0;
+    virtual void fly() = 0;
 
 private:
     Wings wings_;
@@ -553,140 +629,163 @@ private:
 
 class Swimmable {
 public:
-    virtual void Swim() = 0;
+    virtual void swim() = 0;
 };
 
-class Singingable {
+class Soundable {
 public:
-    virtual void MakeSound() = 0;
+    virtual void makeSound() = 0;
 };
 ```
 
-```C++
+___
+
+## Użycie interfejsów
+
+```cpp
 class Penguin : public Bird, public Swimmable {
 public:
     // Override from Bird
-    void Eat() override;
-    void Sleep() override;
+    void eat() override;
+    void sleep() override;
 
     // Override from Swimmable
-    void Swim() override;
+    void swim() override;
 };
 
 class Hummingbird : public Bird,
                     public Flyable,
-                    public Singingable {
+                    public Soundable {
 public:
     // Override from Bird
-    void Eat() override;
-    void Sleep() override;
+    void eat() override;
+    void sleep() override;
 
-    // Override from Singingable
-    void MakeSound() override;
+    // Override from Soundable
+    void makeSound() override;
 
     // Override from Flyable
-    void Fly() override;
+    void fly() override;
 };
 
 class Goose : public Bird,
               public Flyable,
-              public Singingable,
+              public Soundable,
               public Swimmable {
 public:
     // Override from Bird
-    void Eat() override;
-    void Sleep() override;
+    void eat() override;
+    void sleep() override;
 
-    // Override from Singingable
-    void MakeSound() override;
+    // Override from Soundable
+    void makeSound() override;
 
     // Override from Flyable
-    void Fly() override;
+    void fly() override;
 
     // Override from Swimmable
-    void Swim() override;
+    void swim() override;
 };
 ```
 
-*WAŻNE* Klasa, która posiada co najmniej jedną czysto wirtualną metodę nie może być zainicjalizowana.
-Możemy przechowywać wskaźnik wskazujący na typ tej klasy, ale nie możemy stworzyć jej instancji, ponieważ nie mamy zdefiniowanych 
-jej zachowań. Klasa taka nazywa się abstrakcyjną, służy tylko
-do ujednolicania interfejsu, a nie tworzenia obiektów. Dopiero klasa, która zaimplementuje wszystkie
-brakujące metody, może zostać utworzona.
+___
 
-Słowo virtual i override.
+## Klasa abstrakcyjna
+
+Nie można utworzyć obiektu klasy, która posiada <span class="fragment highlight-green">**co najmniej jedną czysto wirtualną**</span>.
+
+Możemy przechowywać wskaźnik wskazujący na typ tej klasy, ale nie możemy stworzyć jej instancji, ponieważ nie mamy zdefiniowanych jej zachowań.
+
+Klasa taka nazywa się  <span class="fragment highlight-green">**klasą abstrakcyjną**</span> i służy tylko do ujednolicania interfejsu, a nie tworzenia obiektów.
+
+Dopiero obiekt klasy pochodnej, która zaimplementuje wszystkie brakujące metody, może zostać utworzona.
+
+___
+
+## Słowo `virtual` i `override`
+
+Co to za słowa? Co one robią? O tym w kolejnej lekcji ;)
+
+Zostawiamy was z tym niedopowiedzeniem, abyście sami zechcieli poszukać o tym informacji lub przejrzeli wideo pana Zelenta.
+
+___
 
 Jeżeli chcemy, aby jakaś metoda była wirtualna, lub można ją było przeciążyć, należy poinformować kompilator słowem `virtual`.
+
+<!-- TODO: Co to znaczy wirtualna? -->
+
 Jeżeli w klasie pochodnej przeciążamy taką metodę, należy dodać słowo `override`.
 
-```C++
+```cpp
 class Interface {
 public:
-    virtual void DoSth() = 0;
+    virtual void doSth() = 0;
 };
 
 class SomeClass : public Interface {
 public:
-    DoSth() override;
+    doSth() override;
 };
 
 int main() {
-    Interface interface;                // Wrong, class Interface is pure virtual!
-    SmomeClass someClass;               // Good!
-    Interface* interface = &someClass;  // Good! We hold pointer!
+    Interface interface;    // Compilation error, class Interface is pure virtual
+    SomeClass someClass;    // OK
+    Interface* interface = &someClass;  // OK, we hold a pointer
 }
 ```
 
-# 3 Polimorfizm
+___
 
-Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` to klasy pochodne, które dziedziczą po pewnych klasach bazowych jak `Bird`, `Flyable`, `Singingable`, `Swimmable` oraz przeciążają kilka ich metod jak:
+## Polimorfizm
 
-* `void Eat() override;`,
-* `void Sleep() override;`,
-* `void MakeSound() override;`,
-* `void Fly() override;`,
-* `void Swim() override;`.
+Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` to klasy pochodne, które dziedziczą po pewnych klasach bazowych jak `Bird`, `Flyable`, `Soundable`, `Swimmable` oraz przeciążają kilka ich metod jak:
+
+* `void eat() override`
+* `void sleep() override`
+* `void makeSound() override`
+* `void fly() override`
+* `void swim() override`
   
 Przeciążanie takich metod powoduje, że możemy zmienić nieco implementacje konkretnych metod:
 
-```C++
-class Singingable {
+```cpp
+class Soundable {
 public:
-    virtual void MakeSound() = 0;
+    virtual void makeSound() = 0;
 };
 ```
 
-```C++
-class Goose : public Singingable {
+```cpp
+class Goose : public Soundable {
 public:
-    // Override from Singingable
-    void MakeSound() override { std::cout << "Honk! Honk!"; }
+    // Override from Soundable
+    void makeSound() override { std::cout << "Honk! Honk!"; }
 };
 ```
 
-```C++
-class Hen : public Singingable {
+```cpp
+class Hen : public Soundable {
 public:
-    // Override from Singingable
-    void MakeSound() override { std::cout << "Cluck! Cluck!"; }
+    // Override from Soundable
+    void makeSound() override { std::cout << "Cluck! Cluck!"; }
 };
 ```
 
-```C++
-class Duck : public Singingable {
+```cpp
+class Duck : public Soundable {
 public:
-    // Override from Singingable
-    void MakeSound() override { std::cout << "Quack! Quack!"; }
+    // Override from Soundable
+    void makeSound() override { std::cout << "Quack! Quack!"; }
 };
 ```
 
-Ponieważ wspólnym rodzicem wszystkich klas jest klasa `Singingable` możemy przechowywać w kontenerze wskaźniki typu `Singingable`.
-`std::vector<std::shared_ptr<Singingable>> birds_;`
+Ponieważ wspólnym rodzicem wszystkich klas jest klasa `Soundable` możemy przechowywać w kontenerze wskaźniki typu `Soundable`.
+`std::vector<std::shared_ptr<Soundable>> birds_;`
 
--Pytanie: Jakie dane otrzymamy na wyjściu?
+### Jakie dane otrzymamy na wyjściu?
 
-```C++
-std::vector<std::shared_ptr<Singingable>> birds_;
+```cpp
+std::vector<std::shared_ptr<Soundable>> birds_;
 birds_.push_back(std::make_shared<Goose>());
 birds_.push_back(std::make_shared<Hen>());
 birds_.push_back(std::make_shared<Duck>());
@@ -701,15 +800,15 @@ Polimorfizm pozwala funkcji przybrać różne formy jak na przykładzie.
 Dlatego, jeżeli utworzymy kolejno obiekty `Goose`, `Hen` i `Duck` w zależności
 od obiektu zostanie wywołana jego wersja metody `MakeSound`.
 
--Pytanie: Kto grał lub czytał Wiedźmina?
+### Kto grał lub czytał Wiedźmina?
 
-W uniwersum wykreowanym przez naszego rodzimego pisarza: Andrzeja Sapkowskiego, występuje pewna
+W uniwersum wykreowanym przez naszego rodzimego pisarza Andrzeja Sapkowskiego, występuje pewna
 intrygująca i ciekawa rasa zwana Dopplerami. Rasa ta potrafi przyjąć, postać różnych form życia,
 może stać się człowiekiem, elfem, krasnoludem. Zmienia w ten sposób swoje cechy jak głos, kolor włosów, a nawet ubranie!
 Pomimo że rasa ta jest typu Doppler, potrafi w różnych okolicznościach podszywać się pod inne rasy jak elf, krasnolud czy człowiek.
 Z punktu widzenia C++ nasz Doppler podlega zjawisku polimorfizmu.
 
-```C++
+```cpp
 class Doppler {
 public:
     virtual SayHallo() {
@@ -746,13 +845,15 @@ int main() {
 }
 ```
 
+<!-- TODO: Pokazać, że bez słowa virtual też kod się skompiluje, ale zachowa się inaczej -->
+
 Jak widzimy, nasz Doppler może przyjąć różne formy i zachowywać się tak jak one. Pomimo że wskaźnik jest typu Doppler.
 Program dobrze wie, kiedy Doppler podszywa się pod człowieka, kiedy pod krasnoluda, a kiedy pod elfa.
 
 Bardzo ważne w przypadku tworzenia metod wirtualnych i dziedziczenia jest tworzenie wirtualnych destruktorów.
 Jeżeli korzystamy z dobroci polimorfizmu i nie oznaczymy destruktor jako `virtual` lub w klasach pochodnych jako `override`, to destruktor ten nie zostanie wywołany.
 
-```C++
+```cpp
 #include <iostream>
 #include <string>
 
@@ -773,7 +874,7 @@ int main() {
 }
 ```
 
-```C++
+```cpp
 #include <iostream>
 #include <memory>
 #include <string>
@@ -799,7 +900,7 @@ int main() {
 }
 ```
 
-```C++
+```cpp
 #include <iostream>
 #include <memory>
 #include <string>
@@ -821,12 +922,13 @@ int main() {
 }
 ```
 
-# 4 Zmienne i funkjce statyczne
+___
 
-Czasami chcielibyśmy przypisać jakąś stałą cechę do klasy. Nie konkretnych obiektów a klasy samej w sobie. Np. Każdy obiekt klasy
-ma nazwę "Obiekt".
+## Zmienne i funkcje statyczne
 
-```C++
+Czasami chcielibyśmy przypisać jakąś stałą cechę do klasy. Nie konkretnych obiektów, a klasy samej w sobie. Np. Każdy obiekt klasy ma nazwę "Obiekt".
+
+```cpp
 class Object {
 public:
     std::string GetName() const { return name_; }
@@ -836,22 +938,23 @@ private:
 };
 ```
 
-W celu otrzymania nazwy tego obiektu, musimy najpierw utworzyć obiekt, a następnie zawołać `GetName()`.
+W celu otrzymania nazwy tego obiektu, musimy najpierw utworzyć obiekt, a następnie zawołać `getName()`.
 
-```C++
+```cpp
 int main() {
     Object obj;
-    std::cout << obj.GetName() << '\n';
+    std::cout << obj.getName() << '\n';
 }
 ```
-Nawet jeżeli obiekt zajmowałby dużo miejsca w pamięci a my chcielibyśmy tylko jego nazwę i tak musimy go utworzyć, ponieważ tylko na nim możemy zawołać metodę `GetName()`.
 
-Rozwiązaniem tej uciążliwości jest static. Co więcej, problem ten możemy rozwiązać na 2 sposoby:
+Nawet jeżeli obiekt zajmowałby dużo miejsca w pamięci a my chcielibyśmy tylko jego nazwę i tak musimy go utworzyć, ponieważ tylko na nim możemy zawołać metodę `getName()`.
 
-```C++
+Rozwiązaniem tej uciążliwości jest `static`. Co więcej, problem ten możemy rozwiązać na 2 sposoby:
+
+```cpp
 class Object {
 public:
-    static std::string GetName() { return "Object"; }
+    static std::string getName() { return "Object"; }
 };
 
 class Object2 {
@@ -862,13 +965,17 @@ public:
 std::string Object2::name_{"Object2"};
 
 int main() {
-    std::cout << Object::GetName() << '\n';
+    std::cout << Object::getName() << '\n';
     std::cout << Object2::name_ << '\n';
 
     return 0;
 }
 ```
 
-Nie musimy w ten sposób tworzyć specjalnie obiketu, aby dostać się do cechy klasy, jaka jest jej nazwa.
+Nie musimy w ten sposób tworzyć specjalnie obiektu, aby dostać się do cechy klasy, jaką jest jej nazwa.
 
-# Sekcja pytań i odpowiedzi
+<!-- TODO: Brakuje tu motywacji na jakimś konkretnym przykładzie -->
+
+___
+
+## Q&A
