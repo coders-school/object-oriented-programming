@@ -7,8 +7,8 @@ size_t constexpr START_SPACE = 0;
 
 class Player {
   public:
-    Player(Ship* ship, size_t money);
-    Player(Ship* ship);
+    Player(std::unique_ptr<Ship> ship, size_t money, size_t space);
+    Player(std::unique_ptr<Ship> ship);
 
     size_t GetMoney() const { return money_; }
     size_t GetAvailableSpace() const { return availableSpace_; }

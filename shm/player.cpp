@@ -2,11 +2,11 @@
 
 #include <memory>
 
-Player::Player(Ship* ship, size_t money, size_t space)
-    : ship_(std::make_unique<Ship>(ship)), money_(money), availableSpace_(space) {}
+Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space)
+    : ship_(std::move(ship)), money_(money), availableSpace_(space) {}
 
-Player::Player(Ship* ship)
-    : Player(ship, START_MONEY, START_SPACE) {}
+Player::Player(std::unique_ptr<Ship> ship)
+    : Player(std::move(ship), START_MONEY, START_SPACE) {}
 
 size_t Player::GetSpeed() {
     if (ship_)
