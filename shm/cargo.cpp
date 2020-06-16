@@ -1,5 +1,5 @@
 #include <string>
-
+#include "cargo.hpp"
 class Cargo {
 public:
     Cargo& operator+=(size_t amount) {

@@ -1,11 +1,11 @@
 #include <string>
+#include "ship.hpp"
 
-class Ship {
-public:
-    Ship()
+    Ship::Ship()
         : id_(-1)
     {}
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, int id)
+
+    Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, int id)
         : capacity_(capacity)
         , maxCrew_(maxCrew)
         , crew_(0)
@@ -13,17 +13,18 @@ public:
         , name_(name)
         , id_(id)
     {}
-    Ship(int maxCrew, int speed, size_t id)
+    
+    Ship::Ship(int maxCrew, int speed, size_t id)
         : Ship(0, maxCrew, speed, "", id)
     {}
 
-    void setName(const std::string& name) { name_ = name; }
+    void Ship::setName(const std::string& name) { name_ = name; }
 
-    Ship& operator-=(size_t num) {
+    Ship& Ship::operator-=(size_t num) {
         crew_ -= num;
         return *this;
     }
-    Ship& operator+=(size_t num) {
+    Ship& Ship::operator+=(size_t num) {
         if(num + crew_ > maxCrews_) {
             std::cerr << "To many papays!\n";
             return *this;
@@ -32,17 +33,16 @@ public:
         return *this;
     }
 
-    size_t getCapacity() const  { return capacity_; }
-    size_t getMaxCrew() const   { return maxCrew_; }
-    size_t getSpeed() const     { return speed_; }
-    std::string getName() const { return name_; }
-    int getId() const        { return id_; }
+    size_t Ship::getCapacity() const  { return capacity_; }
+    size_t Ship::getMaxCrew() const   { return maxCrew_; }
+    size_t Ship::getSpeed() const     { return speed_; }
+    std::string Ship::getName() const { return name_; }
+    int Ship::getId() const        { return id_; }
 
-private:
-    size_t capacity_;
-    size_t maxCrew_;
-    size_t crew_;
-    size_t speed_;
-    std::string name_;
-    const int id_;
-};
+    size_t Ship::capacity_;
+    size_t Ship::maxCrew_;
+    size_t Ship::crew_;
+    size_t Ship::speed_;
+    std::string Ship::name_;
+    const int Ship::id_;
+
