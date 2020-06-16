@@ -8,16 +8,16 @@ Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space)
 Player::Player(std::unique_ptr<Ship> ship)
     : Player(std::move(ship), START_MONEY, START_SPACE) {}
 
-size_t Player::GetSpeed() {
+size_t Player::getSpeed() {
     if (ship_)
-        return ship_->GetSpeed();
+        return ship_->getSpeed();
 
     return 0;
 }
 
-Cargo Player::GetCargo(size_t index) {
+Cargo Player::getCargo(size_t index) {
     if (ship_)
-        return ship_->GetCargo(index);
+        return ship_->getCargo(index);
 
     return 0;
 }

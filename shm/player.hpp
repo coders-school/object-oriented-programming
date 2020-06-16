@@ -11,10 +11,10 @@ class Player {
     Player(std::unique_ptr<Ship> ship, size_t money, size_t space);
     Player(std::unique_ptr<Ship> ship);
 
-    size_t GetMoney() const { return money_; }
-    size_t GetAvailableSpace() const { return availableSpace_; }
-    size_t GetSpeed() const;
-    Cargo GetCargo(size_t index) const;
+    size_t getMoney() const { return money_; }
+    size_t getAvailableSpace() const { return availableSpace_; }
+    size_t getSpeed() const;
+    Cargo getCargo(size_t index) const;
 
   private:
     std::unique_ptr<Ship> ship_;
