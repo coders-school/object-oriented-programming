@@ -5,8 +5,7 @@
 
 class Player {
 public:
-    Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace)
-        : ship_{ship}, money_{money}, availableSpace_{availableSpace} {}
+    Player(std::shared_ptr<Ship>, size_t, size_t);
 
     std::shared_ptr<Ship> getShip() const { return ship_; }
     size_t getMoeny() const { return money_; }
