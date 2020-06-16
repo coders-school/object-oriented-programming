@@ -14,7 +14,7 @@ Cargo& Cargo::operator-=(size_t amount) {
 }
 
 bool Cargo::operator==(const Cargo& other) {
-    return (this->amount_ == other.amount_ &&
-            this->basePrice_ == other.basePrice_ &&
-            this->name_ == other.name_);
+    return (amount_ == other.amount_ &&
+            basePrice_ == other.basePrice_ &&
+            name_ == other.name_);
 }
