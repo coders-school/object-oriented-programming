@@ -1,9 +1,12 @@
 #include <memory>
 
-size_t constexpr DEFAULT_MONEY = 1000;
+#include "ship.hpp"
+
+size_t constexpr START_MONEY = 1000;
+size_t constexpr START_SPACE = 0;
 
 class Player {
-public:
+  public:
     Player(Ship* ship, size_t money);
     Player(Ship* ship);
 
@@ -12,7 +15,7 @@ public:
     size_t GetSpeed() const;
     Cargo GetCargo(size_t index) const;
 
-private:
+  private:
     std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
