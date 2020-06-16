@@ -1,11 +1,11 @@
-#include <Cargo.hpp>
+#include "Cargo.hpp"
 
 Cargo& Cargo::operator+=(const size_t amount) {
-    m_amount += amount;
+    _amount += amount;
     return *this;
 }
 
 Cargo& Cargo::operator-=(const size_t amount) {
-    m_amount -= amount;
+    _amount -= amount;
     return *this;
 }
