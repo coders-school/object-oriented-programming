@@ -11,8 +11,6 @@ Ship::Ship(int id, size_t speed, size_t maxCcrew)
     : Ship(id, "", speed, maxCrew, 0) {}
 
 Ship::Ship& operator+=(const size_t crew){
-    // std::clamp(m_crew + crew, 0, m_maxCrew);
-
     if (m_crew + crew > maxCrew) {
         std::cerr << "To many papays!\n";
         return *this;
