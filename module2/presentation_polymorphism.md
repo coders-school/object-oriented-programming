@@ -250,3 +250,13 @@ int main() {
 ___
 
 ## Q&A
+
+___
+
+## Zadanie 3
+
+Napisz klasę `DryFruit`, która dziedziczyć będzie po klasie `Fruit`.
+Klasa ta powinna przeciążać metody `getPrice()`, `getName()` oraz `operator--`.
+`operator--` powinien odejmować zużycie raz na 10 wywołań.
+Metoda `getPrice()` powinna zwracać trzykrotnie większą wartość w porównaniu do ceny bazowej.
+Przetestuj wywołania polimorficzne oraz podziel się wnioskami.

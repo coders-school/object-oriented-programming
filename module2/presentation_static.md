@@ -69,3 +69,9 @@ int main() {
 ___
 
 ## Q&A
+
+___
+
+## Zadanie 4
+
+Przekształć klasę bazową `Coordinates`, tak aby miała funkcję statyczną `static size_t distance(const Coordinates& lhs, const Coordinates& rhs)`, która powinna zwracać dystans pomiędzy dwoma pozycjami.
