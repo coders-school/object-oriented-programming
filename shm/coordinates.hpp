@@ -1,7 +1,5 @@
 #pragma once
 
-#include "island.hpp"
-
 #include <vector>
 
 class Coordinates
