@@ -1,0 +1,17 @@
+name: C++ with CMake CI
+
+on: [push, pull_request]
+
+jobs:
+  Symulator Handlu Morskiego:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: mkdir shm/build
+      run: mkdir shm/build
+    - name: Compile
+      working-directory: shm/build
+      run: |
+        cmake ..
+        make
