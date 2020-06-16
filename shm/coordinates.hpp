@@ -2,8 +2,7 @@
 
 #include <vector>
 
-class Coordinates
-{
+class Coordinates {
 public:
     Coordinates();
     Coordinates(const int positionX, const int positionY);
