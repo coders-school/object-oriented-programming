@@ -8,7 +8,7 @@ private:
     size_t positionY_ {0};
 public:
     Coordinates(size_t positionX, size_t positionY) : positionX_(positionX), positionY_(positionY) {};
-    bool operator==(Coordinates& cord) {
+    bool operator==(const Coordinates& cord) {
         return (positionX_ == cord.positionX_) && (positionY_ == cord.positionY_);
     };
 };
