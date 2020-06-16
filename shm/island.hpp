@@ -3,6 +3,9 @@
 class Coordinates {
 public:
     Coordinates(int, int);
+    bool operator==(const Coordinates& pos) const {
+        return positionX == pos.positionX && positionY == pos.positionY;
+    }
 private:
     int positionX;
     int positionY;
@@ -11,7 +14,6 @@ private:
 class Island {
 public:
     Coordinates getPosition();
-    //bool operator==()
 private:
     Coordinates position_;
 };
