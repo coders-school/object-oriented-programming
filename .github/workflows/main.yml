@@ -3,7 +3,7 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
-  Symulator Handlu Morskiego:
+  SymulatorHandluMorskiego:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
