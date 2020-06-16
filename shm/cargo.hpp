@@ -20,3 +20,4 @@ private:
     std::string name_;
     size_t ammount_;
     double basePrice_;
+};

@@ -9,7 +9,7 @@ public:
 
     std::shared_ptr<Ship> getShip() const { return ship_; }
     size_t getMoeny() const { return money_; }
-    size_t getAvailableSpeed() const { return availableSpace_; };
+    size_t getAvailableSpeed() const { return availableSpace_; }
     size_t getSpeed() const { return ship_->getSpeed(); }
     //Cargo* getCargo(size_t index) const{;}
 
