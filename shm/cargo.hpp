@@ -5,7 +5,6 @@
 class Cargo {
 public:
     Cargo();
-
     Cargo& operator+=(const size_t& ammount) {
         ammount_ += ammount;
         return *this;
@@ -21,4 +20,3 @@ private:
     std::string name_;
     size_t ammount_;
     double basePrice_;
-};
