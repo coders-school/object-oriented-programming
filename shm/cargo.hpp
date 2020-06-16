@@ -1,5 +1,5 @@
 #include <string>
-
+#pragma once
 class Cargo {
 public:
     Cargo& operator+=(size_t amount);

@@ -1,3 +1,7 @@
+#pragma once
+#include <string>
+
+
 class Ship {
 public: 
     void setName(const std::string& name); 
