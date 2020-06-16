@@ -39,10 +39,3 @@
     std::string Ship::getName() const { return name_; }
     int Ship::getId() const        { return id_; }
 
-    size_t Ship::capacity_;
-    size_t Ship::maxCrew_;
-    size_t Ship::crew_;
-    size_t Ship::speed_;
-    std::string Ship::name_;
-    const int Ship::id_;
-
