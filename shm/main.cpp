@@ -1,5 +1,5 @@
-#include "cargo.hpp"
-#include "ship.hpp"
+#include "inc/cargo.hpp"
+#include "inc/ship.hpp"
 
 int main() {
 
