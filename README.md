@@ -21,5 +21,10 @@ https://github.com/kszytko/object-oriented-programming/projects/1
 * jeżeli jest potrzebna pomoc piszemy na discordzie na naszym prywatnym grupowym kanale;
 * powodzenia. :)
 
+## 3. Standard programowania:
+Przy nazwach zmiennych class używamy prefixów tj:
+```c++
+size_t _cargo;
+```
 
 `Based on Marcinati`
