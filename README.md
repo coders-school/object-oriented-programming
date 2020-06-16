@@ -24,7 +24,7 @@ https://github.com/kszytko/object-oriented-programming/projects/1
 ## 3. Standard programowania:
 Przy nazwach zmiennych class używamy prefixów tj:
 ```c++
-size_t _cargo;
+size_t m_cargo;
 ```
 
 `Based on Marcinati`
