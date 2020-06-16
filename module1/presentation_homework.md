@@ -102,13 +102,13 @@ ___
 
 ## Zadanie 4
 
-Napisz klasę `Map`, która będzie posiadała `std::vector<Island&>` przechowujący wszystkie wyspy na mapie, oraz zmienną `Island* currentPosition_` określającą aktualną pozycję gracza na mapie.
+Napisz klasę `Map`, która będzie posiadała `std::vector<Island>` przechowujący wszystkie wyspy na mapie, oraz zmienną `Island* currentPosition_` określającą aktualną pozycję gracza na mapie.
 
 ___
 
 ## Zadanie 5
 
-W klasie `Map` utwórz konstruktor bezargumentowy, a w jego ciele utwórz 10 wysp, które przechowasz w `std::vector<Island&>`.
+W klasie `Map` utwórz konstruktor bezargumentowy, a w jego ciele utwórz 10 wysp, które przechowasz w `std::vector<Island>`.
 Do wygenerowania losowych wartości pozycji wysp na mapie skorzystaj z [przykładu na cppreference](https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution).
 Wymyśl sposób, aby pozycje wysp się nie powielały.
 
@@ -120,7 +120,7 @@ W klasie `Map` napisz funkcję
 
 `Island* getIsland(const Island::Coordinates& coordinate)`
 
-Powinna ona przeszukać `std::vector<Island&>` i zwrócić szukaną wyspę.
+Powinna ona przeszukać `std::vector<Island>` i zwrócić szukaną wyspę.
 
 ___
 
