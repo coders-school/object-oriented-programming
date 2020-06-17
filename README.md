@@ -1,5 +1,4 @@
-# DIGGERS 
-# object-oriented-programming
+# DIGGERS object-oriented-programming
 [![Build Status](https://travis-ci.org/kszytko/object-oriented-programming.svg?branch=homeworkSHM1)](https://travis-ci.org/kszytko/object-oriented-programming) 
 
 https://github.com/kszytko/object-oriented-programming/projects/1
