@@ -7,6 +7,9 @@ public:
     Cargo& operator+=(const size_t);
     Cargo& operator-=(const size_t);
 
+    bool operator==(const Cargo&) const;
+    bool operator!=(const Cargo&) const;
+
 private:
     std::string _name;
     size_t _amount;
