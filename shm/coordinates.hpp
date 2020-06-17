@@ -1,13 +1,12 @@
 #pragma once
-#include <cstddef>
 
 class Coordinates {
 public:
     Coordinates() = default;
-    Coordinates(size_t, size_t);
+    Coordinates(int, int);
     bool operator==(const Coordinates&) const;
 
 private:
-    size_t positionX_{0};
-    size_t positionY_{0};
+    int positionX_{0};
+    int positionY_{0};
 };
