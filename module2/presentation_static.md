@@ -64,7 +64,7 @@ public:
 std::string ObjectB::name_{"ObjectB"};
 
 int main() {
-    std::cout << ObjecObjectAt::getName() << '\n';
+    std::cout << ObjectA::getName() << '\n';
     std::cout << ObjectB::name_ << '\n';
 
     return 0;
