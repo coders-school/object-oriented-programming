@@ -6,6 +6,6 @@ public:
     Island(int position_X, int position_Y);
     Coordinates getPosition() const { return position_; }
 
-// private:
+private:
     Coordinates position_;
 };
