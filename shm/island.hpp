@@ -1,11 +1,9 @@
 #pragma once
 #include "coordinates.hpp"
 
-#include <cstddef>
-
 class Island {
 public:
-    Island(size_t, size_t);
+    Island(int, int);
     Coordinates getPosition() const { return position_; }
 
 private:
