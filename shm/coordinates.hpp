@@ -3,8 +3,8 @@
 class Coordinates {
 public:
     Coordinates() = default;
-    Coordinates(int, int);
-    bool operator==(const Coordinates&) const;
+    Coordinates(int positionX, int positionY);
+    bool operator==(const Coordinates& rhs) const;
 
 private:
     int positionX_{0};
