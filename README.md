@@ -1,4 +1,5 @@
 # object-oriented-programming
+[![Build Status](https://travis-ci.org/kszytko/object-oriented-programming.svg?branch=homeworkSHM1)](https://travis-ci.org/kszytko/object-oriented-programming) 
 
 https://github.com/kszytko/object-oriented-programming/projects/1
 
@@ -24,7 +25,7 @@ https://github.com/kszytko/object-oriented-programming/projects/1
 ## 3. Standard programowania:
 Przy nazwach zmiennych class używamy prefixów tj:
 ```c++
-size_t m_cargo;
+size_t _cargo;
 ```
 
 `Based on Marcinati`
