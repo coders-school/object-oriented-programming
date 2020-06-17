@@ -5,6 +5,8 @@
 class Cargo {
 public:
     Cargo();
+    size_t getAmount() const {return ammount_;}
+
     Cargo& operator+=(const size_t& ammount) {
         ammount_ += ammount;
         return *this;
