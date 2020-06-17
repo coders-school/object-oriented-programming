@@ -38,3 +38,4 @@ bool operator!=(const Cargo& lhs, const Cargo& rhs)
     return !(lhs == rhs);
 }
 
+

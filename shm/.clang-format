@@ -51,3 +51,5 @@ TabWidth: 4
 UseTab: Never
 Standard: c++17
 
+# Run manually to reformat a file:
+# clang-format -i --style=file <file>
