@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 
+#include "cargo.hpp"
 #include "ship.hpp"
 
 size_t constexpr START_MONEY = 1000;
@@ -20,4 +21,6 @@ class Player {
     std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
+    
+    size_t countFreeSpace();
 };

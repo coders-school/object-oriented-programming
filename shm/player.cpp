@@ -1,5 +1,6 @@
 #include "player.hpp"
 
+#include <algorithm>
 #include <memory>
 
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space)
@@ -20,4 +21,9 @@ Cargo Player::getCargo(size_t index) {
         return ship_->getCargo(index);
 
     return 0;
+}
+
+size_t countFreeSpace() { 
+    size_t loadedSpace = std::accumulate(ship->getAllCargo.begin(), ship->getAllCargo.end(), 0);
+    return ship->getCapacity() - loadedSpace;
 }
