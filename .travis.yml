@@ -3,6 +3,6 @@ compiler:
   - clang
   - gcc
 
+before_script: cd shm
 script:
-  - cd shm
   - make
