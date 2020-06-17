@@ -7,7 +7,7 @@
 class Player {
 public:
     size_t getSpeed() const { return ship_->getSpeed(); }
-    Cargo* getCargo(size_t index) const { return ship_->getCargo(index); }
+    Cargo* getCargo(size_t index) const;
 
 private:
     std::shared_ptr<Ship> ship_;
