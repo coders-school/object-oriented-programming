@@ -3,6 +3,7 @@
 #include "island.hpp" 
 #include "map.hpp" 
 #include "ship.hpp"
+#include "player.hpp"
 
 #include <iostream>
 #include <string>
