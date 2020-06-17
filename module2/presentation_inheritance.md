@@ -15,7 +15,7 @@ ___
 Podczas implementacji klas, często możemy zauważyć, że część cech składowych klasy można wykorzystać także w innych klasach.
 <!-- .element: class="fragment fade-in" -->
 
-Weźmy pod lupę klasę `Komputer`. Jeżeli chcielibyśmy utworzyć klasy: `laptop`, `PC`, `tablet`, to część metod oraz składowych klasy musielibyśmy powielić.
+Weźmy pod lupę klasę `Computer`. Jeżeli chcielibyśmy utworzyć klasy: `Laptop`, `PC`, `Tablet`, to część metod oraz składowych klasy musielibyśmy powielić.
 <!-- .element: class="fragment fade-in" -->
 
 ___
