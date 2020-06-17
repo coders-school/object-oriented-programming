@@ -1,8 +1,8 @@
 #pragma once
 #include <string>
-#include "cargo.hpp"
-
 #include <vector>
+
+#include "cargo.hpp"
 
 class Ship {
 public:

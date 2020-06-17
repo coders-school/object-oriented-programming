@@ -1,11 +1,9 @@
 #pragma once
 
-#include "ship.hpp"
-
 #include <iostream>
 #include <memory>
 
-
+#include "ship.hpp"
 
 class Player {
 public:
