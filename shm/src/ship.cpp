@@ -13,7 +13,7 @@ Ship& Ship::operator+=(size_t num) {
 }
 
 Cargo Ship::getCargo(size_t index) const {
-    if (index < 0 || index >= cargo_.size()) {
+    if (index >= cargo_.size()) {
         std::cerr << "Invalid index\n";
     }
     return cargo_[index];
