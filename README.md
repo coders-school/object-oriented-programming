@@ -23,12 +23,12 @@ __homeworkSHM1__|default|Main branch|Pull Request, Pull
 ---
 ## Praca na projekcie
 ### 1. Przygotowanie
-* robimy `git clone` tego forka, bądź tworzymy własny fork z oryginalnego repo
-* tworzymy nowy branch o nazwie `<your_nickname>` i na nim pracujemy
+* robimy `git clone` tego lub orginalnego forka
+* tworzymy nowy branch o nazwie `<your_nickname>`, na którym będziemy pracować
 * pracujemy w folderze `/shm`  bez podfolderów
 ### 2. In progress
-* **Przypominam o częstych pull'ach na lokane repo**  `git pull origin homeworkShM1`
-* po skończeniu zadania i zaktualizowaniu brancha robimy `git push origin <your_nickname>`
+* **Przypominam o częstych pullach**  `git pull origin homeworkShM1`
+* po skończeniu zadania i zaktualizowaniu brancha robimy pushujemy swojego brancha   `git push origin <your_nickname>`
 ### 3. Pull request
 * otwieramy nowego PR z brancha `<your_nickname> -> homeworkSHM1` (domyślny)
 * aby doszło do merge, `PR` musi mieć przynajmniej **2 code rewiev**
@@ -42,7 +42,3 @@ Przy nazwach zmiennych klasu używamy prefixu `_` tj:
 ```c++
 size_t _cargo;
 ```
-
-
-
-######Based on Marcinati
