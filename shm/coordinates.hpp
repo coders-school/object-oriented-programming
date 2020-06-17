@@ -7,10 +7,7 @@ public:
     Coordinates();
     Coordinates(const int positionX, const int positionY);
 
-    Coordinates& operator==(std::vector<int> currentPosition) {
-        currentPosition == position_;
-        return *this;
-    };
+    Coordinates& operator==(std::vector<int> currentPosition);
 
     int getPositionX() const { return positionX_; }
     int getPositionY() const { return positionY_; }
