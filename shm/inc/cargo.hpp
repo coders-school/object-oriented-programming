@@ -8,6 +8,8 @@ public:
 
     Cargo& operator-=(size_t amount);
 
+    bool operator==(const Cargo& cargoToCheck) const;
+
 protected:
     std::string name_;
     size_t amount_;
