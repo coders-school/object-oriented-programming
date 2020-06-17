@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include "ship.hpp"
 
@@ -21,8 +22,8 @@
     void Ship::setName(const std::string& name) { name_ = name; }
 
     Ship& Ship::operator-=(size_t num) {
-        if((crew_-num)<0){
-            crew_=0
+        if (crew_ < num) {
+            std::cerr << "Number of papays is lower than 0 \n";
             return *this;
         }
         crew_ -= num;
