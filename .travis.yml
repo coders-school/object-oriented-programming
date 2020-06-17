@@ -2,3 +2,7 @@ language: cpp
 compiler:
   - clang
   - gcc
+
+script:
+  - cd shm/
+  - make
