@@ -6,3 +6,4 @@
 !.gitignore
 !*.hpp
 !*.cpp
+!CMakeLists.txt
