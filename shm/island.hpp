@@ -3,7 +3,7 @@
 
 class Island {
 public:
-    Island(int, int);
+    Island(int position_X, int position_Y);
     Coordinates getPosition() const { return position_; }
 
 private:
