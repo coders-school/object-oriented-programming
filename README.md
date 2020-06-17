@@ -1,5 +1,5 @@
 # DIGGERS object-oriented-programming
-[![Build Status](https://travis-ci.org/kszytko/object-oriented-programming.svg?branch=homeworkSHM1)](https://travis-ci.org/kszytko/object-oriented-programming) 
+[![Build Status](https://travis-ci.org/kszytko/object-oriented-programming.svg?branch=homeworkSHM1)](https://travis-ci.org/kszytko/object-oriented-programming)  ![C++ with Make CI](https://github.com/kszytko/object-oriented-programming/workflows/C++%20with%20Make%20CI/badge.svg?event=pull_request)
 
 https://github.com/kszytko/object-oriented-programming/projects/1
 
