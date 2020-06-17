@@ -18,4 +18,11 @@ public:
 
     size_t getSpeed() const;
     Cargo* getCargo(size_t index) const;
+
+    Player(std::shared_ptr<Ship> ship,
+           int money,
+           size_t availableSpace)
+        : ship_(std::make_shared<Ship>(ship)),
+          money_(money),
+          availableSpace_(availableSpace) {}
 };
