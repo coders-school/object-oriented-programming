@@ -3,6 +3,7 @@
 #include "island.hpp" 
 #include "map.hpp" 
 #include "ship.hpp"
+#include "player.hpp"
 
 #include <vector>
 #include "gtest/gtest.h"
