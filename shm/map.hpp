@@ -8,5 +8,5 @@ private:
     std::vector<Island> vecOfIslandOnMap_;
     Island* currentPosition_;
 public:
-
+    Map();
 };
