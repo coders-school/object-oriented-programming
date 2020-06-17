@@ -6,6 +6,9 @@ public:
                 const int positionY)
         : _positionX(positionX), _positionY(positionY) {}
 
+    bool operator==(const Coordinates& coordinatesToCheck) const;
+    bool operator!=(const Coordinates& coordinatesToCheck) const;
+
 private:
     const int _positionX;
     const int _positionY;
