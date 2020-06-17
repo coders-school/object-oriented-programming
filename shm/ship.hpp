@@ -16,20 +16,20 @@ class Ship {
 
     void setName(const std::string& name);
 
-    Ship& operator-=(size_t num);
-    Ship& operator+=(size_t num);
+    Ship& operator-=(size_t crew);
+    Ship& operator+=(size_t crew);
 
-    size_t getCapacity() const;
-    size_t getMaxCrew() const;
-    size_t getSpeed() const;
-    std::string getName() const;
     size_t getId() const;
+    std::string getName() const;
+    size_t getSpeed() const;
+    size_t getMaxCrew() const;
+    size_t getCapacity() const;
 
    private:
-    size_t capacity_;
-    size_t maxCrew_;
-    size_t crew_;
-    size_t speed_;
+    size_t id_;
     std::string name_;
-    const size_t id_;
+    size_t speed_;
+    size_t maxCrew_;
+    size_t capacity_;
+    size_t crew_;
 };
