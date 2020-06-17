@@ -9,8 +9,7 @@ public:
           size_t basePrice)
         : _name(name), _amount(amount), _basePrice(basePrice) {}
 
-    Cargo&
-    operator+=(const size_t);
+    Cargo& operator+=(const size_t);
     Cargo& operator-=(const size_t);
 
     std::string getName() const { return _name; }
