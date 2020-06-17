@@ -38,8 +38,12 @@ endif()
 project(SHM)
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut test.cpp)
+
+
+add_executable(${PROJECT_NAME} main.cpp cargo.cpp coordinates.cpp island.cpp map.cpp ship.cpp)
+add_executable(${PROJECT_NAME}-ut test.cpp cargo.cpp coordinates.cpp island.cpp map.cpp ship.cpp)
+
+add_compile_options(${PROJECT_NAME} -Wall -Wextra -Wconversion -pedantic -Werror)
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
