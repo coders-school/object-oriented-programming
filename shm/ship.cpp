@@ -21,6 +21,10 @@
     void Ship::setName(const std::string& name) { name_ = name; }
 
     Ship& Ship::operator-=(size_t num) {
+        if((crew_-num)<0){
+            crew_=0
+            return this;
+        }
         crew_ -= num;
         return *this;
     }
