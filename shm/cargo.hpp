@@ -6,6 +6,9 @@ public:
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
     bool operator==(std::string name);
+    std::string GetName() const;
+    size_t GetAmount() const;
+    size_t GetBasePrice() const;
 
 
 

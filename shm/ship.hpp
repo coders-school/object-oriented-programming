@@ -6,15 +6,15 @@ class Ship {
 public: 
     Ship();
     Ship(int capacity, int maxCrew, int speed, const std::string& name, int id);
-Ship::Ship(int maxCrew, int speed, size_t id);
+    Ship(int maxCrew, int speed, size_t id);
     void setName(const std::string& name); 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
-    size_t getCapacity();  
-    size_t getMaxCrew(); 
-    size_t getSpeed();
-    std::string getName();
-    int getId();
+    size_t getCapacity() const;  
+    size_t getMaxCrew() const; 
+    size_t getSpeed() const;
+    std::string getName() const;
+    int getId() const;
 private:
     size_t capacity_;
     size_t maxCrew_;
