@@ -6,7 +6,7 @@ public:
     Coordinates(int positionX, int positionY);
     bool operator==(const Coordinates& rhs) const;
 
-private:
+// private:
     int positionX_{0};
     int positionY_{0};
 };

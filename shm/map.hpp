@@ -1,4 +1,3 @@
-
 #pragma once
 #include <vector>
 
@@ -6,10 +5,10 @@
 
 class Map {
 public:
-    Map() {};
-    ~Map() {};
+    Map();
+    void addIsland(int how_many);
+    std::vector<Island> islands_;
 
 private:
-    std::vector<Island> islands;
-    Island currentPosition_;
-}
+    Island* currentPosition_;
+};
