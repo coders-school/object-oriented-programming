@@ -1,8 +1,10 @@
 #include "Player.hpp"
 
+#include <numeric>
+
 size_t countAvailableSpace() {
     auto total = std::accumulate(begin(ship_->getAllCargos()), end(ship_->getAllCargos()), 0, [](const auto& cargo) {
-        cargo->getAmount();
+        cargo.getAmount();
     });
     if (ship_->getCapacity() <= total) {
         return 0;

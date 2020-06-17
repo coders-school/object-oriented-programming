@@ -1,10 +1,6 @@
 #pragma once
 
-#include <algorithm>
 #include <memory>
-#include <numeric>
-#include <string>
-#include <vector>
 
 class Player {
 public:
@@ -23,5 +19,6 @@ private:
     std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t avaliableSpace_;
+
     size_t countAvailableSpace();
 };
