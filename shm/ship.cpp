@@ -30,7 +30,7 @@
         return *this;
     }
     Ship& Ship::operator+=(size_t num) {
-        if(num + crew_ > maxCrews_) {
+        if(num + crew_ > maxCrew_) {
             std::cerr << "To many papays!\n";
             return *this;
         }

@@ -4,6 +4,9 @@
 
 class Ship {
 public: 
+    Ship();
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, int id);
+Ship::Ship(int maxCrew, int speed, size_t id);
     void setName(const std::string& name); 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
