@@ -12,7 +12,7 @@ ___
 
 ## Słowo `virtual` i `override`
 
-Jeżeli chcemy, aby jakaś metoda była wirtualna, lub można ją było przeciążyć, należy poinformować kompilator słowem `virtual`.
+Jeżeli chcemy, aby jakaś metoda była wirtualna lub można ją było przeciążyć, należy poinformować kompilator słowem `virtual`.
 
 <!-- TODO: Co to znaczy wirtualna? -->
 
@@ -49,6 +49,8 @@ Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` t
 * `void swim() override`
 
 Nadpisanie takich metod powoduje, że możemy zmienić ich implementacje
+
+**UWAGA!** `override` jest opcjonalne. Jeśli go nie podamy to metoda i tak zostanie nadpisana w klasie pochodnej. Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie przeciążamy metodą z klasy bazowej i jeśli nie, to program się nie skompiluje. Bez `override` mogłąby zostać utworzona nowa metoda w klasie pochodnej, która nie nadpisuje niczego z klasy bazowej.
 
 ___
 
