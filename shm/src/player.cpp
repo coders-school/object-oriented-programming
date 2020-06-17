@@ -9,7 +9,7 @@ size_t Player::calculateavailableSpace() {
                   [&reservedSpace](const Cargo& cargo) {
                       reservedSpace += cargo.getAmount();
                   });
-    size_t freeSpace = ship_->getmaxCapacity() - reservedSpace;
+    size_t freeSpace = ship_->getCapacity() - reservedSpace;
 
     return freeSpace;
 }
