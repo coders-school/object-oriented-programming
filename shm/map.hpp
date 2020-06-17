@@ -7,6 +7,10 @@
 #include <vector>
 
 class Map {
+private:
+    std::vector<Island> vecOfIslandOnMap_;
+    Island* currentPosition_;
+    
 public:
     Map();
     Island* getIsland(const Coordinates& desiredCoordinate);
