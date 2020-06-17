@@ -2,7 +2,6 @@
 
 #include <memory>
 
-#include "Cargo.cpp"
 #include "Ship.cpp"
 
 class Player {
@@ -16,8 +15,8 @@ public:
     int GetMoney_() const { return money_; };
     size_t GetAvailableSpace_() const { return availableSpace_; };
 
-    size_t getSpeed() const;
-    Cargo* getCargo(size_t index) const;
+    size_t getSpeed() const { return ship_->GetSpeed_(); };
+    Cargo* getCargo(size_t index) const {return ship_->Get};
 
     Player(std::shared_ptr<Ship> ship,
            int money,
