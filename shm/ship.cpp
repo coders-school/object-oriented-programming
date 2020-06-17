@@ -7,7 +7,7 @@ void Ship::setName(const std::string& name) {
 }
 
 Ship& Ship::operator-=(size_t crew) {
-    if (crew_ >= crew) {
+    if (crew_ < crew) {
         crew_ -= crew;
     }
     std::cerr << "Too few sailors!";
