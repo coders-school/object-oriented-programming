@@ -10,6 +10,7 @@ class Ship {
 public:
     Ship()
         : id_(-1) {}
+
     Ship(int capacity, size_t maxCapacity, int maxCrew, int speed, const std::string& name, size_t id)
         : capacity_(0), maxCapacity_(maxCapacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
     Ship(size_t maxCapacity, int maxCrew, int speed, size_t id)
