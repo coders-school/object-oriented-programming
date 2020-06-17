@@ -1,10 +1,8 @@
 #pragma once
+#include <string>
 #include "cargo.hpp"
 
-#include <string>
 #include <vector>
-
-
 
 class Ship {
 public:
@@ -13,7 +11,7 @@ public:
 
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
         : capacity_(0), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
-    Ship(size_t maxCapacity, int maxCrew, int speed, size_t id)
+    Ship(int maxCrew, int speed, size_t id)
         : Ship(0, maxCrew, speed, "", id) {}
 
     void setName(const std::string& name) { name_ = name; }
