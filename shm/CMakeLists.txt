@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND  SHM_SOURCES   Cargo.cpp Player.cpp Island.cpp Coordinates.cpp Ship.cpp)
 
+>>>>>>> initial commit
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
