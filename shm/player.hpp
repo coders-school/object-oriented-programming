@@ -2,6 +2,7 @@
 #include <memory>
 
 #include "ship.hpp"
+#include "cargo.hpp"
 
 size_t constexpr START_MONEY = 1000;
 size_t constexpr START_SPACE = 0;
