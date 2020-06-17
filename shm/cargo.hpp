@@ -18,7 +18,6 @@ public:
 
     bool operator==(const Cargo& freight2) {
         return name_ == freight2.name_;
-            return true;
         return false;
     }
 
