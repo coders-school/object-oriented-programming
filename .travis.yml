@@ -4,5 +4,5 @@ compiler:
   - gcc
 
 script:
-  - cd shm/
+  - cd shm
   - make
