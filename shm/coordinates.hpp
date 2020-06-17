@@ -4,8 +4,8 @@
 
 class Coordinates {
    public:
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
+    Coordinates(int positionX, int positionY) : positionX_(positionX), positionY_(positionY) {}
+    bool operator==(Coordinates& position);
 
    private:
     int positionX_;
