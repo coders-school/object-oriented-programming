@@ -5,3 +5,8 @@ Coordinates::Coordinates()
     
 Coordinates::Coordinates(const int positionX, const int positionY)
     : positionX_(positionX), positionY_(positionY) {}
+
+Coordinates& Coordinates::operator==(std::vector<int> currentPosition) {
+        currentPosition == position_;
+        return *this;
+    }
