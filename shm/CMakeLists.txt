@@ -39,7 +39,7 @@ project(shm)
 enable_testing()
 
 # Now simply link against gtest or gtest_main as needed. Eg
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp Cargo.cpp Ship.cpp)
 add_executable(${PROJECT_NAME}-ut test.cpp)
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
