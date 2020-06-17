@@ -22,7 +22,7 @@ public:
         return *this;
     }
     bool operator==(const Cargo& cargo) {
-        return (name_ == cargo.name_) && (amount_ == cargo.amount_) && (basePrice_ == cargo.basePrice_);
+        return (name_ == cargo.name_);
     }
 
 protected:
