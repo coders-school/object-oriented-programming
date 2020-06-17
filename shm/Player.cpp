@@ -3,11 +3,11 @@
 #include <numeric>
 
 size_t countAvailableSpace() {
-    auto total = std::accumulate(begin(ship_->getAllCargos()), end(ship_->getAllCargos()), 0, [](const auto& cargo) {
+    auto occupiedSpace = std::accumulate(begin(ship_->getAllCargos()), end(ship_->getAllCargos()), 0, [](const auto& cargo) {
         cargo.getAmount();
     });
-    if (ship_->getCapacity() <= total) {
+    if (ship_->getCapacity() <= occupiedSpace) {
         return 0;
     }
-    return ship_->getCapacity() - total;
+    return ship_->getCapacity() - occupiedSpace;
 }

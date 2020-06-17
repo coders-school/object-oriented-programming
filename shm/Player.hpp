@@ -2,6 +2,9 @@
 
 #include <memory>
 
+#include "Cargo.hpp"
+#include "Ship.hpp"
+
 class Player {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money) {
