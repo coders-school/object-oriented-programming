@@ -4,7 +4,13 @@
 
 class Cargo {
 public:
-    Cargo& operator+=(const size_t);
+    Cargo(const std::string& name,
+          size_t amount,
+          size_t basePrice)
+        : _name(name), _amount(amount), _basePrice(basePrice) {}
+
+    Cargo&
+    operator+=(const size_t);
     Cargo& operator-=(const size_t);
 
     std::string getName() const { return _name; }
