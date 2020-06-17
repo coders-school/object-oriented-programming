@@ -13,10 +13,16 @@ Map::Map() {
         auto posX = (size_t)distrib(gen);
         auto posY = (size_t)distrib(gen);
         if (std::none_of(islands_.begin(), islands_.end(), [posX, posY](auto& i) {
-                return posX == i.first && posY == i.second;
+                return i.get()->getPosition() == Coordinates(posX, posY);
             })) {
-            islands_.push_back(Island(posX, posY));
+            islands_.push_back(std::make_shared<Island>(posX, posY));
             isls--;
         }
     } while (isls > 0);
+}
+
+Island* Map::getIsland(const Coordinates& coordinate) {
+    auto itr = std::find_if(islands_.begin(), islands_.end(), [&coordinate](auto& i) {
+        return i.get()->getPosition() == coordinate; } );
+    return (*itr).get();
 }

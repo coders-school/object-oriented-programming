@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "island.hpp"
@@ -10,8 +11,9 @@ constexpr size_t MAX_ISLANDS = 10;
 class Map {
 public:
     Map();
+    Island* getIsland(const Coordinates& coordinate); // (const Island::Coordinates& coordinate)
 
 private:
-    std::vector<Island&> islands_;
+    std::vector<std::shared_ptr<Island>> islands_;
     Island* currentPosition_;
 };
