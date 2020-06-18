@@ -17,4 +17,7 @@ private:
     std::shared_ptr<Ship> _ship;
     size_t _money;
     size_t _availableSpace;
+    
+    size_t Player::getSpeed() const;
+    Cargo* getCargo(size_t index) const;
 };
