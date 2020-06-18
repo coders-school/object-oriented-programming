@@ -24,10 +24,7 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     int getId() const { return id_; }
-
     Cargo getCargo(size_t index) const;
-    std::vector<Cargo>& getallCargo() { return cargo_; }
-
     size_t getAvailableSpace() const;
 
 private:
