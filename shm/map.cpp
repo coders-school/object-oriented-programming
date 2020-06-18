@@ -23,4 +23,13 @@ Map::Map() {
                    [](int x, int y) {
                        return std::make_pair(x, y);
                    });
-}
+
+    Island* getIsland(const Island::Coordinates& desiredCoordinate) {
+        std::find_if(Island.cbegin(), Island.cend(), [desiredCoordinate](const auto& el) {
+            if (el.getCoordinates != Island.end()) {
+                return el.getCoordinates() == desiredCoordinates;
+            }
+            return 0;
+        };
+    }
+};
