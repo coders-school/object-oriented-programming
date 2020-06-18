@@ -18,7 +18,7 @@ public:
     Cargo getCargo(size_t index) const { return ship_->getCargo(index); }
 
 private:
-    size_t getAvailableSpace();
+    size_t getAvailableSpace() { return ship_->getAvailableSpace(); }
 
     std::unique_ptr<Ship> ship_;
     size_t money_;
