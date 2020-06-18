@@ -4,11 +4,11 @@
 
 class Cargo {
 public:
-    Cargo& operator+=(const size_t);
-    Cargo& operator-=(const size_t);
+    Cargo& operator+=(const size_t amount);
+    Cargo& operator-=(const size_t amount);
 
-    bool operator==(const Cargo&) const;
-    bool operator!=(const Cargo&) const;
+    bool operator==(const Cargo& src) const;
+    bool operator!=(const Cargo& src) const;
 
 private:
     std::string _name;
