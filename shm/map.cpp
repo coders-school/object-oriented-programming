@@ -24,9 +24,12 @@ Map::Map() {
                        return std::make_pair(x, y);
                    });
 
-    Island* getIsland(const Island::Coordinates& coordinate) {
-        std::search(std::vector<Island>.cbegin(), std::vector<Island>.cend(),
-                    coordinate.cbegin(), coordinate.cend());
-        return *this;
+    Island* getIsland(const Island::Coordinates& desiredCoordinate) {
+        std::find_if(Island.cbegin(), Island.cend(), [desiredCoordinate](const auto& el) {
+            return result};
+        if (result != Island.end()) {
+            return el.getCoordinates() == desiredCoordinates;
+        }
+        return desiredCoordinates;
     }
 };
