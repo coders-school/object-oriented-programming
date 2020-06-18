@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include <numeric>
 
 #include "ship.hpp"
 
@@ -21,4 +22,13 @@ private:
     std::shared_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
+
+    size_t countSpace() {
+        size_t totalAmount = std::accumulate(ship_->getCargo().begin(), ship_->getCargo().end(),
+                                             [](const Cargo& item1, const Cargo& item2) {
+                                                 return item1.getAmount() + item2.getAmount();
+                                             });
+
+        return ship_->getCapacity() - totalAmount;
+    }
 };

@@ -5,6 +5,7 @@
 class Cargo {
 public:
     Cargo();
+
     Cargo(std::string name, size_t ammount, double basePrice)
         : name_(name),
           ammount_(ammount),
