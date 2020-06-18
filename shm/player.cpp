@@ -28,6 +28,6 @@ size_t Player::getSpeed() const {
 }
 Cargo* Player::getCargo(size_t index) const {
     if (ship_)
-        return &ship_->getCargo(index);
+        return ship_->getCargo(index);
     return nullptr;
 }
