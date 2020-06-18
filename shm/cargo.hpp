@@ -4,8 +4,9 @@
 
 class Cargo {
 public:
-    Cargo();
+    Cargo() = default;
     Cargo(std::string name, size_t ammount, double basePrice);
+    ~Cargo() = default;
 
     std::string getName() const { return name_; }
     size_t getAmmount() const { return ammount_; }
@@ -23,5 +24,6 @@ private:
 
 class Fruit : public Cargo {
     Fruit(std::string name, size_t ammount, double basePrice);
+    ~Fruit();
 
 };
