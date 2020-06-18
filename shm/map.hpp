@@ -6,6 +6,8 @@
 
 class Map {
 public:
+
+    Map();
     Island* Map::getIsland(const Coordinates& coordinate);
 
 private:
