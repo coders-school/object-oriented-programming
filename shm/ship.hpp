@@ -21,7 +21,7 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
-    std::vector<Cargo> getCargo() const { return cargo_; };
+    std::vector<Cargo>& getCargo() { return cargo_; };
 
 private:
     size_t capacity_;
