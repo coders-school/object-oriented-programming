@@ -10,3 +10,18 @@ Cargo* Player::getCargo(size_t index) const {
         return nullptr;
     }
 }
+
+void Player::countAvailableSpace() {
+    const std::vector<Cargo> temp = ship_->getCargo();
+
+    size_t amount = 0;
+    for(const auto& cargo : temp) {
+        amount += cargo.getAmount();
+    }
+    int available = ship_->getCapacity() - amount;
+    if(available < 0) {
+        availableSpace_ = 0;
+    } else {
+        availableSpace_ = available;
+    }
+}

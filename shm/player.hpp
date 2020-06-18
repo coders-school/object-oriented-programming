@@ -16,4 +16,6 @@ private:
     std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
+
+    void countAvailableSpace();
 };
