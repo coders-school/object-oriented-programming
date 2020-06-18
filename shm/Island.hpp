@@ -9,3 +9,4 @@ public:
     Island(size_t positionX, size_t positionY) : position_(positionX, positionY) {};
     Coordinates& getPosition() { return position_; };
 };
+

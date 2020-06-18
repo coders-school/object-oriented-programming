@@ -20,3 +20,4 @@ Island* Map::getIsland(const Coordinates& coordinate)
 
     return &(*island);
 }
+
