@@ -1,6 +1,5 @@
 name: C++ with CMake CI
 
-<<<<<<< HEAD
 on:
   push:
     branches:
@@ -34,37 +33,7 @@ jobs:
        run: |
         cmake ..
         make
-<<<<<<< HEAD
     - name: Run tests
       working-directory: shm/build
       run: ctest -V
-=======
-     - name: Run tests
-       working-directory: shm/build
-       run: ctest -V
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> Update main.yml
-=======
->>>>>>> Revert "Merge branch 'master' into homework1"
-=======
 
-=======
-on: [push, pull_request]
-
-jobs:
->>>>>>> Actions restored
-  checker:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out code
-      uses: actions/checkout@master
-    - name: Run check.sh
-      working-directory: shm
-      run: |
-        chmod +x check.sh
-        sudo apt install -y pcregrep
-        ./check.sh CMakeLists.txt
->>>>>>> Update main.yml
-
-# In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
