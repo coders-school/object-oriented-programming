@@ -7,6 +7,5 @@ private:
     Coordinates position_;
 public:
     Island(size_t positionX, size_t positionY) : position_(positionX, positionY) {};
-    Coordinates& getPosition() { return position_; };
+    Coordinates getPosition() const { return position_; };
 };
-
