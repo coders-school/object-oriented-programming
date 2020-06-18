@@ -45,6 +45,6 @@ size_t Ship::getSpeed() const {
 std::string Ship::getName() const {
     return name_;
 }
-int Ship::getId() {
+int Ship::getId() const{
     return id_;
 }
