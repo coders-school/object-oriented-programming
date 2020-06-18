@@ -8,18 +8,18 @@
 class Player {
 private:
     std::unique_ptr<Ship> ship_;
-    size_t availableSpace_;
-    size_t money_;
+    uint32_t availableSpace_;
+    uint32_t money_;
 
-    size_t CountAvailableSpace() const;
+    uint32_t CountAvailableSpace() const;
 
 public:
-    Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
+    Player(std::unique_ptr<Ship> ship, uint32_t money, uint32_t availableSpace);
 
     std::unique_ptr<Ship> getShip();
-    size_t getMoney() const;
-    size_t getAvailableSpace() const;
+    uint32_t getMoney() const;
+    uint32_t getAvailableSpace() const;
 
-    size_t getSpeed() const;
-    Cargo* getCargo(size_t index) const;
+    uint32_t getSpeed() const;
+    Cargo* getCargo(uint32_t index) const;
 };
