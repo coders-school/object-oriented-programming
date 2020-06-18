@@ -97,4 +97,6 @@ TEST(map, getIslandShouldRTeturnCorrectIsland)
     Coordinates corr = islands[1].getPosition();
 
     EXPECT_NE(map_.getIsland(corr).getPosition(), island_.getPosition());
+
 }
+
