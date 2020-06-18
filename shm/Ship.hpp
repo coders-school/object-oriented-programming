@@ -1,12 +1,15 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
+#include "Cargo.hpp"
 
 class Ship {
 public:
     Ship();
     Ship(int id,
-         const std::string & name,
+         const std::string& name,
          size_t speed,
          size_t maxCrew,
          size_t capacity);
@@ -20,6 +23,12 @@ public:
     size_t getMaxCrew() const { return _maxCrew; }
     size_t getCapacity() const { return _capacity; }
     size_t getCrew() const { return _crew; }
+    Cargo* getCargo(const size_t id) {
+        if (id < _cargo.size()) {
+            return &_cargo[id];
+        }
+        return {};
+    }
 
     void setName(const std::string& name) { _name = name; }
 
@@ -33,4 +42,5 @@ private:
     size_t _maxCrew;
     size_t _capacity;
     size_t _crew;
+    std::vector<Cargo> _cargo;
 };
