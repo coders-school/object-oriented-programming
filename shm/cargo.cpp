@@ -19,3 +19,6 @@ Cargo& Cargo::operator-=(const size_t& ammount) {
 bool Cargo::operator==(const Cargo& freight2) {
     return name_ == freight2.name_;
 }
+
+Fruit::Fruit(std::string name, size_t ammount, double basePrice)
+    : Cargo(name, ammount, basePrice) {}

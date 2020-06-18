@@ -7,9 +7,9 @@ public:
     Cargo();
     Cargo(std::string name, size_t ammount, double basePrice);
 
-    std::string getName() const { return name_; };
-    size_t getAmmount() const { return ammount_; };
-    double getBasePrice() const { return basePrice_; };
+    std::string getName() const { return name_; }
+    size_t getAmmount() const { return ammount_; }
+    double getBasePrice() const { return basePrice_; }
 
     Cargo& operator+=(const size_t& ammount);
     Cargo& operator-=(const size_t& ammount);
@@ -19,4 +19,9 @@ private:
     std::string name_;
     size_t ammount_;
     double basePrice_;
+};
+
+class Fruit : public Cargo {
+    Fruit(std::string name, size_t ammount, double basePrice);
+
 };
