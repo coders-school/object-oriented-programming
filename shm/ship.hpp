@@ -5,25 +5,29 @@
 class Ship {
    public:
     Ship();
-    Ship(uint8_t capacity, uint8_t maxCrew, uint8_t speed, const std::string& name, uint8_t id);
-    Ship(uint8_t maxCrew, uint8_t speed, uint8_t id);
+    Ship(uint32_t capacity,
+         uint32_t maxCrew,
+         uint32_t speed,
+         const std::string& name,
+         uint32_t id);
+    Ship(uint32_t maxCrew, uint32_t speed, uint32_t id);
 
     void setName(const std::string& name);
 
-    Ship& operator-=(uint8_t crew);
-    Ship& operator+=(uint8_t crew);
+    Ship& operator-=(uint32_t crew);
+    Ship& operator+=(uint32_t crew);
 
-    uint8_t getId() const;
+    uint32_t getId() const;
     std::string getName() const;
-    uint8_t getSpeed() const;
-    uint8_t getMaxCrew() const;
-    uint8_t getCapacity() const;
+    uint32_t getSpeed() const;
+    uint32_t getMaxCrew() const;
+    uint32_t getCapacity() const;
 
    private:
-    uint8_t id_;
+    uint32_t id_;
     std::string name_;
-    uint8_t speed_;
-    uint8_t maxCrew_;
-    uint8_t capacity_;
-    uint8_t crew_;
+    uint32_t speed_;
+    uint32_t maxCrew_;
+    uint32_t capacity_;
+    uint32_t crew_;
 };

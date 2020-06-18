@@ -4,11 +4,11 @@
 
 class Cargo {
    public:
-    Cargo& operator+=(uint8_t amount);
-    Cargo& operator-=(uint8_t amount);
+    Cargo& operator+=(uint32_t amount);
+    Cargo& operator-=(uint32_t amount);
 
    private:
     std::string name_;
-    uint8_t amount_;
-    uint8_t basePrice_;
+    uint32_t amount_;
+    uint32_t basePrice_;
 };
