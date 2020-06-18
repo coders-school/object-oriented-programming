@@ -37,6 +37,6 @@ private:
     size_t crew_;
     size_t speed_;
     std::string name_;
-    int id_;
+    const int id_;
     std::vector<std::unique_ptr<Cargo>> cargo_;
 };
