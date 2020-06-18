@@ -1,9 +1,7 @@
 #include "map.hpp"
-
 #include <map>
 #include <random>
 #include <string>
-#include <vector>
 
 Map::Map() {
 
@@ -14,7 +12,7 @@ Map::Map() {
 
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(1000, 1010);
+    std::uniform_int_distribution<> distrib(MAP_RND_DISTRIBUTION_MIN, MAP_RND_DISTRIBUTION_MAX);
 
     bool coordinateExist = false;
     int posX = 0;
@@ -33,7 +31,17 @@ Map::Map() {
 
         } while (!coordinateExist);
 
-    allIslands.emplace_back(Island(posX, posY));
-
+        allIslands.emplace_back(Island(posX, posY));
     }
+}
+
+
+Island* Map::getIsland(const Coordinates& coordinate)
+{
+    for (Island& island : allIslands){
+        if (island.getPosition() == coordinate){
+            return &island;
+        }
+    }
+    return nullptr;
 }
