@@ -4,29 +4,32 @@
 //#include "coordinates.hpp"
 #include <vector>
 
-///-------------------------------------------------
-#warning remove this code when ilsands is ready
-
-
 constexpr int MAP_RND_DISTRIBUTION_MIN = 1000;
 constexpr int MAP_RND_DISTRIBUTION_MAX = 1010;
 
-class Coordinates{
+
+///-------------------------------------------------
+#warning remove this code when ilsands is ready
+class Coordinates {
 private:
     int x_;
-    int y_; 
+    int y_;
 public:
-    Coordinates(int x, int y): x_(x), y_(y){};
-    bool operator==(const Coordinates &pos) {return ((x_== pos.x_) && (y_ == pos.y_));} 
+    Coordinates(int x, int y): x_(x), y_(y) {};
+    bool operator==(const Coordinates &pos) {
+        return ((x_== pos.x_) && (y_ == pos.y_));
+    }
 };
 
 class Island {
 private:
     Coordinates position_;
-    
+
 public:
-    Island(int x, int y): position_(Coordinates(x,y)){};
-    inline Coordinates getPosition(){ return position_;}
+    Island(int x, int y): position_(Coordinates(x,y)) {};
+    inline Coordinates getPosition() {
+        return position_;
+    }
 
 };
 ///-------------------------------------------------
