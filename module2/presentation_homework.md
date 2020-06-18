@@ -22,13 +22,16 @@ ___
 5. <!-- .element: class="fragment fade-in" --> klasy abstrakcyjne
 6. <!-- .element: class="fragment fade-in" --> interfejsy
 7. <!-- .element: class="fragment fade-in" --> polimorfizm
-8. <!-- .element: class="fragment fade-in" --> `static`
+8. <!-- .element: class="fragment fade-in" --> pola i metody statyczne
 
 ___
 
 ### Pre-work
 
-* Dowiedz się czym jest problem diamentowy
+* Dowiedzcie się czym jest problem diamentowy
+* Poczytajcie o zasadach SOLID, dotyczących pisania dobrego kodu obiektowego
+* Lektura o wzorcach projektowych z przykładami w C++ - [refactoring.guru](https://refactoring.guru/design-patterns)
+* Spróbujcie w grupie metodą Copy & Paste dorzucić system budowania cmake do projektu. W tym celu popatrzcie na dotychczasowe zadania domowe i plik CMakeLists.txt.
 
 ___
 
@@ -36,16 +39,16 @@ ___
 
 Wykorzystajcie kod napisany podczas zajęć. Możecie też skorzystać z kodu w katalogu [solutions](solutions)
 
-Projekt grupowy - kontynuacja. Możecie zmieniać grupy ;)
+Projekt grupowy - kontynuacja. Możecie zmienić grupę jeśli chcecie ;)
 
 ___
 
 ## Organizacja prac
 
 * Jak wyglądało wasze daily?
-* Jak Code Review nie jest zaniedbane?
+* Czy Code Review nie jest zaniedbane?
 * Czy współpraca idzie gładko?
-* Zróbcie sobie retro :)
+* Zróbcie sobie retrospektywę :)
 
 ___
 
@@ -54,14 +57,14 @@ ___
 * 3 pierwsze zadania - 5 punktów
 * zadania 4, 5, 6 - 8 punktów
 * 20 punktów za dostarczenie wszystkich 6 zadań przed 05.07.2020 (niedziela) do 23:59
-* brak punktów bonusowych za dostarczenie tylko części zadań przed 28.06.
+* brak punktów bonusowych za dostarczenie tylko części zadań przed 05.07
 * 6 punktów za pracę w grupie dla każdej osoby z grupy.
 
 ___
 
 ## Zadanie 1
 
-Napisz klasę `Store`, która będzie umożliwiała dokonywanie zakupów.
+Napisz klasę `Store`, która będzie umożliwiała dokonywanie zakupów. Wykorzystaj poniższy enum i funkcje.
 
 ```cpp
 enum class Response {done, lack_of_money, lack_of_cargo, lack_of_space};

@@ -9,11 +9,14 @@
 </a>
 
 ___
-<!-- .slide: style="font-size: 0.9em" -->
+<!-- .slide: style="font-size: 0.85em" -->
 
-## Zmienne i funkcje statyczne
+## "Zmienna lub stała klasy"
 
-Czasami chcielibyśmy przypisać jakąś stałą cechę do klasy. Nie konkretnych obiektów, a klasy samej w sobie. Np. Każdy obiekt klasy ma nazwę "Obiekt".
+Czasami chcielibyśmy przypisać jakąś stałą cechę do klasy.
+Nie konkretnych obiektów, a klasy samej w sobie.
+Np. każdy obiekt klasy ma nazwę "Object".
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Object {
@@ -24,8 +27,10 @@ private:
     const std::string name_ = "Object";
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 W celu otrzymania nazwy tego obiektu, musimy najpierw utworzyć obiekt, a następnie zawołać `getName()`.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 int main() {
@@ -33,8 +38,10 @@ int main() {
     std::cout << obj.getName() << '\n';
 }
 ```
+<!-- .element: class="fragment fade-in" -->
 
 Nawet jeżeli obiekt zajmowałby dużo miejsca w pamięci a my chcielibyśmy tylko jego nazwę i tak musimy go utworzyć, ponieważ tylko na nim możemy zawołać metodę `getName()`.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 <!-- .slide: style="font-size: 0.9em" -->
@@ -44,25 +51,26 @@ ___
 Rozwiązaniem tej uciążliwości jest `static`. Co więcej, problem ten możemy rozwiązać na 2 sposoby. Nie musimy w ten sposób tworzyć specjalnie obiektu, aby dostać się do cechy klasy, jaką jest jej nazwa.
 
 ```cpp
-class Object {
+class ObjectA {
 public:
-    static std::string getName() { return "Object"; }
+    static std::string getName() { return "ObjectA"; }
 };
 
-class Object2 {
+class ObjectB {
 public:
     static std::string name_;
 };
 
-std::string Object2::name_{"Object2"};
+std::string ObjectB::name_{"ObjectB"};
 
 int main() {
-    std::cout << Object::getName() << '\n';
-    std::cout << Object2::name_ << '\n';
+    std::cout << ObjectA::getName() << '\n';
+    std::cout << ObjectB::name_ << '\n';
 
     return 0;
 }
 ```
+<!-- .element: class="fragment fade-in" -->
 
 <!-- TODO: Brakuje tu motywacji na jakimś konkretnym przykładzie -->
 
@@ -74,4 +82,10 @@ ___
 
 ## Zadanie 4
 
-Przekształć klasę bazową `Coordinates`, tak aby miała funkcję statyczną `static size_t distance(const Coordinates& lhs, const Coordinates& rhs)`, która powinna zwracać dystans pomiędzy dwoma pozycjami.
+Przekształć klasę bazową `Coordinates`, tak aby miała funkcję statyczną
+
+```cpp
+static size_t distance(const Coordinates& lhs, const Coordinates& rhs)
+```
+
+Funkcja ta powinna zwracać dystans pomiędzy dwoma pozycjami.

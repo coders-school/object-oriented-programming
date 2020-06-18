@@ -10,13 +10,79 @@
 
 ___
 
-## Słowo `virtual` i `override`
+## Słowo kluczowe `virtual`
 
-Jeżeli chcemy, aby jakaś metoda była wirtualna, lub można ją było przeciążyć, należy poinformować kompilator słowem `virtual`.
+Jeżeli chcemy, aby przy używaniu wskaźników lub referencji na klasę bazową, jakaś metoda zachowywała się inaczej w zależności od prawdziwego typu obiektu, to należy ją oznaczyć słowem kluczowym `virtual`. Jest to tzw. <span class="fragment highlight-green">funkcja wirtualna</span>.
 
-<!-- TODO: Co to znaczy wirtualna? -->
+___
+<!-- .slide: style="font-size: 0.9em" -->
 
-Jeżeli w klasie pochodnej przeciążamy taką metodę, należy dodać słowo `override`.
+## Funkcja nie-wirtualna
+
+```cpp
+#include <iostream>
+
+struct Bird {
+    void sing() { std::cout << "tweet, tweet\n"; }
+};
+
+struct Sparrow : Bird {
+    void sing() { std::cout << "chirp, chirp\n"; }
+};
+
+int main() {
+    Sparrow sparrow;
+    Bird& bird = sparrow;
+    bird.sing();
+    return 0;
+}
+```
+
+Co pojawi się na ekranie?
+<!-- .element: class="fragment fade-in" -->
+
+`tweet, tweet`
+<!-- .element: class="fragment fade-in" -->
+
+___
+<!-- .slide: style="font-size: 0.9em" -->
+
+## Funkcja wirtualna
+
+```cpp
+#include <iostream>
+
+struct Bird {
+    virtual void sing() { std::cout << "tweet, tweet\n"; }
+};
+
+struct Sparrow : Bird {
+    void sing() { std::cout << "chirp, chirp\n"; }
+};
+
+int main() {
+    Sparrow sparrow;
+    Bird& bird = sparrow;
+    bird.sing();
+    return 0;
+}
+```
+
+Co pojawi się na ekranie?
+<!-- .element: class="fragment fade-in" -->
+
+`chirp, chirp`
+<!-- .element: class="fragment fade-in" -->
+
+[Sprawdź na ideone.com](https://ideone.com/yW43Tq)
+<!-- .element: class="fragment fade-in" -->
+
+___
+
+## Słowo kluczowe `override`
+
+Jeżeli w klasie pochodnej **nadpisujemy** metodę wirtualną, czyli zmieniamy jej zachowanie, to należy dodać słowo `override`.
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Interface {
@@ -26,15 +92,32 @@ public:
 
 class SomeClass : public Interface {
 public:
-    doSth() override;
+    doSth() override;   // there should be an implementation in cpp file
 };
 
 int main() {
-    Interface interface;    // Compilation error, class Interface is pure virtual
+    Interface interface;    // Compilation error, Interface is pure virtual
     SomeClass someClass;    // OK
     Interface* interface = &someClass;  // OK, we hold a pointer
 }
 ```
+<!-- .element: class="fragment fade-in" -->
+
+___
+
+### Mała uwaga
+
+`override` jest opcjonalne. Jeśli go nie podamy za sygnaturą funkcji klasy pochodnej to metoda z klasy bazowej i tak zostanie nadpisana.
+<!-- .element: class="fragment fade-in" -->
+
+Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie przeciążamy metodą z klasy bazowej i jeśli nie, to program się nie skompiluje.
+<!-- .element: class="fragment fade-in" -->
+
+Bez `override` mogłaby zostać utworzona nowa metoda w klasie pochodnej, która nie nadpisuje niczego z klasy bazowej.
+<!-- .element: class="fragment fade-in" -->
+
+Metody wirtualne **nadpisujemy**, nie przeciążamy.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -42,13 +125,14 @@ ___
 
 Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` to klasy pochodne, które dziedziczą po pewnych klasach bazowych jak `Bird`, `Flyable`, `Soundable`, `Swimmable` oraz nadpisują kilka ich metod jak:
 
-* `void eat() override`
-* `void sleep() override`
-* `void makeSound() override`
-* `void fly() override`
-* `void swim() override`
+* <!-- .element: class="fragment fade-in" --> <code>void eat() override</code>
+* <!-- .element: class="fragment fade-in" --> <code>void sleep() override</code>
+* <!-- .element: class="fragment fade-in" --> <code>void makeSound() override</code>
+* <!-- .element: class="fragment fade-in" --> <code>void fly() override</code>
+* <!-- .element: class="fragment fade-in" --> <code>void swim() override</code>
 
-Nadpisanie takich metod powoduje, że możemy zmienić ich implementacje
+Nadpisanie takich metod powoduje, że możemy zmienić ich implementacje.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -92,7 +176,7 @@ Ponieważ wspólnym rodzicem wszystkich klas jest klasa `Soundable` możemy prze
 std::vector<std::shared_ptr<Soundable>> birds_;
 ```
 
-### Jakie dane otrzymamy na wyjściu?
+### Jakie dane otrzymamy na wyjściu? <!-- .element: class="fragment fade-in" -->
 
 ```cpp
 std::vector<std::shared_ptr<Soundable>> birds_;
@@ -104,6 +188,7 @@ std::cout << birds_[0]->makeSound() << '\n';
 std::cout << birds_[1]->makeSound() << '\n';
 std::cout << birds_[2]->makeSound() << '\n';
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -112,23 +197,35 @@ ___
 Zjawisko, które właśnie zaobserwowaliśmy, nazywa się polimorfizmem.
 
 Polimorfizm pozwala funkcji przybrać różne formy (implementacje), tak jak na przykładzie.
+<!-- .element: class="fragment fade-in" -->
 
 Dlatego, jeżeli utworzymy kolejno obiekty `Goose`, `Hen` i `Duck` w zależności od obiektu zostanie wywołana jego wersja metody `makeSound`.
+<!-- .element: class="fragment fade-in" -->
+
+Polimorfizm włącza się, gdy mamy funkcje wirtualne i używamy wskaźników lub referencji na typ bazowy.
+<!-- .element: class="fragment fade-in" -->
 
 ### Kto grał lub czytał Wiedźmina?
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## Doppler :)
 
-W uniwersum wykreowanym przez naszego rodzimego pisarza Andrzeja Sapkowskiego, występuje pewna
-intrygująca i ciekawa rasa zwana Dopplerami. Rasa ta potrafi przyjąć, postać różnych form życia,
-może stać się człowiekiem, elfem, krasnoludem. Zmienia w ten sposób swoje cechy jak głos, kolor włosów, a nawet ubranie!
+W uniwersum wykreowanym przez naszego rodzimego pisarza Andrzeja Sapkowskiego, występuje pewna intrygująca i ciekawa rasa zwana Dopplerami.
+<!-- .element: class="fragment fade-in" -->
+
+Rasa ta potrafi przyjąć, postać różnych form życia, może stać się człowiekiem, elfem, krasnoludem. Zmienia w ten sposób swoje cechy jak głos, kolor włosów, a nawet ubranie!
+<!-- .element: class="fragment fade-in" -->
+
 Pomimo że rasa ta jest typu Doppler, potrafi w różnych okolicznościach podszywać się pod inne rasy jak elf, krasnolud czy człowiek.
+<!-- .element: class="fragment fade-in" -->
+
 Z punktu widzenia C++ nasz Doppler podlega zjawisku polimorfizmu.
+<!-- .element: class="fragment fade-in" -->
 
 ___
-<!-- .slide: style="font-size: 0.9em" -->
+<!-- .slide: style="font-size: 0.85em" -->
 
 ```cpp
 class Doppler {
@@ -169,7 +266,7 @@ Jak widzimy, nasz Doppler może przyjąć różne formy i zachowywać się tak j
 ___
 <!-- .slide: style="font-size: 0.9em" -->
 
-## Wirtualne destruktory
+## Nie-wirtualne destruktory
 
 Bardzo ważne w przypadku tworzenia metod wirtualnych i dziedziczenia jest tworzenie wirtualnych destruktorów.
 Jeżeli korzystamy z dobroci polimorfizmu i nie oznaczymy destruktor jako `virtual` to destruktor ten nie zostanie wywołany.
@@ -196,6 +293,8 @@ int main() {
 ```
 
 ___
+
+## Nie-wirtualne destruktory - problem
 
 ```cpp
 #include <iostream>
@@ -224,6 +323,8 @@ int main() {
 ```
 
 ___
+
+## Wirtualny destruktor
 
 ```cpp
 #include <iostream>
@@ -256,7 +357,11 @@ ___
 ## Zadanie 3
 
 Napisz klasę `DryFruit`, która dziedziczyć będzie po klasie `Fruit`.
+
 Klasa ta powinna przeciążać metody `getPrice()`, `getName()` oraz `operator--`.
+
 `operator--` powinien odejmować zużycie raz na 10 wywołań.
+
 Metoda `getPrice()` powinna zwracać trzykrotnie większą wartość w porównaniu do ceny bazowej.
+
 Przetestuj wywołania polimorficzne oraz podziel się wnioskami.
