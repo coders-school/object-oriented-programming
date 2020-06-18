@@ -11,7 +11,7 @@ int main() {
     ship1 += 15;
     ship2 -= 40;
 
-    Cargo flowerCargo, fruitCargo;
+    Cargo flowerCargo{"Tulipan", 7, 50}, fruitCargo{"Truskawka", 5, 40};
 
     assert(flowerCargo != fruitCargo);
 
