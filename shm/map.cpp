@@ -1,6 +1,7 @@
 #include "map.hpp"
 
 #include <algorithm>
+
 #include <random>
 
 Map::Map() {
@@ -17,3 +18,10 @@ Island temp(distrib(gen), distrib(gen));
         Islands_.push_back(temp);
     }
 }
+Island* Map::getIsland(const Coordinates& coordinate) {
+    auto result = std::find_if(Islands_.begin(), Islands_.end(), [coordinate](const Island& islnd) {
+        return islnd.getCoordinates() == coordinate;
+    });
+    return &(*result);
+}
+
