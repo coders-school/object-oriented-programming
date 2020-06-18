@@ -16,23 +16,12 @@ public:
     size_t getSpeed() const { return speed_; }
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getCapacity() const { return capacity_; }
-    std::vector<Cargo> getCargo() const {return cargo_;}
+    std::vector<Cargo> getCargo() const { return cargo_; }
 
     void setName(const std::string& name);
 
-    Ship& operator+=(const size_t& crew) {
-        if (crew_ + crew <= maxCrew_) {
-            crew_ += crew;
-        }
-        return *this;
-    }
-
-    Ship& operator-=(const size_t& crew) {
-        if (crew_ - crew >= 0) {
-            crew_ -= crew;
-        }
-        return *this;
-    }
+    Ship& operator+=(const size_t& crew);
+    Ship& operator-=(const size_t& crew);
 
 private:
     int id_;
