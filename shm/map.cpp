@@ -26,10 +26,10 @@ Map::Map() {
 
     Island* getIsland(const Island::Coordinates& desiredCoordinate) {
         std::find_if(Island.cbegin(), Island.cend(), [desiredCoordinate](const auto& el) {
-            return result};
-        if (result != Island.end()) {
-            return el.getCoordinates() == desiredCoordinates;
-        }
-        return desiredCoordinates;
+            if (el.getCoordinates != Island.end()) {
+                return el.getCoordinates() == desiredCoordinates;
+            }
+            return 0;
+        };
     }
 };
