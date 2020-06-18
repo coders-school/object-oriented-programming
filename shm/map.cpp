@@ -23,4 +23,10 @@ Map::Map() {
                    [](int x, int y) {
                        return std::make_pair(x, y);
                    });
-}
+
+    Island* getIsland(const Island::Coordinates& coordinate) {
+        std::search(std::vector<Island>.cbegin(), std::vector<Island>.cend(),
+                    coordinate.cbegin(), coordinate.cend());
+        return *this;
+    }
+};
