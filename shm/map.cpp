@@ -4,18 +4,18 @@
 #include <random>
 #include <vector>
 
-constexpr int totalIslands = 10;
+constexpr size_t totalIslands = 10;
 constexpr size_t mapWidth = 20;
 constexpr size_t mapHeight = 10;
 
 Map::Map() {
     islands_.reserve(totalIslands);
-    addIsland(totalIslands);
+    generateIsland(totalIslands);
 }
 
-void Map::addIsland(size_t howMany) {
-    std::random_device rd;   //Will be used to obtain a seed for the random number engine
-    std::mt19937 gen(rd());  //Standard mersenne_twister_engine seeded with rd()
+void Map::generateIsland(size_t howMany) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
     std::uniform_int_distribution<> xDistrib(0, mapWidth);
     std::uniform_int_distribution<> yDistrib(0, mapHeight);
 

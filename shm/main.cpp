@@ -2,7 +2,6 @@
 
 int main() {
     Map testMap;
-    testMap.addIsland(10);
 
-    return 1;
+    return 0;
 }

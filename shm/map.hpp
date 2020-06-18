@@ -6,9 +6,9 @@
 class Map {
 public:
     Map();
-    void addIsland(size_t howMany);
 
 private:
+    void generateIsland(size_t howMany);
     Island* currentPosition_;
     std::vector<Island> islands_;
 };
