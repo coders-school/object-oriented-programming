@@ -15,5 +15,5 @@ bool Cargo::operator==(const Cargo& src) const {
 }
 
 bool Cargo::operator!=(const Cargo& src) const {
-    return !operator==(src);
+    return !(this == src);
 }
