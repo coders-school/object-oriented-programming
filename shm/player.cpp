@@ -18,5 +18,10 @@ void Player::countAvailableSpace() {
     for(const auto& cargo : temp) {
         amount += cargo.getAmount();
     }
-    availableSpace_ = ship_->getCapacity() - amount;
+    int available = ship_->getCapacity() - amount;
+    if(available < 0) {
+        availableSpace_ = 0;
+    } else {
+        availableSpace_ = available;
+    }
 }
