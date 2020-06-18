@@ -24,9 +24,9 @@ private:
     size_t availableSpace_;
 
     size_t countSpace() {
-        size_t totalAmount = std::accumulate(ship_->getCargo().begin(), ship_->getCargo().end(),
+        size_t totalAmount = std::accumulate(ship_->getCargo().begin(), ship_->getCargo().end(), 0,
                                              [](const Cargo& item1, const Cargo& item2) {
-                                                 return item1.getAmount() + item2.getAmount();
+                                                 return item1.getAmmount() + item2.getAmmount();
                                              });
 
         return ship_->getCapacity() - totalAmount;

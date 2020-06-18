@@ -5,31 +5,15 @@
 class Cargo {
 public:
     Cargo();
-
-    Cargo(std::string name, size_t ammount, double basePrice)
-        : name_(name),
-          ammount_(ammount),
-          basePrice_(basePrice) {}
-
-    Cargo&
-    operator+=(const size_t& ammount) {
-        ammount_ += ammount;
-        return *this;
-    }
-    Cargo& operator-=(const size_t& ammount) {
-        if (ammount_ - ammount >= 0) {
-            ammount_ -= ammount;
-        }
-        return *this;
-    }
+    Cargo(std::string name, size_t ammount, double basePrice);
 
     std::string getName() const { return name_; };
     size_t getAmmount() const { return ammount_; };
     double getBasePrice() const { return basePrice_; };
 
-    bool operator==(const Cargo& freight2) {
-        return name_ == freight2.name_;
-    }
+    Cargo& operator+=(const size_t& ammount);
+    Cargo& operator-=(const size_t& ammount);
+    bool operator==(const Cargo& freight2);
 
 private:
     std::string name_;
