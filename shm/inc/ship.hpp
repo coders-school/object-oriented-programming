@@ -23,7 +23,7 @@ public:
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
-    size_t getId() const { return id_; }
+    int getId() const { return id_; }
 
     Cargo getCargo(size_t index) const;
     std::vector<Cargo>& getallCargo() { return cargo_; }
