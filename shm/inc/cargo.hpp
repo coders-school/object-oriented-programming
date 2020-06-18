@@ -11,12 +11,10 @@ public:
 
     Cargo& operator-=(size_t amount);
 
-
     std::string getName() const { return name_; }
     size_t getAmount() const { return amount_; }
     size_t getBasePrice() const { return basePrice_; }
     bool operator==(const Cargo& cargoToCheck) const;
-
 
 protected:
     std::string name_;

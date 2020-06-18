@@ -1,17 +1,17 @@
 #pragma once
-
-#include "cargo.hpp"
-
 #include <string>
 #include <vector>
+
+#include "cargo.hpp"
 
 class Ship {
 public:
     Ship()
         : id_(-1) {}
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id)
-        : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
-    Ship(int maxCrew, int speed, unsigned int id)
+
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
+        : capacity_(0), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+    Ship(int maxCrew, int speed, size_t id)
         : Ship(0, maxCrew, speed, "", id) {}
 
     void setName(const std::string& name) { name_ = name; }
@@ -24,7 +24,13 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
+
     Cargo getCargo(size_t index) const;
+    std::vector<Cargo>& getallCargo() { return cargo_; }
+
+    Cargo getCargo(size_t index) const;
+
+    size_t getAvailableSpace() const;
 
 private:
     std::vector<Cargo> cargo_;
