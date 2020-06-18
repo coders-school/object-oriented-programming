@@ -16,6 +16,10 @@ public:
         return *this;
     }
 
+    bool operator==(const Cargo& freight2) {
+        return name_ == freight2.name_;
+    }
+
 private:
     std::string name_;
     size_t ammount_;
