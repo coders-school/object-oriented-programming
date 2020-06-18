@@ -9,3 +9,4 @@ public:
 private:
     Coordinates _position;
 };
+

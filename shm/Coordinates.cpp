@@ -6,5 +6,5 @@ bool Coordinates::operator==(const Coordinates& coordinatesToCheck) const {
 }
 
 bool Coordinates::operator!=(const Coordinates& coordinatesToCheck) const {
-    return !(this == coordinatesToCheck);
+    return !(*this == coordinatesToCheck);
 }
