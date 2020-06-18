@@ -11,7 +11,7 @@ constexpr size_t MAX_ISLANDS = 10;
 class Map {
 public:
     Map();
-    Island* getIsland(const Coordinates& coordinate); // (const Island::Coordinates& coordinate)
+    std::shared_ptr<Island> getIsland(const Coordinates& coordinate); // (const Island::Coordinates& coordinate)
 
 private:
     std::vector<std::shared_ptr<Island>> islands_;

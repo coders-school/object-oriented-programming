@@ -21,8 +21,11 @@ Map::Map() {
     } while (isls > 0);
 }
 
-Island* Map::getIsland(const Coordinates& coordinate) {
+std::shared_ptr<Island> Map::getIsland(const Coordinates& coordinate) {
     auto itr = std::find_if(islands_.begin(), islands_.end(), [&coordinate](auto& i) {
-        return i.get()->getPosition() == coordinate; } );
-    return (*itr).get();
+        return i->getPosition() == coordinate; } );
+    if (itr == islands_.end()) {
+        return nullptr;
+    }
+    return *itr;
 }
