@@ -1,29 +1,33 @@
 #include "player.hpp"
 
+#include <numeric>
+
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
- : ship_(std::move(ship)), money_(money), availableSpace_(availableSpace){}
+    : ship_(std::move(ship)), money_(money), availableSpace_(availableSpace) {}
 
-//size_t Player::getShip() const { return ship_; }
-
-size_t Player::getAvailableSpace() const { return availableSpace_; }
-size_t Player::getMoney() const { return money_; }
-
-size_t Player::CountAvailableSpace(Ship ship) const {
-    size_t shipSpace = ship.getCapacity(); 
-    size_t wares = 0;
-
-    for(auto ware : ship.items_){
-    wares += ware.getAmount();
-    }
-    
-    return shipSpace - wares;
+std::unique_ptr<Ship> Player::getShip() {
+    return std::move(ship_);
+}
+size_t Player::getAvailableSpace() const {
+    return availableSpace_;
+}
+size_t Player::getMoney() const {
+    return money_;
 }
 
+size_t Player::CountAvailableSpace() const {
+    size_t sumOfAmounts =
+        std::accumulate(ship_->getVectorCargo().begin(), ship_->getVectorCargo().end(), 0,
+                        [](size_t amounts, const Cargo& cargo) { return amounts += cargo.getAmount(); });
 
-size_t Player::getSpeed(Ship ship) const{
-    return ship.getSpeed();
+    return ship_->getCapacity() - sumOfAmounts;
 }
-Cargo* Player::getCargo(Ship ship, size_t index) const{
-    Cargo * ware = &ship.items_[index];
-    return ware;     
+
+size_t Player::getSpeed() const {
+    return ship_->getSpeed();
+}
+Cargo* Player::getCargo(size_t index) const {
+    if (ship_)
+        return &ship_->getCargo(index);
+    return nullptr;
 }
