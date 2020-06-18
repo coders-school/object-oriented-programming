@@ -38,8 +38,8 @@ Map::Map() {
 
 Island* Map::getIsland(const Coordinates& coordinate)
 {
-    for (Island& island : allIslands){
-        if (island.getPosition() == coordinate){
+    for (Island& island : allIslands) {
+        if (island.getPosition() == coordinate) {
             return &island;
         }
     }
