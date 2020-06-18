@@ -21,3 +21,8 @@ Map::Map() {
         }
     }
 }
+
+Island* Map::getIsland(const Coordinates& coordinate) {
+    auto itr = std::find_if(vecOfIslands_.begin(), vecOfIslands_.end(), [&coordinate](auto& i) { return i.getPosition() == coordinate; });
+    return std::addressof(*itr);
+}

@@ -11,6 +11,7 @@ constexpr int numberOfIslands = 10;
 class Map {
 public:
     Map();
+    Island* getIsland(const Coordinates& coordinate);
 
 private:
     std::vector<Island> vecOfIslands_;
