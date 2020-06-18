@@ -1,7 +1,7 @@
 #include "island.hpp"
 
 Coordinates::Coordinates(size_t posX, size_t posY)
-    : positionX(posX), positionY(posY)
+    : positionX_(posX), positionY_(posY)
 {}
 
 Island::Island(size_t posX, size_t posY)
