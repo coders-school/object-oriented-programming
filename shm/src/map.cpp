@@ -1,12 +1,65 @@
 #include "map.hpp"
 
 #include <algorithm>
+#include <random>
+#include <set>
+#include <utility>
 
-Island* Map::getIsland(const Coordinates& coordinate) {
+constexpr size_t kIslandAmt = 10;
+constexpr size_t kMapWidth = 50;
+constexpr size_t kMapHeight = 50;
+
+Map::Map() {
+    generateIslands();
+}
+
+Island* Map::getIsland(const Coordinates& coordinates) {
 
     auto island = std::find_if(islands_.begin(), islands_.end(),
                            [&](const auto& island) {
-                               return coordinate == island.getPosition();
+                               return coordinates == island.getPosition();
                            });
     return island != std::end(islands_) ? &*island : nullptr;
+}
+
+void Map::generateIslands() {
+    std::random_device rd;
+    std::mt19937 eng(rd());
+    islands_.reserve(kIslandAmt);
+    /*************************1*****************************/
+
+    std::uniform_int_distribution<> widthGen(0, kMapWidth);
+    std::uniform_int_distribution<> heightGen(0, kMapHeight);
+
+    std::set<std::pair<int, int>> uniqueIslands;
+    int x = 0;
+    int y = 0;
+    while (uniqueIslands.size() < kIslandAmt) {
+        x = widthGen(eng);
+        y = heightGen(eng);
+
+        uniqueIslands.insert({x, y});
+    }
+    std::transform(uniqueIslands.begin(), uniqueIslands.end(),
+                   std::back_inserter(islands_),
+                   [](const auto& coords) {
+                       return Island(coords.first, coords.second);
+                   });
+
+    /************************2******************************/
+    std::vector<unsigned int> positionsX(kMapWidth);
+    std::vector<unsigned int> positionsY(kMapHeight);
+
+    std::iota(positionsX.begin(), positionsX.end(), 0);
+    std::iota(positionsY.begin(), positionsY.end(), 0);
+
+    std::shuffle(positionsX.begin(), positionsX.end(), eng);
+    std::shuffle(positionsY.begin(), positionsY.end(), eng);
+
+    std::transform(positionsX.begin(), positionsX.end(),
+                   positionsY.begin(),
+                   std::back_inserter(islands_),
+                   [](auto x, auto y) {
+                       return Island(x, y);
+                   });
 }
