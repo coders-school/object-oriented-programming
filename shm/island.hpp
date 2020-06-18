@@ -4,18 +4,18 @@
 
 class Coordinates {
 public:
-    Coordinates(size_t, size_t);
+    Coordinates(size_t posX, size_t posY);
     bool operator==(const Coordinates& pos) const {
-        return positionX == pos.positionX && positionY == pos.positionY;
+        return positionX_ == pos.positionX_ && positionY_ == pos.positionY_;
     }
 private:
-    size_t positionX;
-    size_t positionY;
+    size_t positionX_;
+    size_t positionY_;
 };
 
 class Island {
 public:
-    Island(size_t, size_t);
+    Island(size_t posX, size_t posY);
     Coordinates getPosition();
 private:
     Coordinates position_;
