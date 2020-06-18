@@ -15,5 +15,5 @@ private:
 
 public:
     Map();
-    Island* getIsland(const Island::Coordinates& coordinate)
+    Island* getIsland(const Island::Coordinates& coordinate);
 };
