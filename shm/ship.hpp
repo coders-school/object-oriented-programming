@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 
-
 class Ship {
 public: 
     Ship();
@@ -23,4 +22,3 @@ private:
     std::string name_;
     const int id_;
 };
-

@@ -10,11 +10,8 @@ public:
     size_t GetAmount() const;
     size_t GetBasePrice() const;
 
-
-
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
 };
-
