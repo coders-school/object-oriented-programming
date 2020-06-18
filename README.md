@@ -1,33 +1,44 @@
 # DIGGERS object-oriented-programming
 [![Build Status](https://travis-ci.org/kszytko/object-oriented-programming.svg?branch=homeworkSHM1)](https://travis-ci.org/kszytko/object-oriented-programming)  ![C++ with Make CI](https://github.com/kszytko/object-oriented-programming/workflows/C++%20with%20Make%20CI/badge.svg?event=pull_request)
 
-https://github.com/kszytko/object-oriented-programming/projects/1
 
-# Uwagi odnośnie współpracy:
 
-## 1. Projekt (link powyżej):
-* przypisujemy zadanie (Issue) do siebie
-* wpisujemy zakładany czas wymagany do wykonania zadania
-* przesuwamy zadania (najpierw do In progress), nie zapominamy o aktualizacji.
+## Projekt Scrum 
+[Issues](https://github.com/kszytko/object-oriented-programming/issues)
+* W powyższej karcie wprowadzamy nowe zadania
+* przypisujemy do niego`project`, a także osobę odpowiedzialną
 
-## 2. Jak pracujemy z gitem i GH:
-* robimy git clone tego forka, bądź tworzymy własny fork z oryginalnego repo
-* tworzymy własny branch o nazwie: `task1` itp. Podbranche (jeśli wymagane) :  `task1/something`
-* pracujemy w folderze `/shm` (nie tworzymy podfolderów)
-* **Przypominam o częstych pull'ach na lokane repo**
-* po skończeniu zadania i zaktualizowaniu brancha wysyłamy branch na to repo lub go aktualizujemy
-* robimy `PR` z brancha, na którym rozwiązywaliśmy zadanie, na brancha `homeworkSHM1` (ustawiony domyślnie)
-* zablokowano możliwość commitowania na branch `homeworkSHM1`, zmiany wprowadzamy poprzez `PR`
-* aby doszło do merge, `PR` musi mieć przynajmniej 2 code rewiev
-* jeżeli jest potrzebna pomoc piszemy na discordzie na naszym prywatnym grupowym kanale
-* damy radę :)
+[Tablica projektu](https://github.com/kszytko/object-oriented-programming/projects/1)
+* Zadania nad którymi aktualnie pracujesz przerzuć do okna `In progress`
+* Proszę na bieżąco aktualizować status
 
-## 3. Standard programowania:
-Przy nazwach zmiennych class używamy prefixa `_` tj:
+---
+## Struktura projektu
+Branch|Status|Info|Inputs|
+--- | --- | --- | ---
+__homeworkSHM1__|default|Main branch|Pull Request, Pull
+~~master~~| |Not used| 
+<your_nickname>| |private|Push, Pull, Commit
+
+---
+## Praca na projekcie
+### 1. Przygotowanie
+* robimy `git clone` tego lub orginalnego forka
+* tworzymy nowy branch o nazwie `<your_nickname>`, na którym będziemy pracować
+* pracujemy w folderze `/shm`  bez podfolderów
+### 2. In progress
+* **Przypominam o częstych pullach**  `git pull origin homeworkShM1`
+* po skończeniu zadania i zaktualizowaniu brancha robimy pushujemy swojego brancha   `git push origin <your_nickname>`
+### 3. Pull request
+* otwieramy nowego PR z brancha `<your_nickname> -> homeworkSHM1` (domyślny)
+* aby doszło do merge, `PR` musi mieć przynajmniej **2 code rewiev**
+
+O wszystkim piszemy na naszym kanale na discordzie.
+Damy radę :smile:
+
+---
+## Standard programowania:
+Przy nazwach zmiennych klasu używamy prefixu `_` tj:
 ```c++
 size_t _cargo;
 ```
-
-
-
-`Based on Marcinati`
