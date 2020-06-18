@@ -1,0 +1,28 @@
+
+name: C++ with Make CI
+
+on:
+  pull_request:
+    branches:
+      - homeworkSHM1
+    paths:
+      - 'shm/*'
+  push:
+    paths:
+      - 'shm/*'
+
+jobs:
+  shm:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+#    - name: mkdir module1/homework/calculate/build
+#      run: mkdir module1/homework/calculate/build
+    - name: Compile
+      working-directory: shm
+      run: |
+        make
+#    - name: Run tests
+#      working-directory: module1/homework/calculate/build
+#      run: ctest -V
