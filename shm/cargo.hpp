@@ -26,6 +26,10 @@ public:
     size_t getAmmount() const { return ammount_; };
     double getBasePrice() const { return basePrice_; };
 
+    bool operator==(const Cargo& freight2) {
+        return name_ == freight2.name_;
+    }
+
 private:
     std::string name_;
     size_t ammount_;
