@@ -23,7 +23,10 @@ Cargo Player::getCargo(size_t index) {
     return 0;
 }
 
-size_t countFreeSpace() { 
-    size_t loadedSpace = std::accumulate(ship_->getAllCargo.begin(), ship_->getAllCargo.end(), 0);
-    return ship_->getCapacity() - loadedSpace;
+size_t countFreeSpace() {
+    if (ship_) {
+        size_t loadedSpace = std::accumulate(ship_->getAllCargo.begin(), ship_->getAllCargo.end(), 0);
+        return ship_->getCapacity() - loadedSpace;
+    }
+    return 0;
 }
