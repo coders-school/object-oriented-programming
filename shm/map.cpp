@@ -4,29 +4,21 @@
 #include <random>
 
 Map::Map() {
-    std::vector<unsigned int> posX(maxX);
-    std::vector<unsigned int> posY(maxY);
-
-    std::iota(posX.begin(), posX.end(), posX.begin());
-    std::iota(posY.begin(), posY.end(), posY.begin());
-
-    std::mt19937 gen(std::random_device{}());
-    std::shuffle(posX.begin(), posX.end(), gen);
-    std::shuffle(posY.begin(), posY.end(), gen);
-
-    vecOfIslandOnMap_.reserve(initialAmountOfIsland);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(1, initialAmountOfIsland);
 
     std::transform(posX.begin(),
                    posX.end(),
                    posY.begin(),
-                   std::back_inserter(vecOfIslandOnMap_),
+                   std::back_inserter(islandsOnMap_),
                    [](int x, int y) {
                        return std::make_pair(x, y);
                    });
 
     Island* getIsland(const Island::Coordinates& desiredCoordinate) {
-        std::find_if(vecOfIslandOnMap_.begin(), vecOfIslandOnMap_.cend(), [desiredCoordinate](const auto& el) {
-            if (el.getCoordinates != vecOfIslandOnMap_.end()) {
+        std::find_if(islandsOnMap_.begin(), islandsOnMap_.cend(), [desiredCoordinate](const auto& el) {
+            if (el.getCoordinates != islandsOnMap_.end()) {
                 return el.getCoordinates() == desiredCoordinates;
             }
             return 0;
