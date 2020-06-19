@@ -18,3 +18,5 @@ bool operator==(Island& lhs, Island& rhs)
 {
     return lhs.getPosition() == rhs.getPosition();
 }
+
+Coordinates getPosition() { return position_; }
