@@ -12,4 +12,3 @@ public:
         return (positionX_ == cord.positionX_) && (positionY_ == cord.positionY_);
     };
 };
-

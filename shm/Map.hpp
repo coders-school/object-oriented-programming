@@ -5,7 +5,7 @@
 
 class Map {
 private:
-    Island* currentPosition_ {};
+    Island* currentPosition_ {nullptr};
     std::vector<Island> islandsLocations_;
 public:
     void setCurrentPosition(Island* const currentPosition);
