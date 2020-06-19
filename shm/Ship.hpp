@@ -1,4 +1,6 @@
 #include <string>
+#include <vector>
+#include "Cargo.hpp"
 
 class Ship {
 public:
@@ -33,6 +35,8 @@ public:
     size_t getSpeed() const     { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
+    void load(const std::shared_ptr<Cargo>& cargo) { allCargos_.push_back(cargo); }
+    //void unload(Cargo* cargo) {  }
 
 private:
     size_t capacity_;
@@ -41,4 +45,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
+    std::vector<std::shared_ptr<Cargo>> allCargos_;
 };
