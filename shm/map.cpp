@@ -15,11 +15,11 @@ Map::Map() {
     }  
 
     Island* getIsland(const Island::Coordinates& desiredCoordinate) {
-        std::find_if(islandsOnMap_.begin(), islandsOnMap_.cend(), [desiredCoordinate](const auto& el) {
-            if (el.getCoordinates != islandsOnMap_.end()) {
-                return el.getCoordinates() == desiredCoordinates;
-            }
-            return 0;
-        };
+        auto iCoordinate = std::find_if(islandsOnMap_.begin(), islandsOnMap_.end(), [desiredCoordinate](const auto& el) {
+            return el->getCoordinates() == desiredCoordinates;
+            });
+        if (iCoordinate != islandsOnMap.end()) {
+            return iCoordinate;
+        }
     }
 };
