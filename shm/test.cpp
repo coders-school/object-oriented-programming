@@ -7,7 +7,7 @@
 #include "Map.hpp"
 #include "gtest/gtest.h"
 
-TEST(cargo, cargoShuldNotBeZero)
+TEST(cargo, cargoShuldBeZero)
 {
     Cargo cargoA;
     cargoA -= 10;
@@ -20,6 +20,14 @@ TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
     cargoA += 10;
     cargoB += 10;
     ASSERT_EQ(cargoA, cargoB);
+}
+
+TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqualWithGetters)
+{
+    Cargo cargoA(10, 1), cargoB(100, 2);
+    EXPECT_FALSE(cargoA.getAmount() == cargoB.getAmount());
+    cargoA+=90;
+    EXPECT_EQ(cargoA.getAmount(), cargoB.getAmount());
 }
 
 TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqual)

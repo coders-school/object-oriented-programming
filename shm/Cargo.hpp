@@ -22,3 +22,4 @@ protected:
     size_t basePrice_;
 };
 
+
