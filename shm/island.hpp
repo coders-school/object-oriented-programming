@@ -3,10 +3,10 @@
 #include "coordinates.hpp"
 
 class Island {
-   public:
-    Island(int positionX, int positionY);
+public:
+    Island(Coordinates position);
     Coordinates getPosition() const;
 
-   private:
+private:
     Coordinates position_;
 };

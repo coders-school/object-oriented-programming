@@ -3,11 +3,11 @@
 #include <string>
 
 class Coordinates {
-   public:
-    Coordinates(int positionX, int positionY);
-    bool operator==(Coordinates& position);
+public:
+    Coordinates(int32_t positionX, int32_t positionY);
+    bool operator==(const Coordinates& position);
 
-   private:
+private:
     const int positionX_;
     const int positionY_;
 };
