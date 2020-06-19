@@ -1,20 +1,15 @@
 #include "cargo.hpp"
 
-#include <string>
+#include <iostream>
 
-class Cargo {
-public:
-    Cargo& operator+=(size_t amount) {
-        amount_ += amount;
-        return *this;
-    }
-    Cargo& operator-=(size_t amount) {
-        amount_ -= amount;
-        return *this;
-    }
+Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
+    : name_(name), amount_(amount), basePrice_(basePrice) {}
 
-protected:
-    std::string name_;
-    size_t amount_;
-    size_t basePrice_;
-};
+Cargo& Cargo::operator+=(size_t amount) {
+    amount_ += amount;
+    return *this;
+}
+Cargo& Cargo::operator-=(size_t amount) {
+    amount_ -= amount;
+    return *this;
+}
