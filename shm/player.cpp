@@ -1,7 +1,6 @@
 #include "player.hpp"
 
 #include <algorithm>
-#include <memory>
 
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space)
     : ship_(std::move(ship)), money_(money), availableSpace_(space) {}
