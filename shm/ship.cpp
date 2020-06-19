@@ -5,16 +5,16 @@
 
 Ship::Ship() : id_(-1){};
 
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
+Ship::Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id)
     : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id){};
 
-Ship::Ship(int maxCrew, int speed, size_t id) : Ship(0, maxCrew, speed, "", id){};
+Ship::Ship(uint32_t maxCrew, uint32_t speed, uint32_t id) : Ship(0, maxCrew, speed, "", id){};
 
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
-Ship& Ship::operator-=(size_t crew) {
+Ship& Ship::operator-=(uint32_t crew) {
     if (crew < crew_) {
         crew_ -= crew;
         return *this;
@@ -23,7 +23,7 @@ Ship& Ship::operator-=(size_t crew) {
     return *this;
 }
 
-Ship& Ship::operator+=(size_t crew) {
+Ship& Ship::operator+=(uint32_t crew) {
     if (crew_ + crew <= maxCrew_) {
         crew_ += crew;
         return *this;
@@ -32,7 +32,7 @@ Ship& Ship::operator+=(size_t crew) {
     return *this;
 }
 
-size_t Ship::getId() const {
+uint32_t Ship::getId() const {
     return id_;
 }
 
@@ -40,19 +40,19 @@ std::string Ship::getName() const {
     return name_;
 }
 
-size_t Ship::getSpeed() const {
+uint32_t Ship::getSpeed() const {
     return speed_;
 }
 
-size_t Ship::getCrew() const {
+uint32_t Ship::getCrew() const {
     return crew_;
 }
 
-size_t Ship::getMaxCrew() const {
+uint32_t Ship::getMaxCrew() const {
     return maxCrew_;
 }
 
-size_t Ship::getCapacity() const {
+uint32_t Ship::getCapacity() const {
     return capacity_;
 }
 
