@@ -4,6 +4,10 @@
 #include <vector>
 
 #include "cargo.hpp"
+#include <algorithm>
+#include <memory>
+
+using cargoPtr = std::shared_ptr<Cargo>;
 
 class Ship {
 public:
@@ -17,6 +21,8 @@ public:
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getCapacity() const { return capacity_; }
     //std::vector<Cargo> getCargo() const { return cargo_; }
+    void load(cargoPtr cargo);
+    Cargo* FindMatchCargo(Cargo* cargo);
 
     void setName(const std::string& name);
 
@@ -30,5 +36,5 @@ private:
     size_t maxCrew_;
     size_t capacity_;
     size_t crew_;
-    std::vector<Cargo> cargo_;
+    std::vector<cargoPtr> cargo_;
 };

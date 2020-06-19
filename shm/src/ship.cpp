@@ -24,3 +24,32 @@ Ship& Ship::operator-=(const size_t& crew) {
     }
     return *this;
 }
+
+/*void Ship::load(std::shared_ptr<Cargo> cargo) {
+    if (auto match_cargo = FindMatchCargo(cargo.get())) {
+        *match_cargo += cargo->getAmount();
+        return;
+    }
+    cargo_.push_back(std::move(cargo));
+}
+
+/*Cargo* Ship::FindMatchCargo(Cargo* cargo) {
+    for (auto el : cargo_) {
+        if (el->getName() == "Fruit") {
+            if (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->getExpiryDate() == cargo->getExpiryDate())
+                return el.get();
+        } else if (el->getName() == "Alcohol") {
+            if (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->GetPercentage() == cargo->getPercentage())
+                return el.get();
+        } else {
+            if (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->getRarity() == cargo->getRarity())
+                return el.get();
+        }
+    }
+}*/

@@ -6,27 +6,26 @@
 class Cargo {
 public:
     Cargo() = default;
-    Cargo(std::string name, size_t ammount, double basePrice);
+    Cargo(std::string name, size_t amount, double basePrice);
     virtual ~Cargo() = default;
 
     virtual std::string getName() const = 0;
     virtual size_t getAmount() const = 0;
     virtual double getBasePrice() const = 0;
     virtual double getPrice() const = 0;
-
-    Cargo& operator+=(const size_t& ammount);
-    Cargo& operator-=(const size_t& ammount);
+    virtual Cargo& operator+=(const size_t& amount) = 0;
+    virtual Cargo& operator-=(const size_t& amount) = 0;
     bool operator==(const Cargo& freight2);
 
 protected:
     std::string name_;
-    size_t ammount_;
+    size_t amount_;
     double basePrice_;
 };
 
 class Fruit : public Cargo {
 public:
-    Fruit(std::string name, size_t ammount, double basePrice);
+    Fruit(std::string name, size_t amount, double basePrice);
     ~Fruit() override {}
 
     Fruit& operator--() {
@@ -35,8 +34,19 @@ public:
         }
         return *this;
     }
+    Cargo& operator+=(size_t amount) {
+        amount_ += amount;
+        return *this;
+    }
+    Cargo& operator-=(const size_t& amount) {
+        if (amount_ - amount >= 0) {
+            amount_ -= amount;
+        }
+        return *this;
+    }
+
     std::string getName() const override {return name_; }
-    size_t getAmount() const override { return ammount_; }
+    size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
     size_t getTimeToRotten() const { return timeToRotten_; }
     double getPrice() const override {
@@ -49,10 +59,21 @@ private:
 
 class Alcohol : public Cargo {
 public:
-    Alcohol(std::string name, size_t ammount, double basePrice);
+    Alcohol(std::string name, size_t amount, double basePrice);
     ~Alcohol() override {}
+
+    Cargo& operator+=(size_t amount) {
+        amount_ += amount;
+        return *this;
+    }
+    Cargo& operator-=(const size_t& amount) {
+        if (amount_ - amount >= 0) {
+            amount_ -= amount;
+        }
+        return *this;
+    }
     std::string getName() const override {return name_; }
-    size_t getAmount() const override { return ammount_; }
+    size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
     double getPrice() const override {
         return volume_ == 0,96
@@ -72,10 +93,20 @@ public:
                         epic = 6,
                         legendary = 10 };
 
-    Item(std::string name, size_t ammount, double basePrice);
+    Item(std::string name, size_t amount, double basePrice);
     ~Item() override {}
+    Cargo& operator+=(size_t amount) {
+        amount_ += amount;
+        return *this;
+    }
+    Cargo& operator-=(const size_t& amount) {
+        if (amount_ - amount >= 0) {
+            amount_ -= amount;
+        }
+        return *this;
+    }
     std::string getName() const override {return name_; }
-    size_t getAmount() const override { return ammount_; }
+    size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
     double getPrice() const override { return getBasePrice() * static_cast<int>(rarity_); }
     Rarity getRarity() const { return rarity_; }
