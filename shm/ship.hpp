@@ -1,5 +1,9 @@
 #pragma once
+#include <memory>
 #include <string>
+#include <vector>
+
+#include "cargo.hpp"
 
 class Ship {
 public:
@@ -18,6 +22,9 @@ public:
     size_t getId() const { return id_; }
     size_t getCrew() const { return crew_; }
 
+    void load(const std::shared_ptr<Cargo>& cargo);
+    void unload(Cargo* cargo);
+
 private:
     size_t capacity_;
     size_t maxCrew_;
@@ -25,4 +32,6 @@ private:
     std::string name_;
     const size_t id_;
     size_t crew_;
+
+    std::vector<std::shared_ptr<Cargo>> cargo_;
 };

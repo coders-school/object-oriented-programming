@@ -1,5 +1,6 @@
 #include "ship.hpp"
 
+#include <algorithm>
 #include <iostream>
 
 Ship::Ship()
@@ -29,4 +30,22 @@ Ship& Ship::operator-=(const size_t crew) {
     }
     crew_ -= crew;
     return *this;
+}
+
+void Ship::load(const std::shared_ptr<Cargo>& cargo) {
+    cargo_.push_back(cargo);
+    // apply checking if this cargo type exist
+    // and have same expiry date!
+    // if yes - increase amount
+    // else pushback
+}
+
+void Ship::unload(Cargo* cargo) {
+    // this should remove given amount of cargo
+    auto it = std::find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
+        return ptr.get() == cargo;
+    });
+    if (it != cargo_.end()) {
+        cargo_.erase(it);
+    }
 }
