@@ -12,6 +12,7 @@ set(SOURCES
     src/map.cpp
     src/player.cpp
     src/ship.cpp)
+    
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion)

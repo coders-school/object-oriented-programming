@@ -2,7 +2,6 @@
 
 #include <vector>
 
-#include "coordinates.hpp"
 #include "island.hpp"
 
 class Map {
