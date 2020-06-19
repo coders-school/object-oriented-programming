@@ -21,5 +21,6 @@ Map::Map() {
         if (iCoordinate != islandsOnMap.end()) {
             return iCoordinate;
         }
+        return 0;
     }
 };
