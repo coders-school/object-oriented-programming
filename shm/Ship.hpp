@@ -5,8 +5,14 @@
 class Ship {
 public:
     Ship();
-    Ship(int, const std::string &, size_t, size_t, size_t);
-    Ship(int, size_t, size_t);
+    Ship(int id,
+         const std::string & name,
+         size_t speed,
+         size_t maxCrew,
+         size_t capacity);
+    Ship(int id,
+         size_t speed,
+         size_t maxCrew);
 
     int getId() const { return _id; }
     std::string getName() const { return _name; }
@@ -17,8 +23,8 @@ public:
 
     void setName(const std::string& name) { _name = name; }
 
-    Ship& operator+=(const size_t);
-    Ship& operator-=(const size_t);
+    Ship& operator+=(const size_t crew);
+    Ship& operator-=(const size_t crew);
 
 private:
     const int _id;
