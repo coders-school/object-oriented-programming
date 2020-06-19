@@ -2,7 +2,7 @@
 
 struct Coordinates
 {
-    Coordinates() : x(0), y(0) {}
+    Coordinates() : position_x(0), position_y(0) {}
     Coordinates(int position_x_, int position_y_) : position_x(position_x_), position_y(position_y_) {}
 
     int position_x;
@@ -14,12 +14,7 @@ struct Coordinates
 
 bool operator==(const Coordinates& lhs, const Coordinates& rhs)
 {
-    return lhs.x == rhs.x and lhs.y == rhs.y;
-}
-
-bool operator!=(const Coordinates& lhs, const Coordinates& rhs)
-{
-    return lhs.x != rhs.x or lhs.y != rhs.y;
+    return lhs.position_x == rhs.position_x and lhs.position_y == rhs.position_y;
 }
 
 class Island
