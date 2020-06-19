@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -23,13 +24,12 @@ public:
     size_t getMaxCrew() const { return _maxCrew; }
     size_t getCapacity() const { return _capacity; }
     size_t getCrew() const { return _crew; }
-    Cargo* getCargo(const size_t id) {
+    std::shared_ptr<Cargo> getCargo(const size_t id) {
         if (id < _cargo.size()) {
-            return &_cargo[id];
+            return _cargo[id];
         }
         return {};
     }
-
     void setName(const std::string& name) { _name = name; }
 
     Ship& operator+=(const size_t crew);
@@ -42,5 +42,5 @@ private:
     size_t _maxCrew;
     size_t _capacity;
     size_t _crew;
-    std::vector<Cargo> _cargo;
+    std::vector<std::shared_ptr<Cargo>> _cargo;
 };
