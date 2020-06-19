@@ -25,8 +25,8 @@ Map::Map() {
                    });
 
     Island* getIsland(const Island::Coordinates& desiredCoordinate) {
-        std::find_if(Island.cbegin(), Island.cend(), [desiredCoordinate](const auto& el) {
-            if (el.getCoordinates != Island.end()) {
+        std::find_if(vecOfIslandOnMap_.begin(), vecOfIslandOnMap_.cend(), [desiredCoordinate](const auto& el) {
+            if (el.getCoordinates != vecOfIslandOnMap_.end()) {
                 return el.getCoordinates() == desiredCoordinates;
             }
             return 0;
