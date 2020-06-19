@@ -10,7 +10,7 @@ public:
     virtual ~Cargo() = default;
 
     virtual std::string getName() const = 0;
-    virtual size_t getAmmount() const = 0;
+    virtual size_t getAmount() const = 0;
     virtual double getBasePrice() const = 0;
     virtual double getPrice() const = 0;
 
@@ -36,11 +36,12 @@ public:
         return *this;
     }
     std::string getName() const override {return name_; }
-    size_t getAmmount() const override { return ammount_; }
+    size_t getAmount() const override { return ammount_; }
     double getBasePrice() const override { return basePrice_; }
     size_t getTimeToRotten() const { return timeToRotten_; }
     double getPrice() const override {
         return basePrice_ * (1 / std::exp(timeToRotten_));}
+    size_t getExpiryDate() const { return timeToRotten_; }
 
 private:
     size_t timeToRotten_;
@@ -51,13 +52,14 @@ public:
     Alcohol(std::string name, size_t ammount, double basePrice);
     ~Alcohol() override {}
     std::string getName() const override {return name_; }
-    size_t getAmmount() const override { return ammount_; }
+    size_t getAmount() const override { return ammount_; }
     double getBasePrice() const override { return basePrice_; }
     double getPrice() const override {
         return volume_ == 0,96
                 ? getBasePrice()
                 : getBasePrice() * (0.96 - volume_);
     }
+    double getPercentage() { return volume_; }
 
 private:
     const double volume_ = 0.96;
@@ -73,9 +75,10 @@ public:
     Item(std::string name, size_t ammount, double basePrice);
     ~Item() override {}
     std::string getName() const override {return name_; }
-    size_t getAmmount() const override { return ammount_; }
+    size_t getAmount() const override { return ammount_; }
     double getBasePrice() const override { return basePrice_; }
     double getPrice() const override { return getBasePrice() * static_cast<int>(rarity_); }
+    Rarity getRarity() const { return rarity_; }
 private:
     Rarity rarity_;
 };
