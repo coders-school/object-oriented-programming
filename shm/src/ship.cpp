@@ -25,7 +25,7 @@ Ship& Ship::operator-=(const size_t& crew) {
     return *this;
 }
 
-/*void Ship::load(std::shared_ptr<Cargo> cargo) {
+void Ship::load(std::shared_ptr<Cargo> cargo) {
     if (auto match_cargo = FindMatchCargo(cargo.get())) {
         *match_cargo += cargo->getAmount();
         return;
@@ -33,7 +33,7 @@ Ship& Ship::operator-=(const size_t& crew) {
     cargo_.push_back(std::move(cargo));
 }
 
-/*Cargo* Ship::FindMatchCargo(Cargo* cargo) {
+Cargo* Ship::FindMatchCargo(Cargo* cargo) {
     for (auto el : cargo_) {
         if (el->getName() == "Fruit") {
             if (el->getName() == cargo->getName() &&
@@ -43,7 +43,7 @@ Ship& Ship::operator-=(const size_t& crew) {
         } else if (el->getName() == "Alcohol") {
             if (el->getName() == cargo->getName() &&
                 el->getBasePrice() == cargo->getBasePrice() &&
-                el->GetPercentage() == cargo->getPercentage())
+                el->getPercentage() == cargo->getPercentage())
                 return el.get();
         } else {
             if (el->getName() == cargo->getName() &&
@@ -52,4 +52,4 @@ Ship& Ship::operator-=(const size_t& crew) {
                 return el.get();
         }
     }
-}*/
+}

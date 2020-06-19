@@ -3,6 +3,11 @@
 #include <cmath>
 #include <string>
 
+enum class Rarity { common = 1,
+                    rare = 3,
+                    epic = 6,
+                    legendary = 10 };
+
 class Cargo {
 public:
     Cargo() = default;
@@ -13,6 +18,9 @@ public:
     virtual size_t getAmount() const = 0;
     virtual double getBasePrice() const = 0;
     virtual double getPrice() const = 0;
+    virtual size_t getExpiryDate() const = 0;
+    virtual double getPercentage() const = 0;
+    virtual Rarity getRarity() const = 0;
     virtual Cargo& operator+=(const size_t& amount) = 0;
     virtual Cargo& operator-=(const size_t& amount) = 0;
     bool operator==(const Cargo& freight2);
@@ -80,7 +88,7 @@ public:
                 ? getBasePrice()
                 : getBasePrice() * (0.96 - volume_);
     }
-    double getPercentage() { return volume_; }
+    double getPercentage() const { return volume_; }
 
 private:
     const double volume_ = 0.96;
@@ -88,11 +96,6 @@ private:
 
 class Item : public Cargo {
 public:
-    enum class Rarity { common = 1,
-                        rare = 3,
-                        epic = 6,
-                        legendary = 10 };
-
     Item(std::string name, size_t amount, double basePrice);
     ~Item() override {}
     Cargo& operator+=(size_t amount) {
