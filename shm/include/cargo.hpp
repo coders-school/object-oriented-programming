@@ -21,6 +21,7 @@ public:
     virtual size_t getExpiryDate() const = 0;
     virtual double getPercentage() const = 0;
     virtual Rarity getRarity() const = 0;
+    virtual Cargo& operator--() = 0;
     virtual Cargo& operator+=(const size_t& amount) = 0;
     virtual Cargo& operator-=(const size_t& amount) = 0;
     bool operator==(const Cargo& freight2);
@@ -36,7 +37,7 @@ public:
     Fruit(std::string name, size_t amount, double basePrice);
     ~Fruit() override {}
 
-    Fruit& operator--() {
+    Cargo& operator--() {
         if (timeToRotten_ > 0) {
             timeToRotten_--;
         }
@@ -61,8 +62,24 @@ public:
         return basePrice_ * (1 / std::exp(timeToRotten_));}
     size_t getExpiryDate() const { return timeToRotten_; }
 
-private:
+protected:
+    size_t time_elapsed_{0};
     size_t timeToRotten_;
+};
+
+class DryFruit : public Fruit {
+    std::string getName() const override { return "Dry Fruit"; }
+    double getPrice() const override {
+        return 3 * basePrice_ * (1 / std::exp(timeToRotten_));}
+    Cargo& operator--() override {
+        if (++counter_ == 10) {
+            ++time_elapsed_;
+            counter_ = 0;
+        }
+        return *this;
+    }
+private:
+    size_t counter_{0};
 };
 
 class Alcohol : public Cargo {
