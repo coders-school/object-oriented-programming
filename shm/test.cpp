@@ -1,6 +1,7 @@
 #include <vector>
 
 #include "Cargo.hpp"
+#include "Island.hpp"
 #include "gtest/gtest.h"
 
 TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
