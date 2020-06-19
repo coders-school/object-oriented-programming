@@ -16,7 +16,7 @@ public:
     size_t getSpeed() const { return speed_; }
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getCapacity() const { return capacity_; }
-    std::vector<Cargo> getCargo() const { return cargo_; }
+    //std::vector<Cargo> getCargo() const { return cargo_; }
 
     void setName(const std::string& name);
 
