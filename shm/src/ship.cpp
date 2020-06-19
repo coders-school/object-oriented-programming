@@ -3,13 +3,26 @@
 #include <iostream>
 #include <numeric>
 
+Ship::Ship()
+    : id_(-1) {}
+
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+
+Ship::Ship(int maxCrew, int speed, unsigned int id)
+    : Ship(0, maxCrew, speed, "", id) {}
+
 Ship& Ship::operator-=(size_t num) {
-    crew_ -= num;
+    if (crew_ > 0) {
+        crew_ -= num;
+    }
     return *this;
 }
 
 Ship& Ship::operator+=(size_t num) {
-    crew_ += num;
+    if (crew_ < maxCrew_) {
+        crew_ += num;
+    }
     return *this;
 }
 

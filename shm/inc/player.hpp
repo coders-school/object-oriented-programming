@@ -6,8 +6,7 @@
 
 class Player {
 public:
-    Player(Ship& ship, size_t money, size_t availableSpace)
-        : ship_(std::make_unique<Ship>(ship)), money_(money), availableSpace_(availableSpace) {}
+    Player(Ship& ship, size_t money, size_t availableSpace);
 
     std::unique_ptr<Ship> getShip() { return std::move(ship_); }
     size_t getMoney() const { return money_; }

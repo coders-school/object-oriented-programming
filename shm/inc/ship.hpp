@@ -6,13 +6,11 @@
 
 class Ship {
 public:
-    Ship()
-        : id_(-1) {}
+    Ship();
 
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id)
-        : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
-    Ship(int maxCrew, int speed, unsigned int id)
-        : Ship(0, maxCrew, speed, "", id) {}
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id);
+
+    Ship(int maxCrew, int speed, unsigned int id);
 
     void setName(const std::string& name) { name_ = name; }
 
