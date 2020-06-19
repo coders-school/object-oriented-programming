@@ -27,3 +27,11 @@ TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqualWithGetters)
     cargoA+=90;
     EXPECT_EQ(cargoA.getAmount(), cargoB.getAmount());
 }
+
+TEST(island, twoIslandsPositionsShouldBeEqual)
+{
+    Island A(9,9), B(9,9);
+    EXPECT_EQ(A.getPosition(), B.getPosition());
+
+}
+
