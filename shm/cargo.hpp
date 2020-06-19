@@ -3,12 +3,20 @@
 #include <string>
 
 class Cargo {
-   public:
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
+public:
+    Cargo(uint32_t amount, std::string name, uint32_t basePrice);
+    ~Cargo();
 
-   private:
+    uint32_t getAmount() const;
+    uint32_t getBasePrice() const;
+    std::string getName() const;
+
+    Cargo& operator+=(uint32_t amount);
+    Cargo& operator-=(uint32_t amount);
+    bool operator==(Cargo& cargo);
+
+private:
     std::string name_;
-    size_t amount_;
-    size_t basePrice_;
+    uint32_t amount_;
+    uint32_t basePrice_;
 };
