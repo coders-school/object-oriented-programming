@@ -30,3 +30,13 @@ public:
     size_t getAmmount() const override { return ammount_; }
     size_t getBasePrice() const override { return basePrice_; }
 };
+
+class Alcohol : public Cargo {
+public:
+    Alcohol(std::string name, size_t ammount, double basePrice);
+    ~Alcohol() override {}
+    std::string getName() const override {return name_; }
+    size_t getAmmount() const override { return ammount_; }
+    size_t getBasePrice() const override { return basePrice_; }
+};
+

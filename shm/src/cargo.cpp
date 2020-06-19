@@ -22,3 +22,6 @@ bool Cargo::operator==(const Cargo& freight2) {
 
 Fruit::Fruit(std::string name, size_t ammount, double basePrice)
     : Cargo(name, ammount, basePrice) {}
+
+Alcohol::Alcohol(std::string name, size_t ammount, double basePrice)
+    : Cargo(name, ammount, basePrice) {}
