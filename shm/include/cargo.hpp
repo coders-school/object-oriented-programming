@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cmath>
 #include <string>
 
 class Cargo {
@@ -11,6 +12,7 @@ public:
     virtual std::string getName() const = 0;
     virtual size_t getAmmount() const = 0;
     virtual size_t getBasePrice() const = 0;
+    virtual double getPrice() const = 0;
 
     Cargo& operator+=(const size_t& ammount);
     Cargo& operator-=(const size_t& ammount);
@@ -26,9 +28,22 @@ class Fruit : public Cargo {
 public:
     Fruit(std::string name, size_t ammount, double basePrice);
     ~Fruit() override {}
+
+    Fruit& operator--() {
+        if (timeToRotten_ > 0) {
+            timeToRotten_--;
+        }
+        return *this;
+    }
     std::string getName() const override {return name_; }
     size_t getAmmount() const override { return ammount_; }
     size_t getBasePrice() const override { return basePrice_; }
+    size_t getTimeToRotten() const { return timeToRotten_; }
+    double getPrice() const override {
+        return basePrice_ * (1 / std::exp(timeToRotten_));}
+
+private:
+    size_t timeToRotten_;
 };
 
 class Alcohol : public Cargo {
