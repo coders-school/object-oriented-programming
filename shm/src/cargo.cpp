@@ -25,3 +25,6 @@ Fruit::Fruit(std::string name, size_t ammount, double basePrice)
 
 Alcohol::Alcohol(std::string name, size_t ammount, double basePrice)
     : Cargo(name, ammount, basePrice) {}
+
+Item::Item(std::string name, size_t ammount, double basePrice)
+    : Cargo(name, ammount, basePrice) {}
