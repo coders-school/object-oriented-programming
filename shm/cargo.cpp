@@ -30,7 +30,3 @@ size_t Cargo::GetAmount() const {
 size_t Cargo::GetBasePrice() const {
     return basePrice_;
 }
-
-bool Cargo::operator==(std::string name) {
-    return name_ == name;
-}
