@@ -24,7 +24,7 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     int getId() const { return id_; }
-    Cargo getCargo(size_t index) const;
+    Cargo* getCargo(size_t index);
     size_t getAvailableSpace() const;
 
 private:
