@@ -14,6 +14,6 @@ public:
     Island* getIsland(const Coordinates& coordinate);
 
 private:
-    std::vector<Island> vecOfIslands_;
-    Island* currentPosition_;
+    std::vector<Island> _vecOfIslands;
+    Island* _currentPosition;
 };
