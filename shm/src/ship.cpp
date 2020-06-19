@@ -53,3 +53,14 @@ Cargo* Ship::FindMatchCargo(Cargo* cargo) {
         }
     }
 }
+
+void Ship::Unload(Cargo* cargo) {
+    RemoveFromStorage(cargo);
+}
+
+void Ship::RemoveFromStorage(Cargo *cargo) {
+    cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
+                              [cargo](const auto& el) {
+                                  return *el == *cargo;
+                              }));
+}

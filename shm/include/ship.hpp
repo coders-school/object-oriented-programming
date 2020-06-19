@@ -23,6 +23,8 @@ public:
     //std::vector<Cargo> getCargo() const { return cargo_; }
     void load(cargoPtr cargo);
     Cargo* FindMatchCargo(Cargo* cargo);
+    void Unload(Cargo* cargo);
+    void RemoveFromStorage(Cargo* cargo);
 
     void setName(const std::string& name);
 
