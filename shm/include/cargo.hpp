@@ -65,10 +65,18 @@ private:
 
 class Item : public Cargo {
 public:
+    enum class Rarity { common = 1,
+                        rare = 3,
+                        epic = 6,
+                        legendary = 10 };
+
     Item(std::string name, size_t ammount, double basePrice);
     ~Item() override {}
     std::string getName() const override {return name_; }
     size_t getAmmount() const override { return ammount_; }
     double getBasePrice() const override { return basePrice_; }
+    double getPrice() const override { return getBasePrice() * static_cast<int>(rarity_); }
+private:
+    Rarity rarity_;
 };
 
