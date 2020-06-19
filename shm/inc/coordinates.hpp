@@ -7,7 +7,6 @@ public:
 
     bool operator==(const Coordinates& coordToCheck) const;
 
-
 private:
     int positionX_;
     int positionY_;

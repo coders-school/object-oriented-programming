@@ -40,8 +40,5 @@ size_t Ship::getAvailableSpace() const {
                                            0, [](size_t space, const Cargo& cargo) {
                                                return space += cargo.getAmount();
                                            });
-
-    size_t availableSpace = capacity_ - reservedSpace;
-
-    return availableSpace;
+    return capacity_ - reservedSpace;
 }
