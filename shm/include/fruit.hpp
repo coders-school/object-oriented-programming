@@ -33,6 +33,12 @@ public:
         return *this;
     }
 
+    bool operator==(Fruit& fruit) {
+        return getName() == fruit.getName() &&
+               getBasePrice() == fruit.getBasePrice() &&
+               getPrice() == fruit.getPrice();
+    }
+
 private:
     //size_t time_elapsed_{0};
     size_t timeToRotten_;
