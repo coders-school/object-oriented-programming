@@ -1,5 +1,11 @@
 #include "cargo.hpp"
 
+enum class Rarity { common = 1,
+                    rare = 3,
+                    epic = 6,
+                    legendary = 10 };
+
+
 class Item : public Cargo {
 public:
     Item(std::string name, size_t amount, double basePrice);
