@@ -14,6 +14,10 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
+void Ship::addToCargo(Cargo cargo) {
+    cargo_.push_back(cargo);
+}
+
 Ship& Ship::operator-=(uint32_t crew) {
     if (crew < crew_) {
         crew_ -= crew;
