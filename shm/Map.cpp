@@ -26,8 +26,6 @@ void Map::generateIslands() {
     }
 }
 
-#include <algorithm>
-
 void Map::setCurrentPosition(Island* const currentPosition) {
     currentPosition_ = currentPosition;
 }
