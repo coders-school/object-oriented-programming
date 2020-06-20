@@ -16,7 +16,7 @@ Map::Map() {
         if (std::none_of(_vecOfIslands.begin(), _vecOfIslands.end(), [positionX, positionY](auto& i) {
                 return i.getPosition() == Coordinates(positionX, positionY);
             })) {
-            _vecOfIslands.emplace_back(Island(positionX, positionY));
+            _vecOfIslands.push_back(Island(positionX, positionY));
             notRepeatedPositions++;
         }
     }
