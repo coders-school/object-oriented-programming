@@ -24,12 +24,14 @@ public:
     size_t getMaxCrew() const { return _maxCrew; }
     size_t getCapacity() const { return _capacity; }
     size_t getCrew() const { return _crew; }
-    std::shared_ptr<Cargo> getCargo(const size_t id) {
+    std::vector<std::shared_ptr<Cargo>> getCargo() const { return _cargo; }
+    std::shared_ptr<Cargo> getCargo(const size_t id) const {
         if (id < _cargo.size()) {
             return _cargo[id];
         }
         return {};
     }
+
     void setName(const std::string& name) { _name = name; }
 
     Ship& operator+=(const size_t crew);
