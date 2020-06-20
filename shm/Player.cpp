@@ -15,4 +15,9 @@ size_t Player::countAvailableSpace() {
                                          [](const Cargo& cargoFirst, const Cargo& cargoSecond) {
                                              return cargoFirst.getAmount() + cargoSecond.getAmount();
                                          });
+
+    if (ship_->getCapacity() <= occupiedSpace) {
+        return 0;
+    }
+    return ship_->getCapacity() - occupiedSpace;
 }
