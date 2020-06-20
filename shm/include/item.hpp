@@ -15,5 +15,5 @@ public:
     size_t getBasePrice() const override { return basePrice_; }
 
 private:
-    Rarity rarity_;
+    const Rarity rarity_;
 };

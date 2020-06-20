@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -21,7 +22,9 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
-    std::vector<Cargo>& getCargo() { return cargo_; };
+    std::vector<std::shared_ptr<Cargo>>& getCargo() { return cargo_; };
+
+    void load(std::shared_ptr<Cargo> cargo);
 
 private:
     size_t capacity_;
@@ -30,5 +33,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<Cargo> cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
 };
