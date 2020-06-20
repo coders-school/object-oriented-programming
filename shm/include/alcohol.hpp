@@ -11,24 +11,27 @@ public:
     double getPrice() const override {
         return volume_ == 0, 96
                                  ? getBasePrice()
-                                 : getBasePrice() * (0.96 - volume_);
+                                 : getBasePrice() * (0.96 - getVolume());
     }
 
-    double getPercentage() const { return volume_; }
+    double getVolume() const { return volume_; }
 
-    Cargo& operator+=(size_t amount) {
+    Alcohol& operator+=(size_t amount) {
         amount_ += amount;
         return *this;
     }
-    Cargo& operator-=(const size_t& amount) {
+
+    Alcohol& operator-=(const size_t& amount) {
         if (amount_ >= amount) {
             amount_ -= amount;
         }
         return *this;
     }
 
-    bool operator==(const Cargo& cargo) const override {
-        return getName() == cargo.getName();
+    bool operator==(Cargo& alcohol) const override {
+        return getName() == alcohol.getName() && 
+        getBasePrice() == alcohol.getBasePrice() &&
+        getPrice() == alcohol.getPrice();
     }
 
 private:

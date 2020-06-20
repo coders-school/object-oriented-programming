@@ -33,7 +33,7 @@ public:
         return *this;
     }
 
-    bool operator==(Fruit& fruit) {
+    bool operator==(Cargo& fruit) const override {
         return getName() == fruit.getName() &&
                getBasePrice() == fruit.getBasePrice() &&
                getPrice() == fruit.getPrice();

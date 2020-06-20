@@ -14,9 +14,9 @@ public:
     virtual double getPrice() const = 0;
     //virtual Rarity getRarity() const = 0;
     //virtual Cargo& operator--() = 0; fruit
-    //virtual Cargo& operator+=(const size_t& amount) = 0;
-    //virtual Cargo& operator-=(const size_t& amount) = 0;
-   // bool operator==(const Cargo& cargo);
+    virtual Cargo& operator+=(const size_t& amount) = 0;
+    virtual Cargo& operator-=(const size_t& amount) = 0;
+    virtual bool operator==(Cargo& cargo) const = 0;
 
 protected:
     std::string name_;
