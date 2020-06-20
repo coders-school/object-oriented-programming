@@ -19,7 +19,7 @@ void Player::updateAvailableSpace() {
                                        _ship->getCargo().end(),
                                        0,
                                        [](size_t sum, auto item) {
-                                           return sum +  item->getAmount();
+                                           return sum + item->getAmount();
                                        });
 
     _availableSpace = _ship->getCapacity() - cargoSize;
