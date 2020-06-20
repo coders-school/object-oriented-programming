@@ -3,9 +3,6 @@
 --- | :---:
 *Main branch*|*Last pull request*
 
-
-
-
 ## Projekt Scrum 
 [Issues](https://github.com/kszytko/object-oriented-programming/issues)
 * W powyższej karcie wprowadzamy nowe zadania
@@ -27,14 +24,14 @@ __homeworkSHM1__|default|Main branch|Pull Request, Pull
 ## Praca na projekcie
 ### 1. Przygotowanie
 * robimy `git clone` tego lub orginalnego forka
-* tworzymy nowy branch o nazwie `<your_nickname>`, na którym będziemy pracować
+* na swoim forku tworzycie branche i na nich pracujecie - konwencja jak wam wygodnie
 * pracujemy w folderze `/shm`  bez podfolderów
 ### 2. In progress
 * **Przypominam o częstych pullach**  `git pull origin homeworkShM1`
-* po skończeniu zadania i zaktualizowaniu brancha robimy pushujemy swojego brancha   `git push origin <your_nickname>`
+* po skończeniu zadania i zaktualizowaniu brancha robicie pusha na swojego forka
 ### 3. Pull request
-* otwieramy nowego PR z brancha `<your_nickname> -> homeworkSHM1` (domyślny)
-* aby doszło do merge, `PR` musi mieć przynajmniej **2 code rewiev**
+* otwieramy nowego PR ze swojego forka na  `kszytko -> homeworkSHM1` (domyślny)
+* aby doszło do merge, `PR` musi mieć przynajmniej **2 code rewiev** 
 
 O wszystkim piszemy na naszym kanale na discordzie.
 Damy radę :smile:
