@@ -5,11 +5,16 @@
 Ship::Ship()
     : _id(-1) { }
 
-Ship::Ship (int id, const std::string & name, size_t speed, size_t maxCrew, size_t capacity)
-    : _id(id), _name(name), _speed(speed), _maxCrew(maxCrew), _capacity(capacity)
-    { }
+Ship::Ship (int id,
+            const std::string & name,
+            size_t speed,
+            size_t maxCrew,
+            size_t capacity)
+    : _id(id), _name(name), _speed(speed), _maxCrew(maxCrew), _capacity(capacity) {}
 
-Ship::Ship(int id, size_t speed, size_t maxCrew)
+Ship::Ship(int id,
+           size_t speed,
+           size_t maxCrew)
     : Ship(id, "", speed, maxCrew, 0) {}
 
 Ship& Ship::operator+=(const size_t crew){

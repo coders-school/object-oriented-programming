@@ -6,7 +6,7 @@ CC = g++
 
 CFLAGS = -std=c++17 -Wall -Wextra -Wpedantic -Wconversion -Werror -O2
 
-OBJECTS = Ship.o Cargo.o Map.o SHM.o
+OBJECTS = Cargo.o Ship.o Coordinates.o Island.o Map.o SHM.o
 
 .cpp.o:
 	$(CC) -c $(CFLAGS) $< -o $@
