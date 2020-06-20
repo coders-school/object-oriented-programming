@@ -1,11 +1,12 @@
-#include <iostream>
+#include "game.hpp"
 
-#include "cargo.hpp"
-#include "map.hpp"
-#include "ship.hpp"
+constexpr size_t start_money = 1'000;
+constexpr size_t game_days = 100;
+constexpr size_t final_goal = 2'000;
 
 int main() {
-    std::cout << "Hello world";
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
 
     return 0;
 }
