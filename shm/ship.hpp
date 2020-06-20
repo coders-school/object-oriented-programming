@@ -11,6 +11,7 @@ public:
     Ship(uint32_t maxCrew, uint32_t speed, uint32_t id);
 
     void setName(const std::string& name);
+    void addToCargo(Cargo cargo);
 
     Ship& operator-=(uint32_t crew);
     Ship& operator+=(uint32_t crew);
