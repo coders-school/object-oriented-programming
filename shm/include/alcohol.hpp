@@ -5,16 +5,14 @@ public:
     Alcohol(std::string name, size_t amount, double basePrice);
     ~Alcohol() override {}
 
+    double getVolume() const { return volume_; }
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
     double getPrice() const override {
-        return volume_ == 0, 96
-                                 ? getBasePrice()
-                                 : getBasePrice() * (0.96 - getVolume());
+        return volume_ == 0.96 ? getBasePrice()
+                               : getBasePrice() * (0.96 - getVolume());
     }
-
-    double getVolume() const { return volume_; }
 
     Alcohol& operator+=(size_t amount) {
         amount_ += amount;
@@ -29,9 +27,9 @@ public:
     }
 
     bool operator==(Cargo& alcohol) const override {
-        return getName() == alcohol.getName() && 
-        getBasePrice() == alcohol.getBasePrice() &&
-        getPrice() == alcohol.getPrice();
+        return getName() == alcohol.getName() &&
+               getBasePrice() == alcohol.getBasePrice() &&
+               getPrice() == alcohol.getPrice();
     }
 
 private:

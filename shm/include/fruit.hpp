@@ -7,10 +7,10 @@ public:
     Fruit(std::string name, size_t amount, double basePrice);
     ~Fruit() override {}
 
+    size_t getTimeToRotten() const { return timeToRotten_; }
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
-    size_t getTimeToRotten() const { return timeToRotten_; }
     double getPrice() const override {
         return basePrice_ * (1 / std::exp(getTimeToRotten()));
     }
