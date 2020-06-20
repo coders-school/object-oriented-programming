@@ -26,19 +26,19 @@ Ship& Ship::operator+=(size_t num) {
     return *this;
 }
 
-Cargo* Ship::getCargo(size_t index) {
+std::shared_ptr<Cargo> Ship::getCargo(size_t index) {
     if (index >= cargo_.size()) {
         std::cerr << "Invalid index\n";
         return nullptr;
     }
-    return &cargo_[index];
+    return cargo_[index];
 }
 
 size_t Ship::getAvailableSpace() const {
     size_t reservedSpace = std::accumulate(cargo_.begin(),
                                            cargo_.end(),
-                                           0, [](size_t space, const Cargo& cargo) {
-                                               return space += cargo.getAmount();
+                                           0, [](size_t space, const auto& cargo) {
+                                               return space += cargo->getAmount();
                                            });
     return capacity_ - reservedSpace;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "cargo.hpp"
@@ -20,14 +21,14 @@ public:
     std::string getName() const { return name_; }
     int getId() const { return id_; }
 
-    Cargo* getCargo(size_t index);
+    std::shared_ptr<Cargo> getCargo(size_t index);
     size_t getAvailableSpace() const;
 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
 
 private:
-    std::vector<Cargo> cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
