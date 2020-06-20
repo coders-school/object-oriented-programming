@@ -4,11 +4,7 @@
 
 class Fruit : public Cargo {
 public:
-    Fruit(const std::string& name,
-          size_t amount,
-          size_t basePrice,
-          size_t expiryDate,
-          size_t timeElapsed);
+    Fruit(const std::string& name, size_t amount, size_t basePrice, size_t timeToSpoil);
 
     // override from Cargo
     size_t getPrice() const override;
@@ -19,6 +15,6 @@ public:
     Fruit& operator--();
 
 private:
-    size_t timeElapsed_{0};
-    size_t expiryDate_;
+    size_t timeToSpoil_{10};
+    const size_t expiryDate_{10};
 };

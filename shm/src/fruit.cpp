@@ -1,23 +1,13 @@
 #include "fruit.hpp"
 
-Fruit::Fruit(const std::string& name,
-             size_t amount,
-             size_t basePrice,
-             size_t expiryDate,
-             size_t timeElapsed)
-    : Cargo(name, amount, basePrice),
-      expiryDate_(expiryDate),
-      timeElapsed_(timeElapsed) {}
+Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t timeToSpoil)
+    : Cargo(name, amount, basePrice), timeToSpoil_(timeToSpoil) {}
 
 size_t Fruit::getPrice() const {
-    if (timeElapsed_ >= expiryDate_) {
-        return 0;
-    }
-    return static_cast<size_t>(basePrice_ * ((float)(expiryDate_ - timeElapsed_)) /
-                               expiryDate_);
+    return static_cast<size_t>(basePrice_ * (float(timeToSpoil_) / expiryDate_));
 }
 
 Fruit& Fruit::operator--() {
-    --expiryDate_;
+    --timeToSpoil_;
     return *this;
 }
