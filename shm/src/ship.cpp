@@ -24,3 +24,43 @@ Ship& Ship::operator-=(const size_t& crew) {
     }
     return *this;
 }
+
+void Ship::load(std::shared_ptr<Cargo> cargo) {
+    if (auto match_cargo = FindMatchCargo(cargo.get())) {
+        *match_cargo += cargo->getAmount();
+        return;
+    }
+    cargo_.push_back(std::move(cargo));
+}
+
+Cargo* Ship::FindMatchCargo(Cargo* cargo) {
+    for (auto el : cargo_) {
+        if (el->getName() == "Fruit") {
+            if (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->getExpiryDate() == cargo->getExpiryDate())
+                return el.get();
+        } else if (el->getName() == "Alcohol") {
+            if (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->getPercentage() == cargo->getPercentage())
+                return el.get();
+        } else {
+            if (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->getRarity() == cargo->getRarity())
+                return el.get();
+        }
+    }
+}
+
+void Ship::Unload(Cargo* cargo) {
+    RemoveFromStorage(cargo);
+}
+
+void Ship::RemoveFromStorage(Cargo *cargo) {
+    cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
+                              [cargo](const auto& el) {
+                                  return *el == *cargo;
+                              }));
+}
