@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "cargo.hpp"
-#include <algorithm>
 #include <memory>
 
 using cargoPtr = std::shared_ptr<Cargo>;
@@ -20,7 +19,7 @@ public:
     size_t getSpeed() const { return speed_; }
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getCapacity() const { return capacity_; }
-    //std::vector<Cargo> getCargo() const { return cargo_; }
+    std::vector<cargoPtr> getCargo() const { return cargo_; }
     void load(cargoPtr cargo);
     Cargo* FindMatchCargo(Cargo* cargo);
     void Unload(Cargo* cargo);
