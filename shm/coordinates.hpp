@@ -4,6 +4,7 @@
 
 class Coordinates {
 public:
+    Coordinates ();
     Coordinates(int32_t positionX, int32_t positionY);
     bool operator==(const Coordinates& position);
     int32_t getPositionX() const;

@@ -1,5 +1,7 @@
 #include "coordinates.hpp"
 
+Coordinates::Coordinates() : positionX_(0), positionY_(0){};
+
 Coordinates::Coordinates(int32_t positionX, int32_t positionY) : positionX_(positionX), positionY_(positionY){};
 
 bool Coordinates::operator==(const Coordinates& position) {
