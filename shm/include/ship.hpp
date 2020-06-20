@@ -25,6 +25,7 @@ public:
     std::vector<std::shared_ptr<Cargo>>& getCargo() { return cargo_; };
 
     void load(std::shared_ptr<Cargo> cargo);
+    void unload(Cargo* cargo);
 
 private:
     size_t capacity_;

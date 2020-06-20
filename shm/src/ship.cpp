@@ -51,3 +51,20 @@ void Ship::load(std::shared_ptr<Cargo> cargo) {
     }
     **result += cargo->getAmount();
 }
+
+void Ship::unload(Cargo* cargo) {
+    auto thing = std::find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& el) {
+        return (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->getPrice() == cargo->getPrice());
+    });
+    if (thing == cargo_.end()) {
+        return;
+    }
+
+    if ((*thing)->getAmount() <= cargo->getAmount()) {
+        cargo_.erase(thing);
+        return;
+    }
+    **thing -= cargo->getAmount();
+}
