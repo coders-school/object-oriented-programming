@@ -4,7 +4,7 @@
 
 #include "Island.hpp"
 
-constexpr int randomNumberStart = 1;
+constexpr int minPositionXY = 1;
 constexpr int maxPositionXY = 10;
 constexpr int numberOfIslands = 10;
 
