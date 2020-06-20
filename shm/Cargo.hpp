@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 
 class Cargo {
@@ -9,21 +11,9 @@ public:
     size_t getAmount() const { return amount_; }
     size_t getBasePrice() const { return basePrice_; }
 
-    Cargo& operator+=(const size_t amount) {
-        amount_ += amount;
-        return *this;
-    }
-    Cargo& operator-=(const size_t amount) {
-        if (amount > amount_) {
-            amount_ = 0;
-            return *this;
-        }
-        amount_ -= amount;
-        return *this;
-    }
-    bool operator==(const Cargo& cargo) {
-        return (name_ == cargo.name_);
-    }
+    Cargo& operator+=(const size_t amount);
+    Cargo& operator-=(const size_t amount);
+    bool operator==(const Cargo& cargo);
 
 protected:
     std::string name_;
