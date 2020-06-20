@@ -38,8 +38,8 @@ endif()
 project(SymulatorHandluMorskiego)
 enable_testing()
 
-add_executable(${PROJECT_NAME} SHM.cpp Cargo.cpp Player.cpp Ship.cpp)
-#add_executable(${PROJECT_NAME}-ut test.cpp Cargo.cpp Player.cpp Ship.cpp)
+add_executable(${PROJECT_NAME} SHM.cpp Cargo.cpp Coordinates.cpp Island.cpp Player.cpp Ship.cpp)
+#add_executable(${PROJECT_NAME}-ut test.cpp Cargo.cpp Coordinates.cpp Island.cpp Player.cpp Ship.cpp)
 
 #target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 #add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
