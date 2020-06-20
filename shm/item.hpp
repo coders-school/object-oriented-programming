@@ -9,7 +9,7 @@ public:
         epic = 4,
         legendary = 8
     };
-    
+
     std::string getName() const override {
         return name_;
     }
