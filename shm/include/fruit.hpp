@@ -14,6 +14,7 @@ public:
     double getPrice() const override {
         return basePrice_ * (1 / std::exp(getTimeToRotten()));
     }
+    void nextDay();
 
     Fruit& operator--() {
         if (timeToRotten_ > 0) {
