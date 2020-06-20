@@ -2,9 +2,7 @@
 
 class Coordinates {
 public:
-    Coordinates(const int positionX,
-                const int positionY)
-        : _positionX(positionX), _positionY(positionY) {}
+    Coordinates(const int positionX, const int positionY);
 
     bool operator==(const Coordinates& coordinatesToCheck) const;
     bool operator!=(const Coordinates& coordinatesToCheck) const;
