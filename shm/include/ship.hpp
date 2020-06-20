@@ -26,6 +26,7 @@ public:
     void RemoveFromStorage(Cargo* cargo);
 
     void setName(const std::string& name);
+    void nextDay();
 
     Ship& operator+=(const size_t& crew);
     Ship& operator-=(const size_t& crew);
@@ -38,4 +39,5 @@ private:
     size_t capacity_;
     size_t crew_;
     std::vector<cargoPtr> cargo_;
+    double money_;
 };

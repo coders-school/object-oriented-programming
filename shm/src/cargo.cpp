@@ -5,7 +5,7 @@ Cargo::Cargo(std::string name, size_t amount, double basePrice)
       amount_(amount),
       basePrice_(basePrice) {}
 
-bool Cargo::operator==(const Cargo& freight2) {
-    return name_ == freight2.name_;
+bool Cargo::operator==(Cargo& cargo) const {
+    return name_ == cargo.name_;
 }
 

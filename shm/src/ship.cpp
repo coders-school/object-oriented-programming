@@ -13,6 +13,10 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
+void Ship::nextDay() {
+    money_ -= crew_;
+}
+
 Ship& Ship::operator+=(const size_t& crew) {
     if (crew_ + crew <= maxCrew_) {
         crew_ += crew;
