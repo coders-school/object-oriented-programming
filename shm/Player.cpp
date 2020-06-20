@@ -9,11 +9,10 @@ Player::Player(std::unique_ptr<Ship> ship, size_t money) {
 };
 
 size_t Player::countAvailableSpace() {
-    auto occupiedSpace = std::accumulate(begin(ship_->getAllCargos()), end(ship_->getAllCargos()), 0, [](const auto& cargo) {
-        cargo.getAmount();
-    });
-    if (ship_->getCapacity() <= occupiedSpace) {
-        return 0;
-    }
-    return ship_->getCapacity() - occupiedSpace;
+    auto occupiedSpace = std::accumulate(begin(ship_->getAllCargos()),
+                                         end(ship_->getAllCargos()),
+                                         0,
+                                         [](const Cargo& cargoFirst, const Cargo& cargoSecond) {
+                                             return cargoFirst.getAmount() + cargoSecond.getAmount();
+                                         });
 }
