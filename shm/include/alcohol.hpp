@@ -2,6 +2,7 @@
 
 class Alcohol : public Cargo {
 public:
+    Alcohol(std::string name, size_t amount, double basePrice);
     Alcohol(std::string name, size_t amount, double basePrice, double volume);
     ~Alcohol() override {}
 

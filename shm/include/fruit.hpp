@@ -4,6 +4,7 @@
 
 class Fruit : public Cargo {
 public:
+    Fruit(std::string name, size_t amount, double basePrice);
     Fruit(std::string name, size_t amount, double basePrice, size_t timeToRotten);
     ~Fruit() override {}
 

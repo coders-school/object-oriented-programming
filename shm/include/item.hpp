@@ -7,6 +7,7 @@ enum class Rarity { common = 1,
 
 class Item : public Cargo {
 public:
+    Item(std::string name, size_t amount, double basePrice);
     Item(std::string name, size_t amount, double basePrice, Rarity rarity);
     ~Item() override {}
 

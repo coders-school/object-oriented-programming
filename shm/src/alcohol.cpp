@@ -1,5 +1,10 @@
 #include "alcohol.hpp"
 
+Alcohol::Alcohol(std::string name, size_t amount, double basePrice)
+    : Cargo(name, amount, basePrice) {
+    price_ = setPrice();
+}
+
 Alcohol::Alcohol(std::string name, size_t amount, double basePrice,  double volume)
     : Cargo(name, amount, basePrice), volume_(volume) {
     price_ = setPrice();
