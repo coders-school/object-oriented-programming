@@ -16,6 +16,8 @@ public:
     Cargo& operator-=(const size_t amount);
     bool operator==(const Cargo& cargo);
 
+    virtual void nextDay() {}
+
 protected:
     std::string name_;
     size_t amount_;
