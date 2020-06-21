@@ -22,7 +22,7 @@ void Map::generateIslands(int numIslandsToGenerate) {
                 [positionX, positionY](auto& island) { 
                 return island.getPosition() == Coordinates(positionX, positionY); 
             })) { 
-            islandsLocations_.push_back(Island(positionX, positionY));
+            addIsland({positionX, positionY});
         } 
     } while (numIslandsToGenerate-- > 0); 
 }
