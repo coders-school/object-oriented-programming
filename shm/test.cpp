@@ -54,3 +54,20 @@ TEST(player, newMoneyAmountWasSet)
     player.setAvailableSpace(money);
     EXPECT_EQ(player.getAvailableSpace(), money);
 }
+
+TEST(Map, mapWithOneIsland)
+{
+    Map map_(1,1,1);
+    Island island_{Island(0,0)};
+    EXPECT_EQ(map_.getIslands().at(0).getPosition(), island_.getPosition());
+}
+
+
+TEST(Map, mapWith10Island)
+{
+    Map map_;
+    std::vector<Island> is = map_.getIslands();
+    EXPECT_EQ(map_.getIslands().size(), 10);
+    for(auto i : is) std::cout << i << "\n";
+}
+
