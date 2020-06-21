@@ -1,8 +1,5 @@
 #include "ship.hpp"
 
-#include <iostream>
-#include <string>
-
 Ship::Ship()
     : id_(-1) {}
 
@@ -16,20 +13,16 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
-Ship& Ship::operator-=(size_t num) {
-    if (crew_ < num) {
-        std::cerr << "Number of papays is lower than 0 \n";
-        return *this;
+Ship& Ship::operator-=(size_t crewman) {
+    if (crew_ > crewman) {
+        crew_ -= crewman;
     }
-    crew_ -= num;
     return *this;
 }
-Ship& Ship::operator+=(size_t num) {
-    if (num + crew_ > maxCrew_) {
-        std::cerr << "To many papays!\n";
-        return *this;
+Ship& Ship::operator+=(size_t crewman) {
+    if (crew_ + crewman < maxCrew_) {
+        crew_ += crewman;
     }
-    crew_ += num;
     return *this;
 }
 

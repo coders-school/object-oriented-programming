@@ -1,5 +1,7 @@
 #pragma once
+
 #include <string>
+
 class Cargo {
 public:
     Cargo(std::string name, size_t amount, size_t basePrice);
@@ -10,7 +12,7 @@ public:
     size_t GetAmount() const;
     size_t GetBasePrice() const;
 
-protected:
+private:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
