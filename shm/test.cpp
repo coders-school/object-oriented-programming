@@ -1,4 +1,6 @@
 #include <vector>
+#include <set>
+#include <algorithm>
 
 #include "Cargo.hpp"
 #include "Island.hpp"
@@ -26,15 +28,14 @@ TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqualWithGetters)
 {
     Cargo cargoA(10, 1), cargoB(100, 2);
     EXPECT_FALSE(cargoA.getAmount() == cargoB.getAmount());
-    cargoA+=90;
+    cargoA += 90;
     EXPECT_EQ(cargoA.getAmount(), cargoB.getAmount());
 }
 
 TEST(island, twoIslandsPositionsShouldBeEqual)
 {
-    Island A(9,9), B(9,9);
+    Island A(9, 9), B(9, 9);
     EXPECT_EQ(A.getPosition(), B.getPosition());
-
 }
 
 TEST(player, newSpaceWasSet)
@@ -57,17 +58,18 @@ TEST(player, newMoneyAmountWasSet)
 
 TEST(Map, mapWithOneIsland)
 {
-    Map map_(1,1,1);
-    Island island_{Island(0,0)};
+    Map map_(1, 1, 1);
+    Island island_{Island(0, 0)};
     EXPECT_EQ(map_.getIslands().at(0).getPosition(), island_.getPosition());
 }
 
-
-TEST(Map, mapWith10Island)
+TEST(Map, mapWith10uniqueIslands)
 {
     Map map_;
-    std::vector<Island> is = map_.getIslands();
-    EXPECT_EQ(map_.getIslands().size(), 10);
-    for(auto i : is) std::cout << i << "\n";
-}
+    std::vector<Island> islands = map_.getIslands();
+    std::set<std::pair<int, int>> set_;
+    for (auto& is : islands)
+        set_.insert(std::make_pair(is.getPosition().position_x, is.getPosition().position_y));
 
+    EXPECT_EQ(map_.getIslands().size(), set_.size());
+}
