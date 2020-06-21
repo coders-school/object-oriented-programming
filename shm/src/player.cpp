@@ -5,18 +5,18 @@ Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
 
 Cargo* Player::getCargo(size_t index) const {
     if (index < (ship_->getCargo().size())) {
-        return &ship_->getCargo()[index];
+        return ship_->getCargo()[index].get();
     } else {
         return nullptr;
     }
 }
 
 void Player::countAvailableSpace() {
-    const std::vector<Cargo> temp = ship_->getCargo();
+    const std::vector<std::shared_ptr<Cargo>> temp = ship_->getCargo();
 
     size_t amount = 0;
     for (const auto& cargo : temp) {
-        amount += cargo.getAmount();
+        amount += cargo->getAmount();
     }
     int available = ship_->getCapacity() - amount;
     if (available < 0) {
