@@ -21,6 +21,7 @@ public:
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
     size_t getCrew() const { return crew_; }
+    Cargo* getCargo(size_t index) { return cargo_[index].get(); }
 
     void load(const std::shared_ptr<Cargo>& cargo);
     void unload(Cargo* cargo);
