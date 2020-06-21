@@ -12,9 +12,9 @@ public:
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
 
-    std::string getName();
-    size_t getAmount();
-    size_t getBasePrice();
+    std::string getName() const;
+    size_t getAmount() const;
+    size_t getBasePrice() const;
  
     void setName(std::string name);
     void setAmount(size_t amount);

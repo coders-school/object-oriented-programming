@@ -28,9 +28,9 @@ Cargo& Cargo::operator-=(size_t amount) {
     return *this;
 }
 
-std::string Cargo::getName() { return name_; }
-size_t Cargo::getAmount() { return amount_; }
-size_t Cargo::getBasePrice() { return basePrice_; }
+std::string Cargo::getName() const { return name_; }
+size_t Cargo::getAmount() const { return amount_; }
+size_t Cargo::getBasePrice() const { return basePrice_; }
 
 void Cargo::setName(std::string name) { name_ = name; }
 void Cargo::setAmount(size_t amount) { amount_ = amount; }
