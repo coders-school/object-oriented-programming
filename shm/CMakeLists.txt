@@ -28,6 +28,7 @@ set(HEADER_FILES
     include/map.hpp
     include/player.hpp
     include/ship.hpp
+    include/time.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADER_FILES})
