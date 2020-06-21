@@ -5,26 +5,26 @@
 
 Map::Map(){
     islandsLocations_.reserve(amountOfIslands);
-    generateIslands(numIslandsToGenerate);
+    generateIslands(amountOfIslands);
 }
 
-void Map::generateIslands(int numIslandsToGenerate) {
+void Map::generateIslands(int numOfIslandsToGenerate) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(minPositionXY, maxPositionXY);
     
-        size_t positionX {}; 
-        size_t positionY {};
+    size_t positionX {}; 
+    size_t positionY {};
     do { 
         positionX = distrib(gen); 
         positionY = distrib(gen); 
         if (std::any_of(islandsLocations_.begin(), islandsLocations_.end(), 
-                [positionX, positionY](auto& island) { 
+                [positionX, positionY](const auto& island) { 
                 return island.getPosition() == Coordinates(positionX, positionY); 
             })) { 
             addIsland({positionX, positionY});
         } 
-    } while (--numIslandsToGenerate > 0); 
+    } while (--numOfIslandsToGenerate); 
 }
 
 void Map::setCurrentPosition(Island* const currentPosition) {
