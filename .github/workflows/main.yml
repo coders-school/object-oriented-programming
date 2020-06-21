@@ -17,12 +17,13 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@master
-#    - name: mkdir module1/homework/calculate/build
-#      run: mkdir module1/homework/calculate/build
+    - name: mkdir shm/build
+      run: mkdir shm/build
     - name: Compile
-      working-directory: shm
+      working-directory: shm/build
       run: |
+        cmake ..
         make
-#    - name: Run tests
-#      working-directory: module1/homework/calculate/build
-#      run: ctest -V
+    - name: Run tests
+      working-directory: shm/build
+      run: ctest -V
