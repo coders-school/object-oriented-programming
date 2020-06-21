@@ -13,16 +13,18 @@ void Map::generateIslands(int numIslandsToGenerate) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(minPositionXY, maxPositionXY);
     
+        size_t positionX {}; 
+        size_t positionY {};
     do { 
-        size_t positionX = distrib(gen); 
-        size_t positionY = distrib(gen); 
+        positionX = distrib(gen); 
+        positionY = distrib(gen); 
         if (std::any_of(islandsLocations_.begin(), islandsLocations_.end(), 
                 [positionX, positionY](auto& island) { 
                 return island.getPosition() == Coordinates(positionX, positionY); 
             })) { 
             islandsLocations_.push_back(Island(positionX, positionY));
         } 
-    } while (amountOfIslands <10); 
+    } while (numIslandsToGenerate-- > 0); 
 }
 
 void Map::setCurrentPosition(Island* const currentPosition) {
