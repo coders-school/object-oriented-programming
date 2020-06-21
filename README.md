@@ -1,7 +1,7 @@
 # DIGGERS object-oriented-programming
-[![Build Status](https://travis-ci.org/kszytko/object-oriented-programming.svg?branch=homeworkSHM1)](https://travis-ci.org/kszytko/object-oriented-programming)|[![C++ with Make CI](https://github.com/kszytko/object-oriented-programming/workflows/C++%20with%20Make%20CI/badge.svg)](https://github.com/kszytko/object-oriented-programming/pulls)
---- | :---:
-*Main branch*|*Last pull request*
+[![Travis (.org) branch](https://img.shields.io/travis/kszytko/object-oriented-programming/homeworkSHM1?label=homeworkSHM1&logo=travis)](https://travis-ci.org/kszytko/object-oriented-programming)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/kszytko/object-oriented-programming/C++%20with%20Make%20CI?label=latest%20PR&logo=github)](https://github.com/kszytko/object-oriented-programming/pulls)
+[![GitHub issues by-label](https://img.shields.io/github/issues/kszytko/object-oriented-programming/SHM2)](https://github.com/kszytko/object-oriented-programming/issues)
 
 ## Projekt Scrum 
 [Issues](https://github.com/kszytko/object-oriented-programming/issues)
