@@ -50,6 +50,14 @@ int main() {
         std::cout << element.getName() << "\n";
     }
 
+    Map mainMap;
+
+    Coordinates location(1, 1);
+
+    if (mainMap.getIsland(location)) {
+        std::cout << "Island found!\n";
+    }
+
     std::cout << pawellos.getAvailableSpace() << "\n";
 
     std::cout << pawellos.getShip()->getName() << "\n";
