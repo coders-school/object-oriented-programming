@@ -7,15 +7,15 @@ enum class Rarity { common = 1,
 
 class Item : public Cargo {
 public:
-    Item(std::string name, size_t amount, double basePrice);
+    Item(std::string name, size_t amount, double basePrice, Rarity rarity);
     ~Item() override {}
 
     Rarity getRarity() const { return rarity_; }
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
-    double getPrice() const override { return getBasePrice() * static_cast<int>(rarity_); }
-    
+    double getPrice() const override { return price_; }
+    double setPrice() const;
 
     Cargo& operator+=(size_t amount) {
         amount_ += amount;
@@ -36,4 +36,5 @@ public:
 
 private:
     Rarity rarity_;
+    double price_;
 };

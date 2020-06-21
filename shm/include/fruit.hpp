@@ -4,16 +4,15 @@
 
 class Fruit : public Cargo {
 public:
-    Fruit(std::string name, size_t amount, double basePrice);
+    Fruit(std::string name, size_t amount, double basePrice, size_t timeToRotten);
     ~Fruit() override {}
 
     size_t getTimeToRotten() const { return timeToRotten_; }
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
-    double getPrice() const override {
-        return basePrice_ * (1 / std::exp(getTimeToRotten()));
-    }
+    double getPrice() const override { return price_; }
+    double setPrice ();
     void nextDay();
 
     Fruit& operator--() {
@@ -43,6 +42,7 @@ public:
 private:
     //size_t time_elapsed_{0};
     size_t timeToRotten_;
+    double price_;
 };
 
 // class DryFruit : public Fruit {
