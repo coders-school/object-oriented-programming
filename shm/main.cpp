@@ -1,3 +1,7 @@
+#include "map.hpp"
+
 int main() {
-    return 1;
+    Map testMap;
+
+    return 0;
 }
