@@ -1,5 +1,7 @@
 #include "cargo.hpp"
 
+#include <iostream>
+
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     : name_(name), amount_(amount), basePrice_(basePrice) {}
 
@@ -9,8 +11,12 @@ Cargo& Cargo::operator+=(size_t amount) {
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
-    if (amount_ > 0) {
+    if (amount > amount_) {
+        amount_ = 0;
+    } else if (amount_ > 0) {
         amount_ -= amount;
+    } else {
+        std::cerr << "Amount equal zero\n";
     }
     return *this;
 }
