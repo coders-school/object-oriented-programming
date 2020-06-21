@@ -1,7 +1,7 @@
 #include <cassert>
 
-#include "Ship.hpp"
 #include "Cargo.hpp"
+#include "Ship.hpp"
 
 int main() {
     Ship ship1;
@@ -14,7 +14,6 @@ int main() {
     Cargo flowerCargo{"Tulipan", 7, 50}, fruitCargo{"Truskawka", 5, 40};
 
     assert(flowerCargo != fruitCargo);
-
 
     return 0;
 }
