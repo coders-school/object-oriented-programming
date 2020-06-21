@@ -3,13 +3,13 @@
 #include "Island.hpp"
 #include <vector>
 
-constexpr size_t amountIslands = 10;
-constexpr size_t heightIsland = 10;
-constexpr size_t widthIsland = 10;
+constexpr size_t amountOfIslands = 10;
+constexpr size_t minPositionXY = 0;
+constexpr size_t maxPositionXY = 10;
 
 class Map {
 private:
-    void generateIslands();
+    void generateIslands(int numIslandsToGenerate);
     Island* currentPosition_ {nullptr};
     std::vector<Island> islandsLocations_;
 public:
