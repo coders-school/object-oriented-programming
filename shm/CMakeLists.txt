@@ -8,4 +8,4 @@ project(shm)
 
 #TODO: Add your cpp file you implemented below, e.g. add_executable(${PROJECT_NAME} main.cpp ship.cpp)
 
-add_executable(${PROJECT_NAME} main.cpp coordinates.cpp island.cpp player.cpp )
+add_executable(${PROJECT_NAME} main.cpp coordinates.cpp island.cpp cargo.cpp ship.cpp fruit.cpp alcohol.cpp item.cpp)
