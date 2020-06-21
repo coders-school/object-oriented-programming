@@ -30,8 +30,8 @@ Ship& Ship::operator+=(size_t crew) {
 
 void Ship::load(std::shared_ptr<Cargo> cargo) {
     size_t allAmount = 0;
-    for (auto el : cargo_) {
-        allAmount + el->getAmount();
+    for (const auto& el : cargo_) {
+        allAmount += el->getAmount();
     }
 
     if (allAmount + cargo->getAmount() > getCapacity()) {
