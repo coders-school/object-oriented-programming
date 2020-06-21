@@ -34,8 +34,8 @@ public:
     Ship& operator-=(const size_t crew);
     Ship& operator+=(const size_t crew);
 
-    void load(const std::shared_ptr<Cargo>& cargo) { allCargos_.push_back(cargo); }
-    //void unload(Cargo* cargo) {  }
+    void load(const std::shared_ptr<Cargo>& cargo);
+    void unload(Cargo* cargo);
 
 private:
     size_t capacity_;
@@ -44,5 +44,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> allCargos_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
 };
