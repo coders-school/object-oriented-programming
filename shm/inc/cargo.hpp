@@ -5,10 +5,12 @@
 class Cargo {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
+    virtual ~Cargo() = default;
 
-    std::string getName() const { return name_; }
-    size_t getAmount() const { return amount_; }
-    size_t getBasePrice() const { return basePrice_; }
+    virtual std::string getName() const = 0;
+    virtual size_t getAmount() const = 0;
+    virtual size_t getPrice() const = 0;
+    virtual size_t getBasePrice() const = 0;
 
     bool operator==(const Cargo& cargoToCheck) const;
     Cargo& operator+=(size_t amount);
