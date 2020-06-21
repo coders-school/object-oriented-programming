@@ -30,4 +30,3 @@ Ship& Ship::operator+=(size_t num)
     return *this;
 }
 
-
