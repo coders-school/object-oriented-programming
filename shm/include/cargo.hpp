@@ -13,6 +13,7 @@ public:
     virtual double getBasePrice() const = 0;
     virtual double getPrice() const = 0;
     virtual void nextDay() = 0;
+    virtual size_t getTimeToRotten() const = 0;
     virtual Cargo& operator+=(const size_t& amount) = 0;
     virtual Cargo& operator-=(const size_t& amount) = 0;
     virtual bool operator==(Cargo& cargo) const = 0;

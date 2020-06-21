@@ -24,6 +24,7 @@ public:
     Cargo* FindMatchCargo(Cargo* cargo);
     void Unload(Cargo* cargo);
     void RemoveFromStorage(Cargo* cargo);
+    void RemoveFromStorageIfRotten();
 
     void setName(const std::string& name);
     void nextDay();
