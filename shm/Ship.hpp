@@ -31,8 +31,8 @@ public:
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
 
-    Ship& operator-=(size_t num);
-    Ship& operator+=(size_t num);
+    Ship& operator-=(const size_t crew);
+    Ship& operator+=(const size_t crew);
 
     void load(const std::shared_ptr<Cargo>& cargo) { allCargos_.push_back(cargo); }
     //void unload(Cargo* cargo) {  }
