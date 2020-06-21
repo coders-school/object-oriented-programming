@@ -1,8 +1,5 @@
 #include "ship.hpp"
 
-#include <iostream>
-#include <string>
-
 Ship::Ship()
     : id_(-1) {}
 
