@@ -49,12 +49,5 @@ SpacesInParentheses: false
 SpacesInSquareBrackets: false
 TabWidth: 4
 UseTab: Never
-<<<<<<< HEAD
 Standard: c++17
 
-# Run manually to reformat a file:
-# clang-format -i --style=file <file>
-=======
-Standard: Cpp11
-
->>>>>>> proper clang format added
