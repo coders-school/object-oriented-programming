@@ -3,6 +3,11 @@ compiler:
   - clang
   - gcc
 
-before_script: cd shm
+before_script: 
+  - mkdir shm/build
+  - cd shm/build
+
 script:
+  - cmake ..
   - make
+  - ctest -V 
