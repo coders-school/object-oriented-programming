@@ -15,6 +15,10 @@ Cargo& Cargo::operator+=(size_t amount) {
     return *this;
 }
 Cargo& Cargo::operator-=(size_t amount) {
-    amount_ -= amount;
-    return *this;
+    if (amount > amount_) {
+        return *this;
+    } else {
+        amount_ -= amount;
+        return *this;
+    }
 }
