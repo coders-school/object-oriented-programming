@@ -24,7 +24,7 @@ void Map::generateIslands(int numIslandsToGenerate) {
             })) { 
             addIsland({positionX, positionY});
         } 
-    } while (numIslandsToGenerate-- > 0); 
+    } while (--numIslandsToGenerate > 0); 
 }
 
 void Map::setCurrentPosition(Island* const currentPosition) {
