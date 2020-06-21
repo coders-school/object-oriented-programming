@@ -16,13 +16,12 @@
 		return *this;
 	}
 
-	Cargo::Cargo& operator==(Cargo cargo) {
-		this = cargo;
-		return *this;
+	Cargo::bool operator==(const Cargo& cargo) const {
+		return this->name_ == cargo.GetName() && this->amount_ == cargo.GetAmount() && this->basePrice_ == cargo.GetBasePrice();
 	}
 
-	constexpr std::string& Cargo::GetName() {
-		return *name_;
+	constexpr std::string Cargo::GetName() {
+		return name_;
 	}
 
 	constexpr size_t Cargo::GetAmount() {
