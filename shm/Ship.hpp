@@ -30,11 +30,12 @@ public:
     size_t getSpeed() const     { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
-    void load(const std::shared_ptr<Cargo>& cargo) { allCargos_.push_back(cargo); }
-    //void unload(Cargo* cargo) {  }
 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
+
+    void load(const std::shared_ptr<Cargo>& cargo) { allCargos_.push_back(cargo); }
+    //void unload(Cargo* cargo) {  }
 
 private:
     size_t capacity_;
