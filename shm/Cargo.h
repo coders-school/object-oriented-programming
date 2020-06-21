@@ -7,9 +7,9 @@ public:
 
 	Cargo& operator+=(size_t amount);
 	Cargo& operator-=(size_t amount);
-	Cargo& operator==(Cargo cargo);
+	bool operator==(const Cargo& cargo) const;
 
-	constexpr std::string& GetName() const;
+	constexpr std::string GetName() const;
 	constexpr size_t GetAmount() const;
 	constexpr size_t GetBasePrice() const;
 
