@@ -38,7 +38,7 @@ endif()
 project(shm)
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp Ship.hpp Player.cpp)
+add_executable(${PROJECT_NAME} main.cpp Ship.hpp Player.hpp)
 add_executable(${PROJECT_NAME}-ut test.cpp)
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
