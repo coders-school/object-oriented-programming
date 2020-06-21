@@ -9,11 +9,7 @@ Store::Response Store::buy(Cargo* cargo, Player* player) {
         return Response::lack_of_space;
     }
 
-    auto toBuy = std::find_if(stock_.begin(), stock_.end(), [cargo](const auto& el) {
-        return (el->getName() == cargo->getName() &&
-                el->getBasePrice() == cargo->getBasePrice() &&
-                el->getPrice() == cargo->getPrice());
-    });
+    auto toBuy = findStock(cargo);
 
     if (toBuy == stock_.end() || (*toBuy)->getAmount() < cargo->getAmount()) {
         return Response::lack_of_cargo;
@@ -38,11 +34,7 @@ Store::Response Store::sell(Cargo* cargo, Player* player) {
 }
 
 void Store::load(std::shared_ptr<Cargo> cargo) {
-    auto result = std::find_if(stock_.begin(), stock_.end(), [cargo](const auto& el) {
-        return (el->getName() == cargo->getName() &&
-                el->getBasePrice() == cargo->getBasePrice() &&
-                el->getPrice() == cargo->getPrice());
-    });
+    auto result = findStock(cargo.get());
 
     if (result == stock_.end()) {
         stock_.push_back(cargo);
@@ -52,11 +44,8 @@ void Store::load(std::shared_ptr<Cargo> cargo) {
 }
 
 void Store::unload(Cargo* cargo) {
-    auto thing = std::find_if(stock_.begin(), stock_.end(), [cargo](const auto& el) {
-        return (el->getName() == cargo->getName() &&
-                el->getBasePrice() == cargo->getBasePrice() &&
-                el->getPrice() == cargo->getPrice());
-    });
+    auto thing = findStock(cargo);
+
     if (thing == stock_.end()) {
         return;
     }
@@ -66,4 +55,12 @@ void Store::unload(Cargo* cargo) {
         return;
     }
     **thing -= cargo->getAmount();
+}
+
+std::vector<std::shared_ptr<Cargo>>::iterator Store::findStock(Cargo* cargo) {
+    return std::find_if(stock_.begin(), stock_.end(), [cargo](const auto& el) {
+        return (el->getName() == cargo->getName() &&
+                el->getBasePrice() == cargo->getBasePrice() &&
+                el->getPrice() == cargo->getPrice());
+    });
 }

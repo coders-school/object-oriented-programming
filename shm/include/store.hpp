@@ -20,4 +20,5 @@ private:
 
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo);
+    std::vector<std::shared_ptr<Cargo>>::iterator findStock(Cargo* cargo);
 };
