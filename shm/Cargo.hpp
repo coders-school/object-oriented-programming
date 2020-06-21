@@ -20,8 +20,8 @@ public:
 
     friend bool operator==(const Cargo& lhs, const Cargo& rhs);
     friend bool operator!=(const Cargo& lhs, const Cargo& rhs);
-    size_t getAmount() { return amount_; }
-    size_t getBasePrice() { return basePrice_; }
+    [[nodiscard]] size_t getAmount() const { return amount_; }
+    [[nodiscard]] size_t getBasePrice() const { return basePrice_; }
 
 
 protected:

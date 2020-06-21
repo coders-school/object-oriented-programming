@@ -23,11 +23,11 @@ class Ship {
     return *this;
   }
 
-  size_t getCapacity() const { return capacity_; }
-  size_t getMaxCrew() const { return maxCrew_; }
-  size_t getSpeed() const { return speed_; }
-  std::string getName() const { return name_; }
-  size_t getId() const { return id_; }
+  [[nodiscard]] size_t getCapacity() const { return capacity_; }
+  [[nodiscard]] size_t getMaxCrew() const { return maxCrew_; }
+  [[nodiscard]] size_t getSpeed() const { return speed_; }
+  [[nodiscard]] std::string getName() const { return name_; }
+  [[nodiscard]] size_t getId() const { return id_; }
 
  private:
   size_t capacity_;
