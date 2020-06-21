@@ -5,7 +5,7 @@
 
 Map::Map(){
     islandsLocations_.reserve(amountOfIslands);
-    void generateIslands(int numIslandsToGenerate);
+    generateIslands(numIslandsToGenerate);
 }
 
 void Map::generateIslands(int numIslandsToGenerate) {
@@ -41,4 +41,3 @@ Island* Map::getIsland(const Coordinates& coordinate) {
 
     return &(*island);
 }
-
