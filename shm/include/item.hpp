@@ -11,18 +11,20 @@ public:
     Item(std::string name, size_t amount, double basePrice, Rarity rarity);
     ~Item() override {}
 
-    Rarity getRarity() const { return rarity_; }
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
     double getPrice() const override { return price_; }
+    void nextDay() {}
+    size_t getTimeToRotten() const {}
+    Rarity getRarity() const { return rarity_; }
     double setPrice() const;
 
-    Cargo& operator+=(size_t amount) {
+    Cargo& operator+=(const size_t& amount) override {
         amount_ += amount;
         return *this;
     }
-    Cargo& operator-=(const size_t& amount) {
+    Cargo& operator-=(const size_t& amount) override {
         if (amount_ >= amount) {
             amount_ -= amount;
         }
