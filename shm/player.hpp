@@ -11,17 +11,14 @@ private:
     size_t availableSpace_;
 
 public:
-    std::shared_ptr<Ship> GetShip_() const;
-    int GetMoney_() const;
-    size_t GetAvailableSpace_() const;
+    std::shared_ptr<Ship> getShip() const { return ship_; };
+    int getMoney() const { return money_; };
+    size_t getAvailableSpace() const { return availableSpace_; };
 
-    size_t GetSpeed() const;
-    Cargo* GetCargo(size_t index) const;
+    size_t getSpeed() const { return ship_->getSpeed(); };
+    Cargo* getCargo(size_t index) const { ship_->getCargo(index); };
 
     Player(const Ship& ship,
            int money,
-           size_t availableSpace)
-        : ship_(std::make_shared<Ship>(ship)),
-          money_(money),
-          availableSpace_(availableSpace) {}
+           size_t availableSpace);
 };
