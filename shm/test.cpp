@@ -2,6 +2,7 @@
 
 #include "Cargo.hpp"
 #include "Island.hpp"
+#include "Player.hpp"
 #include "gtest/gtest.h"
 
 TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
@@ -35,3 +36,20 @@ TEST(island, twoIslandsPositionsShouldBeEqual)
 
 }
 
+TEST(player, newSpaceWasSet)
+{
+    Ship ship;
+    Player player(ship, 0, 0);
+    size_t space = 10;
+    player.setAvailableSpace(space);
+    EXPECT_EQ(player.getAvailableSpace(), space);
+}
+
+TEST(player, newMoneyAmountWasSet)
+{
+    Ship ship;
+    Player player(ship, 0, 0);
+    size_t money = 10;
+    player.setAvailableSpace(money);
+    EXPECT_EQ(player.getAvailableSpace(), money);
+}
