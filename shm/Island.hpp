@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 struct Coordinates
 {
     Coordinates() : position_x(0), position_y(0) {}
@@ -11,6 +13,12 @@ struct Coordinates
     friend bool operator==(const Coordinates& lhs, const Coordinates& rhs);
     friend bool operator!=(const Coordinates& lhs, const Coordinates& rhs);
 };
+
+std::ostream& operator<<(std::ostream& os, const Coordinates& position)
+{
+    os << " x: " << position.position_x << " y: " << position.position_y;
+    return os;
+}
 
 bool operator==(const Coordinates& lhs, const Coordinates& rhs)
 {
@@ -28,3 +36,8 @@ public:
 private:
     Coordinates position_;
 };
+
+std::ostream& operator<<(std::ostream& os, Island& island)
+{
+    os << "Island: position " << island.getPosition();
+}
