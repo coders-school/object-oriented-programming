@@ -7,11 +7,7 @@
 
 class Player {
 public:
-    Player(std::unique_ptr<Ship> ship, size_t money) {
-        ship_ = std::move(ship);
-        money_ = money;
-        avaliableSpace_ = countAvailableSpace();
-    };
+    Player(std::unique_ptr<Ship> ship, size_t money);
 
     size_t getMoney() const { return money_; };
     size_t getAvaliableSpace() const { return avaliableSpace_; };
