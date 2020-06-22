@@ -4,8 +4,8 @@
 #include <string>
 
 Map::Map() {
-    constexpr int numOfIslands = 10;
-    allIslands.reserve(numOfIslands);
+
+    allIslands.reserve(NUM_OF_ISLANDS);
 
     std::map<std::string, int> repsChecker;
 
@@ -18,7 +18,7 @@ Map::Map() {
     int32_t positionY = 0;
     std::string coordinateXY = "";
 
-    for (std::size_t i = 0; i < numOfIslands; ++i) {
+    for (std::size_t i = 0; i < NUM_OF_ISLANDS; ++i) {
         do {
             positionX = distrib(gen);
             positionY = distrib(gen);
