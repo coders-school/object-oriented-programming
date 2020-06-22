@@ -13,6 +13,16 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
+void Ship::nextDay() {
+    for (auto el: cargo_) {
+        if (el -> getName() == "Fruit") {
+            el -> nextDay();
+        }
+    }
+    Ship::RemoveFromStorageIfRotten();
+    money_ -= crew_;
+}
+
 Ship& Ship::operator+=(const size_t& crew) {
     if (crew_ + crew <= maxCrew_) {
         crew_ += crew;
@@ -66,4 +76,16 @@ void Ship::RemoveFromStorage(Cargo *cargo) {
                               [cargo](const auto& el) {
                                   return *el == *cargo;
                               }));
+}
+
+void Ship::RemoveFromStorageIfRotten() {
+    cargo_.erase(std::remove_if(cargo_.begin(),
+                                  cargo_.end(),
+                                  [](auto& el){
+        if (el -> getName() == "Fruit") {
+            return el -> getTimeToRotten() == 0;
+        }
+        return false;
+        }),
+                   cargo_.end());
 }
