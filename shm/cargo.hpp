@@ -16,7 +16,7 @@ public:
     size_t getAmount() const;
     size_t getBasePrice() const;
  
-    void setName(std::string name);
+    void setName(const std::string& name);
     void setAmount(size_t amount);
     void setBasePrice(size_t basePrice);
 

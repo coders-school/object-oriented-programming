@@ -35,6 +35,6 @@ std::string Cargo::getName() const { return name_; }
 size_t Cargo::getAmount() const { return amount_; }
 size_t Cargo::getBasePrice() const { return basePrice_; }
 
-void Cargo::setName(std::string name) { name_ = name; }
+void Cargo::setName(const std::string& name) { name_ = name; }
 void Cargo::setAmount(size_t amount) { amount_ = amount; }
 void Cargo::setBasePrice(size_t basePrice) { basePrice_ = basePrice; }
