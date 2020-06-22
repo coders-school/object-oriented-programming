@@ -1,5 +1,6 @@
 #include "ship.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <numeric>
 
@@ -47,4 +48,18 @@ size_t Ship::getAvailableSpace() const {
                                                return space += cargo->getAmount();
                                            });
     return capacity_ - reservedSpace;
+}
+
+void Ship::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) {
+    auto clonedCargo = cargo->cloneToShared();
+    (*clonedCargo) -= (clonedCargo->getAmount() - amount);
+    (*cargo) -= amount;
+    if (cargo->getAmount() == 0) {
+        cargoHolder->clearEmptyCargos();
+    }
+    cargo_.push_back(clonedCargo);
+}
+
+void Ship::clearEmptyCargos() {
+    cargo_.erase(std::remove_if(cargo_.begin(), cargo_.end(), [](auto& cargo) { return cargo->getAmount() == 0; }), cargo_.end());
 }

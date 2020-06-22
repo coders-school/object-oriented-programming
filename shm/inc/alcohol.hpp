@@ -20,6 +20,10 @@ public:
     size_t getPrice() const override;
     size_t getBasePrice() const override { return basePrice_; }
 
+protected:
+    // override from Cloneable<Cargo>
+    Cargo* cloneToRawPointer() override { return new Alcohol(*this); }
+
 private:
     const float power_;
 };

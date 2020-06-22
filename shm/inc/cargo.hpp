@@ -2,7 +2,9 @@
 
 #include <string>
 
-class Cargo {
+#include "cloneable.hpp"
+
+class Cargo : public Cloneable<Cargo> {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;

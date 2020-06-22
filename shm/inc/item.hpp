@@ -23,6 +23,10 @@ public:
     size_t getBasePrice() const override { return basePrice_; }
     size_t getPrice() const override;
 
+protected:
+    // override from Cloneable<Cargo>
+    Cargo* cloneToRawPointer() override { return new Item(*this); }
+
 private:
     Rarity rarity_;
 

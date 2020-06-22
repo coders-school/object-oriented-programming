@@ -20,6 +20,10 @@ public:
     size_t getPrice() const override;
     size_t getBasePrice() const override { return basePrice_; }
 
+protected:
+    // override from Cloneable<Cargo>
+    Cargo* cloneToRawPointer() override { return new Fruit(*this); }
+
 private:
     const size_t timeToSpoil_;
     size_t leftTime_ = timeToSpoil_;
