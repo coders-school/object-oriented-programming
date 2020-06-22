@@ -132,7 +132,7 @@ Brak implementacji funkcji czysto wirtualnej to błąd linkera (undefined refere
 ### Definicja interfejsu
 <!-- .element: class="fragment fade-in" -->
 
-W pełni poprawna definicja interfejsu to część publiczna klasy / zestawu funkcjonalności. Mogą to być zarówno metody, pola, typu, ale najczęściej będziemy słowa interfejs używać w odniesieniu do publicznych metod klasy.
+W pełni poprawna definicja interfejsu to część publiczna klasy / zestawu funkcjonalności. Mogą to być zarówno metody, pola, typy, ale najczęściej będziemy słowa interfejs używać w odniesieniu do publicznych metod klasy.
 <!-- .element: class="fragment fade-in" -->
 
 [Zobacz interfejs wektora na cppreference.com](https://en.cppreference.com/w/cpp/container/vector)
