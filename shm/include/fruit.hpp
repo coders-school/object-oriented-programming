@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cmath>
 
 #include "cargo.hpp"
@@ -5,15 +7,16 @@
 class Fruit : public Cargo {
 public:
     Fruit(std::string name, size_t amount, double basePrice);
+    Fruit(std::string name, size_t amount, double basePrice, size_t timeToRotten);
     ~Fruit() override {}
 
-    size_t getTimeToRotten() const { return timeToRotten_; }
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
-    double getPrice() const override {
-        return basePrice_ * (1 / std::exp(getTimeToRotten()));
-    }
+    double getPrice() const override { return price_; }
+    void nextDay() override;
+    size_t getTimeToRotten() const override { return timeToRotten_; }
+    double setPrice ();
 
     Fruit& operator--() {
         if (timeToRotten_ > 0) {
@@ -22,11 +25,11 @@ public:
         return *this;
     }
 
-    Fruit& operator+=(size_t amount) {
+    Fruit& operator+=(const size_t& amount) override {
         amount_ += amount;
         return *this;
     }
-    Fruit& operator-=(const size_t& amount) {
+    Fruit& operator-=(const size_t& amount) override {
         if (amount_ >= amount) {
             amount_ -= amount;
         }
@@ -42,6 +45,7 @@ public:
 private:
     //size_t time_elapsed_{0};
     size_t timeToRotten_;
+    double price_;
 };
 
 // class DryFruit : public Fruit {
