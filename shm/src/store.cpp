@@ -1,7 +1,6 @@
 #include "store.hpp"
 
 #include <algorithm>
-#include <numeric>
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (cargo->getAmount() < amount) {
