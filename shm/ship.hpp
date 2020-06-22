@@ -23,9 +23,6 @@ public:
     size_t getCrew() const { return crew_; }
     Cargo* getCargo(size_t index) { return cargo_[index].get(); }
 
-    void load(const std::shared_ptr<Cargo>& cargo);
-    void unload(Cargo* cargo);
-
 private:
     size_t capacity_;
     size_t maxCrew_;

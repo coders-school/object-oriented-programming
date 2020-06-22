@@ -8,14 +8,12 @@ public:
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
     bool operator==(const Cargo& rhs) const;
-    //this should be virtual - use typeId to compare types of cargo
 
-    virtual std::string getName() const = 0;
-    virtual size_t getAmount() const = 0;
-    virtual size_t getBasePrice() const = 0;
-    virtual size_t getPrice() const = 0;
+    std::string getName() const { return name_; }
+    size_t getAmount() const { return amount_; }
+    size_t getBasePrice() const { return basePrice_; }
 
-protected:
+private:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
