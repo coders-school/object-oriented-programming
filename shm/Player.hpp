@@ -12,7 +12,7 @@ public:
     size_t getMoney() const { return money_; };
     size_t getAvaliableSpace() const { return avaliableSpace_; };
     size_t getSpeed() const { return ship_->getSpeed(); };
-    Cargo* getCargo(size_t index) { return ship_->getCargo(index); };
+    Cargo* getCargo(size_t index) const { return ship_->getCargo(index); };
 
 private:
     std::unique_ptr<Ship> ship_;
