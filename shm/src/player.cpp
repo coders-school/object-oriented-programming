@@ -11,6 +11,16 @@ Cargo* Player::getCargo(size_t index) const {
     }
 }
 
+void Player::loadShip(std::shared_ptr<Cargo> cargo) {
+    ship_->load(cargo);
+    countAvailableSpace();
+}
+
+void Player::unloadShip(Cargo* cargo) {
+    ship_->unload(cargo);
+    countAvailableSpace();
+}
+
 void Player::countAvailableSpace() {
     const std::vector<std::shared_ptr<Cargo>> temp = ship_->getCargo();
 
