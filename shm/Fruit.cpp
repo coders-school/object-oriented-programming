@@ -1,9 +1,6 @@
 #include "Fruit.hpp"
 
 Fruit& Fruit::operator--() {
-    if (daysToRot_ == 0) {
-        return *this;
-    }
-    --daysToRot_;
+    daysToRot_ == 0 ? /*do nothing*/ : --daysToRot_;
     return *this;
 }
