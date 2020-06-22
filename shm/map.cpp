@@ -26,7 +26,7 @@ void Map::generateIsland(size_t howMany) {
             newX = xDistrib(gen);
             newY = yDistrib(gen);
         } while (std::any_of(islands_.begin(), islands_.end(), [=](auto island) {
-            return island.getPosition() == Coordinates(newX, newY);
+            return island.getPosition() == Island::Coordinates(newX, newY);
         }));
         islands_.emplace_back(Island(newX, newY));
     }
