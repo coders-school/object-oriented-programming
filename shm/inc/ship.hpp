@@ -29,6 +29,9 @@ public:
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
 
+    void load(const std::shared_ptr<Cargo>& cargo);
+    void unload(const Cargo* const& cargo);
+
     /* override from CargoHolder */
     void receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) override;
     void clearEmptyCargos() override;

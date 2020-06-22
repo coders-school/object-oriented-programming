@@ -50,6 +50,44 @@ size_t Ship::getAvailableSpace() const {
     return capacity_ - reservedSpace;
 }
 
+void Ship::load(const std::shared_ptr<Cargo>& cargo) {
+    if (cargo->getAmount() > getAvailableSpace()) {
+        std::cerr << "not enough space on the ship\n";
+        return;
+    }
+    auto cargoOnShip = std::find_if(cargo_.begin(), cargo_.end(),
+                                    [name = cargo ->getName()](const auto& el) {
+                                        return el->getName() == name;
+                                    });
+    if (cargoOnShip == cargo_.end()) {
+        cargo_.push_back(cargo);
+    } else {
+        (*cargoOnShip)->operator+=(cargo->getAmount());
+    }
+}
+
+void Ship::unload(const Cargo* const& cargo) {
+    auto cargoOnShip = std::find_if(cargo_.begin(), cargo_.end(),
+                                    [name = cargo ->getName()](const auto& el) {
+                                        return el->getName() == name;
+                                    });
+    if (cargoOnShip == cargo_.end()) {
+        std::cerr << "Not found cargo\n";
+        return;
+    }
+    if ((*cargoOnShip)->getAmount() < cargo->getAmount()) {
+        std::cerr << "You don't have enough cargo\n";
+        return;
+    }
+
+    (*cargoOnShip)->operator-=(cargo->getAmount());
+
+    if ((*cargoOnShip)->getAmount() == 0) {
+        std::copy(cargo_.end(), cargo_.end() - 1, cargoOnShip);
+        cargo_.erase(cargo_.end() - 1, cargo_.end());
+        cargo_.shrink_to_fit();
+    }
+
 void Ship::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) {
     auto clonedCargo = cargo->cloneToShared();
     (*clonedCargo) -= (clonedCargo->getAmount() - amount);
