@@ -11,6 +11,7 @@ public:
     std::unique_ptr<Ship> getShip() { return std::move(ship_); }
     size_t getMoney() const { return money_; }
     size_t getAvailableSpace() const { return availableSpace_; }
+    size_t getSpeed() const { return this->ship_->getSpeed(); }
 
 private:
     std::unique_ptr<Ship> ship_;
