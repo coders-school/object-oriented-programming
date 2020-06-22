@@ -5,9 +5,9 @@
 class Cargo {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
-    bool operator==(const Cargo& other);
+    virtual Cargo& operator+=(size_t amount) = 0;
+    virtual Cargo& operator-=(size_t amount) = 0;
+    virtual bool operator==(const Cargo& other) const = 0;
 
     virtual size_t getPrice() const = 0;
     virtual std::string getName() const = 0;
