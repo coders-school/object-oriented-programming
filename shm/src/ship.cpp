@@ -56,7 +56,7 @@ void Ship::load(const std::shared_ptr<Cargo>& cargo) {
         return;
     }
     auto cargoOnShip = std::find_if(cargo_.begin(), cargo_.end(),
-                                    [name = cargo ->getName()](const auto& el) {
+                                    [name = cargo->getName()](const auto& el) {
                                         return el->getName() == name;
                                     });
     if (cargoOnShip == cargo_.end()) {
@@ -68,7 +68,7 @@ void Ship::load(const std::shared_ptr<Cargo>& cargo) {
 
 void Ship::unload(const Cargo* const& cargo) {
     auto cargoOnShip = std::find_if(cargo_.begin(), cargo_.end(),
-                                    [name = cargo ->getName()](const auto& el) {
+                                    [name = cargo->getName()](const auto& el) {
                                         return el->getName() == name;
                                     });
     if (cargoOnShip == cargo_.end()) {
@@ -87,6 +87,7 @@ void Ship::unload(const Cargo* const& cargo) {
         cargo_.erase(cargo_.end() - 1, cargo_.end());
         cargo_.shrink_to_fit();
     }
+}
 
 void Ship::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) {
     auto clonedCargo = cargo->cloneToShared();
