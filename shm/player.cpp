@@ -7,5 +7,5 @@ Player::Player(Ship& ship, size_t money, size_t availableSpace)
 }
 
 std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
-    return ship_->getCargo().get();
+    return ship_->getCargo(index);
 }
