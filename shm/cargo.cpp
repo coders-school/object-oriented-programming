@@ -9,21 +9,21 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     , basePrice_(basePrice)
 {}
 
-bool Cargo::operator==(Cargo& cargo) {
-    return (name_ == cargo.name_) &&
-           (amount_ == cargo.amount_) &&
-           (basePrice_ == cargo.basePrice_);
+bool Cargo::operator==(const Cargo& cargo) const {
+    return (name_ == cargo.getName()) &&
+           (amount_ == cargo.getAmount()) &&
+           (basePrice_ == cargo.getBasePrice());
 }
-bool Cargo::operator!=(Cargo& cargo) {
-    return (name_ != cargo.name_) ||
-           (amount_ != cargo.amount_) ||
-           (basePrice_ != cargo.basePrice_);
+bool Cargo::operator!=(const Cargo& cargo) const {
+    return (name_ != cargo.getName()) ||
+           (amount_ != cargo.getAmount()) ||
+           (basePrice_ != cargo.getBasePrice());
 }
-Cargo& Cargo::operator+=(size_t amount) {
+Cargo& Cargo::operator+=(const size_t amount) {
     amount_ += amount;
     return *this;
 }
-Cargo& Cargo::operator-=(size_t amount) {
+Cargo& Cargo::operator-=(const size_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
         return *this;

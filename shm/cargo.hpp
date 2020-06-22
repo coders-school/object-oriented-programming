@@ -7,10 +7,10 @@ public:
     Cargo();
     Cargo(const std::string& name, size_t amount, size_t basePrice);
 
-    bool operator==(Cargo& cargo);
-    bool operator!=(Cargo& cargo);
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
+    bool operator==(const Cargo& cargo) const;
+    bool operator!=(const Cargo& cargo) const;
+    Cargo& operator+=(const size_t amount);
+    Cargo& operator-=(const size_t amount);
 
     std::string getName() const;
     size_t getAmount() const;
