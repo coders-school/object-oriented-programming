@@ -53,6 +53,7 @@ set(SOURCES
     ${CMAKE_SOURCE_DIR}/island.cpp
     ${CMAKE_SOURCE_DIR}/cargo.cpp
     ${CMAKE_SOURCE_DIR}/coordinates.cpp
+    ${CMAKE_SOURCE_DIR}/ship.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
