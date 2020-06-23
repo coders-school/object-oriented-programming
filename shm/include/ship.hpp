@@ -2,9 +2,9 @@
 
 #include <string>
 #include <vector>
-
-#include "cargo.hpp"
 #include <memory>
+#include "cargo.hpp"
+
 
 using cargoPtr = std::shared_ptr<Cargo>;
 

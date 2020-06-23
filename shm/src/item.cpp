@@ -12,11 +12,11 @@ double Item::getPrice() const {
     return getBasePrice() * static_cast<int>(rarity_);
 }
 
-Cargo& Item::operator+=(const size_t& amount)  {
+Cargo& Item::operator+=(const size_t& amount) {
     amount_ += amount;
     return *this;
 }
-Cargo& Item::operator-=(const size_t& amount)  {
+Cargo& Item::operator-=(const size_t& amount) {
     if (amount_ >= amount) {
         amount_ -= amount;
     }

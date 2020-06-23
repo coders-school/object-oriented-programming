@@ -22,6 +22,7 @@ public:
     bool operator==(Cargo& fruit) const override;
 
 private:
+    size_t timeElapsed_ = 0;
     size_t timeToRotten_;
 };
 
