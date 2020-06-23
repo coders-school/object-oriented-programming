@@ -9,6 +9,7 @@ set(SOURCES
     src/alcohol.cpp
     src/cargo.cpp
     src/coordinates.cpp
+    src/dryfruit.cpp
     src/fruit.cpp
     src/item.cpp
     src/island.cpp
@@ -16,7 +17,7 @@ set(SOURCES
     src/player.cpp
     src/ship.cpp
     src/store.cpp)
-    
+
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
