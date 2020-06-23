@@ -73,3 +73,22 @@ TEST(Map, mapWith10uniqueIslands)
 
     EXPECT_EQ(map_.getIslands().size(), set_.size());
 }
+
+
+TEST(Map, getIslandShouldRTeturnIsland)
+{
+    Map map_;
+    std::vector<Island> islands = map_.getIslands();
+    Island island_ = islands[4];
+    Coordinates corr = islands[4].getPosition();
+
+    EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
+}
+
+
+
+
+
+
+
+
