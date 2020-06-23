@@ -1,28 +1,29 @@
 #pragma once
-#include <memory>
 #include <iostream>
+#include <memory>
 
-#include "ship.hpp"
 #include "cargo.hpp"
+#include "ship.hpp"
 
-class Player{
+class Player {
 private:
+    std::shared_ptr<Ship> ship_;
+    uint32_t availableSpace_;
+    uint32_t money_;
 
-std::unique_ptr<Ship> ship_; 
-size_t availableSpace_;
-size_t money_;
+    uint32_t CountAvailableSpace() const;
 
-size_t CountAvailableSpace(Ship ship) const;
 public:
+    Player(std::shared_ptr<Ship> ship, uint32_t money, uint32_t availableSpace);
 
-Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace); 
+    std::shared_ptr<Ship> getShip();
+    uint32_t getMoney() const;
+    uint32_t getAvailableSpace() const;
+    uint32_t getSpeed() const;
 
-
-size_t getShip() const;
-size_t getMoney() const; 
-size_t getAvailableSpace() const;
-
-size_t getSpeed(Ship ship) const;
-Cargo* getCargo(Ship ship, size_t index) const;
-
+    Cargo* getCargo(uint32_t index) const;
+    // void purchaseCargo(const Cargo* cargo, uint32_t amount, uint32_t price);
+    void purchaseCargo(std::shared_ptr<Cargo> cargo, uint32_t amount, uint32_t price);
+    void sellCargo(Cargo* cargo, uint32_t price);
+    void printCargo() const;
 };
