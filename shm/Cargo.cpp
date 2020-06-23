@@ -17,3 +17,7 @@ Cargo& Cargo::operator-=(const size_t amount) {
 bool Cargo::operator==(const Cargo& cargo) {
     return (name_ == cargo.name_);
 }
+
+bool Cargo::operator!=(const Cargo& cargo) {
+    return (name_ != cargo.name_);
+}
