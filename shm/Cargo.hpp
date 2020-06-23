@@ -11,13 +11,12 @@ public:
     virtual size_t getAmount() const = 0;
     virtual size_t getBasePrice() const = 0;
     virtual size_t getPrice() const = 0;
+    virtual void nextDay() {}
 
     Cargo& operator+=(const size_t amount);
     Cargo& operator-=(const size_t amount);
     bool operator==(const Cargo& cargo);
     bool operator!=(const Cargo& cargo);
-
-    virtual void nextDay() {}
 
 protected:
     std::string name_;
