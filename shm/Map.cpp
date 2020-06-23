@@ -38,7 +38,7 @@ void Map::addIsland(const Island& newIsland) {
 Island* Map::getIsland(const Coordinates& coordinate) {
     auto island = std::find_if(islandsLocations_.begin(), islandsLocations_.end(),
                                [&coordinate](const auto& isld) {
-                                   return isld.Island::getPosition() == coordinate;
+                                   return isld.getPosition() == coordinate;
                                });
 
     return (island != islandsLocations_.end()) ? &(*island) : nullptr;
