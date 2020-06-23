@@ -11,6 +11,7 @@ Fruit::Fruit(const std::string& name, size_t amount, double basePrice, size_t ti
 void Fruit::nextDay() {
     //todo: operator-- for object can be better here?
     //timeToRotten_--;
+    timeElapsed_++;
     operator--();
 }
 
