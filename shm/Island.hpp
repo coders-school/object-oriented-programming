@@ -41,3 +41,9 @@ std::ostream& operator<<(std::ostream& os, Island& island)
 {
     os << "Island: position " << island.getPosition();
 }
+bool operator==(Island& lhs, Island& rhs)
+{
+    return lhs.getPosition() == rhs.getPosition();
+}
+
+
