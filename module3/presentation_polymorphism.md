@@ -235,17 +235,17 @@ public:
 
 class Dwarf : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Dwarf!"; }
+    virtual void sayHello() { std::cout << "I'm Dwarf!"; }
 };
 
 class Elf : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Elf!"; }
+    virtual void sayHello() { std::cout << "I'm Elf!"; }
 };
 
 class Human : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Human!"; }
+    virtual void sayHello() { std::cout << "I'm Human!"; }
 };
 
 int main() {
