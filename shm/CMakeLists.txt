@@ -50,6 +50,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 ##Insert project source files here.##
 set(SOURCES
     ${CMAKE_SOURCE_DIR}/main.cpp
+    ${CMAKE_SOURCE_DIR}/island.cpp
+    ${CMAKE_SOURCE_DIR}/cargo.cpp
+    ${CMAKE_SOURCE_DIR}/coordinates.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
