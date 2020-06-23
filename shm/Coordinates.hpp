@@ -10,6 +10,7 @@ private:
 public:
     Coordinates(size_t positionX, size_t positionY) : positionX_(positionX), positionY_(positionY) {};
     bool operator==(const Coordinates& cord);
+    bool operator!=(const Coordinates& cord);
 
     static size_t distance(const Coordinates& lhs, const Coordinates& rhs);
 };

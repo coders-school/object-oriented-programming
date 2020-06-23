@@ -6,6 +6,10 @@ bool Coordinates::operator==(const Coordinates& cord) {
     return (positionX_ == cord.positionX_) && (positionY_ == cord.positionY_);
 }
 
+bool Coordinates::operator!=(const Coordinates& cord) {
+    return (positionX_ != cord.positionX_) || (positionY_ != cord.positionY_);
+}
+
 //static
 size_t Coordinates::distance(const Coordinates& lhs, const Coordinates& rhs) {
     return static_cast<size_t>(std::floor(std::sqrt(
