@@ -7,7 +7,9 @@
 
 class Player {
 public:
-    Player(std::unique_ptr<Ship> ship, size_t money);
+    Player(std::unique_ptr<Ship>& ship, size_t money);  //I need to pass ship as & to construct Player in main() like this:
+                                                        //      auto mnShip = std::make_unique<Ship>(150,200, 20, "TEST", 666);
+                                                        //      Player mnPlayer(mnShip, 1000);
 
     size_t getMoney() const { return money_; };
     size_t getAvaliableSpace() const { return avaliableSpace_; };
