@@ -8,7 +8,7 @@ Map::Map(){
     generateIslands(amountOfIslands);
 }
 
-void Map::generateIslands(int numOfIslandsToGenerate) {
+void Map::generateIslands(size_t numOfIslandsToGenerate) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(minPositionXY, maxPositionXY);
@@ -23,8 +23,9 @@ void Map::generateIslands(int numOfIslandsToGenerate) {
                 return island.getPosition() == Coordinates(positionX, positionY); 
             })) { 
             addIsland({positionX, positionY});
+            --numOfIslandsToGenerate;
         } 
-    } while (--numOfIslandsToGenerate); 
+    } while (numOfIslandsToGenerate != 0); 
 }
 
 void Map::setCurrentPosition(Island* const currentPosition) {
