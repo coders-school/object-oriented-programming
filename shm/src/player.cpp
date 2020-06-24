@@ -22,12 +22,11 @@ void Player::unloadShip(Cargo* cargo) {
 }
 
 void Player::countAvailableSpace() {
-    const std::vector<std::shared_ptr<Cargo>> temp = ship_->getCargo();
-
     size_t amount = 0;
-    for (const auto& cargo : temp) {
+    for (const auto& cargo : ship_->getCargo()) {
         amount += cargo->getAmount();
     }
+    
     int available = ship_->getCapacity() - amount;
     if (available < 0) {
         availableSpace_ = 0;

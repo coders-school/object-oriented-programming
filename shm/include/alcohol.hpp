@@ -7,7 +7,11 @@ public:
     Alcohol(const std::string& name, size_t amount, size_t base_price, size_t percentage);
 
     // override from Cargo
-    size_t getPrice() const override { return basePrice_ * percentage_ / maxPercentage_; }
+    Cargo& operator+=(size_t amount) override;
+    Cargo& operator-=(size_t amount) override;
+    bool operator==(const Cargo& other) const override;
+
+    size_t getPrice() const override;
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
