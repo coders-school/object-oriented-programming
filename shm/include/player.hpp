@@ -4,7 +4,7 @@
 
 #include "ship.hpp"
 
-class Player {
+class Player :public Ship::Delegate {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
 
@@ -14,6 +14,7 @@ public:
     Cargo* getCargo(size_t index) const;
 
     void setMoney(size_t money) { money_ = money; }
+    void payCrew(size_t money) override;
 
     void loadShip(std::shared_ptr<Cargo> cargo);
     void unloadShip(Cargo* cargo);

@@ -34,3 +34,7 @@ void Player::countAvailableSpace() {
         availableSpace_ = available;
     }
 }
+
+void Player::payCrew(size_t money) {
+    money_ -= money;
+}

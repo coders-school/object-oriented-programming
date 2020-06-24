@@ -8,9 +8,14 @@
 
 class Ship {
 public:
+    class Delegate {
+        public:
+        virtual void payCrew(size_t crew_count) = 0;
+        virtual ~Delegate(){};
+    };
     Ship();
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id);
-    Ship(int maxCrew, int speed, size_t id);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Delegate* delegate);
+    Ship(int maxCrew, int speed, size_t id, Delegate* delegate);
 
     void setName(const std::string& name);
 
@@ -26,8 +31,10 @@ public:
 
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo);
+    void nextDay();
 
 private:
+    Delegate* delegate_;
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
