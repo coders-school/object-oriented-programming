@@ -13,7 +13,10 @@ public:
     Store();
     // Response buy(const Cargo* cargo, size_t amount, Player* player);
     Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
-    Response sell(Cargo* cargo, size_t amount, Player* player);
+    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
 
-    Cargo* getCargo(uint32_t index) const;
+    std::shared_ptr<Cargo> getCargo(uint32_t index) const;
+    void generateCargo();
+    void printCargo() const;
+    void loadToStore(std::shared_ptr<Cargo> cargo);
 };

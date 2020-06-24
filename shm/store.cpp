@@ -1,10 +1,13 @@
 #include "store.hpp"
 
+#include "algorithm"
+
 Store::Store() {}
 
 // Store::Response buy(const Cargo* cargo, size_t amount, Player* player) {
-Store::Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
+Store::Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getBasePrice();
+    std::shared_ptr<Cargo> buyCargo = std::make_shared<Cargo>(*cargo);
 
     if (amount > player->getAvailableSpace()) {
         return Store::Response::lack_of_space;
@@ -15,12 +18,53 @@ Store::Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player)
     if (price > player->getMoney()) {
         return Store::Response::lack_of_money;
     }
-
-    player->purchaseCargo(cargo, amount, price);
     *cargo -= amount;
+    *buyCargo -= cargo->getAmount();
+    player->purchaseCargo(buyCargo, amount, price);
 
     return Store::Response::done;
 }
-Store::Response sell(Cargo* cargo, size_t amount, Player* player) {
+
+Store::Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
+    const size_t price = amount * cargo->getBasePrice();
+
+    player->sellCargo(cargo, amount, price);
+    loadToStore(cargo);
     return Store::Response::done;
+}
+
+std::shared_ptr<Cargo> Store::getCargo(uint32_t index) const {
+    if (cargo_.size() > index) {
+        return cargo_[index];
+    }
+    return nullptr;
+}
+
+void Store::generateCargo() {
+    std::shared_ptr<Cargo> coffe = std::make_shared<Cargo>(9, "nescafe", 4);
+    std::shared_ptr<Cargo> tea = std::make_shared<Cargo>(12, "lipton", 3);
+    std::shared_ptr<Cargo> cigarette = std::make_shared<Cargo>(15, "marlboro", 5);
+    std::shared_ptr<Cargo> chocolate = std::make_shared<Cargo>(11, "milka", 7);
+    cargo_.emplace_back(coffe);
+    cargo_.emplace_back(tea);
+    cargo_.emplace_back(cigarette);
+    cargo_.emplace_back(chocolate);
+}
+
+void Store::printCargo() const {
+    std::cout << "CARGO IN STORE : "
+              << "\n";
+    std::for_each(cargo_.begin(), cargo_.end(), [](const auto& cargo) {
+        std::cout << cargo->getName() << "  " << cargo->getAmount() << "  " << cargo->getBasePrice() << "\n";
+    });
+}
+
+void Store::loadToStore(std::shared_ptr<Cargo> cargo) {
+    for (auto& element : cargo_) {
+        if (cargo.get()->getName() == element->getName()) {
+            *element += cargo.get()->getAmount();
+            return;
+        }
+    }
+    cargo_.emplace_back(cargo);
 }
