@@ -4,8 +4,8 @@
 #include <iostream>
 #include <random>
 
-constexpr size_t MIN_COORDINATE = 0; // already lowest 
-constexpr size_t MAX_COORDINATE = 10; // can be increased
+constexpr size_t MIN_COORDINATE = 0;
+constexpr size_t MAX_COORDINATE = 10;
 constexpr size_t INITIAL_ISLAND_NUM = 10;
 
 Map::Map() {
@@ -33,13 +33,13 @@ Map::Map() {
 Map::~Map() {}
 
 Island* Map::getIsland(const Coordinates& coordinates) {
-    auto itr = std::find_if(vectorOfIslands_.begin(),
+    auto it = std::find_if(vectorOfIslands_.begin(),
                             vectorOfIslands_.end(),
                             [&](auto& el) {
                                 return el.getPosition() == coordinates;
                             });
-    if (itr != vectorOfIslands_.end()) {
-        return std::addressof(*itr);
+    if (it != vectorOfIslands_.end()) {
+        return std::addressof(*it);
     }
     return nullptr;
 }
