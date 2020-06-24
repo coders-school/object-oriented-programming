@@ -1,12 +1,11 @@
 #include "coordinates.hpp"
 
 Coordinates::Coordinates()
-    : positionX_(0), positionY_(0) {}
-    
-Coordinates::Coordinates(const int positionX, const int positionY)
+    : positionX_(DEFAULT_POSITION_X), positionY_(DEFAULT_POSITION_Y) {}
+   
+Coordinates::Coordinates(int positionX, int positionY)
     : positionX_(positionX), positionY_(positionY) {}
 
-Coordinates& Coordinates::operator==(std::vector<int> currentPosition) {
-        currentPosition == position_;
-        return *this;
-    }
+bool Coordinates::operator==(const Coordinates& currentPosition) const {
+    return positionX_ == currentPosition.positionX_ && positionY_ == currentPosition.positionY_;
+}

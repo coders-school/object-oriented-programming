@@ -1,28 +1,32 @@
 #include "cargo.hpp"
 
-#include <iostream>
-#include <string>
-
 Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
     : name_(name), amount_(amount), basePrice_(basePrice) {}
 
 Cargo& Cargo::operator+=(size_t amount) {
-    amount_ += amount;
+    if (amount <= ship_->countFreeSpace()) {
+        amount_ += amount;
+    }
     return *this;
 }
 Cargo& Cargo::operator-=(size_t amount) {
-    if (amount_ < amount) {
-        std::cerr << "Cargo is lower than 0 \n";
-        return *this;
+    if (amount_ > amount) {
+        amount_ -= amount;
     }
-    amount_ -= amount;
     return *this;
-};
+}
 
-bool Cargo::operator==(std::string name) {
-    return name_ == name;
-};
+bool Cargo::operator==(const Cargo& cargo) const {
+    return Cargo.getBasePrice() == basePrice_ && Cargo.getName() == name_;
+}
 
-bool Cargo::operator==(std::string name) {
-    return name_ == name;
-};
+std::string Cargo::getName() const {
+    return name_;
+}
+size_t Cargo::getAmount() const {
+    return amount_;
+}
+size_t Cargo::getBasePrice() const {
+    return basePrice_;
+}
+

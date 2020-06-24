@@ -2,16 +2,18 @@
 
 #include <vector>
 
+int constexpr DEFAULT_POSITION_X = 0;
+int constexpr DEFAULT_POSITION_Y = 0;
+
 class Coordinates {
 public:
     Coordinates();
-    Coordinates(const int positionX, const int positionY);
+    Coordinates(int positionX, int positionY);
 
-    Coordinates& operator==(std::vector<int> currentPosition);
+    bool operator==(const Coordinates& currentPosition) const;
 
     int getPositionX() const { return positionX_; }
     int getPositionY() const { return positionY_; }
-    std::vector<int> position_ = {getPositionX(), getPositionY()};
 
 private:
     const int positionX_;
