@@ -27,8 +27,3 @@ Cargo* Player::getCargo(size_t cargo) const{
 size_t Player::countAvailableSpace() {
      return ship_->countAvailableSpace(); 
 }
-
-size_t countFreeSpace() { 
-    size_t loadedSpace = std::accumulate(ship->getAllCargo.begin(), ship->getAllCargo.end(), 0);
-    return ship->getCapacity() - loadedSpace;
-}
