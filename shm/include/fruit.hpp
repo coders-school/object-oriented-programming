@@ -10,6 +10,7 @@ public:
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo& other) const override;
+    void nextDay() override;
 
     size_t getPrice() const override;
     std::string getName() const override { return name_; }

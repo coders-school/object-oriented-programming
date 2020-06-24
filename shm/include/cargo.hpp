@@ -8,6 +8,7 @@ public:
     virtual Cargo& operator+=(size_t amount) = 0;
     virtual Cargo& operator-=(size_t amount) = 0;
     virtual bool operator==(const Cargo& other) const = 0;
+    virtual void nextDay() = 0;
 
     virtual size_t getPrice() const = 0;
     virtual std::string getName() const = 0;
