@@ -98,7 +98,7 @@ void Ship::printCargo() const {
         std::cout << "Cargo is empty" << '\n';
     }
     for (const auto& cargoIt : cargo_) {
-        //std::cout << *cargoIt;
+        cargoIt -> getInfo();
     }
     std::cout << '\n';
 }
