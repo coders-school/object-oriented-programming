@@ -1,5 +1,11 @@
 #pragma once
+
+#include <algorithm>
+#include <memory>
 #include <string>
+#include <vector>
+
+#include "cargo.hpp"
 
 class Ship {
 public: 
@@ -14,6 +20,25 @@ public:
     size_t getSpeed() const;
     std::string getName() const;
     int getId() const;
+        
+    ​void load(std::unique_ptr<Cargo> cargo) { 
+        cargo_.push_back(std::move(cargo));
+    }
+    //wziąć pod uwagę available space - countFreeSpace w klasie player!
+    //porównanie dwóch towarów - akumulacja tych samych typów towarów
+    //czy zmiesci sie caly towar (maxcapacity?)
+
+    void unload(Cargo* cargo) {
+        auto it = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
+            return ptr.get() == cargo;
+        });
+
+        if (it != cargo_.end())
+            cargo_.erase(it);
+    }
+  //sprawdzić ilość czy jest 0 - usuwamy
+  //ile zostanie towaru
+
 private:
     size_t capacity_;
     size_t maxCrew_;
@@ -21,4 +46,5 @@ private:
     size_t speed_;
     std::string name_;
     const int id_;
+    std::vector<std::unique_ptr<Cargo>> cargo_;
 };
