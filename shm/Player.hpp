@@ -1,6 +1,8 @@
 #pragma once
 
 #include <memory>
+
+#include "Cargo.hpp"
 #include "Ship.hpp"
 
 class Player
@@ -12,7 +14,9 @@ public:
     };
 
     [[nodiscard]] size_t getMoney() const { return money_; }
-    [[nodiscard]] size_t getAvailableSpace() const { return availableSpace_; }
+    [[nodiscard]] size_t getAvailableSpace();
+    [[nodiscard]] size_t getSpeed() const { return ship_->getSpeed(); }
+    [[nodiscard]] Cargo* getCargo(size_t index) const { return ship_->getCargo(index); };
 
     void setMoney(size_t amount) { money_ = amount; }
     void setAvailableSpace(size_t space) { availableSpace_ = space; }
