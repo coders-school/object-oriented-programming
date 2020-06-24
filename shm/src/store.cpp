@@ -20,14 +20,14 @@ Store::Response Store::buy(Cargo* cargo, Player* player) {
     }
 
     unload(cargo);
-    player->loadShip(std::make_shared<Cargo>(*cargo));
+    player->loadShip(std::shared_ptr<Cargo>(cargo));
     player->setMoney(player->getMoney() - cargo->getPrice());
 
     return Response::done;
 }
 
 Store::Response Store::sell(Cargo* cargo, Player* player) {
-    load(std::make_shared<Cargo>(*cargo));
+    load(std::shared_ptr<Cargo>(cargo));
     player->unloadShip(cargo);
     player->setMoney(player->getMoney() + cargo->getPrice());
 
