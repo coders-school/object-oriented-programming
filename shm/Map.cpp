@@ -18,11 +18,12 @@ void Map::generateIslands(int numOfIslandsToGenerate) {
     do { 
         positionX = distrib(gen); 
         positionY = distrib(gen); 
-        if (std::any_of(islandsLocations_.begin(), islandsLocations_.end(), 
+        if (std::none_of(islandsLocations_.begin(), islandsLocations_.end(), 
                 [positionX, positionY](const auto& island) { 
                 return island.getPosition() == Coordinates(positionX, positionY); 
             })) { 
             addIsland({positionX, positionY});
+            --numOfIslandsToGenerate;
         } 
     } while (--numOfIslandsToGenerate); 
 }
