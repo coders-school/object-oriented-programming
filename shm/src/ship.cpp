@@ -1,3 +1,4 @@
+#include "fruit.hpp"
 #include "ship.hpp"
 
 #include <algorithm>
@@ -35,16 +36,16 @@ Ship& Ship::operator-=(const size_t& crew) {
     return *this;
 }
 
-void Ship::load(std::shared_ptr<Cargo> cargo) {
+/*void Ship::load(std::shared_ptr<Cargo> cargo) {
     if (auto match_cargo = FindMatchCargo(cargo.get())) {
         *match_cargo += cargo->getAmount();
         return;
     }
     cargo_.push_back(std::move(cargo));
-}
+}*/
 
 //TODO: use == operators of each classes to comparison
-cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
+/*cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
     auto looked_for = std::find(cargo_.begin(), cargo_.end(), *cargo);
     if (looked_for != cargo_.end()) {
         return *looked_for;
@@ -67,25 +68,25 @@ cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
     //             return el.get();
     //     }
     // }
-}
+}*/
 
-void Ship::Unload(Cargo* cargo) {
+/*void Ship::Unload(Cargo* cargo) {
     RemoveFromStorage(cargo);
-}
+}*/
 
-void Ship::RemoveFromStorage(Cargo* cargo) {
+/*void Ship::RemoveFromStorage(Cargo* cargo) {
     cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
                               [cargo](const auto& el) {
                                   return *el == *cargo;
                               }));
-}
+}*/
 
 void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
                                 cargo_.end(),
                                 [](auto& el) {
-                                    if (el->getName() == "Fruit") {
-                                        return el->getTimeToRotten() == 0;
+                                    if (typeid(el).name() == "Fruit") {
+                                        return std::dynamic_pointer_cast<Fruit>(el)->getTimeToRotten() == 0;
                                     }
                                     return false;
                                 }),
