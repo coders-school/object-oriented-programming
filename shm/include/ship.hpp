@@ -21,14 +21,17 @@ public:
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getCapacity() const { return capacity_; }
     std::vector<cargoPtr> getCargo() const { return cargo_; }
-    void load(cargoPtr cargo);
-    cargoPtr FindMatchCargo(Cargo* cargo);
-    void Unload(Cargo* cargo);
-    void RemoveFromStorage(Cargo* cargo);
-    void RemoveFromStorageIfRotten();
+    //void load(cargoPtr cargo);
+    //cargoPtr FindMatchCargo(Cargo* cargo);
+    //void Unload(Cargo* cargo);
+    //void RemoveFromStorage(Cargo* cargo);
+    //void RemoveFromStorageIfRotten();
 
     void setName(const std::string& name);
     void nextDay() override;
+
+    void printCargo() const;
+    friend std::ostream& operator<<(std::ostream& os, const Cargo* cargo);
 
     Ship& operator+=(const size_t& crew);
     Ship& operator-=(const size_t& crew);
