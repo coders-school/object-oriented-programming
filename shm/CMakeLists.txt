@@ -8,7 +8,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -Wconversion -We
 
 set(SOURCES
     cargo.cpp
-    coordinates.cpp
     island.cpp
     map.cpp
 #    player.cpp
