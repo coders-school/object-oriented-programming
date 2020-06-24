@@ -9,6 +9,15 @@ Player::Player(std::unique_ptr<Ship>& ship, size_t money) {
     avaliableSpace_ = countAvailableSpace();
 };
 
+void Player::payCrew(size_t money) {
+    if (money > money_) {
+        money_ = SIZE_MAX;
+    }
+    else {
+        money_ -= money;
+    }
+}
+
 size_t Player::countAvailableSpace() {
     auto occupiedSpace = std::accumulate(begin(ship_->getAllCargos()),
                                          end(ship_->getAllCargos()),
