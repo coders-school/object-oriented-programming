@@ -17,7 +17,7 @@
 	}
 
 	bool Cargo::operator==(const Cargo& cargo) const {
-		return this->name_ == cargo.GetName() && this->amount_ == cargo.GetAmount() && this->basePrice_ == cargo.GetBasePrice();
+		return this->name_ == cargo.getName() && this->amount_ == cargo.getAmount() && this->basePrice_ == cargo.getBasePrice();
 	}
 
 	constexpr std::string Cargo::GetName() {

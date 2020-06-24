@@ -3,8 +3,10 @@
 
 public class Island {
 public:
-	Island();
-	Coordinates GetPosition() const;
+	Island() {}
+	Island(size_t position_x, size_t position_y);
+	Coordinates getCoordinates() const;
+
 private:
 	Coordinates position_;
 };

@@ -1,6 +1,6 @@
-#include "Coordinates.h"
+#include "Island.h"
 
-Island::Coordinates GetPosition() const 
+Coordinates Island::getCoordinates() const
 {
-	return this->position_;
+	{ return position_; }
 }

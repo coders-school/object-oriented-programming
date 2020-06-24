@@ -1,6 +1,4 @@
 #pragma once
-#include <cmath>
-#include <iostream>
 
 class Coordinates {
 public:
