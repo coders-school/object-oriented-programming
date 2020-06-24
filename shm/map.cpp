@@ -16,7 +16,7 @@ Map::Map() {
             if (std::none_of(islandsOnMap_.cbegin(), islandsOnMap_.cend(), [posX, posY](const auto& position) {
                                      return position.first == posX && position.second == posY;
                                      })) {           
-                islandsOnMap_.push_back(std::make_unique<Island>(posX, posY));
+                islandsOnMap_.push_back(posX, posY);
                 break;
             }
         }

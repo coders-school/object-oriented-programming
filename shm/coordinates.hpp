@@ -1,7 +1,5 @@
 #pragma once
 
-#include <vector>
-
 int constexpr DEFAULT_POSITION_X = 0;
 int constexpr DEFAULT_POSITION_Y = 0;
 
