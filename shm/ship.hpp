@@ -21,9 +21,9 @@ public:
     std::string getName() const;
     int getId() const;
         
-    ​void load(std::unique_ptr<Cargo> cargo) { 
-        cargo_.push_back(std::move(cargo));
-    }
+    // ​void load(std::unique_ptr<Cargo> cargo) { 
+    //     cargo_.push_back(std::move(cargo));
+    // }
     //wziąć pod uwagę available space - countFreeSpace w klasie player!
     //porównanie dwóch towarów - akumulacja tych samych typów towarów
     //czy zmiesci sie caly towar (maxcapacity?)

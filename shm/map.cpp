@@ -16,13 +16,13 @@ Map::Map() {
             if (std::none_of(islandsOnMap_.cbegin(), islandsOnMap_.cend(), [posX, posY](const auto& position) {
                                      return position.first == posX && position.second == posY;
                                      })) {           
-                islandsOnMap_.push_back(std::unique_ptr<Island>(posX, posY));
+                islandsOnMap_.push_back(std::make_unique<Island>(posX, posY));
                 break;
             }
         }
     }
 
-    Island* getIsland(const Island::Coordinates& desiredCoordinate) {
+    Island* getIsland(const Coordinates& desiredCoordinate) {
         auto iCoordinate = std::find_if(islandsOnMap_.begin(), islandsOnMap_.end(), [desiredCoordinate](const auto& el) {
             return el->getCoordinates() == desiredCoordinates;
             });

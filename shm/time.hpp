@@ -9,7 +9,7 @@ constexpr size_t initialTime = 100; //days
 class Time : public Observer {
 public:
     Time();
-    void nextDay() override;
+    virtual void nextDay();
     void addObserver(Observer* obs);
     void removeObserver(Observer* obs);
     size_t getElapsedTime() const;

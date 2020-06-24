@@ -4,10 +4,6 @@ Time::Time() {
     //
 }
 
-void Time::nextDay() override {
-    //
-}
-
 void Time::addObserver(Observer* obs) {
     ///
 }
