@@ -26,13 +26,14 @@
 class Observer {
 public:
     virtual void nextDay() = 0;
-    virtual ~Observer() {};
+    virtual ~Observer(){};
 };
 
 class Time {
 public:
-    Time() {};
-    explicit Time(size_t game_days) : time_elapsed_(game_days) {};
+    Time(){};
+    explicit Time(size_t game_days)
+        : time_elapsed_(game_days){};
     void addObserver(Observer* obs) {
         observers_.push_back(obs);
     }
@@ -46,7 +47,7 @@ public:
     Time& operator++() {
         time_elapsed_--;
         auto it = observers_.begin();
-        while(it != observers_.end()) {
+        while (it != observers_.end()) {
             (*it)->nextDay();
             ++it;
         }

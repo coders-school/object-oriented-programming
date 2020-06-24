@@ -14,10 +14,8 @@ void Ship::setName(const std::string& name) {
 }
 
 void Ship::nextDay() {
-    for (auto el: cargo_) {
-        if (el -> getName() == "Fruit") {
-            el -> nextDay();
-        }
+    for (auto el : cargo_) {
+        el->nextDay();
     }
     Ship::RemoveFromStorageIfRotten();
     money_ -= crew_;
@@ -46,7 +44,11 @@ void Ship::load(std::shared_ptr<Cargo> cargo) {
 }
 
 //TODO: use == operators of each classes to comparison
-Cargo* Ship::FindMatchCargo(Cargo* cargo) {
+cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
+    auto looked_for = std::find(cargo_.begin(), cargo_.end(), *cargo);
+    if (looked_for != cargo_.end()) {
+        return *looked_for;
+    }
     // for (auto el : cargo_) {
     //     if (el->getName() == "Fruit") {
     //         if (el->getName() == cargo->getName() &&
@@ -71,7 +73,7 @@ void Ship::Unload(Cargo* cargo) {
     RemoveFromStorage(cargo);
 }
 
-void Ship::RemoveFromStorage(Cargo *cargo) {
+void Ship::RemoveFromStorage(Cargo* cargo) {
     cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
                               [cargo](const auto& el) {
                                   return *el == *cargo;
@@ -80,12 +82,12 @@ void Ship::RemoveFromStorage(Cargo *cargo) {
 
 void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
-                                  cargo_.end(),
-                                  [](auto& el){
-        if (el -> getName() == "Fruit") {
-            return el -> getTimeToRotten() == 0;
-        }
-        return false;
-        }),
-                   cargo_.end());
+                                cargo_.end(),
+                                [](auto& el) {
+                                    if (el->getName() == "Fruit") {
+                                        return el->getTimeToRotten() == 0;
+                                    }
+                                    return false;
+                                }),
+                 cargo_.end());
 }
