@@ -22,7 +22,7 @@ public:
     size_t getId() const { return id_; }
     size_t getCrew() const { return crew_; }
     Cargo* getCargo(size_t index) { return cargo_[index].get(); }
-    std::vector<std::shared_ptr<Cargo>> getCargos() { return cargo_; }
+    std::vector<std::shared_ptr<Cargo>> getCargos() const { return cargo_; }
 
 private:
     size_t capacity_;

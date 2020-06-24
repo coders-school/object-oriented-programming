@@ -8,9 +8,10 @@ Player::Player(const Ship& ship,
       availableSpace_(availableSpace) {}
 
 size_t Player::calcAvailableSpace() {
-    availableSpace_ = 0;
+    size_t spaceOccupied = 0;
     for (const auto el : ship_->getCargos()) {
-        availableSpace_ += el->getAmount();
+        spaceOccupied += el->getAmount();
     }
+    availableSpace_ = ship_->getCapacity() - spaceOccupied;
     return availableSpace_;
 }
