@@ -17,7 +17,7 @@ public:
     double getBasePrice() const override { return basePrice_; }
     Rarity getRarity() const { return rarity_; }
 
-    void nextDay() {}
+    void nextDay() override {}
 
     Cargo& operator+=(const size_t& amount) override;
     Cargo& operator-=(const size_t& amount) override;
