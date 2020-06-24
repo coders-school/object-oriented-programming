@@ -15,7 +15,7 @@ size_t Player::getSpeed() const{
     return 0;
 }
 
-Cargo Player::getCargo(size_t index) const{
+Cargo* Player::getCargo(size_t index) const{
     if (ship_)
         return ship_->getCargo(index);
 
