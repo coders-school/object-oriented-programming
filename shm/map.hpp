@@ -8,7 +8,7 @@ class Map {
 public:
     Map();
     virtual ~Map();
-    Island *getIsland(const Coordinates&);
+    Island *getIsland(const Coordinates& coordinates);
     void printMap();
 
 private:
