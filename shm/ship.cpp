@@ -5,17 +5,29 @@
 
 Ship::Ship() : id_(-1){};
 
-Ship::Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id){};
+Ship::Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id, Time* time)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time) {
 
-Ship::Ship(uint32_t maxCrew, uint32_t speed, uint32_t id) : Ship(0, maxCrew, speed, "", id){};
+    time_->registerObserver(this);
+
+};
+
+Ship::~Ship() {
+
+    time_->unregisterObserver(this);
+
+};
+
+//Ship::Ship(uint32_t maxCrew, uint32_t speed, uint32_t id) : Ship(0, maxCrew, speed, "", id){};
 
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
 void Ship::addToCargo(Cargo cargo) {
+
     cargo_.push_back(cargo);
+    time_->registerObserver(&cargo_.back());
 }
 
 Ship& Ship::operator-=(uint32_t crew) {
@@ -66,4 +78,10 @@ Cargo* Ship::getCargo(size_t index) {
 
 std::vector<Cargo> Ship::getVectorCargo() const {
     return cargo_;
+}
+
+void Ship::nextDay() {
+
+    std::cout << "Next day in: " << getName() << " \n";
+
 }

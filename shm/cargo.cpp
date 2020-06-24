@@ -2,9 +2,19 @@
 
 #include <iostream>
 
-Cargo::Cargo(uint32_t amount, std::string name, uint32_t basePrice)
-    : amount_(amount), name_(name), basePrice_(basePrice) {}
-Cargo::~Cargo() {}
+Cargo::Cargo(uint32_t amount, std::string name, uint32_t basePrice, Time* time)
+    : amount_(amount), name_(name), basePrice_(basePrice), time_(time) {
+
+    time_->registerObserver(this);
+
+};
+
+Cargo::~Cargo() {
+
+    time_->unregisterObserver(this);
+
+};
+
 
 std::string Cargo::getName() const {
     return name_;
@@ -34,4 +44,10 @@ Cargo& Cargo::operator-=(uint32_t amount) {
 
 bool Cargo::operator==(Cargo& cargo) {
     return (name_ == cargo.name_) && (amount_ == cargo.amount_) && (basePrice_ == cargo.basePrice_);
+}
+
+void Cargo::nextDay() {
+
+    std::cout << "Next day in: " << getName() << "\n";
+
 }
