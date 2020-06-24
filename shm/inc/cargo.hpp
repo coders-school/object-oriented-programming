@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include "cloneable.hpp"
@@ -14,9 +15,9 @@ public:
     virtual size_t getPrice() const = 0;
     virtual size_t getBasePrice() const = 0;
 
-    bool operator==(const Cargo& cargoToCheck) const;
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
+    virtual bool operator==(const Cargo& cargoToCheck) const = 0;
+    virtual Cargo& operator+=(size_t amount) = 0;
+    virtual Cargo& operator-=(size_t amount) = 0;
 
 protected:
     std::string name_;
