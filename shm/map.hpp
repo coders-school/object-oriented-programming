@@ -16,6 +16,6 @@ public:
     Island* getIsland(const Coordinates& desiredCoordinate);
     
 private:
-    std::vector<std::unique_ptr<Island>> islandsOnMap_;
+    std::vector<Island> islandsOnMap_;
     Island* currentPosition_;
 };
