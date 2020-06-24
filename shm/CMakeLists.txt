@@ -43,21 +43,27 @@ project(SHM)
 enable_testing()
 add_definitions(-D Wall -Wextra -Werror -pedantic)
 
+set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/inc)
+set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
+set(TEST_DIR ${CMAKE_SOURCE_DIR}/test)
+
+include_directories(${INCLUDE_DIR})
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 ##Insert project source files here.##
 set(SOURCES
-    ${CMAKE_SOURCE_DIR}/main.cpp
-    ${CMAKE_SOURCE_DIR}/island.cpp
-    ${CMAKE_SOURCE_DIR}/cargo.cpp
-    ${CMAKE_SOURCE_DIR}/coordinates.cpp
-    ${CMAKE_SOURCE_DIR}/ship.cpp
+    ${SOURCE_DIR}/main.cpp
+    ${SOURCE_DIR}/island.cpp
+    ${SOURCE_DIR}/cargo.cpp
+    ${SOURCE_DIR}/coordinates.cpp
+    ${SOURCE_DIR}/ship.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
-add_executable(${CMAKE_PROJECT_NAME}-ut ${SOURCES} test.cpp)
+add_executable(${CMAKE_PROJECT_NAME}-ut ${SOURCES} ${TEST_DIR}/test.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME}-ut gtest_main)
 add_test(NAME shm_test COMMAND ${CMAKE_PROJECT_NAME}-ut)
