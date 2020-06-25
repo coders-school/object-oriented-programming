@@ -2,9 +2,12 @@
 
 #include <string>
 
-class Cargo {
+#include "observer.hpp"
+
+class Cargo : public Observer {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
+    virtual ~Cargo(){};
     virtual Cargo& operator+=(size_t amount) = 0;
     virtual Cargo& operator-=(size_t amount) = 0;
     virtual bool operator==(const Cargo& other) const = 0;

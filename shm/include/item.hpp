@@ -12,6 +12,7 @@ public:
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo& other) const override;
+    // override from Observer
     void nextDay() override {}
 
     size_t getPrice() const override { return basePrice_ * static_cast<size_t>(rarity_); }
