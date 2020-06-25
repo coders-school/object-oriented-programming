@@ -11,21 +11,10 @@ jobs:
     - name: Run check.sh
       working-directory: shm
       run: |
+        cd shm
         chmod +x check.sh
         ./check.sh
 
-  clangFormat:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Install clang-format
-      run: sudo apt install clang-format
-    - name: Check out code
-      uses: actions/checkout@master
-    - name: Check formatting
-      run: |
-        find . -name "*.cpp" -exec clang-format --style="{ BasedOnStyle: Chromium, UseTab: Never, IndentWidth: 4, TabWidth: 4, AllowShortIfStatementsOnASingleLine: false, IndentCaseLabels: false, ColumnLimit: 0, AccessModifierOffset: -4 }" -i "{}" \;
-        git diff
-        test `git status | grep "modified" | wc -l` == 0
   shm:
    runs-on: ubuntu-latest
    steps:
