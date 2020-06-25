@@ -80,7 +80,7 @@ TEST(Map, getIslandShouldRTeturnIsland)
     Map map_;
     std::vector<Island> islands = map_.getIslands();
     Island island_ = islands[4];
-    Coordinates corr = islands[4].getPosition();
+    Coordinates corr{99999,99999};
 
     EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
 }
