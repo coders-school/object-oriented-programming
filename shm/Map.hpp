@@ -9,7 +9,7 @@ constexpr size_t maxPositionXY = 10;
 
 class Map {
 private:
-    void generateIslands(int numOfIslandsToGenerate);
+    void generateIslands(size_t numOfIslandsToGenerate);
     Island* currentPosition_ {nullptr};
     std::vector<Island> islandsLocations_;
     
