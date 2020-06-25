@@ -1,9 +1,8 @@
 #include <iostream>
 
-#include "fruit.hpp"
-#include "island.hpp"
-#include "item.hpp"
-#include "map.hpp"
+#include "../inc/fruit.hpp"
+#include "../inc/island.hpp"
+#include "../inc/map.hpp"
 
 void ItemClassTest();
 void FruitClassTest();
@@ -11,7 +10,6 @@ void MapClassTest();
 
 int main() {
     FruitClassTest();
-    // ItemClassTest();
 
     return 0;
 }
@@ -42,29 +40,4 @@ void FruitClassTest() {
     apple--;
     std::cout << "Spoil: " << apple.getTimeToSpoilLeft() << '\n';
     std::cout << "Price: " << apple.getPrice() << "\n\n";
-}
-
-void ItemClassTest() {
-    Item emerald("emerald", 2, 20, Item::Rarity::rare);
-    Item diamond("diamond", 7, 40, Item::Rarity::epic);
-    Item item("diamond", 7, 40, Item::Rarity::epic); // name, amount, price, rarity
-
-    std::cout << "Name: " << diamond.getName() << '\n';
-    std::cout << "Amount: " << diamond.getAmount() << '\n';
-    std::cout << "Base price: " << diamond.getBasePrice() << '\n';
-    std::cout << "Price: " << diamond.getPrice() << '\n';
-    std::cout << "Base price: " << emerald.getBasePrice() << '\n';
-    std::cout << "Price: " << emerald.getPrice() << '\n';
-    
-    if (item == diamond) {
-        std::cout << "Diamond is item" << '\n';
-    }
-    if (emerald != diamond) {
-        std::cout << "Diamond isn't emerald" << '\n';
-    }
-
-    diamond += 10;
-    std::cout << "Amount inc: " << diamond.getAmount() << '\n';
-    diamond -= 10;
-    std::cout << "Amount dec: " << diamond.getAmount() << "\n\n";
 }
