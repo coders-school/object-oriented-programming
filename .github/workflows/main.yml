@@ -23,8 +23,9 @@ jobs:
 
   shm:
     runs-on: ubuntu-latest
-    steps:
+    steps:     
      - name: mkdir shm/build
+       uses: actions/checkout@homework1
        run: ls -la
      - name: Compile
        working-directory: shm/build
