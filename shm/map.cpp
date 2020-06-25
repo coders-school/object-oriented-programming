@@ -4,7 +4,6 @@
 #include <string>
 
 Map::Map() {
-
     allIslands.reserve(NUM_OF_ISLANDS);
 
     std::map<std::string, int> repsChecker;
@@ -29,7 +28,7 @@ Map::Map() {
 
         } while (!coordinateExist);
 
-        allIslands.emplace_back(Island(Coordinates(positionX, positionY)));
+        allIslands.push_back(Island(Coordinates(positionX, positionY)));
     }
 }
 
