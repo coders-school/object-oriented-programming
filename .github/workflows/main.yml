@@ -12,7 +12,7 @@ jobs:
       working-directory: shm
       run: |
         chmod +x check.sh
-        check.sh CMakeLists.txt
+        ./check.sh CMakeLists.txt
 
   shm:
    runs-on: ubuntu-latest
