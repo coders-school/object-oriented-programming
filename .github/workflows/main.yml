@@ -15,4 +15,20 @@ jobs:
         sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
 
-# In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
+  shm:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@homework1
+    - name: mkdir shm/build
+      run: mkdir shm/build
+    - name: Compile
+      working-directory: shm/build
+      run: |
+        cmake ..
+        make
+    - name: Run tests
+      working-directory: shm/build
+      run: ctest -V
+
+
