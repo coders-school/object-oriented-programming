@@ -11,7 +11,7 @@ Map::Map() {
     std::uniform_int_distribution<> getRandomHeight(0, MAP_HEIGHT);
     std::set<std::pair<size_t, size_t>> uniquePositions;
     bool isUniquenessConditionMet = ((MAP_WIDTH + 1) * (MAP_HEIGHT + 1)) >= NUMBER_OF_ISLANDS;
-
+    
     if (isUniquenessConditionMet) {
         while (uniquePositions.size() < NUMBER_OF_ISLANDS) {
             size_t x = getRandomWidth(gen);
