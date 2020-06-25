@@ -26,8 +26,8 @@ jobs:
     steps:     
      - name: checkout
        uses: actions/checkout@master
-     - name : list dir
-       run: ls -la
+     - name : mkdir shm/build
+       run: mkdir shm/build
      - name: Compile
        working-directory: shm/build
        run: |
