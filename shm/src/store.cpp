@@ -5,6 +5,14 @@
 
 Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock) : stock_(stock) {}
 
+Store::Store(Time* time) : time_(time) {
+    time_->addObserver(this);
+}
+
+Store::~Store() {
+    time_->removeObserver(this);
+}
+
 Store::Response Store::buy(Cargo* cargo, Player* player) {
     if (cargo->getAmount() > player->getAvailableSpace()) {
         return Response::lack_of_space;
