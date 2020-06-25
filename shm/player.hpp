@@ -21,4 +21,6 @@ public:
     Player(const Ship& ship,
            int money,
            size_t availableSpace);
+
+    size_t calcAvailableSpace();
 };
