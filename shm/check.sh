@@ -73,7 +73,7 @@ positive_lookup "executable should be linked with the library" "target_link_libr
 does_file_exist ".github/workflows/main.yml"
 
 # Part 2
-does_file_exist "CMakeLists.txt.in"
+does_file_exist "shm/CMakeLists.txt.in"
 positive_lookup "binary with tests exist" "add_executable\([\$]\{PROJECT_NAME\}-ut(\s+[[:word:]]+\.cpp)+\)|add_executable\([\$]\{PROJECT_NAME\}-ut\s+([\$\{A-Z_\}]*)\)"
 positive_lookup "test binary added to ctest" "add_test\(NAME.*\s+COMMAND\s+[\$]\{PROJECT_NAME\}-ut\)"
 positive_lookup "testing is enabled" "enable_testing\(\)"
