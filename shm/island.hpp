@@ -17,5 +17,5 @@ public:
     Coordinates getPosition() const { return position_; }
 
 private:
-    Coordinates position_;
+    Coordinates position_{};
 };
