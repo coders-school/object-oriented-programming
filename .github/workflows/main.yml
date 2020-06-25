@@ -24,10 +24,10 @@ jobs:
   shm:
     runs-on: ubuntu-latest
     steps:
-     - name: mkdir_shm/build
-       run: mkdir shm/build
+     - name: mkdir shm/build
+       run: mkdir ./shm/build
      - name: Compile
-       working-directory: shm/build
+       working-directory: ./shm/build
        run: |
         cmake ..
         make
