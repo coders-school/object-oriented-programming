@@ -9,7 +9,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@master
     - name: Run check.sh
-      working_directory: shm
+      working-directory: shm
       run: |
         chmod +x check.sh
         ./check.sh
