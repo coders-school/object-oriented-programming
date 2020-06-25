@@ -9,6 +9,7 @@ public:
 
 private:
     void generateIsland(size_t howMany);
+    Island* getIsland(const Island::Coordinates& coordinate);
     Island* currentPosition_;
     std::vector<Island> islands_;
 };

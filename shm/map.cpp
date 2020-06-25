@@ -31,3 +31,15 @@ void Map::generateIsland(size_t howMany) {
         islands_.emplace_back(Island(newX, newY));
     }
 }
+Island* Map::getIsland(const Island::Coordinates& coordinate) {
+    Island* findedIsland;
+    for (auto& el : islands_) {
+        if (el.getPosition() == coordinate) {
+            findedIsland = &el;
+
+            
+        };
+    }
+
+    return findedIsland;
+}
