@@ -1,5 +1,8 @@
 #include "Item.hpp"
 
+Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
+    : Cargo(name, amount, basePrice), _rarity(rarity) {}
+
 size_t Item::getPrice() const override {
     return _basePrice * static_cast<int>(_rarity);
 }
@@ -19,4 +22,14 @@ Cargo& Item::operator-=(const size_t amount) {
     }
     _amount -= amount;
     return *this;
+}
+bool Item::operator==(const Cargo& src) const {
+    if (typeid(*this) != typeid(src))
+        return false;
+
+    auto item = static_cast<const Item&>(src);
+    return item.getName() == _name &&
+           item.getAmount() == _amount &&
+           item.getBasePrice() == _basePrice &&
+           item.getRarity() == _rarity;
 }

@@ -11,6 +11,11 @@ public:
         legendary = 25
     };
 
+    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
+    ~Item() override = default;
+
+    Rarity getRarity() const { return rarity_; }
+
     size_t getPrice() const override;
     std::string getName() const override { return _name; }
     size_t getAmount() const override { return _amount; }
@@ -20,7 +25,6 @@ public:
     Cargo& operator-=(size_t amount) override;
 
     bool operator==(const Cargo& src) const override;
-    bool operator!=(const Cargo& src) const override;
 
 private:
     const Rarity _rarity{Rarity::epic};
