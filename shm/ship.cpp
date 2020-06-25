@@ -58,10 +58,11 @@ int Ship::getId() const {
     return id_;
 }
 Cargo* Ship::getCargo(size_t cargo) {
-    if (cargo) {
-        return &cargo_[cargo];
+    if (cargo <= cargo_.size()) {
+        return &*cargo_[cargo];
     }
+    return nullptr;
 }
-std::vector<Cargo> Ship::getAllCargo() const {
+std::vector<std::unique_ptr<Cargo>> Ship::getAllCargo() const {
     return cargo_;
 }

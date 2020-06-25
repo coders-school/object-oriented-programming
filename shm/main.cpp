@@ -14,10 +14,11 @@
 #include <memory>
 
 int main() {
-    Ship T(20, 100, -5);
-    Ship FD(100, 50, 12, "Flying Dutchman", 1);
+    //Ship T(20, 100, -5);
+    //std::unique_ptr<Ship> uPtrT = std::make_unique<Ship>(T);
+    //Ship FD(100, 50, 12, "Flying Dutchman", 1);
+    //std::unique_ptr<Ship> uPtrFD = std::make_unique<Ship>(FD);
     //int capacity, int maxCrew, int speed, const std::string& name, int id
-    //std::unique_ptr<Ship> uPtr = std::make_unique<Ship>(FD);
     //std::cout << FD.getCapacity();  
     // size_t getMaxCrew() const; 
     // size_t getSpeed() const;

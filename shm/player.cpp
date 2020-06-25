@@ -1,7 +1,5 @@
 #include "player.hpp"
 
-#include <numeric>
-
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space)
     : ship_(std::move(ship)), money_(money), availableSpace_(space) {}
 
@@ -23,9 +21,9 @@ Cargo* Player::getCargo(size_t cargo) const{
 }
 
 size_t Player::countFreeSpace() {
-    if (ship_) {
-        size_t loadedSpace = std::accumulate(ship_->getAllCargo().cbegin(), ship_->getAllCargo().cend(), 0);
-        return ship_->getCapacity() - loadedSpace;
+    availableSpace_ = ship_->getCapacity();
+    for (const auto cargo : ship_->getAllCargo()) {
+        availableSpace_ -= cargo->getAmount();
     }
-    return 0;
+    return availableSpace_;
 }

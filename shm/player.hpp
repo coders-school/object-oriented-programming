@@ -4,8 +4,8 @@
 #include "cargo.hpp"
 #include "ship.hpp"
 
-size_t constexpr START_MONEY = 1000;
-size_t constexpr START_SPACE = 0;
+constexpr size_t START_MONEY = 1000;
+constexpr size_t START_SPACE = 0;
 
 class Player {
 public:

@@ -14,8 +14,8 @@ public:
     Ship(size_t maxCrew, size_t speed, int id);
 
     void setName(const std::string& name); 
-    void load(std::unique_ptr<Cargo> cargo);
-    void unload(Cargo* cargo);
+    //void load(std::unique_ptr<Cargo> cargo);
+    //void unload(Cargo* cargo);
     
     Ship& operator-=(size_t crewman);
     Ship& operator+=(size_t crewman);
@@ -26,7 +26,7 @@ public:
     std::string getName() const;
     int getId() const;
     Cargo* getCargo(size_t cargo);
-    std::vector<Cargo> getAllCargo() const;
+    std::vector<std::unique_ptr<Cargo>> getAllCargo() const;
     
 private:
     size_t capacity_;
@@ -35,5 +35,5 @@ private:
     size_t speed_;
     std::string name_;
     int id_;
-    std::vector<Cargo> cargo_;
+    std::vector<std::unique_ptr<Cargo>> cargo_;
 };

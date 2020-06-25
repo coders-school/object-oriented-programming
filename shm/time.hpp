@@ -9,7 +9,7 @@ constexpr size_t initialTime = 100; //days
 class Time : public Observer {
 public:
     Time();
-    virtual void nextDay();
+    virtual void nextDay() = 0;
     void addObserver(Observer* obs);
     void removeObserver(Observer* obs);
     size_t getElapsedTime() const;
@@ -20,5 +20,5 @@ public:
 
 private:
     size_t timeElapsed_;
-    std::vector<Observer*> observers;  
+    std::vector<Observer*> observers_;  
 };
