@@ -3,6 +3,29 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
+  checker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Run check.sh
+      working_directory: shm
+      run: |
+        chmod +x check.sh
+        ./check.sh
+
+  clangFormat:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install clang-format
+      run: sudo apt install clang-format
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Check formatting
+      run: |
+        find . -name "*.cpp" -exec clang-format --style="{ BasedOnStyle: Chromium, UseTab: Never, IndentWidth: 4, TabWidth: 4, AllowShortIfStatementsOnASingleLine: false, IndentCaseLabels: false, ColumnLimit: 0, AccessModifierOffset: -4 }" -i "{}" \;
+        git diff
+        test `git status | grep "modified" | wc -l` == 0
   shm:
    runs-on: ubuntu-latest
    steps:
@@ -20,3 +43,5 @@ jobs:
     - name: Run tests
       working-directory: shm/build/tests
       run: ./shm_ut -V
+
+# In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
