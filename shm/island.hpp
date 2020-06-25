@@ -9,8 +9,8 @@ public:
         bool operator==(const Coordinates& rhs) const;
 
     private:
-        int positionX_{0};
-        int positionY_{0};
+        int positionX_{};
+        int positionY_{};
     };
 
     Island(int position_X, int position_Y);

@@ -10,6 +10,6 @@ public:
 
 private:
     void generateIsland(size_t howMany);
-    Island* currentPosition_;
-    std::vector<Island> islands_;
+    Island* currentPosition_{};
+    std::vector<Island> islands_{};
 };
