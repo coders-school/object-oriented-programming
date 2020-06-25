@@ -4,22 +4,22 @@
 
 class Cargo {
 public:
-    Cargo(const std::string& name,
-          size_t amount,
-          size_t basePrice)
-        : _name(name), _amount(amount), _basePrice(basePrice) {}
+    Cargo() = default;
+    Cargo(const std::string& name, size_t amount, size_t basePrice);
+    virtual ~Cargo() = default;
 
-    Cargo& operator+=(const size_t amount);
-    Cargo& operator-=(const size_t amount);
+    virtual size_t getPrice() const = 0;
+    virtual std::string getName() const = 0;
+    virtual size_t getAmount() const = 0;
+    virtual size_t getBasePrice() const = 0;
 
-    bool operator==(const Cargo& src) const;
-    bool operator!=(const Cargo& src) const;
+    virtual Cargo& operator+=(size_t amount) = 0;
+    virtual Cargo& operator-=(size_t amount) = 0;
 
-    std::string getName() const { return _name; }
-    size_t getAmount() const { return _amount; }
-    size_t getBasePrice() const { return _basePrice; }
+    virtual bool operator==(const Cargo& src) const = 0;
+    virtual bool operator!=(const Cargo& src) const = 0;
 
-private:
+protected:
     std::string _name;
     size_t _amount;
     size_t _basePrice;
