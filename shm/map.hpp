@@ -6,6 +6,7 @@
 class Map {
 public:
     Map();
+    Island* getIsland(const Island::Coordinates& coordinates);
 
 private:
     void generateIsland(size_t howMany);
