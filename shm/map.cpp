@@ -32,11 +32,13 @@ void Map::generateIsland(size_t howMany) {
     }
 }
 Island* Map::getIsland(const Island::Coordinates& coordinates) {
-    Island* foundIsland = nullptr;
-    for (auto& el : islands_) {
-        if (el.getPosition() == coordinates) {
-            foundIsland = &el;
-        }
+    auto foundIsland = std::find_if(std::begin(islands_),
+                                    std::end(islands_),
+                                    [&coordinates](const auto& island) {
+                                        return island.getPosition() == coordinates;
+                                    });
+    if (foundIsland != std::end(islands_)) {
+        return &*foundIsland;
     }
-    return foundIsland;
+    return nullptr;
 }
