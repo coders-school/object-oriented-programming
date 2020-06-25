@@ -5,19 +5,27 @@
 #include <vector>
 
 #include "cargo.hpp"
+#include "time.hpp"
 
-class Ship {
+class Ship : public Observer {
 public:
     class Delegate {
-        public:
+    public:
         virtual void payCrew(size_t crew_count) = 0;
         virtual ~Delegate(){};
     };
     Ship();
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Delegate* delegate);
-    Ship(int maxCrew, int speed, size_t id, Delegate* delegate);
+    Ship(int capacity,
+         int maxCrew,
+         int speed,
+         const std::string& name,
+         size_t id,
+         Delegate* delegate,
+         Time* time = nullptr);
+    Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time = nullptr);
+    ~Ship();
 
-    void setName(const std::string& name);
+        void setName(const std::string& name);
 
     Ship& operator-=(size_t crew);
     Ship& operator+=(size_t crew);
@@ -31,7 +39,8 @@ public:
 
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo);
-    void nextDay();
+    // override from Observer
+    void nextDay() override;
 
 private:
     Delegate* delegate_;
@@ -42,4 +51,5 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargo_;
+    Time* time_;
 };

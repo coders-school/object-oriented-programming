@@ -18,7 +18,7 @@ public:
     Response buy(Cargo* cargo, Player* player);
     Response sell(Cargo* cargo, Player* player);
     // override from Observer
-    void nextDay();
+    void nextDay() override;
 
 private:
     std::vector<std::shared_ptr<Cargo>> stock_;
