@@ -1,8 +1,9 @@
+// driver for testing Fruit class
+// please compile with fruit.cpp
+
 #include <iostream>
 
 #include "../inc/fruit.hpp"
-#include "../inc/island.hpp"
-#include "../inc/map.hpp"
 
 void ItemClassTest();
 void FruitClassTest();
