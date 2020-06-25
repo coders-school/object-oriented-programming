@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:     
      - name: checkout
-       uses: actions/checkout@homework1
+       uses: actions/checkout@master
      - name : list dir
        run: ls -la
      - name: Compile
