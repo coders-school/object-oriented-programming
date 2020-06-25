@@ -10,7 +10,7 @@ set(SOURCES
     cargo.cpp
     island.cpp
     map.cpp
-#    player.cpp
+    player.cpp
     ship.cpp)
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
