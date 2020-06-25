@@ -6,10 +6,10 @@
 class Map {
 public:
     Map();
+    Island* getIsland(const Island::Coordinates& coordinates);
 
 private:
     void generateIsland(size_t howMany);
-    Island* getIsland(const Island::Coordinates& coordinate);
     Island* currentPosition_;
     std::vector<Island> islands_;
 };

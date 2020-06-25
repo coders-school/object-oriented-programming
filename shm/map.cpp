@@ -31,12 +31,12 @@ void Map::generateIsland(size_t howMany) {
         islands_.emplace_back(Island(newX, newY));
     }
 }
-Island* Map::getIsland(const Island::Coordinates& coordinate) {
-    Island* findedIsland;
+Island* Map::getIsland(const Island::Coordinates& coordinates) {
+    Island* foundIsland = nullptr;
     for (auto& el : islands_) {
-        if (el.getPosition() == coordinate) {
-            findedIsland = &el;
+        if (el.getPosition() == coordinates) {
+            foundIsland = &el;
         }
     }
-    return findedIsland;
+    return foundIsland;
 }
