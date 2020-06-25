@@ -25,6 +25,12 @@ bool operator==(const Coordinates& lhs, const Coordinates& rhs)
     return lhs.position_x == rhs.position_x and lhs.position_y == rhs.position_y;
 }
 
+bool operator!=(const Coordinates& lhs, const Coordinates& rhs)
+{
+    return lhs.position_x != rhs.position_x or  lhs.position_y != rhs.position_y;
+}
+
+
 class Island
 {
 public:
