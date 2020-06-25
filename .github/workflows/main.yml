@@ -9,10 +9,9 @@ jobs:
     - name: Check out code
       uses: actions/checkout@master
     - name: Run check.sh
+      working-directory: shm
       run: |
-        pwd
-        ls
-        chmod +x shm/check.sh
-        shm/check.sh
+        chmod +x check.sh
+        check.sh CMakeLists.txt
 
 # In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
