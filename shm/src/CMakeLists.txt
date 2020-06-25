@@ -5,12 +5,14 @@ set(SOURCES
     coordinates.cpp
     dryfruit.cpp
     fruit.cpp
+    globaltime.cpp
     island.cpp
     item.cpp
     map.cpp
     player.cpp
     ship.cpp
     store.cpp
+    time.cpp
     )
 
 add_executable(${PROJECT_NAME} ../main.cpp ${SOURCES})
