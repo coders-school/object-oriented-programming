@@ -1,0 +1,42 @@
+#include "item.hpp"
+
+size_t Item::getPrice() const {
+    return basePrice_ * static_cast<size_t>(rairty_);
+}
+
+std::string Item::getName() const { return name_; }
+size_t Item::getAmount() const { return amount_; }
+size_t Item::getBasePrice() const { return basePrice_; }
+Item::Rarity Item::getRarity() const { return rairty_; }
+
+bool Item::operator==(const Cargo& cargo) const {
+    if (typeid(cargo) == typeid(Item)) {
+        const Item* rarityPtr = static_cast<const Item*>(&cargo);
+        return name_ == rarityPtr->getName() &&
+               amount_ == rarityPtr->getAmount() &&
+               basePrice_ == rarityPtr->getBasePrice() &&
+               rairty_ == rarityPtr->getRarity();
+    }
+    return false;
+}
+bool Item::operator!=(const Cargo& cargo) const {
+    if (typeid(cargo) == typeid(Item)) {
+        const Item* rarityPtr = static_cast<const Item*>(&cargo);
+        return name_ != rarityPtr->getName() ||
+               amount_ != rarityPtr->getAmount() ||
+               basePrice_ != rarityPtr->getBasePrice() ||
+               rairty_ != rarityPtr->getRarity();
+    }
+    return false;
+}
+Cargo& Item::operator+=(size_t amount) {
+    amount_ += amount;
+    return *this;
+}
+Cargo& Item::operator-=(size_t amount) {
+    if (amount <= amount_) {
+        amount_ -= amount;
+        return *this;
+    }
+    return *this;
+}
