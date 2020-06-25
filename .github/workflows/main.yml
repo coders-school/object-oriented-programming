@@ -1,19 +1,30 @@
 name: C++ with CMake CI
 
-on: [push, pull_request]
+on:
+ 
+  push:
+    branches:
+      - homework1
+  pull_request:
+    branches:
+      - homework1
+
+
+
 
 jobs:
   shm:
     runs-on: ubuntu-latest
-     - name: mkdir shm/build
-      run: mkdir shm/build
-    - name: Compile
-      working-directory: shm/build
-      run: |
+    steps:
+     - name: mkdir_shm/build
+       run: mkdir shm/build
+     - name: Compile
+       working-directory: shm/build
+       run: |
         cmake ..
         make
-    - name: Run tests
-      working-directory: shm/build
-      run: ctest -V
+     - name: Run tests
+       working-directory: shm/build
+       run: ctest -V
 
 
