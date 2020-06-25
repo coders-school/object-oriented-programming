@@ -21,7 +21,7 @@ public:
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getCapacity() const { return capacity_; }
     std::vector<cargoPtr> getCargo() const { return cargo_; }
-    //void load(cargoPtr cargo);
+    void load(cargoPtr cargo);
     //cargoPtr FindMatchCargo(Cargo* cargo);
     //void Unload(Cargo* cargo);
     //void RemoveFromStorage(Cargo* cargo);

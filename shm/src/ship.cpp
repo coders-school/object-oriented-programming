@@ -36,13 +36,13 @@ Ship& Ship::operator-=(const size_t& crew) {
     return *this;
 }
 
-/*void Ship::load(std::shared_ptr<Cargo> cargo) {
-    if (auto match_cargo = FindMatchCargo(cargo.get())) {
+void Ship::load(std::shared_ptr<Cargo> cargo) {
+    /*if (auto match_cargo = FindMatchCargo(cargo.get())) {
         *match_cargo += cargo->getAmount();
         return;
-    }
+    }*/
     cargo_.push_back(std::move(cargo));
-}*/
+}
 
 //TODO: use == operators of each classes to comparison
 /*cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
@@ -98,7 +98,7 @@ void Ship::printCargo() const {
         std::cout << "Cargo is empty" << '\n';
     }
     for (const auto& cargoIt : cargo_) {
-        cargoIt -> getInfo();
+        std::cout << cargoIt -> getInfo();
     }
     std::cout << '\n';
 }
