@@ -4,8 +4,10 @@
 #include <string>
 
 #include "cloneable.hpp"
+#include "observer.hpp"
 
-class Cargo : public Cloneable<Cargo> {
+class Cargo : public Cloneable<Cargo>,
+              public Observer {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;

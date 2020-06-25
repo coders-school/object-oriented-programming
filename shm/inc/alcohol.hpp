@@ -10,7 +10,7 @@ class Alcohol : public Cargo {
 public:
     Alcohol(const std::string& name, size_t amount, size_t basePrice);
     Alcohol(const std::string& name, size_t amount, size_t basePrice, float power);
-    ~Alcohol() override = default;
+    ~Alcohol() override;
 
     float getPower() const { return power_; }
 
@@ -20,8 +20,9 @@ public:
     size_t getPrice() const override;
     size_t getBasePrice() const override { return basePrice_; }
 
+    //Override from Observer
     void nextDay() override;
-  
+
     bool operator==(const Cargo& cargoToCheck) const override;
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;

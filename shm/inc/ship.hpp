@@ -6,14 +6,16 @@
 #include "cargo.hpp"
 #include "cargoHolder.hpp"
 #include "delegate.hpp"
+#include "time.hpp"
 
-class Ship : public CargoHolder {
+class Ship : public CargoHolder,
+             public Observer {
 public:
     Ship();
 
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate = nullptr);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate = nullptr, Time* time = nullptr);
 
-    Ship(int maxCrew, int speed, unsigned int id, Delegate* delegate = nullptr);
+    Ship(int maxCrew, int speed, unsigned int id, Delegate* delegate = nullptr, Time* time = nullptr);
 
     void setName(const std::string& name) { name_ = name; }
 
@@ -38,6 +40,10 @@ public:
     /* override from CargoHolder */
     void receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) override;
     void clearEmptyCargos() override;
+    //override from Observer
+    void nextDay() override;
+
+    ~Ship() override;
 
 private:
     std::vector<std::shared_ptr<Cargo>> cargo_;
@@ -48,4 +54,5 @@ private:
     std::string name_;
     const int id_;
     Delegate* payCrew;
+    Time* time_;
 };

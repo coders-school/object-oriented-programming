@@ -3,6 +3,15 @@
 #include <algorithm>
 #include <random>
 
+Store::Store(Time* time)
+    : time_(time) {
+    time_->addObserver(this);
+}
+
+Store::~Store() {
+    time_->removeObserver(this);
+}
+
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (cargo->getAmount() < amount) {
         return Response::lack_of_cargo;

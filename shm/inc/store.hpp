@@ -5,6 +5,7 @@
 
 #include "cargo.hpp"
 #include "player.hpp"
+#include "time.h"
 
 enum class Response {
     done,
@@ -13,9 +14,10 @@ enum class Response {
     lack_of_space
 };
 
-class Store : public CargoHolder {
+class Store : public CargoHolder,
+              public Observer {
 public:
-    Store();
+    Store(Time* time);
     ~Store();
 
     /* Store.buys amount of cargo from a player */
@@ -27,8 +29,10 @@ public:
     void receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) override;
     void clearEmptyCargos() override;
 
+    /* override from Observer */
     void nextDay();
 
 private:
     std::vector<std::shared_ptr<Cargo>> cargo_;
+    Time* time_;
 };

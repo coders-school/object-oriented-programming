@@ -13,7 +13,7 @@ public:
 
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
 
-    ~Item() override = default;
+    ~Item() override;
 
     Rarity getRarity() const { return rarity_; }
 
@@ -23,6 +23,7 @@ public:
     size_t getBasePrice() const override { return basePrice_; }
     size_t getPrice() const override;
 
+    //override from Observer
     void nextDay() override;
 
     bool operator==(const Cargo& cargoToCheck) const override;

@@ -7,11 +7,13 @@
 Ship::Ship()
     : id_(-1) {}
 
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), payCrew(delegate) {}
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate, Time* time)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), payCrew(delegate), time_(time) {
+        time_->addObserver(this);
+    }
 
-Ship::Ship(int maxCrew, int speed, unsigned int id, Delegate* delegate)
-    : Ship(0, maxCrew, speed, "", id, delegate) {}
+Ship::Ship(int maxCrew, int speed, unsigned int id, Delegate* delegate, Time* time)
+    : Ship(0, maxCrew, speed, "", id, delegate, time) {}
 
 Ship& Ship::operator-=(size_t num) {
     if (num > crew_) {
@@ -106,4 +108,8 @@ void Ship::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) {
 
 void Ship::clearEmptyCargos() {
     cargo_.erase(std::remove_if(cargo_.begin(), cargo_.end(), [](auto& cargo) { return cargo->getAmount() == 0; }), cargo_.end());
+}
+
+Ship::~Ship(){
+    time_->removeObserver(this);
 }

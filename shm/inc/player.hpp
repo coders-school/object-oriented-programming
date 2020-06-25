@@ -18,7 +18,7 @@ public:
     //Override from Delegate
     void payCrew(size_t money) override;
 
-    virtual ~Player() override = default;
+    virtual ~Player() {}
 
     void changeMoney(size_t amount);
     void clearEmptyCargo() { ship_->clearEmptyCargo(); };
