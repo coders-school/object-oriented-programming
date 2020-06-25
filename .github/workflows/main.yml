@@ -9,11 +9,9 @@ jobs:
     - name: Check out code
       uses: actions/checkout@master
     - name: Run check.sh
-      working-directory: shm
       run: |
-        cd shm
-        chmod +x check.sh
-        ./check.sh
+        chmod +x shm/check.sh
+        shm/check.sh
 
   shm:
    runs-on: ubuntu-latest
