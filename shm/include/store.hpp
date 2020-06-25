@@ -14,6 +14,7 @@ public:
 
     Response buy(Cargo* cargo, Player* player);
     Response sell(Cargo* cargo, Player* player);
+    void nextDay();
 
 private:
     std::vector<std::shared_ptr<Cargo>> stock_;

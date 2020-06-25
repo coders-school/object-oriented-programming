@@ -31,3 +31,7 @@ bool Fruit::operator==(const Cargo& other) const {
     return (amount_ == other.getAmount() && basePrice_ == other.getBasePrice() &&
             name_ == other.getName() && getPrice() == other.getPrice());
 }
+
+void Fruit::nextDay() {
+    operator--();
+}

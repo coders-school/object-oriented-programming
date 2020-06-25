@@ -1,6 +1,7 @@
 #include "store.hpp"
 
 #include <algorithm>
+#include <random>
 
 Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock) : stock_(stock) {}
 
@@ -19,14 +20,14 @@ Store::Response Store::buy(Cargo* cargo, Player* player) {
     }
 
     unload(cargo);
-    player->loadShip(std::make_shared<Cargo>(*cargo));
+    player->loadShip(std::shared_ptr<Cargo>(cargo));
     player->setMoney(player->getMoney() - cargo->getPrice());
 
     return Response::done;
 }
 
 Store::Response Store::sell(Cargo* cargo, Player* player) {
-    load(std::make_shared<Cargo>(*cargo));
+    load(std::shared_ptr<Cargo>(cargo));
     player->unloadShip(cargo);
     player->setMoney(player->getMoney() + cargo->getPrice());
 
@@ -63,4 +64,18 @@ std::vector<std::shared_ptr<Cargo>>::iterator Store::findStock(Cargo* cargo) {
                 el->getBasePrice() == cargo->getBasePrice() &&
                 el->getPrice() == cargo->getPrice());
     });
+}
+
+void Store::nextDay() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, 1);
+    std::uniform_int_distribution<> distrib2(0, 20);
+    for (const auto& cargo_ptr : stock_) {
+        if (distrib(gen)) {
+            *cargo_ptr += distrib2(gen);
+        } else {
+            *cargo_ptr -= distrib2(gen);
+        }
+    }
 }
