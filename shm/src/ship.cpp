@@ -36,13 +36,13 @@ Ship& Ship::operator-=(const size_t& crew) {
     return *this;
 }
 
-/*void Ship::load(std::shared_ptr<Cargo> cargo) {
-    if (auto match_cargo = FindMatchCargo(cargo.get())) {
+void Ship::load(std::shared_ptr<Cargo> cargo) {
+    /*if (auto match_cargo = FindMatchCargo(cargo.get())) {
         *match_cargo += cargo->getAmount();
         return;
-    }
+    }*/
     cargo_.push_back(std::move(cargo));
-}*/
+}
 
 //TODO: use == operators of each classes to comparison
 /*cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
@@ -50,36 +50,36 @@ Ship& Ship::operator-=(const size_t& crew) {
     if (looked_for != cargo_.end()) {
         return *looked_for;
     }
-    // for (auto el : cargo_) {
-    //     if (el->getName() == "Fruit") {
-    //         if (el->getName() == cargo->getName() &&
-    //             el->getBasePrice() == cargo->getBasePrice() &&
-    //             el->getExpiryDate() == cargo->getExpiryDate())
-    //             return el.get();
-    //     } else if (el->getName() == "Alcohol") {
-    //         if (el->getName() == cargo->getName() &&
-    //             el->getBasePrice() == cargo->getBasePrice() &&
-    //             el->getPercentage() == cargo->getPercentage())
-    //             return el.get();
-    //     } else {
-    //         if (el->getName() == cargo->getName() &&
-    //             el->getBasePrice() == cargo->getBasePrice() &&
-    //             el->getRarity() == cargo->getRarity())
-    //             return el.get();
-    //     }
-    // }
+        for (auto el : cargo_) {
+           if (typeid(el).name() == "Fruit") {
+               if (el->getName() == cargo->getName() &&
+                   el->getBasePrice() == cargo->getBasePrice() &&
+                   std::dynamic_pointer_cast<Fruit>(el)->getTimeToRotten() == cargo->getTimeToRotten());
+                   return el.get();
+           } else if (typeid(el).name() == "Alcohol") {
+               if (el->getName() == cargo->getName() &&
+                    el->getBasePrice() == cargo->getBasePrice() &&
+                    el->getVolume() == cargo->getVolume())
+                    return el.get();
+           } else {
+              if (el->getName() == cargo->getName() &&
+                  el->getBasePrice() == cargo->getBasePrice() &&
+                  el->getRarity() == cargo->getRarity())
+                  return el.get();
+           }
+        }
 }*/
 
-/*void Ship::Unload(Cargo* cargo) {
+void Ship::Unload(Cargo* cargo) {
     RemoveFromStorage(cargo);
-}*/
+}
 
-/*void Ship::RemoveFromStorage(Cargo* cargo) {
+void Ship::RemoveFromStorage(Cargo* cargo) {
     cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
                               [cargo](const auto& el) {
                                   return *el == *cargo;
                               }));
-}*/
+}
 
 void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
