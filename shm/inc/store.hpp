@@ -27,6 +27,8 @@ public:
     void receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) override;
     void clearEmptyCargos() override;
 
+    void nextDay();
+
 private:
     std::vector<std::shared_ptr<Cargo>> cargo_;
 };

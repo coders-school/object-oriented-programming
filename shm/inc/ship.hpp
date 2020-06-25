@@ -5,14 +5,15 @@
 
 #include "cargo.hpp"
 #include "cargoHolder.hpp"
+#include "delegate.hpp"
 
 class Ship : public CargoHolder {
 public:
     Ship();
 
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate = nullptr);
 
-    Ship(int maxCrew, int speed, unsigned int id);
+    Ship(int maxCrew, int speed, unsigned int id, Delegate* delegate = nullptr);
 
     void setName(const std::string& name) { name_ = name; }
 
@@ -21,9 +22,11 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     int getId() const { return id_; }
+    void setDelegate(Delegate* delegate) { payCrew = delegate; }
 
     std::shared_ptr<Cargo> getCargo(size_t index);
     size_t getAvailableSpace() const;
+    void nextDay();
     void clearEmptyCargo();
 
     Ship& operator-=(size_t num);
@@ -44,4 +47,5 @@ private:
     size_t speed_;
     std::string name_;
     const int id_;
+    Delegate* payCrew;
 };

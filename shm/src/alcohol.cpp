@@ -12,6 +12,10 @@ size_t Alcohol::getPrice() const {
     return static_cast<size_t>(static_cast<float>(basePrice_) * (power_ / kBasePower));
 }
 
+void Alcohol::nextDay(){
+    return;
+}
+
 bool Alcohol::operator==(const Cargo& cargoToCheck) const {
     if (typeid(cargoToCheck) != typeid(Alcohol&)) {
         return false;
@@ -38,4 +42,5 @@ Cargo& Alcohol::operator-=(size_t amount) {
         std::cerr << "Amount equal zero\n";
     }
     return *this;
+
 }

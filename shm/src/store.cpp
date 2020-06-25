@@ -1,6 +1,7 @@
 #include "store.hpp"
 
 #include <algorithm>
+#include <random>
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (cargo->getAmount() < amount) {
@@ -45,4 +46,28 @@ void Store::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) 
 
 void Store::clearEmptyCargos() {
     cargo_.erase(std::remove_if(cargo_.begin(), cargo_.end(), [](auto& cargo) { return cargo->getAmount() == 0; }), cargo_.end());
+}
+
+void Store::nextDay() {
+    constexpr size_t addItems = 1;
+    constexpr size_t removeItems = 0;
+    constexpr size_t minQuantityOfProducts = 40;
+    constexpr size_t maxQuantityOfProducts = 100;
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> optionDistrib(removeItems, addItems);
+    std::uniform_int_distribution<> quantityDistrib(minQuantityOfProducts, maxQuantityOfProducts);
+
+    size_t option = optionDistrib(gen);
+
+    if (option == addItems) {
+        for (auto& item : cargo_) {
+            *item += quantityDistrib(gen);
+        }
+    } else if (option == removeItems) {
+        for (auto& item : cargo_) {
+            *item -= quantityDistrib(gen);
+        }
+    }
 }

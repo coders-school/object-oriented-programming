@@ -9,6 +9,10 @@ size_t Item::getPrice() const {
     return basePrice_ * priceMultipliers_.at(rarity_);
 }
 
+void Item::nextDay(){
+    return;
+}
+
 bool Item::operator==(const Cargo& cargoToCheck) const {
     if (typeid(cargoToCheck) != typeid(Item&)) {
         return false;

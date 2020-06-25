@@ -19,6 +19,10 @@ size_t Fruit::getPrice() const {
     return static_cast<size_t>((static_cast<float>(leftTime_) / static_cast<float>(timeToSpoil_)) * static_cast<float>(basePrice_));
 }
 
+void Fruit::nextDay(){
+    --leftTime_;
+}
+
 bool Fruit::operator==(const Cargo& cargoToCheck) const {
     if (typeid(cargoToCheck) != typeid(Fruit&)) {
         return false;

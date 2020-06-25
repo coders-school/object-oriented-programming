@@ -7,11 +7,11 @@
 Ship::Ship()
     : id_(-1) {}
 
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), payCrew(delegate) {}
 
-Ship::Ship(int maxCrew, int speed, unsigned int id)
-    : Ship(0, maxCrew, speed, "", id) {}
+Ship::Ship(int maxCrew, int speed, unsigned int id, Delegate* delegate)
+    : Ship(0, maxCrew, speed, "", id, delegate) {}
 
 Ship& Ship::operator-=(size_t num) {
     if (num > crew_) {
@@ -48,6 +48,11 @@ size_t Ship::getAvailableSpace() const {
                                                return space += cargo->getAmount();
                                            });
     return capacity_ - reservedSpace;
+}
+
+void Ship::nextDay() {
+    constexpr size_t crewMemberCost = 1;
+    payCrew->payCrew(crew_ * crewMemberCost);
 }
 
 void Ship::load(const std::shared_ptr<Cargo>& cargo) {
