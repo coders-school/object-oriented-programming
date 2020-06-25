@@ -21,11 +21,11 @@ public:
          const std::string& name,
          size_t id,
          Delegate* delegate,
-         Time* time = nullptr);
-    Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time = nullptr);
+         Time* time);
+    Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time);
     ~Ship();
 
-        void setName(const std::string& name);
+    void setName(const std::string& name);
 
     Ship& operator-=(size_t crew);
     Ship& operator+=(size_t crew);

@@ -11,7 +11,7 @@ Ship::Ship(int capacity,
            const std::string& name,
            size_t id,
            Delegate* delegate,
-           Time* time = nullptr)
+           Time* time)
     : delegate_(delegate),
       capacity_(capacity),
       maxCrew_(maxCrew),
@@ -21,7 +21,7 @@ Ship::Ship(int capacity,
       id_(id),
       time_(time) {}
 
-Ship::Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time = nullptr)
+Ship::Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time)
     : Ship(0, maxCrew, speed, "", id, delegate, time) {
     time_->addObserver(this);
 }
