@@ -36,10 +36,7 @@ Island* Map::getIsland(const Island::Coordinates& coordinate) {
     for (auto& el : islands_) {
         if (el.getPosition() == coordinate) {
             findedIsland = &el;
-
-            
-        };
+        }
     }
-
     return findedIsland;
 }
