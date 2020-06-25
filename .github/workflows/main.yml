@@ -9,22 +9,19 @@ on:
     branches:
       - homework1
 
-
-
-
 jobs:
   shm:
     runs-on: ubuntu-latest
     steps:
      - name: mkdir shm/build
-       run: mkdir ./shm/build
+       run: mkdir object-oriented-programming/shm/build
      - name: Compile
-       working-directory: ./shm/build
+       working-directory: object-oriented-programming/shm/build
        run: |
         cmake ..
         make
      - name: Run tests
-       working-directory: ./shm/build
+       working-directory: object-oriented-programming/shm/build
        run: ctest -V
 
 
