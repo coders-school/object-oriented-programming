@@ -37,38 +37,23 @@ Ship& Ship::operator-=(const size_t& crew) {
 }
 
 void Ship::load(std::shared_ptr<Cargo> cargo) {
-    /*if (auto match_cargo = FindMatchCargo(cargo.get())) {
-        *match_cargo += cargo->getAmount();
-        return;
-    }*/
+    for (auto el : cargo_) {
+        if (*el == *cargo) {
+            *el +=cargo->getAmount();
+            return;
+        }
+    }
     cargo_.push_back(std::move(cargo));
 }
 
 //TODO: use == operators of each classes to comparison
-/*cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
-    auto looked_for = std::find(cargo_.begin(), cargo_.end(), *cargo);
-    if (looked_for != cargo_.end()) {
-        return *looked_for;
-    }
-        for (auto el : cargo_) {
-           if (typeid(el).name() == "Fruit") {
-               if (el->getName() == cargo->getName() &&
-                   el->getBasePrice() == cargo->getBasePrice() &&
-                   std::dynamic_pointer_cast<Fruit>(el)->getTimeToRotten() == cargo->getTimeToRotten());
-                   return el.get();
-           } else if (typeid(el).name() == "Alcohol") {
-               if (el->getName() == cargo->getName() &&
-                    el->getBasePrice() == cargo->getBasePrice() &&
-                    el->getVolume() == cargo->getVolume())
-                    return el.get();
-           } else {
-              if (el->getName() == cargo->getName() &&
-                  el->getBasePrice() == cargo->getBasePrice() &&
-                  el->getRarity() == cargo->getRarity())
-                  return el.get();
-           }
+cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
+    for (auto el : cargo_) {
+        if (*el == *cargo) {
+            return el;
         }
-}*/
+    }
+}
 
 void Ship::Unload(Cargo* cargo) {
     RemoveFromStorage(cargo);
