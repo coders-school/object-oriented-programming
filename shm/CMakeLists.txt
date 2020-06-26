@@ -38,7 +38,7 @@ endif()
 project(SymulatorHandluMorskiego)
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp Cargo.cpp Coordinates.cpp Island.cpp Map.cpp Player.cpp Ship.cpp)
+add_executable(${PROJECT_NAME} main.cpp Cargo.cpp Coordinates.cpp Island.cpp Map.cpp Player.cpp Ship.cpp Store.cpp)
 #Temp test file
 add_executable(${PROJECT_NAME}-ut ship-unittest.cpp Ship.cpp)
 
