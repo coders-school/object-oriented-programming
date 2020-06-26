@@ -1,7 +1,8 @@
 #include "Map.hpp"
+
 #include <algorithm>
-#include <random>
 #include <cstddef>
+#include <random>
 
 Map::Map(){
     islandsLocations_.reserve(amountOfIslands);
