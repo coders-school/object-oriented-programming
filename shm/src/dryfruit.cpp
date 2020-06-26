@@ -1,6 +1,6 @@
 #include "dryfruit.hpp"
-
 #include "globaltime.hpp"
+
 Fruit& DryFruit::operator--() {
     spoilDelay_--;
     if (spoilDelay_ == 0) {

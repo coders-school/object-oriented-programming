@@ -28,7 +28,6 @@ public:
 
     std::shared_ptr<Cargo> getCargo(size_t index);
     size_t getAvailableSpace() const;
-    void nextDay();
     void clearEmptyCargo();
 
     Ship& operator-=(size_t num);
