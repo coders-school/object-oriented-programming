@@ -3,7 +3,7 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
-  removeVowels:
+  MaritimeTradingSimulator:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
@@ -16,6 +16,6 @@ jobs:
         cmake ..
         make
     - name: Run tests
-      working-directory: module1/homework/removeVowels/build
+      working-directory: shm/build
       run: ctest -V
 
