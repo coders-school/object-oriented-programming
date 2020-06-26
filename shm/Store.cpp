@@ -8,3 +8,7 @@ Store::Response Store::Buy(Cargo* cargo, size_t amount, Player* player) {
         return Response::lack_of_space;
     return Response::done;
 };
+
+Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player){
+
+};

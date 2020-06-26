@@ -10,6 +10,7 @@ public:
     };
 
     Response Buy(Cargo* cargo, size_t amount, Player* player);
+    Response Sell(Cargo* cargo, size_t amount, Player* player);
 
 private:
 };
