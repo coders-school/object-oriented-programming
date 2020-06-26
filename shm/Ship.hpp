@@ -30,6 +30,9 @@ public:
     size_t getId() const {
         return id_;
     }
+    std::vector<Cargo>& getCargo() const {
+        return cargo_;
+    }
 
 private:
     size_t capacity_;
@@ -38,4 +41,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
+    std::vector<Cargo> cargo_;
 };
