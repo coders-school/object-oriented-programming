@@ -2,6 +2,8 @@
 
 #include <vector>
 
+#include "Observer.hpp"
+
 class Time {
 public:
     Time& operator++();

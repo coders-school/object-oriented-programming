@@ -7,6 +7,6 @@ Game::Game(size_t money, size_t days, size_t final_goal)
 }
 
 void Game::StartGame() {
-    std::cout << "Welcome in game SHM (made by The Diggers)\n" <<
-        << "-= This is demo version =-";
+    std::cout << "Welcome in game SHM (made by The Diggers)\n"
+        << "-= This is demo version =-\n\n";
 }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 class Game {
 public:
     Game(size_t money, size_t days, size_t final_goal);
