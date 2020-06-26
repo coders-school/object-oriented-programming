@@ -1,4 +1,6 @@
 #pragma onec
+#include "Cargo.hpp"
+#include "Player.hpp"
 
 class Store {
 public:
