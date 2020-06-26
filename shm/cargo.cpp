@@ -12,7 +12,7 @@ Cargo& Cargo::operator+=(size_t amount) {
 
 Cargo& Cargo::operator-=(size_t amount) {
     if (amount > amount_) {
-        std::cerr << "Not enough amount of cargo!\n";
+        std::cerr << "Not enough amount of this cargo!\n";
         return *this;
     }
     amount_ -= amount;
