@@ -15,6 +15,6 @@ Store::Response Store::Buy(Cargo* cargo, size_t amount, Player* player) {
     return Response::done;
 };
 
-Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player){
-
+Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player) {
+    return Response::done;
 };
