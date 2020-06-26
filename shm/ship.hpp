@@ -1,4 +1,5 @@
 #pragma once
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -25,12 +26,11 @@ public:
     std::vector<std::shared_ptr<Cargo>> getCargos() const { return cargo_; }
 
 private:
-    size_t capacity_;
-    size_t maxCrew_;
-    size_t speed_;
-    std::string name_;
-    const size_t id_;
-    size_t crew_;
-
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    size_t capacity_{};
+    size_t maxCrew_{};
+    size_t speed_{};
+    std::string name_{};
+    const size_t id_{};
+    size_t crew_{};
+    std::vector<std::shared_ptr<Cargo>> cargo_{};
 };

@@ -1,7 +1,5 @@
-#include "map.hpp"
+#include <iostream>
 
 int main() {
-    Map testMap;
-
     return 0;
 }
