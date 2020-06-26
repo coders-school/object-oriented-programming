@@ -1,5 +1,4 @@
 #pragma onec
-#include <string>
 
 class Store {
 public:
@@ -10,6 +9,7 @@ public:
         lack_of_space
     };
 
+    Response Buy(Cargo* cargo, size_t amount, Player* player);
 
 private:
 };
