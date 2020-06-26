@@ -37,13 +37,28 @@ endif()
 
 project(TradeSimulator)
 enable_testing()
-
+set(SOURCE
+    src/alcohol.cpp
+    src/cargo.cpp
+    src/coordinates.cpp
+    src/fruit.cpp
+    src/island.cpp
+    src/item.cpp
+    src/map.cpp
+    src/player.cpp
+    src/ship.cpp
+    src/store.cpp
+)
 include_directories(include)
-file(GLOB SOURCE_DIR "src/*.cpp")
-add_executable(${PROJECT_NAME} ${SOURCE_DIR})
-add_executable(${PROJECT_NAME}-ut test.cpp)
+add_library(lib STATIC ${SOURCE})
+
+add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME}-ut tests/test.cpp)
 
 add_compile_options(${PROJECT_NAME} -Wall -Wextra -Wconversion -pedantic -Werror)
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
+target_link_libraries(${PROJECT_NAME}-ut lib)
+target_link_libraries(${PROJECT_NAME} lib)
+
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
