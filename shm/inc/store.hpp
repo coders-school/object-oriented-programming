@@ -32,6 +32,8 @@ public:
     /* override from Observer */
     void nextDay();
 
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
+
 private:
     std::vector<std::shared_ptr<Cargo>> cargo_;
     Time* time_;

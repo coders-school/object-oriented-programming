@@ -3,6 +3,11 @@
 #include <algorithm>
 #include <random>
 
+#include "alcohol.hpp"
+#include "dryfruit.hpp"
+#include "fruit.hpp"
+#include "item.hpp"
+
 Store::Store(Time* time)
     : time_(time) {
     time_->addObserver(this);
@@ -79,4 +84,39 @@ void Store::nextDay() {
             *item -= quantityDistrib(gen);
         }
     }
+}
+
+std::ostream& operator<<(std::ostream& out, const Store& store) {
+    out << "Cargo that you can buy here:\n";
+    out << "-----------------------------\n";
+    for (const auto& cargo : store.cargo_) {
+        out << "Product name: " << cargo->getName() << '\n';
+        out << "Amount: " << cargo->getAmount() << '\n';
+        out << "Price: " << cargo->getPrice() << '\n';
+        if (typeid(*cargo) == typeid(Alcohol)) {
+            auto alcohol = static_cast<Alcohol*>(cargo.get());
+            out << "Power: " << alcohol->getPower() << "%\n";
+        } else if (typeid(*cargo) == typeid(Fruit) || typeid(*cargo) == typeid(DryFruit)) {
+            auto fruit = static_cast<Fruit*>(cargo.get());
+            out << "Time to spoil: " << fruit->getTimeToSpoil() << '\n';
+        } else if (typeid(*cargo) == typeid(Item)) {
+            auto item = static_cast<Item*>(cargo.get());
+            switch (item->getRarity()) {
+            case Item::Rarity::common:
+                out << "Rarity: common\n";
+                break;
+            case Item::Rarity::epic:
+                out << "Rarity: epic\n";
+                break;
+            case Item::Rarity::legendary:
+                out << "Rarity: legendary\n";
+                break;
+            case Item::Rarity::rare:
+                out << "Rarity: rare\n";
+                break;
+            }
+        }
+        out << "-----------------------------\n";
+    }
+    return out;
 }
