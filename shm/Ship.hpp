@@ -1,6 +1,9 @@
 #pragma once
 
 #include <string>
+#include <vector>
+
+#include "Cargo.hpp"
 
 class Ship {
 public:
@@ -30,7 +33,7 @@ public:
     size_t getId() const {
         return id_;
     }
-    std::vector<Cargo>& getCargo() const {
+    std::vector<Cargo> getCargo() const {
         return cargo_;
     }
 
