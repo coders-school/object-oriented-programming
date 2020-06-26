@@ -6,6 +6,7 @@
 class Store {
 private:
     std::vector<std::shared_ptr<Cargo>> cargo_;
+    friend std::ostream& operator<<(std::ostream& output, const Store& store);
 
 public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };

@@ -1,6 +1,16 @@
 #include "store.hpp"
 
-#include "algorithm"
+#include <algorithm>
+#include <random>
+
+std::ostream& operator<<(std::ostream& out, const Store& store) {
+    out << "Available Cargo in Store: \n";
+    std::for_each(store.cargo_.begin(), store.cargo_.end(), [&, i{0}](const auto& cargo) mutable {
+        out << ++i << " - " << cargo->getName() << "  AMOUNT: " << cargo->getAmount()
+            << "  PRICE: " << cargo->getBasePrice() << '\n';
+    });
+    return out;
+}
 
 Store::Store() {}
 
@@ -41,14 +51,20 @@ std::shared_ptr<Cargo> Store::getCargo(uint32_t index) const {
 }
 
 void Store::generateCargo() {
-    std::shared_ptr<Cargo> coffe = std::make_shared<Cargo>(9, "nescafe", 4);
-    std::shared_ptr<Cargo> tea = std::make_shared<Cargo>(12, "lipton", 3);
-    std::shared_ptr<Cargo> cigarette = std::make_shared<Cargo>(15, "marlboro", 5);
-    std::shared_ptr<Cargo> chocolate = std::make_shared<Cargo>(11, "milka", 7);
-    cargo_.emplace_back(coffe);
-    cargo_.emplace_back(tea);
-    cargo_.emplace_back(cigarette);
-    cargo_.emplace_back(chocolate);
+    const int minAmountOfCargo = 50;
+    const int maxAmountOfCargo = 300;
+    const int minPriceOfCargo = 5;
+    const int maxPriceOfCargo = 15;
+    std::uniform_int_distribution<> amountOfCargo(minAmountOfCargo, maxAmountOfCargo);
+    std::uniform_int_distribution<> priceOfCargo(minPriceOfCargo, maxPriceOfCargo);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    std::vector<std::string> cargoProducts = {"Coffe",      "Tea",     "Cigarette", "Ice cream",
+                                              "Chocolatte", "Alcohol", "Fruits",    "Chips"};
+    for_each(cargoProducts.begin(), cargoProducts.end(), [&](const auto& cargo) {
+        cargo_.emplace_back(std::make_shared<Cargo>(amountOfCargo(gen), cargo, priceOfCargo(gen)));
+    });
 }
 
 void Store::printCargo() const {
