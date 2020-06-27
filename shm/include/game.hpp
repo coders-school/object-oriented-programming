@@ -1,8 +1,10 @@
 #pragma once
 
 #include <memory>
+
 #include "map.hpp"
 #include "player.hpp"
+#include "ship.hpp"
 #include "time.hpp"
 
 class Game {

@@ -18,6 +18,7 @@ set(SOURCES
     src/map.cpp
     src/player.cpp
     src/ship.cpp
+    src/time.cpp
 )
 
 set(HEADER_FILES

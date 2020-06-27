@@ -5,6 +5,9 @@
 //     Your(Time* time) : time_(time) {
 //         time_->addObserver(this);
 //     }
+//     ~Your() {
+//         time_->removeObserver(this);
+//     }
 //     void nextDay() override {
 //         // Some code here
 //     }
@@ -31,34 +34,15 @@ public:
 
 class Time {
 public:
-    Time(){};
-    explicit Time(size_t game_days)
-        : time_elapsed_(game_days){};
-    void addObserver(Observer* obs) {
-        observers_.push_back(obs);
-    }
-    void removeObserver(Observer* obs) {
-        observers_.remove(obs);
-    }
-    size_t getElapsedTime() const {
-        return time_elapsed_;
-    }
+    Time();
+    Time(int game_days);
+    void addObserver(Observer* obs);
+    void removeObserver(Observer* obs);
+    size_t getElapsedTime() const;
     // Prefix increment operator (decrement elapsed time)
-    Time& operator++() {
-        time_elapsed_--;
-        auto it = observers_.begin();
-        while (it != observers_.end()) {
-            (*it)->nextDay();
-            ++it;
-        }
-        return *this;
-    }
+    Time& operator++();
     // Postfix increment operator (decrement elapsed time)
-    Time operator++(int) {
-        Time temp = *this;
-        ++(*this);
-        return temp;
-    }
+    Time operator++(int);
 
 private:
     std::list<Observer*> observers_;
