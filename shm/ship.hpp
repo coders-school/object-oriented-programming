@@ -1,6 +1,5 @@
 #pragma once
 
-#include <algorithm>
 #include <memory>
 #include <string>
 #include <vector>
@@ -14,8 +13,8 @@ public:
     Ship(size_t maxCrew, size_t speed, int id);
 
     void setName(const std::string& name); 
-    //void load(std::unique_ptr<Cargo> cargo);
-    //void unload(Cargo* cargo);
+    void load(std::unique_ptr<Cargo> cargo);
+    void unload(Cargo* cargo);
     
     Ship& operator-=(size_t crewman);
     Ship& operator+=(size_t crewman);
@@ -25,10 +24,13 @@ public:
     size_t getSpeed() const;
     std::string getName() const;
     int getId() const;
-    Cargo* getCargo(size_t cargo);
-    std::vector<std::unique_ptr<Cargo>> getAllCargo() const;
+    Cargo* getCargo(size_t index) const;
+    size_t countAvailableSpace() const;
     
 private:
+    Cargo* findCargo(Cargo* cargo);
+    void removeCargo (Cargo* cargo);
+
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;

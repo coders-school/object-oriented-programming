@@ -1,5 +1,8 @@
 #include "ship.hpp"
 
+#include <algorithm>
+#include <numeric>
+
 Ship::Ship()
     : id_(-1) {}
 
@@ -12,21 +15,23 @@ Ship::Ship(size_t maxCrew, size_t speed, int id)
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
- // ​void Ship::load(std::unique_ptr<Cargo> cargo) { 
-    //     cargo_.push_back(std::move(cargo));
-    // }
+void Ship::load(std::unique_ptr<Cargo> cargo) { 
+    if (auto matchCargo = findCargo(cargo.get())) {
+        *matchCargo += cargo->getAmount();
+    }
+    cargo_.push_back(std::move(cargo));
+}
     //wziąć pod uwagę available space - countFreeSpace w klasie player!
     //porównanie dwóch towarów - akumulacja tych samych typów towarów
     //czy zmiesci sie caly towar (maxcapacity?)
 
-    // void Ship::unload(Cargo* cargo) {
-    //     auto it = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
-    //         return ptr.get() == cargo;
-    //     });
-
-    //     if (it != cargo_.end())
-    //         cargo_.erase(it);
-    // }
+void Ship::unload(Cargo* cargo) {
+    auto matchCargo = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
+                 return ptr.get() == cargo;
+                 });
+    if (matchCargo != cargo_.end())
+        cargo_.erase(matchCargo);
+}
   //sprawdzić ilość czy jest 0 - usuwamy
   //ile zostanie towaru
 
@@ -57,12 +62,22 @@ std::string Ship::getName() const {
 int Ship::getId() const {
     return id_;
 }
-Cargo* Ship::getCargo(size_t cargo) {
-    if (cargo <= cargo_.size()) {
-        return &*cargo_[cargo];
+Cargo* Ship::getCargo(size_t index) const {
+    if (cargo_.size() > index) {
+        return cargo_[index].get();
     }
     return nullptr;
 }
-std::vector<std::unique_ptr<Cargo>> Ship::getAllCargo() const {
-    return cargo_;
+size_t Ship::countAvailableSpace() const {
+    size_t loadedSpace = std::accumulate(cargo_.begin(), cargo_.end(), 0,
+                                    [=](size_t item, const auto& cargo) {
+                                        return item += cargo.get()->getAmount();
+                                    });
+    return capacity_ - loadedSpace;
+}
+void Ship::removeCargo(Cargo* cargo) {
+    cargo_.erase(std::find_if(cargo_.begin(), cargo_.end(),
+            [&cargo](const auto& element) {
+                return *element == *cargo;
+            }));
 }
