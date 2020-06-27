@@ -1,14 +1,15 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include <vector>
-#include <memory>
-#include "cargo.hpp"
 
+#include "cargo.hpp"
+#include "time.hpp"
 
 using cargoPtr = std::shared_ptr<Cargo>;
 
-class Ship {
+class Ship : public Observer {
 public:
     Ship();
     Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity);
@@ -21,13 +22,14 @@ public:
     size_t getCapacity() const { return capacity_; }
     std::vector<cargoPtr> getCargo() const { return cargo_; }
     void load(cargoPtr cargo);
-    Cargo* FindMatchCargo(Cargo* cargo);
+    cargoPtr FindMatchCargo(Cargo* cargo);
+    Cargo* getCargo(size_t index) { return cargo_[index].get(); }
     void Unload(Cargo* cargo);
     void RemoveFromStorage(Cargo* cargo);
     void RemoveFromStorageIfRotten();
 
     void setName(const std::string& name);
-    void nextDay();
+    void nextDay() override;
 
     Ship& operator+=(const size_t& crew);
     Ship& operator-=(const size_t& crew);
