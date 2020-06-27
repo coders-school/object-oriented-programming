@@ -3,7 +3,7 @@
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), _rarity(rarity) {}
 
-size_t Item::getPrice() const override {
+size_t Item::getPrice() const {
     return _basePrice * static_cast<int>(_rarity);
 }
 Cargo& Item::operator+=(const size_t amount) {

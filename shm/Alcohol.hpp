@@ -15,7 +15,7 @@ public:
     size_t getAmount() const override { return _amount; }
     size_t getBasePrice() const override { return _basePrice; }
 
-    size_t getPower() const { return power_; }
+    size_t getPower() const { return _power; }
 
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;

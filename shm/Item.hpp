@@ -14,7 +14,7 @@ public:
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
     ~Item() override = default;
 
-    Rarity getRarity() const { return rarity_; }
+    Rarity getRarity() const { return _rarity; }
 
     size_t getPrice() const override;
     std::string getName() const override { return _name; }

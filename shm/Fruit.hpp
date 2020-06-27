@@ -2,6 +2,8 @@
 
 #include "Cargo.hpp"
 
+constexpr size_t TIME_TO_SPOIL = 10;
+
 class Fruit : public Cargo {
 public:
     Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expiryDate);
