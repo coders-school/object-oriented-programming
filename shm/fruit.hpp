@@ -1,32 +1,16 @@
 #pragma once
-
-#include "cargo.hpp"
-
+#include <string>
 class Fruit : public Cargo {
 public:
     //Override from Cargo
-    size_t getPrice() const override {
-        return basePrice_ * (timeToSpoil_ / expiryDate_);
-    }
-    std::string getName() const override {
-        return name_;
-    }
-    size_t getAmount() const override {
-        return amount_;
-    }
-    size_t getBasePrice() const override {
-        return basePrice_;
-    }
-    
-    Fruit& operator--() {
-        if (expiryDate_ == 0) {
-            return *this;
-        }
-        --timeToSpoil_;
-        return *this;
-    }
+    Fruit(std::string name, size_t amount, size_t basePrice);
+    size_t getPrice() const override;
+    std::string getName() const override;
+    size_t getAmount() const override;
+    size_t getBasePrice() const override;
+    Fruit& operator--();
 
 private:
-    size_t timeToSpoil_ {12};
-    const size_t expiryDate_ {12};
+   size_t timeToSpoil_ {12};
+   const size_t expiryDate_ {12};
 };
