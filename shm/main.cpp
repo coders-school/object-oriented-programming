@@ -1,19 +1,14 @@
-#include <cassert>
+#include <iostream>
 
-#include "Cargo.hpp"
-#include "Ship.hpp"
+#include "Game.hpp"
+
+constexpr size_t startMoney = 1'000;
+constexpr size_t gameDays = 100;
+constexpr size_t finalGoal = 2'000;
 
 int main() {
-    Ship ship1;
-    Ship ship2(10, 100, 500);
-    Ship ship3(10, "Ala", 200, 600, 300);
-
-    ship1 += 15;
-    ship2 -= 40;
-
-    Cargo flowerCargo{"Tulipan", 7, 50}, fruitCargo{"Truskawka", 5, 40};
-
-    assert(flowerCargo != fruitCargo);
+    Game game(startMoney, gameDays, finalGoal);
+    game.StartGame();
 
     return 0;
 }
