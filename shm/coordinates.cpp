@@ -13,8 +13,8 @@ Coordinates::Coordinates(int positionX, int positionY)
 
 int Coordinates::Distance(const Coordinates& currentX, 
                           const Coordinates& currentY) {
-    return std::sqrt(std::pow((currentX.positionX_ - currentY.positionX_), 2) +
-                     std::pow((currentX.positionY_ - currentY.positionY_), 2));
+    return static_cast<int>(std::sqrt(std::pow((currentX.positionX_ - currentY.positionX_), 2) +
+                                      std::pow((currentX.positionY_ - currentY.positionY_), 2)));
 }
 
 bool Coordinates::operator==(const Coordinates& currentPosition) const {
