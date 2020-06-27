@@ -1,5 +1,10 @@
 #include "player.hpp"
 
+#include <numeric>
+
+constexpr size_t START_MONEY = 1000;
+constexpr size_t START_SPACE = 0;
+
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space)
     : ship_(std::move(ship)), money_(money), availableSpace_(space) {}
 
@@ -19,11 +24,6 @@ Cargo* Player::getCargo(size_t cargo) const{
     }
     return nullptr;
 }
-
-size_t Player::countFreeSpace() {
-    availableSpace_ = ship_->getCapacity();
-    for (const auto cargo : ship_->getAllCargo()) {
-        availableSpace_ -= cargo->getAmount();
-    }
-    return availableSpace_;
+size_t Player::countAvailableSpace() {
+     return ship_->countAvailableSpace(); 
 }

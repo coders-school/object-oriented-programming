@@ -1,11 +1,10 @@
 #pragma once
+
+
 #include <memory>
 
 #include "cargo.hpp"
 #include "ship.hpp"
-
-constexpr size_t START_MONEY = 1000;
-constexpr size_t START_SPACE = 0;
 
 class Player {
 public:
@@ -22,5 +21,5 @@ private:
     size_t money_;
     size_t availableSpace_;
     
-    size_t countFreeSpace();
+    size_t countAvailableSpace();
 };
