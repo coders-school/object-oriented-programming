@@ -17,6 +17,6 @@ int main() {
     auto fruitPtr = std::make_shared<Fruit>(fruit);
     Ship ship(01, "sheeeep", 40, 50, 50);
     ship.load(fruitPtr);
-    std::cout << fruit;
+    //std::cout << fruit;
     return 0;
 }
