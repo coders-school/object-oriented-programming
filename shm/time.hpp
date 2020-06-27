@@ -4,8 +4,6 @@
 
 #include "observer.hpp"
 
-constexpr size_t initialTime = 100; //days
-
 class Time : public Observer {
 public:
     Time();

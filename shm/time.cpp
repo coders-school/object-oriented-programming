@@ -2,6 +2,8 @@
 
 #include <algorithm>
 
+constexpr size_t initialTime = 100; //days
+
 Time::Time()
     : timeElapsed_(initialTime) {}
 
