@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-Game::Game(size_t money, size_t days, size_t final_goal)
-    : _money(money), _days(days), _final_goal(final_goal) {
+Game::Game(size_t money, size_t days, size_t finalGoal)
+    : _money(money), _days(days), _finalGoal(finalGoal) {
 }
 
 void Game::StartGame() {

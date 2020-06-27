@@ -2,12 +2,12 @@
 
 #include "Game.hpp"
 
-constexpr size_t start_money = 1'000;
-constexpr size_t game_days = 100;
-constexpr size_t final_goal = 2'000;
+constexpr size_t startMoney = 1'000;
+constexpr size_t gameDays = 100;
+constexpr size_t finalGoal = 2'000;
 
 int main() {
-    Game game(start_money, game_days, final_goal);
+    Game game(startMoney, gameDays, finalGoal);
     game.StartGame();
 
     return 0;

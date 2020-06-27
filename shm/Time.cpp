@@ -3,7 +3,7 @@
 #include <algorithm>
 
 Time& Time::operator++() {
-    ++_time_elapsed;
+    ++_timeElapsed;
 
     for (const auto& obs : _observers) {
         obs->NextDay();
