@@ -6,6 +6,13 @@
 #include "ship.hpp"
 
 class Player {
+private:
+    std::shared_ptr<Ship> ship_;
+    uint32_t availableSpace_;
+    uint32_t money_;
+
+    uint32_t CountAvailableSpace() const;
+
 public:
     Player(std::shared_ptr<Ship> ship, uint32_t money, uint32_t availableSpace);
 
@@ -14,14 +21,9 @@ public:
     uint32_t getAvailableSpace() const;
     uint32_t getSpeed() const;
 
-    Cargo* getCargo(uint32_t index) const;
+    std::shared_ptr<Cargo> getCargo(uint32_t index) const;
+    // void purchaseCargo(const Cargo* cargo, uint32_t amount, uint32_t price);
     void purchaseCargo(std::shared_ptr<Cargo> cargo, uint32_t amount, uint32_t price);
-    void sellCargo(Cargo* cargo, uint32_t price);
-
-private:
-    std::shared_ptr<Ship> ship_;
-    uint32_t availableSpace_;
-    uint32_t money_;
-
-    uint32_t CountAvailableSpace() const;
+    void sellCargo(std::shared_ptr<Cargo> cargo, uint32_t amount, uint32_t price);
+    void printCargo() const;
 };
