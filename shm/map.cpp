@@ -28,7 +28,7 @@ void Map::generateIsland(size_t howMany) {
         } while (std::any_of(islands_.begin(), islands_.end(), [=](auto island) {
             return island.getPosition() == Island::Coordinates(newX, newY);
         }));
-        islands_.emplace_back(Island(newX, newY));
+        islands_.emplace_back(newX, newY);
     }
 }
 

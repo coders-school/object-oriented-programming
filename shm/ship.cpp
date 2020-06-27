@@ -5,10 +5,12 @@
 
 Ship::Ship()
     : id_(-1) {}
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-    : capacity_(capacity), maxCrew_(maxCrew), speed_(speed), name_(name), id_(id), crew_(0) {}
+
+Ship::Ship(int maxCrew, int speed, size_t id, const std::string& name, int capacity)
+    : maxCrew_(maxCrew), speed_(speed), id_(id), name_(name), capacity_(capacity), crew_(0) {}
+
 Ship::Ship(int maxCrew, int speed, size_t id)
-    : Ship(0, maxCrew, speed, "", id) {}
+    : Ship(maxCrew, speed, id, "", 0) {}
 
 void Ship::setName(const std::string& name) {
     name_ = name;

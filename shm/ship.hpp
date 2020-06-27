@@ -9,7 +9,7 @@
 class Ship {
 public:
     Ship();
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id);
+    Ship(int maxCrew, int speed, size_t id, const std::string& name, int capacity);
     Ship(int maxCrew, int speed, size_t id);
 
     void setName(const std::string& name);
@@ -26,11 +26,11 @@ public:
     std::vector<std::shared_ptr<Cargo>> getCargos() const { return cargo_; }
 
 private:
-    size_t capacity_{};
     size_t maxCrew_{};
     size_t speed_{};
-    std::string name_{};
     const size_t id_{};
+    std::string name_{};
+    size_t capacity_{};
     size_t crew_{};
     std::vector<std::shared_ptr<Cargo>> cargo_{};
 };
