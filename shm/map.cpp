@@ -3,6 +3,10 @@
 #include <algorithm>
 #include <random>
 
+constexpr int initialAmountOfIsland = 10;
+constexpr int maxX = 10;
+constexpr int maxY = 10;
+
 Map::Map() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -22,7 +26,8 @@ Map::Map() {
             }
         }
     }
-};
+    currentPosition_ = &islandsOnMap_.front();
+}
 
 Island* Map::getIsland(const Coordinates& desiredCoordinates) {
     auto iCoordinate = std::find_if(islandsOnMap_.begin(), islandsOnMap_.end(), [desiredCoordinates](const auto& el) {

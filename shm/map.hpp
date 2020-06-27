@@ -1,13 +1,10 @@
 #pragma once
 
+#include "coordinates.hpp"
 #include "island.hpp"
 
 #include <memory>
 #include <vector>
-
-constexpr int initialAmountOfIsland = 10;
-constexpr int maxX = 10;
-constexpr int maxY = 10;
 
 class Map {
 public:
