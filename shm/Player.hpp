@@ -13,7 +13,6 @@ public:
     size_t getAvaliableSpace() const { return avaliableSpace_; };
     size_t getSpeed() const { return ship_->getSpeed(); };
     Cargo* getCargo(size_t index) const { return ship_->getCargo(index); };
-    std::vector<std::shared_ptr<Cargo>> getAllCargos() const { return ship_->getAllCargos(); }
 
 private:
     std::unique_ptr<Ship> ship_;
