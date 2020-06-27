@@ -15,23 +15,23 @@ Ship::Ship(size_t maxCrew, size_t speed, int id)
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
-void Ship::load(std::unique_ptr<Cargo> cargo) { 
-    if (auto matchCargo = findCargo(cargo.get())) {
-        *matchCargo += cargo->getAmount();
-    }
-    cargo_.push_back(std::move(cargo));
-}
+// void Ship::load(std::unique_ptr<Cargo> cargo) { 
+//     if (auto matchCargo = findCargo(cargo.get())) {
+//         *matchCargo += cargo->getAmount();
+//     }
+//     cargo_.push_back(std::move(cargo));
+// }
     //wziąć pod uwagę available space - countFreeSpace w klasie player!
     //porównanie dwóch towarów - akumulacja tych samych typów towarów
     //czy zmiesci sie caly towar (maxcapacity?)
 
-void Ship::unload(Cargo* cargo) {
-    auto matchCargo = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
-                 return ptr.get() == cargo;
-                 });
-    if (matchCargo != cargo_.end())
-        cargo_.erase(matchCargo);
-}
+// void Ship::unload(Cargo* cargo) {
+//     auto matchCargo = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
+//                  return ptr.get() == cargo;
+//                  });
+//     if (matchCargo != cargo_.end())
+//         cargo_.erase(matchCargo);
+// }
   //sprawdzić ilość czy jest 0 - usuwamy
   //ile zostanie towaru
 
@@ -75,6 +75,16 @@ size_t Ship::countAvailableSpace() const {
                                     });
     return capacity_ - loadedSpace;
 }
+// Cargo* Ship::findCargo(Cargo* cargo) {
+//     auto found = std::find_if(cargo_.begin(), cargo_.end(),
+//                              [&cargo](const auto& element) {
+//                                 return *element == *cargo;
+//                              });
+//     if (found != cargo_.end()) {
+//         return;
+//     }
+//     return nullptr;
+// }
 void Ship::removeCargo(Cargo* cargo) {
     cargo_.erase(std::find_if(cargo_.begin(), cargo_.end(),
             [&cargo](const auto& element) {

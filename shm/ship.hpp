@@ -13,8 +13,8 @@ public:
     Ship(size_t maxCrew, size_t speed, int id);
 
     void setName(const std::string& name); 
-    void load(std::unique_ptr<Cargo> cargo);
-    void unload(Cargo* cargo);
+   // void load(std::unique_ptr<Cargo> cargo);
+   // void unload(Cargo* cargo);
     
     Ship& operator-=(size_t crewman);
     Ship& operator+=(size_t crewman);
@@ -28,7 +28,7 @@ public:
     size_t countAvailableSpace() const;
     
 private:
-    Cargo* findCargo(Cargo* cargo);
+    //Cargo* findCargo(Cargo* cargo);
     void removeCargo (Cargo* cargo);
 
     size_t capacity_;
