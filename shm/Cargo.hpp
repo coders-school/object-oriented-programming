@@ -21,4 +21,6 @@ protected:
     std::string _name;
     size_t _amount;
     size_t _basePrice;
+
+    size_t _maxAmount = 255;
 };
