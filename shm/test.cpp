@@ -1,6 +1,5 @@
 #include <vector>
 #include <set>
-#include <algorithm>
 
 #include "Cargo.hpp"
 #include "Island.hpp"
