@@ -23,6 +23,7 @@ public:
     std::vector<cargoPtr> getCargo() const { return cargo_; }
     void load(cargoPtr cargo);
     cargoPtr FindMatchCargo(Cargo* cargo);
+    Cargo* getCargo(size_t index) { return cargo_[index].get(); }
     void Unload(Cargo* cargo);
     void RemoveFromStorage(Cargo* cargo);
     void RemoveFromStorageIfRotten();
