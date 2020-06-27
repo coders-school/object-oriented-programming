@@ -32,6 +32,7 @@ public:
     [[nodiscard]] size_t getId() const { return id_; }
 
     [[nodiscard]] Cargo* getCargo(size_t index) const { return storage_.at(index); }
+    [[nodiscard]] std::vector<Cargo*> getCargos() const { return storage_; }
 
 private:
     size_t capacity_;
