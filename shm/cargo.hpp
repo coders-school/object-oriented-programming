@@ -16,7 +16,7 @@ public:
     bool operator==(Cargo& cargo);
 
 private:
-    std::string name_;
-    uint32_t amount_;
-    uint32_t basePrice_;
+    uint32_t amount_ = {};
+    std::string name_ = {};
+    uint32_t basePrice_ = {};
 };

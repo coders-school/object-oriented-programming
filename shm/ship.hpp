@@ -7,9 +7,9 @@
 
 class Ship {
 public:
-    Ship();
     Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id);
     Ship(uint32_t maxCrew, uint32_t speed, uint32_t id);
+    Ship();
 
     void setName(const std::string& name);
     Ship& operator-=(uint32_t crew);
@@ -29,13 +29,12 @@ public:
     void printCargo() const;
 
 private:
-    uint32_t id_;
-    std::string name_;
-    uint32_t speed_;
-    uint32_t maxCrew_;
     uint32_t capacity_;
+    uint32_t maxCrew_;
     uint32_t crew_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    uint32_t speed_;
+    std::string name_;
+    uint32_t id_;
+    std::vector<std::shared_ptr<Cargo>> cargo_ = {};
     // std::vector<Cargo> cargo_;
 };
-
