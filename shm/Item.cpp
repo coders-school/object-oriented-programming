@@ -1,5 +1,8 @@
 #include "Item.hpp"
 
+#include <iostream>
+#include <typeinfo>
+
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), _rarity(rarity) {}
 

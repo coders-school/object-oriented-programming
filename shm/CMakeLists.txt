@@ -38,7 +38,7 @@ endif()
 project(SymulatorHandluMorskiego)
 enable_testing()
 
-set(SOURCE_FILES main.cpp Cargo.cpp Coordinates.cpp Game.cpp Island.cpp Map.cpp Observer.cpp Player.cpp Ship.cpp Store.cpp Time.cpp)  
+set(SOURCE_FILES main.cpp Alcohol.cpp Cargo.cpp Coordinates.cpp Fruit.cpp Game.cpp Island.cpp Item.cpp Map.cpp Observer.cpp Player.cpp Ship.cpp Store.cpp Time.cpp)  
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 #Temp test file

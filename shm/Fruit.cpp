@@ -1,5 +1,8 @@
 #include "Fruit.hpp"
 
+#include <iostream>
+#include <typeinfo>
+
 Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expiryDate)
     : Fruit(name, amount, basePrice, expiryDate, TIME_TO_SPOIL) {}
 
