@@ -22,16 +22,13 @@ ___
 5. <!-- .element: class="fragment fade-in" --> klasy abstrakcyjne
 6. <!-- .element: class="fragment fade-in" --> interfejsy
 7. <!-- .element: class="fragment fade-in" --> polimorfizm
-8. <!-- .element: class="fragment fade-in" --> pola i metody statyczne
+8. <!-- .element: class="fragment fade-in" --> `static`
 
 ___
 
 ### Pre-work
 
-* Dowiedzcie się czym jest problem diamentowy
-* Poczytajcie o zasadach SOLID, dotyczących pisania dobrego kodu obiektowego
-* Lektura o wzorcach projektowych z przykładami w C++ - [refactoring.guru](https://refactoring.guru/design-patterns)
-* Spróbujcie w grupie metodą Copy & Paste dorzucić system budowania cmake do projektu. W tym celu popatrzcie na dotychczasowe zadania domowe i plik CMakeLists.txt.
+* Dowiedz się czym jest problem diamentowy
 
 ___
 
@@ -39,16 +36,16 @@ ___
 
 Wykorzystajcie kod napisany podczas zajęć. Możecie też skorzystać z kodu w katalogu [solutions](solutions)
 
-Projekt grupowy - kontynuacja. Możecie zmienić grupę jeśli chcecie ;)
+Projekt grupowy - kontynuacja. Możecie zmieniać grupy ;)
 
 ___
 
 ## Organizacja prac
 
 * Jak wyglądało wasze daily?
-* Czy Code Review nie jest zaniedbane?
+* Jak Code Review nie jest zaniedbane?
 * Czy współpraca idzie gładko?
-* Zróbcie sobie retrospektywę :)
+* Zróbcie sobie retro :)
 
 ___
 
@@ -57,14 +54,14 @@ ___
 * 3 pierwsze zadania - 5 punktów
 * zadania 4, 5, 6 - 8 punktów
 * 20 punktów za dostarczenie wszystkich 6 zadań przed 05.07.2020 (niedziela) do 23:59
-* brak punktów bonusowych za dostarczenie tylko części zadań przed 05.07
+* brak punktów bonusowych za dostarczenie tylko części zadań przed 28.06.
 * 6 punktów za pracę w grupie dla każdej osoby z grupy.
 
 ___
 
 ## Zadanie 1
 
-Napisz klasę `Store`, która będzie umożliwiała dokonywanie zakupów. Wykorzystaj poniższy enum i funkcje.
+Napisz klasę `Store`, która będzie umożliwiała dokonywanie zakupów.
 
 ```cpp
 enum class Response {done, lack_of_money, lack_of_cargo, lack_of_space};
@@ -94,11 +91,11 @@ ___
 
 ## Zadanie 3
 
-Dopisz do klasy `Ship`, `Cargo` oraz `Store` metodę `nextDay()`
+Dopisz do klasy `Ship`, `Cargo` oraz `Stock` metodę `nextDay()`
 
 * Klasa `Ship`: Metoda powinna odejmować po 1 sztuce monety za każdego członka załogi.
 * Klasa `Cargo`: Metoda powinna powodować psucie się towarów.
-* Klasa `Store`: Metoda powinna zmieniać ilość towaru w sklepach.
+* Klasa `Stock`: Metoda powinna zmieniać ilość towaru w sklepach.
 
 ___
 
@@ -106,7 +103,7 @@ ___
 
 Spróbuj napisać klasę `Time`, która będzie odpowiadać za zarządzanie czasem w grze.
 
-Klasa ta powinna informować inne klasy, takie jak `Cargo`, `Ship`, `Store` o upłynięciu każdego dnia.
+Klasa ta powinna informować inne klasy, takie jak `Cargo`, `Ship`, `Stock` o upłynięciu każdego dnia.
 
 Poczytaj czym jest wzorzec projektowy [`Observer`](https://refactoring.guru/design-patterns/observer).
 
