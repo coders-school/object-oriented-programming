@@ -11,8 +11,7 @@ class Store : public Observer {
 public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };
 
-    Store(const std::vector<std::shared_ptr<Cargo>>& stock);
-    Store(Time* time);
+    Store(const std::vector<std::shared_ptr<Cargo>>& stock, Time* time);
     // override from Observer
     ~Store() override;
 

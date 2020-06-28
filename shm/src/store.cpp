@@ -3,12 +3,10 @@
 #include <algorithm>
 #include <random>
 
-Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock) : stock_(stock) {}
-
-Store::Store(Time* time) : time_(time) {
+Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock, Time* time)
+    : stock_(stock), time_(time) {
     time_->addObserver(this);
 }
-
 Store::~Store() {
     time_->removeObserver(this);
 }
