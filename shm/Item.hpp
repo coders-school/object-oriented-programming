@@ -17,6 +17,11 @@ public:
 
     Rarity getRarityLevel() const { return rarity_; }
 
+    Cargo& operator+=(const size_t amount) override;
+    Cargo& operator-=(const size_t amount) override;
+    
+    bool operator==(const Cargo& cargo) const override;
+
 private:
     const Rarity rarity_ = Rarity::common;
 };
