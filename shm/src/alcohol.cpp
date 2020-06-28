@@ -1,5 +1,6 @@
 #include "alcohol.hpp"
 
+#include <algorithm>
 #include <typeinfo>
 
 Alcohol::Alcohol(const std::string& name,
@@ -18,7 +19,7 @@ Cargo& Alcohol::operator+=(size_t amount) {
 }
 
 Cargo& Alcohol::operator-=(size_t amount) {
-    amount_ -= amount;
+    (amount_ <= amount) ? amount_ = 0 : amount_ -= amount;
     return *this;
 }
 
