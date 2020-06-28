@@ -12,7 +12,7 @@ public:
     Alcohol alco;
     Item item;
     Fruit fruit;
-    std::vector<std::shared_ptr<Cargo>> known_stock;
+    std::vector<std::shared_ptr<Cargo>> test_stock;
     Store store;
     Ship ship;
     NextDayTest()
@@ -20,12 +20,10 @@ public:
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
-          known_stock({{std::make_shared<Alcohol>(alco)},
-                      {std::make_shared<Item>(item)},
-                      {std::make_shared<Fruit>(fruit)}}),
-          store({{std::make_shared<Alcohol>(alco)},
-                 {std::make_shared<Item>(item)},
-                 {std::make_shared<Fruit>(fruit)}}),
+          test_stock({{std::make_shared<Alcohol>(alco)},
+                       {std::make_shared<Item>(item)},
+                       {std::make_shared<Fruit>(fruit)}}),
+          store(test_stock),
           ship(30, 10, 1, &player) {}
 };
 
@@ -44,14 +42,16 @@ TEST_F(NextDayTest, NextDayShouldSpoilFruit) {
 }
 
 TEST_F(NextDayTest, NextDayShouldChangeStockInStore) {
-    for (size_t i = 0; i < known_stock.size(); ++i) {
-        ASSERT_EQ(known_stock[i]->getAmount(), store.get_stock()[i]->getAmount());
-    }
+    auto original_alco_amount = test_stock[0]->getAmount();
+    auto original_item_amount = test_stock[1]->getAmount();
+    auto original_fruit_amount = test_stock[2]->getAmount();
+    ASSERT_EQ(original_alco_amount, test_stock[0]->getAmount());
+    ASSERT_EQ(original_item_amount, test_stock[1]->getAmount());
+    ASSERT_EQ(original_fruit_amount, test_stock[2]->getAmount());
     store.nextDay();
-    for (size_t i = 0; i < known_stock.size(); ++i) {
-    ASSERT_NE(known_stock[i]->getAmount(), store.get_stock()[i]->getAmount());
-    }
-    ASSERT_EQ(known_stock[0]->getAmount(), 10);
+    ASSERT_NE(original_alco_amount, test_stock[0]->getAmount());
+    ASSERT_NE(original_item_amount, test_stock[1]->getAmount());
+    ASSERT_NE(original_fruit_amount, test_stock[2]->getAmount());
 }
 
 TEST_F(NextDayTest, NextDayShouldPayCrew) {
