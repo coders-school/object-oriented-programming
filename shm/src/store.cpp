@@ -5,8 +5,13 @@
 #include <ostream>
 #include <random>
 
-Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock)
-    : stock_(stock) {}
+Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock, Time* time)
+    : stock_(stock), time_(time) {
+    time_->addObserver(this);
+}
+Store::~Store() {
+    time_->removeObserver(this);
+}
 
 Store::Response Store::buy(Cargo* cargo, Player* player) {
     if (cargo->getAmount() > player->getAvailableSpace()) {
