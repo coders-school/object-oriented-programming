@@ -41,6 +41,9 @@ jobs:
      - name: Run tests
        working-directory: shm/build
        run: ctest -V
+<<<<<<< HEAD
 >>>>>>> Update main.yml
+=======
+>>>>>>> Revert "Merge branch 'master' into homework1"
 
 
