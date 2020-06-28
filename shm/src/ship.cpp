@@ -19,12 +19,12 @@ Ship::Ship(int capacity,
       speed_(speed),
       name_(name),
       id_(id),
-      time_(time) {}
-
-Ship::Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time)
-    : Ship(0, maxCrew, speed, "", id, delegate, time) {
+      time_(time) {
     time_->addObserver(this);
 }
+
+Ship::Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time)
+    : Ship(0, maxCrew, speed, "", id, delegate, time) {}
 
 void Ship::setName(const std::string& name) {
     name_ = name;

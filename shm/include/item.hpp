@@ -7,6 +7,7 @@ public:
     enum class Rarity { common = 1, rare = 3, epic = 6, legendary = 10 };
 
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
+    ~Item() = default;
 
     // override from Cargo
     Cargo& operator+=(size_t amount) override;

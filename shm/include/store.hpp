@@ -13,7 +13,8 @@ public:
 
     Store(const std::vector<std::shared_ptr<Cargo>>& stock);
     Store(Time* time);
-    ~Store();
+    // override from Observer
+    ~Store() override;
 
     Response buy(Cargo* cargo, Player* player);
     Response sell(Cargo* cargo, Player* player);

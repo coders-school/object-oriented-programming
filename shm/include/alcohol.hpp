@@ -5,6 +5,7 @@
 class Alcohol : public Cargo {
 public:
     Alcohol(const std::string& name, size_t amount, size_t base_price, size_t percentage);
+    ~Alcohol() = default;
 
     // override from Cargo
     Cargo& operator+=(size_t amount) override;

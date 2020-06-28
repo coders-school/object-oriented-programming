@@ -23,7 +23,8 @@ public:
          Delegate* delegate,
          Time* time);
     Ship(int maxCrew, int speed, size_t id, Delegate* delegate, Time* time);
-    ~Ship();
+    // override from Observer
+    ~Ship() override;
 
     void setName(const std::string& name);
 
