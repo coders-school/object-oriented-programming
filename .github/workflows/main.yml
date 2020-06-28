@@ -1,5 +1,6 @@
 name: C++ with CMake CI
 
+
 on:
  
   push:
@@ -25,5 +26,21 @@ jobs:
      - name: Run tests
        working-directory: shm/build
        run: ctest -V
+
+
+
+on: [push, pull_request]
+
+jobs:
+  checker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Run check.sh
+      working-directory: shm
+      run: |
+        chmod +x check.sh
+        ./check.sh CMakeLists.txt
 
 
