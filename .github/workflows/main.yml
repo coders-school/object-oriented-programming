@@ -5,9 +5,11 @@ on:
   push:
     branches:
       - homework1
+      - homework2
   pull_request:
     branches:
       - homework1
+      - homework2
 
 jobs:
   shm:
