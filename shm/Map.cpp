@@ -38,5 +38,5 @@ Island* Map::getIsland(const Coordinates& coordinates) {
     if (island == islands_.end()) {
         return nullptr;
     }
-    return (*island);
+    return &(*island);
 }
