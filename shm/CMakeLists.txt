@@ -16,7 +16,7 @@ set(SRC
     map.cpp
     player.cpp
     ship.cpp
-    time.cpp)
+    timeSHM.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 add_executable(${PROJECT_NAME} main.cpp)
