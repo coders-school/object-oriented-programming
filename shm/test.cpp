@@ -3,32 +3,34 @@
 
 #include "Cargo.hpp"
 #include "Island.hpp"
+#include "Item.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
 #include "gtest/gtest.h"
 
-TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
+TEST(item, TwoItemsWithTheSameAmountShouldBeEqual)
 {
-    Cargo cargoA, cargoB;
-    cargoA += 10;
-    cargoB += 10;
-    ASSERT_EQ(cargoA, cargoB);
+    size_t amount{10};
+    Item itemA{amount, "item", 0, Item::Rarity::common}, itemB{amount, "item", 0, Item::Rarity::common};
+    itemA += 10;
+    itemB += 10;
+    ASSERT_EQ(itemA, itemB);
 }
 
-TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqual)
+TEST(item, TwoItemssWithDifferentAmountShouldNotBeEqual)
 {
-    Cargo cargoA, cargoB;
-    cargoA += 10;
-    cargoB += 100;
-    ASSERT_NE(cargoA, cargoB);
+    Item itemA{0, "itemA", 0, Item::Rarity::common}, itemB{0, "itemB", 0, Item::Rarity::common};
+    itemA += 10;
+    itemB += 100;
+    ASSERT_NE(itemA, itemB);
 }
 
-TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqualWithGetters)
+TEST(item, TwoItemsWithDifferentAmountShouldNotBeEqualWithGetters)
 {
-    Cargo cargoA(10, "CargoA", 1), cargoB(100, "CargoB", 2);
-    EXPECT_FALSE(cargoA.GetAmount() == cargoB.GetAmount());
-    cargoA += 90;
-    EXPECT_EQ(cargoA.GetAmount(), cargoB.GetAmount());
+    Item itemA(10, "itemA", 1, Item::Rarity::common), cargoB(100, "itemB", 2, Item::Rarity::common);
+    EXPECT_FALSE(itemA.GetAmount() == cargoB.GetAmount());
+    itemA += 90;
+    EXPECT_EQ(itemA.GetAmount(), cargoB.GetAmount());
 }
 
 TEST(island, twoIslandsPositionsShouldBeEqual)

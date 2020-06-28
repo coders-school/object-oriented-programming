@@ -38,8 +38,8 @@ endif()
 project(shm)
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp    Cargo.cpp Player.cpp)
-add_executable(${PROJECT_NAME}-ut test.cpp Cargo.cpp Player.cpp)
+add_executable(${PROJECT_NAME} main.cpp Item.cpp Player.cpp)
+add_executable(${PROJECT_NAME}-ut test.cpp Item.cpp Player.cpp)
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
