@@ -11,7 +11,7 @@ Cargo& Item::operator+=(size_t amount) {
 }
 
 Cargo& Item::operator-=(size_t amount) {
-    amount_ -= amount;
+    (amount_ <= amount) ? amount_ = 0 : amount_ -= amount;
     return *this;
 }
 
