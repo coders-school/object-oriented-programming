@@ -10,7 +10,7 @@
 class Store : public Observer {
 public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };
-
+  
     Store(const std::vector<std::shared_ptr<Cargo>>& stock, Time* time);
     // override from Observer
     ~Store() override;
@@ -19,6 +19,7 @@ public:
     Response sell(Cargo* cargo, Player* player);
     // override from Observer
     void nextDay() override;
+    friend std::ostream & operator<<(std::ostream & str, const Store& store);
 
 private:
     std::vector<std::shared_ptr<Cargo>> stock_;
