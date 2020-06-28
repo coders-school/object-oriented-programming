@@ -11,11 +11,11 @@ Cargo& Cargo::operator-=(size_t amount)
     return *this;
 }
 
-size_t Cargo::getAmount() const
+size_t Cargo::GetAmount() const
 {
     return amount_;
 }
-size_t Cargo::getBasePrice() const
+size_t Cargo::GetBasePrice() const
 {
     return basePrice_;
 }

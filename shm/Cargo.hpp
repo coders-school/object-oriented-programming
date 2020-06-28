@@ -1,26 +1,35 @@
 #pragma once
 
 #include <string>
+#include <utility>
 #include <vector>
 
 class Cargo
 {
 public:
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
     Cargo() : amount_(0), basePrice_(0) {}
-    Cargo(size_t amount, size_t basePrice) : amount_(amount), basePrice_(basePrice) {}
+    Cargo(size_t amount, std::string name, size_t basePrice)
+        : amount_(amount), name_(std::move(name)), basePrice_(basePrice)
+    {
+    }
+
+    virtual ~Cargo() = default;
+
+    virtual void Print() const {};
+
+    virtual std::string GetName() const {};
+
+    [[nodiscard]] virtual size_t GetAmount() const;
+    [[nodiscard]] virtual size_t GetBasePrice() const;
+
+    virtual Cargo& operator+=(size_t amount);
+    virtual Cargo& operator-=(size_t amount);
 
     friend bool operator==(const Cargo& lhs, const Cargo& rhs);
     friend bool operator!=(const Cargo& lhs, const Cargo& rhs);
-    [[nodiscard]] size_t getAmount() const;
-    [[nodiscard]] size_t getBasePrice() const;
-
 
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
 };
-
-
