@@ -40,9 +40,8 @@ TEST(island, twoIslandsPositionsShouldBeEqual)
 TEST(player, newSpaceWasSet)
 {
     Ship ship;
-    Player player(ship, 0, 0);
     size_t space = 10;
-    player.setAvailableSpace(space);
+    Player player(ship, 0, space);
     EXPECT_EQ(player.getAvailableSpace(), space);
 }
 
@@ -51,18 +50,18 @@ TEST(player, newMoneyAmountWasSet)
     Ship ship;
     Player player(ship, 0, 0);
     size_t money = 10;
-    player.setAvailableSpace(money);
-    EXPECT_EQ(player.getAvailableSpace(), money);
+    player.setMoney(money);
+    EXPECT_EQ(player.getMoney(), money);
 }
 
-TEST(Map, mapWithOneIsland)
+TEST(map, mapWithOneIsland)
 {
     Map map_(1, 1, 1);
     Island island_{Island(0, 0)};
     EXPECT_EQ(map_.getIslands().at(0).getPosition(), island_.getPosition());
 }
 
-TEST(Map, mapWith10uniqueIslands)
+TEST(map, mapWith10uniqueIslands)
 {
     Map map_;
     std::vector<Island> islands = map_.getIslands();
@@ -73,8 +72,7 @@ TEST(Map, mapWith10uniqueIslands)
     EXPECT_EQ(map_.getIslands().size(), set_.size());
 }
 
-
-TEST(Map, getIslandShouldRTeturnIsland)
+TEST(map, getIslandShouldRTeturnIsland)
 {
     Map map_;
     std::vector<Island> islands = map_.getIslands();
@@ -84,7 +82,7 @@ TEST(Map, getIslandShouldRTeturnIsland)
     EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
 }
 
-TEST(Map, getIslandShouldRTeturnCorrectIsland)
+TEST(map, getIslandShouldRTeturnCorrectIsland)
 {
     Map map_;
     std::vector<Island> islands = map_.getIslands();
@@ -93,11 +91,3 @@ TEST(Map, getIslandShouldRTeturnCorrectIsland)
 
     EXPECT_NE(map_.getIsland(corr).getPosition(), island_.getPosition());
 }
-
-
-
-
-
-
-
-

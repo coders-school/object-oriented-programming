@@ -1,27 +1,20 @@
 #pragma once
 
 #include <string>
+#include <vector>
 
 class Cargo
 {
 public:
-    Cargo& operator+=(size_t amount)
-    {
-        amount_ += amount;
-        return *this;
-    }
-    Cargo& operator-=(size_t amount)
-    {
-        amount_ -= amount;
-        return *this;
-    }
+    Cargo& operator+=(size_t amount);
+    Cargo& operator-=(size_t amount);
     Cargo() : amount_(0), basePrice_(0) {}
     Cargo(size_t amount, size_t basePrice) : amount_(amount), basePrice_(basePrice) {}
 
     friend bool operator==(const Cargo& lhs, const Cargo& rhs);
     friend bool operator!=(const Cargo& lhs, const Cargo& rhs);
-    [[nodiscard]] size_t getAmount() const { return amount_; }
-    [[nodiscard]] size_t getBasePrice() const { return basePrice_; }
+    [[nodiscard]] size_t getAmount() const;
+    [[nodiscard]] size_t getBasePrice() const;
 
 
 protected:
@@ -30,13 +23,4 @@ protected:
     size_t basePrice_;
 };
 
-bool operator==(const Cargo& lhs, const Cargo& rhs)
-{
-    return lhs.amount_ == rhs.amount_;
-}
-
-bool operator!=(const Cargo& lhs, const Cargo& rhs)
-{
-    return lhs.amount_ != rhs.amount_;
-}
 
