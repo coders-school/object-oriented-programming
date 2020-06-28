@@ -11,6 +11,12 @@ using cargoPtr = std::shared_ptr<Cargo>;
 
 class Ship : public Observer {
 public:
+    class Delegate {
+    public:
+        virtual ~Delegate() = default;
+        virtual void payCrew(size_t money) = 0;
+    };
+
     Ship();
     Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity);
     Ship(size_t id, std::string name, size_t speed);
@@ -42,4 +48,5 @@ private:
     size_t crew_;
     std::vector<cargoPtr> cargo_;
     double money_;
+    Delegate* delegate_;
 };

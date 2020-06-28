@@ -19,7 +19,7 @@ void Ship::nextDay() {
         el->nextDay();
     }
     Ship::RemoveFromStorageIfRotten();
-    money_ -= crew_;
+    delegate_ -> payCrew(crew_);
 }
 
 Ship& Ship::operator+=(const size_t& crew) {

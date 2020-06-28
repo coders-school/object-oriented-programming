@@ -13,6 +13,10 @@ void Player::addMoney(const size_t& money) {
     money_ = money;
 }
 
+void Player::payCrew(size_t money) {
+    money_ -= money;
+}
+
 size_t Player::countSpace() {
     /*size_t totalAmount = std::accumulate(ship_->getCargo().begin(), ship_->getCargo().end(), 0,
                                          [](const Cargo& item1, const Cargo& item2) {
