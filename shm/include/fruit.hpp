@@ -14,7 +14,7 @@ public:
     double getBasePrice() const override { return basePrice_; }
     size_t getTimeToRotten() const { return timeToRotten_; }
     std::string getInfo() const override;
-
+    friend std::ostream& operator<<(std::ostream& os, const Cargo* cargo);
     void nextDay() override;
 
     Fruit& operator--();

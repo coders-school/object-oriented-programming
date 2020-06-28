@@ -21,6 +21,7 @@ public:
     virtual Cargo& operator+=(const size_t& amount) = 0;
     virtual Cargo& operator-=(const size_t& amount) = 0;
     virtual bool operator==(Cargo& cargo) const = 0;
+    friend std::ostream& operator<<(std::ostream& os, const Cargo* cargo);
 
 protected:
     std::string name_;

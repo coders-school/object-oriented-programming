@@ -21,9 +21,10 @@ std::string Fruit::getInfo() const {
             << std::left << std::setw(10) << name_
             << std::left << std::setw(5) << amount_
             << std::left << std::setw(5) << getBasePrice()
-            << std::left << std::setw(5) << "-----"
+            << std::left << std::setw(5) << "----"
             << std::left << std::setw(5) << timeToRotten_
-            << std::left << std::setw(8) << "--------";
+            << std::left << std::setw(8) << "--------"
+            << '\n';
     return ss.str();
 }
 

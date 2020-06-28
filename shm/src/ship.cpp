@@ -97,8 +97,10 @@ void Ship::printCargo() const {
     if (cargo_.empty()) {
         std::cout << "Cargo is empty" << '\n';
     }
-    for (const auto& cargoIt : cargo_) {
+    /*for (const auto& cargoIt : cargo_) {
         std::cout << cargoIt -> getInfo();
-    }
-    std::cout << '\n';
+    }*/
+    std::for_each(cargo_.begin(), cargo_.end(), [](auto& it){
+        std::cout << it->getInfo();
+    });
 }
