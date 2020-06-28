@@ -20,3 +20,9 @@ Cargo& Fruit::operator-=(const size_t amount) {
 
     return *this;
 }
+
+bool Fruit::operator==(const Cargo& cargo) const {
+    return getName() == cargo.getName() &&
+    getBasePrice() == cargo.getBasePrice() &&
+    getPrice() == cargo.getPrice();
+}

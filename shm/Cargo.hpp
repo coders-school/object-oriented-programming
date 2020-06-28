@@ -14,9 +14,9 @@ public:
 
     virtual Cargo& operator+=(const size_t amount) = 0;
     virtual Cargo& operator-=(const size_t amount) = 0;
-    
-    bool operator==(const Cargo& cargo);
-    bool operator!=(const Cargo& cargo);
+
+    virtual bool operator==(const Cargo& cargo) const = 0;
+    bool operator!=(const Cargo& cargo) const;
 
 protected:
     std::string name_;
