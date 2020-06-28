@@ -5,7 +5,7 @@
 class Fruit : public Cargo {
 public:
     Fruit(const std::string& name, size_t amount, size_t basePrice, size_t timeToSpoil);
-    ~Fruit() = default;
+    ~Fruit() override = default;
 
     // override from Cargo
     Cargo& operator+=(size_t amount) override;
