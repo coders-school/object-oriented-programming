@@ -4,7 +4,7 @@
 #include <iostream>
 
 Ship::Ship()
-    : id_(-1) {}
+    : id_(0) {}
 
 Ship::Ship(int maxCrew, int speed, size_t id, const std::string& name, int capacity)
     : maxCrew_(maxCrew), speed_(speed), id_(id), name_(name), capacity_(capacity), crew_(0) {}
