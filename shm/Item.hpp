@@ -26,6 +26,8 @@ public:
 
     bool operator==(const Cargo& src) const override;
 
+    std::ostream& showCargo(std::ostream& out) const override;
+
 private:
     const Rarity _rarity{Rarity::epic};
     size_t _maxAmount = 255;

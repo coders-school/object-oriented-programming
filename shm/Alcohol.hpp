@@ -22,6 +22,8 @@ public:
 
     bool operator==(const Cargo& src) const override;
 
+    std::ostream& showCargo(std::ostream& out) const override;
+
 private:
     const size_t _power;
     size_t _maxAmount = 255;

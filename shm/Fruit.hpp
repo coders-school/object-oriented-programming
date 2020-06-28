@@ -25,6 +25,8 @@ public:
 
     bool operator==(const Cargo& src) const override;
 
+    std::ostream& showCargo(std::ostream& out) const override;
+
 private:
     size_t _timeToSpoil;
     const size_t _expiryDate;

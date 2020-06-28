@@ -26,6 +26,7 @@ Cargo& Item::operator-=(const size_t amount) {
     _amount -= amount;
     return *this;
 }
+
 bool Item::operator==(const Cargo& src) const {
     if (typeid(*this) != typeid(src))
         return false;
@@ -35,4 +36,29 @@ bool Item::operator==(const Cargo& src) const {
            item.getAmount() == _amount &&
            item.getBasePrice() == _basePrice &&
            item.getRarity() == _rarity;
+}
+
+std::ostream& operator<<(std::ostream& out, const Item::Rarity& rarity) {
+    switch (rarity) {
+    case Item::Rarity::common:
+        out << "common";
+        break;
+    case Item::Rarity::rare:
+        out << "rare";
+        break;
+    case Item::Rarity::epic:
+        out << "epic";
+        break;
+    case Item::Rarity::legendary:
+        out << "legendary";
+        break;
+    default:
+        out << "common";
+        break;
+    }
+    return out;
+}
+
+std::ostream& Item::showCargo(std::ostream& out) const {
+    return out << "name: " << _name << ", amount: " << _amount << ", base price: " << _basePrice << ", rarity: " << _rarity << '\n';
 }

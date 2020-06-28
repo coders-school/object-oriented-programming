@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+
 #include "Cargo.hpp"
 #include "Player.hpp"
 
@@ -14,5 +16,12 @@ public:
     Response Buy(Cargo* cargo, size_t amount, Player* player);
     Response Sell(Cargo* cargo, size_t amount, Player* player);
 
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
+    // Temporary added - operator << test
+    //begin
+    void CreateTestCargo();
+    //end
+
 private:
+    std::vector<std::shared_ptr<Cargo>> _cargo;
 };

@@ -17,6 +17,8 @@ public:
 
     virtual bool operator==(const Cargo& src) const = 0;
 
+    virtual std::ostream& showCargo(std::ostream& out) const = 0;
+
 protected:
     std::string _name;
     size_t _amount;

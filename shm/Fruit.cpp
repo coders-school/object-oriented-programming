@@ -49,3 +49,7 @@ bool Fruit::operator==(const Cargo& src) const {
            fruit.getExpiryDate() == _expiryDate &&
            fruit.getTimeToSpoil() == _timeToSpoil;
 }
+
+std::ostream& Fruit::showCargo(std::ostream& out) const {
+    return out << "name: " << _name << ", amount: " << _amount << ", base price: " << _basePrice << ", expiry date: " << _expiryDate << ", time to spoil: " << _timeToSpoil << '\n';
+}
