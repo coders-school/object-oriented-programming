@@ -25,10 +25,10 @@ TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqual)
 
 TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqualWithGetters)
 {
-    Cargo cargoA(10, 1), cargoB(100, 2);
-    EXPECT_FALSE(cargoA.getAmount() == cargoB.getAmount());
+    Cargo cargoA(10, "CargoA", 1), cargoB(100, "CargoB", 2);
+    EXPECT_FALSE(cargoA.GetAmount() == cargoB.GetAmount());
     cargoA += 90;
-    EXPECT_EQ(cargoA.getAmount(), cargoB.getAmount());
+    EXPECT_EQ(cargoA.GetAmount(), cargoB.GetAmount());
 }
 
 TEST(island, twoIslandsPositionsShouldBeEqual)
