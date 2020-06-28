@@ -7,11 +7,13 @@ public:
     enum class Rarity { common = 1, rare = 3, epic = 6, legendary = 10 };
 
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
+    ~Item() override = default;
 
     // override from Cargo
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo& other) const override;
+    // override from Observer
     void nextDay() override {}
 
     size_t getPrice() const override { return basePrice_ * static_cast<size_t>(rarity_); }
