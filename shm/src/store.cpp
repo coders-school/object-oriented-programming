@@ -1,9 +1,12 @@
 #include "store.hpp"
 
 #include <algorithm>
+#include <iomanip>
+#include <ostream>
 #include <random>
 
-Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock) : stock_(stock) {}
+Store::Store(const std::vector<std::shared_ptr<Cargo>>& stock)
+    : stock_(stock) {}
 
 Store::Response Store::buy(Cargo* cargo, Player* player) {
     if (cargo->getAmount() > player->getAvailableSpace()) {
@@ -78,4 +81,15 @@ void Store::nextDay() {
             *cargo_ptr -= distrib2(gen);
         }
     }
+}
+
+std::ostream& operator<<(std::ostream& str, const Store& store) {
+    std::string dash(60, '-');
+    for (const auto& cargo_ptr : store.stock_) {
+        str << "Type: " << std::setw(10) << cargo_ptr->getName() << std::setw(3) << "| ";
+        str << "Amount: " << std::setw(10) << cargo_ptr->getAmount() << std::setw(3) << "| ";
+        str << "Price: " << std::setw(10) << cargo_ptr->getPrice() << std::setw(3) << "| ";
+        str << "\n" << dash << "\n";
+    }
+    return str;
 }
