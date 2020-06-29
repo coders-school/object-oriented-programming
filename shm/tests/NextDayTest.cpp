@@ -5,9 +5,11 @@
 #include "player.hpp"
 #include "ship.hpp"
 #include "store.hpp"
+#include "time.hpp"
 
 class NextDayTest : public ::testing::Test {
 public:
+    Time time;
     Player player;
     Alcohol alco;
     Item item;
@@ -16,15 +18,16 @@ public:
     Store store;
     Ship ship;
     NextDayTest()
-        : player(std::make_unique<Ship>(ship), 100, 50),
+        : time(),
+          player(std::make_unique<Ship>(ship), 100, 50),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
           test_stock({{std::make_shared<Alcohol>(alco)},
-                       {std::make_shared<Item>(item)},
-                       {std::make_shared<Fruit>(fruit)}}),
-          store(test_stock),
-          ship(30, 10, 1, &player) {}
+                      {std::make_shared<Item>(item)},
+                      {std::make_shared<Fruit>(fruit)}}),
+          store(test_stock, &time),
+          ship(30, 10, 1, &player, &time) {}
 };
 
 TEST_F(NextDayTest, NextDayShouldDoNothingToAlcohol) {
