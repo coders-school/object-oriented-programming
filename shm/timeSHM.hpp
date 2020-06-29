@@ -4,7 +4,7 @@
 
 #include "observer.hpp"
 
-class Time : public Observer {
+class Time {
 public:
     Time();
 
