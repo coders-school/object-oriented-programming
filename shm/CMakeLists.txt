@@ -11,6 +11,9 @@ set(SOURCES
     island.cpp
     map.cpp
     player.cpp
-    ship.cpp)
+    ship.cpp
+    fruit.cpp
+    item.cpp
+    alcohol.cpp)
 
 add_executable(${PROJECT_NAME} main.cpp ${SOURCES})
