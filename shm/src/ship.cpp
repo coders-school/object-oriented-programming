@@ -31,11 +31,19 @@ void Ship::setName(const std::string& name) {
 }
 
 Ship& Ship::operator-=(size_t crew) {
-    crew_ -= crew;
+    if (crew_ < crew) {
+        crew_ = 0;
+    } else {
+        crew_ -= crew;
+    }
     return *this;
 }
 Ship& Ship::operator+=(size_t crew) {
+    if (crew_ + crew > maxCrew_) {
+        crew_ = maxCrew_;
+    } else {
     crew_ += crew;
+    }
     return *this;
 }
 
