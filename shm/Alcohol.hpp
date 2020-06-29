@@ -24,6 +24,8 @@ public:
 
     std::ostream& showCargo(std::ostream& out) const override;
 
+    size_t getMaxAmount() const override { return _maxAmount; };
+
 private:
     const size_t _power;
     size_t _maxAmount = 255;

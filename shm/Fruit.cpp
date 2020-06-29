@@ -44,7 +44,6 @@ bool Fruit::operator==(const Cargo& src) const {
 
     auto fruit = static_cast<const Fruit&>(src);
     return fruit.getName() == _name &&
-           fruit.getAmount() == _amount &&
            fruit.getBasePrice() == _basePrice &&
            fruit.getExpiryDate() == _expiryDate &&
            fruit.getTimeToSpoil() == _timeToSpoil;
