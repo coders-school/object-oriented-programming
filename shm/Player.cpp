@@ -15,16 +15,17 @@ size_t Player::getMoney() const {
 Ship* Player::getShip() const {
     return ship_->Get()}
 
-size_t getSpeed() const {
+size_t Player::getSpeed() const {
     return ship_.getSpeed();
 }
 
-Cargo* getCargo(size_t index) const{
-    return _ship->getCargo(index).get();
+Cargo* Player::getCargo(size_t index) const {
+    return ship_->getCargo(index).get();
 }
 
 void Player::checkAvailableSpace()
 {
-    size_t usedSpace = std::accumulate(_ship->getCargos().begin(), _ship->getCargos().end(), 0, [](size_t total, auto item) { return total + item->getAmount(); });
-    _availableSpace = ship->getCapacity() - cargoSize;
+    size_t usedSpace = std::accumulate(ship_->getCargo().begin(), ship_->getCargo().end(), 0, 
+    [](size_t total, auto item) { return total + item->getAmount(); });
+    available_space_ = ship->getCapacity() - usedSpace;
 }
