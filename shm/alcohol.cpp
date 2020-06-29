@@ -3,8 +3,8 @@
 
 #include <string>
 
-Alcohol::Alcohol(std::string name, size_t amount, size_t basePrice, size_t alcohol)
-    : Cargo(name, amount, basePrice), alcohol_(alcohol) {
+Alcohol::Alcohol(std::string name, size_t amount, size_t basePrice, size_t alcoholPower)
+    : Cargo(name, amount, basePrice), alcoholPower_(alcoholPower) {
 }
 
 bool Alcohol::equals(const Cargo& rhs) const {
@@ -12,5 +12,5 @@ bool Alcohol::equals(const Cargo& rhs) const {
     if (!rAlcohol)
         return false;
     return (name_ == rAlcohol->name_ &&
-            alcohol_ == rAlcohol->alcohol_);
+            alcoholPower_ == rAlcohol->alcoholPower_);
 }
