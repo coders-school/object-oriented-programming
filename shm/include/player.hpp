@@ -3,9 +3,10 @@
 
 #include "ship.hpp"
 
-class Player {
+class Player : public Ship::Delegate {
 public:
     Player(std::shared_ptr<Ship> ship, size_t money);
+    virtual ~Player() = default;
 
     std::shared_ptr<Ship> getShip() const { return ship_; }
     size_t getMoeny() const { return money_; }
@@ -15,7 +16,10 @@ public:
 
     void setShip(const std::shared_ptr<Ship>& ship);
     void addMoney(const size_t& money);
+
+    void payCrew(size_t money) override;
     void subtractMoney(const size_t& money);
+
 
 private:
     std::shared_ptr<Ship> ship_;

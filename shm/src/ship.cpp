@@ -1,3 +1,4 @@
+#include "fruit.hpp"
 #include "ship.hpp"
 
 #include <algorithm>
@@ -18,7 +19,7 @@ void Ship::nextDay() {
         el->nextDay();
     }
     Ship::RemoveFromStorageIfRotten();
-    money_ -= crew_;
+    delegate_ -> payCrew(crew_);
 }
 
 Ship& Ship::operator+=(const size_t& crew) {
@@ -36,38 +37,23 @@ Ship& Ship::operator-=(const size_t& crew) {
 }
 
 void Ship::load(std::shared_ptr<Cargo> cargo) {
-    if (auto match_cargo = FindMatchCargo(cargo.get())) {
-        *match_cargo += cargo->getAmount();
-        return;
+    for (auto el : cargo_) {
+        if (*el == *cargo) {
+            *el +=cargo->getAmount();
+            return;
+        }
     }
     cargo_.push_back(std::move(cargo));
 }
 
 //TODO: use == operators of each classes to comparison
-cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
-    auto looked_for = std::find(cargo_.begin(), cargo_.end(), *cargo);
-    if (looked_for != cargo_.end()) {
-        return *looked_for;
+/*cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
+    for (auto el : cargo_) {
+        if (*el == *cargo) {
+            return el;
+        }
     }
-    // for (auto el : cargo_) {
-    //     if (el->getName() == "Fruit") {
-    //         if (el->getName() == cargo->getName() &&
-    //             el->getBasePrice() == cargo->getBasePrice() &&
-    //             el->getExpiryDate() == cargo->getExpiryDate())
-    //             return el.get();
-    //     } else if (el->getName() == "Alcohol") {
-    //         if (el->getName() == cargo->getName() &&
-    //             el->getBasePrice() == cargo->getBasePrice() &&
-    //             el->getPercentage() == cargo->getPercentage())
-    //             return el.get();
-    //     } else {
-    //         if (el->getName() == cargo->getName() &&
-    //             el->getBasePrice() == cargo->getBasePrice() &&
-    //             el->getRarity() == cargo->getRarity())
-    //             return el.get();
-    //     }
-    // }
-}
+}*/
 
 void Ship::Unload(Cargo* cargo) {
     RemoveFromStorage(cargo);
@@ -84,8 +70,8 @@ void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
                                 cargo_.end(),
                                 [](auto& el) {
-                                    if (el->getName() == "Fruit") {
-                                        return el->getTimeToRotten() == 0;
+                                    if (typeid(el).name() == "Fruit") {
+                                        return std::dynamic_pointer_cast<Fruit>(el)->getTimeToRotten() == 0;
                                     }
                                     return false;
                                 }),
