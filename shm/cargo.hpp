@@ -19,4 +19,5 @@ protected:
     std::string name_{};
     size_t amount_{};
     size_t basePrice_{};
+    virtual bool equals(const Cargo& rhs) const = 0;
 };

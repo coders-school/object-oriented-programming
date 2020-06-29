@@ -18,5 +18,5 @@ public:
 
 private:
     size_t alcohol_;
-    // bool equals(const Cargo& rhs) const override;
+    bool equals(const Cargo& rhs) const override;
 };

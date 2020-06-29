@@ -6,7 +6,7 @@ constexpr size_t expiryDate_{10};
 class Fruit : public Cargo {
 public:
     Fruit(std::string name, size_t amount, size_t basePrice, size_t timeToExpire);
-    Fruit& operator--();
+    Fruit& operator--(); // private?
 
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
@@ -17,5 +17,5 @@ public:
 
 private:
     size_t timeToExpire_;
-    // bool equals(const Cargo& rhs) const override;
+    bool equals(const Cargo& rhs) const override;
 };

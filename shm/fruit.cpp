@@ -15,11 +15,11 @@ Fruit& Fruit::operator--() {
     return *this;
 }
 
-// bool Fruit::equals(const Cargo& rhs) const {
-//     const Fruit* rFruit = dynamic_cast<const Fruit*>(&rhs);
-//     if (!rFruit) {
-//         return false;
-//     }
-//     return (name_ == rFruit->name_ &&
-//             timeToExpire_ == rFruit->timeToExpire_);
-// }
+bool Fruit::equals(const Cargo& rhs) const {
+    const Fruit* rFruit = dynamic_cast<const Fruit*>(&rhs);
+    if (!rFruit) {
+        return false;
+    }
+    return (name_ == rFruit->name_ &&
+            timeToExpire_ == rFruit->timeToExpire_);
+}

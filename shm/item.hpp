@@ -24,5 +24,5 @@ public:
 
 private:
     Rarity rarity_;
-    // bool equals(const Cargo& rhs) const override;
+    bool equals(const Cargo& rhs) const override;
 };
