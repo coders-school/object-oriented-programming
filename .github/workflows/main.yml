@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: C/C++ C
 
 on:
   push:
@@ -9,13 +9,14 @@ on:
 jobs:
   checker:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@master
-    - name: Run check.sh
-      working-directory: shm
-      run: |
-        chmod +x check.sh
-        ./shm CMakeLists.txt
+      - name: Cmake
+        run: |
+            mkdir build
+            cd build
+            cmake ..
+            make -j
+        
+
