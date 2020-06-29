@@ -20,7 +20,6 @@ public:
     // override from Observer
     void nextDay() override;
     friend std::ostream & operator<<(std::ostream & str, const Store& store);
-    std::vector<std::shared_ptr<Cargo>> get_stock() const { return stock_; };
 
 private:
     std::vector<std::shared_ptr<Cargo>> stock_;
