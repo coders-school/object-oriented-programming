@@ -19,7 +19,7 @@ public:
     Ship ship;
     NextDayTest()
         : time(),
-          player(std::make_unique<Ship>(ship), 100, 50),
+          player(std::make_unique<Ship>(30, 10, 1, &player, &time), 100, 50),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
@@ -33,7 +33,13 @@ public:
 TEST_F(NextDayTest, NextDayShouldDoNothingToAlcohol) {
     auto temp_alco = alco;
     alco.nextDay();
-    ASSERT_EQ(alco, temp_alco);
+    ASSERT_EQ(temp_alco, alco);
+}
+
+TEST_F(NextDayTest, NextDayShouldDoNothingToItem) {
+    auto temp_item = item;
+    item.nextDay();
+    ASSERT_EQ(temp_item, item);
 }
 
 TEST_F(NextDayTest, NextDayShouldSpoilFruit) {
