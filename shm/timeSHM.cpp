@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-constexpr size_t initialTime = 100; //days
+constexpr size_t initialTime = 1; //days
 
 Time::Time()
     : timeElapsed_(initialTime) {}
