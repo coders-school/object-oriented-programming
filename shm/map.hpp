@@ -13,9 +13,6 @@ public:
     Map();
     Island* getIsland(const Island::Coordinates& coordinates);
 
-    // for testing
-    std::vector<Island> getIslands_() const { return islands_; };
-
 private:
     Island* currentPosition_{};
     std::vector<Island> islands_{};
