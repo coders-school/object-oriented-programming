@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: C++ with CMake CI
 
 on: [push, pull_request]
@@ -5,6 +6,21 @@ on: [push, pull_request]
 jobs:
   checker:
     runs-on: ubuntu-latest
+=======
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ homeworkOOP* ]
+  pull_request:
+    branches: [ homeworkOOP* ]
+
+jobs:
+  checker:
+
+    runs-on: ubuntu-latest
+
+>>>>>>> directory of cmakelists
     steps:
     - name: Check out code
       uses: actions/checkout@master
@@ -12,7 +28,11 @@ jobs:
       working-directory: shm
       run: |
         chmod +x check.sh
+<<<<<<< HEAD
         sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
 
 # In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
+=======
+        ./shm CMakeLists.txt
+>>>>>>> directory of cmakelists
