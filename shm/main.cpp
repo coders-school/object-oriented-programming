@@ -6,7 +6,7 @@ constexpr size_t startMoney = 1'000;
 constexpr size_t gameDays = 100;
 constexpr size_t finalGoal = 2'000;
 
-// Temporary added 
+// Temporary added
 #include "Alcohol.hpp"
 #include "Cargo.hpp"
 #include "Fruit.hpp"
@@ -35,10 +35,21 @@ void SampleTest1() {
 
     delete pRHS;
 }
-// Temporary added 
+// Temporary added
+
+// Temporary added - operator << test
+//begin
+#include "Store.hpp"
+void OperatorTest1() {
+    Store store;
+    store.CreateTestCargo();
+    std::cout << store << "\n";
+}
+//end
 
 int main() {
     SampleTest1();
+    OperatorTest1();  // Temporary added - operator << test
 
     Game game(startMoney, gameDays, finalGoal);
     game.StartGame();
