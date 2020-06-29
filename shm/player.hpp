@@ -2,7 +2,7 @@
 
 
 #include <memory>
-
+#include "coordinates.hpp"
 #include "cargo.hpp"
 #include "ship.hpp"
 
@@ -15,6 +15,7 @@ public:
     size_t getAvailableSpace() const { return availableSpace_; }
     size_t getSpeed() const;
     Cargo* getCargo(size_t index) const;
+    Coordinates& ActualPosition;
 
 private:
     std::unique_ptr<Ship> ship_;

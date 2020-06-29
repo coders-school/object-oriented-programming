@@ -3,7 +3,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-
+#include "coordinates.hpp"
 #include "cargo.hpp"
 
 class Ship {
@@ -11,7 +11,6 @@ public:
     Ship();
     Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id);
     Ship(size_t maxCrew, size_t speed, int id);
-
     void setName(const std::string& name); 
    // void load(std::unique_ptr<Cargo> cargo);
    // void unload(Cargo* cargo);
@@ -26,11 +25,11 @@ public:
     int getId() const;
     Cargo* getCargo(size_t index) const;
     size_t countAvailableSpace() const;
+    Coordinates& ShipPosition; 
     
 private:
     //Cargo* findCargo(Cargo* cargo);
     void removeCargo (Cargo* cargo);
-
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
