@@ -26,7 +26,7 @@ void Player::countAvailableSpace() {
     for (const auto& cargo : ship_->getCargo()) {
         amount += cargo->getAmount();
     }
-    
+
     int available = ship_->getCapacity() - amount;
     if (available < 0) {
         availableSpace_ = 0;
@@ -36,5 +36,9 @@ void Player::countAvailableSpace() {
 }
 
 void Player::payCrew(size_t money) {
-    money_ -= money;
+    if (money_ < money) {
+        money_ = -1;
+    } else {
+        money_ -= money;
+    }
 }
