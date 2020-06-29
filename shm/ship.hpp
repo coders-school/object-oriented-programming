@@ -35,6 +35,6 @@ private:
     uint32_t speed_;
     std::string name_;
     uint32_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_ = {};
+    std::vector<std::shared_ptr<Cargo>> cargo_;
     // std::vector<Cargo> cargo_;
 };
