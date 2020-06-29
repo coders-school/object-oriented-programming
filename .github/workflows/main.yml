@@ -18,4 +18,4 @@ jobs:
       working-directory: shm
       run: |
         chmod +x check.sh
-        ./check.sh CMakeLists.txt
+        ./shm CMakeLists.txt
