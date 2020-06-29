@@ -10,7 +10,11 @@ void Player::setShip(const std::shared_ptr<Ship>& ship) {
 }
 
 void Player::addMoney(const size_t& money) {
-    money_ = money;
+    money_ = money;  // tu nie powinno być +=?
+}
+
+void Player::subtractMoney(const size_t& money) {
+    money_ -= money;
 }
 
 void Player::payCrew(size_t money) {
@@ -18,11 +22,10 @@ void Player::payCrew(size_t money) {
 }
 
 size_t Player::countSpace() {
-    /*size_t totalAmount = std::accumulate(ship_->getCargo().begin(), ship_->getCargo().end(), 0,
-                                         [](const Cargo& item1, const Cargo& item2) {
-                                             return item1.getAmount() + item2.getAmount();
-                                         });
+    size_t totalAmount = std::accumulate(
+        ship_->getCargo().begin(), ship_->getCargo().end(), 0, [](const Cargo& item1, const Cargo& item2) {
+            return (item1.getAmount() + item2.getAmount());
+        });
 
-    return ship_->getCapacity() - totalAmount;*/
-    return 10;
+    return ship_->getCapacity() - totalAmount;
 }

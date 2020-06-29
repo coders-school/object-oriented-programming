@@ -12,17 +12,20 @@ set(SOURCES
     src/alcohol.cpp
     src/cargo.cpp
     src/fruit.cpp
+    src/game.cpp
     src/island.cpp
     src/item.cpp
     src/map.cpp
     src/player.cpp
     src/ship.cpp
+    src/time.cpp
 )
 
 set(HEADER_FILES
     include/alcohol.hpp
     include/cargo.hpp
     include/fruit.hpp
+    include/game.hpp
     include/island.hpp
     include/item.hpp
     include/map.hpp

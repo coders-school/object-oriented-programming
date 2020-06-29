@@ -1,4 +1,4 @@
-#include <iostream>
+#include "game.hpp"
 
 #include "cargo.hpp"
 #include "fruit.hpp"
@@ -18,5 +18,14 @@ int main() {
     Ship ship(01, "sheeeep", 40, 50, 50);
     ship.load(fruitPtr);
     //std::cout << fruit;
+
+  /*
+    constexpr size_t start_money = 1'000;
+    constexpr size_t game_days = 100;
+    constexpr size_t final_goal = 2'000;
+
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
+*/
     return 0;
 }
