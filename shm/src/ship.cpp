@@ -2,6 +2,7 @@
 #include "ship.hpp"
 
 #include <algorithm>
+#include <iostream>
 
 Ship::Ship()
     : id_(-1) {}
@@ -18,6 +19,8 @@ void Ship::nextDay() {
     for (auto el : cargo_) {
         el->nextDay();
     }
+    //Ship::RemoveFromStorageIfRotten();
+    //money_ -= crew_;
     Ship::RemoveFromStorageIfRotten();
     delegate_ -> payCrew(crew_);
 }
@@ -37,6 +40,10 @@ Ship& Ship::operator-=(const size_t& crew) {
 }
 
 void Ship::load(std::shared_ptr<Cargo> cargo) {
+    /*if (auto match_cargo = FindMatchCargo(cargo.get())) {
+        *match_cargo += cargo->getAmount();
+        return;
+    }*/
     for (auto el : cargo_) {
         if (*el == *cargo) {
             *el +=cargo->getAmount();
@@ -47,26 +54,26 @@ void Ship::load(std::shared_ptr<Cargo> cargo) {
 }
 
 //TODO: use == operators of each classes to comparison
-/*cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
+cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
     for (auto el : cargo_) {
         if (*el == *cargo) {
             return el;
         }
     }
-}*/
-
-void Ship::Unload(Cargo* cargo) {
-    RemoveFromStorage(cargo);
 }
 
-void Ship::RemoveFromStorage(Cargo* cargo) {
+/*void Ship::Unload(Cargo* cargo) {
+    RemoveFromStorage(cargo);
+}*/
+
+/*void Ship::RemoveFromStorage(Cargo* cargo) {
     cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
                               [cargo](const auto& el) {
                                   return *el == *cargo;
                               }));
-}
+}*/
 
-void Ship::RemoveFromStorageIfRotten() {
+/*void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
                                 cargo_.end(),
                                 [](auto& el) {
@@ -76,4 +83,16 @@ void Ship::RemoveFromStorageIfRotten() {
                                     return false;
                                 }),
                  cargo_.end());
+}*/
+
+void Ship::printCargo() const {
+    if (cargo_.empty()) {
+        std::cout << "Cargo is empty" << '\n';
+    }
+    /*for (const auto& cargoIt : cargo_) {
+        std::cout << cargoIt -> getInfo();
+    }*/
+    std::for_each(cargo_.begin(), cargo_.end(), [](auto& it){
+        std::cout << it->getInfo();
+    });
 }

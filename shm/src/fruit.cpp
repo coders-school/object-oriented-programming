@@ -15,6 +15,19 @@ void Fruit::nextDay() {
     operator--();
 }
 
+std::string Fruit::getInfo() const {
+    auto ss = std::stringstream {};
+    ss
+            << std::left << std::setw(10) << name_
+            << std::left << std::setw(5) << amount_
+            << std::left << std::setw(5) << getBasePrice()
+            << std::left << std::setw(5) << "----"
+            << std::left << std::setw(5) << timeToRotten_
+            << std::left << std::setw(8) << "--------"
+            << '\n';
+    return ss.str();
+}
+
 Fruit& Fruit::operator--() {
     if (timeToRotten_ > 0) {
         timeToRotten_--;

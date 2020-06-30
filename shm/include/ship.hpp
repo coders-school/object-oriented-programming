@@ -39,6 +39,9 @@ public:
     void setName(const std::string& name);
     void nextDay() override;
 
+    void printCargo() const;
+    friend std::ostream& operator<<(std::ostream& os, const Cargo* cargo);
+
     Ship& operator+=(const size_t& crew);
     Ship& operator-=(const size_t& crew);
 

@@ -13,6 +13,7 @@ public:
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }
     double getVolume() const { return volume_; }
+    std::string getInfo() const override;
 
     void nextDay() override {}
 
