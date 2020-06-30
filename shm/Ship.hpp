@@ -2,28 +2,19 @@
 
 #include <string>
 
+#include "Cargo.hpp"
+
 class Ship
 {
 public:
-    Ship() : id_(-1) {}
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-        : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id)
-    {
-    }
-    Ship(int maxCrew, int speed, size_t id) : Ship(0, maxCrew, speed, "", id) {}
+    Ship();
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id);
+    Ship(int maxCrew, int speed, size_t id);
 
-    void setName(const std::string& name) { name_ = name; }
+    void setName(const std::string& name);
 
-    Ship& operator-=(size_t num)
-    {
-        if(crew_ >= num) crew_-= num;
-        return *this;
-    }
-    Ship& operator+=(size_t num)
-    {
-        crew_ += num;
-        return *this;
-    }
+    Ship& operator-=(size_t num);
+    Ship& operator+=(size_t num);
 
     [[nodiscard]] size_t getCapacity() const { return capacity_; }
     [[nodiscard]] size_t getMaxCrew() const { return maxCrew_; }

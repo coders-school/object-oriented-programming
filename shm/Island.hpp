@@ -16,4 +16,4 @@ private:
     Coordinates position_;
 };
 
-
+bool operator==(Island& lhs, Island& rhs);
