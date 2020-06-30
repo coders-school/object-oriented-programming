@@ -52,7 +52,6 @@ TEST(player, newSpaceWasSet)
     EXPECT_EQ(player.getAvailableSpace(), space);
 }
 
-
 TEST(player, newMoneyAmountWasSet)
 {
     Ship ship;
