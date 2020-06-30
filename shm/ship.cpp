@@ -2,14 +2,19 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include <string>
 
 Ship::Ship() : id_(-1) {}
 
-Ship::Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+Ship::Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id, Time* time)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time) {
+    time_->registerObserver(this);
+}
 
-Ship::Ship(uint32_t maxCrew, uint32_t speed, uint32_t id) : Ship(0, maxCrew, speed, "", id) {}
+Ship::~Ship() {
+    time_->unregisterObserver(this);
+}
 
 void Ship::setName(const std::string& name) {
     name_ = name;
@@ -76,6 +81,7 @@ void Ship::load(std::shared_ptr<Cargo> cargo) {
         }
     }
     cargo_.emplace_back(cargo);
+    time_->registerObserver(cargo_.back().get());
 }
 
 void Ship::unload(std::shared_ptr<Cargo> cargo, uint32_t amount) {
@@ -96,4 +102,8 @@ void Ship::printCargo() const {
     std::for_each(cargo_.begin(), cargo_.end(), [](const auto& cargo) {
         std::cout << cargo->getName() << "  " << cargo->getAmount() << "  " << cargo->getBasePrice() << "\n";
     });
+}
+
+void Ship::nextDay() {
+    std::cout << "Next day in: " << getName() << " \n";
 }

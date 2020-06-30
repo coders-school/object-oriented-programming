@@ -3,16 +3,17 @@
 #include "player.hpp"
 #include "ship.hpp"
 #include "store.hpp"
+#include "time.hpp"
+
+#include <iostream>
+#include <memory>
+#include <string>
 
 int main() {
-    Ship blackPearl(200, 50, 180, "black pearl", 1);
-    std::shared_ptr<Ship> ptr = std::make_shared<Ship>(200, 50, 180, "black pearl", 1);
-
-    Player pawellos(ptr, 300, 70);
-    std::cout << pawellos.getMoney() << "\n";
-    std::cout << pawellos.getAvailableSpace() << "\n";
-    std::cout << pawellos.getSpeed() << "\n";
-    std::cout << pawellos.getShip()->getName() << "\n";
+    // std::cout << pawellos.getMoney() << "\n";
+    // std::cout << pawellos.getAvailableSpace() << "\n";
+    // std::cout << pawellos.getSpeed() << "\n";
+    // std::cout << pawellos.getShip()->getName() << "\n";
     /* std::cout << blackPearl.getName() << "\n";
     std::cout << blackPearl.getId() << "\n";
     std::cout << blackPearl.getMaxCrew() << "\n";
@@ -26,8 +27,19 @@ int main() {
     std::cout << blackPearl.getCrew() << "\n";
     */
 
-    Cargo Chocolate(5, "milka", 3);
-    Cargo IceCream(6, "scholler", 8);
+    Time gameTime;
+
+    Ship blackPearl(200, 50, 180, "black pearl", 1, &gameTime);
+    std::shared_ptr<Ship> ptr = std::make_shared<Ship>(200, 50, 180, "black pearl", 1, &gameTime);
+
+    Player pawellos(ptr, 300, 70);
+
+    Cargo bananas(10, "Bananas", 100, &gameTime);
+    Cargo oranges(50, "Oranges", 10, &gameTime);
+    Cargo apples(200, "Apples", 50, &gameTime);
+
+    Cargo Chocolate(5, "milka", 3, &gameTime);
+    Cargo IceCream(6, "scholler", 8, &gameTime);
 
     std::shared_ptr<Cargo> ptrCargo1 = std::make_shared<Cargo>(Chocolate);
     std::shared_ptr<Cargo> ptrCargo2 = std::make_shared<Cargo>(IceCream);
@@ -39,7 +51,7 @@ int main() {
     std::cout << "Money of player: " << pawellos.getMoney() << '\n';
     std::cout << "Available place on ship: " << pawellos.getAvailableSpace() << '\n';
     Store biedronka;
-    biedronka.generateCargo();
+    biedronka.generateCargo(&gameTime);
     biedronka.printCargo();
     std::cout << "---------After buy------ \n\n";
     // Player* ptrPlayer = &pawellos;
@@ -65,6 +77,34 @@ int main() {
     std::cout << "Money of player: " << pawellos.getMoney() << '\n';
     std::cout << "Available place on ship: " << pawellos.getAvailableSpace() << '\n';
     biedronka.printCargo();
+
+    std::cout << "\n**************\n";
+
+    Ship ship01(100, 20, 21, "Ship #1", 1, &gameTime);
+
+    std::shared_ptr<Cargo> bananasPtr = std::make_shared<Cargo>(bananas);
+    std::shared_ptr<Cargo> orangesPtr = std::make_shared<Cargo>(oranges);
+    std::shared_ptr<Cargo> applesPtr = std::make_shared<Cargo>(apples);
+
+    ship01.load(bananasPtr);
+    ship01.load(bananasPtr);
+    ship01.load(bananasPtr);
+
+    ++gameTime;
+    {
+        Ship ship02(100, 20, 21, "Ship #2", 1, &gameTime);
+        ship02.load(orangesPtr);
+
+        ++gameTime;
+        ++gameTime;
+    }
+    std::cout << "\n**************\n";
+
+    Ship ship03(100, 20, 21, "Ship #3", 1, &gameTime);
+    ship03.load(applesPtr);
+
+    ++gameTime;
+    ++gameTime;
 
     return 0;
 }
