@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 2.8.2)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+list(APPEND  SHM_SOURCES   Cargo.cpp Player.cpp Island.cpp Coordinates.cpp Ship.cpp)
+
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
@@ -38,8 +40,8 @@ endif()
 project(shm)
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp    Cargo.cpp Player.cpp Island.cpp Coordinates.cpp )
-add_executable(${PROJECT_NAME}-ut test.cpp Cargo.cpp Player.cpp Island.cpp Coordinates.cpp )
+add_executable(${PROJECT_NAME} main.cpp    ${SHM_SOURCES} )
+add_executable(${PROJECT_NAME}-ut test.cpp ${SHM_SOURCES} )
 
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
