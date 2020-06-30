@@ -11,10 +11,10 @@ enum class Response {
     lack_of_space
 };
 
-class Store {
+class Store : Observer{
     Store();
-    Response buy(Cargo* cargo, size_t amount, Player* player);
-    Response sell(Cargo* cargo, size_t amount, Player* player);
+    Response buy(cargoPtr cargo, size_t amount, Player* player);
+    Response sell(cargoPtr cargo, size_t amount, Player* player);
     void nextDay() override;
     std::vector<cargoPtr> cargo_;
 

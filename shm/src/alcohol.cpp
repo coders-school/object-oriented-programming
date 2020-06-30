@@ -8,7 +8,7 @@ Alcohol::Alcohol(const std::string& name, size_t amount, double basePrice, doubl
 
 double Alcohol::getPrice() const {
     return volume_ == 0.96 ? getBasePrice()
-                           : getBasePrice() * (0.96 - getVolume());
+                           : getBasePrice() - getBasePrice() * (0.96 - getVolume());
 }
 
 std::string Alcohol::getInfo() const {

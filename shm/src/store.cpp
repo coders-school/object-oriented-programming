@@ -3,7 +3,7 @@
 Store::Store() {
 }
 
-Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+Response Store::buy(cargoPtr cargo, size_t amount, Player* player) {
     int totalPrice = cargo->getPrice() * amount;
 
     if (player->getAvailableSpace() < amount)
@@ -17,15 +17,15 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 
     player->getShip()->load(cargo);
     player->subtractMoney(totalPrice);
-    cargo -= amount;
+    *cargo.get() -= amount;
     return Response::done;
 }
 
-Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
-    if (player->getShip()->FindMatchCargo(cargo)->getAmount() < amount)
+Response Store::sell(cargoPtr cargo, size_t amount, Player* player) {
+    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() < amount)
         return Response::lack_of_cargo;
 
-    cargo += amount;
+    *cargo.get() += amount;
 
     size_t money = amount * cargo->getPrice();
     player->addMoney(money);
@@ -35,6 +35,6 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 
 void Store::nextDay() {
     for (auto el : cargo_) {
-        el += 1;
+        *el.get() += 1;
     }
 }
