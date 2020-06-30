@@ -1,10 +1,12 @@
 #pragma once
 
 #include <string>
+#include "subjectTime.hpp"
+#include "time.hpp"
 
-class Cargo {
+class Cargo : public ObserverTime {
 public:
-    Cargo(uint32_t amount, std::string name, uint32_t basePrice);
+    Cargo(uint32_t amount, std::string name, uint32_t basePrice, Time* time);
     ~Cargo();
 
     uint32_t getAmount() const;
@@ -15,8 +17,12 @@ public:
     Cargo& operator-=(uint32_t amount);
     bool operator==(Cargo& cargo);
 
+    // override from ObserverTime
+    void nextDay() override;
+
 private:
     uint32_t amount_ = {};
     std::string name_ = {};
     uint32_t basePrice_ = {};
+    Time* time_;
 };

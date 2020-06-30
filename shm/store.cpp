@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <random>
 
+Store::Store() {}
+Store::~Store() {}
+
 std::ostream& operator<<(std::ostream& out, const Store& store) {
     out << "Available Cargo in Store: \n";
     std::for_each(store.cargo_.begin(), store.cargo_.end(), [&, i{0}](const auto& cargo) mutable {
@@ -12,11 +15,8 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
     return out;
 }
 
-Store::Store() {}
-
-// Store::Response buy(const Cargo* cargo, size_t amount, Player* player) {
-Store::Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
-    const size_t price = amount * cargo->getBasePrice();
+Store::Response Store::buy(std::shared_ptr<Cargo> cargo, uint32_t amount, Player* player) {
+    const uint32_t price = amount * cargo->getBasePrice();
     std::shared_ptr<Cargo> buyCargo = std::make_shared<Cargo>(*cargo);
 
     if (amount > player->getAvailableSpace()) {
@@ -35,8 +35,8 @@ Store::Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* 
     return Store::Response::done;
 }
 
-Store::Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
-    const size_t price = amount * cargo->getBasePrice();
+Store::Response Store::sell(std::shared_ptr<Cargo> cargo, uint32_t amount, Player* player) {
+    const uint32_t price = amount * cargo->getBasePrice();
 
     player->sellCargo(cargo, amount, price);
     loadToStore(cargo);
@@ -50,7 +50,7 @@ std::shared_ptr<Cargo> Store::getCargo(uint32_t index) const {
     return nullptr;
 }
 
-void Store::generateCargo() {
+void Store::generateCargo(Time* time) {
     const int minAmountOfCargo = 50;
     const int maxAmountOfCargo = 300;
     const int minPriceOfCargo = 5;
@@ -60,10 +60,10 @@ void Store::generateCargo() {
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    std::vector<std::string> cargoProducts = {"Coffe",      "Tea",     "Cigarette", "Ice cream",
-                                              "Chocolatte", "Alcohol", "Fruits",    "Chips"};
+    std::vector<std::string> cargoProducts = {"Coffee",    "Tea",     "Cigarette", "Ice cream",
+                                              "Chocolate", "Alcohol", "Fruits",    "Chips"};
     for_each(cargoProducts.begin(), cargoProducts.end(), [&](const auto& cargo) {
-        cargo_.emplace_back(std::make_shared<Cargo>(amountOfCargo(gen), cargo, priceOfCargo(gen)));
+        cargo_.emplace_back(std::make_shared<Cargo>(amountOfCargo(gen), cargo, priceOfCargo(gen), time));
     });
 }
 

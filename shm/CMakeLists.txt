@@ -38,7 +38,7 @@ endif()
 #Prepare and compile SHM project
 project(SHM)
 
-set(SRC cargo.cpp coordinates.cpp island.cpp map.cpp ship.cpp player.cpp)
+set(SRC cargo.cpp coordinates.cpp island.cpp map.cpp ship.cpp player.cpp store.cpp time.cpp observerTime.cpp subjectTime.cpp)
 set(FLAGS -Wall -Wextra -Wconversion -pedantic -Werror)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
