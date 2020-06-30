@@ -8,19 +8,15 @@
 
 #include <memory>
 
-enum class Action {
-    Buy,
-    Sell,
-    Travel,
-    PrintCargo,
-};
-
 class Game {
 public:
-    Game(size_t money,
-         size_t days,
-         size_t finalGoal,
-         size_t availableSpace);  // TODO: this is not specified in uml
+    enum class Action {
+        Buy,
+        Sell,
+        Travel,
+        PrintCargo,
+    };
+    Game(size_t money, size_t days, size_t finalGoal);
     void startGame();
 
 private:
