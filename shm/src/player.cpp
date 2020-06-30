@@ -3,7 +3,7 @@
 #include <numeric>
 
 Player::Player(std::shared_ptr<Ship> ship, size_t money)
-    : ship_{ship}, money_{money}, availableSpace_{countSpace()} {}
+    : ship_{ship}, money_{money}, availableSpace_{getAvailableSpace()} {}
 
 void Player::setShip(const std::shared_ptr<Ship>& ship) {
     ship_ = ship;
@@ -21,11 +21,10 @@ void Player::payCrew(size_t money) {
     money_ -= money;
 }
 
-size_t Player::countSpace() {
-    size_t totalAmount = std::accumulate(
-        ship_->getCargo().begin(), ship_->getCargo().end(), 0, [](const Cargo& item1, const Cargo& item2) {
-            return (item1.getAmount() + item2.getAmount());
-        });
-
+size_t Player::getAvailableSpace() const {
+   size_t totalAmount = 0;
+   for(const auto el : ship_->getCargo()){
+       totalAmount += el->getAmount();
+   }
     return ship_->getCapacity() - totalAmount;
 }

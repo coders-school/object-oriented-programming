@@ -8,7 +8,7 @@ public:
     Fruit(const std::string& name, size_t amount, double basePrice, size_t timeToRotten);
     ~Fruit() override {}
 
-    double getPrice() const override { return getBasePrice() - 0.09 * getTimeToRotten(); }
+    double getPrice() const override { return getBasePrice() - 0.09 * static_cast<double>(getTimeToRotten()); }
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     double getBasePrice() const override { return basePrice_; }

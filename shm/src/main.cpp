@@ -8,7 +8,7 @@
 
 int main() {
     std::cout << "Hello world";
-    Cargo* cargo = nullptr;
+    //Cargo* cargo = nullptr;
     Fruit fruit("apple", 10, 2.3, 30);
     std::cout << fruit.getTimeToRotten();
     --fruit;
