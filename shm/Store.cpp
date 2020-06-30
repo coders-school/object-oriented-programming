@@ -16,7 +16,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player){
 }
 
 Response Store::sell(Cargo* cargo, size_t amount, Player* player){
-    const size_t price = amount * cargo->getBasePrice();
+    const size_t price = amount * cargo->getPrice();
     player->sellCargo(cargo, amount, price);
     return Response::done;
 }
