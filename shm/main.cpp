@@ -44,7 +44,7 @@ void SampleTest1() {
 #include "Fruit.hpp"
 #include "Item.hpp"
 #include "Store.hpp"
-void SellBuyTest1() {
+void sellBuyTest1() {
     std::cout << "\nTest Cargo:\n";
     // name amount baseprice power
     Alcohol alc1("whiskey", 10, 20, 55);
@@ -138,7 +138,7 @@ void SellBuyTest1() {
 
 int main() {
     SampleTest1();
-    SellBuyTest1();  // Temporary added - sell / buy test
+    sellBuyTest1();  // Temporary added - sell / buy test
 
     Game game(startMoney, gameDays, finalGoal);
     game.StartGame();

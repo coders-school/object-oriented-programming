@@ -6,12 +6,15 @@
 #include "Fruit.hpp"
 #include "Item.hpp"
 
-Cargo* Store::FindCargo(Cargo* cargo) const {
-    auto match_cargo = std::find_if(std::begin(_cargo), std::end(_cargo),
-                                    [cargo](const auto& el) {
-                                        return *el == *cargo;
-                                    });
-    return match_cargo != std::end(_cargo) ? match_cargo->get() : nullptr;
+Cargo* Store::findCargo(Cargo* cargo) const {
+    auto matchCargo = std::find_if(std::begin(_cargo), std::end(_cargo),
+                                   [cargo](const auto& el) {
+                                       return *el == *cargo;
+                                   });
+    if (matchCargo != std::end(_cargo)) {
+        return matchCargo->get();
+    }
+    return nullptr;
 }
 
 Store::Response Store::Buy(Cargo* cargo, size_t amount, Player* player) {
@@ -28,12 +31,12 @@ Store::Response Store::Buy(Cargo* cargo, size_t amount, Player* player) {
         std::cout << "player, lack of money\n";
         return Response::lack_of_money;
     }
-    if (auto* match_cargo = FindCargo(cargo)) {
-        if (amount > match_cargo->getAmount()) {
+    if (auto* matchCargo = findCargo(cargo)) {
+        if (amount > matchCargo->getAmount()) {
             std::cout << "Store, lack of cargo\n";
             return Response::lack_of_cargo;
         } else {
-            *match_cargo -= amount;
+            *matchCargo -= amount;
         }
     } else {
         std::cout << "Store, lack of cargo\n";
@@ -55,12 +58,12 @@ Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player) {
         std::cout << "cargo, lack of cargo\n";
         return Response::lack_of_cargo;
     }
-    if (auto* match_cargo = FindCargo(cargo)) {
-        if (match_cargo->getAmount() + amount > match_cargo->getMaxAmount()) {
+    if (auto* matchCargo = findCargo(cargo)) {
+        if (matchCargo->getAmount() + amount > matchCargo->getMaxAmount()) {
             std::cout << "cargo, lack of space\n";
             return Response::lack_of_space;
         } else {
-            *match_cargo += amount;
+            *matchCargo += amount;
         }
     } else {
         if (auto* alcoholType = dynamic_cast<Alcohol*>(cargo)) {

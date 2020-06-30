@@ -20,5 +20,5 @@ public:
 
 private:
     std::vector<std::shared_ptr<Cargo>> _cargo;
-    Cargo* FindCargo(Cargo* cargo) const;
+    Cargo* findCargo(Cargo* cargo) const;
 };
