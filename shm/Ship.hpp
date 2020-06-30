@@ -16,7 +16,7 @@ public:
 
     Ship& operator-=(size_t num)
     {
-        crew_ -= num;
+        if(crew_ >= num) crew_-= num;
         return *this;
     }
     Ship& operator+=(size_t num)
