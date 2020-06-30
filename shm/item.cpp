@@ -9,7 +9,7 @@ Item::Item(std::string name, size_t amount, size_t basePrice, size_t rarity, Tim
     Cargo(name, amount, basePrice),
     rarity_(rarity),
     Publisher_(Publisher){
-    this->Publisher_->addObserver(this);
+//    this->Publisher_->addObserver(this);
     }
 void Item::nextDay(){
     int rarity = rand()%10+1; 
