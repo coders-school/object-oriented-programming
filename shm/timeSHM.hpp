@@ -7,14 +7,14 @@
 class Time : public Observer {
 public:
     Time();
-    virtual void nextDay() = 0;
+
+    bool findObserver(Observer* obs);
     void addObserver(Observer* obs);
     void removeObserver(Observer* obs);
-    size_t getElapsedTime() const;
-    Time& operator ++();
 
-    size_t getTimeElapsed() const { return timeElapsed_; };
-    Observer& getObserver(Observer* obs);
+    size_t getElapsedTime() const;
+
+    Time& operator++();
 
 private:
     size_t timeElapsed_;

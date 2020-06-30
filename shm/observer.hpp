@@ -1,5 +1,5 @@
 class Observer {
-protected:
+public:
     virtual void nextDay();
     virtual ~Observer();
 };
