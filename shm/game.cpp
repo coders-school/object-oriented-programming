@@ -81,6 +81,6 @@ void Game::printLoseScreen() {
 void Game::printMenu() {
     std::cout << "Money: " << player_->getMoney()
               << " Day: " << time_->getElapsedTime()
-              << " Days left: " << days_ - time_->getElapsedTime()
-              << " Current position: " << map_->getIsland() << '\n';
+              << " Days left: " << days_ - time_->getElapsedTime();
+//              << " Current position: " << map_->getIsland() << '\n';
 }
