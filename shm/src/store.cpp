@@ -38,3 +38,24 @@ void Store::nextDay() {
         *el.get() += 1;
     }
 }
+
+Cargo* Store::GetCargo(const size_t pos) {
+    if (pos >= cargo_.size())
+        return cargo_.at(cargo_.size() - 1);
+    return cargo_.at(pos);
+}
+
+void Store::GenerateCargo() {
+    size_t number = 1 + std::rand() / ((RAND_MAX + 1u) / 10);
+    double basePrice = 1 + std::rand() / ((RAND_MAX + 1u) / 100);
+    Cargo cargo1("alko", number, basePrice);
+    cargo_.emplace_back(cargo1);
+}
+
+Cargo* Store::FindMatchCargo(Cargo* cargo) {
+    for (auto el : cargo_) {
+        if (*el == *cargo) {
+            return el;
+        }
+    }
+}
