@@ -50,8 +50,10 @@ set(SOURCES
     ship.cpp)
 
 set(TESTS
-    tests/cargo_test.cpp
+    tests/alcohol_test.cpp
+    tests/fruit_test.cpp
     tests/island_test.cpp
+    tests/item_test.cpp
     tests/map_test.cpp
     tests/player_test.cpp
     tests/ship_test.cpp)
