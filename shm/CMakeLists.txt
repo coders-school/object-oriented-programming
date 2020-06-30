@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.10)
 project(SHM)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 include_directories(include)
+include_directories(src)
 
 set(MAIN
     src/main.cpp)
@@ -36,7 +37,13 @@ set(HEADER_FILES
     include/time.hpp
 )
 
-add_library(SOURCES STATIC ${SOURCES})
-add_executable(MAIN ${PROJECT_NAME} ${MAIN})
-add_compile_options(-Wall -Wextra -Wconversion -Wpedantic -Werror)
-target_link_libraries(MAIN SOURCES)
+add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
+
+add_executable(${PROJECT_NAME} ${MAIN})
+
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+
+set(FLAGS -Wall -Wextra -Werror -pedantic -Wconversion)
+
+target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
+
