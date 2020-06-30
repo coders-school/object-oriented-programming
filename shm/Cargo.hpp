@@ -16,11 +16,8 @@ public:
     [[nodiscard]] size_t getAmount() const;
     [[nodiscard]] size_t getBasePrice() const;
 
-
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
 };
-
-
