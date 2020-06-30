@@ -2,9 +2,10 @@
 #include <iostream>
 
 #include "Cargo.hpp"
+#include "Observer.hpp"
 #include "Player.hpp"
 
-class Store {
+class Store : public Observer {
 public:
     enum class Response {
         done,
@@ -12,6 +13,9 @@ public:
         lack_of_cargo,
         lack_of_space
     };
+
+    // override from Observer
+    void NextDay() override;
 
     Response Buy(Cargo* cargo, size_t amount, Player* player);
     Response Sell(Cargo* cargo, size_t amount, Player* player);
@@ -24,4 +28,6 @@ public:
 
 private:
     std::vector<std::shared_ptr<Cargo>> _cargo;
+
+    void GenerateDefaultCargo();
 };

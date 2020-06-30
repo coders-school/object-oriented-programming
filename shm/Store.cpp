@@ -1,6 +1,7 @@
 #include "Store.hpp"
 
 #include <algorithm>
+#include <random>
 
 // Temporary added - operator << test
 //begin
@@ -8,6 +9,20 @@
 #include "Fruit.hpp"
 #include "Item.hpp"
 //end
+
+constexpr size_t AMOUNT_MIN = 5;
+constexpr size_t AMOUNT_MAX = 150;
+constexpr size_t PRICE_MIN = 20;
+constexpr size_t PRICE_MAX = 860;
+constexpr size_t POWER_MIN = 40;
+constexpr size_t POWER_MAX = 96;
+constexpr size_t DATE_MIN = 2;
+constexpr size_t DATE_MAX = 16;
+constexpr size_t TIME_MIN = 0;
+constexpr size_t TIME_MAX = 6;
+constexpr size_t RARITY_MIN = 0;
+constexpr size_t RARITY_MAX = 35;
+constexpr size_t COUNTER_MAX = 8;
 
 Store::Response Store::Buy(Cargo* cargo, size_t amount, Player* player) {
     if (amount > cargo->getAmount()) {
@@ -39,12 +54,44 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
     return out;
 }
 
+void Store::NextDay() {
+    static size_t counter = 0;
+
+    if (counter++ > COUNTER_MAX) {
+        counter = 0;
+        _cargo.clear();
+        GenerateDefaultCargo();
+    }
+}
+
+void Store::GenerateDefaultCargo() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> amountDist(AMOUNT_MIN, AMOUNT_MAX);
+    std::uniform_int_distribution<> priceDist(PRICE_MIN, PRICE_MAX);
+    std::uniform_int_distribution<> powerDist(POWER_MIN, POWER_MAX);
+    std::uniform_int_distribution<> dateDist(DATE_MIN, DATE_MAX);
+    std::uniform_int_distribution<> timeDist(TIME_MIN, TIME_MAX);
+    std::uniform_int_distribution<> rarityDist(RARITY_MIN, RARITY_MAX);
+
+    _cargo.reserve(12);
+    _cargo.push_back(std::make_shared<Alcohol>("whiskey", amountDist(gen), priceDist(gen), powerDist(gen)));
+    _cargo.push_back(std::make_shared<Alcohol>("koniak", amountDist(gen), priceDist(gen), powerDist(gen)));
+    _cargo.push_back(std::make_shared<Alcohol>("burbon", amountDist(gen), priceDist(gen), powerDist(gen)));
+    _cargo.push_back(std::make_shared<Alcohol>("zytnia", amountDist(gen), priceDist(gen), powerDist(gen)));
+    _cargo.push_back(std::make_shared<Fruit>("malina", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
+    _cargo.push_back(std::make_shared<Fruit>("wisnia", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
+    _cargo.push_back(std::make_shared<Fruit>("porzeczka", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
+    _cargo.push_back(std::make_shared<Fruit>("jagoda", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
+    _cargo.push_back(std::make_shared<Item>("gold", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
+    _cargo.push_back(std::make_shared<Item>("sword", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
+    _cargo.push_back(std::make_shared<Item>("amulet", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
+    _cargo.push_back(std::make_shared<Item>("books", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
+}
+
 // Temporary added - operator << test
 //begin
 void Store::CreateTestCargo() {
-    _cargo.reserve(3);
-    _cargo.push_back(std::make_shared<Alcohol>("whiskey", 10, 20, 90));
-    _cargo.push_back(std::make_shared<Fruit>("malina", 30, 40, 50, 60));
-    _cargo.push_back(std::make_shared<Item>("sword", 70, 80, Item::Rarity::legendary));
+    GenerateDefaultCargo();
 }
 //end
