@@ -43,3 +43,7 @@ std::shared_ptr<Cargo> Ship::getCargo(const size_t id) const {
     }
     return {};
 }
+
+void Ship::NextDay(){
+    _delegate->PayCrew(_crew);
+}

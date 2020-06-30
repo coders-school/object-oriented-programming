@@ -2,9 +2,10 @@
 #include <memory>
 
 #include "Cargo.hpp"
+#include "Observer.hpp"
 #include "Ship.hpp"
 
-class Player {
+class Player : public Delegate {
 public:
     Player(Ship ship, size_t money);
 
@@ -12,6 +13,9 @@ public:
     size_t getAvailableSpace() const { return _availableSpace; }
     size_t getSpeed() const;
     Cargo* getCargo(size_t index) const;
+
+    // override from Ship::Delegate
+    void PayCrew(size_t money) override;
 
 private:
     std::unique_ptr<Ship> _ship;
