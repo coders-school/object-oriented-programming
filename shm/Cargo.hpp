@@ -2,7 +2,9 @@
 
 #include <string>
 
-class Cargo {
+#include "Observer.hpp"
+
+class Cargo : public Observer {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;

@@ -11,6 +11,9 @@ public:
         legendary = 25
     };
 
+    static Rarity ChooseRarity(size_t code);
+
+
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
     ~Item() override = default;
 
@@ -25,6 +28,9 @@ public:
     Cargo& operator-=(size_t amount) override;
 
     bool operator==(const Cargo& src) const override;
+
+    // override from Observer
+    void NextDay() override;
 
     std::ostream& showCargo(std::ostream& out) const override;
 

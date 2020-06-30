@@ -3,6 +3,19 @@
 #include <iostream>
 #include <typeinfo>
 
+Item::Rarity Item::ChooseRarity(size_t code) {
+	if (code < 3) {
+		return Item::Rarity::common;
+	}
+	else if (code < 10) {
+		return Item::Rarity::rare;
+	}
+	else if (code < 25) {
+		return Item::Rarity::epic;
+	}
+	return Item::Rarity::legendary;
+}
+
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), _rarity(rarity) {}
 
@@ -57,6 +70,10 @@ std::ostream& operator<<(std::ostream& out, const Item::Rarity& rarity) {
         break;
     }
     return out;
+}
+
+void Item::NextDay() {
+    _basePrice = (size_t)(_basePrice * 0.9);
 }
 
 std::ostream& Item::showCargo(std::ostream& out) const {

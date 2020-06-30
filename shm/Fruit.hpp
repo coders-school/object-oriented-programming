@@ -25,6 +25,9 @@ public:
 
     bool operator==(const Cargo& src) const override;
 
+    // override from Observer
+    void NextDay() override;
+
     std::ostream& showCargo(std::ostream& out) const override;
 
 private:
