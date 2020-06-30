@@ -17,4 +17,3 @@ struct Coordinates
 bool operator==(const Coordinates& lhs, const Coordinates& rhs);
 bool operator!=(const Coordinates& lhs, const Coordinates& rhs);
 std::ostream& operator<<(std::ostream& os, const Coordinates& position);
-

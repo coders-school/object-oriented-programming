@@ -21,7 +21,8 @@ public:
     std::vector<Island> getIslands() { return islands; }
     Island getIsland(const Coordinates& corr)
     {
-        return *(std::find_if(std::begin(islands), std::end(islands), [corr](Island& is) {return is.getPosition() == corr; }));
+        return *(std::find_if(
+            std::begin(islands), std::end(islands), [corr](Island& is) { return is.getPosition() == corr; }));
     }
 
 private:

@@ -30,7 +30,7 @@ size_t Cargo::getBasePrice() const
 
 bool operator==(const Cargo& lhs, const Cargo& rhs)
 {
-    return lhs.amount_ == rhs.amount_;
+    return lhs.amount_ == rhs.amount_ && lhs.name_ == rhs.name_ && lhs.basePrice_ == rhs.basePrice_;
 }
 
 bool operator!=(const Cargo& lhs, const Cargo& rhs)
