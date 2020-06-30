@@ -3,10 +3,10 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
-project(shm 
-    HOMEPAGE_URL https://github.com/Marcinati/object-oriented-programming.git)
+project(shm)
 
 set(SRC
+    observer.hpp
     alcohol.cpp
     cargo.cpp
     coordinates.cpp

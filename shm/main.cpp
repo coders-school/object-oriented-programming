@@ -1,4 +1,3 @@
-#include "cargo.hpp"
 #include "coordinates.hpp"
 #include "island.hpp"
 #include "map.hpp"
@@ -6,7 +5,7 @@
 #include "player.hpp"
 #include "ship.hpp"
 #include "timeSHM.hpp"
-
+#include "item.cpp"
 #include <iostream>
 #include <memory>
 #include <string>
@@ -28,7 +27,10 @@ int main() {
     std::cout << "Speed: " << FD.getSpeed() << '\n';
     std::cout << "Name: " << FD.getName() << '\n';
     std::cout << "Id: " << FD.getId() << '\n';
-
+    
+    //Checking observer pattern
+    Time time;
+    Item knife("SilverKnife", 2, 30, 1, &time);
     //std::unique_ptr<Ship> uPtrFD = std::make_unique<Ship>(FD);
     return 0;
 }

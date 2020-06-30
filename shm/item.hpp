@@ -1,10 +1,10 @@
 #pragma once
 #include<string>
-
-class Item : public Cargo {
+#include "timeSHM.hpp"
+class Item : public Cargo, public Observer {
 public:
 
-Item(std::string name, size_t amount, size_t basePrice, size_t rarity);
+Item(std::string name, size_t amount, size_t basePrice, size_t rarity, Time* Publisher);
 
     enum class Rarity {
         common = 1,
@@ -13,6 +13,8 @@ Item(std::string name, size_t amount, size_t basePrice, size_t rarity);
         legendary = 50,
     };
 
+    // override from Observer
+    void nextDay() override;
     //Override from Cargo
     size_t getPrice() const override;
     std::string getName() const override;
@@ -20,4 +22,5 @@ Item(std::string name, size_t amount, size_t basePrice, size_t rarity);
     size_t getBasePrice() const override;
 private:
     const size_t rarity_;
+    Time* Publisher_;
 };
