@@ -4,7 +4,7 @@
 
 #include "ship.hpp"
 
-class Player :public Ship::Delegate {
+class Player : public Ship::Delegate {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money);
 
