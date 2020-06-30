@@ -15,5 +15,5 @@ public:
 
 private:
     std::vector<std::shared_ptr<Island>> islands_;
-    Island* currentPosition_;
+    std::shared_ptr<Island> currentPosition_;
 };

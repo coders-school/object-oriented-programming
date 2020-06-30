@@ -11,6 +11,12 @@ using cargoPtr = std::shared_ptr<Cargo>;
 
 class Ship : public Observer {
 public:
+    class Delegate {
+    public:
+        virtual ~Delegate() = default;
+        virtual void payCrew(size_t money) = 0;
+    };
+
     Ship();
     Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity);
     Ship(size_t id, std::string name, size_t speed);
@@ -22,10 +28,13 @@ public:
     size_t getCapacity() const { return capacity_; }
     std::vector<cargoPtr> getCargo() const { return cargo_; }
     void load(cargoPtr cargo);
-    //cargoPtr FindMatchCargo(Cargo* cargo);
-    //void Unload(Cargo* cargo);
-    //void RemoveFromStorage(Cargo* cargo);
-    //void RemoveFromStorageIfRotten();
+
+    cargoPtr FindMatchCargo(Cargo* cargo);
+    Cargo* getCargo(size_t index) { return cargo_[index].get(); }
+
+    void Unload(Cargo* cargo);
+    void RemoveFromStorage(Cargo* cargo);
+    void RemoveFromStorageIfRotten();
 
     void setName(const std::string& name);
     void nextDay() override;
@@ -45,4 +54,5 @@ private:
     size_t crew_;
     std::vector<cargoPtr> cargo_;
     double money_;
+    Delegate* delegate_;
 };

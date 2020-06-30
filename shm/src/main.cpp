@@ -1,4 +1,4 @@
-#include <iostream>
+#include "game.hpp"
 
 #include "cargo.hpp"
 #include "fruit.hpp"
@@ -13,6 +13,7 @@ int main() {
     --fruit;
     std::cout << fruit.getTimeToRotten();
     fruit.nextDay();
+/*
     std::cout << fruit.getTimeToRotten() << '\n';
     auto fruitPtr = std::make_shared<Fruit>(fruit);
     Ship ship(01, "sheeeep", 40, 50, 50);
@@ -21,6 +22,21 @@ int main() {
     fruitPtr = std::make_shared<Fruit>(fruit2);
     ship.load(fruitPtr);
     ship.printCargo();
+*/
+    std::cout << fruit.getTimeToRotten();
+    auto fruitPtr = std::make_shared<Fruit>(fruit);
+    Ship ship(01, "sheeeep", 40, 50, 50);
+    ship.load(fruitPtr);
+    //std::cout << fruit;
 
+
+  /*
+    constexpr size_t start_money = 1'000;
+    constexpr size_t game_days = 100;
+    constexpr size_t final_goal = 2'000;
+
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
+*/
     return 0;
 }

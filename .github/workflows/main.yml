@@ -1,0 +1,20 @@
+name: C++ with CMake CI
+
+on: [push, pull_request]
+
+jobs:
+  shm:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@project
+    - name: mkdir shm/build 
+      run: mkdir shm/build
+    - name: Compile
+      working-directory: shm/build
+      run: |
+        cmake ..
+        make
+    - name: Run main 
+      working-directory: shm/build
+      run: ./shm 
