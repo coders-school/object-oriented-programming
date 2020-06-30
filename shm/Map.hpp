@@ -1,9 +1,10 @@
 #pragma once
 
-#include <random>
-#include <vector>
 #include <algorithm>
 #include <iostream>
+#include <random>
+#include <vector>
+
 #include "Island.hpp"
 
 class Map

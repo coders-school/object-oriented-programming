@@ -8,8 +8,8 @@ class Cargo
 public:
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
-    Cargo() : amount_(0), basePrice_(0) {}
-    Cargo(size_t amount, size_t basePrice) : amount_(amount), basePrice_(basePrice) {}
+    Cargo();
+    Cargo(size_t amount, size_t basePrice);
 
     friend bool operator==(const Cargo& lhs, const Cargo& rhs);
     friend bool operator!=(const Cargo& lhs, const Cargo& rhs);
