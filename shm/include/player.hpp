@@ -6,7 +6,7 @@
 
 class Player :public Ship::Delegate {
 public:
-    Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
+    Player(std::unique_ptr<Ship> ship, size_t money);
 
     size_t getAvailableSpace() const { return availableSpace_; }
     size_t getMoney() const { return money_; }
