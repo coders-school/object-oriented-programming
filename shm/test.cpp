@@ -7,6 +7,13 @@
 #include "Map.hpp"
 #include "gtest/gtest.h"
 
+TEST(cargo, cargoShuldNotBeZero)
+{
+    Cargo cargoA;
+    cargoA -= 10;
+    ASSERT_EQ(cargoA.getAmount(), 0);
+}
+
 TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
 {
     Cargo cargoA, cargoB;
@@ -44,6 +51,7 @@ TEST(player, newSpaceWasSet)
     Player player(ship, 0, space);
     EXPECT_EQ(player.getAvailableSpace(), space);
 }
+
 
 TEST(player, newMoneyAmountWasSet)
 {
