@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstddef>
+
 class Observer {
 public:
     virtual void NextDay() = 0;
