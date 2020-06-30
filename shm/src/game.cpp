@@ -24,10 +24,13 @@ void Game::makeAction(Action action) {
         break;
     case Action::Sell:
         sell_command_->execute(player_.get());
+        break;
     case Action::Travel:
         travel_command_->execute(player_.get());
+        break;
     case Action::PrintCargo:
         print_cargo_command_->execute(player_.get());
+        break;
     default:
         std::cout << "Bad command"
                   << "\n";
