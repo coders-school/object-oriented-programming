@@ -7,8 +7,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -pedantic -Wconversion -Werror")
 
 set(SOURCES
+    alcohol.cpp
     cargo.cpp
+    fruit.cpp
     island.cpp
+    item.cpp
     map.cpp
     player.cpp
     ship.cpp)
