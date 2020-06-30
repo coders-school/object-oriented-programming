@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "coordinates.hpp"
 #include "cargo.hpp"
 
 class Ship {
@@ -25,7 +24,6 @@ public:
     int getId() const;
     Cargo* getCargo(size_t index) const;
     size_t countAvailableSpace() const;
-    Coordinates& ShipPosition; 
     
 private:
     //Cargo* findCargo(Cargo* cargo);
