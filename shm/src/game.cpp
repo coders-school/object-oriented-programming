@@ -36,23 +36,26 @@ void Game::startGame() {
 }
 
 std::shared_ptr<Ship> Game::generateShip() {
-    return std::make_shared<Ship>(1, "Maria", 12, 128, 1200);
+    return std::make_shared<Ship>(1, "Maria", 1, 128, 1200);
 }
 
 bool Game::checkWinCondition() const {
-    return player_->getMoeny() >= final_goal_; // TODO: powinno być getMoney()
+    return player_->getMoney() >= final_goal_;
 }
 
 bool Game::checkLooseCondition() const {
-    return player_->getMoeny() == 0; // TODO: powinno być getMoney()
+    return player_->getMoney() == 0;
 }
 
 void Game::printTopBar() const {
     std::cout << "Top\n";
+    std::cout << "Elapsed time " << time_->getElapsedTime() << '\n';
 }
 
 void Game::printOptions() const {
-    std::cout << "Options\n";
+    std::cout << "Options:\n";
+    std::cout << "1 - Travel\n";
+    std::cout << "0 - Exit\n";
 }
 
 void Game::printWinScreen() const {
@@ -88,7 +91,16 @@ void Game::makeAction(Action action) {
 
 void Game::travel() {
     std::cout << "Travel\n";
-    ++(*time_);
+    std::cout << *map_.get();
+    std::cout << "Choose island [x y]: ";
+    size_t x, y;
+    std::cin >> x >> y;
+    auto destination = map_->getIsland(Coordinates(x, y));
+    for (auto i = map_->getDistanceToIsland(destination); i > 0; --i) {
+    // one "distance" takes one day
+        ++(*time_);
+    }
+    map_->travel(destination);
 }
 
 void Game::buy() {
@@ -99,7 +111,7 @@ void Game::sell() {
     std::cout << "Sell\n";
 }
 
-void  Game::printCargo() {
+void  Game::printCargo() const {
     std::cout << "Cargo\n";
 }
 
