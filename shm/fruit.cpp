@@ -2,7 +2,6 @@
 
 #include <string>
 
-//Override from Cargo
 Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeElapsed)
     : Cargo(name, amount, basePrice),
       expiryDate_(expiryDate),
