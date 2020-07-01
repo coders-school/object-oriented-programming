@@ -94,11 +94,11 @@ ___
 
 ## Zadanie 3
 
-Dopisz do klasy `Ship`, `Cargo` oraz `Stock` metodę `nextDay()`
+Dopisz do klasy `Ship`, `Cargo` oraz `Store` metodę `nextDay()`
 
 * Klasa `Ship`: Metoda powinna odejmować po 1 sztuce monety za każdego członka załogi.
 * Klasa `Cargo`: Metoda powinna powodować psucie się towarów.
-* Klasa `Stock`: Metoda powinna zmieniać ilość towaru w sklepach.
+* Klasa `Store`: Metoda powinna zmieniać ilość towaru w sklepach.
 
 ___
 
@@ -106,7 +106,7 @@ ___
 
 Spróbuj napisać klasę `Time`, która będzie odpowiadać za zarządzanie czasem w grze.
 
-Klasa ta powinna informować inne klasy, takie jak `Cargo`, `Ship`, `Stock` o upłynięciu każdego dnia.
+Klasa ta powinna informować inne klasy, takie jak `Cargo`, `Ship`, `Store` o upłynięciu każdego dnia.
 
 Poczytaj czym jest wzorzec projektowy [`Observer`](https://refactoring.guru/design-patterns/observer).
 
