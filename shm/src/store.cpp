@@ -6,15 +6,13 @@ Store::Store() {
 Response Store::buy(cargoPtr cargo, size_t amount, Player* player) {
     int totalPrice = cargo->getPrice() * amount;
 
-    if (player->getAvailableSpace() < amount)
+    if (player->getAvailableSpace() < amount) {
         return Response::lack_of_space;
-
-    else if (cargo->getAmount() < amount)
+    } else if (cargo->getAmount() < amount) {
         return Response::lack_of_cargo;
-
-    else if (totalPrice > player->getMoeny())
+    } else if (totalPrice > player->getMoney()) {
         return Response::lack_of_money;
-
+    }
     player->getShip()->load(cargo);
     player->subtractMoney(totalPrice);
     *cargo.get() -= amount;
