@@ -10,7 +10,7 @@ void Player::setShip(const std::shared_ptr<Ship>& ship) {
 }
 
 void Player::addMoney(const size_t& money) {
-    money_ = money;  // tu nie powinno być +=?
+    money_ += money;
 }
 
 void Player::subtractMoney(const size_t& money) {

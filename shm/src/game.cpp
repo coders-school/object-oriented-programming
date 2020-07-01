@@ -40,11 +40,11 @@ std::shared_ptr<Ship> Game::generateShip() {
 }
 
 bool Game::checkWinCondition() const {
-    return player_->getMoeny() >= final_goal_; // TODO: powinno być getMoney()
+    return player_->getMoney() >= final_goal_; // TODO: powinno być getMoney()
 }
 
 bool Game::checkLooseCondition() const {
-    return player_->getMoeny() == 0; // TODO: powinno być getMoney()
+    return player_->getMoney() == 0; // TODO: powinno być getMoney()
 }
 
 void Game::printTopBar() const {
