@@ -20,8 +20,7 @@ void Ship::nextDay() {
         el->nextDay();
     }
     Ship::RemoveFromStorageIfRotten();
-    //money_ -= crew_;
-    delegate_ -> payCrew(crew_);
+    //delegate_ -> payCrew(crew_);
 }
 
 Ship& Ship::operator+=(const size_t& crew) {
@@ -76,7 +75,7 @@ void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
                                 cargo_.end(),
                                 [](auto& el) {
-                                    if (typeid(el).name() == "Fruit") {
+                                        if (el -> getPrice() == el -> getBasePrice()) {
                                         return std::dynamic_pointer_cast<Fruit>(el)->getTimeToRotten() == 0;
                                     }
                                     return false;
