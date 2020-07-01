@@ -21,6 +21,10 @@ public:
     size_t getPrice() const override {
         return basePrice_ * static_cast<int>(rarity_);
     }
+    //override from Cargo
+    void nextDay() override;
+
+    std::string checkRarity();
 
 private:
     Rarity rarity_{};
