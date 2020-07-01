@@ -6,7 +6,11 @@ Store::Store() {
 Response Store::buy(cargoPtr cargo, size_t amount, Player* player) {
     int totalPrice = cargo->getPrice() * amount;
 
-    if (player->getAvailableSpace() < amount)
+    size_t totalAmount = 0;
+    for (const auto el : player->getShip()->getCargo()) {
+        totalAmount += el->getAmount();
+    }
+    if (player->getShip()->getCapacity() - totalAmount < amount)
         return Response::lack_of_space;
 
     else if (cargo->getAmount() < amount)
@@ -39,23 +43,24 @@ void Store::nextDay() {
     }
 }
 
-Cargo* Store::GetCargo(const size_t pos) {
+cargoPtr Store::GetCargo(const size_t pos) {
     if (pos >= cargo_.size())
         return cargo_.at(cargo_.size() - 1);
     return cargo_.at(pos);
 }
 
 void Store::GenerateCargo() {
-    size_t number = 1 + std::rand() / ((RAND_MAX + 1u) / 10);
-    double basePrice = 1 + std::rand() / ((RAND_MAX + 1u) / 100);
-    Cargo cargo1("alko", number, basePrice);
-    cargo_.emplace_back(cargo1);
+    // size_t number = 1 + std::rand() / ((RAND_MAX + 1u) / 10);
+    // double basePrice = 1 + std::rand() / ((RAND_MAX + 1u) / 100);
+    // Cargo cargo1("alko", number, basePrice);
+    // cargo_.emplace_back(cargo1);
 }
 
-Cargo* Store::FindMatchCargo(Cargo* cargo) {
+cargoPtr Store::FindMatchCargo(cargoPtr cargo) {
     for (auto el : cargo_) {
         if (*el == *cargo) {
             return el;
         }
     }
+    return nullptr;
 }

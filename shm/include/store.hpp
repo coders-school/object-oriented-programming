@@ -11,16 +11,16 @@ enum class Response {
     lack_of_space
 };
 
-class Store {
+class Store : public Cargo {
     Store();
-    Cargo* GetCargo(const size_t pos);
-    Response buy(Cargo* cargo, size_t amount, Player* player);
-    Response sell(Cargo* cargo, size_t amount, Player* player);
+    cargoPtr GetCargo(const size_t pos);
+    Response buy(cargoPtr cargo, size_t amount, Player* player);
+    Response sell(cargoPtr cargo, size_t amount, Player* player);
     void nextDay() override;
 
 private:
     void GenerateCargo();
-    Cargo* FindMatchCargo(Cargo* cargo);
+    cargoPtr FindMatchCargo(cargoPtr cargo);
     std::vector<cargoPtr> cargo_;
     Time* time_;
 };
