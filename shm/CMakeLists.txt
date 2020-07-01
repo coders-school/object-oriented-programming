@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 project(shm)
 
 set(SRC
-    observer.hpp
     alcohol.cpp
     cargo.cpp
     coordinates.cpp

@@ -24,8 +24,8 @@ size_t Fruit::getBasePrice() const {
 }
 
 Fruit& Fruit::operator--() {
-basePrice_ = static_cast<int>(static_cast<double>basePrice*0.1)
-    }
+basePrice_ = static_cast<int>(static_cast<double>(basePrice_)*0.1);
+    
     return *this;
 }
 

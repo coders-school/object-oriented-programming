@@ -5,7 +5,7 @@
 #include <iostream>
 #include <ctype.h>
 
-Item::Item(std::string name, size_t amount, size_t basePrice,  Rarity rarity, Time* Publisher):
+Item::Item(std::string name, size_t amount, size_t basePrice,  int rarity, Time* Publisher):
     Cargo(name, amount, basePrice),
     rarity_(rarity),
     Publisher_(Publisher){
@@ -49,6 +49,6 @@ size_t Item::getBasePrice() const {
     return basePrice_;
 }
 
-Item::Rarity Item::getRarity() const {
+int Item::getRarity() const {
     return rarity_;
 }

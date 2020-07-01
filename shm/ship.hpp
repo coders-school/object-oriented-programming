@@ -27,12 +27,12 @@ public:
     
 private:
     //Cargo* findCargo(Cargo* cargo);
-   // void removeCargo (Cargo* cargo);
+    void removeCargo (Cargo* cargo);
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
     size_t speed_;
     std::string name_;
     int id_;
-    //std::vector<std::unique_ptr<Cargo>> cargo_;
+    std::vector<std::unique_ptr<Cargo>> cargo_;
 };
