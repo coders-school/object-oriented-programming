@@ -15,6 +15,8 @@ public:
     virtual size_t getBasePrice() const = 0;
     virtual size_t getPrice() const = 0;
 
+    virtual void nextDay() = 0;
+
 protected:
     std::string name_{};
     size_t amount_{};
