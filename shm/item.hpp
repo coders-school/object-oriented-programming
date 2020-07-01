@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "cargo.hpp"
+
 class Item : public Cargo {
 public:
     enum class Rarity {
