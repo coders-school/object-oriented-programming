@@ -19,9 +19,8 @@ void Ship::nextDay() {
     for (auto el : cargo_) {
         el->nextDay();
     }
-    //Ship::RemoveFromStorageIfRotten();
-    //money_ -= crew_;
     Ship::RemoveFromStorageIfRotten();
+    //money_ -= crew_;
     delegate_ -> payCrew(crew_);
 }
 
@@ -62,18 +61,18 @@ cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
     }
 }
 
-/*void Ship::Unload(Cargo* cargo) {
+void Ship::Unload(Cargo* cargo) {
     RemoveFromStorage(cargo);
-}*/
+}
 
-/*void Ship::RemoveFromStorage(Cargo* cargo) {
+void Ship::RemoveFromStorage(Cargo* cargo) {
     cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
                               [cargo](const auto& el) {
                                   return *el == *cargo;
                               }));
-}*/
+}
 
-/*void Ship::RemoveFromStorageIfRotten() {
+void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
                                 cargo_.end(),
                                 [](auto& el) {
@@ -83,7 +82,7 @@ cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
                                     return false;
                                 }),
                  cargo_.end());
-}*/
+}
 
 void Ship::printCargo() const {
     if (cargo_.empty()) {
