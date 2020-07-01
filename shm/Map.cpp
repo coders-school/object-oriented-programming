@@ -4,6 +4,10 @@
 #include <memory>
 #include <random>
 
+constexpr int minPositionXY = 1;
+constexpr int maxPositionXY = 10;
+constexpr int numberOfIslands = 10;
+
 Map::Map() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -22,6 +26,8 @@ Map::Map() {
             _vecOfIslands.push_back(Island(positionX, positionY));
         }
     }
+
+    _currentIsland = &_vecOfIslands.front();
 }
 
 Island* Map::getIsland(const Coordinates& coordinate) {

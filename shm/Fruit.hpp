@@ -27,7 +27,7 @@ public:
 
     // override from Observer
     void nextDay() override;
-    
+
     std::ostream& showCargo(std::ostream& out) const override;
 
     size_t getMaxAmount() const override { return _maxAmount; };

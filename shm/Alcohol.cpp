@@ -4,10 +4,13 @@
 #include <typeinfo>
 
 Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice)
-    : Alcohol(name, amount, basePrice, MAX_POWER) {}
+    : Alcohol(name, amount, basePrice, MAX_POWER) {
+}
+
 Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t power)
     : Cargo(name, amount, basePrice),
-      _power(power) {}
+      _power(power) {
+}
 
 size_t Alcohol::getPrice() const {
     return _basePrice * (_power / MAX_POWER);
