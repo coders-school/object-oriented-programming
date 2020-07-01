@@ -2,6 +2,8 @@
 
 #include <string>
 
+constexpr size_t maxPower{96};
+
 //Override from Cargo
 Alcohol::Alcohol(std::string name, size_t amount, size_t basePrice, size_t power)
     : Cargo(name, amount, basePrice),
