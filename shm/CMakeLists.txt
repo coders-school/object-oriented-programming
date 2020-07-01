@@ -60,7 +60,7 @@ target_link_libraries(${PROJECT_NAME}-ut gtest_main ${PROJECT_NAME}-lib)
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
 
 set(FLAGS
-#    -Wall //some errors to resolve
+    -Wall
     -Wextra
     -Werror
     -pedantic

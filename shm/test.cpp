@@ -53,7 +53,7 @@ TEST_F(ShipTest, ShouldNotSubtractNewMembersFromShipCrewBecauseOfTooSmallCrew) {
 
 TEST_F(ShipTest, ShouldAddNewMembersToShipCrew) {
     auto amountOfNewMembers = 14;
-    auto amountOfActualCrew = shipOne.getCrew(); //initial 0
+    auto amountOfActualCrew = shipOne.getCrew(); //initial value = 0
   
     shipOne += amountOfNewMembers;
     ASSERT_EQ(shipOne.getCrew(), amountOfNewMembers + amountOfActualCrew);

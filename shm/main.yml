@@ -1,4 +1,4 @@
-name: C++ with CMake
+name: C++ with CMake with tests
 
 on:
   push:
