@@ -9,7 +9,7 @@ Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDat
 
 size_t Fruit::getPrice() const {
     if (timeToSpoil_) {
-        return static_cast<size_t>(basePrice_ * static_cast<float>(timeToSpoil_) / expiryDate_);
+        return static_cast<size_t>(basePrice_ * static_cast<long double>(timeToSpoil_) / expiryDate_);
     }
     return 0;
 }
