@@ -1,0 +1,26 @@
+name: C++ with CMake
+
+on:
+  push:
+    branches: [ homeworkOOP* ]
+  pull_request:
+    branches: [ homeworkOOP* ]
+
+jobs:
+  builder:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: mkdir shm/build
+      run: mkdir shm/build
+    - name: Compile
+      working-directory: shm/build
+      run: |
+        cmake ..
+        make
+
+        
+

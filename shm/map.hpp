@@ -1,15 +1,15 @@
 #pragma once
 
+#include "coordinates.hpp"
 #include "island.hpp"
 
-constexpr int initialAmountOfIsland = 10;
-constexpr int maxX = 10;
-constexpr int maxY = 10;
+#include <memory>
+#include <vector>
 
 class Map {
 public:
     Map();
-    Island* getIsland(const Island::Coordinates& coordinate);
+    Island* getIsland(const Coordinates& desiredCoordinate);
     
 private:
     std::vector<Island> islandsOnMap_;

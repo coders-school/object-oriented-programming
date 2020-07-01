@@ -1,13 +1,12 @@
 #pragma once
 
-#include <vector>
-
 class Coordinates {
 public:
     Coordinates();
-    Coordinates(const int positionX, const int positionY);
+    Coordinates(int positionX, int positionY);
 
-    bool operator==(const Coordinates& currentPosition);
+    static int Distance(const Coordinates& currentX, const Coordinates& currentY);
+    bool operator==(const Coordinates& currentPosition) const;
 
     int getPositionX() const { return positionX_; }
     int getPositionY() const { return positionY_; }
