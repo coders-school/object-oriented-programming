@@ -19,7 +19,6 @@ Fruit& Fruit::operator--() {
     }
     return *this;
 }
-
 Cargo& Fruit::operator+=(const size_t amount) {
     if (_amount + amount > _maxAmount) {
         std::cerr << "Not enought space for that cargo!\n";
@@ -45,13 +44,12 @@ bool Fruit::operator==(const Cargo& src) const {
 
     auto fruit = static_cast<const Fruit&>(src);
     return fruit.getName() == _name &&
-           fruit.getAmount() == _amount &&
            fruit.getBasePrice() == _basePrice &&
            fruit.getExpiryDate() == _expiryDate &&
            fruit.getTimeToSpoil() == _timeToSpoil;
 }
 
-void Fruit::NextDay() {
+void Fruit::nextDay() {
     if (_timeToSpoil > 0) {
         --_timeToSpoil;
     }

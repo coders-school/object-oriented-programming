@@ -37,12 +37,11 @@ bool Alcohol::operator==(const Cargo& src) const {
 
     auto alcohol = static_cast<const Alcohol&>(src);
     return alcohol.getName() == _name &&
-           alcohol.getAmount() == _amount &&
            alcohol.getBasePrice() == _basePrice &&
            alcohol.getPower() == _power;
 }
 
-void Alcohol::NextDay() {
+void Alcohol::nextDay() {
   _basePrice = (size_t)(_basePrice * 1.2);
     //if (_power > 0) {
     //  _power *= 0.95;

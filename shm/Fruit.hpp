@@ -26,9 +26,11 @@ public:
     bool operator==(const Cargo& src) const override;
 
     // override from Observer
-    void NextDay() override;
-
+    void nextDay() override;
+    
     std::ostream& showCargo(std::ostream& out) const override;
+
+    size_t getMaxAmount() const override { return _maxAmount; };
 
 private:
     size_t _timeToSpoil;

@@ -34,7 +34,7 @@ public:
     Ship& operator-=(const size_t crew);
 
     // override from Observer
-    void NextDay() override;
+    void nextDay() override;
 
 private:
     const int _id;

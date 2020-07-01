@@ -15,19 +15,16 @@ public:
     };
 
     // override from Observer
-    void NextDay() override;
+    void nextDay() override;
 
     Response Buy(Cargo* cargo, size_t amount, Player* player);
     Response Sell(Cargo* cargo, size_t amount, Player* player);
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
-    // Temporary added - operator << test
-    //begin
-    void CreateTestCargo();
-    //end
 
 private:
     std::vector<std::shared_ptr<Cargo>> _cargo;
 
-    void GenerateDefaultCargo();
+    Cargo* findCargo(Cargo* cargo) const;
+    void generateDefaultCargo();
 };

@@ -14,8 +14,8 @@ public:
     size_t getSpeed() const;
     Cargo* getCargo(size_t index) const;
 
-    // override from Ship::Delegate
-    void PayCrew(size_t money) override;
+    // override from Delegate
+    void payCrew(size_t money) override;
 
 private:
     std::unique_ptr<Ship> _ship;
