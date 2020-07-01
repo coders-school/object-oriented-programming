@@ -1,5 +1,7 @@
 #include "store.hpp"
 
+#include "algorithm"
+#include "fruit.hpp"
 Store::Store() {
 }
 
@@ -50,10 +52,12 @@ cargoPtr Store::GetCargo(const size_t pos) {
 }
 
 void Store::GenerateCargo() {
-    // size_t number = 1 + std::rand() / ((RAND_MAX + 1u) / 10);
-    // double basePrice = 1 + std::rand() / ((RAND_MAX + 1u) / 100);
-    // Cargo cargo1("alko", number, basePrice);
-    // cargo_.emplace_back(cargo1);
+    // size_t number = GenerateRandom(10);
+    // double basePrice = GenerateRandom(100);
+    // for (auto el : fruitsNames) {
+    // Fruit fr
+    // }
+    // cargo_.emplace_back(&cargo1);
 }
 
 cargoPtr Store::FindMatchCargo(cargoPtr cargo) {
@@ -62,5 +66,16 @@ cargoPtr Store::FindMatchCargo(cargoPtr cargo) {
             return el;
         }
     }
-    return nullptr;  // czy tak może być?
+    return nullptr;  // czy tak może być? Bo coś tu chyba musimy zwracać, jak się nie znajdzie? Ale czy nullptr to dobra myśl?
+}
+
+size_t Store::GenerateRandom(size_t range) {
+    return 1 + std::rand() / ((RAND_MAX + 1u) / range);
+}
+
+void Store::RemoveFromStore(cargoPtr cargo) {
+    cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
+                              [cargo](const auto& el) {
+                                  return *el == *cargo;
+                              }));
 }
