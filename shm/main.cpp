@@ -31,6 +31,7 @@ int main() {
     //Checking observer pattern
     Time time;
     Item knife("SilverKnife", 2, 30, 1, &time);
+    Ship::getName(Ship::getCargo(0));
     //std::unique_ptr<Ship> uPtrFD = std::make_unique<Ship>(FD);
     return 0;
 }

@@ -15,12 +15,12 @@ Ship::Ship(size_t maxCrew, size_t speed, int id)
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
-// void Ship::load(std::unique_ptr<Cargo> cargo) { 
-//     if (auto matchCargo = findCargo(cargo.get())) {
-//         *matchCargo += cargo->getAmount();
-//     }
-//     cargo_.push_back(std::move(cargo));
-// }
+void Ship::load(std::unique_ptr<Cargo> cargo) { 
+     if (auto matchCargo = findCargo(cargo.get())) {
+         *matchCargo += cargo->getAmount();
+     }
+     cargo_.push_back(std::move(cargo));
+}
     //wziąć pod uwagę available space - countFreeSpace w klasie player!
     //porównanie dwóch towarów - akumulacja tych samych typów towarów
     //czy zmiesci sie caly towar (maxcapacity?)

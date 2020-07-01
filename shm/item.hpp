@@ -3,6 +3,7 @@
 #include "timeSHM.hpp"
 #include "cargo.hpp"
 #include "Rarity.hpp"
+#include <iostream>
 class Item : public Cargo, public Observer {
 
 public:
@@ -10,7 +11,11 @@ public:
     // override from Observer
     Item(std::string name, size_t amount, size_t basePrice, int rarity, Time* Publisher);
 
-    ~Item() override = default;
+    ~Item(){
+        this->Publisher_->removeObserver(this);
+        std::cout<<"Goodbye! I was you Item"<<'\n';
+    };
+//~Item() override {};
     void nextDay() override;
 
     //Override from Cargo
