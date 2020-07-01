@@ -18,7 +18,7 @@ void Player::subtractMoney(const size_t& money) {
 }
 
 void Player::payCrew(size_t money) {
-    money_ -= money;
+    Player::subtractMoney(money);
 }
 
 size_t Player::getAvailableSpace() const {

@@ -21,6 +21,7 @@ void Ship::nextDay() {
     }
     Ship::RemoveFromStorageIfRotten();
     //delegate_ -> payCrew(crew_);
+    delegate_->payCrew(money_);
 }
 
 Ship& Ship::operator+=(const size_t& crew) {
@@ -38,10 +39,6 @@ Ship& Ship::operator-=(const size_t& crew) {
 }
 
 void Ship::load(std::shared_ptr<Cargo> cargo) {
-    /*if (auto match_cargo = FindMatchCargo(cargo.get())) {
-        *match_cargo += cargo->getAmount();
-        return;
-    }*/
     for (auto el : cargo_) {
         if (*el == *cargo) {
             *el +=cargo->getAmount();
@@ -51,7 +48,6 @@ void Ship::load(std::shared_ptr<Cargo> cargo) {
     cargo_.push_back(std::move(cargo));
 }
 
-//TODO: use == operators of each classes to comparison
 cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
     for (auto el : cargo_) {
         if (*el == *cargo) {
