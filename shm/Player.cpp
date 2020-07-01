@@ -27,3 +27,10 @@ void Player::updateAvailableSpace() {
 
     _availableSpace = _ship->getCapacity() - cargoSize;
 }
+
+void Player::payCrew(size_t money) {
+    if (money > _money)
+        money = SIZE_MAX;
+    else
+        _money -= money;
+}

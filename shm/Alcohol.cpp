@@ -41,6 +41,13 @@ bool Alcohol::operator==(const Cargo& src) const {
            alcohol.getPower() == _power;
 }
 
+void Alcohol::nextDay() {
+  _basePrice = (size_t)(_basePrice * 1.2);
+    //if (_power > 0) {
+    //  _power *= 0.95;
+    //}
+}
+
 std::ostream& Alcohol::showCargo(std::ostream& out) const {
     return out << "name: " << _name << ", amount: " << _amount << ", base price: " << _basePrice << ", power: " << _power << '\n';
 }

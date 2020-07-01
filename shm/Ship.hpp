@@ -5,8 +5,9 @@
 #include <vector>
 
 #include "Cargo.hpp"
+#include "Observer.hpp"
 
-class Ship {
+class Ship : public Observer {
 public:
     Ship();
     Ship(int id,
@@ -32,6 +33,9 @@ public:
     Ship& operator+=(const size_t crew);
     Ship& operator-=(const size_t crew);
 
+    // override from Observer
+    void nextDay() override;
+
 private:
     const int _id;
     std::string _name;
@@ -39,5 +43,6 @@ private:
     size_t _maxCrew;
     size_t _capacity;
     size_t _crew;
+    Delegate* _delegate;
     std::vector<std::shared_ptr<Cargo>> _cargo;
 };

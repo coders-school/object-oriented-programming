@@ -11,6 +11,20 @@ public:
         legendary = 25
     };
 
+    std::string getRarityStr() const {
+        if (_rarity == Rarity::common)
+            return "common";
+        if (_rarity == Rarity::rare)
+            return "rare";
+        if (_rarity == Rarity::epic)
+            return "epic";
+        if (_rarity == Rarity::legendary)
+            return "legendary";
+        return "common";
+    }
+
+    static Rarity ChooseRarity(size_t code);
+    
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
     ~Item() override = default;
 
@@ -26,23 +40,12 @@ public:
 
     bool operator==(const Cargo& src) const override;
 
+    // override from Observer
+    void nextDay() override;
+
     std::ostream& showCargo(std::ostream& out) const override;
 
     size_t getMaxAmount() const override { return _maxAmount; };
-
-    //Store testing begin
-    std::string getTestRarity() const {
-        if (_rarity == Rarity::common)
-            return "common";
-        if (_rarity == Rarity::rare)
-            return "rare";
-        if (_rarity == Rarity::epic)
-            return "epic";
-        if (_rarity == Rarity::legendary)
-            return "legendary";
-        return "common";
-    }
-    //end
 
 private:
     const Rarity _rarity{Rarity::epic};

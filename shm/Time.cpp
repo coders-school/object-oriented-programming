@@ -6,7 +6,7 @@ Time& Time::operator++() {
     ++_timeElapsed;
 
     for (const auto& obs : _observers) {
-        obs->NextDay();
+        obs->nextDay();
     }
 
     return *this;

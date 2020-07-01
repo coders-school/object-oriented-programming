@@ -8,7 +8,7 @@
 class Time {
 public:
     Time& operator++();
-    size_t GetTimeElpased() const { return _timeElapsed; }
+    size_t getTimeElpased() const { return _timeElapsed; }
 
 private:
     size_t _timeElapsed;

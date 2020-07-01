@@ -49,6 +49,12 @@ bool Fruit::operator==(const Cargo& src) const {
            fruit.getTimeToSpoil() == _timeToSpoil;
 }
 
+void Fruit::nextDay() {
+    if (_timeToSpoil > 0) {
+        --_timeToSpoil;
+    }
+}
+
 std::ostream& Fruit::showCargo(std::ostream& out) const {
     return out << "name: " << _name << ", amount: " << _amount << ", base price: " << _basePrice << ", expiry date: " << _expiryDate << ", time to spoil: " << _timeToSpoil << '\n';
 }
