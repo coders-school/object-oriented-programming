@@ -36,11 +36,7 @@ Ship& Ship::operator-=(size_t crew) {
     return *this;
 }
 Ship& Ship::operator+=(size_t crew) {
-    if (crew_ + crew > maxCrew_) {
-        crew_ = maxCrew_;
-    } else {
-        crew_ += crew;
-    }
+    (crew_ + crew > maxCrew_) ? crew_ = maxCrew_ : crew_ += crew;
     return *this;
 }
 
