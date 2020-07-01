@@ -28,7 +28,7 @@ set(FLAGS
     -Wextra
     -Werror
     -pedantic
-    -Wconversion
+    #-Wconversion
     -O3)
 
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
