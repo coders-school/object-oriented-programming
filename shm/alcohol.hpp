@@ -15,6 +15,9 @@ public:
         return basePrice_ * (alcoholPower_ / maxPower);
     }
 
+    //override from Cargo
+    void nextDay() override;
+
 private:
     size_t alcoholPower_{};
     bool equals(const Cargo& rhs) const override;
