@@ -49,6 +49,8 @@ set(SOURCE
     src/ship.cpp
     src/store.cpp
     src/time.cpp
+    src/game.cpp
+    src/commands.cpp
 )
 
 set (TEST_FILES

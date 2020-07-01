@@ -2,8 +2,10 @@
 
 #include <limits>
 
-Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
-    : ship_(std::move(ship)), money_(money), availableSpace_(availableSpace) {}
+Player::Player(std::unique_ptr<Ship> ship, size_t money)
+    : ship_(std::move(ship)), money_(money) {
+    availableSpace_ = ship_->getCapacity();
+}
 
 Cargo* Player::getCargo(size_t index) const {
     if (index < (ship_->getCargo().size())) {

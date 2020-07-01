@@ -19,7 +19,7 @@ public:
     Ship ship;
     NextDayTest()
         : time(),
-          player(std::make_unique<Ship>(30, 10, 1, &player, &time), 100, 50),
+          player(std::make_unique<Ship>(30, 10, 1, &player, &time), 100),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
