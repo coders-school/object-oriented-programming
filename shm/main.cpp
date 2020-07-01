@@ -5,6 +5,8 @@
 #include "fruit.hpp"
 #include "item.hpp"
 #include "map.hpp"
+#include "player.hpp"
+#include "ship.hpp"
 
 int main() {
     Fruit bananas("Bananas", 200, 10, 8);
@@ -31,5 +33,10 @@ int main() {
         std::cout << "Different\n";
     }
 
+    Ship ship(1, 2, 3, "a", 2, nullptr);
+    Player player(ship, 10000, 100);
+    ship.setDelegate(&player);
+    ship.nextDay();
+    std::cout << player.getMoney();
     return 0;
 }

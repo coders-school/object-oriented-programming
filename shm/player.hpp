@@ -5,8 +5,15 @@
 #include "cargo.hpp"
 #include "ship.hpp"
 
-class Player {
+#include <iostream>
+
+class Player : public Ship::Delegate {
 public:
+    //override from Ship::Delegate
+    void PayCrew(size_t money) override {
+        money_ -= static_cast<int>(money);
+    };
+
     Player(const Ship& ship, int money, size_t availableSpace);
 
     std::shared_ptr<Ship> getShip() const { return ship_; };
