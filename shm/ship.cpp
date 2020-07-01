@@ -35,5 +35,7 @@ Ship& Ship::operator-=(const size_t crew) {
 }
 
 void Ship::nextDay() {
-    delegatePlayer_->PayCrew(crew_);
+    if (delegatePlayer_) {
+        delegatePlayer_->PayCrew(crew_);
+    }
 }
