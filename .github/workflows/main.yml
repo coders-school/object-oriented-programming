@@ -17,4 +17,4 @@ jobs:
         make
     - name: Run main 
       working-directory: shm/build
-      run: ./shm 
+      run: ./SHM
