@@ -18,7 +18,7 @@ public:
     virtual void Print() const = 0;
 
     [[nodiscard]] virtual std::string GetName() const = 0;
-
+    [[nodiscard]] virtual size_t GetPrice() const = 0;
     [[nodiscard]] virtual size_t GetAmount() const = 0;
     [[nodiscard]] virtual size_t GetBasePrice() const = 0;
 
