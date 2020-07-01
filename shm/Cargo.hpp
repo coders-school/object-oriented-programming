@@ -19,6 +19,8 @@ public:
 
     virtual std::ostream& showCargo(std::ostream& out) const = 0;
 
+    virtual size_t getMaxAmount() const = 0;
+
 protected:
     std::string _name;
     size_t _amount;

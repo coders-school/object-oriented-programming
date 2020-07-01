@@ -17,11 +17,8 @@ public:
     Response Sell(Cargo* cargo, size_t amount, Player* player);
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
-    // Temporary added - operator << test
-    //begin
-    void CreateTestCargo();
-    //end
 
 private:
     std::vector<std::shared_ptr<Cargo>> _cargo;
+    Cargo* findCargo(Cargo* cargo) const;
 };

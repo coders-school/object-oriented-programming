@@ -27,6 +27,8 @@ public:
 
     std::ostream& showCargo(std::ostream& out) const override;
 
+    size_t getMaxAmount() const override { return _maxAmount; };
+
 private:
     size_t _timeToSpoil;
     const size_t _expiryDate;

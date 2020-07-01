@@ -33,7 +33,6 @@ bool Item::operator==(const Cargo& src) const {
 
     auto item = static_cast<const Item&>(src);
     return item.getName() == _name &&
-           item.getAmount() == _amount &&
            item.getBasePrice() == _basePrice &&
            item.getRarity() == _rarity;
 }

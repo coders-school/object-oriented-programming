@@ -2,9 +2,12 @@
 
 #include <numeric>
 
+constexpr size_t constAvailableSpace = 1000;
+
 Player::Player(Ship ship, size_t money)
     : _ship(std::make_unique<Ship>(ship)),
-      _money(money) {}
+      _money(money),
+      _availableSpace(constAvailableSpace) {}
 
 size_t Player::getSpeed() const {
     return _ship->getSpeed();

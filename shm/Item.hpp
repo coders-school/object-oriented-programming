@@ -28,6 +28,22 @@ public:
 
     std::ostream& showCargo(std::ostream& out) const override;
 
+    size_t getMaxAmount() const override { return _maxAmount; };
+
+    //Store testing begin
+    std::string getTestRarity() const {
+        if (_rarity == Rarity::common)
+            return "common";
+        if (_rarity == Rarity::rare)
+            return "rare";
+        if (_rarity == Rarity::epic)
+            return "epic";
+        if (_rarity == Rarity::legendary)
+            return "legendary";
+        return "common";
+    }
+    //end
+
 private:
     const Rarity _rarity{Rarity::epic};
     size_t _maxAmount = 255;

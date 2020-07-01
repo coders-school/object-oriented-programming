@@ -37,7 +37,6 @@ bool Alcohol::operator==(const Cargo& src) const {
 
     auto alcohol = static_cast<const Alcohol&>(src);
     return alcohol.getName() == _name &&
-           alcohol.getAmount() == _amount &&
            alcohol.getBasePrice() == _basePrice &&
            alcohol.getPower() == _power;
 }
