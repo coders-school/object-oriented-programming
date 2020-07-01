@@ -82,6 +82,7 @@ private:
     GraphicsCard graphics_card_;
     Memory memory_;
     Screen screen_;
+    Keyboard keyboard_;
 };
 ```
 
@@ -124,6 +125,7 @@ public:
 
 private:
     Screen screen_;
+    Keyboard keyboard_;
 };
 ```
 <!-- .element: class="fragment fade-in" -->
@@ -167,7 +169,18 @@ Załóżmy, że dodajemy klasę `Screen`. Klasa ta wyświetla na bieżąco inter
 Chcemy też stworzyć klasę reprezentującą ekran dotykowy - `TouchScreen`, który również umożliwia odczyt akcji od użytkownika i ich wyświetlanie.
 <!-- .element: class="fragment fade-in" -->
 
-<div class="multicolumn">
+<style>
+.container {
+    display: flex;
+}
+.col {
+    flex: 1;
+    margin: 1%;
+}
+</style>
+
+<div class="container">
+
 <div class="col">
 
 ```cpp
@@ -184,6 +197,7 @@ private:
 <!-- .element: class="fragment fade-in" -->
 
 </div>
+
 <div class="col">
 
 ```cpp
@@ -202,6 +216,7 @@ private:
 <!-- .element: class="fragment fade-in" -->
 
 </div>
+
 </div>
 
 ### Jak uprościć powyższy kod?
