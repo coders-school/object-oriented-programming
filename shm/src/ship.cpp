@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
-Ship::Ship() : id_(-1) {}
+Ship::Ship()
+    : id_(-1) {}
 
 Ship::Ship(int capacity,
            int maxCrew,
@@ -31,11 +32,11 @@ void Ship::setName(const std::string& name) {
 }
 
 Ship& Ship::operator-=(size_t crew) {
-    crew_ -= crew;
+    (crew_ < crew) ? crew_ = 0 : crew_ -= crew;
     return *this;
 }
 Ship& Ship::operator+=(size_t crew) {
-    crew_ += crew;
+    (crew_ + crew > maxCrew_) ? crew_ = maxCrew_ : crew_ += crew;
     return *this;
 }
 

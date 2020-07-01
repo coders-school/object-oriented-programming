@@ -48,12 +48,19 @@ set(SOURCE
     src/player.cpp
     src/ship.cpp
     src/store.cpp
+    src/time.cpp
 )
+
+set (TEST_FILES
+  tests/AlcoholTest.cpp
+  tests/NextDayTest.cpp
+)
+
 include_directories(include)
 add_library(lib STATIC ${SOURCE})
 
 add_executable(${PROJECT_NAME} src/main.cpp)
-add_executable(${PROJECT_NAME}-ut tests/test.cpp)
+add_executable(${PROJECT_NAME}-ut ${TEST_FILES})
 
 add_compile_options(${PROJECT_NAME} -Wall -Wextra -Wconversion -pedantic -Werror)
 

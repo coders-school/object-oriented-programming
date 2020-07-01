@@ -78,7 +78,7 @@ void Store::nextDay() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(0, 1);
-    std::uniform_int_distribution<> distrib2(0, 20);
+    std::uniform_int_distribution<> distrib2(1, 20);
     for (const auto& cargo_ptr : stock_) {
         if (distrib(gen)) {
             *cargo_ptr += distrib2(gen);
