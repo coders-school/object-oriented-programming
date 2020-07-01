@@ -1,6 +1,9 @@
 #pragma once
 
+#include "alcohol.hpp"
 #include "cargo.hpp"
+#include "fruit.hpp"
+#include "item.hpp"
 #include "player.hpp"
 
 class Store {
@@ -12,7 +15,6 @@ public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };
 
     Store();
-    // Response buy(const Cargo* cargo, size_t amount, Player* player);
     Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
     Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
 

@@ -14,10 +14,9 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
 
 Store::Store() {}
 
-// Store::Response buy(const Cargo* cargo, size_t amount, Player* player) {
 Store::Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getBasePrice();
-    std::shared_ptr<Cargo> buyCargo = std::make_shared<Cargo>(*cargo);
+    std::shared_ptr<Cargo> buyCargo = cargo->clone();
 
     if (amount > player->getAvailableSpace()) {
         return Store::Response::lack_of_space;
@@ -63,11 +62,23 @@ void Store::generateCargo() {
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    std::vector<std::string> cargoProducts = {"Coffe",      "Tea",     "Cigarette", "Ice cream",
-                                              "Chocolatte", "Alcohol", "Fruits",    "Chips"};
-    for_each(cargoProducts.begin(), cargoProducts.end(), [&](const auto& cargo) {
-        cargo_.emplace_back(std::make_shared<Cargo>(amountOfCargo(gen), cargo, priceOfCargo(gen)));
-    });
+    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Oranges", priceOfCargo(gen), 6)));
+    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Bananas", priceOfCargo(gen), 4)));
+    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Apples", priceOfCargo(gen), 9)));
+
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Vodka", priceOfCargo(gen), 40)));
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Liquor", priceOfCargo(gen), 24)));
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Whiskey", priceOfCargo(gen), 38)));
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Bimber", priceOfCargo(gen), 70)));
+
+    cargo_.push_back(
+        std::make_shared<Item>(Item(amountOfCargo(gen), "Woods", priceOfCargo(gen), Item::Rarity::common)));
+    cargo_.push_back(std::make_shared<Item>(Item(amountOfCargo(gen), "Bronze", priceOfCargo(gen), Item::Rarity::rare)));
+    cargo_.push_back(std::make_shared<Item>(Item(amountOfCargo(gen), "Silver", priceOfCargo(gen), Item::Rarity::epic)));
+    cargo_.push_back(
+        std::make_shared<Item>(Item(amountOfCargo(gen), "Gold", priceOfCargo(gen), Item::Rarity::legendary)));
+    //   for_each(cargoProducts.begin(), cargoProducts.end(),
+    //           [&](const auto& cargo) { cargo_.push_back(std::make_shared<cargo.second()>; });
 }
 
 void Store::printCargo() const {
