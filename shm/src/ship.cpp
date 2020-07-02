@@ -54,6 +54,7 @@ cargoPtr Ship::FindMatchCargo(Cargo* cargo) {
             return el;
         }
     }
+    return nullptr;
 }
 
 void Ship::Unload(Cargo* cargo) {
