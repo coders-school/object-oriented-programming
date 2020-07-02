@@ -30,3 +30,4 @@ bool Fruit::operator!=(const Cargo& cargo) const {
            getBasePrice() != cargo.getBasePrice() ||
            getPrice() != cargo.getPrice();
 }
+
