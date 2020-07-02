@@ -7,10 +7,6 @@
 #include "player.hpp"
 
 class Store {
-private:
-    std::vector<std::shared_ptr<Cargo>> cargo_;
-    friend std::ostream& operator<<(std::ostream& output, const Store& store);
-
 public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };
 
@@ -23,4 +19,8 @@ public:
     void generateCargo();
     void printCargo() const;
     void loadToStore(std::shared_ptr<Cargo> cargo, uint32_t amount);
+
+private:
+    std::vector<std::shared_ptr<Cargo>> cargo_;
+    friend std::ostream& operator<<(std::ostream& output, const Store& store);
 };

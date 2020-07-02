@@ -4,6 +4,7 @@
 #include <random>
 
 Store::Store() {}
+
 Store::~Store() {}
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
@@ -78,8 +79,6 @@ void Store::generateCargo() {
     cargo_.push_back(std::make_shared<Item>(Item(amountOfCargo(gen), "Silver", priceOfCargo(gen), Item::Rarity::epic)));
     cargo_.push_back(
         std::make_shared<Item>(Item(amountOfCargo(gen), "Gold", priceOfCargo(gen), Item::Rarity::legendary)));
-    //   for_each(cargoProducts.begin(), cargoProducts.end(),
-    //           [&](const auto& cargo) { cargo_.push_back(std::make_shared<cargo.second()>; });
 }
 
 void Store::printCargo() const {

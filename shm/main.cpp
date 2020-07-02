@@ -14,18 +14,6 @@ int main() {
     // std::cout << pawellos.getAvailableSpace() << "\n";
     // std::cout << pawellos.getSpeed() << "\n";
     // std::cout << pawellos.getShip()->getName() << "\n";
-    /* std::cout << blackPearl.getName() << "\n";
-    std::cout << blackPearl.getId() << "\n";
-    std::cout << blackPearl.getMaxCrew() << "\n";
-    std::cout << blackPearl.getCapacity() << "\n \n";
-    std::cout << blackPearl.getCrew() << "\n";
-    blackPearl += 6;
-    std::cout << blackPearl.getCrew() << "\n";
-    blackPearl -= 3;
-    std::cout << blackPearl.getCrew() << "\n";
-    blackPearl -= 8;
-    std::cout << blackPearl.getCrew() << "\n";
-    */
 
     Time gameTime;
 
@@ -111,9 +99,9 @@ int main() {
 // #include "ship.hpp"
 // #include "store.hpp"
 
-// constexpr size_t start_money = 1'000;
-// constexpr size_t game_days = 100;
-// constexpr size_t final_goal = 2'000;
+// constexpr uint32_t start_money = 1000;
+// constexpr uint32_t game_days = 100;
+// constexpr uint32_t final_goal = 2000;
 
 // int main() {
 //     Game game(start_money, game_days, final_goal);

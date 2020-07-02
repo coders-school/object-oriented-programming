@@ -4,6 +4,7 @@
 
 Fruit::Fruit(uint32_t amount, const std::string& name, uint32_t basePrice, int32_t expiryDate)
     : Cargo(amount, name, basePrice), expiryDate_(expiryDate), currentExpiryDate_(expiryDate) {}
+
 Fruit::~Fruit() {}
 
 std::string Fruit::getName() const {

@@ -8,9 +8,11 @@ Player::Player(std::shared_ptr<Ship> ship, uint32_t money, uint32_t availableSpa
 std::shared_ptr<Ship> Player::getShip() {
     return ship_;
 }
+
 uint32_t Player::getAvailableSpace() const {
     return availableSpace_;
 }
+
 uint32_t Player::getMoney() const {
     return money_;
 }
@@ -26,9 +28,11 @@ uint32_t Player::CountAvailableSpace() const {
 uint32_t Player::getSpeed() const {
     return ship_->getSpeed();
 }
+
 std::shared_ptr<Cargo> Player::getCargo(uint32_t index) const {
-    if (ship_)
+    if (ship_) {
         return ship_->getCargo(index);
+    }
     return nullptr;
 }
 
@@ -43,6 +47,7 @@ void Player::sellCargo(std::shared_ptr<Cargo> cargo, uint32_t amount, uint32_t p
     money_ += price;
     ship_->unload(cargo, amount);
 }
+
 void Player::printCargo() const {
     ship_->printCargo();
 }

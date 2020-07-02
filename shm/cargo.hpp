@@ -2,9 +2,6 @@
 
 #include <memory>
 #include <string>
-//#include "alcohol.hpp"
-//#include "fruit.hpp"
-//#include "item.hpp"
 #include "subjectTime.hpp"
 #include "time.hpp"
 
@@ -30,5 +27,4 @@ protected:
     uint32_t amount_;
     std::string name_;
     uint32_t basePrice_;
-    // Time* time_;
 };

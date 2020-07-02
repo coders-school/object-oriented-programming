@@ -33,7 +33,6 @@ Map::Map() {
         allIslands.push_back(Island(Coordinates(positionX, positionY)));
         allIslands[i].createStore();
     }
-    // currentPosition_ = &allIslands[0];
 }
 
 Island* Map::getIsland(const Coordinates& coordinate) {

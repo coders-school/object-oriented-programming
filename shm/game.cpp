@@ -18,8 +18,9 @@ void Game::startGame() {
         uint32_t action;
         std::cin.clear();
         std::cin >> action;
-        if (!action)
+        if (!action) {
             break;
+        }
         makeAction(static_cast<Action>(action));
     }
 }
@@ -62,13 +63,15 @@ void Game::buy() {
         std::cout << "Money of player: " << player_->getMoney() << '\n';
         std::cout << "Available place on ship: " << player_->getAvailableSpace() << '\n';
         player_->printCargo();
-        if (store_.getCargo(0))
+        if (store_.getCargo(0)) {
             std::cout << store_;
-        else
+        } else {
             std::cout << "You are not at the Island ! You are on water ! Press 0 to return back \n";
+        }
         std::cin >> choiceProduct;
-        if (choiceProduct == 0)
+        if (choiceProduct == 0) {
             break;
+        }
         std::cin >> choiceAmount;
         Store::Response response = store_.buy(store_.getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
@@ -97,13 +100,15 @@ void Game::sell() {
         std::cout << "Money of player: " << player_->getMoney() << '\n';
         std::cout << "Available place on ship: " << player_->getAvailableSpace() << '\n';
         player_->printCargo();
-        if (store_.getCargo(0))
+        if (store_.getCargo(0)) {
             std::cout << store_;
-        else
+        } else {
             std::cout << "You are not at the Island ! You are on water ! Press 0 to return back \n";
+        }
         std::cin >> choiceProduct;
-        if (choiceProduct == 0)
+        if (choiceProduct == 0) {
             break;
+        }
         std::cin >> choiceAmount;
         Store::Response response = store_.sell(player_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
@@ -132,8 +137,9 @@ void Game::travel() {
         std::cout << "Next destination ?: \n";
         uint32_t x, y;
         std::cin >> x >> y;
-        if (x == 0 || y == 0)
+        if (x == 0 || y == 0) {
             break;
+        }
         Island* island = map_.getIsland(Coordinates(x, y));
         if (island != nullptr) {
             map_.travel(island);

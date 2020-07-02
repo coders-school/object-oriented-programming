@@ -3,7 +3,6 @@
 #include <algorithm>
 
 // override from ObserverTime
-
 void Time::registerObserver(ObserverTime* o) {
     observersList_.emplace_back(o);
 }

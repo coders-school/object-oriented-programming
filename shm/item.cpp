@@ -1,9 +1,6 @@
 #include "item.hpp"
 
 #include <iostream>
-//#include <typeinfo>
-
-// enum class Rarity { common = 1, rare = 3, epic = 7, legendary = 15 };
 
 Item::Item(uint32_t amount, const std::string& name, uint32_t basePrice, Rarity rarity)
     : Cargo(amount, name, basePrice), rarity_(rarity) {}
@@ -49,7 +46,6 @@ bool Item::operator==(const Cargo& cargo) const {
     if (typeid(*this) != typeid(cargo)) {
         return false;
     }
-
     return (item.getBasePrice() == basePrice_) && (item.getName() == name_) && (item.getRarity() == rarity_);
 }
 
