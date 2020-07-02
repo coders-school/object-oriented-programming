@@ -1,7 +1,9 @@
 #include "game.hpp"
 
 #include <cstdlib> // exit, size_t
+#include <ios>
 #include <iostream>
+#include <limits>
 
 Game::Game() {}
 
@@ -95,6 +97,12 @@ void Game::travel() {
     std::cout << "Choose island [x y]: ";
     size_t x, y;
     std::cin >> x >> y;
+    while(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cout << "Bad entry.  Enter a NUMBER: ";
+        std::cin >> x;
+    }
     auto destination = map_->getIsland(Coordinates(x, y));
     if (destination != nullptr)
     {
@@ -103,8 +111,8 @@ void Game::travel() {
             ++(*time_);
         }
         map_->travel(destination);
-    }
-    else { std::cout << "Wrong coordinates!" << '\n'; }
+     }
+     else { std::cout << "Wrong coordinates!" << '\n'; }
 }
 
 void Game::buy() {
