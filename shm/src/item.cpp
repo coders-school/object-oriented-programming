@@ -11,21 +11,21 @@ Item::Rarity Item::getRarity() const { return rairty_; }
 
 bool Item::operator==(const Cargo& cargo) const {
     if (typeid(cargo) == typeid(Item)) {
-        const Item* rarityPtr = static_cast<const Item*>(&cargo);
-        return name_ == rarityPtr->getName() &&
-               amount_ == rarityPtr->getAmount() &&
-               basePrice_ == rarityPtr->getBasePrice() &&
-               rairty_ == rarityPtr->getRarity();
+        const Item* item = static_cast<const Item*>(&cargo);
+        return name_ == item->getName() &&
+               amount_ == item->getAmount() &&
+               basePrice_ == item->getBasePrice() &&
+               rairty_ == item->getRarity();
     }
     return false;
 }
 bool Item::operator!=(const Cargo& cargo) const {
     if (typeid(cargo) == typeid(Item)) {
-        const Item* rarityPtr = static_cast<const Item*>(&cargo);
-        return name_ != rarityPtr->getName() ||
-               amount_ != rarityPtr->getAmount() ||
-               basePrice_ != rarityPtr->getBasePrice() ||
-               rairty_ != rarityPtr->getRarity();
+        const Item* item = static_cast<const Item*>(&cargo);
+        return name_ != item->getName() ||
+               amount_ != item->getAmount() ||
+               basePrice_ != item->getBasePrice() ||
+               rairty_ != item->getRarity();
     }
     return false;
 }
