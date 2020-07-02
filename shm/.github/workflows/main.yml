@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@master
+      uses: actions/checkout@SHM
     - name: mkdir shm/build
       run: mkdir shm/build
     - name: Compile
