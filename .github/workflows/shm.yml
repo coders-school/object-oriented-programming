@@ -3,7 +3,7 @@ name: C++ with CMake with tests
 on: [push, pull_request]
 
 jobs:
-  builder:
+  Game:
 
     runs-on: ubuntu-18.04
 
