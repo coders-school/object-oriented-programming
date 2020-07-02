@@ -23,6 +23,7 @@ set(SOURCES
     src/ship.cpp
     src/store.cpp
     src/time.cpp
+    src/store.cpp
 )
 
 set(HEADER_FILES
@@ -36,6 +37,7 @@ set(HEADER_FILES
     include/player.hpp
     include/ship.hpp
     include/time.hpp
+    include/store.hpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
