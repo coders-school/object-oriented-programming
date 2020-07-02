@@ -36,14 +36,22 @@ void Game::startGame() {
 
     while (days_ > time_->getElapsedTime()) {
         if (checkWinConditions()) {
+            printWinScreen();
             return;
         } else if (checkLoseConditions()) {
+            printLoseScreen();
             break;
         }
-        printTrail();
-        //make game 
+        int pickAction;
+        printMenu();
+        printOptions();
+        std::cin.clear();
+        std::cin >> pickAction;
+        makeAction(static_cast<Action>(pickAction));
+        if (pickAction == 0) {
+            break;
+        }
     }
-    printMenu();
 }
 
 void Game::printTrail() {
@@ -76,15 +84,40 @@ void Game::printMenu() {
     std::cout << "Money: " << player_->getMoney()
               << " Day: " << time_->getElapsedTime()
               << " Days left: " << days_ - time_->getElapsedTime();
-//              << " Current position: " << map_->getIsland() << '\n';
+      //        << " Current position: " << map_->getIsland() << '\n';
 }
 
 void Game::printOptions() {
-    //To do 
+    std::cout << "What do you want to do? \n"
+              << "1. Travel \n"
+              << "2. Buy \n"
+              << "3. Sell \n"
+              << "0. Exit game \n";
 }
 
-void Game::makeAction(size_t choice) {
-    //To do
+void Game::makeAction(Action pickAction) {
+    switch (pickAction) {
+        case Action::exit: {
+            std::cout << "Bye, bye";
+            break;
+        }
+        case Action::travel: {
+            travel();
+            break;
+        }
+        case Action::buy: {
+            buy();
+            break;
+        }
+        case Action::sell: {
+            sell();
+            break;
+        }
+        case Action::printCargo: {
+            printCargo();
+            break;
+        }
+    }
 }
 
 void Game::travel() {
