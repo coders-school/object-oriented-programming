@@ -35,8 +35,7 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
-project(shm 
-    HOMEPAGE_URL https://github.com/Marcinati/object-oriented-programming)
+project(shm)
 
 set(SRC
     alcohol.cpp
