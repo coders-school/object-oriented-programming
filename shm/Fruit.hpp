@@ -19,6 +19,7 @@ public:
     Cargo& operator-=(const size_t amount) override;
 
     bool operator==(const Cargo& cargo) const override;
+    bool operator!=(const Cargo& cargo) const override;
 
 private:
     size_t daysToRot_ = 10;
