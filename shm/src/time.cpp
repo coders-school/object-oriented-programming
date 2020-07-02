@@ -10,12 +10,12 @@ void Time::RemoveObserver(Observer *obs) {
 }
 Time& Time::operator++() {
     time_elapsed_++;
-    Notify();
+    notify();
     return *this;
 }
 
-void Time::Notify() {
+void Time::notify() {
     for (const auto obs : observers_) {
-        obs->NextDay();
+        obs->nextDay();
     }
 }

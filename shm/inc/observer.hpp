@@ -2,6 +2,6 @@
 
 class Observer {
 public:
-    virtual void NextDay() = 0;
-    virtual ~Observer();
+    virtual void nextDay() = 0;
+    virtual ~Observer() {}
 };

@@ -59,6 +59,6 @@ size_t Ship::getAvailableSpace() const {
                                       });
     return capacity_ - occupied;
 }
-void Ship::NextDay() {
+void Ship::nextDay() {
 
 }

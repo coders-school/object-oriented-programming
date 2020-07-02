@@ -13,7 +13,7 @@ public:
     Ship(int maxCrew, int speed, size_t id);
     Ship(int capacity, int maxCrew, int speed,
          const std::string& name, size_t id);
-    ~Ship();
+    ~Ship() override;
 
     Ship& operator-=(const size_t crew);
     Ship& operator+=(const size_t crew);
@@ -38,5 +38,5 @@ private:
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargo_;
 
-    void NextDay();
+    void nextDay() override;
 };
