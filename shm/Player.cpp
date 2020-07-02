@@ -22,8 +22,8 @@ size_t Player::countAvailableSpace() {
     auto occupiedSpace = std::accumulate(begin(ship_->getAllCargos()),
                                          end(ship_->getAllCargos()),
                                          0,
-                                         [](const Cargo& cargoFirst, const Cargo& cargoSecond) {
-                                             return cargoFirst.getAmount() + cargoSecond.getAmount();
+                                         [](int accumulated, const auto& cargo) {
+                                             return accumulated + cargo->getAmount();
                                          });
 
     if (ship_->getCapacity() <= occupiedSpace) {
