@@ -45,7 +45,7 @@ set(TEST_SRC
   ut/fruit_test.cpp
   )
 set(FLAGS -Wall -Wextra -Wconversion -pedantic -Werror)
-set(INCLUDES -I .)
+set(INCLUDES -I..)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 
