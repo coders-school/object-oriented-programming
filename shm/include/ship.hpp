@@ -53,6 +53,6 @@ private:
     size_t capacity_;
     size_t crew_;
     std::vector<cargoPtr> cargo_;
-    double money_;
+    size_t money_;
     Delegate* delegate_;
 };
