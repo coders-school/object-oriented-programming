@@ -73,9 +73,9 @@ TEST_F(SHM_TestFixtureAlco, TestOperatorAddEqual) {
 }
 
 TEST_F(SHM_TestFixtureAlco, TestOperatorMinusEqual) {
-
-    alko_1 -= 200;
-    EXPECT_EQ(AMOUNT_1, alko_1.getAmount());
+    
+    alko_1 -= 20;
+    EXPECT_EQ(AMOUNT_1-20, alko_1.getAmount());
 }
 
 TEST_F(SHM_TestFixtureAlco, CannotGiveMoreThanHave) {
