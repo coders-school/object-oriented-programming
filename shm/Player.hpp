@@ -8,9 +8,7 @@
 
 class Player : public Delegate {
 public:
-    Player(std::unique_ptr<Ship>& ship, size_t money);  //I need to pass ship as & to construct Player in main() like this:
-                                                        //      auto mnShip = std::make_unique<Ship>(150,200, 20, "TEST", 666);
-                                                        //      Player mnPlayer(mnShip, 1000);
+    Player(std::unique_ptr<Ship>& ship, size_t money);
 
     size_t getMoney() const { return money_; };
     size_t getAvaliableSpace() const { return avaliableSpace_; };
@@ -19,8 +17,6 @@ public:
 
     //override from Delegate
     void payCrew(size_t money) override;
-
-    void callNextDay() {ship_->nextDay();} //TEMPORARY FOR TESTING ONLY
 
 private:
     std::unique_ptr<Ship> ship_;
