@@ -20,6 +20,7 @@ public:
     Ship& operator+=(size_t crewman);
 
     size_t getCapacity() const;  
+    size_t getCrew() const;
     size_t getMaxCrew() const; 
     size_t getSpeed() const;
     std::string getName() const;
