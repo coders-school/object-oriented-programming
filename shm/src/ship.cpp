@@ -17,6 +17,9 @@ Ship::Ship(int capacity, int maxCrew, int speed,
     , name_(name)
     , id_(id)
 {}
+Ship::~Ship() {
+
+}
 
 Ship& Ship::operator-=(const size_t crew) {
     if (crew <= crew_) {
@@ -55,4 +58,7 @@ size_t Ship::getAvailableSpace() const {
                                           return sum += cargo->getAmount();
                                       });
     return capacity_ - occupied;
+}
+void Ship::NextDay() {
+
 }

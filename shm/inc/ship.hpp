@@ -5,13 +5,15 @@
 #include <vector>
 
 #include "cargo.hpp"
+#include "observer.hpp"
 
-class Ship {
+class Ship : public Observer {
 public:
     Ship();
     Ship(int maxCrew, int speed, size_t id);
     Ship(int capacity, int maxCrew, int speed,
          const std::string& name, size_t id);
+    ~Ship();
 
     Ship& operator-=(const size_t crew);
     Ship& operator+=(const size_t crew);
@@ -35,4 +37,6 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargo_;
+
+    void NextDay();
 };
