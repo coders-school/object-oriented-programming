@@ -62,6 +62,7 @@ set(SOURCES
     ${SOURCE_DIR}/ship.cpp
     ${SOURCE_DIR}/map.cpp
     ${SOURCE_DIR}/player.cpp
+    ${SOURCE_DIR}/fruit.cpp
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
