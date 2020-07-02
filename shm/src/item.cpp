@@ -22,10 +22,7 @@ bool Item::operator==(const Cargo& cargo) const {
 bool Item::operator!=(const Cargo& cargo) const {
     if (typeid(cargo) == typeid(Item)) {
         const Item* item = static_cast<const Item*>(&cargo);
-        return name_ != item->getName() ||
-               amount_ != item->getAmount() ||
-               basePrice_ != item->getBasePrice() ||
-               rairty_ != item->getRarity();
+        return !(this == item);
     }
     return false;
 }
