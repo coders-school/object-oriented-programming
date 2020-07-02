@@ -65,11 +65,19 @@ void Game::printOptions() const {
 }
 
 void Game::printWinScreen() const {
-    std::cout << "Win\n";
+    std::cout << "You won!\n";
+    std::cout << "You've done it in "
+              << game_days_ - time_->getElapsedTime()
+              << " days,\n You've earned "
+              << player_->getMoney()
+              << " coins.\n";
 }
 
 void  Game::printLooseScreen() const {
-    std::cout << "Loose\n";
+    std::cout << "You loose\n";
+    std::cout << "You've run out of money in "
+              << time_->getElapsedTime()
+              << " days\n";
 }
 
 void Game::makeAction(Action action) {
@@ -113,6 +121,7 @@ void Game::travel() {
         for (auto i = map_->getDistanceToIsland(destination); i > 0; --i) {
             // one "distance" takes one day
             ++(*time_);
+            if (time_->getElapsedTime() == 0) { break; }
         }
         map_->travel(destination);
      }
