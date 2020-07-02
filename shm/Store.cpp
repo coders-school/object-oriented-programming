@@ -1,6 +1,6 @@
 #include "Store.hpp"
 
-Response Store::buy(Cargo* cargo, size_t amount, Player* player){
+Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getBasePrice();
     if (cargo -> getAmount() < amount){
         return Response::lack_of_cargo;
@@ -15,7 +15,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player){
     return Response::done;
 }
 
-Response Store::sell(Cargo* cargo, size_t amount, Player* player){
+Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getPrice();
     player->sellCargo(cargo, amount, price);
     return Response::done;
