@@ -51,7 +51,7 @@ set(SRC
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut testShip.cpp testItem.cpp)
+add_executable(${PROJECT_NAME}-ut tests/testShip.cpp tests/testItem.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 
