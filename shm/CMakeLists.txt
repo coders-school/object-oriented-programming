@@ -55,6 +55,8 @@ add_executable(${PROJECT_NAME} main.cpp)
 add_executable(${PROJECT_NAME}-ut tests/testShip.cpp tests/testItem.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME}-ut gtest_main ${PROJECT_NAME}-lib)
+add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
 
 set(FLAGS
     -Wextra
