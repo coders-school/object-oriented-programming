@@ -2,23 +2,23 @@
 
 #include <numeric>
 
-Ship::Ship()
-    : Ship(0, 0, 0, "", 0)
-{}
-Ship::Ship(int maxCrew, int speed, size_t id)
-    : Ship(0, maxCrew, speed, "", id)
+Ship::Ship(int maxCrew, int speed, size_t id, Time *time)
+    : Ship(0, maxCrew, speed, "", id, time)
 {}
 Ship::Ship(int capacity, int maxCrew, int speed,
-        const std::string& name, size_t id)
+        const std::string& name, size_t id, Time *time)
     : capacity_(capacity)
     , maxCrew_(maxCrew) 
     , crew_(0)
     , speed_(speed)
     , name_(name)
     , id_(id)
-{}
+    , time_(time)
+{
+    time_->addObserver(this);
+}
 Ship::~Ship() {
-
+    time_->removeObserver(this);
 }
 
 Ship& Ship::operator-=(const size_t crew) {
