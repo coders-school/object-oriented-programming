@@ -6,7 +6,7 @@
 
 class Fruit : public Cargo {
 public:
-    Fruit(const std::string name, size_t amount, size_t basePrice, size_t timeToSpoil)
+    Fruit(const std::string& name, size_t amount, size_t basePrice, size_t timeToSpoil)
             : Cargo(name, amount, basePrice)
             , timeToSpoil_(timeToSpoil)
     {}
