@@ -40,6 +40,6 @@ private:
     void travel();
     void buy();
     void sell();
-    void printCargo();
+    void printCargo() const;
     void exit();
 };
