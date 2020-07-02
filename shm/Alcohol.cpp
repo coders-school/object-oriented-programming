@@ -11,7 +11,6 @@ Cargo& Alcohol::operator-=(const size_t amount) {
         return *this;
     }
     amount_ -= amount;
-
     return *this;
 }
 
@@ -20,3 +19,4 @@ bool Alcohol::operator==(const Cargo& cargo) const {
            getBasePrice() == cargo.getBasePrice() &&
            getPrice() == cargo.getPrice();
 }
+
