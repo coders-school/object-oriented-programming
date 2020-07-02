@@ -51,12 +51,20 @@ set(SRC
 
 enable_testing()
 
+set(TEST
+    tests/testShip.cpp
+    tests/testItem.cpp)
+    
+include_directories(include)
+
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
+
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut tests/testShip.cpp tests/testItem.cpp)
+add_executable(${PROJECT_NAME}-ut ${TEST})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME}-ut gtest_main ${PROJECT_NAME}-lib)
+
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
 
 set(FLAGS
