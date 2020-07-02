@@ -62,6 +62,7 @@ set(SOURCES
     ${SOURCE_DIR}/ship.cpp
     ${SOURCE_DIR}/map.cpp
     ${SOURCE_DIR}/player.cpp
+    ${SOURCE_DIR}/time.cpp
     ${SOURCE_DIR}/fruit.cpp
     ${SOURCE_DIR}/item.cpp
 )
