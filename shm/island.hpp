@@ -1,19 +1,22 @@
 #pragma once
 
+#include <cstddef>  // for size_t
+
 class Island {
 public:
     class Coordinates {
     public:
         Coordinates() = default;
-        Coordinates(int positionX, int positionY);
+        Coordinates(size_t positionX, size_t positionY);
+
         bool operator==(const Coordinates& rhs) const;
 
     private:
-        int positionX_{};
-        int positionY_{};
+        size_t positionX_{};
+        size_t positionY_{};
     };
 
-    Island(int position_X, int position_Y);
+    Island(size_t position_X, size_t position_Y);
     Coordinates getPosition() const { return position_; }
 
 private:

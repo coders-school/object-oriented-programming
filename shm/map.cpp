@@ -4,10 +4,6 @@
 #include <random>
 #include <vector>
 
-constexpr size_t totalIslands = 10;
-constexpr size_t mapWidth = 20;
-constexpr size_t mapHeight = 10;
-
 Map::Map() {
     islands_.reserve(totalIslands);
     generateIsland(totalIslands);
