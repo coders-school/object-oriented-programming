@@ -9,7 +9,7 @@ public:
 
     void AddObserver(Observer *obs);
     void RemoveObserver(Observer *obs);
-    size_t GetElapsedTime() const {return time_elapsed_; };
+    size_t GetElapsedTime() const {return time_elapsed_; }
     Time& operator++();
 
 private:
