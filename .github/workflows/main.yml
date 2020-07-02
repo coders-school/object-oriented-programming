@@ -1,26 +1,18 @@
-name: C++ with CMake
+name: C++ with CMake CI
 
-on:
-  push:
-    branches: [ homeworkOOP* ]
-  pull_request:
-    branches: [ homeworkOOP* ]
+on: [push, pull_request]
 
 jobs:
-  builder:
-
-    runs-on: ubuntu-18.04
-
+  checker:
+    runs-on: ubuntu-latest
     steps:
     - name: Check out code
       uses: actions/checkout@master
-    - name: mkdir shm/build
-      run: mkdir shm/build
-    - name: Compile
-      working-directory: shm/build
+    - name: Run check.sh
+      working-directory: shm
       run: |
-        cmake ..
-        make
-
+        chmod +x check.sh
+        sudo apt install -y pcregrep
+        ./check.sh CMakeLists.txt
         
-
+# In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
