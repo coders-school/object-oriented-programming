@@ -8,6 +8,9 @@
 #include "player.hpp"
 #include "ship.hpp"
 
+#include "player.hpp"
+#include "ship.hpp"
+
 int main() {
     Fruit bananas("Bananas", 200, 10, 8);
     Fruit oranges("Oranges", 150, 12, 8);
