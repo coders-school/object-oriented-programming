@@ -10,8 +10,10 @@ protected:
     std::string name = "First_Ship";
     size_t maxCrewOfShip = 30;
     size_t maxCargoCapacity = 100;
+    size_t speedOfShip = 10;
+    size_t idOfShip = 1;
 
-    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, 10, name, 1) {}
+    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip) {}
     Ship shipOne;
 };
 
