@@ -96,11 +96,15 @@ void Game::travel() {
     size_t x, y;
     std::cin >> x >> y;
     auto destination = map_->getIsland(Coordinates(x, y));
-    for (auto i = map_->getDistanceToIsland(destination); i > 0; --i) {
-    // one "distance" takes one day
-        ++(*time_);
+    if (destination != nullptr)
+    {
+        for (auto i = map_->getDistanceToIsland(destination); i > 0; --i) {
+            // one "distance" takes one day
+            ++(*time_);
+        }
+        map_->travel(destination);
     }
-    map_->travel(destination);
+    else { std::cout << "Wrong coordinates!" << '\n'; }
 }
 
 void Game::buy() {
