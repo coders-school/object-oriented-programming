@@ -16,7 +16,7 @@ public:
     virtual Cargo& operator-=(const size_t amount) = 0;
 
     virtual bool operator==(const Cargo& cargo) const = 0;
-    bool operator!=(const Cargo& cargo) const;
+    virtual bool operator!=(const Cargo& cargo) const = 0;
 
 protected:
     std::string name_;
