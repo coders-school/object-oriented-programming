@@ -19,7 +19,7 @@ class Store : public Cargo,
     Response sell(cargoPtr cargo, size_t amount, Player* player);
     void nextDay() override;
 
-    //friend std::ostream& operator<<(std::ostream& out, const Store& store);
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
 private:
     void GenerateCargo();
@@ -29,6 +29,9 @@ private:
     std::array<std::string, 3> fruitsNames{"apple", "raspberry", "lemon"};
     std::array<std::string, 3> alcoNames{"vodka", "whiskey", "beer"};
     std::array<std::string, 3> itemNames{"tools", "wood", "material"};
+    void GenerateFruits();
+    void GenerateAlco();
+    void GenerateItems();
 
     std::vector<cargoPtr> cargo_;
     Time* time_;
