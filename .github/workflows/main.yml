@@ -12,7 +12,7 @@ jobs:
       working-directory: shm
       run: |
         chmod +x check.sh
-        apt install pcregrep
+        sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
 
   shm:
