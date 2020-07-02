@@ -20,3 +20,9 @@ bool Item::operator==(const Cargo& cargo) const {
            getPrice() == cargo.getPrice();
 }
 
+bool Item::operator!=(const Cargo& cargo) const {
+    return getName() != cargo.getName() ||
+           getBasePrice() != cargo.getBasePrice() ||
+           getPrice() != cargo.getPrice();
+}
+
