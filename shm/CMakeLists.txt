@@ -50,6 +50,7 @@ set(SRC
     timeSHM.cpp)
 
 enable_testing()
+
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 add_executable(${PROJECT_NAME} main.cpp)
 add_executable(${PROJECT_NAME}-ut tests/testShip.cpp tests/testItem.cpp)
