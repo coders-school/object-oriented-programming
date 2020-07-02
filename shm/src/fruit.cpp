@@ -27,23 +27,23 @@ Fruit& Fruit::operator--(int) {
 }
 bool Fruit::operator==(const Cargo& cargo) const {
     if (typeid(cargo) == typeid(Fruit)) {
-        const Fruit* fruitPtr = static_cast<const Fruit*>(&cargo);
-        return name_ == fruitPtr->getName() &&
-            amount_ == fruitPtr->getAmount() &&
-            basePrice_ == fruitPtr->getBasePrice() &&
-            timeToSpoil_ == fruitPtr->getTimeToSpoil() &&
-            timeToSpoilLeft_ == fruitPtr->getTimeToSpoilLeft();
+        const Fruit* fruit = static_cast<const Fruit*>(&cargo);
+        return name_ == fruit->getName() &&
+            amount_ == fruit->getAmount() &&
+            basePrice_ == fruit->getBasePrice() &&
+            timeToSpoil_ == fruit->getTimeToSpoil() &&
+            timeToSpoilLeft_ == fruit->getTimeToSpoilLeft();
     }
     return false;
 }
 bool Fruit::operator!=(const Cargo& cargo) const {
     if (typeid(cargo) == typeid(Fruit)) {
-        const Fruit* fruitPtr = static_cast<const Fruit*>(&cargo);
-        return name_ != fruitPtr->getName() ||
-               amount_ != fruitPtr->getAmount() ||
-               basePrice_ != fruitPtr->getBasePrice() ||
-               timeToSpoil_ != fruitPtr->getTimeToSpoil() ||
-               timeToSpoilLeft_ != fruitPtr->getTimeToSpoilLeft();
+        const Fruit* fruit = static_cast<const Fruit*>(&cargo);
+        return name_ != fruit->getName() ||
+               amount_ != fruit->getAmount() ||
+               basePrice_ != fruit->getBasePrice() ||
+               timeToSpoil_ != fruit->getTimeToSpoil() ||
+               timeToSpoilLeft_ != fruit->getTimeToSpoilLeft();
     }
     return false;
 }
