@@ -1,34 +1,37 @@
 #include "Cargo.h"
 
-	Cargo::Cargo (std::string name, size_t amount, size_t basePrice) :
-				name_(name), 
-				amount_(amount),
-				basePrice_(basePrice)
-				{}
+Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
+    : name_(name),
+      amount_(amount),
+      basePrice_(basePrice) {}
 
-	Cargo::Cargo& operator+=(size_t amount) {
-		amount_ += amount;
-		return *this;
-	}
+Cargo& Cargo::operator+=(size_t amount) {
+    amount_ += amount;
+    return *this;
+}
 
-	Cargo::Cargo& operator-=(size_t amount) {
-		amount_ -= amount;
-		return *this;
-	}
+Cargo& Cargo::operator-=(size_t amount) {
+    if (amount > amount_) {
+        amount_ = 0;
+    } else {
+        amount_ -= amount;
+    }
 
-	bool Cargo::operator==(const Cargo& cargo) const {
-		return this->name_ == cargo.getName() && this->amount_ == cargo.getAmount() && this->basePrice_ == cargo.getBasePrice();
-	}
+    return *this;
+}
 
-	constexpr std::string Cargo::GetName() {
-		return name_;
-	}
+bool Cargo::operator==(const Cargo& cargo) const {
+    return name_ == cargo.name_ && amount_ == cargo.amount_ && basePrice_ == cargo.basePrice_;
+}
 
-	constexpr size_t Cargo::GetAmount() {
-		return amount_;
-	}
+std::string Cargo::getName() {
+    return name_;
+}
 
-	constexpr size_t Cargo::GetBestPrice() {
-		return basePrice_;
-	}
-};
+size_t Cargo::getAmount() {
+    return amount_;
+}
+
+size_t Cargo::getBasePrice() {
+    return basePrice_;
+}

@@ -6,9 +6,9 @@
 #include "Island.h"
 
 Map::Map() {
-    for (int i = 0; i < islandsCount; i++) {
-        std::random_device rd;
-        std::mt19937 gen(rd());
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    for (size_t i = 0; i < islandsCount; i++) {
         std::uniform_int_distribution<> distrib(0, mapSizeX);
         std::uniform_int_distribution<> distrib2(0, mapSizeY);
         size_t x;

@@ -14,7 +14,7 @@ public:
     Cargo* getCargo(size_t index) const;
 
 private:
-    std::shared_ptr<Ship> ship_;
+    std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t available_space_;
     void checkAvailableSpace();

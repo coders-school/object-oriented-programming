@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Coordinates.h"
 
 class Island {

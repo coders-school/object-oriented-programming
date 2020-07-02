@@ -1,36 +1,51 @@
-#include <string>
+#include "Ship.h"
 
-class Ship {
-public:
-    Ship()
-        : id_(-1) {}
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-        : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
-    Ship(int maxCrew, int speed, size_t id)
-        : Ship(0, maxCrew, speed, "", id) {}
+Ship::Ship()
+    : id_(-1){};
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+Ship::Ship(size_t maxCrew, size_t speed, size_t id)
+    : Ship(0, maxCrew, speed, "", id) {}
 
-    void setName(const std::string& name) { name_ = name; }
+void Ship::setName(const std::string& name) {
+    name_ = name;
+}
 
-    Ship& operator-=(size_t num) {
+Ship& Ship::operator-=(size_t num) {
+    if (num >= crew_) {
+        crew_ = 0;
+    } else {
         crew_ -= num;
-        return *this;
     }
-    Ship& operator+=(size_t num) {
-        crew_ += num;
-        return *this;
+    return *this;
+}
+Ship& Ship::operator+=(size_t num) {
+    crew_ += num;
+    if (crew_ > maxCrew_) {
+        crew_ = maxCrew_;
     }
+    return *this;
+}
 
-    size_t getCapacity() const { return capacity_; }
-    size_t getMaxCrew() const { return maxCrew_; }
-    size_t getSpeed() const { return speed_; }
-    std::string getName() const { return name_; }
-    size_t getId() const { return id_; }
+std::shared_ptr<Cargo> Ship::getCargo(size_t index) {
+    return cargo_[index];
+}
+std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
+    return cargo_;
+}
 
-private:
-    size_t capacity_;
-    size_t maxCrew_;
-    size_t crew_;
-    size_t speed_;
-    std::string name_;
-    const size_t id_;
-};
+size_t Ship::getCapacity() const {
+    return capacity_;
+}
+size_t Ship::getMaxCrew() const {
+    return maxCrew_;
+}
+size_t Ship::getSpeed() const {
+    return speed_;
+}
+std::string Ship::getName() const {
+    return name_;
+}
+size_t Ship::getId() const {
+    return id_;
+}
