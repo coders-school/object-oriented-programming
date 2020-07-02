@@ -7,6 +7,7 @@ public:
                         rare = 3,
                         epic = 6,
                         legendary = 10 };
+                        
     const char* enumToString (Rarity r) const {
         const std::map<Rarity,const char*> enumStrings {
             { Rarity::common, "common" },
