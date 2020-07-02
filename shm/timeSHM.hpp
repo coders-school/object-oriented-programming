@@ -6,7 +6,7 @@
 
 class Time {
 public:
-    Time();
+    explicit Time();
 
     bool findObserver(Observer* obs);
     void addObserver(Observer* obs);

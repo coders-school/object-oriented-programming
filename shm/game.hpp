@@ -6,6 +6,14 @@
 
 class Game {
 public:
+    enum class Action {
+        exit = 0,
+        travel = 1,
+        buy = 2,
+        sell = 3,
+        printCargo = 4
+    };
+
     Game(size_t money, size_t days, size_t finalGoal);
 
     void startGame();
@@ -28,7 +36,7 @@ private:
     void printLoseScreen();
     void printMenu();
     void printOptions();
-    void makeAction(size_t choice);
+    void makeAction(Action pickAction);
     void travel();
     void buy();
     void sell();
