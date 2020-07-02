@@ -27,7 +27,7 @@ double Fruit::getPrice() const {
     if (currentExpiryDate_ == 0 || expiryDate_ == 0) {
         return 0;
     }
-    return basePrice_ * currentExpiryDate_ / expiryDate_ + NOFLOAT_ROUNDING;
+    return basePrice_ * currentExpiryDate_ / expiryDate_;
 }
 
 Fruit& Fruit::operator--() {
@@ -47,6 +47,7 @@ Cargo& Fruit::operator+=(uint32_t amount) {
 Cargo& Fruit::operator-=(uint32_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
+        std::cout<<amount_<<'\n';
         return *this;
     }
     std::cout << "There is no so many fruits!";
