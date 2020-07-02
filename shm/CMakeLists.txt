@@ -39,15 +39,17 @@ endif()
 project(SHM)
 
 set(SRC cargo.cpp coordinates.cpp island.cpp map.cpp ship.cpp player.cpp store.cpp time.cpp observerTime.cpp subjectTime.cpp alcohol.cpp item.cpp fruit.cpp)
+set(TEST_SRC ut/alcohol_test.cpp)
 set(FLAGS -Wall -Wextra -Wconversion -pedantic -Werror)
+set(INCLUDES -I .)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut test.cpp)
+add_executable(${PROJECT_NAME}-ut test.cpp ${TEST_SRC})
 
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
-target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
+target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS} ${INCLUDES})
 target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
