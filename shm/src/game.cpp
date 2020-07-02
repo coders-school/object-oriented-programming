@@ -50,13 +50,17 @@ bool Game::checkLooseCondition() const {
 }
 
 void Game::printTopBar() const {
-    std::cout << "Top\n";
+    std::cout << "  ~~~~    SHM version 1.0   ~~~~" << '\n';
     std::cout << "Elapsed time " << time_->getElapsedTime() << '\n';
+    std::cout << "Elapsed money " << player_->getMoney() << '\n';
 }
 
 void Game::printOptions() const {
     std::cout << "Options:\n";
     std::cout << "1 - Travel\n";
+    std::cout << "2 - Buy\n";
+    std::cout << "3 - Sell\n";
+    std::cout << "4 - Print cargo\n";
     std::cout << "0 - Exit\n";
 }
 
