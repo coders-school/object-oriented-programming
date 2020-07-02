@@ -2,6 +2,14 @@
 
 #include <algorithm>
 
+
+Cargo* Ship::getCargo(size_t index) const {
+    if (index > cargo_.size()) {
+        return nullptr;
+    }
+    return cargo_[index-1].get();
+}
+
 Ship& Ship::operator-=(const size_t crew) {
     if (crew > crew_) {
         crew_ = 0;
@@ -29,5 +37,11 @@ void Ship::unload(Cargo* cargo) {
         std::remove_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
             return ptr.get() == cargo;
         });
+    }
+}
+
+void Ship::nextDay() {
+    if (delegate_) {
+        delegate_->payCrew(crew_ * salaryPerWorker); 
     }
 }
