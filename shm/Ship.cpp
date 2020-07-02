@@ -31,3 +31,9 @@ void Ship::unload(Cargo* cargo) {
         });
     }
 }
+
+void Ship::nextDay() {
+    if (delegate_) {
+        delegate_->payCrew(crew_ * salaryPerWorker); 
+    }
+}

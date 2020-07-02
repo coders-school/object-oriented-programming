@@ -2,11 +2,21 @@
 
 #include <numeric>
 
-Player::Player(std::unique_ptr<Ship> ship, size_t money) {
-    ship_ = std::move(ship);
+Player::Player(std::unique_ptr<Ship>& ship, size_t money) {
+    ship_ = std::move(ship); //it might be good to let the Player class to construct Ship for itself
+    ship_->setDelegate(this);
     money_ = money;
     avaliableSpace_ = countAvailableSpace();
 };
+
+void Player::payCrew(size_t money) {
+    if (money > money_) {
+        money_ = SIZE_MAX;
+    }
+    else {
+        money_ -= money;
+    }
+}
 
 size_t Player::countAvailableSpace() {
     auto occupiedSpace = std::accumulate(begin(ship_->getAllCargos()),
