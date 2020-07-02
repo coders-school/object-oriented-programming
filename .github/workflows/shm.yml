@@ -1,8 +1,13 @@
 name: C++ with CMake with tests
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ homeworkOOP* ]
+  pull_request:
+    branches: [ homeworkOOP* ]
 
 jobs:
+<<<<<<< HEAD
 <<<<<<< HEAD
   Game:
 
@@ -24,10 +29,22 @@ jobs:
     - name: Run check.sh
       working-directory: shm
 >>>>>>> from banch test
+=======
+  builder:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Make build directory
+      run: mkdir shm/build
+    - name: Compile
+      working-directory: shm/build
+>>>>>>> Rename shm/.github/workflows/shm.yml to .github/workflows/shm.yml
       run: |
         cmake ..
         make
     - name: Run tests
       working-directory: shm/build
-      run: ctest -V    
-
+      run: ctest -V   
