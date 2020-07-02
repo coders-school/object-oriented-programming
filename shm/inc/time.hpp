@@ -16,5 +16,5 @@ private:
     size_t time_elapsed_{};
     std::vector<Observer*> observers_;
     
-    void Notify();
+    void notify();
 };
