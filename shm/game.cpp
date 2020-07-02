@@ -5,7 +5,6 @@
 #include <iostream>
 
 
-
 Game::Game(size_t money, size_t days, size_t finalGoal)
     : money_(money), 
       days_(days), 
@@ -17,6 +16,9 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
 }
 
 void Game::startGame() {
+
+                std::cout << player_->getMoney();
+
     printTrail();
     printStars();
     printStars();
@@ -38,16 +40,15 @@ void Game::startGame() {
               << std::setw(8) << "May the force be with you!";            
     printStars();
 
-    // while (days_ > time_->getElapsedTime()) {
-    //     if (checkWinConditions()) {
-    //         printWinScreen();
+    while (days_ > time_->getElapsedTime()) {
+        if (checkWinConditions()) {
     //         return;
-    //     } else if (checkLoseConditions()) {
-    //         break;
-    //     }
+        } else if (checkLoseConditions()) {
+            break;
+        }
     //     printTrail();
     //     //game 
-    // } ///////////////////time - observer
+    } ///////////////////time - observer
     printMenu();
 }
 
@@ -70,8 +71,7 @@ void Game::printWinScreen() {
 }
 
 bool Game::checkLoseConditions() const {
-    return player_->getMoney() == SIZE_MAX; //change when -= money in player return Size_max
-                                            //  || currentDay_ > days_
+    return currentDay_ > days_ || player_->getMoney() == SIZE_MAX; //change when -= money in player return Size_max
 }
 
 void Game::printLoseScreen() {
@@ -83,4 +83,28 @@ void Game::printMenu() {
               << " Day: " << time_->getElapsedTime()
               << " Days left: " << days_ - time_->getElapsedTime();
 //              << " Current position: " << map_->getIsland() << '\n';
+}
+
+void Game::printOptions() {
+    //To do 
+}
+
+void Game::makeAction(size_t choice) {
+    //To do
+}
+
+void Game::travel() {
+    //To do
+}
+
+void Game::buy() {
+    //To do
+}
+
+void Game::sell() {
+    //To do
+}
+
+void Game::printCargo() {
+    //To do
 }
