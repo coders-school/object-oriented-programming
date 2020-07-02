@@ -12,6 +12,8 @@ public:
     Map();
 
     Island* getIsland(const Coordinates& coordinate);
+    void showIslands();
+    void travel(Island* island);
 
 private:
     std::vector<Island> allIslands;

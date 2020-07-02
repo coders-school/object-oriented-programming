@@ -7,7 +7,7 @@ Store::Store() {}
 Store::~Store() {}
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    out << "Available Cargo in Store: \n";
+    out << "Available Cargo in Store: \n0 - Exit \n";
     std::for_each(store.cargo_.begin(), store.cargo_.end(), [&, i{0}](const auto& cargo) mutable {
         out << ++i << " - " << cargo->getName() << "  AMOUNT: " << cargo->getAmount()
             << "  PRICE: " << cargo->getBasePrice() << '\n';
@@ -17,7 +17,7 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
 
 Store::Response Store::buy(std::shared_ptr<Cargo> cargo, uint32_t amount, Player* player) {
     const uint32_t price = amount * cargo->getBasePrice();
-    std::shared_ptr<Cargo> buyCargo = std::make_shared<Cargo>(*cargo);
+    std::shared_ptr<Cargo> buyCargo = cargo->clone();
 
     if (amount > player->getAvailableSpace()) {
         return Store::Response::lack_of_space;
@@ -38,8 +38,11 @@ Store::Response Store::buy(std::shared_ptr<Cargo> cargo, uint32_t amount, Player
 Store::Response Store::sell(std::shared_ptr<Cargo> cargo, uint32_t amount, Player* player) {
     const uint32_t price = amount * cargo->getBasePrice();
 
+    if (amount > cargo->getAmount()) {
+        return Store::Response::lack_of_cargo;
+    }
     player->sellCargo(cargo, amount, price);
-    loadToStore(cargo);
+    loadToStore(cargo, amount);
     return Store::Response::done;
 }
 
@@ -50,7 +53,7 @@ std::shared_ptr<Cargo> Store::getCargo(uint32_t index) const {
     return nullptr;
 }
 
-void Store::generateCargo(Time* time) {
+void Store::generateCargo() {
     const int minAmountOfCargo = 50;
     const int maxAmountOfCargo = 300;
     const int minPriceOfCargo = 5;
@@ -60,11 +63,23 @@ void Store::generateCargo(Time* time) {
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    std::vector<std::string> cargoProducts = {"Coffee",    "Tea",     "Cigarette", "Ice cream",
-                                              "Chocolate", "Alcohol", "Fruits",    "Chips"};
-    for_each(cargoProducts.begin(), cargoProducts.end(), [&](const auto& cargo) {
-        cargo_.emplace_back(std::make_shared<Cargo>(amountOfCargo(gen), cargo, priceOfCargo(gen), time));
-    });
+    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Oranges", priceOfCargo(gen), 6)));
+    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Bananas", priceOfCargo(gen), 4)));
+    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Apples", priceOfCargo(gen), 9)));
+
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Vodka", priceOfCargo(gen), 40)));
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Liquor", priceOfCargo(gen), 24)));
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Whiskey", priceOfCargo(gen), 38)));
+    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Bimber", priceOfCargo(gen), 70)));
+
+    cargo_.push_back(
+        std::make_shared<Item>(Item(amountOfCargo(gen), "Woods", priceOfCargo(gen), Item::Rarity::common)));
+    cargo_.push_back(std::make_shared<Item>(Item(amountOfCargo(gen), "Bronze", priceOfCargo(gen), Item::Rarity::rare)));
+    cargo_.push_back(std::make_shared<Item>(Item(amountOfCargo(gen), "Silver", priceOfCargo(gen), Item::Rarity::epic)));
+    cargo_.push_back(
+        std::make_shared<Item>(Item(amountOfCargo(gen), "Gold", priceOfCargo(gen), Item::Rarity::legendary)));
+    //   for_each(cargoProducts.begin(), cargoProducts.end(),
+    //           [&](const auto& cargo) { cargo_.push_back(std::make_shared<cargo.second()>; });
 }
 
 void Store::printCargo() const {
@@ -75,10 +90,10 @@ void Store::printCargo() const {
     });
 }
 
-void Store::loadToStore(std::shared_ptr<Cargo> cargo) {
+void Store::loadToStore(std::shared_ptr<Cargo> cargo, uint32_t amount) {
     for (auto& element : cargo_) {
         if (cargo.get()->getName() == element->getName()) {
-            *element += cargo.get()->getAmount();
+            *element += amount;
             return;
         }
     }

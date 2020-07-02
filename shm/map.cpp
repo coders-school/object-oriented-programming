@@ -1,10 +1,11 @@
 #include "map.hpp"
+
+#include <iostream>
 #include <map>
 #include <random>
 #include <string>
 
 Map::Map() {
-
     allIslands.reserve(NUM_OF_ISLANDS);
 
     std::map<std::string, int> repsChecker;
@@ -29,8 +30,10 @@ Map::Map() {
 
         } while (!coordinateExist);
 
-        allIslands.emplace_back(Island(Coordinates(positionX, positionY)));
+        allIslands.push_back(Island(Coordinates(positionX, positionY)));
+        allIslands[i].createStore();
     }
+    // currentPosition_ = &allIslands[0];
 }
 
 Island* Map::getIsland(const Coordinates& coordinate) {
@@ -40,4 +43,21 @@ Island* Map::getIsland(const Coordinates& coordinate) {
         }
     }
     return nullptr;
+}
+
+void Map::showIslands() {
+    if (!currentPosition_) {
+        std::cout << "You are on water ! \n";
+    } else {
+        std::cout << "Your current position is: " << currentPosition_->getPosition().getPositionX() << " "
+                  << currentPosition_->getPosition().getPositionY() << '\n';
+    }
+    std::cout << "Next other islands position: \n";
+    for (const auto& element : allIslands) {
+        std::cout << element.getPosition().getPositionX() << " " << element.getPosition().getPositionY() << '\n';
+    }
+}
+
+void Map::travel(Island* island) {
+    currentPosition_ = island;
 }
