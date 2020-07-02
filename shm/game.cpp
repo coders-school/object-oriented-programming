@@ -3,22 +3,16 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
+#include <memory>
 
 
 Game::Game(size_t money, size_t days, size_t finalGoal)
     : money_(money), 
       days_(days), 
       finalGoal_(finalGoal),
-      currentDay_(1) {
-    Map* map_;
-    Player* player_;
-    Time* time_;
-}
+      currentDay_(1) {}
 
 void Game::startGame() {
-
-                std::cout << player_->getMoney();
-
     printTrail();
     printStars();
     printStars();
@@ -42,13 +36,13 @@ void Game::startGame() {
 
     while (days_ > time_->getElapsedTime()) {
         if (checkWinConditions()) {
-    //         return;
+            return;
         } else if (checkLoseConditions()) {
             break;
         }
-    //     printTrail();
-    //     //game 
-    } ///////////////////time - observer
+        printTrail();
+        //make game 
+    }
     printMenu();
 }
 
