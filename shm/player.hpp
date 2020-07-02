@@ -5,7 +5,6 @@
 
 #include "cargo.hpp"
 #include "ship.hpp"
-#include "cargo.hpp"
 
 class Player {
 public:
