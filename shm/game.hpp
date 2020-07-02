@@ -3,6 +3,7 @@
 #include "ship.hpp"
 #include "timeSHM.hpp"
 
+
 class Game {
 public:
     Game(size_t money, size_t days, size_t finalGoal);
@@ -14,8 +15,9 @@ private:
     size_t days_ {0};
     const size_t finalGoal_ {0};
     size_t currentDay_ {0};
-    Map* map_;
-    Player* player_;
+    Map map_;
+    std::shared_ptr<Ship> ship_ = std::make_shared<Ship>(150, 50, 13, "Player_ship", 1);
+    std::shared_ptr<Player> player_ = std::make_shared<Player>(ship_, 500, 200);
     Time* time_;
 
     void printTrail();
