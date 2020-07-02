@@ -10,7 +10,10 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
     : money_(money), 
       days_(days), 
       finalGoal_(finalGoal),
-      currentDay_(1) {}
+      currentDay_(1),
+    //   player_(std::make_shared<Player>(money, time_),
+      time_(std::make_shared<Time>()),
+	  map_(std::make_shared<Map>()) {}
 
 void Game::startGame() {
     printTrail();
@@ -28,11 +31,13 @@ void Game::startGame() {
     std::cout << std::setw(8) << "You" 
               << std::setw(8) << "have: "
               << std::setw(8) << days_
-              << std::setw(8) << "days to get: "
+              << std::setw(8) << " days to get: "
               << std::setw(8) << finalGoal_
-              << std::setw(8) << "gold. Have a nice time!"
+              << std::setw(8) << " gold. Have a nice time! \n"
               << std::setw(8) << "May the force be with you!";            
     printStars();
+    std::cout << '\n';
+    printTrail();
 
     while (days_ > time_->getElapsedTime()) {
         if (checkWinConditions()) {
@@ -42,10 +47,9 @@ void Game::startGame() {
             printLoseScreen();
             break;
         }
-        int pickAction;
         printMenu();
         printOptions();
-        std::cin.clear();
+        int pickAction;
         std::cin >> pickAction;
         makeAction(static_cast<Action>(pickAction));
         if (pickAction == 0) {
@@ -81,10 +85,10 @@ void Game::printLoseScreen() {
 }
 
 void Game::printMenu() {
-    std::cout << "Money: " << player_->getMoney();
-      //        << " Day: " << time_->getElapsedTime()
-       //       << " Days left: " << days_ - time_->getElapsedTime();
-      //        << " Current position: " << map_->getIsland() << '\n';
+    std::cout << "Money: " << player_->getMoney()
+              << " Day: " << time_->getElapsedTime()
+              << " Days left: " << days_ - time_->getElapsedTime();
+            //  << " Current position: " << map_->getIsland() << '\n';
 }
 
 void Game::printOptions() {
@@ -92,13 +96,14 @@ void Game::printOptions() {
               << "1. Travel \n"
               << "2. Buy \n"
               << "3. Sell \n"
+              << "4. Print cargo \n"
               << "0. Exit game \n";
 }
 
 void Game::makeAction(Action pickAction) {
     switch (pickAction) {
         case Action::exit: {
-            std::cout << "Bye, bye";
+            std::cout << "Bye, bye \n";
             break;
         }
         case Action::travel: {
@@ -116,6 +121,9 @@ void Game::makeAction(Action pickAction) {
         case Action::printCargo: {
             printCargo();
             break;
+        }
+        default: {
+            std::cout << "I can't do this! \n";
         }
     }
 }

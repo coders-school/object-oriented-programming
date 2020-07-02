@@ -17,6 +17,6 @@ public:
     Time& operator++();
 
 private:
-    size_t timeElapsed_;
+    size_t timeElapsed_ {1};
     std::vector<Observer*> observers_;  
 };
