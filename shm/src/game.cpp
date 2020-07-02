@@ -113,6 +113,7 @@ void Game::sell() {
 
 void  Game::printCargo() const {
     std::cout << "Cargo\n";
+    player_ -> printCargo();
 }
 
 void  Game::exit() {

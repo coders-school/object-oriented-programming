@@ -28,3 +28,7 @@ size_t Player::getAvailableSpace() const {
    }
     return ship_->getCapacity() - totalAmount;
 }
+
+void Player::printCargo() const {
+    ship_ -> printCargo();
+}
