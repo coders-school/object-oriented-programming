@@ -3,6 +3,7 @@ name: C++ with CMake with tests
 on: [push, pull_request]
 
 jobs:
+<<<<<<< HEAD
   Game:
 
     runs-on: ubuntu-18.04
@@ -14,6 +15,15 @@ jobs:
       run: mkdir shm/build
     - name: Compile
       working-directory: shm/build
+=======
+  checker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Run check.sh
+      working-directory: shm
+>>>>>>> from banch test
       run: |
         cmake ..
         make
