@@ -53,7 +53,8 @@ enable_testing()
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut test.cpp)
+add_executable(${PROJECT_NAME}-ut testShip.cpp)
+add_executable(${PROJECT_NAME}-ut testItem.cpp)
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME}-ut gtest_main ${PROJECT_NAME}-lib)
