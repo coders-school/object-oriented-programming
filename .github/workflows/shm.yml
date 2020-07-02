@@ -1,10 +1,6 @@
-name: C++ with CMake
+name: C++ with CMake with tests
 
-on:
-  push:
-    branches: [ homeworkOOP* ]
-  pull_request:
-    branches: [ homeworkOOP* ]
+on: [push, pull_request]
 
 jobs:
   builder:
@@ -21,6 +17,7 @@ jobs:
       run: |
         cmake ..
         make
-
-        
+    - name: Run tests
+      working-directory: shm/build
+      run: ctest -V    
 
