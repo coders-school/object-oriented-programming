@@ -32,7 +32,7 @@ int main() {
     //Checking observer pattern
     Time time;
     Item knife("SilverKnife", 2, 30, 1, &time);
-    Fruit aplles("Apples", 30, 10, 20, 10, &time);
+    Fruit apples("Apples", 30, 10, 20, 10, &time);
 
     //std::unique_ptr<Ship> uPtrFD = std::make_unique<Ship>(FD);
     return 0;
