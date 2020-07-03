@@ -33,15 +33,15 @@ void Game::startGame() {
     std::cout << '\n';
     printTrail();
     printStars();
-    std::cout << std::setw(8) << "You" 
-              << std::setw(8) << "have: "
-              << std::setw(8) << days_
-              << std::setw(8) << " days to get: "
-              << std::setw(8) << finalGoal_
-              << std::setw(8) << " gold. Have a nice time! \n"
-              << std::setw(8) << "May the force be with you!";            
+    std::cout << std::setw(8) << " You have: "
+                              << days_
+                              << " days to get: "
+                              << finalGoal_
+                              << " gold. Have a nice time!";
+    printStars();
     printStars();
     std::cout << '\n';
+    std::cout << "~~~May the force be with you!~~~ \n";            
     printTrail();
 
     while (days_ > time_->getElapsedTime()) {
@@ -136,7 +136,19 @@ void Game::makeAction(Action pickAction) {
 }
 
 void Game::travel() {
-    //To do
+    while (true) {
+        //operator wypisania mapy
+        std::cout << "Where do you want to sail? (posX posY) \n";
+        int posX, posY;
+        std::cin >> posX >> posY;
+        Island* island = map_->getIsland(Coordinates(posX, posY));
+        if (island != nullptr) {
+            //Coordinates::Distance(Coordinates(map_->getCurrentPosition()), Coordinates(posX,posY))
+            //make_travel
+        }
+        std::cout << "Give me right coordinates! \n";
+        printTrail();
+    }
 }
 
 void Game::buy() {
