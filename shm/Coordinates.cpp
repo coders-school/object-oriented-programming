@@ -2,11 +2,11 @@
 
 #include <math.h>
 
-bool Coordinates::operator==(const Coordinates& cord) {
+bool Coordinates::operator==(const Coordinates& cord) const {
     return (positionX_ == cord.positionX_) && (positionY_ == cord.positionY_);
 }
 
-bool Coordinates::operator!=(const Coordinates& cord) {
+bool Coordinates::operator!=(const Coordinates& cord) const {
     return (positionX_ != cord.positionX_) || (positionY_ != cord.positionY_);
 }
 

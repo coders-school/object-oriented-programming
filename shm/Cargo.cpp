@@ -14,10 +14,10 @@ Cargo& Cargo::operator-=(const size_t amount) {
     return *this;
 }
 
-bool Cargo::operator==(const Cargo& cargo) {
+bool Cargo::operator==(const Cargo& cargo) const {
     return (name_ == cargo.name_);
 }
 
-bool Cargo::operator!=(const Cargo& cargo) {
+bool Cargo::operator!=(const Cargo& cargo) const {
     return (name_ != cargo.name_);
 }

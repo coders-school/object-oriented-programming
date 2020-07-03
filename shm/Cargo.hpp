@@ -15,8 +15,8 @@ public:
 
     Cargo& operator+=(const size_t amount);
     Cargo& operator-=(const size_t amount);
-    bool operator==(const Cargo& cargo);
-    bool operator!=(const Cargo& cargo);
+    bool operator==(const Cargo& cargo) const;
+    bool operator!=(const Cargo& cargo) const;
 
 protected:
     std::string name_;
