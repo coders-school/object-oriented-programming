@@ -24,7 +24,6 @@ public:
     int getId() const;
     Cargo* getCargo(size_t index) const;
     size_t countAvailableSpace() const;
-    
 private:
     Cargo* findCargo(Cargo* cargo);
     void removeCargo (Cargo* cargo);

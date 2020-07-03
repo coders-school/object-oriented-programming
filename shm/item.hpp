@@ -1,9 +1,9 @@
 #pragma once
 #include<string>
+#include <iostream>
 #include "timeSHM.hpp"
 #include "cargo.hpp"
 #include "Rarity.hpp"
-#include <iostream>
 class Item : public Cargo, public Observer {
 
 public:
@@ -13,9 +13,9 @@ public:
 
     ~Item(){
         this->Publisher_->removeObserver(this);
-        std::cout<<"Goodbye! I was you Item"<<'\n';
+        std::cout<<"Goodbye! I was your Item"<<'\n';
     };
-//~Item() override {};
+
     void nextDay() override;
 
     //Override from Cargo

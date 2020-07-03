@@ -2,10 +2,13 @@
 
 #include <string>
 
-Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeElapsed)
+Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeElapsed, Time* Publisher)
     : Cargo(name, amount, basePrice),
-      expiryDate_(expiryDate),
-      timeElapsed_(timeElapsed) {}
+    expiryDate_(expiryDate),
+    timeElapsed_(timeElapsed),
+    Publisher_(Publisher){
+    this->Publisher_->addObserver(this);   
+    }
 
 size_t Fruit::getPrice() const {
     if (timeToSpoil_) {

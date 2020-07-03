@@ -5,7 +5,8 @@
 #include "player.hpp"
 #include "ship.hpp"
 #include "timeSHM.hpp"
-#include "item.cpp"
+#include "item.hpp"
+#include "fruit.hpp"
 #include <iostream>
 #include <memory>
 #include <string>
@@ -31,7 +32,8 @@ int main() {
     //Checking observer pattern
     Time time;
     Item knife("SilverKnife", 2, 30, 1, &time);
-    Ship::getName(Ship::getCargo(0));
+    Fruit aplles("Apples", 30, 10, 20, 10, &time);
+
     //std::unique_ptr<Ship> uPtrFD = std::make_unique<Ship>(FD);
     return 0;
 }
