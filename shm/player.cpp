@@ -1,5 +1,4 @@
 #include "player.hpp"
-
 #include <numeric>
 
 constexpr size_t START_MONEY = 1000;

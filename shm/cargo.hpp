@@ -6,6 +6,7 @@ class Cargo {
 public:
     Cargo();
     Cargo(std::string name, size_t amount, size_t basePrice);
+    
     virtual ~Cargo() = default;
 
     Cargo& operator+=(size_t amount);

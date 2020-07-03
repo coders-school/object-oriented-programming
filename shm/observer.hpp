@@ -1,5 +1,5 @@
 class Observer {
 public:
-    virtual void nextDay();
-    virtual ~Observer();
+    virtual void nextDay()=0;
+    //virtual ~Observer();
 };

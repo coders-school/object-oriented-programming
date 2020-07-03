@@ -1,28 +1,32 @@
 #pragma once
-
-#include <string>
-
+#include<string>
+#include <iostream>
+#include "timeSHM.hpp"
 #include "cargo.hpp"
+#include "rarity.hpp"
 
-class Item : public Cargo {
+class Item : public Cargo, public Observer {
+
 public:
-    enum class Rarity {
-        common = 1,
-        rare = 3,
-        epic = 8,
-        legendary = 50,
+
+    // override from Observer
+    Item(std::string name, size_t amount, size_t basePrice, int rarity, Time* Publisher);
+
+    ~Item(){
+        this->Publisher_->removeObserver(this);
+        std::cout<<"Goodbye! I was your Item"<<'\n';
     };
 
-    Item(std::string name, size_t amount, size_t basePrice, Rarity rarity);
-    ~Item() override = default;
+    void nextDay() override;
 
     //Override from Cargo
     size_t getPrice() const override;
     std::string getName() const override;
     size_t getAmount() const override;
     size_t getBasePrice() const override;
-    Rarity getRarity() const;
+    int getRarity() const;
 
 private:
-    Rarity rarity_;
+    Time* Publisher_;
+    int rarity_;
 };

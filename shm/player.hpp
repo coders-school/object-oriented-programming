@@ -1,11 +1,9 @@
 #pragma once
-
-
 #include <memory>
-
 #include "cargo.hpp"
 #include "ship.hpp"
 
+class Coordinates;
 class Player {
 public:
     Player(std::shared_ptr<Ship> ship, size_t money, size_t space);
@@ -20,6 +18,6 @@ private:
     std::shared_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
-    
     size_t countAvailableSpace();
+    Coordinates* ActualPosition;
 };
