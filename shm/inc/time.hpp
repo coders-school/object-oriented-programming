@@ -7,9 +7,9 @@ class Time {
 public:
     Time();
 
-    void AddObserver(Observer *obs);
-    void RemoveObserver(Observer *obs);
-    size_t GetElapsedTime() const {return time_elapsed_; }
+    void addObserver(Observer *obs);
+    void removeObserver(Observer *obs);
+    size_t getElapsedTime() const {return time_elapsed_; }
     Time& operator++();
 
 private:

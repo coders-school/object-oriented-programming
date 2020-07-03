@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.2)
+cmake_minimum_required(VERSION 3.10)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -38,8 +38,9 @@ endif()
 
 ##-----------------G-test SCRIPT FROM CODERS SCHOOL----------------##
 
+set(PROJECT_NAME SHM)
 
-project(SHM)
+project(${PROJECT_NAME})
 enable_testing()
 add_definitions(-D Wall -Wextra -Werror -pedantic)
 
@@ -55,7 +56,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 ##Insert project source files here.##
 set(SOURCES
-    ${SOURCE_DIR}/main.cpp
     ${SOURCE_DIR}/island.cpp
     ${SOURCE_DIR}/cargo.cpp
     ${SOURCE_DIR}/coordinates.cpp
@@ -67,8 +67,11 @@ set(SOURCES
     ${SOURCE_DIR}/item.cpp
 )
 
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
-add_executable(${CMAKE_PROJECT_NAME}-ut ${SOURCES} ${TEST_DIR}/test.cpp)
+add_library(${CMAKE_PROJECT_NAME}-lib STATIC ${SOURCES})
 
-target_link_libraries(${CMAKE_PROJECT_NAME}-ut gtest_main)
+add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_DIR}/main.cpp)
+add_executable(${CMAKE_PROJECT_NAME}-ut ${TEST_DIR}/test.cpp)
+
+target_link_libraries(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}-lib)
+target_link_libraries(${CMAKE_PROJECT_NAME}-ut ${CMAKE_PROJECT_NAME}-lib gtest_main)
 add_test(NAME shm_test COMMAND ${CMAKE_PROJECT_NAME}-ut)
