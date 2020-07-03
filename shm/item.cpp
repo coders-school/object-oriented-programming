@@ -37,7 +37,7 @@ Cargo& Item::operator-=(uint32_t amount) {
         amount_ -= amount;
         return *this;
     }
-    std::cout << "There is no so many items!";
+    std::cout << "There is no so many items!\n";
     return *this;
 }
 

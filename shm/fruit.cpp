@@ -34,7 +34,7 @@ Fruit& Fruit::operator--() {
     if (currentExpiryDate_ > 0) {
         --currentExpiryDate_;
     } else {
-        std::cout << "Fruits already rotten!";
+        std::cout << "Fruits already rotten!\n";
     }
     return *this;
 }
@@ -47,10 +47,9 @@ Cargo& Fruit::operator+=(uint32_t amount) {
 Cargo& Fruit::operator-=(uint32_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
-        std::cout<<amount_<<'\n';
         return *this;
     }
-    std::cout << "There is no so many fruits!";
+    std::cout << "There is no so many fruits!\n";
     return *this;
 }
 
