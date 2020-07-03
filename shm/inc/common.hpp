@@ -10,9 +10,6 @@
 
 class Common {
 public:
-    enum updateMode { ADD = 0,
-                      REDUCE = 1 };
-
     static void printCargo(const std::vector<Cargo*>& vecOfCargo);
     static Cargo* getCargo(const std::string& name,
                            const std::vector<Cargo*>& vecOfCargo);
