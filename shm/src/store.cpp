@@ -1,7 +1,10 @@
 #include "store.hpp"
 
-#include "algorithm"
+#include <algorithm>
+#include <random>
+
 #include "fruit.hpp"
+
 Store::Store() {
     GenerateCargo();
 }
@@ -64,11 +67,14 @@ cargoPtr Store::FindMatchCargo(cargoPtr cargo) {
             return el;
         }
     }
-    return nullptr;  // czy tak może być? Bo coś tu chyba musimy zwracać, jak się nie znajdzie? Ale czy nullptr to dobra myśl?
+    return nullptr;
 }
 
-size_t Store::GenerateRandom(size_t range) {
-    return 1 + std::rand() / ((RAND_MAX + 1u) / range);
+size_t Store::GenerateRandom(size_t minValue, size_t maxValue) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(minValue, maxValue);
+    return distrib(gen);
 }
 
 void Store::RemoveFromStore(cargoPtr cargo) {
@@ -80,9 +86,9 @@ void Store::RemoveFromStore(cargoPtr cargo) {
 
 void Store::GenerateFruits() {
     for (auto el : fruitsNames) {
-        size_t number = GenerateRandom(15);
-        double basePrice = GenerateRandom(20);
-        size_t timeToRotten = GenerateRandom(28);
+        size_t number = GenerateRandom(1, 15);
+        double basePrice = GenerateRandom(1, 20);
+        size_t timeToRotten = GenerateRandom(1, 28);
         Fruit fr(el, number, basePrice, timeToRotten);
         auto ptr = std::make_shared<Fruit>(fr);
         cargo_.emplace_back(ptr);
@@ -90,8 +96,8 @@ void Store::GenerateFruits() {
 }
 void Store::GenerateAlco() {
     for (auto el : alcoNames) {
-        size_t number = GenerateRandom(10);
-        double basePrice = GenerateRandom(100);
+        size_t number = GenerateRandom(1, 10);
+        double basePrice = GenerateRandom(1, 100);
         Fruit fr(el, number, basePrice);
         auto ptr = std::make_shared<Fruit>(fr);
         cargo_.emplace_back(ptr);
@@ -99,8 +105,8 @@ void Store::GenerateAlco() {
 }
 void Store::GenerateItems() {
     for (auto el : itemNames) {
-        size_t number = GenerateRandom(10);
-        double basePrice = GenerateRandom(70);
+        size_t number = GenerateRandom(1, 10);
+        double basePrice = GenerateRandom(1, 70);
         Fruit fr(el, number, basePrice);
         auto ptr = std::make_shared<Fruit>(fr);
         cargo_.emplace_back(ptr);

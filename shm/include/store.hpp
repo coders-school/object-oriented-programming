@@ -11,8 +11,8 @@ enum class Response {
     lack_of_space
 };
 
-class Store : public Cargo,
-              public Observer {
+class Store : public Observer,
+              public Cargo {
     Store();
     cargoPtr GetCargo(const size_t pos);
     Response buy(cargoPtr cargo, size_t amount, Player* player);
@@ -23,7 +23,7 @@ class Store : public Cargo,
 
 private:
     void GenerateCargo();
-    size_t GenerateRandom(size_t range);
+    size_t GenerateRandom(size_t minValue, size_t maxValue);
     cargoPtr FindMatchCargo(cargoPtr cargo);
     void RemoveFromStore(cargoPtr cargo);
     std::array<std::string, 3> fruitsNames{"apple", "raspberry", "lemon"};
