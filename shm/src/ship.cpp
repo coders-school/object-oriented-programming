@@ -2,11 +2,11 @@
 
 #include <numeric>
 
-Ship::Ship(int maxCrew, int speed, size_t id, Time* time)
-    : Ship(0, maxCrew, speed, "", id, time)
+Ship::Ship(int maxCrew, int speed, size_t id, Time* time, Delegate* delegate)
+    : Ship(0, maxCrew, speed, "", id, time, delegate)
 {}
 Ship::Ship(int capacity, int maxCrew, int speed,
-        const std::string& name, size_t id, Time* time)
+        const std::string& name, size_t id, Time* time, Delegate* delegate)
     : capacity_(capacity)
     , maxCrew_(maxCrew) 
     , crew_(0)
@@ -14,6 +14,7 @@ Ship::Ship(int capacity, int maxCrew, int speed,
     , name_(name)
     , id_(id)
     , time_(time)
+    , delegate_(delegate)
 {
     time_->addObserver(this);
 }
@@ -40,11 +41,12 @@ void Ship::setName(const std::string& name) { name_ = name; }
 void Ship::setDelegate(Delegate* delegate) { 
     delegate_ = delegate; }
 
-size_t Ship::getCapacity() const  { return capacity_; }
-size_t Ship::getMaxCrew() const   { return maxCrew_; }
-size_t Ship::getSpeed() const     { return speed_; }
+size_t Ship::getCapacity() const { return capacity_; }
+size_t Ship::getMaxCrew() const { return maxCrew_; }
+size_t Ship::getCrew() const { return crew_; }
+size_t Ship::getSpeed() const { return speed_; }
 std::string Ship::getName() const { return name_; }
-size_t Ship::getId() const        { return id_; }
+size_t Ship::getId() const { return id_; }
 
 std::shared_ptr<Cargo> Ship::getCargo(const size_t index) {
     if (index >= cargo_.size()) {
