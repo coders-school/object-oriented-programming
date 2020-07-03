@@ -38,12 +38,26 @@ endif()
 #Prepare and compile SHM project
 project(SHM)
 
-set(SRC cargo.cpp coordinates.cpp island.cpp map.cpp ship.cpp player.cpp store.cpp time.cpp observerTime.cpp subjectTime.cpp alcohol.cpp item.cpp fruit.cpp)
+set(SRC 
+  cargo.cpp 
+  coordinates.cpp 
+  island.cpp 
+  map.cpp 
+  ship.cpp 
+  player.cpp 
+  store.cpp 
+  time.cpp 
+  alcohol.cpp 
+  item.cpp 
+  fruit.cpp
+  )
+
 set(TEST_SRC 
   ut/alcohol_test.cpp 
   ut/coordinates_test.cpp
   ut/fruit_test.cpp
   )
+  
 set(FLAGS -Wall -Wextra -Wconversion -pedantic -Werror)
 set(INCLUDES -I..)
 
