@@ -41,18 +41,39 @@ size_t Ship::getSpeed() const     { return speed_; }
 std::string Ship::getName() const { return name_; }
 size_t Ship::getId() const        { return id_; }
 
-std::shared_ptr<Cargo> Ship::getCargo(const size_t index) {
-    if (index >= cargo_.size()) {
-        return nullptr;
-    }
-    return cargo_[index];
+
+
+Cargo* Ship::getCargo(const std::string& name) {
+    return Common::getCargo(name, cargo_);
 }
+
+
 size_t Ship::getAvailableSpace() const {
-    size_t occupied = std::accumulate(cargo_.begin(),
-                                      cargo_.end(),
-                                      0,
-                                      [](size_t sum, const auto& cargo) {
-                                          return sum += cargo->getAmount();
-                                      });
-    return capacity_ - occupied;
+    Common::getAvailableSpace(capacity_, cargo_);
+}
+
+bool Ship::addCargo(Cargo* cargo) {
+    if (this->getAvailableSpace() >= cargo->getAmount()) {
+        auto it = std::find_if(cargo_.begin(),
+                               cargo_.end(),
+                               [=](Cargo* el) {
+                                   return el->getName() == cargo->getName();
+                               });
+
+        if (it == cargo_.end()) {
+            cargo_.push_back(cargo);
+        } else {
+            size_t tmpAmount = (*it)->getAmount() + cargo->getAmount();
+            (*it)->setAmount(tmpAmount);
+        }
+    }
+}
+
+bool Ship::removeCargo(Cargo* cargo) {
+    auto it = std::find_if(cargo_.begin(),
+                           cargo_.end(),
+                           [=](Cargo* el) {
+                               return el->getName() == cargo->getName();
+                           });
+    cargo_.erase(it);
 }

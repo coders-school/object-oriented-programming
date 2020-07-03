@@ -3,8 +3,11 @@
 #include <string>
 #include <memory>
 #include <vector>
+#include <algorithm>
+#include <iostream>
 
 #include "cargo.hpp"
+#include "common.hpp"
 
 class Ship {
 public:
@@ -24,8 +27,12 @@ public:
     std::string getName() const;
     size_t getId() const;
     
-    std::shared_ptr<Cargo> getCargo(const size_t index);
+    Cargo* getCargo(const std::string& name);
     size_t getAvailableSpace() const;
+
+    void printCargo();
+    bool addCargo(Cargo* cargo);
+    bool removeCargo(Cargo* cargo);
 
 private:
     size_t capacity_;
@@ -34,5 +41,6 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    // std::vecto/r<std::shared_ptr<Cargo>> cargo_;
+    std::vector<Cargo*> cargo_;
 };
