@@ -3,6 +3,7 @@
 #include "algorithm"
 #include "fruit.hpp"
 Store::Store() {
+    GenerateCargo();
 }
 
 Response Store::buy(cargoPtr cargo, size_t amount, Player* player) {
@@ -52,12 +53,9 @@ cargoPtr Store::GetCargo(const size_t pos) {
 }
 
 void Store::GenerateCargo() {
-    // size_t number = GenerateRandom(10);
-    // double basePrice = GenerateRandom(100);
-    // for (auto el : fruitsNames) {
-    // Fruit fr
-    // }
-    // cargo_.emplace_back(&cargo1);
+    GenerateFruits();
+    GenerateItems();
+    GenerateAlco();
 }
 
 cargoPtr Store::FindMatchCargo(cargoPtr cargo) {
@@ -78,4 +76,44 @@ void Store::RemoveFromStore(cargoPtr cargo) {
                               [cargo](const auto& el) {
                                   return *el == *cargo;
                               }));
+}
+
+void Store::GenerateFruits() {
+    for (auto el : fruitsNames) {
+        size_t number = GenerateRandom(15);
+        double basePrice = GenerateRandom(20);
+        size_t timeToRotten = GenerateRandom(28);
+        Fruit fr(el, number, basePrice, timeToRotten);
+        auto ptr = std::make_shared<Fruit>(fr);
+        cargo_.emplace_back(ptr);
+    }
+}
+void Store::GenerateAlco() {
+    for (auto el : alcoNames) {
+        size_t number = GenerateRandom(10);
+        double basePrice = GenerateRandom(100);
+        Fruit fr(el, number, basePrice);
+        auto ptr = std::make_shared<Fruit>(fr);
+        cargo_.emplace_back(ptr);
+    }
+}
+void Store::GenerateItems() {
+    for (auto el : itemNames) {
+        size_t number = GenerateRandom(10);
+        double basePrice = GenerateRandom(70);
+        Fruit fr(el, number, basePrice);
+        auto ptr = std::make_shared<Fruit>(fr);
+        cargo_.emplace_back(ptr);
+    }
+}
+
+std::ostream& operator<<(std::ostream& out, const Store& store) {
+    out << "Name:   "
+        << "Amount:   "
+        << "Price:    \n";
+    for (const auto el : store.cargo_) {
+        out << el->getName() << " " << el->getAmount() << " " << el->getBasePrice() << '\n';
+    }
+
+    return out;
 }
