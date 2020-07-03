@@ -54,17 +54,15 @@ size_t Ship::getAvailableSpace() const {
 
 bool Ship::addCargo(Cargo* cargo) {
     if (this->getAvailableSpace() >= cargo->getAmount()) {
-        auto it = std::find_if(cargo_.begin(),
-                               cargo_.end(),
-                               [=](Cargo* el) {
-                                   return el->getName() == cargo->getName();
-                               });
+        auto ptrCargo = this->getCargo(cargo->getName());
 
-        if (it == cargo_.end()) {
+        //If there is not such cargo type yet
+        if (ptrCargo == nullptr) {
             cargo_.push_back(cargo);
+            //If there is already relevant type of cargo
         } else {
-            size_t tmpAmount = (*it)->getAmount() + cargo->getAmount();
-            (*it)->setAmount(tmpAmount);
+            size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
+            ptrCargo->setAmount(tmpAmount);
         }
     }
 }

@@ -74,18 +74,15 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 bool Store::addCargo(Cargo* cargo) {
     //Check whether is enough avaiable space
     if (this->getAvaiableSpace() >= cargo->getAmount()) {
-        auto it = std::find_if(cargoVec.begin(),
-                               cargoVec.end(),
-                               [=](Cargo* el) {
-                                   return el->getName() == cargo->getName();
-                               });
+        auto ptrCargo = this->getCargo(cargo->getName());
+
         //If there is not such cargo type yet
-        if (it == cargoVec.end()) {
+        if (ptrCargo == nullptr) {
             cargoVec.push_back(cargo);
-        //If there is already relevant type of cargo
+            //If there is already relevant type of cargo
         } else {
-            size_t tmpAmount = (*it)->getAmount() + cargo->getAmount();
-            (*it)->setAmount(tmpAmount);
+            size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
+            ptrCargo->setAmount(tmpAmount);
         }
     }
 }
