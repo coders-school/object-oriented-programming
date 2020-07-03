@@ -3,6 +3,19 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
+  checker:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
+    - name: Run check.sh
+      working-directory: shm
+      run: |
+        chmod +x check.sh
+        sudo apt install -y pcregrep
+        ./check.sh CMakeLists.txt
+
+jobs:
   SHM:
     runs-on: ubuntu-latest
     steps:
