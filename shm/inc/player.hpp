@@ -2,9 +2,10 @@
 
 #include <memory>
 
+#include "delegate.hpp"
 #include "ship.hpp"
 
-class Player {
+class Player : public Delegate {
 public:
     Player(Ship& ship, size_t money, size_t availableSpace);
 
@@ -19,4 +20,5 @@ private:
     size_t money_;
     size_t availableSpace_;
     size_t getAvailableSpace() { return ship_->getAvailableSpace(); }
+    void payCrew(size_t money) override;
 };

@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "cargo.hpp"
+#include "delegate.hpp"
 #include "observer.hpp"
 #include "time.hpp"
 
@@ -19,7 +20,8 @@ public:
     Ship& operator+=(const size_t crew);
 
     void setName(const std::string& name);
-    
+    void setDelegate(Delegate *delegate);
+
     size_t getCapacity() const;
     size_t getMaxCrew() const;
     size_t getSpeed() const;
@@ -32,12 +34,13 @@ public:
 private:
     size_t capacity_;
     size_t maxCrew_;
-    size_t crew_;
+    size_t crew_{};
     size_t speed_;
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargo_;
-    Time *time_;
+    Time* time_;
+    Delegate* delegate_;
 
     void nextDay() override;
 };

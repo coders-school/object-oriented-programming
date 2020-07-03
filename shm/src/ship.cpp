@@ -2,11 +2,11 @@
 
 #include <numeric>
 
-Ship::Ship(int maxCrew, int speed, size_t id, Time *time)
+Ship::Ship(int maxCrew, int speed, size_t id, Time* time)
     : Ship(0, maxCrew, speed, "", id, time)
 {}
 Ship::Ship(int capacity, int maxCrew, int speed,
-        const std::string& name, size_t id, Time *time)
+        const std::string& name, size_t id, Time* time)
     : capacity_(capacity)
     , maxCrew_(maxCrew) 
     , crew_(0)
@@ -37,6 +37,8 @@ Ship& Ship::operator+=(const size_t crew) {
 }
 
 void Ship::setName(const std::string& name) { name_ = name; }
+void Ship::setDelegate(Delegate* delegate) { 
+    delegate_ = delegate; }
 
 size_t Ship::getCapacity() const  { return capacity_; }
 size_t Ship::getMaxCrew() const   { return maxCrew_; }
@@ -60,5 +62,7 @@ size_t Ship::getAvailableSpace() const {
     return capacity_ - occupied;
 }
 void Ship::nextDay() {
-
+    if (delegate_) {
+        delegate_->payCrew(crew_);
+    }
 }
