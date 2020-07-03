@@ -5,7 +5,7 @@
 
 class Time {
 public:
-    Time();
+    Time() = default;
 
     void addObserver(Observer *obs);
     void removeObserver(Observer *obs);
