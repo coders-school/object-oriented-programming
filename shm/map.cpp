@@ -1,12 +1,12 @@
 #include "map.hpp"
+
+#include <iostream>
 #include <map>
 #include <random>
 #include <string>
 
 Map::Map() {
-
-    constexpr int numOfIslands = 10;
-    allIslands.reserve(numOfIslands);
+    allIslands.reserve(NUM_OF_ISLANDS);
 
     std::map<std::string, int> repsChecker;
 
@@ -15,33 +15,48 @@ Map::Map() {
     std::uniform_int_distribution<> distrib(MAP_RND_DISTRIBUTION_MIN, MAP_RND_DISTRIBUTION_MAX);
 
     bool coordinateExist = false;
-    int posX = 0;
-    int posY = 0;
+    int32_t positionX = 0;
+    int32_t positionY = 0;
     std::string coordinateXY = "";
 
-    for (std::size_t i = 0; i < numOfIslands; ++i) {
-
+    for (std::size_t i = 0; i < NUM_OF_ISLANDS; ++i) {
         do {
-            posX = distrib(gen);
-            posY = distrib(gen);
+            positionX = distrib(gen);
+            positionY = distrib(gen);
 
-            coordinateXY = std::string(std::to_string(posX) + std::to_string(posY));
+            coordinateXY = std::string(std::to_string(positionX) + std::to_string(positionY));
             auto tryInsert = repsChecker.emplace(coordinateXY, 0);
             coordinateExist = tryInsert.second;
 
         } while (!coordinateExist);
 
-        allIslands.emplace_back(Island(posX, posY));
+        allIslands.push_back(Island(Coordinates(positionX, positionY)));
+        allIslands[i].createStore();
     }
 }
 
-
-Island* Map::getIsland(const Coordinates& coordinate)
-{
+Island* Map::getIsland(const Coordinates& coordinate) {
     for (Island& island : allIslands) {
         if (island.getPosition() == coordinate) {
             return &island;
         }
     }
     return nullptr;
+}
+
+void Map::showIslands() {
+    if (!currentPosition_) {
+        std::cout << "You are on water ! \n";
+    } else {
+        std::cout << "Your current position is: " << currentPosition_->getPosition().getPositionX() << " "
+                  << currentPosition_->getPosition().getPositionY() << '\n';
+    }
+    std::cout << "Next other islands position: \n";
+    for (const auto& element : allIslands) {
+        std::cout << element.getPosition().getPositionX() << " " << element.getPosition().getPositionY() << '\n';
+    }
+}
+
+void Map::travel(Island* island) {
+    currentPosition_ = island;
 }
