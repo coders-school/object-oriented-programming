@@ -2,7 +2,7 @@
 #include "coordinates.hpp"
 
 Island::Island(Coordinates position, Time* time) : position_(position), time_(time), store_(time)  {
-    this->store_.generateCargo();
+    this->createStore();
 }
 
 Coordinates Island::getPosition() const {

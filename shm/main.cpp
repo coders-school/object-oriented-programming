@@ -1,5 +1,5 @@
 #include "cargo.hpp"
-//#include "fruit.hpp"
+#include "fruit.hpp"
 #include "player.hpp"
 #include "item.hpp"
 #include "map.hpp"
@@ -21,49 +21,29 @@ int main() {
     Player pawellos(ptr, 300, 70);
 
     Map gameMap(&gameTime);
+    gameMap.showIslands();
+    std::cout << "Where should we swim?\n";
+    unsigned int x;
+    unsigned int y;
+    std::cin >> x >> y;
 
-
-    Store biedronka(&gameTime);
-    std::cout << "\n\nFIRST CARGO\n\n";
-
-    biedronka.generateCargo();
-    biedronka.printCargo();
-
-
-    std::cout << "\n\nSECOND CARGO\n\n";
-
-    biedronka.generateCargo();
-    biedronka.printCargo();
-
-    std::cout << "\n\nTHIRD CARGO\n\n";
-
-    biedronka.generateCargo();
-    biedronka.printCargo();
-
-    std::cout << "\n\nWITHOUT GENERATE CARGO\n\n";
-
-    biedronka.printCargo();
-
-    std::cout << "\n\nGAMETIME++ CARGO\n\n";
-
+    Island* island = gameMap.getIsland(Coordinates(x, y));
+    std::cout << "First\n";
+    island->getStore().printCargo();
+    std::cout << "Second\n";
+    island->getStore().printCargo();
+    std::cout << "++GAMETIME!!!\n";
     ++gameTime;
-    biedronka.printCargo();
+    island->getStore().printCargo();
 
+    Store bieda (&gameTime);
+    std::cout << "Co tam w biedzie w promocji\n";
+    bieda.generateCargo();
+    bieda.printCargo();
+    std::cout << "++GameTime\n";
+    ++gameTime;
+    bieda.printCargo();
 
-
-    /*
-    std::cout << "---------Before sell------ \n\n";
-    pawellos.getShip()->printCargo();
-    std::cout << "Money of player: " << pawellos.getMoney() << '\n';
-    std::cout << "Available place on ship: " << pawellos.getAvailableSpace() << '\n';
-    biedronka.printCargo();
-    biedronka.sell(pawellos.getCargo(1), 3, &pawellos);
-    biedronka.sell(pawellos.getCargo(2), 2, &pawellos);
-    std::cout << "---------After sell------ \n\n";
-    pawellos.getShip()->printCargo();
-    std::cout << "Money of player: " << pawellos.getMoney() << '\n';
-    std::cout << "Available place on ship: " << pawellos.getAvailableSpace() << '\n';
-    biedronka.printCargo(); */
 
     std::cout << "\n**************\n";
 
