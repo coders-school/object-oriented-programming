@@ -81,9 +81,8 @@ size_t Ship::countAvailableSpace() const {
     Cargo* Ship::findCargo(Cargo* cargo) {
     auto found = std::find_if(cargo_.begin(), cargo_.end(),
                              [&cargo](const auto element) {
-                             if(*cargo== *element){
-                             return cargo;
-                             }});
+                             return *cargo == *element;
+                             });
     if (found != cargo_.end()) {
         return *found;
     }
