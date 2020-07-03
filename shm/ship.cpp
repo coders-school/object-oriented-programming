@@ -50,6 +50,9 @@ Ship& Ship::operator+=(size_t crewman) {
 size_t Ship::getCapacity() const {
     return capacity_;
 }
+size_t Ship::getCrew() const {
+    return crew_;
+}
 size_t Ship::getMaxCrew() const {
     return maxCrew_;
 }
