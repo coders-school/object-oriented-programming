@@ -53,7 +53,7 @@ void sellBuyTest1() {
     std::cout << "itm2 name: " << itm2.getName() << ", amount: " << itm2.getAmount() << ", base price: " << itm2.getBasePrice() << ", price: " << itm2.getPrice() << ", rarity: " << itm2.getRarityStr() << "\n";
     std::cout << "itm3 name: " << itm3.getName() << ", amount: " << itm3.getAmount() << ", base price: " << itm3.getBasePrice() << ", price: " << itm3.getPrice() << ", rarity: " << itm3.getRarityStr() << "\n";
 
-    Ship testShip(1, "TestShip", 540, 26, 1000);
+    Ship testShip(1, "TestShip", 540, 26, 1000, nullptr);
     Player testPlayer(testShip, 2000);
 
     Store testStore;

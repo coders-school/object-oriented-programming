@@ -19,6 +19,7 @@ Fruit& Fruit::operator--() {
     }
     return *this;
 }
+
 Cargo& Fruit::operator+=(const size_t amount) {
     if (_amount + amount > _maxAmount) {
         std::cerr << "Not enought space for that cargo!\n";

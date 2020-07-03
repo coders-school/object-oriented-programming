@@ -2,20 +2,32 @@
 
 #include <iostream>
 
+constexpr size_t CREW = 16;
+
 Ship::Ship()
-    : _id(-1) {}
+    : _id(-1) {
+}
 
 Ship::Ship(int id,
            const std::string& name,
            size_t speed,
            size_t maxCrew,
-           size_t capacity)
-    : _id(id), _name(name), _speed(speed), _maxCrew(maxCrew), _capacity(capacity) {}
+           size_t capacity,
+           Delegate* delegate)
+    : _id(id),
+    _name(name),
+    _speed(speed),
+    _maxCrew(maxCrew),
+    _capacity(capacity),
+    _crew(CREW),
+    _delegate(delegate) {
+}
 
 Ship::Ship(int id,
            size_t speed,
            size_t maxCrew)
-    : Ship(id, "", speed, maxCrew, 0) {}
+    : Ship(id, "", speed, maxCrew, 0, nullptr) {
+}
 
 Ship& Ship::operator+=(const size_t crew) {
     if (_crew + crew > _maxCrew) {
@@ -46,4 +58,9 @@ std::shared_ptr<Cargo> Ship::getCargo(const size_t id) const {
 
 void Ship::nextDay(){
     _delegate->payCrew(_crew);
+}
+
+void Ship::showCargo() const {
+    for (const auto elem : _cargo)
+        elem->showCargo(std::cout);
 }

@@ -14,7 +14,8 @@ public:
          const std::string& name,
          size_t speed,
          size_t maxCrew,
-         size_t capacity);
+         size_t capacity,
+         Delegate* delegate);
     Ship(int id,
          size_t speed,
          size_t maxCrew);
@@ -35,6 +36,8 @@ public:
 
     // override from Observer
     void nextDay() override;
+
+    void showCargo() const;
 
 private:
     const int _id;
