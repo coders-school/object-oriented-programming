@@ -13,6 +13,10 @@ size_t Player::getMoney() const {
     return money_;
 }
 
+void Player::setMoney(size_t amount) {
+    money_ = amount;
+}
+
 Ship* Player::getShip() const {
     return ship_.get();
 }
@@ -33,4 +37,8 @@ void Player::checkAvailableSpace() {
     size_t usedSpace = std::accumulate(ship_->getCargos().begin(), ship_->getCargos().end(), 0,
                                        [](size_t total, auto item) { return total + item->getAmount(); });
     available_space_ = ship_->getCapacity() - usedSpace;
+}
+
+std::vector<std::shared_ptr<Cargo>> Player::getCargos() const {
+    return ship_->getCargos();
 }

@@ -4,15 +4,18 @@
 
 class Cargo {
 public:
+    Cargo() = default;
     Cargo(std::string name, size_t amount, size_t basePrice);
+    virtual ~Cargo() = default;
 
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
-    bool operator==(const Cargo& cargo) const;
+    virtual std::string getName() const = 0;
+    virtual size_t getAmount() const = 0;
+    virtual size_t getPrice() const = 0;
+    virtual size_t getBasePrice() const = 0;
 
-    std::string getName();
-    size_t getAmount();
-    size_t getBasePrice();
+    virtual Cargo& operator+=(size_t amount) = 0;
+    virtual Cargo& operator-=(size_t amount) = 0;
+    virtual bool operator==(const Cargo& cargo) const = 0;
 
 protected:
     std::string name_;
