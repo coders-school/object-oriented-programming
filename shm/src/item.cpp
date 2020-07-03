@@ -13,14 +13,14 @@ double Item::getPrice() const {
 }
 
 std::string Item::getInfo() const {
-    auto ss = std::stringstream {};
+    auto ss = std::stringstream{};
     ss
-            << std::left << std::setw(10) << name_
-            << std::left << std::setw(5) << amount_
-            << std::left << std::setw(5) << getBasePrice()
-            << std::left << std::setw(5) << "-----"
-            << std::left << std::setw(5) << "-----"
-            << std::left << std::setw(8) << enumToString(rarity_);
+        << std::left << std::setw(10) << name_
+        << std::left << std::setw(5) << amount_
+        << std::left << std::setw(5) << getBasePrice()
+        << std::left << std::setw(5) << "-----"
+        << std::left << std::setw(5) << "-----"
+        << std::left << std::setw(8) << enumToString(rarity_);
     return ss.str();
 }
 
@@ -39,4 +39,14 @@ bool Item::operator==(Cargo& item) const {
     return getName() == item.getName() &&
            getPrice() == item.getPrice() &&
            getBasePrice() == item.getBasePrice();
+}
+
+std::string Item::enumToString(Rarity rarity) const {
+    const std::map<Rarity, std::string> enumStrings{
+        {Rarity::common, "common"},
+        {Rarity::rare, "rare"},
+        {Rarity::epic, "epic"},
+        {Rarity::legendary, "legendary"}};
+    auto it = enumStrings.find(rarity);
+    return it == enumStrings.end() ? "Out of range" : it->second;
 }
