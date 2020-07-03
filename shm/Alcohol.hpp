@@ -4,6 +4,8 @@ constexpr size_t maximumAlcoholContent = 96;
 
 class Alcohol : public Cargo {
 public:
+    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t alcoholContent);
+
     //override from Cargo
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
