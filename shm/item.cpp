@@ -1,14 +1,40 @@
 #include "item.hpp"
-
 #include <string>
+#include <cstdlib>
+#include <iostream>
+#include <ctype.h>
 
-#include "cargo.hpp"
+Item::Item(std::string name, size_t amount, size_t basePrice,  int rarity, Time* Publisher):
+    Cargo(name, amount, basePrice),
+    rarity_(rarity),
+    Publisher_(Publisher){
+    this->Publisher_->addObserver(this);
+    }
 
-Item::Item(std::string name, size_t amount, size_t basePrice, Rarity rarity)
-    : Cargo(name, amount, basePrice),
-      rarity_(rarity) {}
+void Item::nextDay(){
+    int lottery = rand()%100+1; 
+    switch(lottery){
+    case 1: 
+        std::cout<<"One of your item has been stolen by crew";
+        --amount_;
+        break;
+    case 20:
+        std::cout<<"One of your item has drowned, I am sorry!";
+        --amount_;
+        break;
+    case 60:
+        std::cout<<"Your item has been partially damaged by mice";
+        basePrice_ = static_cast<size_t>(static_cast<double>(basePrice_) * 0.9);
+        break;
+    case 90:
+        std::cout<<"Your item corroded";
+        basePrice_ = static_cast<size_t>(static_cast<double>(basePrice_)*0.5);
+        break;
+    }
+}
 
 //Override from Cargo
+
 size_t Item::getPrice() const {
     return basePrice_ * static_cast<int>(rarity_);
 }
@@ -22,6 +48,6 @@ size_t Item::getBasePrice() const {
     return basePrice_;
 }
 
-Item::Rarity Item::getRarity() const {
+int Item::getRarity() const {
     return rarity_;
 }

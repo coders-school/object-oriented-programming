@@ -1,5 +1,4 @@
 #include "timeSHM.hpp"
-
 #include <algorithm>
 
 constexpr size_t initialTime = 1; //days
@@ -28,6 +27,12 @@ void Time::removeObserver(Observer* obs) {
 size_t Time::getElapsedTime() const {
     return timeElapsed_;
 }
+
+void Time::notifyObservers() {
+for(auto& observer: observers_){
+    if(observer != *observers_.end()){
+    observer->nextDay();
+}}}
 
 Time& Time::operator++() {
     timeElapsed_++;

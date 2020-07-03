@@ -1,19 +1,15 @@
 #pragma once
-
 #include <vector>
-
 #include "observer.hpp"
-
-class Time : public Observer {
+class Time {
 public:
     Time();
 
     bool findObserver(Observer* obs);
     void addObserver(Observer* obs);
     void removeObserver(Observer* obs);
-
     size_t getElapsedTime() const;
-
+    void notifyObservers();    
     Time& operator++();
 
 private:
