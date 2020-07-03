@@ -14,11 +14,11 @@ public:
     size_t getAvailableSpace() const { return availableSpace_; }
     size_t getSpeed() const { return this->ship_->getSpeed(); }
     std::shared_ptr<Cargo> getCargo(size_t index) const;
+    void payCrew(size_t money) override;
 
 private:
     std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
     size_t getAvailableSpace() { return ship_->getAvailableSpace(); }
-    void payCrew(size_t money) override;
 };
