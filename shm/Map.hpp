@@ -7,11 +7,14 @@
 
 #include "Island.hpp"
 
+constexpr size_t defaultXsize = 10;
+constexpr size_t defaultYsize = 11;
+
 class Map
 {
 
 public:
-    Map() : mapXsize(10), mapYsize(11) { randomIslandGenerator(10); }
+    Map() : mapXsize(defaultXsize), mapYsize(defaultYsize) { randomIslandGenerator(10); }
     Map(int islandsAmount) { randomIslandGenerator(islandsAmount); }
     Map(int sizeY, int sizeX, int islandsAmount) : mapXsize(sizeY), mapYsize(sizeX)
     {
@@ -26,7 +29,7 @@ public:
     }
 
 private:
-    void randomIslandGenerator(int amount)
+    void randomIslandGenerator(size_t amount)
     {
         static std::random_device rd;
         static std::mt19937 gen(rd());
@@ -35,7 +38,7 @@ private:
         std::iota(std::begin(map_), std::end(map_), 0);
         std::shuffle(std::begin(map_), std::end(map_), gen);
 
-        for (int i = 0; i < amount; i++)
+        for (size_t i = 0; i < amount; i++)
             islands.push_back(Island(map_[i] % mapXsize, ((map_[i]) / mapXsize) % mapYsize));
     }
 
