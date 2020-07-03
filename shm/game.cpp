@@ -6,6 +6,9 @@
 #include <iostream>
 #include <memory>
 
+#include "cargo.hpp"
+#include "island.hpp"
+
 
 Game::Game(size_t money, size_t days, size_t finalGoal)
     : money_(money), 
@@ -135,11 +138,11 @@ void Game::travel() {
 }
 
 void Game::buy() {
-    //To do
+    //To do when class Store is ready
 }
 
 void Game::sell() {
-    //To do
+    //To do when class Store is ready
 }
 
 void Game::showCargo() {

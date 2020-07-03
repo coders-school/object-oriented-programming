@@ -99,8 +99,9 @@ void Ship::removeCargo(Cargo* cargo) {
 void Ship::printCargo() const {
     std::for_each(cargo_.begin(), cargo_.end(),
         [i{0}](const auto& index) mutable {
-            std::cout << ++i << "| "; 
-            std::cout << index->getName();
+            std::cout << ++i << "* "; 
+            std::cout << index->getName() << ": "
+                      << index->getAmount();
 
 	    });
 }
