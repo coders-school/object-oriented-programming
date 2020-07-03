@@ -27,14 +27,14 @@ double Fruit::getPrice() const {
     if (currentExpiryDate_ == 0 || expiryDate_ == 0) {
         return 0;
     }
-    return basePrice_ * currentExpiryDate_ / expiryDate_ + NOFLOAT_ROUNDING;
+    return basePrice_ * currentExpiryDate_ / expiryDate_;
 }
 
 Fruit& Fruit::operator--() {
     if (currentExpiryDate_ > 0) {
         --currentExpiryDate_;
     } else {
-        std::cout << "Fruits already rotten!";
+        std::cout << "Fruits already rotten!\n";
     }
     return *this;
 }
@@ -49,7 +49,7 @@ Cargo& Fruit::operator-=(uint32_t amount) {
         amount_ -= amount;
         return *this;
     }
-    std::cout << "There is no so many fruits!";
+    std::cout << "There is no so many fruits!\n";
     return *this;
 }
 

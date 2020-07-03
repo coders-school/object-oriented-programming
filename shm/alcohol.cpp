@@ -38,7 +38,7 @@ Cargo& Alcohol::operator-=(uint32_t amount) {
         amount_ -= amount;
         return *this;
     }
-    std::cout << "There is no so many alcohol!";
+    std::cout << "There is no so many alcohol!\n";
     return *this;
 }
 
