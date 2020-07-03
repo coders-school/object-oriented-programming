@@ -1,7 +1,9 @@
 #include "game.hpp"
 
 #include <cstdlib> // exit, size_t
+#include <ios>
 #include <iostream>
+#include <limits>
 
 Game::Game() {}
 
@@ -48,22 +50,34 @@ bool Game::checkLooseCondition() const {
 }
 
 void Game::printTopBar() const {
-    std::cout << "Top\n";
+    std::cout << "  ~~~~    SHM version 1.0   ~~~~" << '\n';
     std::cout << "Elapsed time " << time_->getElapsedTime() << '\n';
+    std::cout << "Elapsed money " << player_->getMoney() << '\n';
 }
 
 void Game::printOptions() const {
     std::cout << "Options:\n";
     std::cout << "1 - Travel\n";
+    std::cout << "2 - Buy\n";
+    std::cout << "3 - Sell\n";
+    std::cout << "4 - Print cargo\n";
     std::cout << "0 - Exit\n";
 }
 
 void Game::printWinScreen() const {
-    std::cout << "Win\n";
+    std::cout << "You won!\n";
+    std::cout << "You've done it in "
+              << game_days_ - time_->getElapsedTime()
+              << " days,\n You've earned "
+              << player_->getMoney()
+              << " coins.\n";
 }
 
 void  Game::printLooseScreen() const {
-    std::cout << "Loose\n";
+    std::cout << "You loose\n";
+    std::cout << "You've run out of money in "
+              << time_->getElapsedTime()
+              << " days\n";
 }
 
 void Game::makeAction(Action action) {
@@ -95,12 +109,23 @@ void Game::travel() {
     std::cout << "Choose island [x y]: ";
     size_t x, y;
     std::cin >> x >> y;
-    auto destination = map_->getIsland(Coordinates(x, y));
-    for (auto i = map_->getDistanceToIsland(destination); i > 0; --i) {
-    // one "distance" takes one day
-        ++(*time_);
+    while(std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cout << "Wrong data type.  Enter two digits: ";
+        std::cin >> x >> y;
     }
-    map_->travel(destination);
+    auto destination = map_->getIsland(Coordinates(x, y));
+    if (destination != nullptr)
+    {
+        for (auto i = map_->getDistanceToIsland(destination); i > 0; --i) {
+            // one "distance" takes one day
+            ++(*time_);
+            if (time_->getElapsedTime() == 0) { break; }
+        }
+        map_->travel(destination);
+     }
+     else { std::cout << "Wrong coordinates!" << '\n'; }
 }
 
 void Game::buy() {
@@ -113,6 +138,7 @@ void Game::sell() {
 
 void  Game::printCargo() const {
     std::cout << "Cargo\n";
+    player_ -> printCargo();
 }
 
 void  Game::exit() {
