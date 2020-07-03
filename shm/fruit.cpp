@@ -64,7 +64,7 @@ bool Fruit::operator==(const Cargo& cargo) const {
 
 void Fruit::nextDay() {
     operator--();
-    std::cout << "Next day in: " << getName() << "\n";
+    //std::cout << "Next day in: " << getName() << "\n";
 }
 
 std::shared_ptr<Cargo> Fruit::clone() const {

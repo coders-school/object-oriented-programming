@@ -53,7 +53,7 @@ bool Alcohol::operator==(const Cargo& cargo) const {
 
 void Alcohol::nextDay() {
     power_--;
-    std::cout << "Next day in: " << getName() << "\n";
+   // std::cout << "Next day in: " << getName() << "\n";
 }
 
 std::shared_ptr<Cargo> Alcohol::clone() const {
