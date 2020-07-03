@@ -1,5 +1,6 @@
 name: C++ with CMake CI
 
+<<<<<<< HEAD
 on:
   push:
     branches:
@@ -48,6 +49,11 @@ jobs:
 >>>>>>> Revert "Merge branch 'master' into homework1"
 =======
 
+=======
+on: [push, pull_request]
+
+jobs:
+>>>>>>> Actions restored
   checker:
     runs-on: ubuntu-latest
     steps:
@@ -61,4 +67,4 @@ jobs:
         ./check.sh CMakeLists.txt
 >>>>>>> Update main.yml
 
-
+# In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
