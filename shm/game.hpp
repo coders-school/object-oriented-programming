@@ -24,8 +24,8 @@ private:
     const size_t finalGoal_ {0};
     size_t currentDay_ {0};
     std::shared_ptr<Map> map_;
-    std::shared_ptr<Ship> ship_ = std::make_shared<Ship>(150, 50, 13, "Player_ship", 1);
-    std::shared_ptr<Player> player_ = std::make_shared<Player>(ship_, 500, 200);
+    std::shared_ptr<Ship> ship_;
+    std::shared_ptr<Player> player_;
     std::shared_ptr<Time> time_;
 
     void printTrail();
@@ -40,5 +40,5 @@ private:
     void travel();
     void buy();
     void sell();
-    void printCargo();
+    void showCargo();
 };

@@ -1,5 +1,6 @@
 #include "game.hpp"
 
+#include <algorithm>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
@@ -11,7 +12,8 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
       days_(days), 
       finalGoal_(finalGoal),
       currentDay_(1),
-    //   player_(std::make_shared<Player>(money, time_),
+      ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1)), 
+      player_(std::make_shared<Player>(ship_, 500, 200)),
       time_(std::make_shared<Time>()),
 	  map_(std::make_shared<Map>()) {}
 
@@ -119,7 +121,7 @@ void Game::makeAction(Action pickAction) {
             break;
         }
         case Action::printCargo: {
-            printCargo();
+            showCargo();
             break;
         }
         default: {
@@ -140,6 +142,7 @@ void Game::sell() {
     //To do
 }
 
-void Game::printCargo() {
-    //To do
+void Game::showCargo() {
+    std::cout << "You have: \n";
+    ship_->printCargo();
 }
