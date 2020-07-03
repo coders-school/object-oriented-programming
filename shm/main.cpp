@@ -7,6 +7,7 @@
 #include "timeSHM.hpp"
 #include "item.hpp"
 #include "fruit.hpp"
+#include "alcohol.hpp"
 #include <iostream>
 #include <memory>
 #include <string>
@@ -33,7 +34,19 @@ int main() {
     Time time;
     Item knife("SilverKnife", 2, 30, 1, &time);
     Fruit apples("Apples", 30, 10, 20, 10, &time);
+    Alcohol Rum("Rum", 20, 60, 70, &time);
 
+for(size_t i=0; i<100; i++){
+    time.notifyObservers();
+    std::cout << "Apples time to Rot: " << apples.timeToRot() << '\n';
+    std::cout << "Items amount: " << knife.getAmount() << '\n';
+    std::cout << "Alcohol Power: " << Rum.getPower() << '\n';
+
+
+}
+
+
+    
     //std::unique_ptr<Ship> uPtrFD = std::make_unique<Ship>(FD);
     return 0;
 }

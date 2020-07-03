@@ -8,7 +8,6 @@ class Item : public Cargo, public Observer {
 
 public:
 
-    // override from Observer
     Item(std::string name, size_t amount, size_t basePrice, int rarity, Time* Publisher);
 
     ~Item(){
@@ -16,9 +15,10 @@ public:
         std::cout<<"Goodbye! I was your Item"<<'\n';
     };
 
+// Override from Observer
     void nextDay() override;
 
-    //Override from Cargo
+//Override from Cargo
     size_t getPrice() const override;
     std::string getName() const override;
     size_t getAmount() const override;
