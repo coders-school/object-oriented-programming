@@ -11,9 +11,10 @@
 
 class Ship : public Observer {
 public:
-    Ship(int maxCrew, int speed, size_t id, Time* time);
-    Ship(int capacity, int maxCrew, int speed,
-         const std::string& name, size_t id, Time* time);
+    Ship(int maxCrew, int speed, size_t id,
+         Time* time = nullptr, Delegate* delegate = nullptr);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id,
+         Time* time = nullptr, Delegate* delegate = nullptr);
     ~Ship() override;
 
     Ship& operator-=(const size_t crew);
@@ -24,6 +25,7 @@ public:
 
     size_t getCapacity() const;
     size_t getMaxCrew() const;
+    size_t getCrew() const;
     size_t getSpeed() const;
     std::string getName() const;
     size_t getId() const;
