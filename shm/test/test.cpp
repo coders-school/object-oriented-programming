@@ -4,30 +4,43 @@
 #include "ship.hpp"
 #include "time.hpp"
 
+namespace SHM_test {
+
 constexpr int SHIP_MAX_CREW = 20;
 constexpr int SHIP_SPEED = 666;
 constexpr size_t SHIP_ID = 7;
 constexpr int SHIP_CREW = 5;
-
 constexpr size_t MONEY = 1000;
+constexpr size_t SALARY = 20;
 constexpr size_t AVAILABLE_SPACE = 100;
 
+Time time;
+Ship ship(SHIP_MAX_CREW, SHIP_SPEED, SHIP_ID, &time);
+Player player(ship, MONEY, AVAILABLE_SPACE);
+
 TEST(ShipTest, ShouldInitShip) {
-    Time time;
-    Ship ship(SHIP_MAX_CREW, SHIP_SPEED, SHIP_ID, &time);
     EXPECT_EQ(ship.getMaxCrew(), SHIP_MAX_CREW);
     EXPECT_EQ(ship.getSpeed(), SHIP_SPEED);
     EXPECT_EQ(ship.getId(), SHIP_ID);
 }
-
-TEST(PlayerTest, ShouldPayCrew) {
-    Time time;
-    Ship ship(SHIP_MAX_CREW, SHIP_SPEED, SHIP_ID, &time);
-
-    Player player(ship, MONEY, AVAILABLE_SPACE);
-
+TEST(ShipTest, ShouldAddCrew) {
     ship += SHIP_CREW;
+    EXPECT_EQ(ship.getCrew(), SHIP_CREW);
+}
+TEST(ShipTest, ShouldSubtractCrew) {
+    ship -= SHIP_CREW;
+    EXPECT_EQ(ship.getCrew(), 0);
+}
+TEST(PlayerTest, ShouldInitPlayer) {
     EXPECT_EQ(player.getMoney(), MONEY);
+}
+TEST(PlayerTest, ShouldPayCrew) {
+    player.payCrew(SALARY);
+    EXPECT_EQ(player.getMoney(), MONEY - SALARY);
+
+}
+TEST(TimeTest, ShouldTimePass) {
     ++time;
-    EXPECT_EQ(player.getMoney(), MONEY - SHIP_CREW);
+    EXPECT_EQ(time.getElapsedTime(), 1);
+}
 }
