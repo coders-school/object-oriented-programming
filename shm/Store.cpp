@@ -19,7 +19,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player)
 
 Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getPrice();
-    *cargo -= amount;
+    *cargo -= amount; 
     player->sellCargo(cargo, amount, price);
     return Response::done;
 }
