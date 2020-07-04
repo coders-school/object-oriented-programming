@@ -1,7 +1,6 @@
 #include "time.hpp"
 
 #include <algorithm>
-#include <iostream>
 
 void Time::addObserver(Observer* obs) {
     observers_.push_back(obs);
@@ -18,7 +17,6 @@ Time& Time::operator++() {
 }
 
 void Time::notify() {
-    std::cout << "<><><><>ObserversCount: " << observers_.size() << "\n";
     for (const auto& obs : observers_) {
         obs->nextDay();
     }

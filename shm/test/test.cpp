@@ -35,12 +35,14 @@ TEST(PlayerTest, ShouldInitPlayer) {
     EXPECT_EQ(player.getMoney(), MONEY);
 }
 TEST(PlayerTest, ShouldPayCrew) {
-    player.payCrew(SALARY);
-    EXPECT_EQ(player.getMoney(), MONEY - SALARY);
+    size_t crew = ship.getCrew();
+    size_t money = player.getMoney();
 
+    ++time;
+    EXPECT_EQ(player.getMoney(), money - crew);
 }
 TEST(TimeTest, ShouldTimePass) {
     ++time;
-    EXPECT_EQ(time.getElapsedTime(), 1);
+    EXPECT_EQ(time.getElapsedTime(), 2);
 }
 }
