@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "store.hpp"
+
 class Coordinates {
 public:
     Coordinates(size_t posX, size_t posY);
@@ -20,6 +22,8 @@ class Island {
 public:
     Island(size_t posX, size_t posY);
     Coordinates getPosition();
+    Store* getStore() const {return store_;}
 private:
     Coordinates position_;
+    Store* store_;
 };
