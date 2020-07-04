@@ -29,4 +29,3 @@ Ship& Ship::operator+=(size_t num)
     crew_ += num;
     return *this;
 }
-
