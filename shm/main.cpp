@@ -1,8 +1,8 @@
 #include "cargo.hpp"
 #include "fruit.hpp"
-#include "player.hpp"
 #include "item.hpp"
 #include "map.hpp"
+#include "player.hpp"
 #include "ship.hpp"
 #include "store.hpp"
 #include "time.hpp"
@@ -12,7 +12,6 @@
 #include <string>
 
 int main() {
-
     Time gameTime;
 
     Map gameMap(&gameTime);
@@ -25,10 +24,10 @@ int main() {
 
     Island* island = gameMap.getIsland(Coordinates(x, y));
 
-    if(island){
-    std::cout << "Island founded!\n";
+    if (island) {
+        std::cout << "Island founded!\n";
     } else {
-    std::cout << "Sth goes wrong!\n";
+        std::cout << "Sth goes wrong!\n";
     }
 
     std::cout << "FIRST\n";
@@ -46,7 +45,6 @@ int main() {
     ++gameTime;
     island->getStore()->printCargo();
 
-
     /*
     Store bieda (&gameTime);
 
@@ -60,6 +58,4 @@ int main() {
     */
 
     std::cout << "\n**************\n";
-
-
 }

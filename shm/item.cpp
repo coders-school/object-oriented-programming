@@ -52,8 +52,3 @@ bool Item::operator==(const Cargo& cargo) const {
 std::shared_ptr<Cargo> Item::clone() const {
     return std::make_shared<Item>(*this);
 }
-
-void nextDay() {
-
-   // std::cout << "Next day in items :)\n";
-}

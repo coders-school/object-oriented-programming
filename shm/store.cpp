@@ -59,8 +59,7 @@ std::shared_ptr<Cargo> Store::getCargo(uint32_t index) const {
 }
 
 void Store::generateCargo() {
-
-    if(!cargo_.empty()) {
+    if (!cargo_.empty()) {
         cargo_.clear();
     }
 
@@ -77,7 +76,7 @@ void Store::generateCargo() {
     std::mt19937 gen(rd());
 
     std::vector<std::pair<std::string, int>> cargoProducts = {
-        {"Oranges", 1}, {"Bananas", 1}, {"Apples", 1}, {"Vodka", 2},  {"Liquor", 2}, {"Whkiskey", 2},
+        {"Oranges", 1}, {"Bananas", 1}, {"Apples", 1}, {"Vodka", 2},  {"Liquor", 2}, {"Whiskey", 2},
         {"Bimber", 2},  {"Woods", 3},   {"Bronze", 3}, {"Silver", 3}, {"Gold", 3}};
 
     for_each(cargoProducts.begin(), cargoProducts.end(), [&](const auto& cargo) {
@@ -93,7 +92,6 @@ void Store::generateCargo() {
                 std::make_shared<Item>(amountOfCargo(gen), cargo.first, priceOfCargo(gen), Item::Rarity::common));
         }
     });
-
 }
 
 void Store::printCargo() const {
@@ -115,6 +113,8 @@ void Store::loadToStore(std::shared_ptr<Cargo> cargo, uint32_t amount) {
 }
 
 void Store::nextDay() {
-    std::cout << "Next day in: " << " STORE" << " \n";
+    std::cout << "Next day in: "
+              << " STORE"
+              << " \n";
     this->generateCargo();
 }

@@ -28,14 +28,14 @@ public:
     }
 
     // put in any custom data members that you need
-    Map testMap;
+    // Map testMap;
 };
 
-TEST_F(SHM_TestFixture, ShouldAlwaysPass) {
-    EXPECT_TRUE(true);
-}
+// TEST_F(SHM_TestFixture, ShouldAlwaysPass) {
+//     EXPECT_TRUE(true);
+// }
 
-TEST_F(SHM_TestFixture, ShouldReturnNullPtrWhenAskedForIslandOutOfRange) {
-    Coordinates location(MAP_RND_DISTRIBUTION_MAX + 10, MAP_RND_DISTRIBUTION_MAX + 10);
-    EXPECT_EQ(nullptr, testMap.getIsland(location));
-}
+// TEST_F(SHM_TestFixture, ShouldReturnNullPtrWhenAskedForIslandOutOfRange) {
+//     Coordinates location(MAP_RND_DISTRIBUTION_MAX + 10, MAP_RND_DISTRIBUTION_MAX + 10);
+//     EXPECT_EQ(nullptr, testMap.getIsland(location));
+// }
