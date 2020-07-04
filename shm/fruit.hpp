@@ -23,7 +23,7 @@ public:
     Fruit& operator--();
     size_t getExpiryDate() const;
     size_t getTimeElapsed() const;
-
+    size_t timeToRot() const;
 private:
     Time* Publisher_;
     size_t timeElapsed_{0};    

@@ -9,7 +9,13 @@ Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDat
     Publisher_(Publisher){
     this->Publisher_->addObserver(this);   
     }
-void Fruit::nextDay(){}
+void Fruit::nextDay(){
+    if(timeElapsed_ != expiryDate_){
+        ++timeElapsed_;
+    }
+    if(timeElapsed_ == expiryDate_){
+        amount_ = 0;
+}}
 
 size_t Fruit::getPrice() const {
     if (timeToSpoil_) {
@@ -39,4 +45,8 @@ size_t Fruit::getExpiryDate() const {
 
 size_t Fruit::getTimeElapsed() const {
     return timeElapsed_;
+}
+
+size_t Fruit::timeToRot() const {
+    return expiryDate_ - timeElapsed_;
 }
