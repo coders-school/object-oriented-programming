@@ -12,6 +12,9 @@ private:
     Map* map_;
     Player* player_;
 
+    bool checkWinCondition() const;
+    bool checkLoseCondition() const;
+
 public:
     Game(size_t money, size_t days, size_t final_goal);
 };
