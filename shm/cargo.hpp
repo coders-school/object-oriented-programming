@@ -20,9 +20,6 @@ public:
     virtual Cargo& operator-=(uint32_t amount) = 0;
     virtual bool operator==(const Cargo& cargo) const = 0;
 
-    // override from ObserverTime
-    virtual void nextDay() = 0;
-
 protected:
     uint32_t amount_;
     std::string name_;
