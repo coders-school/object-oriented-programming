@@ -43,6 +43,7 @@ void Ship::nextDay() {
     if (delegate_) {
         delegate_->payCrew(crew_ * salaryPerWorker);
     }
+    std::for_each(cargo_.begin(), cargo_.end(), [](const auto& el){ el->nextDay(); });
 }
 
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::shared_ptr<Time>& time)
