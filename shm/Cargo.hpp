@@ -13,13 +13,15 @@ public:
     virtual size_t getPrice() const = 0;
     virtual void nextDay() {}
 
-    Cargo& operator+=(const size_t amount);
-    Cargo& operator-=(const size_t amount);
-    bool operator==(const Cargo& cargo) const;
-    bool operator!=(const Cargo& cargo) const;
+    virtual Cargo& operator+=(const size_t amount) = 0;
+    virtual Cargo& operator-=(const size_t amount) = 0;
+    virtual bool operator==(const Cargo& cargo) const = 0;
+    virtual bool operator!=(const Cargo& cargo) const = 0;
+
 
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
 };
+

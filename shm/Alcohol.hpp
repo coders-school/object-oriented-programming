@@ -16,6 +16,12 @@ public:
 
     size_t getAlcoholContent() const { return alcoholContent_; }
 
+    Cargo& operator+=(const size_t amount) override;
+    Cargo& operator-=(const size_t amount) override;
+    bool operator==(const Cargo& cargo) const override;
+    bool operator!=(const Cargo& cargo) const override;
+
 private:
     const size_t alcoholContent_ = 96;
 };
+
