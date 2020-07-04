@@ -34,6 +34,8 @@ endif()
 
 project(SHM)
 
+enable_testing()
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -81,6 +83,7 @@ set(TEST_SRC_LIST
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
 add_executable(${PROJECT_NAME} ${MAIN})
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+
 set(FLAGS -g -Wall -Wextra -Werror -pedantic -Wconversion)
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 
@@ -90,6 +93,9 @@ else (UNIX)
     target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 endif (UNIX)
 
-link_libraries(gtest)
+
 add_executable(${PROJECT_NAME}-ut ${TEST_SRC_LIST})
+target_link_libraries(${PROJECT_NAME}-ut gtest_main)
 target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib)
+
+add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
