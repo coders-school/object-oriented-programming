@@ -138,6 +138,36 @@ void Game::buy() {
     std::cout << "Buy\n";
     auto actualIslandStore = map_->getCurrentPosition()->getStore();
     std::cout << actualIslandStore << '\n';
+    size_t cargoNr, amountNr;
+    std::cout << "Please, write cargo number: ";
+    std::cin >> cargoNr;
+    std::cout << "Please, write amount: ";
+    std::cin >> amountNr;
+    while (std::cin.fail() || cargoNr < 0 || cargoNr > actualIslandStore.getCargoContainer().size()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong data. First digit from 0 to " << actualIslandStore.getCargoContainer().size() << ": ";
+        std::cin >> cargoNr;
+    }
+    --cargoNr;
+    Response response = actualIslandStore.buy(actualIslandStore.GetCargo(cargoNr), amountNr, player_);
+
+    switch (response) {
+    case Response::done:
+        std::cout << "Done! \n";
+        break;
+    case Response::lack_of_cargo:
+        std::cout << "Lack of cargo ! \n";
+        break;
+    case Response::lack_of_money:
+        std::cout << "Lack of money! \n";
+        break;
+    case Response::lack_of_space:
+        std::cout << "Lack of space! \n";
+        break;
+    default:
+        break;
+    }
 }
 
 void Game::sell() {

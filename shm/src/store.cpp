@@ -1,15 +1,17 @@
 #include "store.hpp"
 
 #include <algorithm>
+#include <iostream>
 #include <random>
 
 #include "fruit.hpp"
 
 Store::Store() {
     GenerateCargo();
+    // std::cout << "Cześć, jestem store";
 }
 
-Response Store::buy(cargoPtr cargo, size_t amount, Player* player) {
+Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player) {
     int totalPrice = cargo->getPrice() * amount;
 
     size_t totalAmount = 0;
@@ -114,15 +116,14 @@ void Store::GenerateItems() {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
+    int i = 1;
     out << "Name:   "
         << "Amount:   "
         << "Price:    \n";
-    if (store.getCargoContainer().empty()) {
-        out << "Store is empty!!!\n";
-    } else {
-        for (const auto el : store.getCargoContainer()) {
-            out << el->getName() << " " << el->getAmount() << " " << el->getBasePrice() << '\n';
-        }
+
+    for (const auto el : store.cargo_) {
+        out << i << ": " << el->getName() << " " << el->getAmount() << " " << el->getBasePrice() << '\n';
+        i++;
     }
 
     return out;

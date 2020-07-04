@@ -10,7 +10,7 @@ static size_t distance(const Coordinates& lhs, const Coordinates& rhs) {
 }
 
 Island::Island(size_t posX, size_t posY)
-    : position_(posX, posY), store_() {
+    : position_(posX, posY) {
 }
 
 Coordinates Island::getPosition() {

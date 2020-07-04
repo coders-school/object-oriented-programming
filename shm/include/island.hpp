@@ -13,6 +13,7 @@ public:
     size_t getPositionX() const { return positionX_; }
     size_t getPositionY() const { return positionY_; }
     static size_t distance(const Coordinates& lhs, const Coordinates& rhs);
+
 private:
     size_t positionX_;
     size_t positionY_;
@@ -22,7 +23,8 @@ class Island {
 public:
     Island(size_t posX, size_t posY);
     Coordinates getPosition();
-    Store getStore() const {return store_;}
+    Store getStore() { return store_; }
+
 private:
     Coordinates position_;
     Store store_;
