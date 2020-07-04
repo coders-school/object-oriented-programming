@@ -61,4 +61,4 @@ target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 
 enable_testing()
 
-#add_test(Name shmTest COMMAND ${PROJECT_NAME}-ut)
+add_test(Name shmTest COMMAND ${PROJECT_NAME}-ut)
