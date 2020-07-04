@@ -28,6 +28,8 @@ public:
     Cargo* getCargo(size_t index) const;
     Cargo* findCargoByName(std::string name);
     size_t countAvailableSpace() const;
+    void printCargo() const;
+    
 private:
     Cargo* findCargo(Cargo* cargo);
 
