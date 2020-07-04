@@ -9,7 +9,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player)
     else if (player -> getMoney() < price){
         return Response::lack_of_money;
     }
-    else if (player -> getAvaliableSpace() < amount){
+    else if (player -> getAvailableSpace() < amount){
         return Response::lack_of_space;
     }
     *cargo += amount;
@@ -23,4 +23,3 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player
     player->sellCargo(cargo, amount, price);
     return Response::done;
 }
-
