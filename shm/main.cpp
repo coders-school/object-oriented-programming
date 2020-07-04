@@ -22,7 +22,24 @@ int main() {
     unsigned int y;
     std::cin >> x >> y;
 
+    Ship blackPearl(200, 50, 180, "black pearl", 1, &gameTime);
+    std::shared_ptr<Ship> ptr = std::make_shared<Ship>(200, 50, 180, "black pearl", 1, &gameTime);
+
+    Player pawellos(ptr, 300, 70);
+
+    std::cout << "First\n";
+    blackPearl += 10;
+    // blackPearl -= 50;
+    std::cout << "CREW: " << blackPearl.getCrew() << std::endl;
+    pawellos.getShip()->operator+=(10);
+    // pawellos->blackPearl += 10;
+    std::cout << "CREW2: " << blackPearl.getCrew() << std::endl;
+    std::cout << "MONEY: " << pawellos.getMoney() << std::endl;
+    ++gameTime;
+    std::cout << "MONEY2: " << pawellos.getMoney() << std::endl;
+
     Island* island = gameMap.getIsland(Coordinates(x, y));
+
 
     if (island) {
         std::cout << "Island founded!\n";
@@ -31,6 +48,7 @@ int main() {
     }
 
     std::cout << "FIRST\n";
+
 
     island->getStore()->printCargo();
 
@@ -45,17 +63,6 @@ int main() {
     ++gameTime;
     island->getStore()->printCargo();
 
-    /*
-    Store bieda (&gameTime);
-
-
-    std::cout << "Co tam w biedzie w promocji\n";
-    bieda.generateCargo();
-    bieda.printCargo();
-    std::cout << "++GameTime\n";
-    ++gameTime;
-    bieda.printCargo();
-    */
-
     std::cout << "\n**************\n";
+
 }

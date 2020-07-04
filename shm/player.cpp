@@ -3,7 +3,9 @@
 #include <numeric>
 
 Player::Player(std::shared_ptr<Ship> ship, uint32_t money, uint32_t availableSpace)
-    : ship_(ship), money_(money), availableSpace_(availableSpace) {}
+    : ship_(ship), money_(money), availableSpace_(availableSpace) {
+    ship_->setDelegate(this);
+}
 
 std::shared_ptr<Ship> Player::getShip() {
     return ship_;
@@ -50,4 +52,12 @@ void Player::sellCargo(std::shared_ptr<Cargo> cargo, uint32_t amount, uint32_t p
 
 void Player::printCargo() const {
     ship_->printCargo();
+}
+
+void Player::payCrew(uint32_t salary) {
+    if (salary < money_) {
+        money_ -= salary;
+    } else {
+        std::cerr << "Too few money!\n";
+    }
 }

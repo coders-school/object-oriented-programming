@@ -3,9 +3,10 @@
 #include <memory>
 
 #include "cargo.hpp"
+#include "delegate.hpp"
 #include "ship.hpp"
 
-class Player {
+class Player : public Delegate {
 public:
     Player(std::shared_ptr<Ship> ship, uint32_t money, uint32_t availableSpace);
 
@@ -17,6 +18,8 @@ public:
     void purchaseCargo(std::shared_ptr<Cargo> cargo, uint32_t amount, uint32_t price);
     void sellCargo(std::shared_ptr<Cargo> cargo, uint32_t amount, uint32_t price);
     void printCargo() const;
+
+    void payCrew(uint32_t salary) override;
 
 private:
     std::shared_ptr<Ship> ship_;

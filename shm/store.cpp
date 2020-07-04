@@ -113,8 +113,5 @@ void Store::loadToStore(std::shared_ptr<Cargo> cargo, uint32_t amount) {
 }
 
 void Store::nextDay() {
-    std::cout << "Next day in: "
-              << " STORE"
-              << " \n";
     this->generateCargo();
 }
