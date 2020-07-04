@@ -1,4 +1,5 @@
 #include "timeSHM.hpp"
+
 #include <algorithm>
 
 constexpr size_t initialTime = 1; //days

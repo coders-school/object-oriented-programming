@@ -1,6 +1,9 @@
 #pragma once
+
 #include <vector>
+
 #include "observer.hpp"
+
 class Time {
 public:
     Time();

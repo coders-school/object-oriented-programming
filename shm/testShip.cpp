@@ -1,7 +1,7 @@
+#include <string>
+
 #include "gtest/gtest.h"
 #include "ship.hpp"
-
-#include <string>
 
 class ShipTest : public ::testing::Test {
 protected:

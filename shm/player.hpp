@@ -1,7 +1,10 @@
 #pragma once
+
 #include <memory>
+
 #include "cargo.hpp"
 #include "ship.hpp"
+
 class Coordinates;
 class Player {
 public:
@@ -9,8 +12,13 @@ public:
     Player(std::unique_ptr<Ship> ship);
 
     size_t getMoney() const { return money_; }
-    size_t getAvailableSpace() const { return availableSpace_; }
+    void   giveMoney(size_t money);
+    void   takeMoney(size_t money);
+    size_t getAvailableSpace();
     size_t getSpeed() const;
+    void   giveCargo(Cargo* cargo);
+    void   removeCargo (Cargo* cargo);
+    Cargo* getCargoWithName(std::string name);
     Cargo* getCargo(size_t index) const;
 
 private:

@@ -1,16 +1,17 @@
+#include <iostream>
+#include <memory>
+#include <string>
+
+#include "alcohol.hpp"
 #include "coordinates.hpp"
+#include "fruit.hpp"
 #include "island.hpp"
+#include "item.hpp"
 #include "map.hpp"
 //#include "observer.hpp" not ready yet
 #include "player.hpp"
 #include "ship.hpp"
 #include "timeSHM.hpp"
-#include "item.hpp"
-#include "fruit.hpp"
-#include "alcohol.hpp"
-#include <iostream>
-#include <memory>
-#include <string>
 
 void printTrail() {
     const std::string floor(50, '-');

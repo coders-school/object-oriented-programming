@@ -1,4 +1,5 @@
 #include "player.hpp"
+
 #include <numeric>
 
 constexpr size_t START_MONEY = 1000;
@@ -17,12 +18,37 @@ size_t Player::getSpeed() const{
     return 0;
 }
 
+void Player::giveMoney(size_t money){
+    money_ += money;
+}
+
+void Player::takeMoney(size_t money){
+    money_ -= money;
+}
+
+Cargo* Player::getCargoWithName(std::string name){
+    return ship_->findCargoByName(name);
+}
+
 Cargo* Player::getCargo(size_t cargo) const{
     if (ship_) {
         return ship_->getCargo(cargo);
     }
     return nullptr;
 }
-size_t Player::countAvailableSpace() {
+
+void  Player::giveCargo(Cargo* cargo){
+    ship_->load(cargo);
+}
+
+void  Player::removeCargo(Cargo* cargo){
+    ship_->removeCargo(cargo);
+}
+
+size_t Player::countAvailableSpace(){
      return ship_->countAvailableSpace(); 
+}
+
+size_t Player::getAvailableSpace() { 
+    return availableSpace_ + ship_->countAvailableSpace();
 }
