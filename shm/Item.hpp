@@ -31,7 +31,6 @@ public:
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
-
 private:
     Rarity rarity_;
 };

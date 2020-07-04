@@ -8,6 +8,30 @@
 #include "Map.hpp"
 #include "gtest/gtest.h"
 
+TEST(item, TwoItemsWithTheSameAmountShouldBeEqual)
+{
+    size_t amount{10};
+    Item itemA{amount, "item", 0, Item::Rarity::common}, itemB{amount, "item", 0, Item::Rarity::common};
+    itemA += 10;
+    itemB += 10;
+    ASSERT_EQ(itemA, itemB);
+}
+
+TEST(item, TwoItemssWithDifferentAmountShouldNotBeEqual)
+{
+    Item itemA{0, "itemA", 0, Item::Rarity::common}, itemB{0, "itemB", 0, Item::Rarity::common};
+    itemA += 10;
+    itemB += 100;
+    ASSERT_NE(itemA, itemB);
+}
+
+TEST(item, TwoItemsWithDifferentAmountShouldNotBeEqualWithGetters)
+{
+    Item itemA(10, "itemA", 1, Item::Rarity::common), itemB(100, "itemB", 2, Item::Rarity::common);
+    EXPECT_FALSE(itemA.GetAmount() == itemB.GetAmount());
+    itemA += 90;
+    EXPECT_EQ(itemA.GetAmount(), itemB.GetAmount());
+}
 
 TEST(item, TwoIdenticalItemsShouldBeEqualWithEqualOperator)
 {
@@ -76,31 +100,6 @@ TEST(item, AddToOperatorIncreaseAmount)
     Item itemA(10, "item", 1, Item::Rarity::rare);
     itemA += 5;
     EXPECT_EQ(itemA.GetAmount(), 15);
-}
-
-TEST(item, TwoItemsWithTheSameAmountShouldBeEqual)
-{
-    size_t amount{10};
-    Item itemA{amount, "item", 0, Item::Rarity::common}, itemB{amount, "item", 0, Item::Rarity::common};
-    itemA += 10;
-    itemB += 10;
-    ASSERT_EQ(itemA, itemB);
-}
-
-TEST(item, TwoItemssWithDifferentAmountShouldNotBeEqual)
-{
-    Item itemA{0, "itemA", 0, Item::Rarity::common}, itemB{0, "itemB", 0, Item::Rarity::common};
-    itemA += 10;
-    itemB += 100;
-    ASSERT_NE(itemA, itemB);
-}
-
-TEST(item, TwoItemsWithDifferentAmountShouldNotBeEqualWithGetters)
-{
-    Item itemA(10, "itemA", 1, Item::Rarity::common), cargoB(100, "itemB", 2, Item::Rarity::common);
-    EXPECT_FALSE(itemA.GetAmount() == cargoB.GetAmount());
-    itemA += 90;
-    EXPECT_EQ(itemA.GetAmount(), cargoB.GetAmount());
 }
 
 TEST(island, twoIslandsPositionsShouldBeEqual)
