@@ -3,6 +3,7 @@
 #include <ostream>
 
 #include "Coordinates.hpp"
+
 class Island
 {
 public:

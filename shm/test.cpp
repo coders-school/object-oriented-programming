@@ -23,14 +23,6 @@ TEST(cargo, TwoCargosWithTheSameAmountShouldBeEqual)
     ASSERT_EQ(cargoA, cargoB);
 }
 
-TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqualWithGetters)
-{
-    Cargo cargoA(10, 1), cargoB(100, 2);
-    EXPECT_FALSE(cargoA.getAmount() == cargoB.getAmount());
-    cargoA+=90;
-    EXPECT_EQ(cargoA.getAmount(), cargoB.getAmount());
-}
-
 TEST(cargo, TwoCargosWithDifferentAmountShouldNotBeEqual)
 {
     Cargo cargoA, cargoB;
@@ -106,13 +98,6 @@ TEST(map, getIslandShouldRTeturnCorrectIsland)
     Coordinates corr = islands[1].getPosition();
 
     EXPECT_NE(map_.getIsland(corr).getPosition(), island_.getPosition());
-}
-
-TEST(Map, mapWithOneIsland)
-{
-    Map map_(1,1,1);
-    Island island_{Island(0,0)};
-    EXPECT_EQ(map_.getIslands().at(0).getPosition(), island_.getPosition());
 }
 
 
