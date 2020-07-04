@@ -42,6 +42,7 @@ set(SRC
     cargo.cpp
     coordinates.cpp
     fruit.cpp
+    game.cpp
     island.cpp
     item.cpp
     map.cpp

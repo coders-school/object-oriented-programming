@@ -1,6 +1,7 @@
 #include "ship.hpp"
 #include <iostream>
 #include <algorithm>
+#include <iostream>
 #include <numeric>
 
 Ship::Ship()
@@ -126,9 +127,8 @@ size_t Ship::fillInCrew(){
 Cargo* Ship::findCargo(Cargo* cargo) {
     auto found = std::find_if(cargo_.begin(), cargo_.end(),
                              [&cargo](const auto element) {
-                             if(*cargo== *element){
-                             return cargo;
-                             }});
+                             return *cargo == *element;
+                             });
     if (found != cargo_.end()) {
         return *found;
     }
@@ -140,4 +140,14 @@ void Ship::removeCargo(Cargo* cargo) {
             [&cargo](const auto& element) {
                 return *element == *cargo;
             }));
+}
+
+void Ship::printCargo() const {
+    std::for_each(cargo_.begin(), cargo_.end(),
+        [i{0}](const auto& index) mutable {
+            std::cout << ++i << "* "; 
+            std::cout << index->getName() << ": "
+                      << index->getAmount();
+
+	    });
 }

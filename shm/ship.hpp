@@ -32,6 +32,8 @@ public:
     Cargo* getCargo(size_t index) const;
     size_t countAvailableSpace() const;
     size_t fillInCrew();
+    void printCargo() const;
+    
 private:
     Cargo* findCargo(Cargo* cargo);
     void removeCargo (Cargo* cargo);
@@ -43,5 +45,4 @@ private:
     int id_;
     std::vector<Cargo*> cargo_;
     Time* Publisher_;
-    bool ownerExistenceFlag_;
 };

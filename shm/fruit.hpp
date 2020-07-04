@@ -3,6 +3,7 @@
 #include "timeSHM.hpp"
 #include "cargo.hpp"
 #include <iostream>
+
 class Fruit : public Cargo, public Observer {
 public:    
     Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeElapsed, Time* Publisher);

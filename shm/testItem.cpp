@@ -4,6 +4,7 @@
 #include "rarity.hpp"
 #include <string>
 #include "timeSHM.cpp"
+
 class ItemTest : public ::testing::Test {
 public:
    int rarity = static_cast<int>(Rarity::rare);

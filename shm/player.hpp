@@ -7,9 +7,10 @@
 class Coordinates;
 class Player : public Observer{
 public:
-    Player(Ship* ship, size_t money, size_t space, Time* Publisher);
 
-    Player(Ship* ship, Time* Publisher);
+    Player(std::shared_ptr<Ship> ship, size_t money, size_t space, std::shared_ptr<Time> publisher);
+
+    Player(std::shared_ptr<Ship> ship, std::shared_ptr<Time> publisher);
     
     ~Player(){
         this -> Publisher_ -> removeObserver(this);
@@ -23,10 +24,9 @@ public:
     void payCrew(size_t crew);
     void nextDay();
 private:
-    Ship* ship_;
+    std::shared_ptr<Ship> ship_;
+    std::shared_ptr<Time> publisher_;
     size_t money_;
     size_t availableSpace_;
     size_t countAvailableSpace();
-    Coordinates* ActualPosition;
-    Time* Publisher_;
 };
