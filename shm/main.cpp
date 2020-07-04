@@ -1,7 +1,6 @@
 #include "coordinates.hpp"
 #include "island.hpp"
 #include "map.hpp"
-//#include "observer.hpp" not ready yet
 #include "player.hpp"
 #include "ship.hpp"
 #include "timeSHM.hpp"
@@ -18,9 +17,10 @@ void printTrail() {
 }
 
 int main() {
+    Time time;
     printTrail();
     std::cout << "Test of SHM in main.cpp\n";
-    Ship FD(100, 50, 12, "Flying Dutchman", 1);
+    Ship FD(100, 50, 12, "Flying Dutchman", 1, &time);
     printTrail();
     std::cout << "Ship FD has been created: \n";
     printTrail();
@@ -31,18 +31,18 @@ int main() {
     std::cout << "Id: " << FD.getId() << '\n';
     
     //Checking observer pattern
-    Time time;
+    Player player(std::make_unique<Ship>(FD), &time); 
     Item knife("SilverKnife", 2, 30, 1, &time);
     Fruit apples("Apples", 30, 10, 20, 10, &time);
     Alcohol Rum("Rum", 20, 60, 70, &time);
 
 for(size_t i=0; i<100; i++){
+   
     time.notifyObservers();
     std::cout << "Apples time to Rot: " << apples.timeToRot() << '\n';
     std::cout << "Items amount: " << knife.getAmount() << '\n';
     std::cout << "Alcohol Power: " << Rum.getPower() << '\n';
-
-
+    std::cout << '\n';
 }
 
 

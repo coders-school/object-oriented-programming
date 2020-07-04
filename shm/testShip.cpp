@@ -1,9 +1,10 @@
 #include "gtest/gtest.h"
 #include "ship.hpp"
-
+#include "timeSHM.hpp"
 #include <string>
 
 class ShipTest : public ::testing::Test {
+Time time;
 protected:
     std::string name = "First_Ship";
     size_t maxCrewOfShip = 30;
@@ -11,7 +12,7 @@ protected:
     size_t speedOfShip = 10;
     size_t idOfShip = 1;
 
-    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip) {}
+    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip, &time) {}
     Ship shipOne;
 };
 
