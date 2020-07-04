@@ -13,8 +13,10 @@ ___
 ## Wprowadzenie do dziedziczenia
 
 Podczas implementacji klas, często możemy zauważyć, że część cech składowych klasy można wykorzystać także w innych klasach.
+<!-- .element: class="fragment fade-in" -->
 
-Weźmy pod lupę klasę Komputer. Jeżeli chcielibyśmy utworzyć klasy: laptop, PC, tablet, to część metod oraz składowych klasy musielibyśmy niepotrzebnie powielić.
+Weźmy pod lupę klasę `Computer`. Jeżeli chcielibyśmy utworzyć klasy: `Laptop`, `PC`, `Tablet`, to część metod oraz składowych klasy musielibyśmy powielić.
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -124,35 +126,46 @@ private:
     Screen screen_;
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## Klasy bazowe i pochodne
 
-Klasa, po której dziedziczymy, nazywają się  <span class="fragment highlight-green">**klasą bazową**</span>.
+Klasa, po której dziedziczymy, nazywają się  <span class="fragment highlight-green">**klasą bazową (base class)**</span>.
+<!-- .element: class="fragment fade-in" -->
 
-Klasy, które dziedziczą nazywa się  <span class="fragment highlight-green">**klasami pochodnymi**</span>.
+Klasa, która dziedziczy nazywa się  <span class="fragment highlight-green">**klasą pochodną (derived class)**</span>.
+<!-- .element: class="fragment fade-in" -->
 
 Inaczej, klasa, po której dziedziczymy to rodzic (parent class).
+<!-- .element: class="fragment fade-in" -->
 
 Klasa, która dziedziczy to dziecko (child class).
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
-### Co z metodami klas `Laptop` i `Tablet`, czy można wydzielić kolejną klasę?
+### Co z metodami klas `Laptop` i `Tablet`?
+
+#### Czy można wydzielić kolejną klasę?
+<!-- .element: class="fragment fade-in" -->
 
 ```cpp
 void display();
 void getUserInput();
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
 ## Klasa `Screen` i `TouchScreen`
 
 Załóżmy, że dodajemy klasę `Screen`. Klasa ta wyświetla na bieżąco interfejs użytkownika.
+<!-- .element: class="fragment fade-in" -->
 
-Chcemy też stworzyć klasę reprezentującą ekran dotykowy, który również umożliwia odczyt akcji od użytkownika i ich wyświetlanie.
+Chcemy też stworzyć klasę reprezentującą ekran dotykowy - `TouchScreen`, który również umożliwia odczyt akcji od użytkownika i ich wyświetlanie.
+<!-- .element: class="fragment fade-in" -->
 
 <div class="multicolumn">
 <div class="col">
@@ -168,6 +181,7 @@ private:
     Monitor monitor_;
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 </div>
 <div class="col">
@@ -185,11 +199,13 @@ private:
     Monitor monitor_;
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 </div>
 </div>
 
 ### Jak uprościć powyższy kod?
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
@@ -205,7 +221,10 @@ private:
 
     Monitor monitor_;
 };
+```
+<!-- .element: class="fragment fade-in" -->
 
+```cpp
 class TouchScreen : public Screen {
 public:
     void getUserInput();
@@ -214,10 +233,11 @@ private:
     void displayKeyboard();
 };
 ```
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Wielodziedziczenie #1
+## Wielodziedziczenie
 
 ```cpp
 class Screen {
@@ -264,13 +284,25 @@ class Tablet : public Computer,
 
 ___
 
-## Wielodziedziczenie #2
+## Wielodziedziczenie - disclaimer
 
-Wybór implementacji zależy od programisty. Nie zawsze wielodziedziczenie będzie lepszym rozwiązaniem. Należy się zawsze zastanowić czy dziedziczenie po konkretnej klasie uprości nam program i czy nie będzie powodować żadnych komplikacji w dalszym procesie rozbudowy naszego programu.
+Wielodziedziczenie to dziedziczenie z kliku klas bazowych.
+
+Wybór implementacji zależy od programisty.
+<!-- .element: class="fragment fade-in" -->
+
+Nie zawsze wielodziedziczenie będzie lepszym rozwiązaniem.
+<!-- .element: class="fragment fade-in" -->
+
+Należy się zawsze zastanowić czy dziedziczenie po konkretnej klasie uprości nam program i czy nie będzie powodować żadnych komplikacji w dalszym procesie rozbudowy naszego programu.
+<!-- .element: class="fragment fade-in" -->
+
+Najwyżej trzeba będzie refaktoryzować program ;)
+<!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Wielodziedziczenie - problemy #1
+## Dziedziczenie - problemy
 
 ```cpp
 struct Bird {
@@ -293,7 +325,7 @@ struct Hummingbird {
 ___
 <!-- .slide: style="font-size: 0.9em" -->
 
-## Wielodziedziczenie - problemy #2
+## Dziedziczenie - zasada LSP
 
 Jeżeli spróbujemy teraz uprościć klasę poprzez dziedziczenie pojawi się problem:
 
@@ -317,6 +349,14 @@ struct Hummingbird : public Bird {
 
 Jeszcze bardziej utrudnimy sytuacje, gdy w przyszłości dodamy sobie kolejne klasy jak Struś. Zawsze przed implementacją musimy się zastanowić jak podzielić odpowiedzialność na poszczególne klasy, aby
 uniknąć podobnych problemów.
+
+___
+
+### Dla ciekawskich
+
+Poczytajcie o zasadzie Liskov Substitution Principle (LSP). Mówi ona jak powinno / nie powinno się projektować kodu obiektowego. Ta zasada została złamana w ostatnim przykładzie.
+
+Możecie też poczytać o wszystkich zasadach SOLID.
 
 ___
 
