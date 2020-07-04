@@ -6,15 +6,14 @@
 
 class Time {
 private:
-    std::vector<std::shared_ptr<Observer>> observers_ {};
+    std::vector<Observer*> observers_ {};
     size_t elapsedTime_ {0};
 
+public:
+    void addObserver(Observer* observer);
+    void removeObserver(Observer* observer);
     void resetTime();
     void notifyObservers();
-public:
-    void addObserver(std::shared_ptr<Observer> &observer);
-    void removeObserver(std::shared_ptr<Observer> &observer);
-    void sendNotification();
     size_t getElapsedTime() const;
     Time& operator++();
 };

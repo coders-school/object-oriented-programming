@@ -7,25 +7,26 @@
 #include "Cargo.hpp"
 #include "Delegate.hpp"
 #include "Observer.hpp"
+#include "Time.hpp"
 
 constexpr size_t salaryPerWorker = 1;
 
 class Ship : public Observer{
+private:
+    size_t capacity_;
+    size_t maxCrew_;
+    size_t crew_;
+    size_t speed_;
+    std::string name_;
+    const size_t id_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
+    Delegate* delegate_ {nullptr};
+    std::shared_ptr<Time> time_ {nullptr};
+
 public:
-    Ship()
-        : id_(0)
-    {}
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-        : capacity_(capacity)
-        , maxCrew_(maxCrew)
-        , crew_(0)
-        , speed_(speed)
-        , name_(name)
-        , id_(id)
-    {}
-    Ship(int maxCrew, int speed, size_t id)
-        : Ship(0, maxCrew, speed, "", id)
-    {}
+    Ship();
+    Ship(int capacity, int maxCrew, int speed, const std::string &name, size_t id, std::shared_ptr<Time>& time);
+    Ship(int maxCrew, int speed, size_t id, std::shared_ptr<Time>& time);
 
     void setName(const std::string& name) { name_ = name; }
     void setDelegate(Delegate* const delegate) { delegate_ = delegate; }    //it might be good to integrate it with Ship constructor
@@ -47,13 +48,4 @@ public:
     //Override from Observer
     void nextDay() override;
 
-private:
-    size_t capacity_;
-    size_t maxCrew_;
-    size_t crew_;
-    size_t speed_;
-    std::string name_;
-    const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
-    Delegate* delegate_ = nullptr;
 };

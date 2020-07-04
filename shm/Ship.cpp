@@ -46,3 +46,25 @@ void Ship::nextDay() {
     }
     std::for_each(cargo_.begin(), cargo_.end(), [](const auto& el){ el->nextDay(); });
 }
+
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string &name, size_t id, std::shared_ptr<Time>& time)
+        : capacity_(capacity)
+        , maxCrew_(maxCrew)
+        , crew_(0)
+        , speed_(speed)
+        , name_(name)
+        , id_(id)
+        , time_(time)
+{
+    time_->addObserver(this);
+}
+
+Ship::Ship(int maxCrew, int speed, size_t id, std::shared_ptr<Time>& time)
+        : Ship(0, maxCrew, speed, "", id, time) {
+
+}
+
+Ship::Ship()
+        : id_(0) {
+
+}

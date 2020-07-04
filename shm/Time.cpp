@@ -1,11 +1,11 @@
 #include "Time.hpp"
 #include <algorithm>
 
-void Time::addObserver(std::shared_ptr<Observer> &observer) {
+void Time::addObserver(Observer* observer) {
     observers_.push_back(observer);
 }
 
-void Time::removeObserver(std::shared_ptr<Observer> &observer) {
+void Time::removeObserver(Observer* observer) {
     observers_.erase(std::remove(observers_.begin(), observers_.end(), observer));
 }
 
@@ -24,9 +24,4 @@ size_t Time::getElapsedTime() const {
 
 void Time::resetTime() {
     elapsedTime_ = 0;
-}
-
-void Time::sendNotification() {
-    notifyObservers();
-    resetTime();
 }
