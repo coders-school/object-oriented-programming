@@ -17,4 +17,10 @@ private:
 
 public:
     Game(size_t money, size_t days, size_t final_goal);
+
+    enum class Action {
+        buy,
+        sell,
+        travel,
+    };
 };
