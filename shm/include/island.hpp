@@ -22,8 +22,8 @@ class Island {
 public:
     Island(size_t posX, size_t posY);
     Coordinates getPosition();
-    Store* getStore() const {return store_;}
+    Store getStore() const {return store_;}
 private:
     Coordinates position_;
-    Store* store_;
+    Store store_;
 };
