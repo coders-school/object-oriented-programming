@@ -10,10 +10,13 @@ enum class Response {
 };
 
 class Store : public Observer{
+private:
+    std::shared_ptr<Time> time_;
 public:
     //Override from Observer
     void nextDay() override;
 
+    Store(std::shared_ptr<Time>& time);
     Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
     Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
 };
