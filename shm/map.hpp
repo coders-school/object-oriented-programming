@@ -1,10 +1,10 @@
 #pragma once
 
-#include "coordinates.hpp"
-#include "island.hpp"
-
 #include <memory>
 #include <vector>
+
+#include "coordinates.hpp"
+#include "island.hpp"
 
 class Map {
 public:

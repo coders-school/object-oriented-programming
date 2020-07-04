@@ -1,8 +1,11 @@
 #pragma once
+
 #include <iostream>
 #include <string>
-#include "timeSHM.hpp"
+
 #include "cargo.hpp"
+#include "timeSHM.hpp"
+
 
 class Alcohol : public Cargo, public Observer {
 public:

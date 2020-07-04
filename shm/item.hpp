@@ -1,8 +1,10 @@
 #pragma once
-#include<string>
+
 #include <iostream>
-#include "timeSHM.hpp"
+#include <string>
+
 #include "cargo.hpp"
+#include "timeSHM.hpp"
 #include "rarity.hpp"
 
 class Item : public Cargo, public Observer {
