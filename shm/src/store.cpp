@@ -117,7 +117,7 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
     out << "Name:   "
         << "Amount:   "
         << "Price:    \n";
-    for (const auto el : store.cargo_) {
+    for (const auto el : store.getCargoContainer()) {
         out << el->getName() << " " << el->getAmount() << " " << el->getBasePrice() << '\n';
     }
 
