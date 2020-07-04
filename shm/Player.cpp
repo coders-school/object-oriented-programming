@@ -42,3 +42,8 @@ void Player::checkAvailableSpace() {
 std::vector<std::shared_ptr<Cargo>> Player::getCargos() const {
     return ship_->getCargos();
 }
+
+// override from Ship::PayCrewDelegate
+void Player::payCrew(size_t money) {
+    money_ -= money;
+}

@@ -2,12 +2,8 @@
 
 #include "algorithm";
 
-Ship::Ship()
-    : id_(-1){};
-Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id)
-    : capacity_(capacity), max_crew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
-Ship::Ship(size_t maxCrew, size_t speed, size_t id)
-    : Ship(0, maxCrew, speed, "", id) {}
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* crewPayer)
+    : capacity_(capacity), max_crew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), crewPayer_(crewPayer) {}
 
 void Ship::setName(const std::string& name) {
     name_ = name;
@@ -40,15 +36,19 @@ std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
 size_t Ship::getCapacity() const {
     return capacity_;
 }
+
 size_t Ship::getMaxCrew() const {
     return max_crew_;
 }
+
 size_t Ship::getSpeed() const {
     return speed_;
 }
+
 std::string Ship::getName() const {
     return name_;
 }
+
 size_t Ship::getId() const {
     return id_;
 }
@@ -61,4 +61,12 @@ void Ship::unload(Cargo* cargo) {
     cargos_.erase(std::remove_if(cargos_.begin(), cargos_.end(), [cargo](auto listedCargo) {
         return cargo == listedCargo;
     }));
+}
+
+void Ship::nextDay() {
+    if (!crewPayer_) {
+        return;
+    }
+
+    crewPayer_->payCrew(crew_);
 }

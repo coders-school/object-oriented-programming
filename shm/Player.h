@@ -3,7 +3,7 @@
 #include "Cargo.h"
 #include "Ship.h"
 
-class Player {
+class Player : public Ship::PayCrewDelegate {
 public:
     Player(Ship ship, size_t money);
 
@@ -14,6 +14,8 @@ public:
     size_t getSpeed() const;
     Cargo* getCargo(size_t index) const;
     std::vector<std::shared_ptr<Cargo>> getCargos() const;
+
+    void payCrew(size_t money) override;
 
 private:
     std::unique_ptr<Ship> ship_;

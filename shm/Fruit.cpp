@@ -27,6 +27,11 @@ size_t Fruit::getPrice() const {
 }
 
 //override from Cargo
+void Fruit::nextDay() {
+    time_elapsed_++;
+}
+
+//override from Cargo
 bool Fruit::operator==(Cargo& cargo) const {
     Fruit* otherFruit = dynamic_cast<Fruit*>(std::addressof(cargo));
 

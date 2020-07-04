@@ -11,6 +11,7 @@ public:
     size_t getAmount() const override;
     size_t getPrice() const override;
     size_t getBasePrice() const override;
+    void nextDay() override;
 
     bool operator==(Cargo& cargo) const override;
 

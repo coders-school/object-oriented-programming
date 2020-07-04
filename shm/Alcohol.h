@@ -10,6 +10,7 @@ public:
     ~Alcohol() override;
 
     size_t getPrice() const override;
+    void nextDay() override;
 
     bool operator==(Cargo& cargo) const override;
 

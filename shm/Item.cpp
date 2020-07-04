@@ -9,6 +9,10 @@ size_t Item::getPrice() const {
 }
 
 //override from Cargo
+void Item::nextDay() {
+}
+
+//override from Cargo
 bool Item::operator==(Cargo& cargo) const {
     Item* otherItem = dynamic_cast<Item*>(std::addressof(cargo));
 

@@ -6,9 +6,13 @@
 
 class Ship {
 public:
-    Ship();
-    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id);
-    Ship(size_t maxCrew, size_t speed, size_t id);
+    class PayCrewDelegate {
+    public:
+        virtual void payCrew(size_t money) = 0;
+        virtual ~PayCrewDelegate() = default;
+    };
+
+    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* delegate);
 
     void setName(const std::string& name);
 
@@ -24,6 +28,7 @@ public:
     std::vector<std::shared_ptr<Cargo>> getCargos() const;
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo);
+    void nextDay();
 
 private:
     size_t capacity_;
@@ -33,4 +38,5 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargos_;
+    PayCrewDelegate* crewPayer_{};
 };

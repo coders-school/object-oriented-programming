@@ -17,6 +17,7 @@ class Store {
 public:
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
+    void nextDay();
 
 private:
     std::vector<std::unique_ptr<Cargo>> available_cargos_;
