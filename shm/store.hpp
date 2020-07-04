@@ -18,6 +18,8 @@ public:
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
 
+    friend std::ostream& operator<<(std::ostream& print, const Store& store);
+
 private:
     Time* timeTracker_;
     std::vector<Item> cargoToSell_;

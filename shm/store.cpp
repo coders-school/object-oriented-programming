@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "store.hpp"
 
 Store::Store(Time* gameTime):
@@ -33,3 +35,13 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player){
     return Response::done;
 }
 
+std::ostream& operator<<(std::ostream& print, const Store& store) {
+    print << "What you want to buy or sell: \n";
+    std::for_each(store.cargoToSell_.begin(), store.cargoToSell_.end(),
+        [&print, &store, i{0}] (const auto& cargo) mutable {
+            print << ++i << " || ";
+            
+                                
+        });
+        return print;
+}
