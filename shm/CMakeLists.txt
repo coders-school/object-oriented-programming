@@ -75,6 +75,7 @@ set(HEADER_FILES
 
 set(TEST_SRC_LIST
     test/test_main.cpp
+    test/TestCargo.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
