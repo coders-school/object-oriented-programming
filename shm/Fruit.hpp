@@ -29,4 +29,3 @@ private:
     size_t daysToRot_ = 10;
     const size_t expirationDays_ = 10;
 };
-

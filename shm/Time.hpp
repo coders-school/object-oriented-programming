@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Observer.hpp"
-#include <vector>
 #include <memory>
+#include <vector>
+#include "Observer.hpp"
 
 class Time {
 private:
-    std::vector<Observer*> observers_ {};
-    size_t elapsedTime_ {0};
+    std::vector<Observer*> observers_{};
+    size_t elapsedTime_{0};
 
 public:
     void addObserver(Observer* observer);

@@ -1,6 +1,6 @@
 #include "Cargo.hpp"
-#include "Player.hpp"
 #include "Observer.hpp"
+#include "Player.hpp"
 
 enum class Response {
     done,
@@ -9,9 +9,10 @@ enum class Response {
     lack_of_space
 };
 
-class Store : public Observer{
+class Store : public Observer {
 private:
-    std::shared_ptr<Time> time_;
+    std::shared_ptr<Time> time_{nullptr};
+
 public:
     //Override from Observer
     void nextDay() override;

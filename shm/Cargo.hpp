@@ -18,10 +18,8 @@ public:
     virtual bool operator==(const Cargo& cargo) const = 0;
     virtual bool operator!=(const Cargo& cargo) const = 0;
 
-
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
 };
-
