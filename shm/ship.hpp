@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "cargo.hpp"
+#include "delegate.hpp"
 #include "subjectTime.hpp"
 #include "time.hpp"
 
@@ -29,6 +30,7 @@ public:
     void load(std::shared_ptr<Cargo> cargo);
     void unload(std::shared_ptr<Cargo> cargo, uint32_t amount);
     void printCargo() const;
+    void setDelegate(Delegate* const playerDelegate);
 
     // override from ObserverTime
     void nextDay() override;
@@ -42,4 +44,5 @@ private:
     uint32_t id_;
     std::vector<std::shared_ptr<Cargo>> cargo_;
     Time* time_;
+    Delegate* playerDelegate_;
 };

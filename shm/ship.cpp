@@ -104,6 +104,12 @@ void Ship::printCargo() const {
     });
 }
 
+void Ship::setDelegate(Delegate* const playerDelegate) {
+    playerDelegate_ = playerDelegate;
+}
+
 void Ship::nextDay() {
-    std::cout << "Next day in: " << getName() << " \n";
+    if (playerDelegate_) {
+        playerDelegate_->payCrew(crew_);
+    }
 }
