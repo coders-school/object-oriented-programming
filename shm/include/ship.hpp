@@ -19,6 +19,7 @@ public:
 
     Ship();
     Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity);
+    Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate);
     Ship(size_t id, std::string name, size_t speed);
 
     int getId() const { return id_; }
