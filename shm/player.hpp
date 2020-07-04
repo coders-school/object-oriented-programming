@@ -7,9 +7,9 @@
 class Coordinates;
 class Player : public Observer{
 public:
-    Player(std::unique_ptr<Ship> ship, size_t money, size_t space, Time* Publisher);
+    Player(Ship* ship, size_t money, size_t space, Time* Publisher);
 
-    Player(std::unique_ptr<Ship> ship, Time* Publisher);
+    Player(Ship* ship, Time* Publisher);
     
     ~Player(){
         this -> Publisher_ -> removeObserver(this);
@@ -23,7 +23,7 @@ public:
     void payCrew(size_t crew);
     void nextDay();
 private:
-    std::unique_ptr<Ship> ship_;
+    Ship* ship_;
     size_t money_;
     size_t availableSpace_;
     size_t countAvailableSpace();

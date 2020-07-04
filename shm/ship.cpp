@@ -110,7 +110,7 @@ size_t Ship::countAvailableSpace() const {
 }
 
 size_t Ship::fillInCrew(){
-    if(crew_ > maxCrew_){
+    if(crew_ < maxCrew_){
         size_t previousCrew = crew_;
         crew_ = maxCrew_;
         std::cout << "You hired: " << (maxCrew_ - previousCrew) << " sailors\n";

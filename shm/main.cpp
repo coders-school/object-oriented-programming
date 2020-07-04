@@ -24,14 +24,16 @@ int main() {
     printTrail();
     std::cout << "Ship FD has been created: \n";
     printTrail();
+    FD.fillInCrew();
     std::cout << "Capacity: " << FD.getCapacity() << '\n';
     std::cout << "Max crew: " << FD.getMaxCrew() << '\n';
+    std::cout << "Crew: " << FD.getCrew() << '\n';
     std::cout << "Speed: " << FD.getSpeed() << '\n';
     std::cout << "Name: " << FD.getName() << '\n';
     std::cout << "Id: " << FD.getId() << '\n';
     
     //Checking observer pattern
-    Player player(std::make_unique<Ship>(FD), &time); 
+    Player player(&FD, &time); 
     Item knife("SilverKnife", 2, 30, 1, &time);
     Fruit apples("Apples", 30, 10, 20, 10, &time);
     Alcohol Rum("Rum", 20, 60, 70, &time);
