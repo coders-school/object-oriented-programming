@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-int constexpr DEFAULT_POSITION_X = 0;
-int constexpr DEFAULT_POSITION_Y = 0;
+int constexpr DEFAULT_POSITION_X = 10;
+int constexpr DEFAULT_POSITION_Y = 20;
 
 Coordinates::Coordinates()
     : positionX_(DEFAULT_POSITION_X), positionY_(DEFAULT_POSITION_Y) {}

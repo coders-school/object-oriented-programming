@@ -95,7 +95,8 @@ void Game::printMenu() {
     std::cout << "Money: " << player_->getMoney() << " | "
               << "Day: " << time_->getElapsedTime() << " | "
               << "Days left: " << days_ - time_->getElapsedTime() << " | "
-              << "Current position: " << map_->getCurrentPosition() << '\n';
+              << "Current position: " << "(X" << map_->getCurrentPosition()->getPositionX() << ", "
+                                      << "Y" << map_->getCurrentPosition()->getPositionY() << ") \n";
 }
 
 void Game::printOptions() {
