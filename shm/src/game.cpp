@@ -11,8 +11,9 @@ Game::Game(size_t start_money, size_t game_days, size_t final_goal)
     : start_money_(start_money), game_days_(game_days), final_goal_(final_goal) {
     map_ = std::make_unique<Map>();
     time_ = std::make_unique<Time>(game_days_);
-    ship_ = generateShip();
-    player_ = std::make_unique<Player>(ship_, start_money_);
+    //ship_ = generateShip();
+    //player_ = std::make_unique<Player>(ship_, start_money_);
+    player_ = std::make_unique<Player>(start_money);
 };
 
 void Game::startGame() {
@@ -122,6 +123,7 @@ void Game::travel() {
             // one "distance" takes one day
             ++(*time_);
             if (time_->getElapsedTime() == 0) { break; }
+            player_->nextDay();
         }
         map_->travel(destination);
      }
