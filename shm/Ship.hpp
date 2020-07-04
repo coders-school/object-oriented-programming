@@ -6,10 +6,11 @@
 
 #include "Cargo.hpp"
 #include "Delegate.hpp"
+#include "Observer.hpp"
 
 constexpr size_t salaryPerWorker = 1;
 
-class Ship {
+class Ship : public Observer{
 public:
     Ship()
         : id_(0)
@@ -43,7 +44,8 @@ public:
     void load(const std::shared_ptr<Cargo>& cargo);
     void unload(Cargo* cargo);
 
-    void nextDay();
+    //Override from Observer
+    void nextDay() override;
 
 private:
     size_t capacity_;

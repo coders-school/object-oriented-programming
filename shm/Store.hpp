@@ -1,5 +1,6 @@
 #include "Cargo.hpp"
 #include "Player.hpp"
+#include "Observer.hpp"
 
 enum class Response {
     done,
@@ -8,8 +9,11 @@ enum class Response {
     lack_of_space
 };
 
-class Store{
+class Store : public Observer{
 public:
+    //Override from Observer
+    void nextDay() override;
+
     Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
     Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
 };

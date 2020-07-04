@@ -14,4 +14,3 @@ public:
     void removeObserver(std::shared_ptr<Observer> &observer);
 
 };
-

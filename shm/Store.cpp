@@ -23,3 +23,7 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player
     player->sellCargo(cargo, amount, price);
     return Response::done;
 }
+
+void Store::nextDay() {
+    //Doing nothing for now. Interface purposes
+}
