@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
 #include "observer.hpp"
+
 class Time {
 public:
-    Time();
+    explicit Time();
 
     bool findObserver(Observer* obs);
     void addObserver(Observer* obs);
@@ -13,6 +14,6 @@ public:
     Time& operator++();
 
 private:
-    size_t timeElapsed_;
+    size_t timeElapsed_ {1};
     std::vector<Observer*> observers_;  
 };

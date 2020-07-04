@@ -4,10 +4,10 @@
 constexpr size_t START_MONEY = 1000;
 constexpr size_t START_SPACE = 0;
 
-Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space)
+Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t space)
     : ship_(std::move(ship)), money_(money), availableSpace_(space) {}
 
-Player::Player(std::unique_ptr<Ship> ship)
+Player::Player(std::shared_ptr<Ship> ship)
     : Player(std::move(ship), START_MONEY, START_SPACE) {}
 
 size_t Player::getSpeed() const{

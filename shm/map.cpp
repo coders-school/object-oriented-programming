@@ -38,3 +38,7 @@ Island* Map::getIsland(const Coordinates& desiredCoordinates) {
     }
     return nullptr;
 }
+
+Island* Map::getCurrentPosition() {
+    return currentPosition_;
+}

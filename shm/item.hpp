@@ -4,6 +4,7 @@
 #include "timeSHM.hpp"
 #include "cargo.hpp"
 #include "rarity.hpp"
+
 class Item : public Cargo, public Observer {
 
 public:
