@@ -11,7 +11,7 @@ public:
 
     size_t getPrice() const override;
 
-    bool operator==(const Cargo& cargo) const override;
+    bool operator==(Cargo& cargo) const override;
 
     size_t getPower() const;
 

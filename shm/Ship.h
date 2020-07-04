@@ -22,13 +22,15 @@ public:
     size_t getId() const;
     std::shared_ptr<Cargo> getCargo(size_t index);
     std::vector<std::shared_ptr<Cargo>> getCargos() const;
+    void load(std::shared_ptr<Cargo> cargo);
+    void unload(Cargo* cargo);
 
 private:
     size_t capacity_;
     size_t crew_;
-    size_t maxCrew_;
+    size_t max_crew_;
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargos_;
 };

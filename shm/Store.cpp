@@ -21,7 +21,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     }
 
     player->setMoney(player->getMoney() - totalPrice);
-    player->getCargos().push_back(std::make_shared<Cargo>(cargo));
+    player->getShip()->load(std::make_shared<Cargo>(cargo));
     return Response::done;
 }
 
@@ -37,7 +37,7 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 
     cargo -= amount;
     if (cargo->getAmount() == 0) {
-        player->getCargos().erase(std::remove(player->getCargos().begin(), player->getCargos().end(), cargo));
+        player->getShip()->unload(cargo);
     }
 
     return Response::done;
