@@ -3,9 +3,13 @@
 #include <algorithm>
 #include <random>
 
-Store::Store() {}
+Store::Store(Time* time) : time_(time) {
+    time_->registerObserver(this);
+}
 
-Store::~Store() {}
+Store::~Store() {
+    time_->unregisterObserver(this);
+}
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
     out << "Available Cargo in Store: \n0 - Exit \n";
@@ -55,30 +59,39 @@ std::shared_ptr<Cargo> Store::getCargo(uint32_t index) const {
 }
 
 void Store::generateCargo() {
+    if (!cargo_.empty()) {
+        cargo_.clear();
+    }
+
     const int minAmountOfCargo = 50;
     const int maxAmountOfCargo = 300;
     const int minPriceOfCargo = 5;
     const int maxPriceOfCargo = 15;
+    const int minExpiryDateOfFruits = 1;
+    const int maxExpiryDateOfFruits = 10;
     std::uniform_int_distribution<> amountOfCargo(minAmountOfCargo, maxAmountOfCargo);
     std::uniform_int_distribution<> priceOfCargo(minPriceOfCargo, maxPriceOfCargo);
+    std::uniform_int_distribution<> expiryDateOfFruits(minExpiryDateOfFruits, maxExpiryDateOfFruits);
     std::random_device rd;
     std::mt19937 gen(rd());
 
-    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Oranges", priceOfCargo(gen), 6)));
-    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Bananas", priceOfCargo(gen), 4)));
-    cargo_.push_back(std::make_shared<Fruit>(Fruit(amountOfCargo(gen), "Apples", priceOfCargo(gen), 9)));
+    std::vector<std::pair<std::string, int>> cargoProducts = {
+        {"Oranges", 1}, {"Bananas", 1}, {"Apples", 1}, {"Vodka", 2},  {"Liquor", 2}, {"Whiskey", 2},
+        {"Bimber", 2},  {"Woods", 3},   {"Bronze", 3}, {"Silver", 3}, {"Gold", 3}};
 
-    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Vodka", priceOfCargo(gen), 40)));
-    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Liquor", priceOfCargo(gen), 24)));
-    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Whiskey", priceOfCargo(gen), 38)));
-    cargo_.push_back(std::make_shared<Alcohol>(Alcohol(amountOfCargo(gen), "Bimber", priceOfCargo(gen), 70)));
-
-    cargo_.push_back(
-        std::make_shared<Item>(Item(amountOfCargo(gen), "Woods", priceOfCargo(gen), Item::Rarity::common)));
-    cargo_.push_back(std::make_shared<Item>(Item(amountOfCargo(gen), "Bronze", priceOfCargo(gen), Item::Rarity::rare)));
-    cargo_.push_back(std::make_shared<Item>(Item(amountOfCargo(gen), "Silver", priceOfCargo(gen), Item::Rarity::epic)));
-    cargo_.push_back(
-        std::make_shared<Item>(Item(amountOfCargo(gen), "Gold", priceOfCargo(gen), Item::Rarity::legendary)));
+    for_each(cargoProducts.begin(), cargoProducts.end(), [&](const auto& cargo) {
+        if (cargo.second == 1) {
+            cargo_.push_back(
+                std::make_shared<Fruit>(amountOfCargo(gen), cargo.first, priceOfCargo(gen), expiryDateOfFruits(gen)));
+        }
+        if (cargo.second == 2) {
+            cargo_.push_back(std::make_shared<Alcohol>(amountOfCargo(gen), cargo.first, priceOfCargo(gen), 40));
+        }
+        if (cargo.second == 3) {
+            cargo_.push_back(
+                std::make_shared<Item>(amountOfCargo(gen), cargo.first, priceOfCargo(gen), Item::Rarity::common));
+        }
+    });
 }
 
 void Store::printCargo() const {
@@ -97,4 +110,8 @@ void Store::loadToStore(std::shared_ptr<Cargo> cargo, uint32_t amount) {
         }
     }
     cargo_.emplace_back(cargo);
+}
+
+void Store::nextDay() {
+    this->generateCargo();
 }

@@ -5,7 +5,7 @@
 #include <random>
 #include <string>
 
-Map::Map() {
+Map::Map(Time* time) : time_(time) {
     allIslands.reserve(NUM_OF_ISLANDS);
 
     std::map<std::string, int> repsChecker;
@@ -30,7 +30,7 @@ Map::Map() {
 
         } while (!coordinateExist);
 
-        allIslands.push_back(Island(Coordinates(positionX, positionY)));
+        allIslands.push_back(Island(Coordinates(positionX, positionY), time_));
         allIslands[i].createStore();
     }
 }
