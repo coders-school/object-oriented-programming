@@ -3,24 +3,18 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
-<<<<<<< HEAD
   checker:
-=======
   SHM:
->>>>>>> origin/develop
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
       uses: actions/checkout@master
-<<<<<<< HEAD
     - name: Run check.sh
       working-directory: shm
       run: |
         chmod +x check.sh
         ./check.sh CMakeLists.txt
 
-# In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
-=======
     - name: mkdir shm/build
       run: mkdir shm/build
     - name: Compile
@@ -32,4 +26,3 @@ jobs:
       working-directory: shm/build
       run: ctest -V
 
->>>>>>> origin/develop
