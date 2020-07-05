@@ -10,8 +10,7 @@ Fruit::Fruit(const std::string& name, size_t amount, double basePrice, size_t ti
 
 void Fruit::nextDay() {
     timeElapsed_++;
-    //operator--();
-    timeToRotten_--;
+    operator--();
 }
 
 std::string Fruit::getInfo() const {

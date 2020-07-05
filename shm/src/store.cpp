@@ -5,9 +5,9 @@
 #include <iostream>
 #include <random>
 
+#include "alcohol.hpp"
 #include "fruit.hpp"
 #include "item.hpp"
-#include "alcohol.hpp"
 
 Store::Store() {
     GenerateCargo();
@@ -21,15 +21,22 @@ Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& play
     for (const auto el : player->getShip()->getCargo()) {
         totalAmount += el->getAmount();
     }
-    if (player->getShip()->getCapacity() - totalAmount < amount)
+
+    if (player->getShip()->getCapacity() - totalAmount < amount) {
         return Response::lack_of_space;
+    }
 
-    else if (cargo->getAmount() < amount)
+    if (cargo->getAmount() < amount) {
         return Response::lack_of_cargo;
+    }
 
-    else if (totalPrice > player->getMoney())
+    if (totalPrice > player->getMoney()) {
         return Response::lack_of_money;
+    }
 
+    //TODO:
+    //how we know how much will be loaded into ship?
+    //example: Store have got 15 lemons, I buy 1 lemnot but after transaction on ship i have got 14 lemons :)
     player->getShip()->load(cargo);
     player->subtractMoney(totalPrice);
     *cargo.get() -= amount;
