@@ -39,6 +39,7 @@ public:
     Cargo* getCargo(const std::string& name);
     void printCargo();
     void printResponseMessage(Response& response);
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
 private:
     size_t capacity_;
