@@ -31,6 +31,7 @@ public:
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
+    void addCargo(Cargo* cargo);
     size_t getAvaiableSpace() const;
     size_t getAvaiableFunds() const { return avaiableFunds_; };
     void setCapasity(const size_t amount) { capacity_ = amount; }

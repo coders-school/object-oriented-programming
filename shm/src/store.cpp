@@ -64,6 +64,18 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     return Response::invalid_cargo_name;
 }
 
+void Store::addCargo(Cargo* cargo) {
+    if (this->getAvaiableSpace() >= cargo->getAmount()) {
+        auto ptrCargo = this->getCargo(cargo->getName());
+        if (ptrCargo == nullptr) {
+            cargoVec.push_back(cargo);
+        } else {
+            size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
+            ptrCargo->setAmount(tmpAmount);
+        }
+    }
+}
+
 Cargo* Store::getCargo(const std::string& name) {
     return Common::getCargo(name, cargoVec);
 }
@@ -158,6 +170,7 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
         }
         if (typeid(*cargo) == typeid(Alcohol)) {
             Alcohol* alcohol = static_cast<Alcohol*>(cargo);
+            alcohol->getPrice();
             out << "Current price: " << alcohol->getPrice() << '\n';
             out << "Expires in: " << alcohol->getTimeToSpoilLeft() << '\n';
         }
