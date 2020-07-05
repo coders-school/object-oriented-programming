@@ -10,7 +10,9 @@ Fruit::Fruit(const std::string& name, size_t amount, double basePrice, size_t ti
 
 void Fruit::nextDay() {
     timeElapsed_++;
-    operator--();
+    if (timeToRotten_ > 0) {
+        timeToRotten_--;
+    }
 }
 
 std::string Fruit::getInfo() const {
@@ -21,12 +23,12 @@ std::string Fruit::getInfo() const {
     return ss.str();
 }
 
-Fruit& Fruit::operator--() {
-    if (timeToRotten_ > 0) {
-        timeToRotten_--;
-    }
-    return *this;
-}
+// Fruit& Fruit::operator--() {
+//     if (timeToRotten_ > 0) {
+//         timeToRotten_--;
+//     }
+//     return *this;
+// }
 
 Cargo& Fruit::operator+=(const size_t& amount) {
     amount_ += amount;

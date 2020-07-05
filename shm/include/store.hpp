@@ -4,6 +4,8 @@
 #include "player.hpp"
 #include "time.hpp"
 
+#include <memory>
+
 enum class Response {
     done,
     lack_of_money,
@@ -13,7 +15,8 @@ enum class Response {
 
 class Store : public Observer {
 public:
-    Store();
+    Store(std::shared_ptr<Time> time);
+    ~Store();
     cargoPtr GetCargo(const size_t pos);
     std::vector<cargoPtr> getCargoContainer() const { return cargo_; }
     Response buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player);
@@ -35,5 +38,5 @@ private:
     void GenerateItems();
 
     std::vector<cargoPtr> cargo_;
-    Time* time_;
+    std::shared_ptr<Time> time_;
 };

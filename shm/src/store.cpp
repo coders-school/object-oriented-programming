@@ -10,8 +10,13 @@
 #include "fruit.hpp"
 #include "item.hpp"
 
-Store::Store() {
+Store::Store(std::shared_ptr<Time> time) : time_(time) {
     GenerateCargo();
+    time_->addObserver(this);
+}
+
+Store::~Store() {
+    time_->removeObserver(this);
 }
 
 Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player) {
