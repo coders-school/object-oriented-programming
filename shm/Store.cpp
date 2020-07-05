@@ -1,7 +1,7 @@
 #include "Store.hpp"
 #include <algorithm>
 
-Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
+Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getBasePrice();
     if (cargo -> getAmount() < amount){
         return Response::lack_of_cargo;
@@ -13,13 +13,13 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player)
         return Response::lack_of_space;
     }
     *cargo += amount;
-    player->buyCargo(cargo, amount, price);
+    player->purchaseCargo(std::shared_ptr<Cargo> (cargo), amount, price);
     return Response::done;
 }
 
-Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
+Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getPrice();
     *cargo -= amount; 
-    player->sellCargo(cargo, amount, price);
+    player->sellCargo(std::shared_ptr<Cargo> (cargo), amount, price);
     return Response::done;
 }

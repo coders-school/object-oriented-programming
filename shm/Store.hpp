@@ -10,6 +10,6 @@ enum class Response {
 
 class Store{
 public:
-    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
-    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
+    Response buy(Cargo* cargo, size_t amount, Player* player);
+    Response sell(Cargo* cargo, size_t amount, Player* player);
 };
