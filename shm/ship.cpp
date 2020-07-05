@@ -110,18 +110,16 @@ size_t Ship::countAvailableSpace() const {
     return capacity_ - loadedSpace;
 }
 
-size_t Ship::fillInCrew(){
-    if(crew_ < maxCrew_){
+size_t Ship::fillInCrew() {
+    if(crew_ < maxCrew_) {
         size_t previousCrew = crew_;
         crew_ = maxCrew_;
         std::cout << "You hired: " << (maxCrew_ - previousCrew) << " sailors\n";
 
         return maxCrew_ - previousCrew;
     }
-    if(crew_ == maxCrew_){
-        std::cout << "You have maximum number of sailors!\n";
-        return 0;
-    }
+    std::cout << "You have maximum number of sailors!\n";
+    return 0;
 }
 
 Cargo* Ship::findCargo(Cargo* cargo) {
