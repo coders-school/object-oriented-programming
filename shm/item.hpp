@@ -29,6 +29,6 @@ public:
     int getRarity() const;
 
 private:
-    Time* Publisher_;
     int rarity_;
+    Time* Publisher_;
 };

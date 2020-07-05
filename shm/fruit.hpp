@@ -27,8 +27,8 @@ public:
     size_t getTimeElapsed() const;
     size_t timeToRot() const;
 private:
-    Time* Publisher_;
-    size_t timeElapsed_{0};    
     const size_t expiryDate_{12};
+    size_t timeElapsed_{0};    
     size_t timeToSpoil_ = expiryDate_ - timeElapsed_;
+    Time* Publisher_;
 };
