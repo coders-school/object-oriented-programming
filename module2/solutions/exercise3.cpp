@@ -1,3 +1,6 @@
+#include <string>
+
+
 class DryFruit : public Fruit {
 public:
     // override from Cargo
