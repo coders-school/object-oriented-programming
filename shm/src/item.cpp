@@ -14,13 +14,9 @@ double Item::getPrice() const {
 
 std::string Item::getInfo() const {
     auto ss = std::stringstream{};
-    ss
-        << std::left << std::setw(10) << name_
-        << std::left << std::setw(5) << amount_
-        << std::left << std::setw(5) << getBasePrice()
-        << std::left << std::setw(5) << "-----"
-        << std::left << std::setw(5) << "-----"
-        << std::left << std::setw(8) << enumToString(rarity_);
+    ss << std::left << std::setw(5) << "Name: " << getName()
+       << std::left << std::setw(5) << "\tAmount: " << getAmount()
+       << std::left << std::setw(5) << "\tItem rarity: " << enumToString(getRarity()) << '\n';
     return ss.str();
 }
 

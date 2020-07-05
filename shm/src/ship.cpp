@@ -1,15 +1,16 @@
-#include "fruit.hpp"
 #include "ship.hpp"
 
 #include <algorithm>
 #include <iostream>
+
+#include "fruit.hpp"
 
 Ship::Ship()
     : id_(-1) {}
 Ship::Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity)
     : id_(id), name_(name), speed_(speed), maxCrew_(maxCrew), capacity_(capacity) {}
 Ship::Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate)
-        : id_(id), name_(name), speed_(speed), maxCrew_(maxCrew), capacity_(capacity), delegate_(delegate) {}
+    : id_(id), name_(name), speed_(speed), maxCrew_(maxCrew), capacity_(capacity), delegate_(delegate) {}
 Ship::Ship(size_t id, std::string name, size_t speed)
     : Ship(id, name, speed, 0, 0) {}
 
@@ -42,7 +43,7 @@ Ship& Ship::operator-=(const size_t& crew) {
 void Ship::load(std::shared_ptr<Cargo> cargo) {
     for (auto el : cargo_) {
         if (*el == *cargo) {
-            *el +=cargo->getAmount();
+            *el += cargo->getAmount();
             return;
         }
     }
@@ -73,7 +74,7 @@ void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
                                 cargo_.end(),
                                 [](auto& el) {
-                                        if (el -> getPrice() == el -> getBasePrice()) {
+                                    if (el->getPrice() == el->getBasePrice()) {
                                         return std::dynamic_pointer_cast<Fruit>(el)->getTimeToRotten() == 0;
                                     }
                                     return false;
@@ -84,8 +85,8 @@ void Ship::RemoveFromStorageIfRotten() {
 void Ship::printCargo() const {
     if (cargo_.empty()) {
         std::cout << "Cargo is empty" << '\n';
-    std::for_each(cargo_.begin(), cargo_.end(), [](auto& it){
-        std::cout << it->getInfo();
-        });
     }
+    std::for_each(cargo_.begin(), cargo_.end(), [](auto& it) {
+        std::cout << it->getInfo();
+    });
 }

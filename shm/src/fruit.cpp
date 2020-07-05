@@ -10,19 +10,15 @@ Fruit::Fruit(const std::string& name, size_t amount, double basePrice, size_t ti
 
 void Fruit::nextDay() {
     timeElapsed_++;
-    operator--();
+    //operator--();
+    timeToRotten_--;
 }
 
 std::string Fruit::getInfo() const {
-    auto ss = std::stringstream {};
-    ss
-            << std::left << std::setw(10) << name_
-            << std::left << std::setw(5) << amount_
-            << std::left << std::setw(5) << getBasePrice()
-            << std::left << std::setw(5) << "----"
-            << std::left << std::setw(5) << timeToRotten_
-            << std::left << std::setw(8) << "--------"
-            << '\n';
+    auto ss = std::stringstream{};
+    ss << std::left << std::setw(5) << "Name: " << getName()
+       << std::left << std::setw(5) << "\tAmount: " << getAmount()
+       << std::left << std::setw(5) << "\tTime to rotten: " << getTimeToRotten() << '\n';
     return ss.str();
 }
 
