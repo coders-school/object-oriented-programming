@@ -17,7 +17,7 @@ public:
     cargoPtr GetCargo(const size_t pos);
     std::vector<cargoPtr> getCargoContainer() const { return cargo_; }
     Response buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player);
-    Response sell(cargoPtr cargo, size_t amount, Player* player);
+    Response sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player);
     void nextDay() override;
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
