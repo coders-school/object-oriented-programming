@@ -50,7 +50,6 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<Cargo*> cargo_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
     Time* time_;
     Delegate* delegate_;
 
