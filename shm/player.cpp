@@ -5,16 +5,16 @@
 constexpr size_t START_MONEY = 1000;
 constexpr size_t START_SPACE = 0;
 
-Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t space, Time* Publisher)
-    : ship_(std::move(ship)), 
+Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t space, std::shared_ptr<Time> publisher)
+    : ship_(ship), 
     money_(money), 
-    availableSpace_(space){
+    availableSpace_(space),
     publisher_(publisher){
-    this -> Publisher_ -> addObserver(this); 
+    this -> publisher_ -> addObserver(this); 
      }
 
-Player::Player(std::shared_ptr<Ship> ship, Time* Publisher)
-    : Player(std::move(ship), START_MONEY, START_SPACE) {}
+//Player::Player(std::shared_ptr<Ship> ship, std::shared_ptr<Time> publisher)
+ //   : Player(ship, START_MONEY, START_SPACE) {}
 
 size_t Player::getSpeed() const{
     if (ship_) {

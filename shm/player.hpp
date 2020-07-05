@@ -13,7 +13,7 @@ public:
     Player(std::shared_ptr<Ship> ship, std::shared_ptr<Time> publisher);
     
     ~Player(){
-        this -> Publisher_ -> removeObserver(this);
+        this -> publisher_ -> removeObserver(this);
         std::cout << "Goodbye! I was your Player\n";
     };
 

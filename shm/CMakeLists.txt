@@ -53,7 +53,6 @@ set(SRC
 enable_testing()
 
 set(TEST
-    testShip.cpp
     testItem.cpp)
     
 include_directories(include)

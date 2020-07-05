@@ -14,7 +14,7 @@ public:
         printCargo = 4
     };
 
-    Game(size_t money, size_t days, size_t finalGoal);
+    Game(size_t money, size_t days, size_t finalGoal, std::shared_ptr<Time> time, std::shared_ptr<Ship> ship);
 
     void startGame();
 

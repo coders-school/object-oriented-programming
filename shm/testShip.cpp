@@ -4,7 +4,7 @@
 #include <string>
 
 class ShipTest : public ::testing::Test {
-Time time;
+    
 protected:
     std::string name = "First_Ship";
     size_t maxCrewOfShip = 30;
@@ -12,7 +12,9 @@ protected:
     size_t speedOfShip = 10;
     size_t idOfShip = 1;
 
-    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip, &time) {}
+    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip, time_ptr) {
+    std::shared_ptr<Time> time_ptr = std::make_shared<Time>(time);
+    }
     Ship shipOne;
 };
 

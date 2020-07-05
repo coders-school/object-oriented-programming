@@ -5,20 +5,21 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>
-
 #include "cargo.hpp"
 #include "island.hpp"
 
 
-Game::Game(size_t money, size_t days, size_t finalGoal)
+Game::Game(size_t money, size_t days, size_t finalGoal, std::shared_ptr<Time> time, std::shared_ptr<Ship> ship)
     : money_(money), 
-      days_(days), 
-      finalGoal_(finalGoal),
-      currentDay_(1),
-      ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1)), 
-      player_(std::make_shared<Player>(ship_, 500, 200)),
-      time_(std::make_shared<Time>()),
-	  map_(std::make_shared<Map>()) {}
+    days_(days), 
+    finalGoal_(finalGoal),
+    currentDay_(1),
+    time_(time),
+    ship_(ship){}
+
+ //     player_(std::make_shared<Player>(ship_, 500, 200)),
+ //     time_(std::make_shared<Time>()),
+//	  map_(std::make_shared<Map>()) {}
 
 void Game::startGame() {
     printTrail();

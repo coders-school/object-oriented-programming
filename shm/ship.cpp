@@ -7,15 +7,15 @@
 Ship::Ship()
     : id_(-1) {}
 
-Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, Time* Publisher)
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, std::shared_ptr<Time> publisher)
     : capacity_(capacity), 
     maxCrew_(maxCrew), 
     crew_(0), 
     speed_(speed), 
     name_(name), 
     id_(id),
-    Publisher_(Publisher){
-    this->Publisher_->addObserver(this);
+    publisher_(publisher){
+    this->publisher_->addObserver(this);
     }
 
 //Ship::Ship(size_t maxCrew, size_t speed, int id)

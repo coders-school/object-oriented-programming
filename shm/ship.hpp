@@ -10,10 +10,10 @@ class Ship : public Observer {
 
 public: 
     Ship();
-    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, Time* Publisher);
+    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, std::shared_ptr<Time> publisher);
     //Ship(size_t maxCrew, size_t speed, int id);
     ~Ship(){
-        this->Publisher_->removeObserver(this);
+        this->publisher_->removeObserver(this);
         std::cout << "Goodbye! I was your Ship\n";
     };
     void setName(const std::string& name); 
@@ -44,5 +44,5 @@ private:
     std::string name_;
     int id_;
     std::vector<Cargo*> cargo_;
-    Time* Publisher_;
+    std::shared_ptr<Time> publisher_;
 };
