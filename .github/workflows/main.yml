@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@homework1
+      uses: actions/checkout@master
     - name: mkdir shm/build
       run: mkdir shm/build
     - name: Compile
