@@ -14,6 +14,8 @@ void Game::startGame() {
     std::cout << "SHM game is welcome ! \n"
               << "To final game you have to reach: " << money_ << " Have a good fun :) \n";
 
+    store_ = map_->getCurrentPosition()->getStore();
+
     while (days_) {
         printMenu();
         printOption();
@@ -122,12 +124,13 @@ void Game::sell() {
             break;
         }
         std::cin >> choiceAmount;
+        std::string productName = player_->getCargo(choiceProduct - 1)->getName();
+        uint32_t productPrice = player_->getCargo(choiceProduct - 1).get()->getBasePrice();
         Store::Response response = store_->sell(player_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
         case Store::Response::done:
-            std::cout << "You sell: " << player_->getCargo(choiceProduct - 1)->getName()
-                      << " in amount: " << choiceAmount
-                      << " by price: " << player_->getCargo(choiceProduct - 1).get()->getBasePrice() << " \n";
+            std::cout << "You sell: " << productName << " in amount: " << choiceAmount << " by price: " << productPrice
+                      << " \n";
             break;
         case Store::Response::lack_of_cargo:
             std::cout << "You do not have that much cargo ! \n";
