@@ -4,13 +4,14 @@
 #include <vector>
 
 #include "island.hpp"
+#include "time.hpp"
 
 constexpr size_t MAP_SIZE = 10;  // 10 x 10
 constexpr size_t MAX_ISLANDS = 10;
 
 class Map {
 public:
-    Map();
+    Map(std::shared_ptr<Time> time);
     std::shared_ptr<Island> getCurrentPosition() const;
     std::shared_ptr<Island> getIsland(const Coordinates& coordinate) const;
     size_t getDistanceToIsland(std::shared_ptr<Island> destination) const;

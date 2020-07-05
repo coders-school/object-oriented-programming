@@ -25,7 +25,7 @@ private:
     size_t game_days_ = 100;
     size_t final_goal_ = 2000;
     std::unique_ptr<Map> map_;
-    std::unique_ptr<Time> time_;
+    std::shared_ptr<Time> time_;
     std::shared_ptr<Ship> ship_;
     std::unique_ptr<Player> player_;
 

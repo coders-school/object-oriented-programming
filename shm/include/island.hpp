@@ -1,8 +1,10 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 #include "store.hpp"
+#include "time.hpp"
 
 class Coordinates {
 public:
@@ -21,7 +23,7 @@ private:
 
 class Island {
 public:
-    Island(size_t posX, size_t posY);
+    Island(size_t posX, size_t posY, std::shared_ptr<Time> time);
     Coordinates getPosition();
     Store getStore() { return store_; }
 

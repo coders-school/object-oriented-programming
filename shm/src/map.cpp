@@ -5,7 +5,7 @@
 #include <iostream>
 #include <random>
 
-Map::Map() {
+Map::Map(std::shared_ptr<Time> time) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(1, MAP_SIZE);
@@ -17,7 +17,7 @@ Map::Map() {
         if (std::none_of(islands_.begin(), islands_.end(), [posX, posY](auto& i) {
                 return i->getPosition() == Coordinates(posX, posY);
             })) {
-            islands_.push_back(std::make_shared<Island>(posX, posY));
+            islands_.push_back(std::make_shared<Island>(posX, posY, time));
             isls--;
         }
     } while (isls > 0);

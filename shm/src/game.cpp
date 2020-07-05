@@ -9,11 +9,11 @@ Game::Game() {}
 
 Game::Game(size_t start_money, size_t game_days, size_t final_goal)
     : start_money_(start_money), game_days_(game_days), final_goal_(final_goal) {
-    map_ = std::make_unique<Map>();
-    time_ = std::make_unique<Time>(game_days_);
+    time_ = std::make_shared<Time>(game_days_);
+    map_ = std::make_unique<Map>(time_);
     //ship_ = generateShip();
     //player_ = std::make_unique<Player>(ship_, start_money_);
-    player_ = std::make_unique<Player>(start_money);
+    player_ = std::make_unique<Player>(start_money, time_);
 };
 
 void Game::startGame() {
@@ -38,9 +38,9 @@ void Game::startGame() {
     exit();
 }
 
-std::shared_ptr<Ship> Game::generateShip() {
-    return std::make_shared<Ship>(1, "Maria", 1, 128, 1200);
-}
+// std::shared_ptr<Ship> Game::generateShip() {
+//     return std::make_shared<Ship>(1, "Maria", 1, 128, 1200);
+// }
 
 bool Game::checkWinCondition() const {
     return player_->getMoney() >= final_goal_;
@@ -54,7 +54,7 @@ void Game::printTopBar() const {
     std::cout << "  ~~~~    SHM version 1.0   ~~~~" << '\n';
     std::cout << "Elapsed time " << time_->getElapsedTime() << '\n';
     std::cout << "Elapsed money " << player_->getMoney() << '\n';
-    std::cout << "Actual position x:" << map_->getCurrentPosition()->getPosition().getPositionX()
+    std::cout << "Actual position x: " << map_->getCurrentPosition()->getPosition().getPositionX()
               << " y: " << map_->getCurrentPosition()->getPosition().getPositionY() << '\n';
 }
 
@@ -78,9 +78,16 @@ void Game::printWinScreen() const {
 
 void Game::printLooseScreen() const {
     std::cout << "You loose\n";
-    std::cout << "You've run out of money in "
-              << time_->getElapsedTime()
-              << " days\n";
+    if (player_->getMoney() == 0) {
+        std::cout << "You've run out of money in "
+                  << time_->getElapsedTime()
+                  << " days\n";
+    } else {
+        std::cout << "You didn't get "
+                  << final_goal_
+                  << " coins in "
+                  << game_days_ << ".\n";
+    }
 }
 
 void Game::makeAction(Action action) {
@@ -126,7 +133,7 @@ void Game::travel() {
             if (time_->getElapsedTime() == 0) {
                 break;
             }
-            player_->nextDay();
+            // player_->nextDay();
         }
         map_->travel(destination);
     } else {
