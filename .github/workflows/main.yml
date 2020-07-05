@@ -13,6 +13,7 @@ jobs:
       run: |
         chmod +x check.sh
         sudo apt install -y pcregrep
+        sudo apt-get update
         ./check.sh CMakeLists.txt
 
 # In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
