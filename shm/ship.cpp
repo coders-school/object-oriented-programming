@@ -1,7 +1,6 @@
 #include "ship.hpp"
 
 #include <algorithm>
-#include <iostream>
 #include <numeric>
 
 Ship::Ship()
@@ -17,25 +16,20 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
-void Ship::load(Cargo* cargo) { 
-     if (auto matchCargo = findCargo(cargo)){
-         *matchCargo += cargo->getAmount();
-     }
+void Ship::load(Alcohol* cargo) {
      cargo_.push_back(cargo);
+     alcos_.push_back(cargo);
 }
-    //wziąć pod uwagę available space - countFreeSpace w klasie player!
-    //porównanie dwóch towarów - akumulacja tych samych typów towarów
-    //czy zmiesci sie caly towar (maxcapacity?)
 
-// void Ship::unload(Cargo* cargo) {
-//     auto matchCargo = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
-//                  return ptr.get() == cargo;
-//                  });
-//     if (matchCargo != cargo_.end())
-//         cargo_.erase(matchCargo);
-// }
-  //sprawdzić ilość czy jest 0 - usuwamy
-  //ile zostanie towaru
+void Ship::load(Fruit* cargo) {
+     cargo_.push_back(cargo);
+     fruits_.push_back(cargo);
+}
+
+void Ship::load(Item* cargo) {
+     cargo_.push_back(cargo);
+     items_.push_back(cargo);
+}
 
 Ship& Ship::operator-=(size_t crewman) {
     if (crew_ > crewman) {
@@ -89,15 +83,29 @@ size_t Ship::countAvailableSpace() const {
     return capacity_ - loadedSpace;
 }
 
-Cargo* Ship::findCargoByName(std::string name) {
-    auto found = std::find_if(cargo_.begin(), cargo_.end(),
+template<typename T>
+T Ship::findCargoByName(const std::string& name,std::vector<T>& where){
+    auto found = std::find_if(where.begin(), where.end(),
                              [name](const auto element) {
                              return name == element->getName();
                              });
-    if (found != cargo_.end()) {
+    if (found != where.end()) {
         return *found;
     }
     return nullptr;
+
+}
+
+Alcohol* Ship::findAlcoByName(const std::string& name) {
+    return findCargoByName(name,alcos_);
+}
+
+Fruit* Ship::findFruitByName(const std::string& name) {
+    return findCargoByName(name,fruits_);
+}
+
+Item* Ship::findItemByName(const std::string& name) {
+    return findCargoByName(name,items_);
 }
 
 Cargo* Ship::findCargo(Cargo* cargo) {
@@ -111,12 +119,32 @@ Cargo* Ship::findCargo(Cargo* cargo) {
     return nullptr;
 }
 
-void Ship::removeCargo(Cargo* cargo) {
+template<typename T>
+void Ship::removeCargo(T cargo,std::vector<T>& where){
+    where.erase(std::find_if(where.begin(), where.end(),
+            [&cargo](const auto& element) {
+                return *element == *cargo;
+            }));
     cargo_.erase(std::find_if(cargo_.begin(), cargo_.end(),
             [&cargo](const auto& element) {
                 return *element == *cargo;
             }));
+
 }
+
+void Ship::removeAlco(Alcohol* cargo) {
+    removeCargo(cargo,alcos_);
+}
+
+void Ship::removeFruit(Fruit* cargo) {
+    removeCargo(cargo,fruits_);
+}
+
+void Ship::removeItem(Item* cargo) {
+    removeCargo(cargo,items_);
+}
+
+
 
 void Ship::printCargo() const {
     std::for_each(cargo_.begin(), cargo_.end(),
