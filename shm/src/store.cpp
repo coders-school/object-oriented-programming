@@ -6,7 +6,7 @@
 
 #include "fruit.hpp"
 #include "item.hpp"
-// #include "alcohol.hpp"
+#include "alcohol.hpp"
 
 Store::Store(size_t capacity, size_t avaiableFunds)
     : capacity_(capacity), avaiableFunds_(avaiableFunds) {}
@@ -194,10 +194,11 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
                 break;
             }
         }
-        // if (typeid(*cargo) == typeid(Alcohol)) {
-        //     Alcohol* alcohol = static_cast<Alcohol*>(cargo);
-        //     out << "" << alcohol->() << '\n';
-        // }
+        if (typeid(*cargo) == typeid(Alcohol)) {
+            Alcohol* alcohol = static_cast<Alcohol*>(cargo);
+            out << "Current price: " << alcohol->getPrice() << '\n';
+            out << "Expires in: " << alcohol->getTimeToSpoilLeft() << '\n';
+        }
     }
     return out;
 }
