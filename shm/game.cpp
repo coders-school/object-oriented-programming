@@ -6,7 +6,8 @@
 #include "map.hpp"
 #include "store.hpp"
 
-Game::Game(uint32_t money, uint32_t days, uint32_t target) : money_(money), days_(days), target_(target) {}
+Game::Game(uint32_t money, uint32_t days, uint32_t target, Time* time)
+    : money_(money), days_(days), target_(target), time_(time) {}
 
 void Game::startGame() {
     std::cout << "SHM game is welcome ! \n"
@@ -55,7 +56,7 @@ void Game::makeAction(Action choice) {
 
 void Game::buy() {
     // Store store;
-    // store.generateCargo();
+    // store_->generateCargo();
     while (true) {
         uint32_t choiceProduct;
         uint32_t choiceAmount;
@@ -63,8 +64,8 @@ void Game::buy() {
         std::cout << "Money of player: " << player_->getMoney() << '\n';
         std::cout << "Available place on ship: " << player_->getAvailableSpace() << '\n';
         player_->printCargo();
-        if (store_.getCargo(0)) {
-            std::cout << store_;
+        if (store_->getCargo(0)) {
+            std::cout << *store_;
         } else {
             std::cout << "You are not at the Island ! You are on water ! Press 0 to return back \n";
         }
@@ -73,11 +74,11 @@ void Game::buy() {
             break;
         }
         std::cin >> choiceAmount;
-        Store::Response response = store_.buy(store_.getCargo(choiceProduct - 1), choiceAmount, player_.get());
+        Store::Response response = store_->buy(store_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
         case Store::Response::done:
-            std::cout << "You buy: " << store_.getCargo(choiceProduct - 1)->getName() << " in amount: " << choiceAmount
-                      << " by price: " << store_.getCargo(choiceProduct - 1).get()->getBasePrice() << " \n";
+            std::cout << "You buy: " << store_->getCargo(choiceProduct - 1)->getName() << " in amount: " << choiceAmount
+                      << " by price: " << store_->getCargo(choiceProduct - 1).get()->getBasePrice() << " \n";
             break;
         case Store::Response::lack_of_cargo:
             std::cout << "Store is not have enough cargo ! \n";
@@ -100,8 +101,8 @@ void Game::sell() {
         std::cout << "Money of player: " << player_->getMoney() << '\n';
         std::cout << "Available place on ship: " << player_->getAvailableSpace() << '\n';
         player_->printCargo();
-        if (store_.getCargo(0)) {
-            std::cout << store_;
+        if (store_->getCargo(0)) {
+            std::cout << *store_;
         } else {
             std::cout << "You are not at the Island ! You are on water ! Press 0 to return back \n";
         }
@@ -110,7 +111,7 @@ void Game::sell() {
             break;
         }
         std::cin >> choiceAmount;
-        Store::Response response = store_.sell(player_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
+        Store::Response response = store_->sell(player_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
         case Store::Response::done:
             std::cout << "You sell: " << player_->getCargo(choiceProduct - 1)->getName()
@@ -127,23 +128,23 @@ void Game::sell() {
             std::cout << "You do not have enough space on your ship ! \n";
             break;
         }
-        store_.printCargo();
+        store_->printCargo();
     }
 }
 
 void Game::travel() {
     while (true) {
-        map_.showIslands();
+        map_->showIslands();
         std::cout << "Next destination ?: \n";
         uint32_t x, y;
         std::cin >> x >> y;
         if (x == 0 || y == 0) {
             break;
         }
-        Island* island = map_.getIsland(Coordinates(x, y));
+        Island* island = map_->getIsland(Coordinates(x, y));
         if (island != nullptr) {
-            map_.travel(island);
-            store_ = map_.getIsland(Coordinates(x, y))->getStore();
+            map_->travel(island);
+            store_ = map_->getIsland(Coordinates(x, y))->getStore();
             std::cout << "Island is here \n";
             break;
         }
