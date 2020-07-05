@@ -99,9 +99,15 @@ void Game::buy() {
             std::cout << "You are not at the Island ! You are on water ! Press 0 to return back \n";
         }
         std::cin >> choiceProduct;
-        if (choiceProduct == 0) {
-            break;
+        while ((!store_->getCargo(choiceProduct - 1)) && (choiceProduct != 0)) {
+            std::cout << "Store does not have cargo at that index \n";
+            std::cin >> choiceProduct;
+            if (choiceProduct == 0) {
+                break;
+            }
         }
+        if (choiceProduct == 0)
+            break;
         std::cin >> choiceAmount;
         Store::Response response = store_->buy(store_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
@@ -136,16 +142,22 @@ void Game::sell() {
             std::cout << "You are not at the Island ! You are on water ! Press 0 to return back \n";
         }
         std::cin >> choiceProduct;
-        if (choiceProduct == 0) {
-            break;
+        while (choiceProduct > ship_->getVectorCargo().size()) {
+            std::cout << "You do not have cargo at that index \n";
+            std::cin >> choiceProduct;
+            if (choiceProduct == 0) {
+                break;
+            }
         }
+        if (choiceProduct == 0)
+            break;
         std::cin >> choiceAmount;
-        std::string productName = player_->getCargo(choiceProduct - 1)->getName();
-        uint32_t productPrice = player_->getCargo(choiceProduct - 1).get()->getBasePrice();
+        std::string ProductName = player_->getCargo(choiceProduct - 1)->getName();
+        uint32_t ProductPrice = player_->getCargo(choiceProduct - 1).get()->getBasePrice();
         Store::Response response = store_->sell(player_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
         case Store::Response::done:
-            std::cout << "You sell: " << productName << " in amount: " << choiceAmount << " by price: " << productPrice
+            std::cout << "You sell: " << ProductName << " in amount: " << choiceAmount << " by price: " << ProductPrice
                       << " \n";
             break;
         case Store::Response::lack_of_cargo:
