@@ -11,39 +11,36 @@
 #include "island.hpp"
 #include "store.hpp"
 
-
 Game::Game(size_t money, size_t days, size_t finalGoal)
-    : money_(money), 
-      days_(days), 
+    : money_(money),
+      days_(days),
       finalGoal_(finalGoal),
       currentDay_(1),
-      ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1)), 
+      ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1)),
       player_(std::make_shared<Player>(ship_, 500, 200)),
       time_(std::make_shared<Time>()),
-	  map_(std::make_shared<Map>()) {}
+      map_(std::make_shared<Map>()) {}
 
 void Game::startGame() {
     printTrail();
     printStars();
     printStars();
     std::cout << std::setw(8) << "Welcome" 
-              << std::setw(8) << "in"
-              << std::setw(8) << "SHM"
-              << std::setw(8) << "Game" << std::setw(8);
+              << std::setw(8) << "in" 
+              << std::setw(8) << "SHM" 
+              << std::setw(8) << "Game"
+              << std::setw(8) << "v1.0"
+              << std::setw(8);
     printStars();
     printStars();
     std::cout << '\n';
     printTrail();
     printStars();
-    std::cout << std::setw(8) << " You have: "
-                              << days_
-                              << " days to get: "
-                              << finalGoal_
-                              << " gold. Have a nice time!";
+    std::cout << std::setw(8) << "You have: " << days_ << " days to get: " << finalGoal_ << " gold. Have a nice time!";
     printStars();
     printStars();
-    std::cout << '\n';
-    std::cout << "~~~May the force be with you!~~~ \n";            
+    std::cout << "\n\n\n";
+    std::cout << "~~~May the force be with you!~~~ \n";
     printTrail();
 
     while (days_ > time_->getElapsedTime()) {
@@ -51,7 +48,6 @@ void Game::startGame() {
             printWinScreen();
             return;
         } else if (checkLoseConditions()) {
-            printLoseScreen();
             break;
         }
         printMenu();
@@ -64,7 +60,9 @@ void Game::startGame() {
         if (pickAction == 0) {
             break;
         }
+        printTrail();
     }
+    printLoseScreen();
 }
 
 void Game::printTrail() {
@@ -82,21 +80,26 @@ bool Game::checkWinConditions() const {
 }
 
 void Game::printWinScreen() {
-    std::cout << "Congratulations, you won! \n";
+    std::cout << "Congratulations, you won! \n"
+              << "You have got " << money_ << "money in " << days_ << "!\n";
+    printTrail();
 }
 
 bool Game::checkLoseConditions() const {
-    return currentDay_ > days_ || player_->getMoney() == SIZE_MAX; //change when -= money in player return Size_max
+    return currentDay_ > days_ || player_->getMoney() == SIZE_MAX;  // change when -= money in player return Size_max
 }
 
 void Game::printLoseScreen() {
-    std::cout << "You have lost, good bye. \n";
+    std::cout << "You have lost, good bye. \n"
+              << "You have failed to get: " << finalGoal_ - money_ << " more money.\n";
+    printTrail();
 }
 
 void Game::printMenu() {
     std::cout << "Money: " << player_->getMoney() << " | "
               << "Day: " << time_->getElapsedTime() << " | "
               << "Days left: " << days_ - time_->getElapsedTime() << " | "
+              << "Money to earn: " << finalGoal_ - money_ << " | "
               << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
 }
 
@@ -111,29 +114,29 @@ void Game::printOptions() {
 
 void Game::makeAction(Action pickAction) {
     switch (pickAction) {
-        case Action::exit: {
-            std::cout << "Bye, bye \n";
-            break;
-        }
-        case Action::travel: {
-            travel();
-            break;
-        }
-        case Action::buy: {
-            buy();
-            break;
-        }
-        case Action::sell: {
-            sell();
-            break;
-        }
-        case Action::printCargo: {
-            showCargo();
-            break;
-        }
-        default: {
-            std::cout << "I can't do this! \n";
-        }
+    case Action::exit: {
+        std::cout << "Bye, bye \n";
+        break;
+    }
+    case Action::travel: {
+        travel();
+        break;
+    }
+    case Action::buy: {
+        buy();
+        break;
+    }
+    case Action::sell: {
+        sell();
+        break;
+    }
+    case Action::printCargo: {
+        showCargo();
+        break;
+    }
+    default: {
+        std::cout << "I can't do this! \n";
+    }
     }
 }
 
@@ -155,7 +158,7 @@ void Game::travel() {
             std::cin >> travelDecision;
             if (std::toupper(travelDecision) == 'Y') {
                 map_->travel(island);
-                std::cout << daysOfTravel << " day/s have passed. \n";
+                std::cout << "~~~~" << '\n' << daysOfTravel << " day/s have passed. \n";
                 for (size_t i = 0; i < daysOfTravel; i++) {
                     ++*time_;
                 }
@@ -163,18 +166,17 @@ void Game::travel() {
             }
         }
         std::cout << "Give me right coordinates! \n";
-        printTrail();
     }
 }
 
 void Game::buy() {
     Store store(gameTime);
-	std::cout << "\n" << store << "\n";
+    std::cout << "\n" << store << "\n";
 }
 
 void Game::sell() {
     Store store(gameTime);
-	std::cout << "\n" << store << "\n";
+    std::cout << "\n" << store << "\n";
 }
 
 void Game::showCargo() {
