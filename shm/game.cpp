@@ -102,12 +102,10 @@ void Game::buy() {
         while ((!store_->getCargo(choiceProduct - 1)) && (choiceProduct != 0)) {
             std::cout << "Store does not have cargo at that index \n";
             std::cin >> choiceProduct;
-            if (choiceProduct == 0) {
-                break;
-            }
         }
-        if (choiceProduct == 0)
+        if (choiceProduct == 0) {
             break;
+        }
         std::cin >> choiceAmount;
         Store::Response response = store_->buy(store_->getCargo(choiceProduct - 1), choiceAmount, player_.get());
         switch (response) {
