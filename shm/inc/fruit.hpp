@@ -24,7 +24,7 @@ public:
   size_t getTimeToSpoil() const;
   size_t getTimeToSpoilLeft() const;
 
-  void nextDay() override;
+  void nextDay();
 
 private:
   const size_t timeToSpoil_ = 5;

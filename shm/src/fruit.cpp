@@ -55,10 +55,10 @@ Cargo &Fruit::operator-=(size_t amount) {
 }
 
 void Fruit::nextDay() {
-  if (timeToSpoilLeft > 0) {
+  if (timeToSpoilLeft_ > 0) {
     --timeToSpoilLeft_;
   }
-  if (timeToSpoilLeft = 0) {
+  if (timeToSpoilLeft_ = 0) {
     amount_ = 0;
   }
 }
