@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ostream>
+
 class Coordinates {
 public:
     Coordinates();
@@ -10,6 +12,9 @@ public:
 
     int getPositionX() const { return positionX_; }
     int getPositionY() const { return positionY_; }
+
+    friend std::ostream& operator<<(std::ostream& print, const Coordinates& cord);
+
 
 private:
     const int positionX_;

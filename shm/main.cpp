@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 constexpr size_t START_MONEY = 500;
-constexpr size_t GAME_DAYS = 20;
+constexpr size_t GAME_DAYS = 100;
 constexpr size_t FINAL_GOAL = 5000;
 
 int main() {

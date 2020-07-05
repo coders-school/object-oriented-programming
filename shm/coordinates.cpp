@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-int constexpr DEFAULT_POSITION_X = 10;
-int constexpr DEFAULT_POSITION_Y = 20;
+int constexpr DEFAULT_POSITION_X = 0;
+int constexpr DEFAULT_POSITION_Y = 0;
 
 Coordinates::Coordinates()
     : positionX_(DEFAULT_POSITION_X), positionY_(DEFAULT_POSITION_Y) {}
@@ -19,4 +19,8 @@ int Coordinates::Distance(const Coordinates& PointA,
 
 bool Coordinates::operator==(const Coordinates& currentPosition) const {
     return positionX_ == currentPosition.positionX_ && positionY_ == currentPosition.positionY_;
+}
+
+std::ostream& operator<<(std::ostream& print, const Coordinates& coords) {
+    return print << "(X:" << coords.getPositionX() << ", Y:" << coords.getPositionY() << ")";
 }

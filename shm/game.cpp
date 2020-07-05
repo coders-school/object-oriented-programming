@@ -1,6 +1,7 @@
 #include "game.hpp"
 
 #include <algorithm>
+#include <cctype>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
@@ -96,8 +97,7 @@ void Game::printMenu() {
     std::cout << "Money: " << player_->getMoney() << " | "
               << "Day: " << time_->getElapsedTime() << " | "
               << "Days left: " << days_ - time_->getElapsedTime() << " | "
-              << "Current position: " << "(X" << map_->getCurrentPosition()->getPositionX() << ", "
-                                      << "Y" << map_->getCurrentPosition()->getPositionY() << ") \n";
+              << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
 }
 
 void Game::printOptions() {
@@ -139,14 +139,28 @@ void Game::makeAction(Action pickAction) {
 
 void Game::travel() {
     while (true) {
-        //operator wypisania mapy
+        std::cout << *map_;
         std::cout << "Where do you want to sail? (posX posY) \n";
         int posX, posY;
         std::cin >> posX >> posY;
         Island* island = map_->getIsland(Coordinates(posX, posY));
-        if (island != nullptr) {
-            //Coordinates::Distance(Coordinates(map_->getCurrentPosition()), Coordinates(posX,posY))
-            //make_travel
+        if (island == map_->getCurrentPosition()) {
+            std::cout << "You are already here! \n";
+        } else if (island != nullptr) {
+            const int travelDistance = map_->getDistanceToIsland(island);
+            const size_t speed = player_->getSpeed();
+            const size_t daysOfTravel = ((travelDistance + speed) / speed);
+            std::cout << "Travel will take " << daysOfTravel << " day/s. Do you want to travel Y/N? ";
+            char travelDecision;
+            std::cin >> travelDecision;
+            if (std::toupper(travelDecision) == 'Y') {
+                map_->travel(island);
+                std::cout << daysOfTravel << " day/s have passed. \n";
+                for (size_t i = 0; i < daysOfTravel; i++) {
+                    ++*time_;
+                }
+                break;
+            }
         }
         std::cout << "Give me right coordinates! \n";
         printTrail();
