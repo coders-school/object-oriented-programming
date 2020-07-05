@@ -1,5 +1,6 @@
 #include "game.hpp"
 
+#include <cmath>
 #include <iostream>
 
 #include "island.hpp"
@@ -27,7 +28,19 @@ void Game::startGame() {
 }
 
 void Game::printMenu() {
-    std::cout << "Money: " << player_->getMoney() << "\n";
+    if (!map_->getCurrentPosition()) {
+        std::cout << "Money:" << player_->getMoney() << " | Position:  Water | "
+                  << "Day: " << timeElapsed << " | "
+                  << "Left days: " << days_ - timeElapsed << " | "
+                  << "\n";
+    } else {
+        std::cout << "Money: " << player_->getMoney()
+                  << " | Position: X = " << map_->getCurrentPosition()->getPosition().getPositionX()
+                  << " Y = " << map_->getCurrentPosition()->getPosition().getPositionY() << " | Day: " << timeElapsed
+                  << " | "
+                  << "Left days: " << days_ - timeElapsed << " | "
+                  << " \n";
+    }
 }
 
 void Game::printOption() {
@@ -55,8 +68,6 @@ void Game::makeAction(Action choice) {
 }
 
 void Game::buy() {
-    // Store store;
-    // store_->generateCargo();
     while (true) {
         uint32_t choiceProduct;
         uint32_t choiceAmount;
@@ -136,14 +147,38 @@ void Game::travel() {
     while (true) {
         map_->showIslands();
         std::cout << "Next destination ?: \n";
-        uint32_t x, y;
+        int32_t currentX;
+        int32_t currentY;
+        int32_t x;
+        int32_t y;
+        uint32_t distance;
+        uint32_t ship_speed;
+        uint32_t time_travel;
+        currentX = map_->getCurrentPosition()->getPosition().getPositionX();
+        currentY = map_->getCurrentPosition()->getPosition().getPositionY();
         std::cin >> x >> y;
+
         if (x == 0 || y == 0) {
             break;
         }
-        Island* island = map_->getIsland(Coordinates(x, y));
-        if (island != nullptr) {
-            map_->travel(island);
+
+        distance = abs(currentX - x) + abs(currentY - y);
+        ship_speed = ship_->getSpeed();
+        time_travel = distance / ship_speed;
+
+        if (time_travel == 1) {
+            std::cout << "You will be travelling " << time_travel << " day\n";
+        } else {
+            std::cout << "You will be travelling " << time_travel << " days\n";
+        }
+
+        island_ = map_->getIsland(Coordinates(x, y));
+        if (island_ != nullptr) {
+            for (uint32_t i = 0; i < (time_travel); i++) {
+                time_->operator++();
+                timeElapsed++;
+            }
+            map_->travel(island_);
             store_ = map_->getIsland(Coordinates(x, y))->getStore();
             std::cout << "Island is here \n";
             break;

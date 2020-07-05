@@ -26,10 +26,11 @@ private:
     uint32_t target_;
     Time* time_;
 
-    std::shared_ptr<Ship> ship_ = std::make_shared<Ship>(200, 50, 180, "black pearl", 1, time_);
+    uint32_t timeElapsed = 0;
+
+    std::shared_ptr<Ship> ship_ = std::make_shared<Ship>(200, 50, 30, "black pearl", 1, time_);
     std::shared_ptr<Player> player_ = std::make_shared<Player>(ship_, 300, 80);
-    // std::shared_ptr<Store> store_ = std::make_shared<Store>(time_);
-    // std::shared_ptr<Map> map_ = std::make_shared<Map>(time_);
-    Store* store_ = new Store(time_);
+    Store* store_;
+    Island* island_;
     Map* map_ = new Map(time_);
 };

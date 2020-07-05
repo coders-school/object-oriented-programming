@@ -8,7 +8,7 @@
 Ship::Ship() : id_(-1) {}
 
 Ship::Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id, Time* time)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time) {
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(10), speed_(speed), name_(name), id_(id), time_(time) {
     time_->registerObserver(this);
 }
 
@@ -99,8 +99,9 @@ void Ship::unload(std::shared_ptr<Cargo> cargo, uint32_t amount) {
 void Ship::printCargo() const {
     std::cout << "CARGO ON SHIP : "
               << "\n";
-    std::for_each(cargo_.begin(), cargo_.end(), [](const auto& cargo) {
-        std::cout << cargo->getName() << "  " << cargo->getAmount() << "  " << cargo->getBasePrice() << "\n";
+    std::for_each(cargo_.begin(), cargo_.end(), [i{0}](const auto& cargo) mutable {
+        std::cout << ++i << " - " << cargo->getName() << "  " << cargo->getAmount() << "  " << cargo->getBasePrice()
+                  << "\n";
     });
 }
 

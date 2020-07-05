@@ -33,6 +33,7 @@ Map::Map(Time* time) : time_(time) {
         allIslands.push_back(Island(Coordinates(positionX, positionY), time_));
         allIslands[i].createStore();
     }
+    currentPosition_ = &allIslands[0];
 }
 
 Island* Map::getIsland(const Coordinates& coordinate) {
@@ -42,6 +43,10 @@ Island* Map::getIsland(const Coordinates& coordinate) {
         }
     }
     return nullptr;
+}
+
+Island* Map::getCurrentPosition() {
+    return currentPosition_;
 }
 
 void Map::showIslands() {
