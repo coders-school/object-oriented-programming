@@ -64,11 +64,8 @@ bool Ship::addCargo(Cargo* cargo) {
   bool success = false;
   if (this->getAvailableSpace() >= cargo->getAmount()) {
     auto ptrCargo = this->getCargo(cargo->getName());
-
-    // If there is not such cargo type yet
     if (ptrCargo == nullptr) {
       cargo_.push_back(cargo);
-      // If there is already relevant type of cargo
     } else {
       size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
       ptrCargo->setAmount(tmpAmount);
@@ -80,7 +77,6 @@ bool Ship::addCargo(Cargo* cargo) {
 
 bool Ship::removeCargo(Cargo* cargo) {
   bool success = false;
-
   auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](Cargo* el) {
     return el->getName() == cargo->getName();
   });
@@ -95,4 +91,8 @@ bool Ship::removeCargo(Cargo* cargo) {
 void Ship::cloneCargo(Cargo* cargo){
     Cargo* ptr = cargo->clone();
     cargo_.push_back(ptr);
+}
+
+void Ship::printCargo() {
+    Common::printCargo(cargo_);
 }

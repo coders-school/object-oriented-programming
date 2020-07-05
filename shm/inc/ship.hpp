@@ -30,7 +30,7 @@ public:
     Cargo* getCargo(const std::string& name);
     size_t getAvailableSpace() const;
 
-    void printCargo() {Common::printCargo(cargo_);}
+    void printCargo();
     bool addCargo(Cargo* cargo);
     bool removeCargo(Cargo* cargo);
 
@@ -43,6 +43,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    // std::vecto/r<std::shared_ptr<Cargo>> cargo_;
     std::vector<Cargo*> cargo_;
 };

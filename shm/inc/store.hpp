@@ -36,7 +36,6 @@ public:
     void setCapasity(const size_t amount) { capacity_ = amount; }
     void setAvaiableFunds(const size_t amount) { avaiableFunds_ = amount; }
 
-    bool addCargo(Cargo* cargo);
     Cargo* getCargo(const std::string& name);
     void printCargo();
     void printResponseMessage(Response& response);
