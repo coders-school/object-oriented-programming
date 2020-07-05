@@ -21,6 +21,11 @@ public:
     bool addCargo(Cargo* cargo) { return ship_->addCargo(cargo); }
     bool removeCargo(Cargo* cargo) { return ship_->removeCargo(cargo); }
 
+    void cloneCargo(Cargo* cargo){ 
+        ship_->cloneCargo(cargo);
+    
+    }
+
 private:
     std::unique_ptr<Ship> ship_;
     size_t money_;

@@ -25,6 +25,8 @@ public:
     size_t getTimeToSpoil() const;
     size_t getTimeToSpoilLeft() const;
 
+    Cargo* clone() override { return new Fruit( *this);}
+
 private:
     const size_t timeToSpoil_;
     size_t timeToSpoilLeft_ = timeToSpoil_;

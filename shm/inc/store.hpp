@@ -37,10 +37,7 @@ public:
     void setAvaiableFunds(const size_t amount) { avaiableFunds_ = amount; }
 
     bool addCargo(Cargo* cargo);
-    // bool addCargo(const std::string& name, size_t amount, size_t basePrice);  //overloaded
-
     Cargo* getCargo(const std::string& name);
-
     void printCargo();
     void printResponseMessage(Response& response);
 

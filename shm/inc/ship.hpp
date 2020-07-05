@@ -30,9 +30,11 @@ public:
     Cargo* getCargo(const std::string& name);
     size_t getAvailableSpace() const;
 
-    void printCargo();
+    void printCargo() {Common::printCargo(cargo_);}
     bool addCargo(Cargo* cargo);
     bool removeCargo(Cargo* cargo);
+
+    void cloneCargo(Cargo* cargo);
 
 private:
     size_t capacity_;

@@ -19,6 +19,7 @@ void Common::printCargo(const std::vector<Cargo*>& vecOfCargo) {
 //-----------------------------------------------------------------------------------
 Cargo* Common::getCargo(const std::string& name,
                         const std::vector<Cargo*>& vecOfCargo) {
+
     auto it = std::find_if(vecOfCargo.begin(), vecOfCargo.end(),
                            [&](Cargo* el) { return el->getName() == name; });
 
