@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@SHM
+      uses: actions/checkout@master
     - name: mkdir shm/build
       run: mkdir shm/build
     - name: Compile
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
-      uses: actions/checkout@SHM
+      uses: actions/checkout@master
     - name: Run check.sh
       working-directory: shm
       run: |
@@ -31,4 +31,4 @@ jobs:
         sudo apt-get update
         sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
-        
+
