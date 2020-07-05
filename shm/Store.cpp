@@ -7,8 +7,15 @@
 #include "Fruit.h";
 #include "Item.h";
 
-Store::Store() {
+Store::Store(Time* time)
+    : time_(time) {
     generateCargos();
+    time_->subscribe(this);
+}
+
+//override from Observer;
+Store::~Store() {
+    time_->unsubscribe(this);
 }
 
 void Store::generateCargos() {
@@ -81,4 +88,9 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 
 void Store::nextDay() {
     generateCargos();
+}
+
+//override from Observer;
+void Store::update() {
+    nextDay();
 }

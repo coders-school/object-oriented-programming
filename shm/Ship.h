@@ -2,9 +2,11 @@
 #include <string>
 #include <vector>
 
-#include "Cargo.h";
+#include "Cargo.h"
+#include "Observer.h"
+#include "Time.h"
 
-class Ship {
+class Ship : public Observer {
 public:
     class PayCrewDelegate {
     public:
@@ -12,7 +14,8 @@ public:
         virtual ~PayCrewDelegate() = default;
     };
 
-    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* delegate);
+    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* delegate, Time* time);
+    ~Ship() override;
 
     void setName(const std::string& name);
 
@@ -29,6 +32,7 @@ public:
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo);
     void nextDay();
+    void update() override;
 
 private:
     size_t capacity_;
@@ -39,4 +43,5 @@ private:
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargos_;
     PayCrewDelegate* crewPayer_{};
+    Time* time_;
 };

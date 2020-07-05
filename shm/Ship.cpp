@@ -2,8 +2,15 @@
 
 #include "algorithm";
 
-Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* crewPayer)
-    : capacity_(capacity), max_crew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), crewPayer_(crewPayer) {}
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* crewPayer, Time* time)
+    : capacity_(capacity), max_crew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), crewPayer_(crewPayer), time_(time) {
+    time_->subscribe(this);
+}
+
+//override from Observer;
+Ship::~Ship() {
+    time_->unsubscribe(this);
+}
 
 void Ship::setName(const std::string& name) {
     name_ = name;
@@ -69,4 +76,9 @@ void Ship::nextDay() {
     }
 
     crewPayer_->payCrew(crew_);
+}
+
+//override from Observer;
+void Ship::update() {
+    this->nextDay();
 }

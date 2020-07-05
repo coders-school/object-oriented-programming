@@ -5,7 +5,9 @@
 
 #include "Cargo.h"
 #include "Item.h";
+#include "Observer.h"
 #include "Player.h"
+#include "Time.h"
 
 enum class Response {
     done,
@@ -42,15 +44,18 @@ extern std::vector<FruitData> available_fruits = {
     {"Watermelon", 3},
 };
 
-class Store {
+class Store : public Observer {
 public:
-    Store() = default;
+    Store(Time* time);
+    ~Store() override;
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
     void nextDay();
+    void update() override;
 
 private:
     void generateCargos();
     std::vector<std::unique_ptr<Cargo>> available_cargos_;
+    Time* time_;
 };
