@@ -12,7 +12,6 @@ jobs:
       working-directory: shm
       run: |
         chmod +x check.sh
-        sudo apt-get update
         sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
 
