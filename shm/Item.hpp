@@ -23,6 +23,7 @@ public:
     [[nodiscard]] size_t GetPrice() const override;
     [[nodiscard]] size_t GetAmount() const override;
     [[nodiscard]] size_t GetBasePrice() const override;
+    [[nodiscard]] Item::Rarity GetRarity() const;
 
     Item& operator+=(size_t amount) override;
     Item& operator-=(size_t amount) override;
@@ -30,7 +31,6 @@ public:
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
-    [[nodiscard]] Item::Rarity GetRarity() const;
 
 private:
     Rarity rarity_;

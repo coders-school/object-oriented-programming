@@ -56,6 +56,7 @@ bool Item::operator!=(const Cargo& cargo) const
 {
     return not operator==(cargo);
 }
+
 Item::Rarity Item::GetRarity() const
 {
     return rarity_;
