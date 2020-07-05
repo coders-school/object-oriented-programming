@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <memory>
 #include <random>
 
 #include "alcohol.hpp"
@@ -11,7 +12,6 @@
 
 Store::Store() {
     GenerateCargo();
-    // std::cout << "Cześć, jestem store";
 }
 
 Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player) {
@@ -34,12 +34,27 @@ Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& play
         return Response::lack_of_money;
     }
 
-    //TODO:
-    //how we know how much will be loaded into ship?
-    //example: Store have got 15 lemons, I buy 1 lemnot but after transaction on ship i have got 14 lemons :)
-    player->getShip()->load(cargo);
-    player->subtractMoney(totalPrice);
+    
+    if (typeid(*cargo) == typeid(Alcohol)) {
+        Alcohol tempAlcohol(cargo->getName(), amount, cargo->getBasePrice());
+        cargoPtr tempCargo = std::make_shared<Alcohol>(tempAlcohol);
+        player->getShip()->load(tempCargo);
+    }
+
+    if (typeid(*cargo) == typeid(Fruit)) {
+        Fruit tempFruit(cargo->getName(), amount, cargo->getBasePrice());
+        cargoPtr tempCargo = std::make_shared<Fruit>(tempFruit);
+        player->getShip()->load(tempCargo);
+    }
+    
+    if (typeid(*cargo) == typeid(Item)) {
+        Item tempItem(cargo->getName(), amount, cargo->getBasePrice());
+        cargoPtr tempCargo = std::make_shared<Item>(tempItem);
+        player->getShip()->load(tempCargo);
+    }
+
     *cargo.get() -= amount;
+    player->subtractMoney(totalPrice);
     return Response::done;
 }
 
