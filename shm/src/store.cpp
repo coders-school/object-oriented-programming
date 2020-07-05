@@ -6,6 +6,8 @@
 #include <random>
 
 #include "fruit.hpp"
+#include "item.hpp"
+#include "alcohol.hpp"
 
 Store::Store() {
     GenerateCargo();
@@ -104,8 +106,8 @@ void Store::GenerateAlco() {
     for (auto el : alcoNames) {
         size_t number = GenerateRandom(1, 10);
         double basePrice = GenerateRandom(1, 100);
-        Fruit fr(el, number, basePrice);
-        auto ptr = std::make_shared<Fruit>(fr);
+        Alcohol alco(el, number, basePrice);
+        auto ptr = std::make_shared<Alcohol>(alco);
         cargo_.emplace_back(ptr);
     }
 }
@@ -113,8 +115,8 @@ void Store::GenerateItems() {
     for (auto el : itemNames) {
         size_t number = GenerateRandom(1, 10);
         double basePrice = GenerateRandom(1, 70);
-        Fruit fr(el, number, basePrice);
-        auto ptr = std::make_shared<Fruit>(fr);
+        Item itm(el, number, basePrice);
+        auto ptr = std::make_shared<Item>(itm);
         cargo_.emplace_back(ptr);
     }
 }

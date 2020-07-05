@@ -15,7 +15,7 @@ public:
     double getVolume() const { return volume_; }
     std::string getInfo() const override;
 
-    void nextDay() override {}
+    void nextDay() override {volume_ -= 0.05;}
 
     Cargo& operator+=(const size_t& amount) override;
     Cargo& operator-=(const size_t& amount) override;

@@ -19,8 +19,9 @@ void Ship::setName(const std::string& name) {
 }
 
 void Ship::nextDay() {
-    for (auto el : cargo_) {
-        *el.get() += 1;
+    for (auto el : getCargo()) {
+        //*el.get() += 1;
+        el.get()->nextDay();
     }
     Ship::RemoveFromStorageIfRotten();
     delegate_->payCrew(getMaxCrew());
