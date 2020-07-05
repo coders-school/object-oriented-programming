@@ -6,9 +6,11 @@ size_t CREW = 20;
 size_t SPEED = 500;
 std::string NAME = "Czarna";
 size_t ID = 7;
+auto TIME = std::make_shared<Time>();
+
 
 TEST(SHMShipTest, createShip) {
-    Ship ship(CAPACITY, CREW, SPEED, NAME, ID);
+    Ship ship(CAPACITY, CREW, SPEED, NAME, ID, TIME);
     EXPECT_EQ(ship.getCapacity(), CAPACITY);
     EXPECT_EQ(ship.getMaxCrew(), CREW);
     EXPECT_EQ(ship.getSpeed(), SPEED);
