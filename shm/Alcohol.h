@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Cargo.h"
+#include "Time.h"
 
 constexpr size_t max_power = 96;
 
@@ -11,7 +12,7 @@ struct AlcoholData {
 
 class Alcohol : public Cargo {
 public:
-    Alcohol(std::string name, size_t amount, size_t base_price, size_t power);
+    Alcohol(std::string name, size_t amount, size_t base_price, Time* time, size_t power);
     ~Alcohol() override;
 
     std::string getName() const override;
@@ -19,6 +20,7 @@ public:
     size_t getPrice() const override;
     size_t getBasePrice() const override;
     void nextDay() override;
+    std::string getDescription() const override;
 
     bool operator==(Cargo& cargo) const override;
 

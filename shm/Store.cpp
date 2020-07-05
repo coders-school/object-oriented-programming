@@ -94,3 +94,16 @@ void Store::nextDay() {
 void Store::update() {
     nextDay();
 }
+
+std::string Store::getDescription() const {
+    std::string description = "";
+    for (auto&& it : available_cargos_) {
+        description += it->getDescription();
+        description += "\n------\n";
+    }
+    return description;
+}
+
+std::ostream& operator<<(std::ostream& out, const Store& store) {
+    return out << store.getDescription();
+}

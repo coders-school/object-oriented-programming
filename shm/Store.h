@@ -45,6 +45,8 @@ extern std::vector<FruitData> available_fruits = {
 };
 
 class Store : public Observer {
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
+
 public:
     Store(Time* time);
     ~Store() override;
@@ -57,5 +59,6 @@ public:
 private:
     void generateCargos();
     std::vector<std::unique_ptr<Cargo>> available_cargos_;
+    std::string getDescription() const;
     Time* time_;
 };

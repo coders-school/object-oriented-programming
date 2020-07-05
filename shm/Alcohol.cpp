@@ -2,8 +2,8 @@
 
 #include <algorithm>
 
-Alcohol::Alcohol(std::string name, size_t amount, size_t base_price, size_t power)
-    : Cargo(name, amount, base_price), power_(power){};
+Alcohol::Alcohol(std::string name, size_t amount, size_t base_price, Time* time, size_t power)
+    : Cargo(name, amount, base_price, time), power_(power){};
 
 //override from Cargo
 std::string Cargo::getName() const {
@@ -39,4 +39,9 @@ bool Alcohol::operator==(Cargo& cargo) const {
     }
 
     return name_ == otherAlcohol->name_ && amount_ == otherAlcohol->amount_ && basePrice_ == otherAlcohol->basePrice_ && power_ == otherAlcohol->power_;
+}
+
+//override from Cargo
+std::string Alcohol::getDescription() const {
+    return "Name: " + this->name_ + " Power: " + std::to_string(this->power_) + " Amount: " + std::to_string(this->amount_) + " Price: " + std::to_string(this->getPrice());
 }

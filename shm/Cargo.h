@@ -17,6 +17,7 @@ public:
     virtual size_t getPrice() const = 0;
     virtual size_t getBasePrice() const = 0;
     virtual void nextDay() = 0;
+    virtual std::string getDescription() const = 0;
     void update() override;
 
     virtual bool operator==(Cargo& cargo) const = 0;

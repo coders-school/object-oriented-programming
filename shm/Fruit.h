@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Cargo.h"
+#include "Time.h"
 
 struct FruitData {
     std::string name_;
@@ -9,7 +10,7 @@ struct FruitData {
 
 class Fruit : public Cargo {
 public:
-    Fruit(std::string name, size_t amount, size_t base_price, size_t expiry_date);
+    Fruit(std::string name, size_t amount, size_t base_price, Time* time, size_t expiry_date);
     ~Fruit() override;
 
     std::string getName() const override;
@@ -17,6 +18,7 @@ public:
     size_t getPrice() const override;
     size_t getBasePrice() const override;
     void nextDay() override;
+    std::string getDescription() const override;
 
     bool operator==(Cargo& cargo) const override;
 
