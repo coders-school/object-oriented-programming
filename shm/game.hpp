@@ -12,6 +12,9 @@ public:
 
     Game(uint32_t money, uint32_t days, uint32_t target, Time* time);
     ~Game() = default;
+
+    bool checkWin();
+    bool checkLoose();
     void startGame();
     void printMenu();
     void printOption();

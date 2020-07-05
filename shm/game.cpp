@@ -10,6 +10,14 @@
 Game::Game(uint32_t money, uint32_t days, uint32_t target, Time* time)
     : money_(money), days_(days), target_(target), time_(time) {}
 
+bool Game::checkWin() {
+    return player_->getMoney() >= target_;
+}
+
+bool Game::checkLoose() {
+    return player_->getMoney() <= 0;
+}
+
 void Game::startGame() {
     std::cout << "SHM game is welcome ! \n"
               << "To final game you have to reach: " << money_ << " Have a good fun :) \n";
@@ -17,6 +25,14 @@ void Game::startGame() {
     store_ = map_->getCurrentPosition()->getStore();
 
     while (days_) {
+        if (checkWin()) {
+            std::cout << "Congratulations, You WIN !!! \n";
+            return;
+        }
+        if (checkLoose()) {
+            std::cout << "Oh, no...You Loose. Maybe next time. Please try again !\n";
+            return;
+        }
         printMenu();
         printOption();
         uint32_t action;
