@@ -32,7 +32,7 @@ size_t Player::countAvailableSpace() {
     return ship_->getCapacity() - occupiedSpace;
 }
 
-void Player::buyCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
+void Player::purchaseCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
     ship_->load(cargo);
     money_ -= price;
     availableSpace_ -= amount;
