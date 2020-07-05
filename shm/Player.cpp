@@ -10,7 +10,7 @@ void Player::updateAvailableSpace()
     size_t loadTotal = 0;
     for (const auto cargo : ship_->getCargos())
     {
-        loadTotal += cargo->getAmount();
+        loadTotal += cargo->GetAmount();
     }
     availableSpace_ = ship_->getCapacity() - loadTotal;
 }
