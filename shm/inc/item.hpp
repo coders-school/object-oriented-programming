@@ -31,6 +31,8 @@ public:
     size_t getBasePrice() const override;
     Rarity getRarity() const;
 
+    Cargo* clone() override { return new Item( *this);}
+
 private:
     const Rarity rairty_;
 };
