@@ -12,7 +12,6 @@ public:
 
     ~Fruit(){
         this->Publisher_->removeObserver(this);
-        std::cout<<"Goodbye! I was your Fruit"<<'\n';
     };
 
     void nextDay() override;

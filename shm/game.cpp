@@ -19,7 +19,7 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
       ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1)),
       player_(std::make_shared<Player>(ship_, 500, 200)),
       time_(std::make_shared<Time>()),
-      map_(std::make_shared<Map>()) {}
+      map_(std::make_shared<Map>(time_.get())) {}
 
 void Game::startGame() {
     printTrail();
@@ -170,13 +170,13 @@ void Game::travel() {
 }
 
 void Game::buy() {
-    Store store(gameTime);
-    std::cout << "\n" << store << "\n";
+    Island* currentIsland = map_->getCurrentPosition();
+    std::cout << "\n" << *(currentIsland->getStore().get()) << "\n";
 }
 
 void Game::sell() {
-    Store store(gameTime);
-    std::cout << "\n" << store << "\n";
+    //Store store(gameTime);
+    //std::cout << "\n" << store << "\n";
 }
 
 void Game::showCargo() {

@@ -15,7 +15,6 @@ public:
 
     ~Item(){
         this->Publisher_->removeObserver(this);
-        std::cout<<"Goodbye! I was your Item"<<'\n';
     };
 
 // Override from Observer

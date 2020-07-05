@@ -7,7 +7,8 @@ constexpr int initialAmountOfIsland = 10;
 constexpr int maxX = 100;
 constexpr int maxY = 100;
 
-Map::Map() {
+Map::Map(Time* gameTime) {
+    timeTracker_ = gameTime;
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> xesGen(0, maxX);
@@ -21,7 +22,7 @@ Map::Map() {
             if (std::none_of(islandsOnMap_.cbegin(), islandsOnMap_.cend(), [posX, posY](const auto& position) {
                                      return position.getCoordinates() == Coordinates(posX, posY);
                                      })) {           
-                islandsOnMap_.push_back(Island(posX, posY));
+                islandsOnMap_.push_back(Island(posX, posY, timeTracker_));
                 break;
             }
         }
