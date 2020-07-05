@@ -1,7 +1,22 @@
 #include "Item.h"
 
-Item::Item(std::string& name, size_t amount, size_t base_price, Rarity rarity)
+Item::Item(std::string name, size_t amount, size_t base_price, Rarity rarity)
     : Cargo(name, amount, base_price), rarity_(rarity){};
+
+//override from Cargo
+std::string Item::getName() const {
+    return name_;
+}
+
+//override from Cargo
+size_t Item::getAmount() const {
+    return amount_;
+}
+
+//override from Cargo
+size_t Item::getBasePrice() const {
+    return basePrice_;
+}
 
 //override from Cargo
 size_t Item::getPrice() const {
@@ -10,6 +25,7 @@ size_t Item::getPrice() const {
 
 //override from Cargo
 void Item::nextDay() {
+    // it is suppossed to be empty, no mistake here
 }
 
 //override from Cargo

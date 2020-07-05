@@ -2,8 +2,23 @@
 
 #include <algorithm>
 
-Alcohol::Alcohol(std::string& name, size_t amount, size_t base_price, size_t power)
+Alcohol::Alcohol(std::string name, size_t amount, size_t base_price, size_t power)
     : Cargo(name, amount, base_price), power_(power){};
+
+//override from Cargo
+std::string Cargo::getName() const {
+    return name_;
+}
+
+//override from Cargo
+size_t Cargo::getAmount() const {
+    return amount_;
+}
+
+//override from Cargo
+size_t Cargo::getBasePrice() const {
+    return basePrice_;
+}
 
 //override from Cargo
 size_t Alcohol::getPrice() const {

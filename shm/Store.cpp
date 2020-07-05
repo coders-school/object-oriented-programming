@@ -1,6 +1,42 @@
 #include "Store.h"
 
 #include <algorithm>
+#include <random>
+
+#include "Alcohol.h";
+#include "Fruit.h";
+#include "Item.h";
+
+Store::Store() {
+    generateCargos();
+}
+
+void Store::generateCargos() {
+    available_cargos_.clear();
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> amountDistrib(min_cargo_amount, max_cargo_amount);
+    std::uniform_int_distribution<> priceDistrib(min_price, max_price);
+    std::uniform_int_distribution<> itemDistrib(0, available_items.size());
+
+    size_t cargoAmount = amountDistrib(gen);
+    size_t cargoPrice = priceDistrib(gen);
+    ItemData itemData = available_items[itemDistrib(gen)];
+    available_cargos_.push_back(std::make_unique<Item>(new Item::Item(itemData.name_, cargoAmount, cargoPrice, itemData.rarity_)));
+
+    std::uniform_int_distribution<> fruitDistrib(0, available_fruits.size());
+    cargoAmount = amountDistrib(gen);
+    cargoPrice = priceDistrib(gen);
+    FruitData fruitData = available_fruits[fruitDistrib(gen)];
+    available_cargos_.push_back(std::make_unique<Item>(new Fruit::Fruit(fruitData.name_, cargoAmount, cargoPrice, fruitData.expiration_date_)));
+
+    std::uniform_int_distribution<> alcohohlDistrib(0, available_alcohols.size());
+    cargoAmount = amountDistrib(gen);
+    cargoPrice = priceDistrib(gen);
+    AlcoholData alcoholData = available_alcohols[alcohohlDistrib(gen)];
+    available_cargos_.push_back(std::make_unique<Item>(new Alcohol::Alcohol(alcoholData.name_, cargoAmount, cargoPrice, alcoholData.power_)));
+}
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (player->getAvailableSpace() < amount) {
@@ -44,4 +80,5 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 }
 
 void Store::nextDay() {
+    generateCargos();
 }

@@ -23,7 +23,7 @@ Map::Map() {
 }
 
 Island* Map::getIsland(const Coordinates& coordinate) {
-    auto it = std::find(islands_.begin(), islands_.end(), [coordinate & ](auto& i) { return i.getCoordinates() == coordiante; });
+    auto it = std::find(islands_.begin(), islands_.end(), [coordinate](auto& i) { return i.getCoordinates() == coordiante; });
 
     if (it == islands_.end()) {
         return nullptr;

@@ -9,11 +9,19 @@ enum class Rarity {
     legendary = 10,
 };
 
+struct ItemData {
+    std::string name_;
+    Rarity rarity_;
+};
+
 class Item : public Cargo {
 public:
-    Item(std::string& name, size_t amount, size_t base_price, Rarity rarity);
+    Item(std::string name, size_t amount, size_t base_price, Rarity rarity);
     ~Item() override;
 
+    std::string getName() const override;
+    size_t getAmount() const override;
+    size_t getBasePrice() const override;
     size_t getPrice() const override;
     void nextDay() override;
 

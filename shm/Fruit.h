@@ -2,9 +2,14 @@
 
 #include "Cargo.h"
 
+struct FruitData {
+    std::string name_;
+    size_t expiration_date_;
+};
+
 class Fruit : public Cargo {
 public:
-    Fruit(std::string& name, size_t amount, size_t base_price, size_t expiry_date);
+    Fruit(std::string name, size_t amount, size_t base_price, size_t expiry_date);
     ~Fruit() override;
 
     std::string getName() const override;
