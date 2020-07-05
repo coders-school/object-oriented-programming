@@ -14,7 +14,7 @@ public:
         printCargo = 4
     };
 
-    Game(size_t money, size_t days, size_t finalGoal, std::shared_ptr<Time> time, std::shared_ptr<Ship> ship);
+    Game(size_t money, size_t days, size_t finalGoal);
 
     void startGame();
 
@@ -23,10 +23,11 @@ private:
     size_t days_ {0};
     const size_t finalGoal_ {0};
     size_t currentDay_ {0};
-    std::shared_ptr<Map> map_;
+    std::shared_ptr<Time> publisher_;
     std::shared_ptr<Ship> ship_;
     std::shared_ptr<Player> player_;
     std::shared_ptr<Time> time_;
+    std::shared_ptr<Map> map_;
 
     void printTrail();
     void printStars();
