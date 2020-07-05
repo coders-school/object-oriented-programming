@@ -4,6 +4,7 @@
 #include "player.hpp"
 #include "ship.hpp"
 #include "time.hpp"
+#include "ship.hpp"
 #include "store.hpp"
 
 namespace SHM_test {
@@ -80,5 +81,12 @@ TEST(FruitTest, ShouldSpoil) {
         --spoilTime;
     }
     EXPECT_EQ(fruit.getAmount(), 0);
+}
+TEST(StreamTest, ShoutOutputStore) {
+    Store store;
+    Fruit fruit("apple", 50, 8, 99);
+    store.addCargo(&fruit);
+
+    std::cout << store;
 }
 }
