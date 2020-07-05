@@ -58,6 +58,7 @@ void Player::payCrew(uint32_t salary) {
     if (salary < money_) {
         money_ -= salary;
     } else {
+        money_ = 0;
         std::cerr << "Too few money!\n";
     }
 }
