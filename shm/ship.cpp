@@ -137,6 +137,7 @@ size_t Ship::fillInCrew() {
     }
     std::cout << "You have maximum number of sailors!\n";
     return 0;
+}
 
 template<typename T>
 T Ship::findCargoByName(const std::string& name,std::vector<T>& where){

@@ -102,7 +102,6 @@ void Game::printMenu() {
               << "Days left: " << days_ - time_->getElapsedTime() << " | "
               << "Money to earn: " << finalGoal_ - money_ << " | ";
              // << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
-              << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
 }
 
 void Game::printOptions() {
@@ -143,42 +142,6 @@ void Game::makeAction(Action pickAction) {
 }
 
 void Game::travel() {
-//     while (true) {
-//         std::cout << *map_;
-//         std::cout << "Where do you want to sail? (posX posY) \n";
-//         int posX, posY;
-//         std::cin >> posX >> posY;
-//         Island* island = map_->getIsland(Coordinates(posX, posY));
-//         if (island == map_->getCurrentPosition()) {
-//             std::cout << "You are already here! \n";
-//         } else if (island != nullptr) {
-//             const int travelDistance = map_->getDistanceToIsland(island);
-//             const size_t speed = player_->getSpeed();
-//             const size_t daysOfTravel = ((travelDistance + speed) / speed);
-//             std::cout << "Travel will take " << daysOfTravel << " day/s. Do you want to travel Y/N? ";
-//             char travelDecision;
-//             std::cin >> travelDecision;
-//             if (std::toupper(travelDecision) == 'Y') {
-//                 map_->travel(island);
-//                 std::cout << "~~~~" << '\n' << daysOfTravel << " day/s have passed. \n";
-//                 for (size_t i = 0; i < daysOfTravel; i++) {
-//                     ++*time_;
-//                 }
-//                 break;
-//             }
-//         }
-//         std::cout << "Give me right coordinates! \n";
-//     }
-}
-
-void Game::buy() {
-   // Store store(gameTime);
-   // std::cout << "\n" << store << "\n";
-}
-
-void Game::sell() {
-   // Store store(gameTime);
-   // std::cout << "\n" << store << "\n";
     while (true) {
         std::cout << *map_;
         std::cout << "Where do you want to sail? (posX posY) \n";

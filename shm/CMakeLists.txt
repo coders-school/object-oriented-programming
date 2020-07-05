@@ -54,8 +54,8 @@ set(SRC
 enable_testing()
 
 set(TEST
-    testItem.cpp)
-    
+    testShip.cpp   )
+
 include_directories(include)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})

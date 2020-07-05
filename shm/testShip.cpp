@@ -13,9 +13,10 @@ protected:
     size_t maxCargoCapacity = 100;
     size_t speedOfShip = 10;
     size_t idOfShip = 1;
-
-    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip, time_ptr) {
-    std::shared_ptr<Time> time_ptr = std::make_shared<Time>(time);
+    
+    std::shared_ptr<Time> time_ = std::make_shared<Time>();
+    
+    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip, time_) {
     }
     Ship shipOne;
 };
