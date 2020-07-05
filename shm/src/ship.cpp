@@ -2,20 +2,25 @@
 
 #include <numeric>
 
-Ship::Ship() : Ship(0, 0, 0, "", 0) {}
-Ship::Ship(int maxCrew, int speed, size_t id)
-    : Ship(0, maxCrew, speed, "", id) {}
-Ship::Ship(int capacity,
-           int maxCrew,
-           int speed,
-           const std::string& name,
-           size_t id)
-    : capacity_(capacity),
-      maxCrew_(maxCrew),
-      crew_(0),
-      speed_(speed),
-      name_(name),
-      id_(id) {}
+Ship::Ship(int maxCrew, int speed, size_t id, Time* time, Delegate* delegate)
+    : Ship(0, maxCrew, speed, "", id, time, delegate)
+{}
+Ship::Ship(int capacity, int maxCrew, int speed,
+        const std::string& name, size_t id, Time* time, Delegate* delegate)
+    : capacity_(capacity)
+    , maxCrew_(maxCrew) 
+    , crew_(0)
+    , speed_(speed)
+    , name_(name)
+    , id_(id)
+    , time_(time)
+    , delegate_(delegate)
+{
+    time_->addObserver(this);
+}
+Ship::~Ship() {
+    time_->removeObserver(this);
+}
 
 Ship& Ship::operator-=(const size_t crew) {
   if (crew <= crew_) {
@@ -32,25 +37,16 @@ Ship& Ship::operator+=(const size_t crew) {
   return *this;
 }
 
-void Ship::setName(const std::string& name) {
-  name_ = name;
-}
+void Ship::setName(const std::string& name) { name_ = name; }
+void Ship::setDelegate(Delegate* delegate) { 
+    delegate_ = delegate; }
 
-size_t Ship::getCapacity() const {
-  return capacity_;
-}
-size_t Ship::getMaxCrew() const {
-  return maxCrew_;
-}
-size_t Ship::getSpeed() const {
-  return speed_;
-}
-std::string Ship::getName() const {
-  return name_;
-}
-size_t Ship::getId() const {
-  return id_;
-}
+size_t Ship::getCapacity() const { return capacity_; }
+size_t Ship::getMaxCrew() const { return maxCrew_; }
+size_t Ship::getCrew() const { return crew_; }
+size_t Ship::getSpeed() const { return speed_; }
+std::string Ship::getName() const { return name_; }
+size_t Ship::getId() const { return id_; }
 
 Cargo* Ship::getCargo(const std::string& name) {
   return Common::getCargo(name, cargo_);
@@ -95,4 +91,9 @@ void Ship::cloneCargo(Cargo* cargo){
 
 void Ship::printCargo() {
     Common::printCargo(cargo_);
+}
+void Ship::nextDay() {
+    if (delegate_) {
+        delegate_->payCrew(crew_);
+    }
 }

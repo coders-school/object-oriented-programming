@@ -2,9 +2,10 @@
 
 #include <memory>
 
+#include "delegate.hpp"
 #include "ship.hpp"
 
-class Player {
+class Player : public Delegate {
 public:
     Player(Ship& ship, size_t money, size_t availableSpace);
 
@@ -25,6 +26,7 @@ public:
         ship_->cloneCargo(cargo);
     
     }
+    void payCrew(size_t money) override;
 
 private:
     std::unique_ptr<Ship> ship_;
