@@ -115,23 +115,28 @@ void Store::generateGoods(){
     for(size_t i = 0; i < numerOfItems;i++){
         switch(itemNumber(generator)){
             case 1: 
-                cargoToSell_.emplace_back(Item("Sword", itemQuantity(generator), 150 ,static_cast<int>(Rarity::common),timeTracker_));
+                cargoToSell_.emplace_back(Item("Sword", itemQuantity(generator), 150,
+                                          static_cast<int>(Rarity::common),timeTracker_));
                 break;
             case 2: 
-                cargoToSell_.emplace_back(Item("Hat",  itemQuantity(generator), 200 ,static_cast<int>(Rarity::common),timeTracker_));
+                cargoToSell_.emplace_back(Item("Hat",  itemQuantity(generator), 200,
+                                          static_cast<int>(Rarity::common),timeTracker_));
                 break;
             case 3: 
-                cargoToSell_.emplace_back(Item("Boots", itemQuantity(generator), 100 ,static_cast<int>(Rarity::common),timeTracker_));
+                cargoToSell_.emplace_back(Item("Boots", itemQuantity(generator), 100,
+                                               static_cast<int>(Rarity::common),timeTracker_));
                 break;
             case 4: 
-                cargoToSell_.emplace_back(Item("Pistol", itemQuantity(generator),500 ,static_cast<int>(Rarity::common),timeTracker_));
+                cargoToSell_.emplace_back(Item("Pistol", itemQuantity(generator), 500,
+                                          static_cast<int>(Rarity::common),timeTracker_));
                 break;
             case 5: 
-                cargoToSell_.emplace_back(Item("Cannon", itemQuantity(generator), 2000 ,static_cast<int>(Rarity::common),timeTracker_));
+                cargoToSell_.emplace_back(Item("Cannon", itemQuantity(generator), 2000,
+                                          static_cast<int>(Rarity::common),timeTracker_));
                 break;
             case 6: 
-                cargoToSell_.emplace_back(Item("Flag", itemQuantity(generator), 65 ,static_cast<int>(Rarity::common),timeTracker_));
-                break;
+                cargoToSell_.emplace_back(Item("Flag", itemQuantity(generator), 65,
+                                         static_cast<int>(Rarity::common),timeTracker_));
                 break;
             default: 
                 std::cerr << "RNG error!\n";

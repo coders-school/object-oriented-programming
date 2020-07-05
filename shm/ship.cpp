@@ -17,18 +17,18 @@ void Ship::setName(const std::string& name) {
 }
 
 void Ship::load(Alcohol* cargo) {
-     cargo_.push_back(cargo);
-     alcos_.push_back(cargo);
+    cargo_.push_back(cargo);
+    alcos_.push_back(cargo);
 }
 
 void Ship::load(Fruit* cargo) {
-     cargo_.push_back(cargo);
-     fruits_.push_back(cargo);
+    cargo_.push_back(cargo);
+    fruits_.push_back(cargo);
 }
 
 void Ship::load(Item* cargo) {
-     cargo_.push_back(cargo);
-     items_.push_back(cargo);
+    cargo_.push_back(cargo);
+    items_.push_back(cargo);
 }
 
 Ship& Ship::operator-=(size_t crewman) {
