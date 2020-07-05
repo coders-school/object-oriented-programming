@@ -16,7 +16,7 @@ jobs:
         sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
 
-  SHM:
+ SHM:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
