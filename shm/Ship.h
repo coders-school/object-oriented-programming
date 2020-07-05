@@ -14,7 +14,7 @@ public:
         virtual ~PayCrewDelegate() = default;
     };
 
-    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* delegate, Time* time);
+    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, Time* time);
     ~Ship() override;
 
     void setName(const std::string& name);
@@ -31,6 +31,7 @@ public:
     std::vector<std::shared_ptr<Cargo>> getCargos() const;
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo);
+    void setPayCrewDelegate(PayCrewDelegate* delegate);
     void nextDay();
     void update() override;
 

@@ -5,7 +5,7 @@
 
 #include "Island.h"
 
-Map::Map() {
+Map::Map(Time* time) {
     std::random_device rd;
     std::mt19937 gen(rd());
     for (size_t i = 0; i < islandsCount; i++) {
@@ -17,7 +17,7 @@ Map::Map() {
             x = distrib(gen);
             y = distrib2(gen);
         } while (getIsland(Coordinates(x, y)) != nullptr);
-        Island::Island island(x, y);
+        Island::Island island(x, y, time);
         islands_.push_back(island);
     };
 }

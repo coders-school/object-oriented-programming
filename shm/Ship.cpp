@@ -2,8 +2,8 @@
 
 #include "algorithm";
 
-Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, PayCrewDelegate* crewPayer, Time* time)
-    : capacity_(capacity), max_crew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), crewPayer_(crewPayer), time_(time) {
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, Time* time)
+    : capacity_(capacity), max_crew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time) {
     time_->subscribe(this);
 }
 
@@ -68,6 +68,10 @@ void Ship::unload(Cargo* cargo) {
     cargos_.erase(std::remove_if(cargos_.begin(), cargos_.end(), [cargo](auto listedCargo) {
         return cargo == listedCargo;
     }));
+}
+
+void Ship::setPayCrewDelegate(PayCrewDelegate* delegate) {
+    crewPayer_ = delegate;
 }
 
 void Ship::nextDay() {
