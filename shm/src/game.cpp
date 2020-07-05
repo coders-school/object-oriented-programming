@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-#include <cstdlib> // exit, size_t
+#include <cstdlib>  // exit, size_t
 #include <ios>
 #include <iostream>
 #include <limits>
@@ -18,7 +18,7 @@ Game::Game(size_t start_money, size_t game_days, size_t final_goal)
 
 void Game::startGame() {
     std::cout << "Start\n";
-    while(time_->getElapsedTime() > 0) {
+    while (time_->getElapsedTime() > 0) {
         if (checkWinCondition()) {
             printWinScreen();
             exit();
@@ -54,6 +54,8 @@ void Game::printTopBar() const {
     std::cout << "  ~~~~    SHM version 1.0   ~~~~" << '\n';
     std::cout << "Elapsed time " << time_->getElapsedTime() << '\n';
     std::cout << "Elapsed money " << player_->getMoney() << '\n';
+    std::cout << "Actual position x:" << map_->getCurrentPosition()->getPosition().getPositionX()
+              << " y: " << map_->getCurrentPosition()->getPosition().getPositionY() << '\n';
 }
 
 void Game::printOptions() const {
@@ -74,7 +76,7 @@ void Game::printWinScreen() const {
               << " coins.\n";
 }
 
-void  Game::printLooseScreen() const {
+void Game::printLooseScreen() const {
     std::cout << "You loose\n";
     std::cout << "You've run out of money in "
               << time_->getElapsedTime()
@@ -82,7 +84,7 @@ void  Game::printLooseScreen() const {
 }
 
 void Game::makeAction(Action action) {
-    switch(action) {
+    switch (action) {
     case Action::Exit:
         exit();
         break;
@@ -91,7 +93,7 @@ void Game::makeAction(Action action) {
         break;
     case Action::Buy:
         buy();
-        break; 
+        break;
     case Action::Sell:
         sell();
         break;
@@ -110,40 +112,102 @@ void Game::travel() {
     std::cout << "Choose island [x y]: ";
     size_t x, y;
     std::cin >> x >> y;
-    while(std::cin.fail()) {
+    while (std::cin.fail()) {
         std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Wrong data type.  Enter two digits: ";
         std::cin >> x >> y;
     }
     auto destination = map_->getIsland(Coordinates(x, y));
-    if (destination != nullptr)
-    {
+    if (destination != nullptr) {
         for (auto i = map_->getDistanceToIsland(destination); i > 0; --i) {
             // one "distance" takes one day
             ++(*time_);
-            if (time_->getElapsedTime() == 0) { break; }
+            if (time_->getElapsedTime() == 0) {
+                break;
+            }
             player_->nextDay();
         }
         map_->travel(destination);
-     }
-     else { std::cout << "Wrong coordinates!" << '\n'; }
+    } else {
+        std::cout << "Wrong coordinates!" << '\n';
+    }
 }
 
 void Game::buy() {
     std::cout << "Buy\n";
+    auto actualIslandStore = map_->getCurrentPosition()->getStore();
+    std::cout << actualIslandStore << '\n';
+    size_t cargoNr, amountNr;
+    std::cout << "Please, write cargo number: ";
+    std::cin >> cargoNr;
+    std::cout << "Please, write amount: ";
+    std::cin >> amountNr;
+    while (std::cin.fail() || cargoNr < 0 || cargoNr > actualIslandStore.getCargoContainer().size()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong data. First digit from 0 to " << actualIslandStore.getCargoContainer().size() << ": ";
+        std::cin >> cargoNr;
+    }
+    --cargoNr;
+    Response response = actualIslandStore.buy(actualIslandStore.GetCargo(cargoNr), amountNr, player_);
+
+    switch (response) {
+    case Response::done:
+        std::cout << "Done! \n";
+        break;
+    case Response::lack_of_cargo:
+        std::cout << "Lack of cargo ! \n";
+        break;
+    case Response::lack_of_money:
+        std::cout << "Lack of money! \n";
+        break;
+    case Response::lack_of_space:
+        std::cout << "Lack of space! \n";
+        break;
+    default:
+        std::cout << "I shouldn't be here ;_; \n";
+        break;
+    }
 }
 
 void Game::sell() {
     std::cout << "Sell\n";
+    auto actualIslandStore = map_->getCurrentPosition()->getStore();
+    std::cout << actualIslandStore << '\n';
+    size_t cargoNr, amountNr;
+    std::cout << "Please, write cargo number: ";
+    std::cin >> cargoNr;
+    std::cout << "Please, write amount: ";
+    std::cin >> amountNr;
+    while (std::cin.fail() || cargoNr < 0 || cargoNr > actualIslandStore.getCargoContainer().size()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong data. First digit from 0 to " << actualIslandStore.getCargoContainer().size() << ": ";
+        std::cin >> cargoNr;
+    }
+    --cargoNr;
+    Response response = actualIslandStore.sell(actualIslandStore.GetCargo(cargoNr), amountNr, player_);
+
+    switch (response) {
+    case Response::done:
+        std::cout << "Done! \n";
+        break;
+    case Response::lack_of_cargo:
+        std::cout << "Lack of cargo ! \n";
+        break;
+    default:
+        std::cout << "I shouldn't be here ;_; \n";
+        break;
+    }
 }
 
-void  Game::printCargo() const {
+void Game::printCargo() const {
     std::cout << "Cargo\n";
-    player_ -> printCargo();
+    player_->printCargo();
 }
 
-void  Game::exit() {
+void Game::exit() {
     std::cout << "Exit\n";
     std::exit(0);
 }

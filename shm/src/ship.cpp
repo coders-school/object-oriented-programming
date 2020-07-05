@@ -22,7 +22,7 @@ void Ship::nextDay() {
         *el.get() += 1;
     }
     Ship::RemoveFromStorageIfRotten();
-    delegate_->payCrew(maxCrew_);
+    delegate_->payCrew(getMaxCrew());
 }
 
 Ship& Ship::operator+=(const size_t& crew) {
