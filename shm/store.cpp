@@ -1,10 +1,11 @@
 #include <algorithm>
+#include <iomanip>
 #include <random>
 
 #include "store.hpp"
 
 Store::Store(Time* gameTime) : timeTracker_(gameTime) {
-    // generateGoods();
+    generateGoods();
 }
 
 Response Store::buys(Cargo* cargo, size_t amount, Player* player, size_t totalPrice) {
@@ -144,9 +145,21 @@ void Store::generateGoods() {
 }
 
 std::ostream& operator<<(std::ostream& print, const Store& store) {
+    std::string trail("-", 40);
     print << "What you want to buy or sell: \n";
+    print << std::setw(5) << "No.||" 
+          << std::setw(10) << " Name    ||" 
+          << std::setw(9) << " Amount ||" 
+          << std::setw(14) << " Sell Price ||" 
+          << std::setw(14) << " Buy Price ||" << "\n";
+
     std::for_each(
         store.cargoToSell_.begin(), store.cargoToSell_.end(),
-        [&print, &store, i{0}](const auto& cargo) mutable { print << ++i << " " << cargo.getName() << " || "; });
+        [&print, &store, i{0}](const auto& cargo) mutable { 
+            print << std::setw(2) << ++i << " ||" 
+                  << std::setw(8) << cargo.getName() << " ||"
+                  << std::setw(7) << cargo.getAmount() << " ||"
+                  << std::setw(11) << cargo.getPrice() << " ||" << "\n";
+        });
     return print;
 }
