@@ -6,6 +6,7 @@
 
 class Island {
 public:
+    Island() = default;
     Island(size_t position_x, size_t position_y, Time* time);
     Coordinates getCoordinates() const;
     Store* getStore();

@@ -12,7 +12,7 @@ enum class Rarity {
     legendary = 10,
 };
 
-extern std::map<Rarity, std::string> rarityMap{
+std::map<Rarity, std::string> rarityMap{
     {Rarity::common, "Common"},
     {Rarity::rare, "Rare"},
     {Rarity::epic, "Epic"},

@@ -1,7 +1,9 @@
+#pragma once
+
 #include <vector>
 
-#include "Observer.h";
-#include "Subject.h";
+#include "Observer.h"
+#include "Subject.h"
 
 class Time : public Subject {
 public:

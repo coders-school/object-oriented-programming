@@ -1,7 +1,8 @@
 #include "Island.h"
 
 Island::Island(size_t position_x, size_t position_y, Time* time) {
-    position_ = Coordinates(position_x, position_y);
+    Coordinates coord(position_x, position_y);
+    position_ = coord;
     store_ = new Store(time);
 }
 

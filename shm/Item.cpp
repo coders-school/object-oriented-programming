@@ -1,7 +1,7 @@
 #include "Item.h"
 
 Item::Item(std::string name, size_t amount, size_t base_price, Time* time, Rarity rarity)
-    : Cargo(name, amount, base_price, time), rarity_(rarity){};
+    : Cargo(name, amount, base_price, time), rarity_(rarity) {}
 
 //override from Cargo
 std::string Item::getName() const {

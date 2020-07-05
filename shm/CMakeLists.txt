@@ -35,7 +35,7 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include") 
 endif()
 
-project(shm)
+project(SHM)
 FILE(GLOB SRC_FILES "*.cpp")
 list(REMOVE_ITEM SRC_FILES main.cpp test.cpp)
 

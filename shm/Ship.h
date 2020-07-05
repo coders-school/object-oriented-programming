@@ -1,3 +1,5 @@
+#pragma once
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -19,8 +21,8 @@ public:
 
     void setName(const std::string& name);
 
-    Ship& Ship::operator-=(size_t num);
-    Ship& Ship::operator+=(size_t num);
+    Ship& operator-=(size_t num);
+    Ship& operator+=(size_t num);
 
     size_t getCapacity() const;
     size_t getMaxCrew() const;
@@ -37,8 +39,8 @@ public:
 
 private:
     size_t capacity_;
-    size_t crew_;
     size_t max_crew_;
+    size_t crew_;
     size_t speed_;
     std::string name_;
     const size_t id_;

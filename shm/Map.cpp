@@ -17,13 +17,13 @@ Map::Map(Time* time) {
             x = distrib(gen);
             y = distrib2(gen);
         } while (getIsland(Coordinates(x, y)) != nullptr);
-        Island::Island island(x, y, time);
+        Island island(x, y, time);
         islands_.push_back(island);
     };
 }
 
 Island* Map::getIsland(const Coordinates& coordinate) {
-    auto it = std::find(islands_.begin(), islands_.end(), [coordinate](auto& i) { return i.getCoordinates() == coordiante; });
+    auto it = std::find_if(islands_.begin(), islands_.end(), [coordinate](auto& i) { return i.getCoordinates() == coordinate; });
 
     if (it == islands_.end()) {
         return nullptr;

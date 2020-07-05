@@ -1,4 +1,6 @@
-#include "Observer.h";
+#pragma once
+
+#include "Observer.h"
 
 class Subject {
 public:

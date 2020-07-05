@@ -3,8 +3,10 @@
 #include <memory>
 #include <vector>
 
+#include "Alcohol.h"
 #include "Cargo.h"
-#include "Item.h";
+#include "Fruit.h"
+#include "Item.h"
 #include "Observer.h"
 #include "Player.h"
 #include "Time.h"
@@ -16,13 +18,13 @@ enum class Response {
     lack_of_space
 };
 
-extern size_t min_cargo_amount = 0;
-extern size_t max_cargo_amount = 100;
+int min_cargo_amount = 0;
+int max_cargo_amount = 100;
 
-extern size_t min_price = 0;
-extern size_t max_price = 100;
+int min_price = 0;
+int max_price = 100;
 
-extern std::vector<ItemData> available_items = {
+std::vector<ItemData> available_items = {
     {"Excalibur", Rarity::legendary},
     {"Pistol", Rarity::rare},
     {"Barrel", Rarity::common},
@@ -31,14 +33,14 @@ extern std::vector<ItemData> available_items = {
     {"Eyepatch", Rarity::common},
 };
 
-extern std::vector<AlcoholData> available_alcohols = {
+std::vector<AlcoholData> available_alcohols = {
     {"Pure alcohol", 96},
     {"Rum", 30},
     {"Ale", 8},
     {"Beer", 3},
 };
 
-extern std::vector<FruitData> available_fruits = {
+std::vector<FruitData> available_fruits = {
     {"Banana", 10},
     {"Apple", 5},
     {"Watermelon", 3},
@@ -58,7 +60,7 @@ public:
 
 private:
     void generateCargos();
-    std::vector<std::unique_ptr<Cargo>> available_cargos_;
+    std::vector<std::shared_ptr<Cargo>> available_cargos_;
     std::string getDescription() const;
     Time* time_;
 };

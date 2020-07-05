@@ -3,7 +3,7 @@
 #include <algorithm>
 
 Alcohol::Alcohol(std::string name, size_t amount, size_t base_price, Time* time, size_t power)
-    : Cargo(name, amount, base_price, time), power_(power){};
+    : Cargo(name, amount, base_price, time), power_(power) {}
 
 //override from Cargo
 std::string Cargo::getName() const {
@@ -27,7 +27,9 @@ size_t Alcohol::getPrice() const {
 
 //override from Cargo
 void Alcohol::nextDay() {
-    power_ = std::max(0U, --power_);
+    if (power_ > 0) {
+        power_--;
+    }
 }
 
 //override from Cargo

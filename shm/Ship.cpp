@@ -1,6 +1,6 @@
 #include "Ship.h"
 
-#include "algorithm";
+#include <algorithm>
 
 Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, Time* time)
     : capacity_(capacity), max_crew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time) {
@@ -61,12 +61,12 @@ size_t Ship::getId() const {
 }
 
 void Ship::load(std::shared_ptr<Cargo> cargo) {
-    cargos_.push_back(std::make_shared<Cargo>(cargo));
+    cargos_.push_back(cargo);
 }
 
 void Ship::unload(Cargo* cargo) {
     cargos_.erase(std::remove_if(cargos_.begin(), cargos_.end(), [cargo](auto listedCargo) {
-        return cargo == listedCargo;
+        return *cargo == *listedCargo;
     }));
 }
 

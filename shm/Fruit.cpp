@@ -3,7 +3,7 @@
 #include <algorithm>
 
 Fruit::Fruit(std::string name, size_t amount, size_t base_price, Time* time, size_t expiry_date)
-    : Cargo(name, amount, base_price, time), expiry_date_(expiry_date){};
+    : Cargo(name, amount, base_price, time), expiry_date_(expiry_date) {}
 
 //override from Cargo
 std::string Cargo::getName() const {
@@ -64,5 +64,11 @@ size_t Fruit::getTimeElapsed() const {
 
 //override from Cargo
 std::string Fruit::getDescription() const {
-    return "Name: " + this->name_ + " Time to rot: " + std::to_string(std::max(0U, this->expiry_date_ - this->time_elapsed_)) + " Amount: " + std::to_string(this->amount_) + " Price: " + std::to_string(this->getPrice());
+    size_t time_to_rot;
+    if (this->expiry_date_ < this->time_elapsed_) {
+        time_to_rot = 0;
+    } else {
+        time_to_rot = this->expiry_date_ - this->time_elapsed_;
+    }
+    return "Name: " + this->name_ + " Time to rot: " + std::to_string(time_to_rot) + " Amount: " + std::to_string(this->amount_) + " Price: " + std::to_string(this->getPrice());
 }
