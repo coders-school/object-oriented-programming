@@ -3,7 +3,7 @@ name: C++ with CMake CI
 on: [push, pull_request]
 
 jobs:
- checker:
+  checker:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
