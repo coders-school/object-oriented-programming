@@ -60,6 +60,18 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     return Response::invalid_cargo_name;
 }
 
+void Store::addCargo(Cargo* cargo) {
+    if (this->getAvaiableSpace() >= cargo->getAmount()) {
+        auto ptrCargo = this->getCargo(cargo->getName());
+        if (ptrCargo == nullptr) {
+            cargoVec.push_back(cargo);
+        } else {
+            size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
+            ptrCargo->setAmount(tmpAmount);
+        }
+    }
+}
+
 Cargo* Store::getCargo(const std::string& name) {
     return Common::getCargo(name, cargoVec);
 }
