@@ -49,7 +49,8 @@ set(SRC
   time.cpp 
   alcohol.cpp 
   item.cpp 
-  fruit.cpp)
+  fruit.cpp
+  game.cpp)
 
 set(TEST_SRC 
   ut/alcohol_test.cpp 

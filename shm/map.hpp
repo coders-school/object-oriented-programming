@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
+
 #include "coordinates.hpp"
 #include "island.hpp"
 #include "time.hpp"
-
 
 constexpr int NUM_OF_ISLANDS = 10;
 constexpr int MAP_RND_DISTRIBUTION_MIN = 1000;
