@@ -1,6 +1,7 @@
 #include "store.hpp"
 
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <random>
 
@@ -120,12 +121,14 @@ void Store::GenerateItems() {
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
     int i = 1;
-    out << "Name:   "
-        << "Amount:   "
-        << "Price:    \n";
+    out << "Index:\t"
+        << std::setw(10) << "Name:\t"
+        << std::setw(10) << "Amount:\t"
+        << std::setw(10) << "Price:\n";
 
     for (const auto el : store.cargo_) {
-        out << i << ": " << el->getName() << " " << el->getAmount() << " " << el->getBasePrice() << '\n';
+        out << i << ":\t" << std::setw(10) << el->getName() << '\t' << std::setw(10)
+            << el->getAmount() << '\t' << std::setw(10) << el->getPrice() << '\n';
         i++;
     }
 
