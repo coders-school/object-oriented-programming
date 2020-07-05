@@ -1,8 +1,9 @@
 #include "item.hpp"
-#include <string>
+
 #include <cstdlib>
-#include <iostream>
 #include <ctype.h>
+#include <iostream>
+#include <string>
 
 Item::Item(std::string name, size_t amount, size_t basePrice,  int rarity, Time* Publisher):
     Cargo(name, amount, basePrice),

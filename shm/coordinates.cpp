@@ -20,3 +20,7 @@ int Coordinates::Distance(const Coordinates& PointA,
 bool Coordinates::operator==(const Coordinates& currentPosition) const {
     return positionX_ == currentPosition.positionX_ && positionY_ == currentPosition.positionY_;
 }
+
+std::ostream& operator<<(std::ostream& print, const Coordinates& coords) {
+    return print << "(X:" << coords.getPositionX() << ", Y:" << coords.getPositionY() << ")";
+}

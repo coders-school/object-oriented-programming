@@ -48,6 +48,7 @@ set(SRC
     map.cpp
     player.cpp
     ship.cpp
+    store.cpp
     timeSHM.cpp)
 
 enable_testing()

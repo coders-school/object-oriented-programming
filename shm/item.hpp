@@ -1,8 +1,10 @@
 #pragma once
-#include<string>
+
 #include <iostream>
-#include "timeSHM.hpp"
+#include <string>
+
 #include "cargo.hpp"
+#include "timeSHM.hpp"
 #include "rarity.hpp"
 
 class Item : public Cargo, public Observer {
@@ -27,6 +29,6 @@ public:
     int getRarity() const;
 
 private:
-    Time* Publisher_;
     int rarity_;
+    Time* Publisher_;
 };

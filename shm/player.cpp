@@ -23,6 +23,26 @@ size_t Player::getSpeed() const{
     return 0;
 }
 
+void Player::giveMoney(size_t money){
+    money_ += money;
+}
+
+void Player::takeMoney(size_t money){
+    money_ -= money;
+}
+
+Alcohol* Player::getAlcoWithName(const std::string& name){
+    return ship_->findAlcoByName(name);
+}
+
+Fruit* Player::getFruitWithName(const std::string& name){
+    return ship_->findFruitByName(name);
+}
+
+Item* Player::getItemWithName(const std::string& name){
+    return ship_->findItemByName(name);
+}
+
 Cargo* Player::getCargo(size_t cargo) const{
     if (ship_) {
         return ship_->getCargo(cargo);
@@ -37,6 +57,34 @@ void Player::nextDay(){
     payCrew(ship_->getCrew());
 }
 
-size_t Player::countAvailableSpace() {
+void  Player::giveCargo(Alcohol* cargo){
+    ship_->load(cargo);
+}
+
+void  Player::giveCargo(Fruit* cargo){
+    ship_->load(cargo);
+}
+
+void  Player::giveCargo(Item* cargo){
+    ship_->load(cargo);
+}
+
+void  Player::removeAlco(Alcohol* cargo){
+    ship_->removeAlco(cargo);
+}
+
+void  Player::removeFruit(Fruit* cargo){
+    ship_->removeFruit(cargo);
+}
+
+void  Player::removeItem(Item* cargo){
+    ship_->removeItem(cargo);
+}
+
+size_t Player::countAvailableSpace(){
      return ship_->countAvailableSpace(); 
+}
+
+size_t Player::getAvailableSpace() { 
+    return availableSpace_ + ship_->countAvailableSpace();
 }

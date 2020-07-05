@@ -1,3 +1,5 @@
+#include <string>
+
 #include "gtest/gtest.h"
 #include "ship.hpp"
 #include "timeSHM.hpp"

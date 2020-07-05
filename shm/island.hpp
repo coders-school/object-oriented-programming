@@ -1,8 +1,10 @@
 #pragma once
 
+#include <ostream>
+
 #include "coordinates.hpp"
 
-class Island {
+class Island : public Coordinates {
 public:
     Island() {}
     Island(int posX, int posY);

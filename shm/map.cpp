@@ -4,8 +4,8 @@
 #include <random>
 
 constexpr int initialAmountOfIsland = 10;
-constexpr int maxX = 10;
-constexpr int maxY = 10;
+constexpr int maxX = 100;
+constexpr int maxY = 100;
 
 Map::Map() {
     std::random_device rd;
@@ -41,4 +41,23 @@ Island* Map::getIsland(const Coordinates& desiredCoordinates) {
 
 Island* Map::getCurrentPosition() {
     return currentPosition_;
+}
+
+std::ostream& operator<<(std::ostream& print, const Map& map) {
+    print << "Map\n";
+    std::for_each(map.islandsOnMap_.begin(), map.islandsOnMap_.end(), 
+        [&print](const Island& island) {
+            print << island.getCoordinates() << '\n';
+        });
+        return print;
+}
+
+int Map::getDistanceToIsland (Island* destination) {
+    const int dist = Island::Coordinates::Distance(currentPosition_->getCoordinates(), 
+                                                   destination->getCoordinates());
+    return dist;
+}
+
+void Map::travel(Island* destination) {
+    currentPosition_ = destination;
 }
