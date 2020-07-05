@@ -4,6 +4,10 @@
 #include <numeric>
 #include <iostream>
 
+#include "fruit.hpp"
+#include "item.hpp"
+// #include "alcohol.hpp"
+
 Store::Store(size_t capacity, size_t avaiableFunds)
     : capacity_(capacity), avaiableFunds_(avaiableFunds) {}
 
@@ -159,4 +163,41 @@ void Store::printResponseMessage(Response& response) {
         std::cout << "Response Message: Not enought money.\n";
     else if (response == Response::lack_of_space)
         std::cout << "Response Message: Not enouhg space.\n";
+}
+
+std::ostream& operator<<(std::ostream& out, const Store& store) {
+    for (const auto& cargo : store.cargoVec) {
+        out << "Product: " << cargo->getName() << '\n';
+        out << "Amount: " << cargo->getAmount() << '\n';
+        out << "Base price: " << cargo->getBasePrice() << '\n';
+
+        if (typeid(*cargo) == typeid(Fruit)) {
+            Fruit* fruit = static_cast<Fruit*>(cargo);
+            out << "Current price: " << fruit->getPrice() << '\n';
+            out << "Expires in: " << fruit->getTimeToSpoilLeft() << '\n';
+        }
+        if (typeid(*cargo) == typeid(Item)) {
+            Item* item = static_cast<Item*>(cargo);
+            out << "Current price: " << item->getPrice() << '\n';
+            switch (item->getRarity()) {
+            case (Item::Rarity::common):
+                out << "Rarity: common\n";
+                break;
+            case (Item::Rarity::epic):
+                out << "Rarity: epic\n";
+                break;
+            case (Item::Rarity::legendary):
+                out << "Rarity: legendary\n";
+                break;
+            case (Item::Rarity::rare):
+                out << "Rarity: rare\n";
+                break;
+            }
+        }
+        // if (typeid(*cargo) == typeid(Alcohol)) {
+        //     Alcohol* alcohol = static_cast<Alcohol*>(cargo);
+        //     out << "" << alcohol->() << '\n';
+        // }
+    }
+    return out;
 }
