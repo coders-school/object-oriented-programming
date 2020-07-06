@@ -21,10 +21,8 @@ size_t Time::getElapsedTime() const {
 // Prefix increment operator (decrement elapsed time)
 Time& Time::operator++() {
     time_elapsed_--;
-    auto it = observers_.begin();
-    while (it != observers_.end()) {
-        (*it)->nextDay();
-        ++it;
+    for (const auto& it: observers_) {
+        it -> nextDay();
     }
     return *this;
 }
