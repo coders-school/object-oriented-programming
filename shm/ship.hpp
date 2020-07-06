@@ -9,20 +9,20 @@
 #include "cargo.hpp"
 #include "timeSHM.hpp"
 #include "item.hpp"
+
 class Ship : public Observer {
 
 public: 
     Ship();
     Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, std::shared_ptr<Time> publisher);
-    //Ship(size_t maxCrew, size_t speed, int id);
     ~Ship(){
         this->publisher_->removeObserver(this);
         std::cout << "Goodbye! I was your Ship\n";
     };
+
     void setName(const std::string& name); 
     void load(Cargo* cargo);
-   // void unload(Cargo* cargo);
-   void nextDay() override; 
+    void nextDay() override; 
     void load(Alcohol* cargo);
     void load(Fruit* cargo);
     void load(Item* cargo);

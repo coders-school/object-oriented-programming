@@ -17,25 +17,10 @@ Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& nam
     this->publisher_->addObserver(this);
     }
 
-//Ship::Ship(size_t maxCrew, size_t speed, int id)
-//   : Ship(0, maxCrew, speed, "", id) {}
-
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
-   //wziąć pod uwagę available space - countFreeSpace w klasie player!
-    //porównanie dwóch towarów - akumulacja tych samych typów towarów
-    //czy zmiesci sie caly towar (maxcapacity?)
 
-// void Ship::unload(Cargo* cargo) {
-//     auto matchCargo = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
-//                  return ptr.get() == cargo;
-//                  });
-//     if (matchCargo != cargo_.end())
-//         cargo_.erase(matchCargo);
-// }
-  //sprawdzić ilość czy jest 0 - usuwamy
-  //ile zostanie towaru
 void Ship::nextDay(){
     int lottery =(rand()%10+1)+(rand()%10+1); 
     switch(lottery){
@@ -92,6 +77,7 @@ Ship& Ship::operator+=(size_t crewman) {
 size_t Ship::getCapacity() const {
     return capacity_;
 }
+
 size_t Ship::getCrew() const {
     return crew_;
 }
