@@ -3,7 +3,7 @@
 
 Coordinates coord(1, 1);
 
-TEST(SHMShipTest, createShip) {
+TEST(SHMCoordinatesTest, calculateDistance) {
     Coordinates testCoord(1, 1);
     EXPECT_EQ(testCoord.distance(testCoord, coord), 0);
 }

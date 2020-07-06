@@ -1,0 +1,148 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Object Oriented Programming - Coders School</title>
+
+        <meta name="description" content="OOP">
+        <meta name="author" content="Mateusz Adamski & Łukasz Ziobroń">
+
+        <link rel="stylesheet" href="../../css/reset.css">
+        <link rel="stylesheet" href="../../css/reveal.css">
+        <link rel="stylesheet" href="../../css/theme/coders.css" id="theme">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="../../lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? '../../css/print/pdf.css' : '../css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <section data-background="#111111">
+
+                        <h1>OOP #3</h1>
+                        <h2>Object-Oriented Programming #3</h2>
+                        <a href="https://coders.school">
+                            <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
+                        </a>
+                        <h3>Mateusz Adamski</h3>
+                        <h3>Łukasz Ziobroń</h3>
+
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+
+                        ## Agenda
+
+                        1. <!-- .element: class="fragment fade-in-then-semi-out" --> dziedziczenie
+                        2. <!-- .element: class="fragment fade-in-then-semi-out" --> wielodziedziczenie
+                        3. <!-- .element: class="fragment fade-in-then-semi-out" --> funkcje wirtualne
+                        4. <!-- .element: class="fragment fade-in-then-semi-out" --> funkcje czysto wirtualne
+                        5. <!-- .element: class="fragment fade-in-then-semi-out" --> klasy abstrakcyjne
+                        6. <!-- .element: class="fragment fade-in-then-semi-out" --> interfejsy
+                        7. <!-- .element: class="fragment fade-in" --> przykładowe rozwiązania zadań z OOP#1
+                        7. <!-- .element: class="fragment fade-in" --> polimorfizm
+                        8. <!-- .element: class="fragment fade-in" --> pola i metody statyczne
+                        
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+
+                        ## Zadania
+
+                        Repo GH `coders-school/object-oriented-programming`
+
+                        [https://github.com/coders-school/object-oriented-programming/tree/master/module2](https://github.com/coders-school/object-oriented-programming/tree/master/module2)
+
+                        </textarea>
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+
+                        ## Powtórka obiektowości
+
+                        * <!-- .element: class="fragment fade-in" --> Co oznacza słowo <code>virtual</code>?
+                        * <!-- .element: class="fragment fade-in" --> Co oznacza słowo <code>override</code>?
+                        * <!-- .element: class="fragment fade-in" --> Co to jest dziedziczenie?
+                        * <!-- .element: class="fragment fade-in" --> Do czego służą operatory?
+                        * <!-- .element: class="fragment fade-in" --> Co to jest konstruktor?
+                        * <!-- .element: class="fragment fade-in" --> Czym jest klasa abstrakcyjna?
+
+                        </textarea>
+                    </section>
+                </section>
+                <!--
+                    Note that Windows uses `\r\n` instead of `\n` as its linefeed character.
+                    For a regex that supports all operating systems, use `\r?\n` instead of `\n`.
+                    
+                    Usage:
+                    Install dependencies
+
+                    $ npm install
+                    Serve the presentation and monitor source files for changes
+
+                    $ npm start
+                    Open http://localhost:8000 to view your presentation
+
+                    You can change the port by using npm start -- --port=8001.
+                -->                
+                <section data-markdown="presentation_solutions.md"
+                         data-separator-vertical="^___"
+                         data-separator-notes="^Note:">
+                </section>
+                <section data-markdown="presentation_polymorphism.md"
+                         data-separator-vertical="^___"
+                         data-separator-notes="^Note:">
+                </section>
+                <section data-markdown="presentation_static.md"
+                         data-separator-vertical="^___"
+                         data-separator-notes="^Note:">
+                </section>
+                <section data-markdown="presentation_homework.md"
+                         data-separator-vertical="^___"
+                         data-separator-notes="^Note:">
+                </section>
+                <section data-background="#111111">
+
+                    <h1>Coders School</h1>
+                    <img width="400" data-src="../logo.png" alt="Coders School" class="plain">
+
+                </section>
+            </div>
+        </div>
+
+        <script src="../../js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                width: 1200,
+                height: 750,
+                slideNumber: true,
+                hash: true,
+                pdfSeparateFragments: false,
+                dependencies: [
+                    { src: '../../plugin/externalcode/externalcode.js', condition: function() { return !!document.querySelector( '[data-code]' ); } },
+                    { src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: '../../plugin/markdown/marked.js' },
+                    { src: '../../plugin/markdown/markdown.js' },
+                    { src: '../../plugin/notes/notes.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
