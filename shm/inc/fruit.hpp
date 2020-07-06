@@ -7,8 +7,8 @@
 class Fruit : public Cargo {
 public:
     Fruit(const std::string &name, size_t amount, size_t basePrice,
-        size_t timeToSpoil)
-      : Cargo(name, amount, basePrice), timeToSpoil_(timeToSpoil) {}
+        size_t timeToSpoil, Time* time)
+      : Cargo(name, amount, basePrice, time), timeToSpoil_(timeToSpoil) {}
 
     Fruit &operator--();
     Fruit &operator--(int);
