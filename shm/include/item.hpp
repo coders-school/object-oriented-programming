@@ -24,9 +24,7 @@ public:
 
     std::string enumToString(Rarity rarity) const;
 
-    void nextDay() override { 
-        // std::cout << "nextDay() for item\n";
-    }
+    void nextDay() override {}
 
     Cargo&
     operator+=(const size_t& amount) override;

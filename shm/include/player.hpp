@@ -21,7 +21,6 @@ public:
     void payCrew(size_t money) override;
     void subtractMoney(const size_t& money);
     void printCargo() const;
-    // void nextDay();
 
 private:
     std::shared_ptr<Ship> ship_;

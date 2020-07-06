@@ -40,7 +40,3 @@ size_t Player::getAvailableSpace() const {
 void Player::printCargo() const {
     ship_ -> printCargo();
 }
-
-// void Player::nextDay() {
-//     ship_->nextDay();
-// }
