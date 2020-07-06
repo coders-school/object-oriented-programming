@@ -9,6 +9,10 @@ Store::Store(size_t capacity, size_t avaiableFunds)
 Store::Store()
     : Store(DEFAULT_CAPACITY, DEFAULT_FUNDS) {}
 
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> The buy method allows Player to purchase cargo in store
+//-----------------------------------------------------------------------------------
 Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (cargo) {
         if (this->getCargo(cargo->getName()) != nullptr) {
@@ -35,6 +39,10 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     return Response::invalid_cargo_name;
 }
 
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> The sell method allows Player to sell cargo in store
+//-----------------------------------------------------------------------------------
 Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     if (cargo) {
         if (this->getCargo(cargo->getName()) != nullptr) {
@@ -60,7 +68,12 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     return Response::invalid_cargo_name;
 }
 
-void Store::addCargo(Cargo* cargo) {
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> This method allows to add cargo to the store / updated the cargo vec
+//-----------------------------------------------------------------------------------
+bool Store::addCargo(Cargo* cargo) {
+    bool success = false;
     if (this->getAvaiableSpace() >= cargo->getAmount()) {
         auto ptrCargo = this->getCargo(cargo->getName());
         if (ptrCargo == nullptr) {
@@ -69,21 +82,41 @@ void Store::addCargo(Cargo* cargo) {
             size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
             ptrCargo->setAmount(tmpAmount);
         }
+        success = true;
     }
+    return success;
 }
 
+
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> Finds particular cargo in cargo vec using std::name for comparsion
+//-----------------------------------------------------------------------------------
 Cargo* Store::getCargo(const std::string& name) {
     return Common::getCargo(name, cargoVec);
 }
 
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> Checks the Store's avaiable space
+//-----------------------------------------------------------------------------------
 size_t Store::getAvaiableSpace() const {
     return Common::getAvailableSpace(capacity_, cargoVec);
 }
 
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> Prints out the cargo vector content
+//-----------------------------------------------------------------------------------
 void Store::printCargo() {
     Common::printCargo(cargoVec);
 }
 
+/*private*/
+//-----------------------------------------------------------------------------------
+// <summary> This method is used for updating the cargo amount in cargo vec while 
+//           player is buying/selling goods
+//-----------------------------------------------------------------------------------
 void Store::updateCargo(Cargo* cargo,
                         size_t amount,
                         updateMode mode,
@@ -122,9 +155,13 @@ void Store::updateCargo(Cargo* cargo,
     }
 }
 
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> Prints the relevant Response message
+//-----------------------------------------------------------------------------------
 void Store::printResponseMessage(Response& response) {
     if (response == Response::invalid_cargo_name)
-        std::cout << "Response Message: Invald cargo name.\n";
+        std::cout << "Response Message: Invalid cargo name.\n";
     else if (response == Response::done)
         std::cout << "Response Message: Transaction completed.\n";
     else if (response == Response::lack_of_cargo)

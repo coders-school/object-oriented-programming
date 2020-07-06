@@ -1,5 +1,9 @@
 #include "common.hpp"
 
+/*static*/ /*public*/
+//-----------------------------------------------------------------------------------
+// <summary> This method prints out vector of cargo content
+//-----------------------------------------------------------------------------------
 void Common::printCargo(const std::vector<Cargo*>& vecOfCargo) {
     for (auto* el : vecOfCargo) {
         std::cout << "|Name| " << std::setw(15) << std::left << el->getName()
@@ -9,6 +13,10 @@ void Common::printCargo(const std::vector<Cargo*>& vecOfCargo) {
     }
 }
 
+/*static*/ /*public*/
+//--------------------------------------------------------------------------------------
+// <summary> Finds particular type cargo in cargo vector using std::name for comparsion
+//--------------------------------------------------------------------------------------
 Cargo* Common::getCargo(const std::string& name,
                         const std::vector<Cargo*>& vecOfCargo) {
 
@@ -21,6 +29,10 @@ Cargo* Common::getCargo(const std::string& name,
     return nullptr;
 }
 
+/*static*/ /*public*/
+//-----------------------------------------------------------------------------------
+// <summary> Returns object avaiable space
+//-----------------------------------------------------------------------------------
 size_t Common::getAvailableSpace(size_t capacity,
                                  const std::vector<Cargo*>& vecOfCargo) {
     size_t occupied = std::accumulate(vecOfCargo.begin(), vecOfCargo.end(), 0,

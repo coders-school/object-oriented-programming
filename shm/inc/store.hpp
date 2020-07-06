@@ -31,10 +31,10 @@ public:
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
-    void addCargo(Cargo* cargo);
+    bool addCargo(Cargo* cargo);
     size_t getAvaiableSpace() const;
     size_t getAvaiableFunds() const { return avaiableFunds_; };
-    void setCapasity(const size_t amount) { capacity_ = amount; }
+    void setCapacity(const size_t amount) { capacity_ = amount; }
     void setAvaiableFunds(const size_t amount) { avaiableFunds_ = amount; }
 
     Cargo* getCargo(const std::string& name);

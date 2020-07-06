@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 #include "cargo.hpp"
 
@@ -30,6 +31,8 @@ public:
     size_t getAmount() const override;
     size_t getBasePrice() const override;
     Rarity getRarity() const;
+
+    Cargo* clone() override;
 
 private:
     const Rarity rairty_;

@@ -37,3 +37,8 @@ Cargo& Item::operator-=(size_t amount) {
     }
     return *this;
 }
+
+Cargo* Item::clone() {
+    std::shared_ptr<Item> sp_Item = std::make_shared<Item>(*this);
+    return sp_Item.get();
+}
