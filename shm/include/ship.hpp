@@ -18,9 +18,9 @@ public:
     };
 
     Ship();
-    Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity);
+    //Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity);
     Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate, std::shared_ptr<Time> time);
-    Ship(size_t id, std::string name, size_t speed);
+    //Ship(size_t id, std::string name, size_t speed);
     ~Ship();
 
     int getId() const { return id_; }
