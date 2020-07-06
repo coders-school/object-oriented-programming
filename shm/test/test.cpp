@@ -1,11 +1,15 @@
 #include "gtest/gtest.h"
 
+#include "fruit.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "time.hpp"
+#include "store.hpp"
 
 namespace SHM_test {
 
+constexpr size_t SHIP_CAPACITY = 500;
+constexpr char SHIP_NAME[] = "BestShipEver";
 constexpr int SHIP_MAX_CREW = 20;
 constexpr int SHIP_SPEED = 666;
 constexpr size_t SHIP_ID = 7;
@@ -14,9 +18,15 @@ constexpr size_t MONEY = 1000;
 constexpr size_t SALARY = 20;
 constexpr size_t AVAILABLE_SPACE = 100;
 
+constexpr char APPLE[] = "Apple";
+constexpr size_t APPLE_AMOUNT = 11;
+constexpr size_t APPLE_BASEPRICE = 3;
+constexpr size_t APPLE_SPOILTIME = 8;
+
 Time time;
-Ship ship(SHIP_MAX_CREW, SHIP_SPEED, SHIP_ID, &time);
+Ship ship(SHIP_CAPACITY, SHIP_MAX_CREW, SHIP_SPEED, SHIP_NAME, SHIP_ID, &time);
 Player player(ship, MONEY, AVAILABLE_SPACE);
+Fruit apple(APPLE, APPLE_AMOUNT, APPLE_BASEPRICE, APPLE_SPOILTIME);
 
 TEST(ShipTest, ShouldInitShip) {
     EXPECT_EQ(ship.getMaxCrew(), SHIP_MAX_CREW);
@@ -44,5 +54,14 @@ TEST(PlayerTest, ShouldPayCrew) {
 TEST(TimeTest, ShouldTimePass) {
     ++time;
     EXPECT_EQ(time.getElapsedTime(), 2);
+}
+TEST(StoreTest, ShouldHandleBuy) {
+    Store store;
+
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::invalid_cargo_name);
+    store.addCargo(&apple);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2, &player), Store::Response::lack_of_cargo);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2000, &player), Store::Response::lack_of_money);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::done);
 }
 }
