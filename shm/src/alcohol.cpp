@@ -54,3 +54,9 @@ Cargo& Alcohol::operator-=(size_t amount) {
     }
     return *this;
 }
+
+Cargo* Alcohol::clone() {
+    std::shared_ptr<Alcohol> sp_Alcohol = std::make_shared<Alcohol>(*this);
+    return sp_Alcohol.get();
+}
+

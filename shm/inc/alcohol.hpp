@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 #include "cargo.hpp"
 
@@ -13,10 +14,10 @@ public:
     
     Alcohol& operator--();
     Alcohol& operator--(int);
-    bool operator==(const Cargo& alcohol) const;
-    bool operator!=(const Cargo& alcohol) const;
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
+    bool operator==(const Cargo& alcohol) const override;
+    bool operator!=(const Cargo& alcohol) const override;
+    Cargo& operator+=(size_t amount) override;
+    Cargo& operator-=(size_t amount) override;
 
     size_t getPrice() const override;
     std::string getName() const override;
@@ -25,8 +26,7 @@ public:
     size_t getTimeToSpoil() const;
     size_t getTimeToSpoilLeft() const;
 
-    Cargo* clone() override { return new Alcohol( *this);}
-
+    Cargo* clone() override;
 private:
     const size_t timeToSpoil_;
     size_t timeToSpoilLeft_ = timeToSpoil_;
