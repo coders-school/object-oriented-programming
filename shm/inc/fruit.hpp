@@ -6,27 +6,27 @@
 
 class Fruit : public Cargo {
 public:
-  Fruit(const std::string &name, size_t amount, size_t basePrice,
+    Fruit(const std::string &name, size_t amount, size_t basePrice,
         size_t timeToSpoil)
       : Cargo(name, amount, basePrice), timeToSpoil_(timeToSpoil) {}
 
-  Fruit &operator--();
-  Fruit &operator--(int);
-  bool operator==(const Cargo &fruit) const;
-  bool operator!=(const Cargo &fruit) const;
-  Cargo &operator+=(size_t amount);
-  Cargo &operator-=(size_t amount);
+    Fruit &operator--();
+    Fruit &operator--(int);
+    bool operator==(const Cargo &fruit) const;
+    bool operator!=(const Cargo &fruit) const;
+    Cargo &operator+=(size_t amount);
+    Cargo &operator-=(size_t amount);
 
-  size_t getPrice() const override;
-  std::string getName() const override;
-  size_t getAmount() const override;
-  size_t getBasePrice() const override;
-  size_t getTimeToSpoil() const;
-  size_t getTimeToSpoilLeft() const;
+    size_t getPrice() const override;
+    std::string getName() const override;
+    size_t getAmount() const override;
+    size_t getBasePrice() const override;
+    size_t getTimeToSpoil() const;
+    size_t getTimeToSpoilLeft() const;
 
-  void nextDay();
+    void nextDay();
 
 private:
-  const size_t timeToSpoil_ = 5;
-  size_t timeToSpoilLeft_ = timeToSpoil_;
+    const size_t timeToSpoil_ = 5;
+    size_t timeToSpoilLeft_ = timeToSpoil_;
 };
