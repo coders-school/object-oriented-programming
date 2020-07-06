@@ -42,7 +42,7 @@ Cargo& Item::operator-=(uint32_t amount) {
 }
 
 bool Item::operator==(const Cargo& cargo) const {
-    auto item = dynamic_cast<const Item&>(cargo);
+    auto item = static_cast<const Item&>(cargo);
     if (typeid(*this) != typeid(cargo)) {
         return false;
     }

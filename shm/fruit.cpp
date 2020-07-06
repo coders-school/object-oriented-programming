@@ -54,7 +54,7 @@ Cargo& Fruit::operator-=(uint32_t amount) {
 }
 
 bool Fruit::operator==(const Cargo& cargo) const {
-    auto fruit = dynamic_cast<const Fruit&>(cargo);
+    auto fruit = static_cast<const Fruit&>(cargo);
     if (typeid(*this) != typeid(cargo)) {
         return false;
     }
