@@ -12,6 +12,8 @@ public:
     size_t getPrice() const override {
         return static_cast<size_t>(basePrice_ * daysToRot_ / expirationDays_);
     }
+
+    //override from Observer
     void nextDay() override { --(*this); }
 
     size_t getDaysToRot() const { return daysToRot_; }
@@ -19,9 +21,9 @@ public:
 
     Fruit& operator--();
 
+    //override from Cargo
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
-
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
