@@ -23,7 +23,6 @@ void Ship::setName(const std::string& name) {
 
 void Ship::nextDay() {
     for (auto el : getCargo()) {
-        //*el.get() += 1;
         el.get()->nextDay();
     }
     Ship::RemoveFromStorageIfRotten();
