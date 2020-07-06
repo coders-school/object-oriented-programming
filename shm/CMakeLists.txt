@@ -63,16 +63,16 @@ set(SOURCES
     ${SOURCE_DIR}/item.cpp
 )
 
-add_library(${CMAKE_PROJECT_NAME}-lib STATIC ${SOURCES})
+add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
 
-add_executable(${CMAKE_PROJECT_NAME} ${SOURCE_DIR}/main.cpp)
-add_executable(${CMAKE_PROJECT_NAME}-ut ${TEST_DIR}/test.cpp)
+add_executable(${PROJECT_NAME} ${SOURCE_DIR}/main.cpp)
+add_executable(${PROJECT_NAME}-ut ${TEST_DIR}/test.cpp)
 
-target_link_libraries(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}-lib)
-target_link_libraries(${CMAKE_PROJECT_NAME}-ut ${CMAKE_PROJECT_NAME}-lib gtest_main)
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest_main)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
 target_compile_options(${PROJECT_NAME}-ut PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
 
 enable_testing()
-add_test(NAME shm_test COMMAND ${CMAKE_PROJECT_NAME}-ut)
+add_test(NAME shm_test COMMAND ${PROJECT_NAME}-ut)
