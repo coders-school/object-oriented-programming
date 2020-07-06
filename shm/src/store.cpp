@@ -176,7 +176,7 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
             out << "Current price: " << fruit->getPrice() << '\n';
             out << "Expires in: " << fruit->getTimeToSpoilLeft() << '\n';
         }
-        if (typeid(*cargo) == typeid(Item)) {
+        else if (typeid(*cargo) == typeid(Item)) {
             Item* item = static_cast<Item*>(cargo);
             out << "Current price: " << item->getPrice() << '\n';
             switch (item->getRarity()) {
@@ -194,7 +194,7 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
                 break;
             }
         }
-        if (typeid(*cargo) == typeid(Alcohol)) {
+        else if (typeid(*cargo) == typeid(Alcohol)) {
             Alcohol* alcohol = static_cast<Alcohol*>(cargo);
             alcohol->getPrice();
             out << "Current price: " << alcohol->getPrice() << '\n';
