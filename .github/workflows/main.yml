@@ -13,6 +13,7 @@ jobs:
       run: |
         chmod +x check.sh
         sudo apt-get update
+        sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
   SHM:
     runs-on: ubuntu-latest
