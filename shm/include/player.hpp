@@ -6,9 +6,8 @@
 
 class Player : public Ship::Delegate {
 public:
-    Player(std::shared_ptr<Ship> ship, size_t money);
     Player(size_t money, std::shared_ptr<Time> time);
-    virtual ~Player() = default;
+    virtual ~Player();
 
     std::shared_ptr<Ship> generateShip(std::shared_ptr<Time> time);
     std::shared_ptr<Ship> getShip() const { return ship_; }

@@ -2,12 +2,12 @@
 
 #include <numeric>
 
-Player::Player(std::shared_ptr<Ship> ship, size_t money)
-    : ship_{ship}, money_{money}, availableSpace_{getAvailableSpace()} {}
 Player::Player(size_t money, std::shared_ptr<Time> time)
     :money_(money) {
     ship_ = Player::generateShip(time);
 }
+
+Player::~Player() = default;
 
 std::shared_ptr<Ship> Player::generateShip(std::shared_ptr<Time> time) {
     return std::make_shared<Ship>(1, "Maria", 1, 5, 1200, this, time);
