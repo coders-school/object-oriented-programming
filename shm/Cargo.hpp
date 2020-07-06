@@ -4,6 +4,11 @@
 #include "Observer.hpp"
 
 class Cargo : public Observer {
+protected:
+    std::string name_;
+    size_t amount_;
+    size_t basePrice_;
+
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice)
         : name_(name), amount_(amount), basePrice_(basePrice) {}
@@ -17,9 +22,4 @@ public:
     virtual Cargo& operator-=(const size_t amount) = 0;
     virtual bool operator==(const Cargo& cargo) const = 0;
     virtual bool operator!=(const Cargo& cargo) const = 0;
-
-protected:
-    std::string name_;
-    size_t amount_;
-    size_t basePrice_;
 };
