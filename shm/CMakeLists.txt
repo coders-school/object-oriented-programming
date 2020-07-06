@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND  SHM_SOURCES   Player.cpp Island.cpp Coordinates.cpp Ship.cpp  Alcohol.cpp Fruit.cpp Item.cpp Map.cpp)
 
+ADD_LIBRARY( ShmLib STATIC ${SHM_SOURCES} )
+SET( SHM_EXE StaticTest )
+
+
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
@@ -40,8 +44,13 @@ endif()
 project(shm)
 enable_testing()
 
-add_executable(${PROJECT_NAME} main.cpp    ${SHM_SOURCES} )
+add_executable(${PROJECT_NAME} main.cpp )
 add_executable(${PROJECT_NAME}-ut test.cpp ${SHM_SOURCES} )
 
+
+
+
 target_link_libraries(${PROJECT_NAME}-ut gtest_main)
+target_link_libraries(${PROJECT_NAME} ShmLib)
+
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
