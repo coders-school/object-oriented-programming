@@ -30,6 +30,7 @@ private:
 
     void printTrail();
     void printStars();
+    void printWelcomePage();
     bool checkWinConditions() const;
     void printWinScreen();
     bool checkLoseConditions() const;

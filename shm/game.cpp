@@ -22,26 +22,7 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
       map_(std::make_shared<Map>(publisher_.get())) {}
 
 void Game::startGame() {
-    printTrail();
-    printStars();
-    printStars();
-    std::cout << std::setw(8) << "Welcome" 
-              << std::setw(8) << "in" 
-              << std::setw(8) << "SHM" 
-              << std::setw(8) << "Game"
-              << std::setw(8) << "v1.0"
-              << std::setw(8);
-    printStars();
-    printStars();
-    std::cout << '\n';
-    printTrail();
-    printStars();
-    std::cout << std::setw(8) << "You have: " << days_ << " days to get: " << finalGoal_ << " gold. Have a nice time!";
-    printStars();
-    printStars();
-    std::cout << "\n\n\n";
-    std::cout << "~~~May the force be with you!~~~ \n";
-    printTrail();
+    printWelcomePage();
 
     while (days_ > publisher_->getElapsedTime()) {
         if (checkWinConditions()) {
@@ -62,6 +43,7 @@ void Game::startGame() {
         }
         printTrail();
     }
+    
     printLoseScreen();
 }
 
@@ -73,6 +55,29 @@ void Game::printTrail() {
 void Game::printStars() {
     const std::string stars(15, '*');
     std::cout << stars;
+}
+
+void Game::printWelcomePage() {
+    printTrail();
+    printStars();
+    printStars();
+    std::cout << std::setw(8) << "Welcome" 
+              << std::setw(8) << "in" 
+              << std::setw(8) << "SHM" 
+              << std::setw(8) << "Game"
+              << std::setw(8) << "v1.0"
+              << std::setw(8);
+    printStars();
+    printStars();
+    std::cout << '\n';
+    printTrail();
+    printStars();
+    std::cout << std::setw(8) << "You have: " << days_ << " days to get: " << finalGoal_ << " gold. Have a nice time!";
+    printStars();
+    printStars();
+    std::cout << "\n\n\n";
+    std::cout << "~~~May the force be with you!~~~ \n";
+    printTrail();
 }
 
 bool Game::checkWinConditions() const {
