@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+
 #include "Observer.hpp"
 
 class Time {
@@ -10,6 +11,7 @@ private:
     size_t elapsedTime_{0};
 
     void notifyObservers() const;
+    
 public:
     void addObserver(Observer* observer);
     void removeObserver(Observer* observer);
