@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 
+#include "fruit.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "time.hpp"
@@ -13,6 +14,10 @@ constexpr int SHIP_CREW = 5;
 constexpr size_t MONEY = 1000;
 constexpr size_t SALARY = 20;
 constexpr size_t AVAILABLE_SPACE = 100;
+constexpr char FRUIT_MELON[] = "Melon";
+constexpr size_t FRUIT_MELON_SPOIL_TIME = 5;
+constexpr size_t FRUIT_MELON_BASEPRICE = 10;
+constexpr size_t FRUIT_MELON_AMOUNT = 24;
 
 Time time;
 Ship ship(SHIP_MAX_CREW, SHIP_SPEED, SHIP_ID, &time);
@@ -44,5 +49,16 @@ TEST(PlayerTest, ShouldPayCrew) {
 TEST(TimeTest, ShouldTimePass) {
     ++time;
     EXPECT_EQ(time.getElapsedTime(), 2);
+}
+TEST(FruitTest, ShouldSpoil) {
+    size_t spoilTime = FRUIT_MELON_SPOIL_TIME;
+
+    Fruit fruit(FRUIT_MELON, FRUIT_MELON_AMOUNT, FRUIT_MELON_BASEPRICE, FRUIT_MELON_SPOIL_TIME, &time);
+
+    while (spoilTime) {
+        ++time;
+        --spoilTime;
+    }
+    EXPECT_EQ(fruit.getAmount(), 0);
 }
 }
