@@ -9,11 +9,10 @@ private:
     std::vector<Observer*> observers_{};
     size_t elapsedTime_{0};
 
+    void notifyObservers() const;
 public:
     void addObserver(Observer* observer);
     void removeObserver(Observer* observer);
-    void resetTime();
-    void notifyObservers();
     size_t getElapsedTime() const;
     Time& operator++();
 };

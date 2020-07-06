@@ -11,17 +11,14 @@ void Time::removeObserver(Observer* observer) {
 
 Time& Time::operator++() {
     elapsedTime_++;
+    notifyObservers();
     return *this;
 }
 
-void Time::notifyObservers() {
+void Time::notifyObservers() const {
     std::for_each(observers_.begin(), observers_.end(), [](const auto& el) { el->nextDay(); });
 }
 
 size_t Time::getElapsedTime() const {
     return elapsedTime_;
-}
-
-void Time::resetTime() {
-    elapsedTime_ = 0;
 }
