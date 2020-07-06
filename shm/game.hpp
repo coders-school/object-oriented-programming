@@ -28,7 +28,7 @@ private:
     std::shared_ptr<Player> player_;
     std::shared_ptr<Map> map_;
 
-    void printTrail();
+    void printTrail(char sign);
     void printStars();
     void printWelcomePage();
     bool checkWinConditions() const;
