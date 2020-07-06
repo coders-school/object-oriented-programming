@@ -3,13 +3,16 @@
 Fruit::Fruit(const std::string& name, size_t amount, double basePrice)
     : Cargo(name, amount, basePrice) {
     timeToRotten_ = 100;
+    Fruit::setPrice();
 }
 
 Fruit::Fruit(const std::string& name, size_t amount, double basePrice, size_t timeToRotten)
-    : Cargo(name, amount, basePrice), timeToRotten_(timeToRotten) {}
+    : Cargo(name, amount, basePrice), timeToRotten_(timeToRotten) {
+    Fruit::setPrice();
+}
 
-double Fruit::setPrice() {
-    return getBasePrice() * static_cast<double>((getTimeToRotten()) / (getTimeToRotten() + timeElapsed_));
+void Fruit::setPrice() {
+    price_ = getBasePrice() * static_cast<double>((getTimeToRotten()) / (getTimeToRotten() + timeElapsed_));
 }
 
 void Fruit::nextDay() {

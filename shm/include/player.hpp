@@ -13,7 +13,7 @@ public:
     std::shared_ptr<Ship> getShip() const { return ship_; }
     size_t getMoney() const { return money_; }
     size_t getSpeed() const { return ship_->getSpeed(); }
-    cargoPtr getCargo(size_t index) const { return ship_->getCargo()[index]; }
+    cargoPtr getCargo(const size_t index) const { return ship_->getCargo()[index]; }
     size_t getAvailableSpace() const;
     void setShip(const std::shared_ptr<Ship>& ship);
     void addMoney(const size_t& money);
