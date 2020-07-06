@@ -11,14 +11,14 @@ class Alcohol : public Cargo, public Observer {
 public:
     Alcohol(std::string name, size_t amount, size_t basePrice, size_t power, Time* Publisher);
     
-    ~Alcohol(){
+    ~Alcohol() {
         this->Publisher_->removeObserver(this);
     };
 
-//Override from Observer
+    //Override from Observer
     void nextDay() override;
 
-//Override from Cargo
+    //Override from Cargo
     size_t getPrice() const override;
     std::string getName() const override;
     size_t getAmount() const override;

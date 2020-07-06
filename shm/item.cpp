@@ -5,15 +5,15 @@
 #include <iostream>
 #include <string>
 
-Item::Item(std::string name, size_t amount, size_t basePrice,  int rarity, Time* Publisher):
-    Cargo(name, amount, basePrice),
-    rarity_(rarity),
-    Publisher_(Publisher){
-    this->Publisher_->addObserver(this);
-    }
+Item::Item(std::string name, size_t amount, size_t basePrice,  int rarity, Time* Publisher)
+    : Cargo(name, amount, basePrice),
+      rarity_(rarity),
+      Publisher_(Publisher) {
+          this->Publisher_->addObserver(this);
+      }
 
 //Override from Observer
-void Item::nextDay(){
+void Item::nextDay() {
     int lottery = rand()%100+1; 
     switch(lottery){
     case 1: 
@@ -42,16 +42,18 @@ void Item::nextDay(){
 }
 
 //Override from Cargo
-
 size_t Item::getPrice() const {
     return basePrice_ * static_cast<int>(rarity_);
 }
+
 std::string Item::getName() const {
     return name_;
 }
+
 size_t Item::getAmount() const {
     return amount_;
 }
+
 size_t Item::getBasePrice() const {
     return basePrice_;
 }
