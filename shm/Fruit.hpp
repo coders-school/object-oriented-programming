@@ -1,9 +1,15 @@
 #include "Cargo.hpp"
 
 class Fruit : public Cargo {
+private:
+    size_t daysToRot_ = 10;
+    const size_t expirationDays_ = 10;
+
 public:
-    Fruit(const std::string& name, size_t amount, size_t basePrice)
-        : Cargo(name, amount, basePrice) {}
+    Fruit(const std::string& name, size_t amount, size_t basePrice);
+
+    //override from Observer
+    void nextDay() override { --(*this); }
 
     //override from Cargo
     std::string getName() const override { return name_; }
@@ -12,22 +18,13 @@ public:
     size_t getPrice() const override {
         return static_cast<size_t>(basePrice_ * daysToRot_ / expirationDays_);
     }
-
-    //override from Observer
-    void nextDay() override { --(*this); }
-
-    size_t getDaysToRot() const { return daysToRot_; }
-    size_t getExpirationDays() const { return expirationDays_; }
-
-    Fruit& operator--();
-
-    //override from Cargo
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
-private:
-    size_t daysToRot_ = 10;
-    const size_t expirationDays_ = 10;
+    Fruit& operator--();
+
+    size_t getDaysToRot() const { return daysToRot_; }
+    size_t getExpirationDays() const { return expirationDays_; }
 };
