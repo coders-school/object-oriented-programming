@@ -10,11 +10,8 @@ Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t space, std::shar
     money_(money), 
     availableSpace_(space),
     publisher_(publisher){
-    this -> publisher_ -> addObserver(this); 
+    this->publisher_->addObserver(this); 
      }
-
-//Player::Player(std::shared_ptr<Ship> ship, std::shared_ptr<Time> publisher)
- //   : Player(ship, START_MONEY, START_SPACE) {}
 
 size_t Player::getSpeed() const{
     if (ship_) {

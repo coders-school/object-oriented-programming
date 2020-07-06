@@ -11,11 +11,9 @@ class Player : public Observer{
 public:
 
     Player(std::shared_ptr<Ship> ship, size_t money, size_t space, std::shared_ptr<Time> publisher);
-
-    Player(std::shared_ptr<Ship> ship, std::shared_ptr<Time> publisher);
     
     ~Player(){
-        this -> publisher_ -> removeObserver(this);
+        this->publisher_->removeObserver(this);
         std::cout << "Goodbye! I was your Player\n";
     };
 
@@ -36,6 +34,7 @@ public:
     Cargo* getCargo(size_t index) const;
     void payCrew(size_t crew);
     void nextDay();
+
 private:
     std::shared_ptr<Ship> ship_;
     std::shared_ptr<Time> publisher_;
