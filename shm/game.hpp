@@ -26,7 +26,6 @@ private:
     std::shared_ptr<Time> publisher_;
     std::shared_ptr<Ship> ship_;
     std::shared_ptr<Player> player_;
-    std::shared_ptr<Time> time_;
     std::shared_ptr<Map> map_;
 
     void printTrail();

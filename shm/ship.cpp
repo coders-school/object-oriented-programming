@@ -56,7 +56,7 @@ void Ship::nextDay(){
         crew_ = crew_ / 2;
         break;
     default: 
-        std::cout << "Fortunately today everyone are still alive!\n" << '\n';
+        std::cout << "Fortunately today everyone are still alive!\n";
     }
 }
 

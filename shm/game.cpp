@@ -19,8 +19,7 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
       publisher_(std::make_shared<Time>()),
       ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1, publisher_)),
       player_(std::make_shared<Player>(ship_, 500, 200, publisher_)),
-      time_(std::make_shared<Time>()),
-      map_(std::make_shared<Map>(time_.get())) {}
+      map_(std::make_shared<Map>(publisher_.get())) {}
 
 void Game::startGame() {
     printTrail();
@@ -44,7 +43,7 @@ void Game::startGame() {
     std::cout << "~~~May the force be with you!~~~ \n";
     printTrail();
 
-    while (days_ > time_->getElapsedTime()) {
+    while (days_ > publisher_->getElapsedTime()) {
         if (checkWinConditions()) {
             printWinScreen();
             return;
@@ -98,10 +97,10 @@ void Game::printLoseScreen() {
 
 void Game::printMenu() {
     std::cout << "Money: " << player_->getMoney() << " | "
-              << "Day: " << time_->getElapsedTime() << " | "
-              << "Days left: " << days_ - time_->getElapsedTime() << " | "
-              << "Money to earn: " << finalGoal_ - money_ << " | ";
-             // << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
+              << "Day: " << publisher_->getElapsedTime() << " | "
+              << "Days left: " << days_ - publisher_->getElapsedTime() << " | "
+              << "Money to earn: " << finalGoal_ - money_ << " | "
+              << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
 }
 
 void Game::printOptions() {
@@ -159,10 +158,13 @@ void Game::travel() {
             std::cin >> travelDecision;
             if (std::toupper(travelDecision) == 'Y') {
                 map_->travel(island);
-                std::cout << "~~~~" << '\n' << daysOfTravel << " day/s have passed. \n";
+                std::cout << "~~~~" << '\n' << daysOfTravel << " day/s have passed: \n";
                 for (size_t i = 0; i < daysOfTravel; i++) {
-                    ++*time_;
+                    ++*publisher_;
                 }
+                break;
+            }
+            if (std::toupper(travelDecision) == 'N') {
                 break;
             }
         }
@@ -176,8 +178,6 @@ void Game::buy() {
 }
 
 void Game::sell() {
-    //Store store(gameTime);
-    //std::cout << "\n" << store << "\n";
 }
 
 void Game::showCargo() {
