@@ -12,7 +12,6 @@ public:
     void addObserver(Observer* obs);
     void removeObserver(Observer* obs);
     size_t getElapsedTime() const;
-    void notifyObservers();    
     Time& operator++();
 
 private:
