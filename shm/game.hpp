@@ -28,7 +28,6 @@ private:
     std::shared_ptr<Player> player_;
     std::shared_ptr<Time> time_;
     std::shared_ptr<Map> map_;
-    Time* gameTime;
 
     void printTrail();
     void printStars();

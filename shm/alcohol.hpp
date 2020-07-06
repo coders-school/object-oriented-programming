@@ -13,7 +13,6 @@ public:
     
     ~Alcohol(){
         this->Publisher_->removeObserver(this);
-        std::cout << "Goodbye, I was your Alcohol :)\n";
     };
 
 //Override from Observer
