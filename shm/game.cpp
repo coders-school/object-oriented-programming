@@ -34,23 +34,29 @@ void Game::startGame() {
             break;
         }
         printMenu();
-        printTrail();
         printOptions();
-        printTrail();
         int pickAction;
         std::cin >> pickAction;
+        inputValidator();
         makeAction(static_cast<Action>(pickAction));
         if (pickAction == 0) {
             break;
         }
-        printTrail();
     }
     
     printLoseScreen();
 }
 
-void Game::printTrail() {
-    const std::string trail(100, '-');
+void Game::inputValidator() {
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Something went wrong, try to type it one more time.\n";
+    }
+}
+
+void Game::printTrail(char sign) {
+    const std::string trail(100, sign);
     std::cout << trail << '\n';
 }
 
@@ -60,7 +66,7 @@ void Game::printStars() {
 }
 
 void Game::printWelcomePage() {
-    printTrail();
+    printTrail('-');
     printStars();
     printStars();
     std::cout << std::setw(8) << "Welcome" 
@@ -72,14 +78,15 @@ void Game::printWelcomePage() {
     printStars();
     printStars();
     std::cout << '\n';
-    printTrail();
+    printTrail('-');
     printStars();
     std::cout << std::setw(8) << "You have: " << days_ << " days to get: " << finalGoal_ << " gold. Have a nice time!";
     printStars();
     printStars();
     std::cout << "\n\n\n";
     std::cout << "~~~May the force be with you!~~~ \n";
-    printTrail();
+    printTrail('-');
+    std::cout << "\n\n\n";
 }
 
 bool Game::checkWinConditions() const {
@@ -87,9 +94,10 @@ bool Game::checkWinConditions() const {
 }
 
 void Game::printWinScreen() {
+    printTrail('+');
     std::cout << "Congratulations, you won! \n"
               << "You have got " << money_ << "money in " << days_ << "!\n";
-    printTrail();
+    printTrail('+');
 }
 
 bool Game::checkLoseConditions() const {
@@ -97,26 +105,31 @@ bool Game::checkLoseConditions() const {
 }
 
 void Game::printLoseScreen() {
+    printTrail('-');
     std::cout << "You have lost, good bye. \n"
               << "You have failed to get: " << finalGoal_ - money_ << " more money.\n";
-    printTrail();
+    printTrail('-');
 }
 
 void Game::printMenu() {
+    printTrail('=');
     std::cout << "Money: " << player_->getMoney() << " | "
               << "Day: " << publisher_->getElapsedTime() << " | "
               << "Days left: " << days_ - publisher_->getElapsedTime() << " | "
               << "Money to earn: " << finalGoal_ - player_->getMoney() << " | "
               << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
+    printTrail('=');
 }
 
 void Game::printOptions() {
+    printTrail('-');
     std::cout << "What do you want to do? \n"
               << "1. Travel \n"
               << "2. Buy \n"
               << "3. Sell \n"
               << "4. Print cargo \n"
-              << "0. Exit game \n"; 
+              << "0. Exit game \n";
+    printTrail('-');
 }
 
 void Game::makeAction(Action pickAction) {
@@ -153,6 +166,7 @@ void Game::travel() {
         std::cout << "Where do you want to sail? (posX posY) \n";
         int posX, posY;
         std::cin >> posX >> posY;
+        inputValidator();
         Island* island = map_->getIsland(Coordinates(posX, posY));
         if (island == map_->getCurrentPosition()) {
             std::cout << "You are already here! \n";
@@ -163,6 +177,7 @@ void Game::travel() {
             std::cout << "Travel will take " << daysOfTravel << " day/s. Do you want to travel Y/N? ";
             char travelDecision;
             std::cin >> travelDecision;
+            inputValidator();
             if (std::toupper(travelDecision) == 'Y') {
                 map_->travel(island);
                 std::cout << "~~~~" << '\n' << daysOfTravel << " day/s have passed: \n";
