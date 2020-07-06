@@ -19,7 +19,6 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Cargo* cargo);
     void nextDay() override;
 
-    // Fruit& operator--();
     Cargo& operator+=(const size_t& amount) override;
     Cargo& operator-=(const size_t& amount) override;
     bool operator==(Cargo& fruit) const override;

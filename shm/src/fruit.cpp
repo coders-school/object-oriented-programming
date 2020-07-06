@@ -23,13 +23,6 @@ std::string Fruit::getInfo() const {
     return ss.str();
 }
 
-// Fruit& Fruit::operator--() {
-//     if (timeToRotten_ > 0) {
-//         timeToRotten_--;
-//     }
-//     return *this;
-// }
-
 Cargo& Fruit::operator+=(const size_t& amount) {
     amount_ += amount;
     return *this;
