@@ -12,6 +12,7 @@ jobs:
       working-directory: shm
       run: |
         chmod +x check.sh
+        sudo apt-get update
         ./check.sh CMakeLists.txt
   SHM:
     runs-on: ubuntu-latest
@@ -28,4 +29,3 @@ jobs:
     - name: Run tests
       working-directory: shm/build
       run: ctest -V
-      
