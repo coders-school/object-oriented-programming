@@ -19,7 +19,9 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
       publisher_(std::make_shared<Time>()),
       ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1, publisher_)),
       player_(std::make_shared<Player>(ship_, 500, 200, publisher_)),
-      map_(std::make_shared<Map>(publisher_.get())) {}
+      map_(std::make_shared<Map>(publisher_.get())) {
+          ship_->fillInCrew();
+      }
 
 void Game::startGame() {
     printWelcomePage();
@@ -114,7 +116,7 @@ void Game::printOptions() {
               << "2. Buy \n"
               << "3. Sell \n"
               << "4. Print cargo \n"
-              << "0. Exit game \n";
+              << "0. Exit game \n"; 
 }
 
 void Game::makeAction(Action pickAction) {

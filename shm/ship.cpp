@@ -42,7 +42,7 @@ void Ship::nextDay(){
         break;
     default: 
         std::cout << "Fortunately today everyone are still alive!\n";
-    }
+        }
 }
 
 void Ship::load(Alcohol* cargo) {
