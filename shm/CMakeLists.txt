@@ -45,12 +45,12 @@ project(shm)
 enable_testing()
 
 add_executable(${PROJECT_NAME} main.cpp )
-add_executable(${PROJECT_NAME}-ut test.cpp ${SHM_SOURCES} )
+add_executable(${PROJECT_NAME}-ut test.cpp )
 
 
 
 
-target_link_libraries(${PROJECT_NAME}-ut gtest_main)
+target_link_libraries(${PROJECT_NAME}-ut gtest_main ShmLib)
 target_link_libraries(${PROJECT_NAME} ShmLib)
 
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
