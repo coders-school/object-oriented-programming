@@ -52,15 +52,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 ##Insert project source files here.##
 set(SOURCES
-${SOURCE_DIR}/island.cpp
-${SOURCE_DIR}/cargo.cpp
-${SOURCE_DIR}/coordinates.cpp
-${SOURCE_DIR}/ship.cpp
-${SOURCE_DIR}/map.cpp
-${SOURCE_DIR}/player.cpp
-${SOURCE_DIR}/time.cpp
-${SOURCE_DIR}/fruit.cpp
-${SOURCE_DIR}/item.cpp
+    ${SOURCE_DIR}/island.cpp
+    ${SOURCE_DIR}/cargo.cpp
+    ${SOURCE_DIR}/coordinates.cpp
+    ${SOURCE_DIR}/ship.cpp
+    ${SOURCE_DIR}/map.cpp
+    ${SOURCE_DIR}/player.cpp
+    ${SOURCE_DIR}/time.cpp
+    ${SOURCE_DIR}/fruit.cpp
+    ${SOURCE_DIR}/item.cpp
 )
 
 add_library(${CMAKE_PROJECT_NAME}-lib STATIC ${SOURCES})
@@ -70,6 +70,9 @@ add_executable(${CMAKE_PROJECT_NAME}-ut ${TEST_DIR}/test.cpp)
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${CMAKE_PROJECT_NAME}-lib)
 target_link_libraries(${CMAKE_PROJECT_NAME}-ut ${CMAKE_PROJECT_NAME}-lib gtest_main)
+
+target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
+target_compile_options(${PROJECT_NAME}-ut PRIVATE -Wall -Wextra -Werror -Wconversion -pedantic -O3)
 
 enable_testing()
 add_test(NAME shm_test COMMAND ${CMAKE_PROJECT_NAME}-ut)
