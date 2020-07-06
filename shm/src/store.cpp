@@ -15,23 +15,23 @@ Store::Store()
 //-----------------------------------------------------------------------------------
 Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (cargo) {
-        if (this->getCargo(cargo->getName()) != nullptr) {
+        if (getCargo(cargo->getName()) != nullptr) {
             size_t totalPrice =
-                this->getCargo(cargo->getName())->getBasePrice() * amount;
+                getCargo(cargo->getName())->getBasePrice() * amount;
 
             if (player->getMoney() < totalPrice)
                 return Response::lack_of_money;
 
-            if (this->getCargo(cargo->getName())->getAmount() < amount)
+            if (getCargo(cargo->getName())->getAmount() < amount)
                 return Response::lack_of_cargo;
 
             if (player->getAvailableSpace() <
-                this->getCargo(cargo->getName())->getAmount())
+                getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
             player->setMoney(player->getMoney() - totalPrice);
-            this->setAvaiableFunds(this->getAvaiableFunds() + totalPrice);
-            this->updateCargo(cargo, amount, updateMode::BUY, player);
+            setAvaiableFunds(getAvaiableFunds() + totalPrice);
+            updateCargo(cargo, amount, updateMode::BUY, player);
 
             return Response::done;
         }
@@ -45,23 +45,23 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 //-----------------------------------------------------------------------------------
 Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     if (cargo) {
-        if (this->getCargo(cargo->getName()) != nullptr) {
+        if (getCargo(cargo->getName()) != nullptr) {
             size_t totalPrice =
                 player->getCargo(cargo->getName())->getBasePrice() * amount;
 
-            if (this->getAvaiableFunds() < totalPrice)
+            if (getAvaiableFunds() < totalPrice)
                 return Response::lack_of_money;
 
             if (player->getCargo(cargo->getName())->getAmount() < amount)
                 return Response::lack_of_cargo;
 
-            if (this->getAvaiableSpace() <
+            if (getAvaiableSpace() <
                 player->getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
             player->setMoney(player->getMoney() + totalPrice);
-            this->setAvaiableFunds(this->getAvaiableFunds() - totalPrice);
-            this->updateCargo(cargo, amount, updateMode::SELL, player);
+            setAvaiableFunds(getAvaiableFunds() - totalPrice);
+            updateCargo(cargo, amount, updateMode::SELL, player);
             return Response::done;
         }
     }
@@ -74,8 +74,8 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 //-----------------------------------------------------------------------------------
 bool Store::addCargo(Cargo* cargo) {
     bool success = false;
-    if (this->getAvaiableSpace() >= cargo->getAmount()) {
-        auto ptrCargo = this->getCargo(cargo->getName());
+    if (getAvaiableSpace() >= cargo->getAmount()) {
+        auto ptrCargo = getCargo(cargo->getName());
         if (ptrCargo == nullptr) {
             cargo_.push_back(cargo);
         } else {
@@ -130,15 +130,15 @@ void Store::updateCargo(Cargo* cargo,
             player->getCargo(cargo->getName())->setAmount(amount);
         }
 
-        if (this->getCargo(cargo->getName())->getAmount() == amount) {
+        if (getCargo(cargo->getName())->getAmount() == amount) {
             auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](Cargo* el) {
                 return el->getName() == cargo->getName();
             });
             cargo_.erase(it);
 
         } else {
-            size_t tmpAmount = this->getCargo(cargo->getName())->getAmount() - amount;
-            this->getCargo(cargo->getName())->setAmount(tmpAmount);
+            size_t tmpAmount = getCargo(cargo->getName())->getAmount() - amount;
+            getCargo(cargo->getName())->setAmount(tmpAmount);
         }
 
     } else if (mode == SELL) {
@@ -150,8 +150,8 @@ void Store::updateCargo(Cargo* cargo,
             player->getCargo(cargo->getName())->setAmount(tmpAmount);
         }
 
-        size_t tmpAmount = this->getCargo(cargo->getName())->getAmount() + amount;
-        this->getCargo(cargo->getName())->setAmount(tmpAmount);
+        size_t tmpAmount = getCargo(cargo->getName())->getAmount() + amount;
+        getCargo(cargo->getName())->setAmount(tmpAmount);
     }
 }
 

@@ -58,8 +58,8 @@ size_t Ship::getAvailableSpace() const {
 
 bool Ship::addCargo(Cargo* cargo) {
   bool success = false;
-  if (this->getAvailableSpace() >= cargo->getAmount()) {
-    auto ptrCargo = this->getCargo(cargo->getName());
+  if (getAvailableSpace() >= cargo->getAmount()) {
+    auto ptrCargo = getCargo(cargo->getName());
     if (ptrCargo == nullptr) {
       cargo_.push_back(cargo);
     } else {

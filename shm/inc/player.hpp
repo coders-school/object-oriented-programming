@@ -11,8 +11,8 @@ public:
 
     std::unique_ptr<Ship> getShip() { return std::move(ship_); }
     size_t getMoney() const { return money_; }
-    size_t getAvailableSpace() const { return this->ship_->getAvailableSpace(); }
-    size_t getSpeed() const { return this->ship_->getSpeed(); }
+    size_t getAvailableSpace() const { return ship_->getAvailableSpace(); }
+    size_t getSpeed() const { return ship_->getSpeed(); }
     std::shared_ptr<Cargo> getCargo(size_t index) const;
     Cargo* getCargo(const std::string& name) const;
 
