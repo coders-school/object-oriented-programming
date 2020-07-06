@@ -14,10 +14,10 @@ private:
     std::shared_ptr<Time> time_{nullptr};
 
 public:
-    //Override from Observer
-    void nextDay() override;
-
     Store(std::shared_ptr<Time>& time);
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
+
+    //Override from Observer
+    void nextDay() override;
 };
