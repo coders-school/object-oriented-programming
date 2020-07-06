@@ -58,7 +58,7 @@ void Fruit::nextDay() {
     if (timeToSpoilLeft_ > 0) {
         --timeToSpoilLeft_;
     }
-    if (timeToSpoilLeft_ = 0) {
+    if (timeToSpoilLeft_ == 0) {
         amount_ = 0;
     }
 }
