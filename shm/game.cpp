@@ -16,8 +16,9 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
       days_(days),
       finalGoal_(finalGoal),
       currentDay_(1),
-      ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1)),
-      player_(std::make_shared<Player>(ship_, 500, 200)),
+      publisher_(std::make_shared<Time>()),
+      ship_(std::make_shared<Ship>(150, 50, 13, "Player_ship", 1, publisher_)),
+      player_(std::make_shared<Player>(ship_, 500, 200, publisher_)),
       time_(std::make_shared<Time>()),
       map_(std::make_shared<Map>()) {}
 
@@ -99,8 +100,8 @@ void Game::printMenu() {
     std::cout << "Money: " << player_->getMoney() << " | "
               << "Day: " << time_->getElapsedTime() << " | "
               << "Days left: " << days_ - time_->getElapsedTime() << " | "
-              << "Money to earn: " << finalGoal_ - money_ << " | "
-              << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
+              << "Money to earn: " << finalGoal_ - money_ << " | ";
+             // << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
 }
 
 void Game::printOptions() {

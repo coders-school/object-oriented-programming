@@ -54,9 +54,8 @@ set(SRC
 enable_testing()
 
 set(TEST
-    testShip.cpp
-    testItem.cpp)
-    
+    testShip.cpp)
+
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 
 add_executable(${PROJECT_NAME} main.cpp)

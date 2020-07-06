@@ -2,16 +2,22 @@
 
 #include "gtest/gtest.h"
 #include "ship.hpp"
+#include "timeSHM.hpp"
+#include <string>
 
 class ShipTest : public ::testing::Test {
+    
 protected:
     std::string name = "First_Ship";
     size_t maxCrewOfShip = 30;
     size_t maxCargoCapacity = 100;
     size_t speedOfShip = 10;
     size_t idOfShip = 1;
-
-    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip) {}
+    
+    std::shared_ptr<Time> time_ = std::make_shared<Time>();
+    
+    ShipTest() : shipOne(maxCargoCapacity, maxCrewOfShip, speedOfShip, name, idOfShip, time_) {
+    }
     Ship shipOne;
 };
 

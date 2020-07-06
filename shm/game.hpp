@@ -23,6 +23,7 @@ private:
     size_t days_ {0};
     const size_t finalGoal_ {0};
     size_t currentDay_ {0};
+    std::shared_ptr<Time> publisher_;
     std::shared_ptr<Ship> ship_;
     std::shared_ptr<Player> player_;
     std::shared_ptr<Time> time_;

@@ -20,20 +20,24 @@ void Item::nextDay(){
         std::cout<<"One of your item has been stolen by crew\n";
         --amount_;
         break;
+        return;
     case 20:
         std::cout<<"One of your item has drowned, I am sorry!\n";
         --amount_;
         break;
+        return;
     case 60:
         std::cout<<"Your item has been partially damaged by mice\n";
         basePrice_ = static_cast<size_t>(static_cast<double>(basePrice_) * 0.9);
         break;
+        return;
     case 90:
         std::cout<<"Your item corroded\n";
         basePrice_ = static_cast<size_t>(static_cast<double>(basePrice_)*0.5);
         break;
+        return;
     default: 
-        std::cout << "Fortunately nothing has changed!\n" << '\n';
+        std::cout << "Fortunately nothing has changed!\n"; 
     }
 }
 

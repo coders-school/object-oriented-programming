@@ -21,11 +21,11 @@ protected:
     size_t basePrice = 1000;
     Time Publisher;
     ItemTest() : itemOne(name, amount, basePrice, rarity, &Publisher) {
-        shipOne = Ship(65, 20, 7, "Middleman", 2);   
+        shipOne = Ship(65, 20, 7, "Middleman", 2, &Publisher);   
     };
     Item itemOne;
     Ship shipOne;
-    Player playerOne = Player(std::make_unique<Ship>(40, 10, 5, "Battered Boat", 3));
+    Player playerOne = Player(std::make_shared<Ship>(40, 10, 5, "Battered Boat", 3, &Publisher));
     Store storeOne = Store(&Publisher);
 };
 

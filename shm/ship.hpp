@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
@@ -7,14 +7,22 @@
 #include "alcohol.hpp"
 #include "fruit.hpp"
 #include "cargo.hpp"
+#include "timeSHM.hpp"
 #include "item.hpp"
+class Ship : public Observer {
 
-class Ship {
 public: 
     Ship();
-    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id);
-    Ship(size_t maxCrew, size_t speed, int id);
-    void setName(const std::string& name);
+    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, std::shared_ptr<Time> publisher);
+    //Ship(size_t maxCrew, size_t speed, int id);
+    ~Ship(){
+        this->publisher_->removeObserver(this);
+        std::cout << "Goodbye! I was your Ship\n";
+    };
+    void setName(const std::string& name); 
+    void load(Cargo* cargo);
+   // void unload(Cargo* cargo);
+   void nextDay() override; 
     void load(Alcohol* cargo);
     void load(Fruit* cargo);
     void load(Item* cargo);
@@ -36,7 +44,9 @@ public:
     Fruit*   findFruitByName(const std::string& name);
     Item*    findItemByName(const  std::string& name);
     size_t countAvailableSpace() const;
-    void   printCargo() const;
+    size_t fillInCrew();
+    void printCargo() const;
+    
 private:
     Cargo* findCargo(Cargo* cargo);
     template<typename T>  T findCargoByName(const std::string& name,
@@ -49,6 +59,7 @@ private:
     std::string name_;
     int id_;
     std::vector<Cargo*> cargo_;
+    std::shared_ptr<Time> publisher_;
     std::vector<Alcohol*> alcos_;
     std::vector<Fruit*> fruits_;
     std::vector<Item*> items_;

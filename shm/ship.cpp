@@ -1,19 +1,63 @@
 #include "ship.hpp"
-
+#include <iostream>
 #include <algorithm>
 #include <numeric>
 
 Ship::Ship()
     : id_(-1) {}
 
-Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, std::shared_ptr<Time> publisher)
+    : capacity_(capacity), 
+    maxCrew_(maxCrew), 
+    crew_(0), 
+    speed_(speed), 
+    name_(name), 
+    id_(id),
+    publisher_(publisher){
+    this->publisher_->addObserver(this);
+    }
 
-Ship::Ship(size_t maxCrew, size_t speed, int id)
-    : Ship(0, maxCrew, speed, "", id) {}
+//Ship::Ship(size_t maxCrew, size_t speed, int id)
+//   : Ship(0, maxCrew, speed, "", id) {}
 
 void Ship::setName(const std::string& name) {
     name_ = name;
+}
+   //wziąć pod uwagę available space - countFreeSpace w klasie player!
+    //porównanie dwóch towarów - akumulacja tych samych typów towarów
+    //czy zmiesci sie caly towar (maxcapacity?)
+
+// void Ship::unload(Cargo* cargo) {
+//     auto matchCargo = find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
+//                  return ptr.get() == cargo;
+//                  });
+//     if (matchCargo != cargo_.end())
+//         cargo_.erase(matchCargo);
+// }
+  //sprawdzić ilość czy jest 0 - usuwamy
+  //ile zostanie towaru
+void Ship::nextDay(){
+    int lottery =(rand()%10+1)+(rand()%10+1); 
+    switch(lottery){
+    case 1: 
+        std::cout<<"One of your sailor has drown!\n";
+        --crew_;
+        break;
+    case 6:
+        std::cout<<"One of your sailor died because of malaria!\n";
+        --crew_;
+        break;
+    case 15:
+        std::cout<<"One of your sailor rebelled and drowned under the keel\n";
+        --crew_;
+        break;
+    case 20:
+        std::cout<<"You lost half of your crew during battle with pirates!\n";
+        crew_ = crew_ / 2;
+        break;
+    default: 
+        std::cout << "Fortunately today everyone are still alive!\n" << '\n';
+    }
 }
 
 void Ship::load(Alcohol* cargo) {
@@ -81,6 +125,18 @@ size_t Ship::countAvailableSpace() const {
                                         return item += cargo->getAmount();
                                     });
     return capacity_ - loadedSpace;
+}
+
+size_t Ship::fillInCrew() {
+    if(crew_ < maxCrew_) {
+        size_t previousCrew = crew_;
+        crew_ = maxCrew_;
+        std::cout << "You hired: " << (maxCrew_ - previousCrew) << " sailors\n";
+
+        return maxCrew_ - previousCrew;
+    }
+    std::cout << "You have maximum number of sailors!\n";
+    return 0;
 }
 
 template<typename T>
