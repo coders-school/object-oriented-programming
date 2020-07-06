@@ -8,11 +8,11 @@ class Island {
 public:
     Island(Coordinates position, Time* time);
     Coordinates getPosition() const;
-    Store* getStore() const;
+    std::shared_ptr<Store> getStore() const;
     void createStore();
 
 private:
     Coordinates position_;
-    Store* store_;
+    std::shared_ptr<Store> store_;
     Time* time_;
 };

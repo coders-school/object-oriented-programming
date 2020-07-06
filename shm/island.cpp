@@ -2,14 +2,14 @@
 #include "coordinates.hpp"
 
 Island::Island(Coordinates position, Time* time) : position_(position), time_(time) {
-    store_ = new Store(time);
+    store_ = std::shared_ptr<Store>(new Store(time));
 }
 
 Coordinates Island::getPosition() const {
     return position_;
 }
 
-Store* Island::getStore() const {
+std::shared_ptr<Store> Island::getStore() const {
     return store_;
 }
 
