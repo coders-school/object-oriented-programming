@@ -77,7 +77,7 @@ bool Store::addCargo(Cargo* cargo) {
     if (this->getAvaiableSpace() >= cargo->getAmount()) {
         auto ptrCargo = this->getCargo(cargo->getName());
         if (ptrCargo == nullptr) {
-            cargoVec.push_back(cargo);
+            cargo_.push_back(cargo);
         } else {
             size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
             ptrCargo->setAmount(tmpAmount);
@@ -93,7 +93,7 @@ bool Store::addCargo(Cargo* cargo) {
 // <summary> Finds particular cargo in cargo vec using std::name for comparsion
 //-----------------------------------------------------------------------------------
 Cargo* Store::getCargo(const std::string& name) {
-    return Common::getCargo(name, cargoVec);
+    return Common::getCargo(name, cargo_);
 }
 
 /*public*/
@@ -101,7 +101,7 @@ Cargo* Store::getCargo(const std::string& name) {
 // <summary> Checks the Store's avaiable space
 //-----------------------------------------------------------------------------------
 size_t Store::getAvaiableSpace() const {
-    return Common::getAvailableSpace(capacity_, cargoVec);
+    return Common::getAvailableSpace(capacity_, cargo_);
 }
 
 /*public*/
@@ -109,7 +109,7 @@ size_t Store::getAvaiableSpace() const {
 // <summary> Prints out the cargo vector content
 //-----------------------------------------------------------------------------------
 void Store::printCargo() {
-    Common::printCargo(cargoVec);
+    Common::printCargo(cargo_);
 }
 
 /*private*/
@@ -131,10 +131,10 @@ void Store::updateCargo(Cargo* cargo,
         }
 
         if (this->getCargo(cargo->getName())->getAmount() == amount) {
-            auto it = std::find_if(cargoVec.begin(), cargoVec.end(), [=](Cargo* el) {
+            auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](Cargo* el) {
                 return el->getName() == cargo->getName();
             });
-            cargoVec.erase(it);
+            cargo_.erase(it);
 
         } else {
             size_t tmpAmount = this->getCargo(cargo->getName())->getAmount() - amount;

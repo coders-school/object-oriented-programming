@@ -44,7 +44,7 @@ public:
 private:
     size_t capacity_;
     size_t avaiableFunds_;
-    std::vector<Cargo*> cargoVec;
+    std::vector<Cargo*> cargo_;
 
     void updateCargo(Cargo* cargo, size_t amount, updateMode mode, Player* player);
 };
