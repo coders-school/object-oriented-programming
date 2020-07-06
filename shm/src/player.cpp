@@ -29,6 +29,10 @@ void Player::payCrew(size_t money) {
     Player::subtractMoney(money);
 }
 
+size_t Player::getCargoAmount() const {
+    return ship_->getCargo().size();
+}
+
 size_t Player::getAvailableSpace() const {
    size_t totalAmount = 0;
    for(const auto el : ship_->getCargo()){

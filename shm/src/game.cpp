@@ -11,10 +11,8 @@ Game::Game(size_t start_money, size_t game_days, size_t final_goal)
     : start_money_(start_money), game_days_(game_days), final_goal_(final_goal) {
     time_ = std::make_shared<Time>(game_days_);
     map_ = std::make_unique<Map>(time_);
-    //ship_ = generateShip();
-    //player_ = std::make_unique<Player>(ship_, start_money_);
     player_ = std::make_unique<Player>(start_money, time_);
-};
+}
 
 void Game::startGame() {
     std::cout << "Start\n";
@@ -37,10 +35,6 @@ void Game::startGame() {
     printLooseScreen();
     exit();
 }
-
-// std::shared_ptr<Ship> Game::generateShip() {
-//     return std::make_shared<Ship>(1, "Maria", 1, 128, 1200);
-// }
 
 bool Game::checkWinCondition() const {
     return player_->getMoney() >= final_goal_;
@@ -181,13 +175,14 @@ void Game::buy() {
 void Game::sell() {
     std::cout << "Sell\n";
     auto actualIslandStore = map_->getCurrentPosition()->getStore();
-    std::cout << actualIslandStore << '\n';
+    //std::cout << actualIslandStore << '\n';
+    player_ -> printCargo();
     size_t cargoNr, amountNr;
     std::cout << "Please, write cargo number: ";
     std::cin >> cargoNr;
     std::cout << "Please, write amount: ";
     std::cin >> amountNr;
-    while (std::cin.fail() || cargoNr < 0 || cargoNr > actualIslandStore.getCargoContainer().size()) {
+    while (std::cin.fail() || cargoNr < 0 || cargoNr > player_ -> getCargoAmount()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Wrong data. First digit from 0 to " << actualIslandStore.getCargoContainer().size() << ": ";

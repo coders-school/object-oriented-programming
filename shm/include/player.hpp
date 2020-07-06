@@ -14,6 +14,7 @@ public:
     size_t getMoney() const { return money_; }
     size_t getSpeed() const { return ship_->getSpeed(); }
     cargoPtr getCargo(const size_t index) const { return ship_->getCargo()[index]; }
+    size_t getCargoAmount() const;
     size_t getAvailableSpace() const;
     void setShip(const std::shared_ptr<Ship>& ship);
     void addMoney(const size_t& money);
