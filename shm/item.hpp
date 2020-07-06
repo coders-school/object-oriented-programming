@@ -10,6 +10,7 @@ public:
     Item(uint32_t amount, const std::string& name, uint32_t basePrice, Rarity rarity);
     ~Item() override;
 
+    // override from Cargo
     std::string getName() const override;
     uint32_t getAmount() const override;
     uint32_t getBasePrice() const override;

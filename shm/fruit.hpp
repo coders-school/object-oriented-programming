@@ -9,6 +9,7 @@ public:
     Fruit(uint32_t amount, const std::string& name, uint32_t basePrice, int32_t expiryDate);
     ~Fruit() override;
 
+    // override from Cargo
     std::string getName() const override;
     uint32_t getAmount() const override;
     uint32_t getBasePrice() const override;

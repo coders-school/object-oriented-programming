@@ -54,10 +54,10 @@ Cargo& Fruit::operator-=(uint32_t amount) {
 }
 
 bool Fruit::operator==(const Cargo& cargo) const {
-    auto fruit = static_cast<const Fruit&>(cargo);
     if (typeid(*this) != typeid(cargo)) {
         return false;
     }
+    auto fruit = static_cast<const Fruit&>(cargo);
     return (fruit.getBasePrice() == basePrice_) && (fruit.getName() == name_) &&
            (fruit.getExpiryDate() == currentExpiryDate_);
 }

@@ -42,10 +42,10 @@ Cargo& Item::operator-=(uint32_t amount) {
 }
 
 bool Item::operator==(const Cargo& cargo) const {
-    auto item = static_cast<const Item&>(cargo);
     if (typeid(*this) != typeid(cargo)) {
         return false;
     }
+    auto item = static_cast<const Item&>(cargo);
     return (item.getBasePrice() == basePrice_) && (item.getName() == name_) && (item.getRarity() == rarity_);
 }
 

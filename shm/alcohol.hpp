@@ -8,6 +8,8 @@ class Alcohol : public Cargo {
 public:
     Alcohol(uint32_t amount, const std::string& name, uint32_t basePrice, int32_t power);
     ~Alcohol() override;
+
+    // override from Cargo
     virtual std::shared_ptr<Cargo> clone() const override;
 
     std::string getName() const override;
