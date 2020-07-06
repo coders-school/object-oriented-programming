@@ -35,6 +35,7 @@ void Game::startGame() {
         printOptions();
         int pickAction;
         std::cin >> pickAction;
+        inputValidator();
         makeAction(static_cast<Action>(pickAction));
         if (pickAction == 0) {
             break;
@@ -42,6 +43,14 @@ void Game::startGame() {
     }
     
     printLoseScreen();
+}
+
+void Game::inputValidator() {
+    if (std::cin.fail()) {
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::cout << "Something went wrong, try to type it one more time.\n";
+    }
 }
 
 void Game::printTrail(char sign) {
@@ -155,6 +164,7 @@ void Game::travel() {
         std::cout << "Where do you want to sail? (posX posY) \n";
         int posX, posY;
         std::cin >> posX >> posY;
+        inputValidator();
         Island* island = map_->getIsland(Coordinates(posX, posY));
         if (island == map_->getCurrentPosition()) {
             std::cout << "You are already here! \n";
@@ -165,6 +175,7 @@ void Game::travel() {
             std::cout << "Travel will take " << daysOfTravel << " day/s. Do you want to travel Y/N? ";
             char travelDecision;
             std::cin >> travelDecision;
+            inputValidator();
             if (std::toupper(travelDecision) == 'Y') {
                 map_->travel(island);
                 std::cout << "~~~~" << '\n' << daysOfTravel << " day/s have passed: \n";
