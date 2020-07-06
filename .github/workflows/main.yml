@@ -4,7 +4,6 @@ on: [push, pull_request]
 
 jobs:
   checker:
-  SHM:
     runs-on: ubuntu-latest
     steps:
     - name: Check out code
@@ -14,7 +13,11 @@ jobs:
       run: |
         chmod +x check.sh
         ./check.sh CMakeLists.txt
-
+  SHM:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@master
     - name: mkdir shm/build
       run: mkdir shm/build
     - name: Compile
@@ -25,4 +28,4 @@ jobs:
     - name: Run tests
       working-directory: shm/build
       run: ctest -V
-
+      
