@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstddef>
-#include <vector>
+#include <list>
 
 #include "Observer.hpp"
 
@@ -9,8 +9,10 @@ class Time {
 public:
     Time& operator++();
     size_t getTimeElpased() const { return _timeElapsed; }
+    void addObserver(Observer* observer);
+    void removeObserver(Observer* observer);
 
 private:
     size_t _timeElapsed;
-    std::vector<Observer*> _observers;
+    std::list<Observer*> _observers;
 };

@@ -11,3 +11,11 @@ Time& Time::operator++() {
 
     return *this;
 }
+
+void Time::addObserver(Observer* observer) {
+    _observers.push_back(observer);
+}
+
+void Time::removeObserver(Observer* observer) {
+    _observers.remove(observer);
+}
