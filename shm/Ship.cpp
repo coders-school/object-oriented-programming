@@ -13,20 +13,28 @@ Ship::Ship(int id,
            size_t speed,
            size_t maxCrew,
            size_t capacity,
-           Delegate* delegate)
+           Delegate* delegate,
+           Time* time)
     : _id(id),
     _name(name),
     _speed(speed),
     _maxCrew(maxCrew),
     _capacity(capacity),
     _crew(CREW),
-    _delegate(delegate) {
+    _delegate(delegate),
+    _time(time){
+        _time->addObserver(this);
 }
 
 Ship::Ship(int id,
            size_t speed,
-           size_t maxCrew)
-    : Ship(id, "", speed, maxCrew, 0, nullptr) {
+           size_t maxCrew,
+           Time* time)
+    : Ship(id, "", speed, maxCrew, 0, nullptr, time) {
+}
+
+Ship::~Ship(){
+    _time->removeObserver(this);
 }
 
 Ship& Ship::operator+=(const size_t crew) {
