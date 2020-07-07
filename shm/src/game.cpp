@@ -185,7 +185,7 @@ void Game::sell() {
     while (std::cin.fail() || cargoNr < 0 || cargoNr > player_ -> getCargoAmount()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Wrong data. First digit from 0 to " << actualIslandStore.getCargoContainer().size() << ": ";
+        std::cout << "Wrong data. First digit from 0 to " << player_ -> getCargoAmount() << ": ";
         std::cin >> cargoNr;
     }
     --cargoNr;

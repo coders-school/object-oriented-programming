@@ -39,7 +39,6 @@ Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& play
         return Response::lack_of_money;
     }
 
-    
     if (typeid(*cargo) == typeid(Alcohol)) {
         Alcohol tempAlcohol(cargo->getName(), amount, cargo->getBasePrice());
         cargoPtr tempCargo = std::make_shared<Alcohol>(tempAlcohol);
@@ -64,14 +63,16 @@ Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& play
 }
 
 Response Store::sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player) {
-    if (!player->getShip()->FindMatchCargo(cargo.get()))
+    if (!player->getShip()->FindMatchCargo(cargo.get())) {
         return Response::lack_of_cargo;
+    }
 
-    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() < amount)
+    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() < amount) {
         return Response::lack_of_cargo;  /// maybe better lack of space here? To distinguish from nullptr above ;)
+    }
 
-    *cargo.get() += amount;
-
+    player->getShip()->Unload(cargo.get());
+    *cargo.get() -= amount;
     size_t money = amount * cargo->getPrice();
     player->addMoney(money);
 
