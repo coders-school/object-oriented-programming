@@ -15,8 +15,8 @@ Player::Player(Ship ship, size_t money)
       _availableSpace(SPACE) {
 }
 
-Player::Player(size_t money /*, Time* time*/)
-    : _ship(std::make_unique<Ship>(SHIP_ID, SHIP_NAME, SHIP_SPEED, SHIP_MAX_CREW, SHIP_CAPACITY, this)),
+Player::Player(size_t money ,Time* time)
+    : _ship(std::make_unique<Ship>(SHIP_ID, SHIP_NAME, SHIP_SPEED, SHIP_MAX_CREW, SHIP_CAPACITY, time, this)),
       _money(money),
       _availableSpace(SPACE) {
 }

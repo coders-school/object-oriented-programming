@@ -9,7 +9,7 @@ Game::Game(size_t money, size_t days, size_t finalGoal) :
     _days(days),
     _finalGoal(finalGoal),
     _map(std::make_unique<Map>()),
-    _player(std::make_unique<Player>(money)) {
+    _player(std::make_unique<Player>(money, &_time)) {
 }
 
 void Game::StartGame() {

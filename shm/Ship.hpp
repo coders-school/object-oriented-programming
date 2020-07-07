@@ -10,14 +10,14 @@
 
 class Ship : public Observer {
 public:
-    Ship();
+    Ship(Time* time);
     Ship(int id,
          const std::string& name,
          size_t speed,
          size_t maxCrew,
          size_t capacity,
-         Delegate* delegate,
-         Time* time);
+         Time* time,
+         Delegate* delegate);
     Ship(int id,
          size_t speed,
          size_t maxCrew,

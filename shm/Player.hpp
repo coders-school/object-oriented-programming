@@ -4,11 +4,12 @@
 #include "Cargo.hpp"
 #include "Observer.hpp"
 #include "Ship.hpp"
+#include "Time.hpp"
 
 class Player : public Delegate {
 public:
     Player(Ship ship, size_t money);
-    Player(size_t money /*, Time* time*/);
+    Player(size_t money, Time* time);
 
     size_t getMoney() const { return _money; }
     size_t getAvailableSpace() const { return _availableSpace; }
