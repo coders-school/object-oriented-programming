@@ -67,12 +67,18 @@ Response Store::sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& pla
         return Response::lack_of_cargo;
     }
 
-    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() < amount) {
-        return Response::lack_of_cargo;  /// maybe better lack of space here? To distinguish from nullptr above ;)
+    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() > amount) {
+        return Response::lack_of_space;
+    }
+    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() == amount) {
+        player->getShip()->Unload(cargo.get());
+    }
+    else {
+        //Still not working correctly
+        player->getShip()->FindMatchCargo(cargo.get())->operator -=(amount);
     }
 
-    player->getShip()->Unload(cargo.get());
-    *cargo.get() -= amount;
+    *cargo.get() += amount;
     size_t money = amount * cargo->getPrice();
     player->addMoney(money);
 
