@@ -42,7 +42,7 @@ void Item::nextDay() {
 
 }
 
-Cargo* Item::clone() {
-    std::shared_ptr<Item> sp_Item = std::make_shared<Item>(*this);
-    return sp_Item.get();
+std::unique_ptr<Cargo> Item::clone() {
+    std::unique_ptr<Item> item = std::make_unique<Item>(*this);
+    return std::move(item);
 }

@@ -30,7 +30,7 @@ public:
 
     void nextDay() override;
 
-    Cargo* clone() override;
+    std::unique_ptr<Cargo> clone() override;
 
 private:
     const size_t timeToSpoil_ = 5;

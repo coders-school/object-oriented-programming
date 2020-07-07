@@ -1,8 +1,5 @@
 #pragma once
 
-#include <iomanip>
-#include <iostream>
-
 #include "cargo.hpp"
 #include "common.hpp"
 #include "player.hpp"
@@ -44,7 +41,7 @@ public:
 private:
     size_t capacity_;
     size_t avaiableFunds_;
-    std::vector<Cargo*> cargo_;
+    std::vector<std::unique_ptr<Cargo>> cargo_;
 
-    void updateCargo(Cargo* cargo, size_t amount, updateMode mode, Player* player);
+    void updateCargo(Cargo* cargo, size_t amount, updateMode mode);
 };

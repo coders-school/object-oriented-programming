@@ -1,5 +1,6 @@
 #include "ship.hpp"
 
+#include <algorithm>
 #include <numeric>
 
 Ship::Ship(int maxCrew, int speed, size_t id, Time* time, Delegate* delegate)
@@ -23,23 +24,24 @@ Ship::~Ship() {
 }
 
 Ship& Ship::operator-=(const size_t crew) {
-  if (crew <= crew_) {
-    crew_ -= crew;
+    if (crew <= crew_) {
+        crew_ -= crew;
+        return *this;
+    }
     return *this;
-  }
-  return *this;
 }
 Ship& Ship::operator+=(const size_t crew) {
-  if (crew_ + crew <= maxCrew_) {
-    crew_ += crew;
+    if (crew_ + crew <= maxCrew_) {
+        crew_ += crew;
+        return *this;
+    }
     return *this;
-  }
-  return *this;
 }
 
 void Ship::setName(const std::string& name) { name_ = name; }
 void Ship::setDelegate(Delegate* delegate) { 
-    delegate_ = delegate; }
+    delegate_ = delegate; 
+}
 
 size_t Ship::getCapacity() const { return capacity_; }
 size_t Ship::getMaxCrew() const { return maxCrew_; }
@@ -49,44 +51,37 @@ std::string Ship::getName() const { return name_; }
 size_t Ship::getId() const { return id_; }
 
 Cargo* Ship::getCargo(const std::string& name) {
-  return Common::getCargo(name, cargo_);
+    return Common::getCargo(name, cargo_);
 }
 
 size_t Ship::getAvailableSpace() const {
-  return Common::getAvailableSpace(capacity_, cargo_);
+    return Common::getAvailableSpace(capacity_, cargo_);
 }
 
-bool Ship::addCargo(Cargo* cargo) {
-  bool success = false;
-  if (getAvailableSpace() >= cargo->getAmount()) {
-    auto ptrCargo = getCargo(cargo->getName());
-    if (ptrCargo == nullptr) {
-      cargo_.push_back(cargo);
-    } else {
-      size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
-      ptrCargo->setAmount(tmpAmount);
+void Ship::load(std::unique_ptr<Cargo> cargo) {
+    if (getAvailableSpace() >= cargo->getAmount()) {
+        auto ptrCargo = getCargo(cargo->getName());
+        if (ptrCargo == nullptr) {
+            cargo_.emplace_back(std::move(cargo));
+        } else {
+            *ptrCargo += cargo->getAmount();
+        }
     }
-    success = true;
-  }
-  return success;
 }
 
-bool Ship::removeCargo(Cargo* cargo) {
-  bool success = false;
-  auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](Cargo* el) {
-    return el->getName() == cargo->getName();
-  });
+void Ship::unload(Cargo* cargo) {
+    auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](std::unique_ptr<Cargo>& el) {
+        return el->getName() == cargo->getName();
+    });
 
-  if (it != cargo_.end()) {
-    cargo_.erase(it);
-    success = true;
-  }
-  return success;
-}
-
-void Ship::cloneCargo(Cargo* cargo){
-    Cargo* ptr = cargo->clone();
-    cargo_.push_back(ptr);
+    if (it != cargo_.end()) {
+        size_t currentAmount = (*it)->getAmount(); 
+        if (cargo->getAmount() >= currentAmount ) {
+            cargo_.erase(it); 
+        } else {
+            *(*it) -= cargo->getAmount();
+        }
+    }
 }
 
 void Ship::printCargo() {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 #include "observer.hpp"
 #include "time.hpp"
@@ -20,7 +21,7 @@ public:
     virtual size_t getBasePrice() const = 0;
 
     void setAmount(const size_t amount) { amount_ = amount; }
-    virtual Cargo* clone() = 0;
+    virtual std::unique_ptr<Cargo> clone() = 0;
 
  protected:
     std::string name_;

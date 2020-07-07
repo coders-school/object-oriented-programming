@@ -2,7 +2,7 @@
 
 Player::Player(Ship& ship, size_t money, size_t availableSpace)
     : money_(money), availableSpace_(availableSpace) {
-    ship_ = std::make_unique<Ship>(ship);
+    ship_ = &ship;
     ship_->setDelegate(this);
 }
 
@@ -21,3 +21,12 @@ void Player::payCrew(size_t money) {
         money_ = 0;
     }
 }
+void Player::purchaseCargo(std::unique_ptr<Cargo> cargo, size_t price) {
+    money_ -= price;
+    ship_->load(std::move(cargo));
+}
+void Player::sellCargo(Cargo* cargo, size_t price) {
+    money_ += price;
+    ship_->unload(cargo);
+}
+

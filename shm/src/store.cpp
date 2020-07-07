@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <numeric>
+#include <iostream>
 
 Store::Store(size_t capacity, size_t avaiableFunds)
     : capacity_(capacity), avaiableFunds_(avaiableFunds) {}
@@ -29,9 +30,12 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
                 getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
-            player->setMoney(player->getMoney() - totalPrice);
             setAvaiableFunds(getAvaiableFunds() + totalPrice);
-            updateCargo(cargo, amount, updateMode::BUY, player);
+            updateCargo(cargo, amount, updateMode::BUY);
+
+            std::unique_ptr<Cargo> purchase = cargo->clone();
+            purchase->setAmount(amount);
+            player->purchaseCargo(std::move(purchase), totalPrice);
 
             return Response::done;
         }
@@ -47,7 +51,7 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     if (cargo) {
         if (getCargo(cargo->getName()) != nullptr) {
             size_t totalPrice =
-                player->getCargo(cargo->getName())->getBasePrice() * amount;
+                player->getCargo(cargo->getName())->getPrice() * amount;
 
             if (getAvaiableFunds() < totalPrice)
                 return Response::lack_of_money;
@@ -59,9 +63,11 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
                 player->getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
-            player->setMoney(player->getMoney() + totalPrice);
             setAvaiableFunds(getAvaiableFunds() - totalPrice);
-            updateCargo(cargo, amount, updateMode::SELL, player);
+            updateCargo(cargo, amount, updateMode::SELL);
+
+            player->sellCargo(cargo, totalPrice);
+
             return Response::done;
         }
     }
@@ -77,7 +83,7 @@ bool Store::addCargo(Cargo* cargo) {
     if (getAvaiableSpace() >= cargo->getAmount()) {
         auto ptrCargo = getCargo(cargo->getName());
         if (ptrCargo == nullptr) {
-            cargo_.push_back(cargo);
+            cargo_.emplace_back(cargo->clone());
         } else {
             size_t tmpAmount = ptrCargo->getAmount() + cargo->getAmount();
             ptrCargo->setAmount(tmpAmount);
@@ -119,19 +125,10 @@ void Store::printCargo() {
 //-----------------------------------------------------------------------------------
 void Store::updateCargo(Cargo* cargo,
                         size_t amount,
-                        updateMode mode,
-                        Player* player) {
+                        updateMode mode) {
     if (mode == BUY) {
-        if (player->getCargo(cargo->getName()) != nullptr) {
-            size_t tmpAmount = player->getCargo(cargo->getName())->getAmount() + amount;
-            player->getCargo(cargo->getName())->setAmount(tmpAmount);
-        } else {
-            player->cloneCargo(cargo);
-            player->getCargo(cargo->getName())->setAmount(amount);
-        }
-
         if (getCargo(cargo->getName())->getAmount() == amount) {
-            auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](Cargo* el) {
+            auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](std::unique_ptr<Cargo>& el) {
                 return el->getName() == cargo->getName();
             });
             cargo_.erase(it);
@@ -142,14 +139,6 @@ void Store::updateCargo(Cargo* cargo,
         }
 
     } else if (mode == SELL) {
-        if (player->getCargo(cargo->getName())->getAmount() == amount) {
-            player->removeCargo(player->getCargo(cargo->getName()));
-
-        } else {
-            size_t tmpAmount = player->getCargo(cargo->getName())->getAmount() - amount;
-            player->getCargo(cargo->getName())->setAmount(tmpAmount);
-        }
-
         size_t tmpAmount = getCargo(cargo->getName())->getAmount() + amount;
         getCargo(cargo->getName())->setAmount(tmpAmount);
     }

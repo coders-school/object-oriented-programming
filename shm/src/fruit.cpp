@@ -63,7 +63,7 @@ void Fruit::nextDay() {
     }
 }
 
-Cargo* Fruit::clone() {
-    std::shared_ptr<Fruit> sp_Fruit = std::make_shared<Fruit>(*this);
-    return sp_Fruit.get();
+std::unique_ptr<Cargo> Fruit::clone() {
+    std::unique_ptr<Fruit> fruit = std::make_unique<Fruit>(*this);
+    return std::move(fruit);
 }

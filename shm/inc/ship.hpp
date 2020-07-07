@@ -3,8 +3,6 @@
 #include <string>
 #include <memory>
 #include <vector>
-#include <algorithm>
-#include <iostream>
 
 #include "cargo.hpp"
 #include "common.hpp"
@@ -37,10 +35,9 @@ public:
     size_t getAvailableSpace() const;
 
     void printCargo();
-    bool addCargo(Cargo* cargo);
-    bool removeCargo(Cargo* cargo);
 
-    void cloneCargo(Cargo* cargo);
+    void load(std::unique_ptr<Cargo> cargo);
+    void unload(Cargo* cargo);
 
 private:
     size_t capacity_;
@@ -49,7 +46,7 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<Cargo*> cargo_;
+    std::vector<std::unique_ptr<Cargo>> cargo_;
     Time* time_;
     Delegate* delegate_;
 
