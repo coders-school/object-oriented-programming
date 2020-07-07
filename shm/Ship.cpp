@@ -47,3 +47,7 @@ Ship& Ship::operator+=(size_t num)
         return nullptr;
     }
 }
+void Ship::NextDay()
+{
+    // TODO to be implemented
+}

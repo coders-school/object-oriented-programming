@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_BUILD_TYPE Debug)
 
-list(APPEND SHM_SOURCES Player.cpp Island.cpp Coordinates.cpp Ship.cpp  Alcohol.cpp Fruit.cpp Item.cpp Map.cpp ShmExceptions.cpp)
+list(APPEND SHM_SOURCES Player.cpp Island.cpp Coordinates.cpp Ship.cpp  Alcohol.cpp Fruit.cpp Item.cpp Map.cpp ShmExceptions.cpp Store.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SHM_SOURCES})
 

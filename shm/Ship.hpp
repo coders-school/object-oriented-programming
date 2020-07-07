@@ -3,13 +3,15 @@
 #include <string>
 
 #include "Cargo.hpp"
+#include "Observer.hpp"
 
-class Ship
+class Ship : public Observer
 {
 public:
     Ship();
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id);
     Ship(int maxCrew, int speed, size_t id);
+    ~Ship() override = default;
 
     void setName(const std::string& name);
 
@@ -24,6 +26,8 @@ public:
 
     [[nodiscard]] Cargo* getCargo(size_t index) const;
     [[nodiscard]] std::vector<Cargo*> getCargos() const { return storage_; }
+
+    void NextDay() override;
 
 private:
     size_t capacity_;
