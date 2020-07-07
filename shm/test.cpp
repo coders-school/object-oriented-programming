@@ -5,12 +5,13 @@
 #include "Island.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
+#include "ShmExceptions.hpp"
 #include "gtest/gtest.h"
 
-TEST(cargo, cargoShuldNotBeZero)
+TEST(cargo, cargoShuldBeZero)
 {
     Cargo cargoA;
-    cargoA -= 10;
+    EXPECT_THROW(cargoA.operator-=(10), AmountException);
     ASSERT_EQ(cargoA.getAmount(), 0);
 }
 

@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8.2)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-list(APPEND SHM_SOURCES Player.cpp Island.cpp Coordinates.cpp Ship.cpp Map.cpp Cargo.cpp)
+list(APPEND SHM_SOURCES Player.cpp Island.cpp Coordinates.cpp Ship.cpp Map.cpp Cargo.cpp ShmExceptions.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SHM_SOURCES})
 
