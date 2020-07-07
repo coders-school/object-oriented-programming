@@ -27,9 +27,11 @@ public:
     size_t getTimeToSpoil() const;
     size_t getTimeToSpoilLeft() const;
 
+    void nextDay();
+
     Cargo* clone() override;
 
 private:
-    const size_t timeToSpoil_;
+    const size_t timeToSpoil_ = 5;
     size_t timeToSpoilLeft_ = timeToSpoil_;
 };
