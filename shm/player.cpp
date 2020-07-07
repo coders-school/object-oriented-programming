@@ -1,6 +1,5 @@
 #include "player.hpp"
 
-#include <cmath>
 #include <numeric>
 
 #include "constValues.hpp"
@@ -48,7 +47,7 @@ Cargo* Player::getCargo(size_t cargo) const {
 }
 
 void Player::payCrew(size_t crew) {
-    money_ -= (constValues::dailySalary * std::ceil(crew % 10));
+    money_ -= (constValues::dailySalary * crew % 10);
 }
 void Player::nextDay(){
     payCrew(ship_->getCrew());
