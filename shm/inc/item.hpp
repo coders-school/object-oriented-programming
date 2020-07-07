@@ -14,8 +14,8 @@ public:
         legendary = 16
     };
 
-    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
-            : Cargo(name, amount, basePrice)
+    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity, Time* time)
+            : Cargo(name, amount, basePrice, time)
             , rairty_(rarity)
     {}
     
@@ -31,6 +31,8 @@ public:
     size_t getAmount() const override;
     size_t getBasePrice() const override;
     Rarity getRarity() const;
+
+    void nextDay() override;
 
     Cargo* clone() override;
 

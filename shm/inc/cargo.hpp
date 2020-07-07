@@ -1,12 +1,13 @@
 #pragma once
 
 #include <string>
+#include "observer.hpp"
+#include "time.hpp"
 
-class Cargo {
- public:
-    Cargo(const std::string& name, size_t amount, size_t basePrice);
-    Cargo(const Cargo& cargo);
-    virtual ~Cargo() = default;
+class Cargo : public Observer {
+public:
+    Cargo(const std::string& name, size_t amount, size_t basePrice, Time* time);
+    virtual ~Cargo();
 
     virtual bool operator==(const Cargo& cargo) const = 0;
     virtual bool operator!=(const Cargo& cargo) const = 0;
@@ -25,4 +26,6 @@ class Cargo {
     std::string name_;
     size_t amount_;
     size_t basePrice_;
+
+    Time* time_;
 };
