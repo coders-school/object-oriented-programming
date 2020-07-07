@@ -16,7 +16,7 @@ Ship::Ship(int maxCrew, int speed, size_t id, std::shared_ptr<Time>& time)
 }
 
 Cargo* Ship::getCargo(size_t index) const {
-    if (index > cargo_.size()) {
+    if (index > cargo_.size() || index == 0) {
         return nullptr;
     }
     return cargo_[index - 1].get();
