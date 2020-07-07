@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Cargo.hpp"
 
 constexpr size_t maximumAlcoholContent = 96;

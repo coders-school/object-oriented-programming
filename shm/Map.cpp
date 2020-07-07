@@ -1,4 +1,5 @@
 #include "Map.hpp"
+
 #include <algorithm>
 #include <cstddef>
 #include <random>

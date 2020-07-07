@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Cargo.hpp"
 #include "Observer.hpp"
 #include "Player.hpp"

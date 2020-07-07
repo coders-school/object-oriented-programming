@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Cargo.hpp"
 
 enum class Rarity {

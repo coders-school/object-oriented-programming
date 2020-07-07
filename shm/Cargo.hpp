@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+
 #include "Observer.hpp"
 
 class Cargo : public Observer {

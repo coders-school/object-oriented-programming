@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+
 #include "Island.hpp"
 
 constexpr size_t amountOfIslands = 10;
