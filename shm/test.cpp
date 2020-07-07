@@ -117,6 +117,18 @@ TEST(player, newSpaceWasSet)
     EXPECT_EQ(player.getAvailableSpace(), space);
 }
 
+TEST(ship, crewShouldBeZero)
+{
+    Ship ship{1, 1, 1, "a", 1};
+    EXPECT_THROW(ship.operator-=(10), AmountException);
+}
+
+TEST(ship, crewShouldNotBeHigherThanMaxCrew)
+{
+    Ship ship{1, 1, 1, "a", 1};
+    EXPECT_THROW(ship.operator+=(10), AmountException);
+}
+
 TEST(player, newMoneyAmountWasSet)
 {
     Ship ship;

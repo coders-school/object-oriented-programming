@@ -1,4 +1,5 @@
 #include "Ship.hpp"
+#include "ShmExceptions.hpp"
 
 Ship::Ship() : id_(-1)
 {
@@ -21,11 +22,16 @@ Ship& Ship::operator-=(size_t num)
 {
     if (crew_ >= num)
         crew_ -= num;
+    else
+        throw AmountException("Not enough Crew!");
     return *this;
 }
 
 Ship& Ship::operator+=(size_t num)
 {
-    crew_ += num;
+    if ((crew_ + num) <= maxCrew_)
+        crew_ += num;
+    else
+        throw AmountException("Too much Crew!");
     return *this;
 }
