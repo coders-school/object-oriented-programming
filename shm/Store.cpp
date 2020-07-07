@@ -7,6 +7,13 @@
 #include "Fruit.hpp"
 #include "Item.hpp"
 
+Store::Store(Time* time):_time(time){
+    _time->addObserver(this);
+};
+Store::~Store(){
+    _time->removeObserver(this);
+};
+
 Cargo* Store::findCargo(Cargo* cargo) const {
     auto matchCargo = std::find_if(std::begin(_cargo), std::end(_cargo),
                                    [cargo](const auto& el) {
