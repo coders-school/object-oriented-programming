@@ -36,5 +36,5 @@ private:
     std::shared_ptr<Player> player_ = std::make_shared<Player>(ship_, 300, 80);
     std::shared_ptr<Store> store_;
     Island* island_;
-    Map* map_ = new Map(time_);
+    std::shared_ptr<Map> map_ = std::make_shared<Map>(time_);
 };
