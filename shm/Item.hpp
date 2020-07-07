@@ -1,14 +1,13 @@
 #include "Cargo.hpp"
 
-class Item : public Cargo {
-public:
-    enum class Rarity {
-        common = 1,
-        rare = 2, 
-        epic = 5, 
-        legendary = 10
-    };
+enum class Rarity {
+    common = 1,
+    rare = 2, 
+    epic = 5, 
+    legendary = 10
+};
 
+class Item : public Cargo {
 private:
     const Rarity rarity_ = Rarity::common;
 
