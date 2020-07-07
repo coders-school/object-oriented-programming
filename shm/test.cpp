@@ -175,3 +175,24 @@ TEST(map, getIslandShouldRTeturnCorrectIsland)
 
     EXPECT_NE(map_.getIsland(corr).getPosition(), island_.getPosition());
 }
+
+
+TEST(map, getIslandShouldThrowExceptionWhenIslandNotFound)
+{
+    Map map_(1, 1, 1);
+    Coordinates corr{10,10};
+    Island islandOutsideMap{10,10};
+
+    EXPECT_EQ(map_.getIsland(corr).getPosition(), islandOutsideMap.getPosition());
+
+}
+
+TEST(map, mapWithTooMuchIslands)
+{
+    Map map_(1, 1, 10);
+    Coordinates corr{10,10};
+    Island islandOutsideMap{10,10};
+
+    EXPECT_EQ(map_.getIsland(corr).getPosition(), islandOutsideMap.getPosition());
+
+}
