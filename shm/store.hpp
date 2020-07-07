@@ -7,8 +7,6 @@
 #include "player.hpp"
 #include "time.hpp"
 
-#include "subjectTime.hpp"
-
 class Store : public ObserverTime {
 public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };

@@ -1,17 +1,20 @@
 #pragma once
 
-#include "observerTime.hpp"
-#include "subjectTime.hpp"
-
 #include <cstdint>
 #include <vector>
 
-class Time : public SubjectTime {
+class ObserverTime {
+public:
+    virtual void nextDay() = 0;
+    virtual ~ObserverTime() = default;
+};
+
+class Time {
 public:
     Time() = default;
 
-    void registerObserver(ObserverTime* o) override;
-    void unregisterObserver(ObserverTime* o) override;
+    void registerObserver(ObserverTime* o);
+    void unregisterObserver(ObserverTime* o);
 
     uint32_t getElapsedTime() const;
     Time& operator++();

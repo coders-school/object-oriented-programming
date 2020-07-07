@@ -5,12 +5,16 @@
 #include <vector>
 
 #include "cargo.hpp"
-#include "delegate.hpp"
-#include "subjectTime.hpp"
 #include "time.hpp"
 
 class Ship : public ObserverTime {
 public:
+    class Delegate {
+    public:
+        virtual ~Delegate() = default;
+        virtual void payCrew(uint32_t money) = 0;
+    };
+
     Ship();
     Ship(uint32_t capacity, uint32_t maxCrew, uint32_t speed, const std::string& name, uint32_t id, Time* time);
     ~Ship();

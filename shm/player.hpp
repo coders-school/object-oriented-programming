@@ -4,10 +4,9 @@
 #include <memory>
 
 #include "cargo.hpp"
-#include "delegate.hpp"
 #include "ship.hpp"
 
-class Player : public Delegate {
+class Player : public Ship::Delegate {
 public:
     Player(std::shared_ptr<Ship> ship, uint32_t money, uint32_t availableSpace);
 
