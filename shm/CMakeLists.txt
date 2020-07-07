@@ -87,15 +87,8 @@ target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 set(FLAGS -g -Wall -Wextra -Werror -pedantic -Wconversion)
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 
-if (UNIX)
-    target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib pthread)
-else (UNIX)
-    target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
-endif (UNIX)
-
-
 add_executable(${PROJECT_NAME}-ut ${TEST_SRC_LIST})
-target_link_libraries(${PROJECT_NAME}-ut gtest_main)
-target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib gtest)
+target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
 
 add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
