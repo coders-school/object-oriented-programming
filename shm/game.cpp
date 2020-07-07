@@ -107,7 +107,7 @@ bool Game::checkLoseConditions() const {
 void Game::printLoseScreen() {
     printTrail('-');
     std::cout << "You have lost, good bye. \n"
-              << "You have failed to get: " << finalGoal_ - money_ << " more money.\n";
+              << "You have failed to get: " << finalGoal_ - player_->getMoney() << " more money.\n";
     printTrail('-');
 }
 

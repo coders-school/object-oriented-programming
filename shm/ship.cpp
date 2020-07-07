@@ -1,5 +1,5 @@
 #include "ship.hpp"
-#include <iostream>
+
 #include <algorithm>
 #include <numeric>
 
@@ -8,22 +8,22 @@ Ship::Ship()
 
 Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, int id, std::shared_ptr<Time> publisher)
     : capacity_(capacity), 
-    maxCrew_(maxCrew), 
-    crew_(0), 
-    speed_(speed), 
-    name_(name), 
-    id_(id),
-    publisher_(publisher){
-    this->publisher_->addObserver(this);
-    }
+      maxCrew_(maxCrew), 
+      crew_(0), 
+      speed_(speed), 
+      name_(name), 
+      id_(id),
+      publisher_(publisher) {
+          this->publisher_->addObserver(this);
+      }
 
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
-void Ship::nextDay(){
+void Ship::nextDay() {
     int lottery =(rand()%10+1)+(rand()%10+1); 
-    switch(lottery){
+    switch(lottery) {
     case 1: 
         std::cout<<"One of your sailor has drown!\n";
         --crew_;

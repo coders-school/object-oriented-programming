@@ -1,14 +1,15 @@
 #pragma once
+
 #include <iostream>
 #include <memory>
 #include <string>
 #include <vector>
 
 #include "alcohol.hpp"
-#include "fruit.hpp"
 #include "cargo.hpp"
-#include "timeSHM.hpp"
+#include "fruit.hpp"
 #include "item.hpp"
+#include "timeSHM.hpp"
 
 class Ship : public Observer {
 
