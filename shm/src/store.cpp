@@ -40,7 +40,7 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
             return Response::done;
         }
     }
-    return Response::invalid_cargo_name;
+    return Response::invalid_cargo;
 }
 
 /*public*/
@@ -71,7 +71,7 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
             return Response::done;
         }
     }
-    return Response::invalid_cargo_name;
+    return Response::invalid_cargo;
 }
 
 /*public*/
@@ -149,7 +149,7 @@ void Store::updateCargo(Cargo* cargo,
 // <summary> Prints the relevant Response message
 //-----------------------------------------------------------------------------------
 void Store::printResponseMessage(Response& response) {
-    if (response == Response::invalid_cargo_name)
+    if (response == Response::invalid_cargo)
         std::cout << "Response Message: Invalid cargo name.\n";
     else if (response == Response::done)
         std::cout << "Response Message: Transaction completed.\n";

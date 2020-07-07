@@ -10,7 +10,7 @@ constexpr size_t DEFAULT_FUNDS = 1000;
 class Store {
 public:
     enum class Response {
-        invalid_cargo_name,
+        invalid_cargo,
         done,
         lack_of_money,
         lack_of_cargo,
