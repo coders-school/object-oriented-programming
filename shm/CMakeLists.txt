@@ -8,7 +8,7 @@ list(APPEND SHM_SOURCES Player.cpp Island.cpp Coordinates.cpp Ship.cpp  Alcohol.
 
 add_library(${PROJECT_NAME}-lib STATIC ${SHM_SOURCES})
 
-add_compile_options(-Wall -Wextra -pedantic -Werror)
+add_compile_options(-Wall -Wextra -pedantic -Wconversion -Werror)
 
 # Download and unpack googletest at configure time
 configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
