@@ -13,8 +13,8 @@ public:
         legendary = 16
     };
 
-    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
-            : Cargo(name, amount, basePrice)
+    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity, Time* time)
+            : Cargo(name, amount, basePrice, time)
             , rairty_(rarity)
     {}
     
