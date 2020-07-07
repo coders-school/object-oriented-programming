@@ -3,12 +3,12 @@
 #include <iostream>
 #include <typeinfo>
 
-Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice)
-    : Alcohol(name, amount, basePrice, MAX_POWER) {
+Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, Time* time)
+    : Alcohol(name, amount, basePrice, MAX_POWER, time) {
 }
 
-Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t power)
-    : Cargo(name, amount, basePrice),
+Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t power, Time* time)
+    : Cargo(name, amount, basePrice, time),
       _power(power) {
 }
 

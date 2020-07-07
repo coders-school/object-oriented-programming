@@ -25,7 +25,7 @@ public:
 
     static Rarity ChooseRarity(size_t code);
 
-    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
+    Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity, Time* time);
     ~Item() override = default;
 
     Rarity getRarity() const { return _rarity; }

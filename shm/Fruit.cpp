@@ -3,11 +3,11 @@
 #include <iostream>
 #include <typeinfo>
 
-Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expiryDate)
-    : Fruit(name, amount, basePrice, expiryDate, TIME_TO_SPOIL) {}
+Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expiryDate, Time* time)
+    : Fruit(name, amount, basePrice, expiryDate, TIME_TO_SPOIL, time) {}
 
-Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeToSpoil)
-    : Cargo(name, amount, basePrice), _expiryDate(expiryDate), _timeToSpoil(timeToSpoil) {}
+Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeToSpoil, Time* time)
+    : Cargo(name, amount, basePrice, time), _expiryDate(expiryDate), _timeToSpoil(timeToSpoil) {}
 
 size_t Fruit::getPrice() const {
     return _basePrice * (_timeToSpoil / _expiryDate);
