@@ -1,6 +1,21 @@
 
 #include "Map.hpp"
 
+Map::Map() : mapXsize(defaultXsize), mapYsize(defaultYsize)
+{
+    randomIslandGenerator(10);
+}
+Map::Map(int sizeY, int sizeX, int islandsAmount) : mapXsize(sizeY), mapYsize(sizeX)
+{
+    randomIslandGenerator(islandsAmount);
+}
+
+Island Map::getIsland(const Coordinates& corr)
+{
+    return *(
+        std::find_if(std::begin(islands), std::end(islands), [corr](Island& is) { return is.getPosition() == corr; }));
+}
+
 void Map::randomIslandGenerator(size_t amount)
 {
     static std::random_device rd;
@@ -14,10 +29,4 @@ void Map::randomIslandGenerator(size_t amount)
         islands.push_back(Island(map_[i] % mapXsize, ((map_[i]) / mapXsize) % mapYsize));
 }
 
-
-Island Map::getIsland(const Coordinates& corr)
-{
-    return *(std::find_if(
-        std::begin(islands), std::end(islands), [corr](Island& is) { return is.getPosition() == corr; }));
-}
 
