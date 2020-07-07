@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 list(APPEND  SHM_SOURCES   Player.cpp Island.cpp Coordinates.cpp Ship.cpp  Alcohol.cpp Fruit.cpp Item.cpp Map.cpp)
 
-ADD_LIBRARY( ${PROJECT_NAME}-lib STATIC ${SHM_SOURCES} )
+add_library( ${PROJECT_NAME}-lib STATIC ${SHM_SOURCES} )
 
 
 # Download and unpack googletest at configure time
