@@ -63,7 +63,7 @@ set(INCLUDES -I..)
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut test.cpp ${TEST_SRC})
+add_executable(${PROJECT_NAME}-ut ${TEST_SRC})
 
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS} ${INCLUDES})

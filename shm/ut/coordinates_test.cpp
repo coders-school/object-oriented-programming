@@ -2,6 +2,7 @@
 
 #include <string>
 #include <typeinfo>
+
 #include "gtest/gtest.h"
 
 namespace {
