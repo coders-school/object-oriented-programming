@@ -29,7 +29,7 @@ public:
     virtual bool operator!=(const Cargo& cargo) const = 0;
 
 protected:
+    size_t amount_;
     std::string name_;
     size_t base_price_;
-    size_t amount_;
 };
