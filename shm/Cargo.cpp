@@ -1,4 +1,5 @@
 #include "Cargo.hpp"
+#include "ShmExceptions.hpp"
 
 Cargo::Cargo() : amount_(0), basePrice_(0)
 {
@@ -14,8 +15,11 @@ Cargo& Cargo::operator+=(size_t amount)
 }
 Cargo& Cargo::operator-=(size_t amount)
 {
+
     if (amount_ >= amount)
         amount_ -= amount;
+    else
+        throw AmountException("Not enough Cargo!");
     return *this;
 }
 

@@ -6,6 +6,7 @@
 #include "Item.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
+#include "ShmExceptions.hpp"
 #include "gtest/gtest.h"
 
 TEST(item, TwoItemsWithTheSameAmountShouldBeEqual)
@@ -15,7 +16,7 @@ TEST(item, TwoItemsWithTheSameAmountShouldBeEqual)
     itemA += 10;
     itemB += 10;
     ASSERT_EQ(itemA, itemB);
-}
+}    
 
 TEST(item, TwoItemssWithDifferentAmountShouldNotBeEqual)
 {
