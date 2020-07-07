@@ -110,7 +110,7 @@ ___
 `override` jest opcjonalne. Jeśli go nie podamy za sygnaturą funkcji klasy pochodnej to metoda z klasy bazowej i tak zostanie nadpisana.
 <!-- .element: class="fragment fade-in" -->
 
-Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie przeciążamy metodą z klasy bazowej i jeśli nie, to program się nie skompiluje.
+Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie nadpisujemy metodę z klasy bazowej i jeśli nie, to program się nie skompiluje.
 <!-- .element: class="fragment fade-in" -->
 
 Bez `override` mogłaby zostać utworzona nowa metoda w klasie pochodnej, która nie nadpisuje niczego z klasy bazowej.
