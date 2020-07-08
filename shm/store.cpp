@@ -26,9 +26,17 @@ Response Store::buys(Cargo* cargo, size_t amount, Player* player, size_t totalPr
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     size_t totalPrice = cargo->getPrice() * amount;
-    Response result = Store::buys(cargo, amount, player, totalPrice);
-    if (result != Response::done) {
-        return result;
+
+    if (cargo->getAmount() < amount) {
+        return Response::lack_of_cargo;
+    }
+    if (player->getAvailableSpace() < amount) {
+        return Response::lack_of_space;
+    }
+    if (player->getMoney() < totalPrice) {
+        return Response::lack_of_money;
+    }
+
     }
     Alcohol alcoBought(alco->getName(), amount, alco->getBasePrice(), alco->getPower(), timeTracker_);
     alcosSold_.push_back(std::move(alcoBought));
@@ -119,10 +127,9 @@ void Store::generateGoods() {
     }
 }
 
-    void Store::AddGeneratedCargo(size_t expiryDate, size_t amount, size_t pos)
-    {
-        switch (pos) {
-        case 1:
+void Store::AddGeneratedCargo(size_t expiryDate, size_t amount, size_t pos) {
+    switch (pos) {
+    case 1:
             cargoToSell_.emplace_back(std::make_shared<Store>(
                 Fruit("Bananas", amount, 35, expiryDate, 0, timeTracker_));
             break;
@@ -156,9 +163,8 @@ void Store::generateGoods() {
         default:
             std::cerr << "RNG error!\n";
             break;
-        }
     }
-
+}
 
 std::ostream& operator<<(std::ostream& print, const Store& store) {
     std::string trail("-", 40);
