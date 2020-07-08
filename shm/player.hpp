@@ -22,7 +22,6 @@ public:
     size_t getAvailableSpace();
     size_t getSpeed() const;
     void removeCargo(std::shared_ptr<Cargo> cargo);
-    Alcohol* getAlcoWithName(const std::string& name);
     Fruit* getFruitWithName(const std::string& name);
     Item* getItemWithName(const std::string& name);
     Cargo* getCargo(size_t index) const;

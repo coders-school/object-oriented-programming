@@ -49,7 +49,7 @@ void Store::generateGoods() {
     randomVal amount(constValues::minAmount, constValues::maxAmount);
 
     for (size_t i = 0; i < constValues::numerOfItems; i++) {
-        AddGeneratedCargo(expiryDate(generator), amount(generator), i);
+        AddGeneratedCargo(expiryDate(generator), amount(generator), itemNumber(generator));
     }
 }
 
@@ -92,13 +92,13 @@ void Store::AddGeneratedCargo(size_t expiryDate, size_t amount, size_t pos) {
 std::ostream& operator<<(std::ostream& print, const Store& store) {
     std::string trail("-", 40);
     print << "What you want to buy or sell: \n";
-    print << std::setw(5) << "No.||" << std::setw(10) << " Name    ||" << std::setw(9) << " Amount ||" << std::setw(14)
+    print << std::setw(5) << "No.||" << std::setw(20) << " Name    ||" << std::setw(9) << " Amount ||" << std::setw(14)
           << " Sell Price ||" << std::setw(14) << " Buy Price ||"
           << "\n";
 
     std::for_each(store.cargoToSell_.begin(), store.cargoToSell_.end(),
                   [&print, &store, i{0}](const auto& cargo) mutable {
-                      print << std::setw(2) << ++i << " ||" << std::setw(8) << cargo->getName() << " ||" << std::setw(7)
+                      print << std::setw(2) << ++i << " ||" << std::setw(17) << cargo->getName() << " ||" << std::setw(7)
                             << cargo->getAmount() << " ||" << std::setw(11) << cargo->getPrice() << " ||"
                             << "\n";
                   });
