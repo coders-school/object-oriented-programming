@@ -166,10 +166,10 @@ CargoIt Ship::findSameCargo(Cargo* cargo) {
 template <class T>
 CargoIt Ship::findIdenticalCargo(T* concreteCargo) {
     auto it = std::find_if(cargo_.begin(), cargo_.end(), [concreteCargo](const auto& cargo){
-        T* t = dynamic_cast<T*>(cargo);
+        T* t = dynamic_cast<T*>(cargo.get());
 
-        if(f){
-            return concreteCargo& == time&;
+        if(t){
+            return *concreteCargo == *t;
         }
         else {
             return false;

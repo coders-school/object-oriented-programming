@@ -27,18 +27,6 @@ void Player::takeMoney(size_t money) {
     money_ -= money;
 }
 
-Alcohol* Player::getAlcoWithName(const std::string& name) {
-    return ship_->findAlcoByName(name);
-}
-
-Fruit* Player::getFruitWithName(const std::string& name) {
-    return ship_->findFruitByName(name);
-}
-
-Item* Player::getItemWithName(const std::string& name) {
-    return ship_->findItemByName(name);
-}
-
 Cargo* Player::getCargo(size_t cargo) const {
     if (ship_) {
         return ship_->getCargo(cargo);
@@ -57,9 +45,13 @@ size_t Player::getAvailableSpace() {
     return availableSpace_ = ship_->countAvailableSpace();
 }
 
-void Player::PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price, size_t amount) {
+void Player::purchaseCargo(std::shared_ptr<Cargo> cargo, size_t price, size_t amount) {
     availableSpace_ -= amount;
     takeMoney(price);
     ship_->load(cargo);
     *cargo -= amount;
+}
+
+void Player::removeCargo(std::shared_ptr<Cargo> cargo){
+    ship_->removeCargo(cargo.get());
 }

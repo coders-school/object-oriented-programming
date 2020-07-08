@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <memory>
+#include <random>
 #include <string>
 #include <vector>
 
@@ -31,8 +32,6 @@ public:
     void load(std::shared_ptr<Cargo> cargo);
     void nextDay() override;
 
-
-
     Ship& operator-=(size_t crewman);
     Ship& operator+=(size_t crewman);
 
@@ -43,19 +42,18 @@ public:
     std::string getName() const;
     int getId() const;
     Cargo* getCargo(size_t index) const;
-    Alcohol* findAlcoByName(const std::string& name);
     Fruit* findFruitByName(const std::string& name);
     Item* findItemByName(const std::string& name);
     size_t countAvailableSpace() const;
     size_t fillInCrew();
     void printCargo() const;
+    void removeCargo(Cargo* cargo);
 
 private:
     Cargo* findCargo(Cargo* cargo) const;
     Cargo* findCargoByName(const std::string& name) const;
-    void removeCargo(Cargo* cargo);
-    CargoIt Ship::findSameCargo(Cargo* cargo);
-    template<typename T>
+    CargoIt findSameCargo(Cargo* cargo);
+    template <typename T>
     CargoIt findIdenticalCargo(T* concreteCargo);
 
     size_t capacity_;
