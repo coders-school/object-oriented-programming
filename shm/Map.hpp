@@ -9,6 +9,7 @@
 
 constexpr size_t defaultXsize = 10;
 constexpr size_t defaultYsize = 11;
+constexpr int defaultIslandsAmount = 10;
 
 class Map
 {
