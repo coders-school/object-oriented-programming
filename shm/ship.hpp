@@ -29,7 +29,7 @@ public:
     };
 
     void setName(const std::string& name);
-    void load(std::shared_ptr<Cargo> cargo);
+    void load(std::shared_ptr<Cargo> cargo, size_t amount);
     void nextDay() override;
 
     Ship& operator-=(size_t crewman);

@@ -8,6 +8,32 @@ Store::Store(Time* gameTime) : timeTracker_(gameTime) {
     generateGoods();
 }
 
+std::shared_ptr<Cargo> Store::getCargo(const std::string& name) {
+    auto it = std::find_if(cargoToSell_.begin(), cargoToSell_.end(),
+                           [name](const auto& cargo) { return cargo->getName() == name; });
+    
+    if (it == cargoToSell_.end())
+        return nullptr;
+    
+    return *it;
+}
+
+size_t Store::getTotalBuyPrice(std::shared_ptr<Cargo> cargo, size_t amount) {
+    size_t totalPrice = 0;
+
+    for(size_t i = amount; i > 0; i--) {
+        totalPrice += cargo->getBasePrice() + (constValues::maxAmount - (cargo->getAmount() - i));
+    }
+
+    return totalPrice;
+}
+
+size_t Store::getTotalSellPrice(std::shared_ptr<Cargo> cargo, size_t amount) {
+    size_t totalPrice = 0;
+
+    return totalPrice;
+}
+
 Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
     size_t totalPrice = cargo->getPrice() * amount;
 
@@ -63,7 +89,7 @@ void Store::AddGeneratedCargo(size_t expiryDate, size_t amount, size_t pos) {
             std::make_shared<Fruit>(Fruit("Watermelon", amount, 35, expiryDate, 0, timeTracker_)));
         break;
     case 3:
-        cargoToSell_.emplace_back(std::make_shared<Alcohol>(Alcohol("Jack Daniel’s", amount, 35, 40, timeTracker_)));
+        cargoToSell_.emplace_back(std::make_shared<Alcohol>(Alcohol("Jack Daniels", amount, 35, 40, timeTracker_)));
         break;
     case 4:
         cargoToSell_.emplace_back(std::make_shared<Alcohol>(Alcohol("Spirit", amount, 35, 96, timeTracker_)));

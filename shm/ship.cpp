@@ -43,13 +43,15 @@ void Ship::nextDay() {
     }
 }
 
-void Ship::load(std::shared_ptr<Cargo> cargo) {
+void Ship::load(std::shared_ptr<Cargo> cargo, size_t amount) {
     auto it = findSameCargo(cargo.get());
 
     if (it != cargo_.end()) {
-        *it->get() += cargo->getAmount();
+        *it->get() += amount;
     } else {
-        cargo_.push_back(std::move(cargo));
+        auto newCargo = cargo->Clone();
+        newCargo->setAmount(amount);
+        cargo_.push_back(newCargo);
     }
 }
 

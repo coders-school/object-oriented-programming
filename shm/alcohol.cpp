@@ -4,13 +4,11 @@
 
 constexpr size_t maxPower{96};
 
-//Override from Cargo
+// Override from Cargo
 Alcohol::Alcohol(std::string name, size_t amount, size_t basePrice, size_t power, Time* Publisher)
-    : Cargo(name, amount, basePrice),
-      power_(power),
-      Publisher_(Publisher) {
-          this->Publisher_->addObserver(this);
-      }
+    : Cargo(name, amount, basePrice), power_(power), Publisher_(Publisher) {
+    this->Publisher_->addObserver(this);
+}
 
 void Alcohol::nextDay(){
     if(power_ > 0){

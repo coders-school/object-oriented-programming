@@ -15,6 +15,9 @@ public:
     Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
     Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
     void generateGoods();
+    std::shared_ptr<Cargo> getCargo(const std::string& name);
+    size_t getTotalBuyPrice(std::shared_ptr<Cargo> cargo, size_t amount);
+    size_t getTotalSellPrice(std::shared_ptr<Cargo> cargo, size_t amount);
     friend std::ostream& operator<<(std::ostream& print, const Store& store);
 
 private:

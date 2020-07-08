@@ -48,7 +48,7 @@ size_t Player::getAvailableSpace() {
 void Player::purchaseCargo(std::shared_ptr<Cargo> cargo, size_t price, size_t amount) {
     availableSpace_ -= amount;
     takeMoney(price);
-    ship_->load(cargo);
+    ship_->load(cargo, amount);
     *cargo -= amount;
 }
 
