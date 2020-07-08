@@ -10,12 +10,11 @@ class Player
 public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t space);
 
-    [[nodiscard]] size_t getAvailableSpace() const;
-    [[nodiscard]] size_t getMoney() const;
-    [[nodiscard]] size_t getSpeed() const;
-    [[nodiscard]] Cargo* getCargo(size_t index) const;
-
-    void setMoney(size_t amount);
+    [[nodiscard]] size_t getMoney() const { return money_; }
+    [[nodiscard]] size_t getSpeed() const { return ship_->getSpeed(); }
+    [[nodiscard]] Cargo* getCargo(size_t index) const { return ship_->getCargo(index); };
+    [[nodiscard]] size_t getAvailableSpace() const { return availableSpace_; }
+    void setMoney(size_t amount) { money_ = amount; }
 
 private:
     std::unique_ptr<Ship> ship_;

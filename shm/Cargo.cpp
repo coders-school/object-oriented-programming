@@ -23,14 +23,7 @@ Cargo& Cargo::operator-=(size_t amount)
     return *this;
 }
 
-size_t Cargo::getAmount() const
-{
-    return amount_;
-}
-size_t Cargo::getBasePrice() const
-{
-    return basePrice_;
-}
+
 
 bool operator==(const Cargo& lhs, const Cargo& rhs)
 {

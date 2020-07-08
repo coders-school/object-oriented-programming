@@ -35,3 +35,15 @@ Ship& Ship::operator+=(size_t num)
         throw AmountException("Too much Crew!");
     return *this;
 }
+
+[[nodiscard]] Cargo* Ship::getCargo(size_t index) const
+{
+    try
+    {
+        return storage_.at(index);
+    }
+    catch (const std::out_of_range& ex)
+    {
+        return nullptr;
+    }
+}

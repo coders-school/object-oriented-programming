@@ -13,8 +13,8 @@ public:
 
     friend bool operator==(const Cargo& lhs, const Cargo& rhs);
     friend bool operator!=(const Cargo& lhs, const Cargo& rhs);
-    [[nodiscard]] size_t getAmount() const;
-    [[nodiscard]] size_t getBasePrice() const;
+    [[nodiscard]] size_t getAmount() const { return amount_; }
+    [[nodiscard]] size_t getBasePrice() const { return basePrice_; }
 
 protected:
     std::string name_;
