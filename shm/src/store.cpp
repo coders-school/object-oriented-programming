@@ -150,7 +150,7 @@ void Store::updateCargo(Cargo* cargo,
 //-----------------------------------------------------------------------------------
 void Store::printResponseMessage(Response& response) {
     if (response == Response::invalid_cargo)
-        std::cout << "Response Message: Invalid cargo name.\n";
+        std::cout << "Response Message: Invalid cargo.\n";
     else if (response == Response::done)
         std::cout << "Response Message: Transaction completed.\n";
     else if (response == Response::lack_of_cargo)
