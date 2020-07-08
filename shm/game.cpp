@@ -25,7 +25,11 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
 
 void Game::startGame() {
     printWelcomePage();
+    gameLoop();
+    printLoseScreen();
+}
 
+void Game::gameLoop() {
     while (days_ > publisher_->getElapsedTime()) {
         if (checkWinConditions()) {
             printWinScreen();
@@ -33,7 +37,7 @@ void Game::startGame() {
         } else if (checkLoseConditions()) {
             break;
         }
-        printMenu();
+        printStats();
         printOptions();
         int pickAction;
         std::cin >> pickAction;
@@ -43,8 +47,6 @@ void Game::startGame() {
             break;
         }
     }
-    
-    printLoseScreen();
 }
 
 void Game::inputValidator() {
@@ -60,29 +62,30 @@ void Game::printTrail(char sign) {
     std::cout << trail << '\n';
 }
 
-void Game::printStars() {
-    const std::string stars(15, '*');
+void Game::printStars(size_t amountOfGalaxy) {
+    constexpr size_t galaxy = 15;
+    const std::string stars(amountOfGalaxy * galaxy, '*');
     std::cout << stars;
 }
 
-void Game::printWelcomePage() {
+void Game::printHeader() {
     printTrail('-');
-    printStars();
-    printStars();
+    printStars(2);
     std::cout << std::setw(8) << "Welcome" 
               << std::setw(8) << "in" 
               << std::setw(8) << "SHM" 
               << std::setw(8) << "Game"
-              << std::setw(8) << "v1.0"
-              << std::setw(8);
-    printStars();
-    printStars();
+              << std::setw(8) << "v1.0";
+    printStars(2);
     std::cout << '\n';
     printTrail('-');
-    printStars();
+}
+
+void Game::printWelcomePage() {
+    printHeader();
+    printStars(1);
     std::cout << std::setw(8) << "You have: " << days_ << " days to get: " << finalGoal_ << " gold. Have a nice time!";
-    printStars();
-    printStars();
+    printStars(2);
     std::cout << "\n\n\n";
     std::cout << "~~~May the force be with you!~~~ \n";
     printTrail('-');
@@ -111,7 +114,7 @@ void Game::printLoseScreen() {
     printTrail('-');
 }
 
-void Game::printMenu() {
+void Game::printStats() {
     printTrail('=');
     std::cout << "Money: " << player_->getMoney() << " | "
               << "Day: " << publisher_->getElapsedTime() << " | "
@@ -134,63 +137,83 @@ void Game::printOptions() {
 
 void Game::makeAction(Action pickAction) {
     switch (pickAction) {
-    case Action::exit: {
-        std::cout << "Bye, bye \n";
-        break;
+        case Action::exit: {
+            std::cout << "Bye, bye \n";
+            break;
+        }
+        case Action::travel: {
+            travel();
+            break;
+        }
+        case Action::buy: {
+            buy();
+            break;
+        }
+        case Action::sell: {
+            sell();
+            break;
+        }
+        case Action::printCargo: {
+            showCargo();
+            break;
+        }
+        default: {
+            std::cout << "I can't do this! \n";
+        }
     }
-    case Action::travel: {
-        travel();
-        break;
-    }
-    case Action::buy: {
-        buy();
-        break;
-    }
-    case Action::sell: {
-        sell();
-        break;
-    }
-    case Action::printCargo: {
-        showCargo();
-        break;
-    }
-    default: {
-        std::cout << "I can't do this! \n";
-    }
-    }
+}
+
+Island* Game::pickTargetIsland() {
+    std::cout << *map_;
+    std::cout << "Where do you want to sail? (posX posY) \n";
+    int posX, posY;
+    std::cin >> posX >> posY;
+    inputValidator();
+    Island* island = map_->getIsland(Coordinates(posX, posY));
+    return island;
+}
+
+size_t Game::countDaysOfTravel(Island* island) {
+    const int travelDistance = map_->getDistanceToIsland(island);
+    const size_t speed = player_->getSpeed();
+    const size_t daysOfTravel = ((travelDistance + speed) / speed);
+    return daysOfTravel;
+}
+
+char Game::userTravelDecision(size_t daysOfTravel) {
+    std::cout << "Travel will take " << daysOfTravel << " day/s. Do you still want to travel Y/N? ";
+    char travelDecision;
+    std::cin >> travelDecision;
+    inputValidator();
+    return static_cast<char>(std::toupper(travelDecision));
 }
 
 void Game::travel() {
     while (true) {
-        std::cout << *map_;
-        std::cout << "Where do you want to sail? (posX posY) \n";
-        int posX, posY;
-        std::cin >> posX >> posY;
-        inputValidator();
-        Island* island = map_->getIsland(Coordinates(posX, posY));
+        Island* island = pickTargetIsland();
         if (island == map_->getCurrentPosition()) {
             std::cout << "You are already here! \n";
         } else if (island != nullptr) {
-            const int travelDistance = map_->getDistanceToIsland(island);
-            const size_t speed = player_->getSpeed();
-            const size_t daysOfTravel = ((travelDistance + speed) / speed);
-            std::cout << "Travel will take " << daysOfTravel << " day/s. Do you want to travel Y/N? ";
-            char travelDecision;
-            std::cin >> travelDecision;
-            inputValidator();
-            if (std::toupper(travelDecision) == 'Y') {
-                map_->travel(island);
-                std::cout << "~~~~" << '\n' << daysOfTravel << " day/s have passed: \n";
-                for (size_t i = 0; i < daysOfTravel; i++) {
-                    ++*publisher_;
-                }
+            size_t daysOfTravel = countDaysOfTravel(island);
+            char travelDecision = userTravelDecision(daysOfTravel);
+            if (travelDecision == 'Y') {
+                makeTravel(island, daysOfTravel);
                 break;
             }
-            if (std::toupper(travelDecision) == 'N') {
+            if (travelDecision == 'N') {
                 break;
             }
         }
         std::cout << "Give me right coordinates! \n";
+    }
+}
+
+void Game::makeTravel(Island* island, size_t daysOfTravel) {
+    map_->travel(island);
+    std::cout << "~~~~ " << daysOfTravel << " day/s have passed: \n";
+    for (size_t i = 0; i < daysOfTravel; i++) {
+        std::cout << i + 1 << ". ";
+        ++*publisher_;
     }
 }
 
