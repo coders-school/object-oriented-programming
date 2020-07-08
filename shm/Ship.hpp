@@ -22,7 +22,7 @@ public:
     [[nodiscard]] std::string getName() const { return name_; }
     [[nodiscard]] size_t getId() const { return id_; }
 
-    [[nodiscard]] Cargo* getCargo(size_t index) const { return storage_.at(index); }
+    [[nodiscard]] Cargo* getCargo(size_t index) const;
     [[nodiscard]] std::vector<Cargo*> getCargos() const { return storage_; }
 
 private:
