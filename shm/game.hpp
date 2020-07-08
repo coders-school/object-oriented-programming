@@ -31,6 +31,7 @@ private:
     std::shared_ptr<Player> player_;
     std::shared_ptr<Map> map_;
 
+    void inputValidator();
     void printTrail(char sign);
     void printStars();
     void printWelcomePage();
