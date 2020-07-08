@@ -1,8 +1,8 @@
+#include "store.hpp"
+
 #include <algorithm>
 #include <iomanip>
 #include <random>
-
-#include "store.hpp"
 
 Store::Store(Time* gameTime) : timeTracker_(gameTime) {
     generateGoods();

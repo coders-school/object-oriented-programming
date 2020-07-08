@@ -31,18 +31,24 @@ private:
     std::shared_ptr<Player> player_;
     std::shared_ptr<Map> map_;
 
+    void gameLoop();
     void inputValidator();
     void printTrail(char sign);
-    void printStars();
+    void printStars(size_t amountOfGalaxy);
+    void printHeader();
     void printWelcomePage();
     bool checkWinConditions() const;
     void printWinScreen();
     bool checkLoseConditions() const;
     void printLoseScreen();
-    void printMenu();
+    void printStats();
     void printOptions();
     void makeAction(Action pickAction);
+    Island* pickTargetIsland();
+    size_t countDaysOfTravel(Island* island);
+    char userTravelDecision(size_t daysOfTravel);
     void travel();
+    void makeTravel(Island* island, size_t daysOfTravel);
     void buy();
     void sell();
     void showCargo();
