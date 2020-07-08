@@ -104,7 +104,7 @@ TEST(map, getIslandShouldRTeturnIsland)
 
 TEST(map, getIslandShouldRTeturnCorrectIsland)
 {
-    Map map_;
+    Map map_{};
     std::vector<Island> islands = map_.getIslands();
     Island island_ = islands[4];
     Coordinates corr = islands[1].getPosition();
@@ -112,23 +112,18 @@ TEST(map, getIslandShouldRTeturnCorrectIsland)
     EXPECT_NE(map_.getIsland(corr).getPosition(), island_.getPosition());
 }
 
-
-TEST(map, getIslandShouldThrowExceptionWhenIslandNotFound)
+TEST(map, getIslandShouldReturnNegativeValueWhenIslandNotFound)
 {
-    Map map_(1, 1, 1);
-    Coordinates corr{10,10};
-    Island islandOutsideMap{10,10};
-
-    EXPECT_EQ(map_.getIsland(corr).getPosition(), islandOutsideMap.getPosition());
-
+    Map map_{};
+    Coordinates corr{-1, -1};
+    EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
 }
 
-TEST(map, mapWithTooMuchIslands)
+TEST(map, mapWithTooManyIslandsShouldThroException)
 {
-    Map map_(1, 1, 10);
-    Coordinates corr{10,10};
-    Island islandOutsideMap{10,10};
+    EXPECT_THROW(Map(1, 1, 100), AmountException);
+}
 
-    EXPECT_EQ(map_.getIsland(corr).getPosition(), islandOutsideMap.getPosition());
-
+TEST(map, emptyTestAddExpectCallHere)
+{
 }
