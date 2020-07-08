@@ -5,7 +5,7 @@
 #include "player.hpp"
 #include "timeSHM.hpp"
 
-constexpr size_t numerOfItems{3};
+using randomVal = std::uniform_int_distribution<size_t>;
 
 enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };
 
@@ -26,8 +26,6 @@ private:
 
     Response buys(Cargo* cargo, size_t amount, Player* player, size_t totalPrice);
     Response sells(Cargo* cargo, size_t amount, Player* player, size_t totalPrice);
-    std::vector<Item> cargoToSell_;
-    std::vector<Alcohol> alcosSold_;
-    std::vector<Fruit> fruitsSold_;
-    std::vector<Item> itemsSold_;
+    std::vector<std::shared_ptr<Cargo>> cargoToSell_;
+    void AddGeneratedStore(size_t expiryDate, size_t amount, size_t pos);
 };

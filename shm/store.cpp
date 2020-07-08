@@ -1,4 +1,5 @@
 #include "store.hpp"
+#include "constValues.hpp"
 
 #include <algorithm>
 #include <iomanip>
@@ -23,9 +24,9 @@ Response Store::buys(Cargo* cargo, size_t amount, Player* player, size_t totalPr
     return Response::done;
 }
 
-Response Store::buy(Alcohol* alco, size_t amount, Player* player) {
-    size_t totalPrice = alco->getPrice() * amount;
-    Response result = Store::buys(alco, amount, player, totalPrice);
+Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+    size_t totalPrice = cargo->getPrice() * amount;
+    Response result = Store::buys(cargo, amount, player, totalPrice);
     if (result != Response::done) {
         return result;
     }
@@ -48,8 +49,8 @@ Response Store::buy(Fruit* fruit, size_t amount, Player* player) {
     return result;
 }
 
-Response Store::buy(Item* item, size_t amount, Player* player) {
-    size_t totalPrice = item->getPrice() * amount;
+Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+    size_t totalPrice = cargo->getPrice() * amount;
     Response result = Store::buys(item, amount, player, totalPrice);
     if (result != Response::done) {
         return result;
@@ -109,57 +110,68 @@ void Store::generateGoods() {
     cargoToSell_.clear();
     std::random_device device;
     std::mt19937 generator(device());
-    std::uniform_int_distribution<size_t> itemNumber(1, 6);
-    std::uniform_int_distribution<size_t> itemQuantity(1, 20);
-    for (size_t i = 0; i < numerOfItems; i++) {
-        switch (itemNumber(generator)) {
+    randomVal itemNumber(1, 8);
+    randomVal expiryDate(constValues::minExpiryDate, constValues::maxExpiryDate);
+    randomVal amount(constValues::minAmount, constValues::maxAmount);
+
+    for (size_t i = 0; i < constValues::numerOfItems; i++) {
+        AddGeneratedCargo(expiryDate(generator), amount(generator), i);
+    }
+}
+
+    void Store::AddGeneratedCargo(size_t expiryDate, size_t amount, size_t pos)
+    {
+        switch (pos) {
         case 1:
-            cargoToSell_.emplace_back(
-                Item("Sword", itemQuantity(generator), 150, static_cast<int>(Rarity::common), timeTracker_));
+            cargoToSell_.emplace_back(std::make_shared<Store>(
+                Fruit("Bananas", amount, 35, expiryDate, 0, timeTracker_));
             break;
         case 2:
-            cargoToSell_.emplace_back(
-                Item("Hat", itemQuantity(generator), 200, static_cast<int>(Rarity::common), timeTracker_));
+            cargoToSell_.emplace_back(std::make_shared<Store>(
+                Fruit("Watermelon", amount, 35, expiryDate, 0, timeTracker_)));
             break;
         case 3:
             cargoToSell_.emplace_back(
-                Item("Boots", itemQuantity(generator), 100, static_cast<int>(Rarity::common), timeTracker_));
+                std::make_shared<Store>(Alcohol("Jack Daniel’s", amount, 35, 40, timeTracker_)));
             break;
         case 4:
             cargoToSell_.emplace_back(
-                Item("Pistol", itemQuantity(generator), 500, static_cast<int>(Rarity::common), timeTracker_));
-            break;
+                std::make_shared<Store>(Alcohol("Spirit", amount, 35, 96, timeTracker_)));
         case 5:
             cargoToSell_.emplace_back(
-                Item("Cannon", itemQuantity(generator), 2000, static_cast<int>(Rarity::common), timeTracker_));
+                Item("Pistol", amount, 500, static_cast<int>(Rarity::common), timeTracker_));
             break;
         case 6:
             cargoToSell_.emplace_back(
-                Item("Flag", itemQuantity(generator), 65, static_cast<int>(Rarity::common), timeTracker_));
+                Item("Cannon", amount, 2000, static_cast<int>(Rarity::common), timeTracker_));
+            break;
+        case 7:
+            cargoToSell_.emplace_back(
+                Item("Flag", amount, 65, static_cast<int>(Rarity::common), timeTracker_));
+            break;
+        case 8:
+            cargoToSell_.emplace_back(std::make_shared<Store>(
+                Fruit("Apples", amount, 35, expiryDate, 0, timeTracker_)));
             break;
         default:
             std::cerr << "RNG error!\n";
             break;
         }
     }
-}
+
 
 std::ostream& operator<<(std::ostream& print, const Store& store) {
     std::string trail("-", 40);
     print << "What you want to buy or sell: \n";
-    print << std::setw(5) << "No.||" 
-          << std::setw(10) << " Name    ||" 
-          << std::setw(9) << " Amount ||" 
-          << std::setw(14) << " Sell Price ||" 
-          << std::setw(14) << " Buy Price ||" << "\n";
+    print << std::setw(5) << "No.||" << std::setw(10) << " Name    ||" << std::setw(9) << " Amount ||" << std::setw(14)
+          << " Sell Price ||" << std::setw(14) << " Buy Price ||"
+          << "\n";
 
-    std::for_each(
-        store.cargoToSell_.begin(), store.cargoToSell_.end(),
-        [&print, &store, i{0}](const auto& cargo) mutable { 
-            print << std::setw(2) << ++i << " ||" 
-                  << std::setw(8) << cargo.getName() << " ||"
-                  << std::setw(7) << cargo.getAmount() << " ||"
-                  << std::setw(11) << cargo.getPrice() << " ||" << "\n";
-        });
+    std::for_each(store.cargoToSell_.begin(), store.cargoToSell_.end(),
+                  [&print, &store, i{0}](const auto& cargo) mutable {
+                      print << std::setw(2) << ++i << " ||" << std::setw(8) << cargo.getName() << " ||" << std::setw(7)
+                            << cargo.getAmount() << " ||" << std::setw(11) << cargo.getPrice() << " ||"
+                            << "\n";
+                  });
     return print;
 }
