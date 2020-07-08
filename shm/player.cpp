@@ -1,6 +1,6 @@
 #include "player.hpp"
-#include "constValues.hpp"
 #include <numeric>
+#include "constValues.hpp"
 
 constexpr size_t START_MONEY = 1000;
 constexpr size_t START_SPACE = 0;
@@ -48,7 +48,7 @@ Cargo* Player::getCargo(size_t cargo) const{
 }
 
 void Player::payCrew(size_t crew){
-    money_ -= (constValues::dailySalary * crew);
+   money_ -= (constValues::dailySalary * crew);
 }
 void Player::nextDay(){
     payCrew(ship_->getCrew());
