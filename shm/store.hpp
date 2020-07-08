@@ -27,5 +27,5 @@ private:
     Response buys(Cargo* cargo, size_t amount, Player* player, size_t totalPrice);
     Response sells(Cargo* cargo, size_t amount, Player* player, size_t totalPrice);
     std::vector<std::shared_ptr<Cargo>> cargoToSell_;
-    void AddGeneratedStore(size_t expiryDate, size_t amount, size_t pos);
+    void AddGeneratedCargo(size_t expiryDate, size_t amount, size_t pos);
 };

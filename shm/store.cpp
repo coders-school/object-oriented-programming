@@ -24,7 +24,7 @@ Response Store::buys(Cargo* cargo, size_t amount, Player* player, size_t totalPr
     return Response::done;
 }
 
-Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
     size_t totalPrice = cargo->getPrice() * amount;
 
     if (cargo->getAmount() < amount) {
@@ -37,10 +37,8 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
         return Response::lack_of_money;
     }
 
-    }
-    Alcohol alcoBought(alco->getName(), amount, alco->getBasePrice(), alco->getPower(), timeTracker_);
-    alcosSold_.push_back(std::move(alcoBought));
-    player->giveCargo(&alcosSold_.back());
+    player->PurchaseCargo(cargo, totalPrice, amount);
+
     return result;
 }
 

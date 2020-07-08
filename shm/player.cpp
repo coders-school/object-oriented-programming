@@ -53,34 +53,13 @@ void Player::nextDay(){
     payCrew(ship_->getCrew());
 }
 
-void  Player::giveCargo(Alcohol* cargo) {
-    ship_->load(cargo);
-}
-
-void  Player::giveCargo(Fruit* cargo) {
-    ship_->load(cargo);
-}
-
-void  Player::giveCargo(Item* cargo) {
-    ship_->load(cargo);
-}
-
-void  Player::removeAlco(Alcohol* cargo) {
-    ship_->removeAlco(cargo);
-}
-
-void  Player::removeFruit(Fruit* cargo) {
-    ship_->removeFruit(cargo);
-}
-
-void  Player::removeItem(Item* cargo) {
-    ship_->removeItem(cargo);
-}
-
-size_t Player::countAvailableSpace() {
-     return ship_->countAvailableSpace(); 
-}
-
 size_t Player::getAvailableSpace() { 
-    return availableSpace_ + ship_->countAvailableSpace();
+    return availableSpace_ = ship_->countAvailableSpace();
+}
+
+void Player::PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price, size_t amount) {
+    availableSpace_ -= amount;
+    takeMoney(price);
+    ship_->load(cargo);
+    *cargo -= amount;
 }

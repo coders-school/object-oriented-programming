@@ -22,9 +22,6 @@ public:
     void   takeMoney(size_t money);
     size_t getAvailableSpace();
     size_t getSpeed() const;
-    void   giveCargo(Alcohol* cargo);
-    void   giveCargo(Fruit* cargo);
-    void   giveCargo(Item* cargo);
     void   removeAlco (Alcohol* cargo);
     void   removeFruit(Fruit* cargo);
     void   removeItem (Item* cargo);
@@ -34,11 +31,11 @@ public:
     Cargo* getCargo(size_t index) const;
     void payCrew(size_t crew);
     void nextDay();
+    void PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price, size_t amount);
 
 private:
     std::shared_ptr<Ship> ship_;
     std::shared_ptr<Time> publisher_;
     size_t money_;
     size_t availableSpace_;
-    size_t countAvailableSpace();
 };
