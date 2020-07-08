@@ -23,7 +23,8 @@ constexpr size_t FRUIT_MELON_BASEPRICE = 10;
 constexpr size_t FRUIT_MELON_AMOUNT = 24;
 
 constexpr char APPLE[] = "Apple";
-constexpr size_t APPLE_AMOUNT = 11;
+constexpr size_t APPLE_AMOUNT = 16;
+constexpr size_t APPLE_HALF_AMOUNT = 8;
 constexpr size_t APPLE_BASEPRICE = 3;
 constexpr size_t APPLE_SPOILTIME = 8;
 
@@ -59,14 +60,15 @@ TEST(TimeTest, ShouldTimePass) {
     ++time;
     EXPECT_EQ(time.getElapsedTime(), 2);
 }
-TEST(StoreTest, ShouldHandleBuy) {
+TEST(StoreTest, ShouldHandleBuySell) {
     Store store;
 
     EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::invalid_cargo);
     store.addCargo(&apple);
     EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2, &player), Store::Response::lack_of_cargo);
     EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2000, &player), Store::Response::lack_of_money);
-    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::done);
+    EXPECT_EQ(store.buy(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
+    EXPECT_EQ(store.sell(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
 }
 TEST(FruitTest, ShouldSpoil) {
     size_t spoilTime = FRUIT_MELON_SPOIL_TIME;
