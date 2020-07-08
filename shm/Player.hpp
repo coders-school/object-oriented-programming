@@ -8,7 +8,7 @@
 class Player
 {
 public:
-    Player(Ship ship, size_t money, size_t space);
+    Player(std::unique_ptr<Ship> ship, size_t money, size_t space);
 
     [[nodiscard]] size_t getAvailableSpace() const;
     [[nodiscard]] size_t getMoney() const;

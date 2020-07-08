@@ -47,10 +47,10 @@ TEST(island, twoIslandsPositionsShouldBeEqual)
 
 TEST(player, newSpaceWasSet)
 {
-    Ship ship;
-    size_t space = 10;
-    Player player(ship, 0, space);
-    EXPECT_EQ(player.getAvailableSpace(), space);
+    size_t space_ = 10;
+    size_t money_ = 1;
+    Player player(std::make_unique<Ship>(), money_, space_);
+    EXPECT_EQ(player.getAvailableSpace(), space_);
 }
 
 TEST(ship, crewShouldBeZero)
@@ -67,8 +67,9 @@ TEST(ship, crewShouldNotBeHigherThanMaxCrew)
 
 TEST(player, newMoneyAmountWasSet)
 {
-    Ship ship;
-    Player player(ship, 0, 0);
+    size_t space_ = 0;
+    size_t money_ = 0;
+    Player player(std::make_unique<Ship>(), money_, space_);
     size_t money = 10;
     player.setMoney(money);
     EXPECT_EQ(player.getMoney(), money);
