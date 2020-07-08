@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8.2)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_BUILD_TYPE Debug)
 
 list(APPEND SHM_SOURCES Player.cpp Island.cpp Coordinates.cpp Ship.cpp  Alcohol.cpp Fruit.cpp Item.cpp Map.cpp)
 

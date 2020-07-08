@@ -1,8 +1,8 @@
 #include "Player.hpp"
 
-Player::Player(Ship ship, size_t money, size_t space) : money_(money), availableSpace_(space)
+Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space) : money_(money), availableSpace_(space)
 {
-    ship_ = std::make_unique<Ship>(std::move(ship));
+    ship_ = std::move(ship);
 };
 
 void Player::updateAvailableSpace()
