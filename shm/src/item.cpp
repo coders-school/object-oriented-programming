@@ -37,3 +37,12 @@ Cargo& Item::operator-=(size_t amount) {
     }
     return *this;
 }
+
+void Item::nextDay() {
+
+}
+
+std::unique_ptr<Cargo> Item::clone() {
+    std::unique_ptr<Item> item = std::make_unique<Item>(*this);
+    return std::move(item);
+}

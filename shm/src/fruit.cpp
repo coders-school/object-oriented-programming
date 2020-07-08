@@ -62,3 +62,8 @@ void Fruit::nextDay() {
         amount_ = 0;
     }
 }
+
+std::unique_ptr<Cargo> Fruit::clone() {
+    std::unique_ptr<Fruit> fruit = std::make_unique<Fruit>(*this);
+    return std::move(fruit);
+}

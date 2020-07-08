@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "cargo.hpp"
+#include "common.hpp"
 #include "delegate.hpp"
 #include "observer.hpp"
 #include "time.hpp"
@@ -30,8 +31,13 @@ public:
     std::string getName() const;
     size_t getId() const;
     
-    std::shared_ptr<Cargo> getCargo(const size_t index);
+    Cargo* getCargo(const std::string& name);
     size_t getAvailableSpace() const;
+
+    void printCargo();
+
+    void load(std::unique_ptr<Cargo> cargo);
+    void unload(Cargo* cargo);
 
 private:
     size_t capacity_;
@@ -40,7 +46,7 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::unique_ptr<Cargo>> cargo_;
     Time* time_;
     Delegate* delegate_;
 
