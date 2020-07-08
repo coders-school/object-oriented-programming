@@ -3,7 +3,7 @@
 #include <numeric>
 
 Player::Player(std::unique_ptr<Ship>& ship, size_t money) {
-    ship_ = std::move(ship); //it might be good to let the Player class to construct Ship for itself
+    ship_ = std::move(ship);  //it might be good to let the Player class to construct Ship for itself
     ship_->setDelegate(this);
     money_ = money;
     availableSpace_ = countAvailableSpace();
@@ -12,8 +12,7 @@ Player::Player(std::unique_ptr<Ship>& ship, size_t money) {
 void Player::payCrew(size_t money) {
     if (money > money_) {
         money_ = SIZE_MAX;
-    }
-    else {
+    } else {
         money_ -= money;
     }
 }
@@ -30,4 +29,15 @@ size_t Player::countAvailableSpace() {
         return 0;
     }
     return ship_->getCapacity() - occupiedSpace;
+}
+
+void Player::purchaseCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
+    ship_->load(cargo);
+    money_ -= price;
+    availableSpace_ -= amount;
+}
+void Player::sellCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
+    ship_->unload(cargo.get());
+    money_ += price;
+    availableSpace_ += amount;
 }

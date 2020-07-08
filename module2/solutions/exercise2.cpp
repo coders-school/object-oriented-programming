@@ -1,3 +1,8 @@
+#include <memory>
+#include <algorithm>
+
+class Cargo;
+
 class Ship {
 public:
     void Load(std::unique_ptr<Cargo> cargo) {

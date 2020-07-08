@@ -21,4 +21,3 @@ bool Cargo::operator==(const Cargo& cargo) const {
 bool Cargo::operator!=(const Cargo& cargo) const {
     return (name_ != cargo.name_);
 }
-

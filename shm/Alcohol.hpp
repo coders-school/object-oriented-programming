@@ -24,4 +24,3 @@ public:
 private:
     const size_t alcoholContent_ = 96;
 };
-

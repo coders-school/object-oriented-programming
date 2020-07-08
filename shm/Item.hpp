@@ -26,4 +26,3 @@ public:
 private:
     const Rarity rarity_ = Rarity::common;
 };
-

@@ -14,6 +14,8 @@ public:
     size_t getAvailableSpace() const { return availableSpace_; };
     size_t getSpeed() const { return ship_->getSpeed(); };
     Cargo* getCargo(size_t index) const { return ship_->getCargo(index); };
+    void purchaseCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price);
+    void sellCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price);
 
     //override from Delegate
     void payCrew(size_t money) override;
