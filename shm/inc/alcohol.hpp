@@ -22,13 +22,10 @@ public:
     bool operator==(const Cargo& cargoToCheck) const override;
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
+    std::shared_ptr<Cargo> getShared() override { return std::make_shared<Alcohol>(Alcohol(*this)); }
 
     //Override from Observer
     void nextDay() override;
-
-protected:
-    // override from Cloneable<Cargo>
-    Cargo* cloneToRawPointer() override { return new Alcohol(*this); }
 
 private:
     const float power_;

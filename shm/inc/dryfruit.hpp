@@ -8,6 +8,7 @@ constexpr auto kDrynessPriceMultiplier = 3;
 }  // namespace
 
 class DryFruit : public Fruit {
+public:
     using Fruit::Fruit;
 
     Fruit& operator--() override;
@@ -15,6 +16,7 @@ class DryFruit : public Fruit {
     // override from Cargo.Fruit
     std::string getName() const override { return "Dry " + name_; }
     size_t getPrice() const override;
+    std::shared_ptr<Cargo> getShared() override { return std::make_shared<DryFruit>(DryFruit(*this)); }
 
     //override from Observer
     void nextDay() override;

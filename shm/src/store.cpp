@@ -49,13 +49,13 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 }
 
 void Store::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) {
-    auto clonedCargo = cargo->cloneToShared();
-    (*clonedCargo) -= (clonedCargo->getAmount() - amount);
+    cargo_.push_back(cargo->getShared());
+
+    (*cargo_.back()) -= (cargo_.back()->getAmount() - amount);
     (*cargo) -= amount;
     if (cargo->getAmount() == 0) {
         cargoHolder->clearEmptyCargos();
     }
-    cargo_.push_back(clonedCargo);
 }
 
 void Store::clearEmptyCargos() {

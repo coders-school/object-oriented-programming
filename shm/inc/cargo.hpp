@@ -3,11 +3,9 @@
 #include <memory>
 #include <string>
 
-#include "cloneable.hpp"
 #include "observer.hpp"
 
-class Cargo : public Cloneable<Cargo>,
-              public Observer {
+class Cargo : public Observer {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;
@@ -22,6 +20,8 @@ public:
     virtual bool operator==(const Cargo& cargoToCheck) const = 0;
     virtual Cargo& operator+=(size_t amount) = 0;
     virtual Cargo& operator-=(size_t amount) = 0;
+
+    virtual std::shared_ptr<Cargo> getShared() = 0;
 
 protected:
     std::string name_;

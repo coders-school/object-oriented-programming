@@ -9,8 +9,8 @@ Ship::Ship()
 
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate, Time* time)
     : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), payCrew(delegate), time_(time) {
-        time_->addObserver(this);
-    }
+    time_->addObserver(this);
+}
 
 Ship::Ship(int maxCrew, int speed, unsigned int id, Delegate* delegate, Time* time)
     : Ship(0, maxCrew, speed, "", id, delegate, time) {}
@@ -97,19 +97,19 @@ void Ship::unload(const Cargo* const& cargo) {
 }
 
 void Ship::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) {
-    auto clonedCargo = cargo->cloneToShared();
-    (*clonedCargo) -= (clonedCargo->getAmount() - amount);
+    cargo_.push_back(cargo->getShared());
+
+    (*cargo_.back()) -= (cargo_.back()->getAmount() - amount);
     (*cargo) -= amount;
     if (cargo->getAmount() == 0) {
         cargoHolder->clearEmptyCargos();
     }
-    cargo_.push_back(clonedCargo);
 }
 
 void Ship::clearEmptyCargos() {
     cargo_.erase(std::remove_if(cargo_.begin(), cargo_.end(), [](auto& cargo) { return cargo->getAmount() == 0; }), cargo_.end());
 }
 
-Ship::~Ship(){
+Ship::~Ship() {
     time_->removeObserver(this);
 }
