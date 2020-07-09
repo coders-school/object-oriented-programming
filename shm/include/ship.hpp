@@ -33,6 +33,7 @@ public:
     Cargo* getCargo(const size_t index) { return cargo_[index].get(); }
 
     void Unload(Cargo* cargo);
+    void Unload(Cargo *cargo, size_t amount);
     void RemoveFromStorage(Cargo* cargo);
     void RemoveFromStorageIfRotten();
 

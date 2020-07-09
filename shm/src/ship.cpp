@@ -66,6 +66,22 @@ void Ship::Unload(Cargo* cargo) {
     RemoveFromStorage(cargo);
 }
 
+void Ship::Unload(Cargo *cargo, size_t amount) {
+    auto elIt = std::find_if(std::begin(cargo_), std::end(cargo_),
+                 [cargo](const auto& el) {
+                     return *el == *cargo;
+                 });
+    if (elIt != cargo_.end()) {
+        if (elIt->get()->getAmount() == amount) {
+            cargo_.erase(elIt);
+        }
+        else if ((elIt->get()->getAmount() != amount)) {
+            std::cout << "-------------amount\n";
+            *cargo -= amount;
+        }
+    }
+}
+
 void Ship::RemoveFromStorage(Cargo* cargo) {
     cargo_.erase(std::find_if(std::begin(cargo_), std::end(cargo_),
                               [cargo](const auto& el) {
