@@ -10,7 +10,8 @@
 #include "fruit.hpp"
 #include "item.hpp"
 
-Store::Store(std::shared_ptr<Time> time) : time_(time) {
+Store::Store(std::shared_ptr<Time> time)
+    : time_(time) {
     GenerateCargo();
     time_->addObserver(this);
 }
@@ -39,23 +40,18 @@ Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& play
         return Response::lack_of_money;
     }
 
+    cargoPtr tempCargo = nullptr;
     if (typeid(*cargo) == typeid(Alcohol)) {
         Alcohol tempAlcohol(cargo->getName(), amount, cargo->getBasePrice());
-        cargoPtr tempCargo = std::make_shared<Alcohol>(tempAlcohol);
-        player->getShip()->load(tempCargo);
-    }
-
-    if (typeid(*cargo) == typeid(Fruit)) {
+        tempCargo = std::make_shared<Alcohol>(tempAlcohol);
+    } else if (typeid(*cargo) == typeid(Fruit)) {
         Fruit tempFruit(cargo->getName(), amount, cargo->getBasePrice());
-        cargoPtr tempCargo = std::make_shared<Fruit>(tempFruit);
-        player->getShip()->load(tempCargo);
-    }
-    
-    if (typeid(*cargo) == typeid(Item)) {
+        tempCargo = std::make_shared<Fruit>(tempFruit);
+    } else if (typeid(*cargo) == typeid(Item)) {
         Item tempItem(cargo->getName(), amount, cargo->getBasePrice());
-        cargoPtr tempCargo = std::make_shared<Item>(tempItem);
-        player->getShip()->load(tempCargo);
+        tempCargo = std::make_shared<Item>(tempItem);
     }
+    player->getShip()->load(tempCargo);
 
     *cargo.get() -= amount;
     player->subtractMoney(totalPrice);
@@ -72,10 +68,9 @@ Response Store::sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& pla
     }
     if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() == amount) {
         player->getShip()->Unload(cargo.get());
-    }
-    else {
+    } else {
         //Still not working correctly
-        player->getShip()->FindMatchCargo(cargo.get())->operator -=(amount);
+        player->getShip()->FindMatchCargo(cargo.get())->operator-=(amount);
     }
 
     *cargo.get() += amount;
