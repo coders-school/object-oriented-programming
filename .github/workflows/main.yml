@@ -10,6 +10,8 @@ jobs:
       uses: actions/checkout@master
     - name: mkdir shm/build
       run: mkdir shm/build
+    - name: Update submodule
+      run: git submodule update --init --recursive
     - name: Compile
       working-directory: shm/build
       run: |
