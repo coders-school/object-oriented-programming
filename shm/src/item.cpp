@@ -1,7 +1,8 @@
 #include "item.hpp"
-#include "globaltime.hpp"
 
 #include <iostream>
+
+#include "globaltime.hpp"
 
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), rarity_(rarity) {
@@ -9,7 +10,7 @@ Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rari
 }
 
 size_t Item::getPrice() const {
-    return basePrice_ * priceMultipliers_.at(rarity_);
+    return basePrice_ * static_cast<int>(rarity_);
 }
 
 void Item::nextDay() {

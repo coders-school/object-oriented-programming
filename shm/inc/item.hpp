@@ -6,10 +6,10 @@
 
 class Item : public Cargo {
 public:
-    enum class Rarity { common,
-                        rare,
-                        epic,
-                        legendary };
+    enum class Rarity { common = 1,
+                        rare = 2,
+                        epic = 4,
+                        legendary = 8 };
 
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
 
@@ -22,13 +22,12 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
     size_t getPrice() const override;
-
-    //override from Observer
-    void nextDay() override;
-
     bool operator==(const Cargo& cargoToCheck) const override;
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
+
+    //override from Observer
+    void nextDay() override;
 
 protected:
     // override from Cloneable<Cargo>
@@ -36,9 +35,4 @@ protected:
 
 private:
     Rarity rarity_;
-
-    const std::map<Rarity, size_t> priceMultipliers_{{Rarity::common, 1},
-                                                     {Rarity::rare, 2},
-                                                     {Rarity::epic, 4},
-                                                     {Rarity::legendary, 8}};
 };
