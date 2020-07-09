@@ -30,9 +30,9 @@ private:
     size_t GenerateRandom(size_t minValue, size_t maxValue);
     cargoPtr FindMatchCargo(cargoPtr cargo);
     void RemoveFromStore(cargoPtr cargo);
-    std::array<std::string, 3> fruitsNames{"apple", "raspberry", "lemon"};
-    std::array<std::string, 3> alcoNames{"vodka", "whiskey", "beer"};
-    std::array<std::string, 3> itemNames{"tools", "wood", "material"};
+    const std::array<std::string, 3> fruitsNames{"apple", "raspberry", "lemon"};
+    const std::array<std::string, 3> alcoNames{"vodka", "whiskey", "beer"};
+    const std::array<std::string, 3> itemNames{"tools", "wood", "material"};
     void GenerateFruits();
     void GenerateAlco();
     void GenerateItems();
