@@ -1,6 +1,5 @@
 #pragma once
 
-#include <iostream>
 #include <map>
 
 #include "cargo.hpp"
@@ -22,10 +21,9 @@ public:
 
     std::string enumToString(Rarity rarity) const;
 
-    void nextDay() override {}
+    void nextDay() override;
 
-    Cargo&
-    operator+=(const size_t& amount) override;
+    Cargo& operator+=(const size_t& amount) override;
     Cargo& operator-=(const size_t& amount) override;
     bool operator==(Cargo& item) const override;
 
