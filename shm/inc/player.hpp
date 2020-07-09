@@ -24,8 +24,8 @@ public:
     void clearEmptyCargo() { ship_->clearEmptyCargo(); };
 
     /* override from CargoHolder through its ship */
-    void receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) override { ship_->receiveCargo(cargo, amount, cargoHolder); }
-    void clearEmptyCargos() override { ship_->clearEmptyCargos(); }
+    void receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) override;
+    void clearEmptyCargos() override;
 
 private:
     size_t getAvailableSpace() { return ship_->getAvailableSpace(); }

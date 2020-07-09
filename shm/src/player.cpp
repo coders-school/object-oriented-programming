@@ -20,3 +20,10 @@ void Player::payCrew(size_t money) {
     }
     money_ -= money;
 }
+
+void Player::receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) {
+    ship_->receiveCargo(cargo, amount, cargoHolder);
+}
+void Player::clearEmptyCargos() {
+    ship_->clearEmptyCargos();
+}
