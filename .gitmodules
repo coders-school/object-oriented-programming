@@ -1,0 +1,3 @@
+[submodule "shm/lib/googletest"]
+	path = shm/lib/googletest
+	url = https://github.com/google/googletest.git
