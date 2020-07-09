@@ -32,6 +32,6 @@ jobs:
         make
     - name: Run tests
       working-directory: shm/build/tests
-      run: ./shm_ut -V
+      run: ./shm-ut -V
 
 # In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
