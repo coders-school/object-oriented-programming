@@ -1,13 +1,14 @@
-#include "gtest/gtest.h"
 #include <string>
+
 #include "alcohol.hpp"
 #include "cargo.hpp"
 #include "fruit.hpp"
+#include "gtest/gtest.h"
 #include "item.hpp"
 
 struct TestCargo : public ::testing::Test {
     Alcohol alcohol = Alcohol("whisky", 10, 110, 0.40);
-    Fruit fruit = Fruit("apple", 50, 1.6, 30);
+    Fruit fruit = Fruit("apple", 50, 2, 30);
     Item::Rarity rarity = Item::Rarity::legendary;
     Item item = Item("ContinouumTransfunctioner", 1, 1000000, rarity);
 };
@@ -20,16 +21,16 @@ TEST_F(TestCargo, checkAlcoholConstructor) {
 }
 
 TEST_F(TestCargo, checkAlcoholOperator) {
-    alcohol+=5;
+    alcohol += 5;
     ASSERT_EQ(alcohol.getAmount(), 15);
-    alcohol-=2;
+    alcohol -= 2;
     ASSERT_EQ(alcohol.getAmount(), 13);
-    Alcohol alcohol2 = Alcohol("whisky", 10, 110, 0.40);
+    Alcohol alcohol2 = Alcohol("whisky", 13, 110, 0.40);
     ASSERT_TRUE(alcohol == alcohol2);
 }
 
 TEST_F(TestCargo, checkFruitConstructor) {
-    ASSERT_EQ(fruit.getBasePrice(), 1.6);
+    ASSERT_EQ(fruit.getBasePrice(), 2);
     ASSERT_EQ(fruit.getName(), "apple");
     ASSERT_EQ(fruit.getAmount(), 50);
     ASSERT_EQ(fruit.getTimeToRotten(), 30);
@@ -62,5 +63,3 @@ TEST_F(TestCargo, checkItemOperator) {
     item -= 1;
     ASSERT_EQ(item.getAmount(), 1);
 }
-
-

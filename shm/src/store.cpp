@@ -62,10 +62,10 @@ Response Store::sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& pla
     if (!player->getShip()->FindMatchCargo(cargo.get())) {
         return Response::lack_of_cargo;
     }
-
     if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() > amount) {
         return Response::lack_of_space;
     }
+
     if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() == amount) {
         player->getShip()->Unload(cargo.get());
     } else {

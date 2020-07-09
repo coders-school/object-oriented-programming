@@ -12,11 +12,15 @@ double Alcohol::getPrice() const {
 }
 
 std::string Alcohol::getInfo() const {
-    auto ss = std::stringstream {};
+    auto ss = std::stringstream{};
     ss << std::left << std::setw(5) << "Name: " << getName()
        << std::left << std::setw(5) << "\tAmount: " << getAmount()
        << std::left << std::setw(5) << "\tAlcohol volume: " << getVolume() << '\n';
     return ss.str();
+}
+
+void Alcohol::nextDay() {
+    volume_ -= 0.01;
 }
 
 Cargo& Alcohol::operator+=(const size_t& amount) {
