@@ -8,12 +8,8 @@ public:
     Fruit(const std::string& name, size_t amount, double basePrice, size_t timeToRotten);
     ~Fruit() override {}
 
-    double getPrice() const override { return getBasePrice() * static_cast<double>((getTimeToRotten()) / (getTimeToRotten() + timeElapsed_)); }
-    std::string getName() const override { return name_; }
-    size_t getAmount() const override { return amount_; }
-    double getBasePrice() const override { return basePrice_; }
+    double getPrice() const override;
     size_t getTimeToRotten() const { return timeToRotten_; }
-    void setPrice();
     std::string getInfo() const override;
     friend std::ostream& operator<<(std::ostream& os, const Cargo* cargo);
     void nextDay() override;

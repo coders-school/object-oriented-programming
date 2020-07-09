@@ -1,18 +1,15 @@
 #include "fruit.hpp"
 
 Fruit::Fruit(const std::string& name, size_t amount, double basePrice)
-    : Cargo(name, amount, basePrice) {
-    timeToRotten_ = 100;
-    Fruit::setPrice();
-}
+    : Cargo(name, amount, basePrice), timeToRotten_{100}, price_{getPrice()} 
+    {}
 
 Fruit::Fruit(const std::string& name, size_t amount, double basePrice, size_t timeToRotten)
-    : Cargo(name, amount, basePrice), timeToRotten_(timeToRotten) {
-    Fruit::setPrice();
-}
-
-void Fruit::setPrice() {
-    price_ = getBasePrice() * static_cast<double>((getTimeToRotten()) / (getTimeToRotten() + timeElapsed_));
+    : Cargo(name, amount, basePrice), timeToRotten_(timeToRotten),price_{getPrice()}  
+    {}
+    
+double Fruit::getPrice() const {
+    return getBasePrice() * static_cast<double>((getTimeToRotten()) / (getTimeToRotten() + timeElapsed_));
 }
 
 void Fruit::nextDay() {
@@ -20,7 +17,6 @@ void Fruit::nextDay() {
     if (timeToRotten_ > 0) {
         timeToRotten_--;
     }
-    Fruit::setPrice();
 }
 
 std::string Fruit::getInfo() const {

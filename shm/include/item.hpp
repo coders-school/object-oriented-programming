@@ -17,9 +17,6 @@ public:
     ~Item() override {}
 
     double getPrice() const override;
-    std::string getName() const override { return name_; }
-    size_t getAmount() const override { return amount_; }
-    double getBasePrice() const override { return basePrice_; }
     Rarity getRarity() const { return rarity_; }
     std::string getInfo() const override;
 
