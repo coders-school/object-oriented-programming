@@ -92,11 +92,11 @@ public:
 
 class SomeClass : public Interface {
 public:
-    doSth() override;   // there should be an implementation in cpp file
+    void doSth() override;   // there should be an implementation in cpp file
 };
 
 int main() {
-    Interface interface;    // Compilation error, Interface is pure virtual
+    // Interface interface;    // Compilation error, Interface is pure virtual
     SomeClass someClass;    // OK
     Interface* interface = &someClass;  // OK, we hold a pointer
 }
@@ -110,7 +110,7 @@ ___
 `override` jest opcjonalne. Jeśli go nie podamy za sygnaturą funkcji klasy pochodnej to metoda z klasy bazowej i tak zostanie nadpisana.
 <!-- .element: class="fragment fade-in" -->
 
-Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie przeciążamy metodą z klasy bazowej i jeśli nie, to program się nie skompiluje.
+Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie nadpisujemy metodę z klasy bazowej i jeśli nie, to program się nie skompiluje.
 <!-- .element: class="fragment fade-in" -->
 
 Bez `override` mogłaby zostać utworzona nowa metoda w klasie pochodnej, która nie nadpisuje niczego z klasy bazowej.
@@ -358,7 +358,7 @@ ___
 
 Napisz klasę `DryFruit`, która dziedziczyć będzie po klasie `Fruit`.
 
-Klasa ta powinna przeciążać metody `getPrice()`, `getName()` oraz `operator--`.
+Klasa ta powinna nadpisywać metody `getPrice()`, `getName()` oraz `operator--`.
 
 `operator--` powinien odejmować zużycie raz na 10 wywołań.
 

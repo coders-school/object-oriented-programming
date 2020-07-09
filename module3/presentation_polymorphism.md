@@ -92,11 +92,11 @@ public:
 
 class SomeClass : public Interface {
 public:
-    doSth() override;   // there should be an implementation in cpp file
+    void doSth() override;   // there should be an implementation in cpp file
 };
 
 int main() {
-    Interface interface;    // Compilation error, Interface is pure virtual
+    // Interface interface;    // Compilation error, Interface is pure virtual
     SomeClass someClass;    // OK
     Interface* interface = &someClass;  // OK, we hold a pointer
 }
@@ -235,17 +235,17 @@ public:
 
 class Dwarf : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Dwarf!"; }
+    virtual void sayHello() { std::cout << "I'm Dwarf!"; }
 };
 
 class Elf : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Elf!"; }
+    virtual void sayHello() { std::cout << "I'm Elf!"; }
 };
 
 class Human : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Human!"; }
+    virtual void sayHello() { std::cout << "I'm Human!"; }
 };
 
 int main() {
@@ -358,7 +358,7 @@ ___
 
 Napisz klasę `DryFruit`, która dziedziczyć będzie po klasie `Fruit`.
 
-Klasa ta powinna przeciążać metody `getPrice()`, `getName()` oraz `operator--`.
+Klasa ta powinna nadpisywać metody `getPrice()`, `getName()` oraz `operator--`.
 
 `operator--` powinien odejmować zużycie raz na 10 wywołań.
 
