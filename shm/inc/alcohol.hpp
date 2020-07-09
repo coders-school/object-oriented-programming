@@ -19,13 +19,12 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getPrice() const override;
     size_t getBasePrice() const override { return basePrice_; }
-
-    //Override from Observer
-    void nextDay() override;
-
     bool operator==(const Cargo& cargoToCheck) const override;
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
+
+    //Override from Observer
+    void nextDay() override;
 
 protected:
     // override from Cloneable<Cargo>
