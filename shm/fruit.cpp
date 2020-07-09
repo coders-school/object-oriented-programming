@@ -3,12 +3,9 @@
 #include <string>
 
 Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeElapsed, Time* Publisher)
-    : Cargo(name, amount, basePrice),
-      expiryDate_(expiryDate),
-      timeElapsed_(timeElapsed),
-      Publisher_(Publisher) {
-          this->Publisher_->addObserver(this);   
-      }
+    : Cargo(name, amount, basePrice), expiryDate_(expiryDate), timeElapsed_(timeElapsed), Publisher_(Publisher) {
+    this->Publisher_->addObserver(this);
+}
 
 void Fruit::nextDay() {
     if(timeElapsed_ != expiryDate_) {

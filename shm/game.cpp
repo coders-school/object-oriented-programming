@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>
+#include <string>
 
 #include "cargo.hpp"
 #include "island.hpp"
@@ -218,8 +219,60 @@ void Game::makeTravel(Island* island, size_t daysOfTravel) {
 }
 
 void Game::buy() {
-    Island* currentIsland = map_->getCurrentPosition();
-    std::cout << "\n" << *(currentIsland->getStore().get()) << "\n";
+    while (true) {
+        Island* currentIsland = map_->getCurrentPosition();
+        Store* store = currentIsland->getStore().get();
+        std::cout << "\n" << *store << "\n";
+        printTrail('-');
+        std::cout << "Select product name and amount: (0 0 to exit)";
+        std::string name;
+        size_t amount = 0;
+        std::cin >> name >> amount;
+
+        if (amount == 0 && name == "0") {
+            return;
+        }
+
+        std::shared_ptr<Cargo> cargo = store->getCargo(name);
+        printTrail('-');
+
+        if (!cargo) {
+            std::cout << "Wrong cargo name. Try again.\n";
+            continue;
+        }
+
+        while (true) {
+            std::cout << "Total price is: " << store->getTotalBuyPrice(cargo, amount) << '\n';
+            std::cout << "Do you want to make a purchase? (Y/N) ";
+            char answer;
+            std::cin >> answer;
+            if (std::tolower(answer) == 'n')
+                return;
+            else if (std::tolower(answer) == 'y')
+                break;
+
+            std::cin.clear();
+            std::cout << "Wrong answer! Operation interrupted.\n";
+        }
+
+        switch (store->buy(cargo, amount, player_.get())) {
+        case Response::done:
+            std::cout << "Buy " << amount << " " << name << '\n';
+            return;
+            break;
+        case Response::lack_of_cargo:
+            std::cout << "There is no enough cargo to buy!\n";
+            break;
+        case Response::lack_of_money:
+            std::cout << "You dont have enough money to buy cargo!\n";
+            break;
+        case Response::lack_of_space:
+            std::cout << "You dont have enough space to store cargo\n";
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void Game::sell() {
