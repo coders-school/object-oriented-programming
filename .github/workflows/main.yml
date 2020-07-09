@@ -14,7 +14,8 @@ jobs:
         chmod +x check.sh
         sudo apt install -y pcregrep
         ./check.sh CMakeLists.txt
-   shm:
+
+  shm:
    runs-on: ubuntu-latest
    steps:
     - name: Check out code
@@ -31,3 +32,5 @@ jobs:
     - name: Run tests
       working-directory: shm/build/tests
       run: ./shm_ut -V
+
+# In case of conflict do not remove above jobs. Just add your jobs below and remove this comment :)
