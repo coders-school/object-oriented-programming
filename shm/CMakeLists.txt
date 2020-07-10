@@ -61,6 +61,7 @@ set(SOURCES
     ${SOURCE_DIR}/time.cpp
     ${SOURCE_DIR}/fruit.cpp
     ${SOURCE_DIR}/item.cpp
+    ${SOURCE_DIR}/alcohol.cpp
     ${SOURCE_DIR}/store.cpp
     ${SOURCE_DIR}/common.cpp
 )
