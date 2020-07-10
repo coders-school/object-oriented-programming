@@ -166,18 +166,18 @@ void Store::printResponseMessage(Response& response) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    for (const auto& cargo : store.cargoVec) {
+    for (const auto& cargo : store.cargo_) {
         out << "Product: " << cargo->getName() << '\n';
         out << "Amount: " << cargo->getAmount() << '\n';
         out << "Base price: " << cargo->getBasePrice() << '\n';
 
         if (typeid(*cargo) == typeid(Fruit)) {
-            Fruit* fruit = static_cast<Fruit*>(cargo);
+            Fruit* fruit = static_cast<Fruit*>(cargo.get());
             out << "Current price: " << fruit->getPrice() << '\n';
             out << "Expires in: " << fruit->getTimeToSpoilLeft() << '\n';
         }
         else if (typeid(*cargo) == typeid(Item)) {
-            Item* item = static_cast<Item*>(cargo);
+            Item* item = static_cast<Item*>(cargo.get());
             out << "Current price: " << item->getPrice() << '\n';
             switch (item->getRarity()) {
             case (Item::Rarity::common):
@@ -195,7 +195,7 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
             }
         }
         else if (typeid(*cargo) == typeid(Alcohol)) {
-            Alcohol* alcohol = static_cast<Alcohol*>(cargo);
+            Alcohol* alcohol = static_cast<Alcohol*>(cargo.get());
             alcohol->getPrice();
             out << "Current price: " << alcohol->getPrice() << '\n';
             out << "Expires in: " << alcohol->getTimeToSpoilLeft() << '\n';
