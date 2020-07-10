@@ -1,4 +1,4 @@
-#include "../inc/Coordinates.hpp"
+#include "Coordinates.hpp"
 
 #include <cstddef>
 

@@ -6,15 +6,11 @@
 #include "Coordinates.hpp"
 #include "Island.hpp"
 
-constexpr int minCoordinate = 0;
-constexpr int maxCoordinate = 100;
-constexpr int numberOfIslands = 10;
-
 class Map {
 public:
-    Island* getIsland(const Coordinates& coordinate);
-
     Map();
+
+    Island* getIsland(const Coordinates& coordinate);
 
 private:
     std::vector<std::shared_ptr<Island>> islands_;

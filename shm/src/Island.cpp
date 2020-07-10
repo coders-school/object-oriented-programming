@@ -1,8 +1,8 @@
-#include "../inc/Island.hpp"
+#include "Island.hpp"
 
-#include "../inc/Coordinates.hpp"
-
-Coordinates Island::getPosition() const { return position_; }
+#include "Coordinates.hpp"
 
 Island::Island(size_t x, size_t y)
     : position_(Coordinates(x, y)) { }
+
+Coordinates Island::getPosition() const { return position_; }

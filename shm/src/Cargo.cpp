@@ -1,4 +1,4 @@
-#include "../inc/Cargo.hpp"
+#include "Cargo.hpp"
 
 std::string Cargo::getName() const { return name_; }
 size_t Cargo::getAmount() const { return amount_; }

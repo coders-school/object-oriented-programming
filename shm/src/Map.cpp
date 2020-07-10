@@ -1,28 +1,20 @@
-#include "../inc/Map.hpp"
+#include "Map.hpp"
 
 #include <algorithm>
-#include <memory>
 #include <random>
-#include <vector>
 
-#include "../inc/Coordinates.hpp"
-#include "../inc/Island.hpp"
+#include "Coordinates.hpp"
+#include "Island.hpp"
 
-Island* Map::getIsland(const Coordinates& coordinate) {
-    auto search = std::find(begin(islands_), end(islands_), [&coordinate](const std::shared_ptr<Island>& island){
-        return island->getPosition() == coordinate;
-    });
-    if (search != end(islands_)) {
-        return search->get();
-    }
-    return nullptr;
-}
-
-std::random_device rd;
-std::mt19937 gen(rd());
-std::uniform_int_distribution<> distrib(minCoordinate, maxCoordinate);
+constexpr int minCoordinate = 0;
+constexpr int maxCoordinate = 100;
+constexpr int numberOfIslands = 10;
 
 Map::Map() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(minCoordinate, maxCoordinate);
+
     islands_.reserve(numberOfIslands);
     bool coordinatesAreFree;
 
@@ -38,4 +30,14 @@ Map::Map() {
             islands_.push_back(std::make_shared<Island>(Island(tempX, tempY)));
         }
     }
+}
+
+Island* Map::getIsland(const Coordinates& coordinate) {
+    auto search = std::find(begin(islands_), end(islands_), [&coordinate](const std::shared_ptr<Island>& island){
+        return island->getPosition() == coordinate;
+    });
+    if (search != end(islands_)) {
+        return search->get();
+    }
+    return nullptr;
 }
