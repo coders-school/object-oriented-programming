@@ -9,9 +9,9 @@ Ship::Ship()
     : id_(-1) {}
 Ship::Ship(size_t id, std::string name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate, std::shared_ptr<Time> time)
     : id_(id), name_(name), speed_(speed), maxCrew_(maxCrew), capacity_(capacity), delegate_(delegate), time_(time) {
-        time_->addObserver(this);
-        crew_ = maxCrew_;
-    }
+    time_->addObserver(this);
+    crew_ = maxCrew_;
+}
 
 Ship::~Ship() {
     time_->removeObserver(this);
@@ -77,7 +77,7 @@ void Ship::RemoveFromStorageIfRotten() {
     cargo_.erase(std::remove_if(cargo_.begin(),
                                 cargo_.end(),
                                 [](auto& el) {
-                                    if (el->getPrice() == el->getBasePrice()) {
+                                    if (el->getPrice() == el->getBasePrice() && typeid(*el) == typeid(Fruit)) {
                                         return std::dynamic_pointer_cast<Fruit>(el)->getTimeToRotten() == 0;
                                     }
                                     return false;
