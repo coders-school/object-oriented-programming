@@ -28,7 +28,7 @@ public:
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
-    void addCargo(Cargo* cargo);
+    bool addCargo(Cargo* cargo);
     size_t getAvaiableSpace() const;
     size_t getAvaiableFunds() const { return avaiableFunds_; };
     void setCapacity(const size_t amount) { capacity_ = amount; }
@@ -37,7 +37,6 @@ public:
     Cargo* getCargo(const std::string& name);
     void printCargo();
     void printResponseMessage(Response& response);
-    friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
 private:
     size_t capacity_;
