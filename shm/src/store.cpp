@@ -8,6 +8,10 @@
 #include "item.hpp"
 #include "alcohol.hpp"
 
+#include "fruit.hpp"
+#include "item.hpp"
+#include "alcohol.hpp"
+
 Store::Store(size_t capacity, size_t avaiableFunds)
     : capacity_(capacity), avaiableFunds_(avaiableFunds) {}
 
