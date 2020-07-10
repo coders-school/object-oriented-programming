@@ -1,13 +1,12 @@
-#include "gtest/gtest.h"
-
 #include "fruit.hpp"
+#include "gtest/gtest.h"
 #include "player.hpp"
 #include "ship.hpp"
-#include "time.hpp"
 #include "store.hpp"
+#include "time.hpp"
 
-namespace SHM_test {
-
+namespace SHM_test
+{
 constexpr size_t SHIP_CAPACITY = 500;
 constexpr char SHIP_NAME[] = "BestShipEver";
 constexpr int SHIP_MAX_CREW = 20;
@@ -33,44 +32,52 @@ Ship ship(SHIP_CAPACITY, SHIP_MAX_CREW, SHIP_SPEED, SHIP_NAME, SHIP_ID, &time);
 Player player(ship, MONEY, AVAILABLE_SPACE);
 Fruit apple(APPLE, APPLE_AMOUNT, APPLE_BASEPRICE, APPLE_SPOILTIME, &time);
 
-TEST(ShipTest, ShouldInitShip) {
+TEST(ShipTest, ShouldInitShip)
+{
     EXPECT_EQ(ship.getMaxCrew(), SHIP_MAX_CREW);
     EXPECT_EQ(ship.getSpeed(), SHIP_SPEED);
     EXPECT_EQ(ship.getId(), SHIP_ID);
 }
-TEST(ShipTest, ShouldAddCrew) {
+TEST(ShipTest, ShouldAddCrew)
+{
     ship += SHIP_CREW;
     EXPECT_EQ(ship.getCrew(), SHIP_CREW);
 }
-TEST(ShipTest, ShouldSubtractCrew) {
+TEST(ShipTest, ShouldSubtractCrew)
+{
     ship -= SHIP_CREW;
     EXPECT_EQ(ship.getCrew(), 0);
 }
-TEST(PlayerTest, ShouldInitPlayer) {
+TEST(PlayerTest, ShouldInitPlayer)
+{
     EXPECT_EQ(player.getMoney(), MONEY);
 }
-TEST(PlayerTest, ShouldPayCrew) {
+TEST(PlayerTest, ShouldPayCrew)
+{
     size_t crew = ship.getCrew();
     size_t money = player.getMoney();
 
     ++time;
     EXPECT_EQ(player.getMoney(), money - crew);
 }
-TEST(TimeTest, ShouldTimePass) {
+TEST(TimeTest, ShouldTimePass)
+{
     ++time;
     EXPECT_EQ(time.getElapsedTime(), 2);
 }
-TEST(StoreTest, ShouldHandleBuySell) {
+TEST(StoreTest, ShouldHandleBuySell)
+{
     Store store;
 
     EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::invalid_cargo);
     store.addCargo(&apple);
-    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2, &player), Store::Response::lack_of_cargo);
-    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2000, &player), Store::Response::lack_of_money);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT * 2, &player), Store::Response::lack_of_cargo);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT * 2000, &player), Store::Response::lack_of_money);
     EXPECT_EQ(store.buy(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
     EXPECT_EQ(store.sell(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
 }
-TEST(FruitTest, ShouldSpoil) {
+TEST(FruitTest, ShouldSpoil)
+{
     size_t spoilTime = FRUIT_MELON_SPOIL_TIME;
 
     Fruit fruit(FRUIT_MELON, FRUIT_MELON_AMOUNT, FRUIT_MELON_BASEPRICE, FRUIT_MELON_SPOIL_TIME, &time);
@@ -81,4 +88,4 @@ TEST(FruitTest, ShouldSpoil) {
     }
     EXPECT_EQ(fruit.getAmount(), 0);
 }
-}
+}  // namespace SHM_test

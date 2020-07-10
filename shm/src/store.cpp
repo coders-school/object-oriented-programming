@@ -1,24 +1,24 @@
+#include <algorithm>
+#include <iostream>
+#include <numeric>
+
+#include "fruit.hpp"
+#include "item.hpp"
 #include "store.hpp"
 
-#include <algorithm>
-#include <numeric>
-#include <iostream>
+Store::Store(size_t capacity, size_t avaiableFunds) : capacity_(capacity), avaiableFunds_(avaiableFunds) {}
 
-Store::Store(size_t capacity, size_t avaiableFunds)
-    : capacity_(capacity), avaiableFunds_(avaiableFunds) {}
-
-Store::Store()
-    : Store(DEFAULT_CAPACITY, DEFAULT_FUNDS) {}
+Store::Store() : Store(DEFAULT_CAPACITY, DEFAULT_FUNDS) {}
 
 /*public*/
 //-----------------------------------------------------------------------------------
 // <summary> The buy method allows Player to purchase cargo in store
 //-----------------------------------------------------------------------------------
-Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player)
+{
     if (cargo) {
         if (getCargo(cargo->getName()) != nullptr) {
-            size_t totalPrice =
-                getCargo(cargo->getName())->getBasePrice() * amount;
+            size_t totalPrice = getCargo(cargo->getName())->getBasePrice() * amount;
 
             if (player->getMoney() < totalPrice)
                 return Response::lack_of_money;
@@ -26,8 +26,7 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
             if (getCargo(cargo->getName())->getAmount() < amount)
                 return Response::lack_of_cargo;
 
-            if (player->getAvailableSpace() <
-                getCargo(cargo->getName())->getAmount())
+            if (player->getAvailableSpace() < getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
             setAvaiableFunds(getAvaiableFunds() + totalPrice);
@@ -47,11 +46,11 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 //-----------------------------------------------------------------------------------
 // <summary> The sell method allows Player to sell cargo in store
 //-----------------------------------------------------------------------------------
-Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
+Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player)
+{
     if (cargo) {
         if (getCargo(cargo->getName()) != nullptr) {
-            size_t totalPrice =
-                player->getCargo(cargo->getName())->getPrice() * amount;
+            size_t totalPrice = player->getCargo(cargo->getName())->getPrice() * amount;
 
             if (getAvaiableFunds() < totalPrice)
                 return Response::lack_of_money;
@@ -59,8 +58,7 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
             if (player->getCargo(cargo->getName())->getAmount() < amount)
                 return Response::lack_of_cargo;
 
-            if (getAvaiableSpace() <
-                player->getCargo(cargo->getName())->getAmount())
+            if (getAvaiableSpace() < player->getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
             setAvaiableFunds(getAvaiableFunds() - totalPrice);
@@ -78,7 +76,8 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 //-----------------------------------------------------------------------------------
 // <summary> This method allows to add cargo to the store / updated the cargo vec
 //-----------------------------------------------------------------------------------
-bool Store::addCargo(Cargo* cargo) {
+bool Store::addCargo(Cargo* cargo)
+{
     bool success = false;
     if (getAvaiableSpace() >= cargo->getAmount()) {
         auto ptrCargo = getCargo(cargo->getName());
@@ -93,12 +92,12 @@ bool Store::addCargo(Cargo* cargo) {
     return success;
 }
 
-
 /*public*/
 //-----------------------------------------------------------------------------------
 // <summary> Finds particular cargo in cargo vec using std::name for comparsion
 //-----------------------------------------------------------------------------------
-Cargo* Store::getCargo(const std::string& name) {
+Cargo* Store::getCargo(const std::string& name)
+{
     return Common::getCargo(name, cargo_);
 }
 
@@ -106,7 +105,8 @@ Cargo* Store::getCargo(const std::string& name) {
 //-----------------------------------------------------------------------------------
 // <summary> Checks the Store's avaiable space
 //-----------------------------------------------------------------------------------
-size_t Store::getAvaiableSpace() const {
+size_t Store::getAvaiableSpace() const
+{
     return Common::getAvailableSpace(capacity_, cargo_);
 }
 
@@ -114,23 +114,22 @@ size_t Store::getAvaiableSpace() const {
 //-----------------------------------------------------------------------------------
 // <summary> Prints out the cargo vector content
 //-----------------------------------------------------------------------------------
-void Store::printCargo() {
+void Store::printCargo()
+{
     Common::printCargo(cargo_);
 }
 
 /*private*/
 //-----------------------------------------------------------------------------------
-// <summary> This method is used for updating the cargo amount in cargo vec while 
+// <summary> This method is used for updating the cargo amount in cargo vec while
 //           player is buying/selling goods
 //-----------------------------------------------------------------------------------
-void Store::updateCargo(Cargo* cargo,
-                        size_t amount,
-                        updateMode mode) {
+void Store::updateCargo(Cargo* cargo, size_t amount, updateMode mode)
+{
     if (mode == BUY) {
         if (getCargo(cargo->getName())->getAmount() == amount) {
-            auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](std::unique_ptr<Cargo>& el) {
-                return el->getName() == cargo->getName();
-            });
+            auto it = std::find_if(cargo_.begin(), cargo_.end(),
+                                   [=](std::unique_ptr<Cargo>& el) { return el->getName() == cargo->getName(); });
             cargo_.erase(it);
 
         } else {
@@ -148,7 +147,8 @@ void Store::updateCargo(Cargo* cargo,
 //-----------------------------------------------------------------------------------
 // <summary> Prints the relevant Response message
 //-----------------------------------------------------------------------------------
-void Store::printResponseMessage(Response& response) {
+void Store::printResponseMessage(Response& response)
+{
     if (response == Response::invalid_cargo)
         std::cout << "Response Message: Invalid cargo.\n";
     else if (response == Response::done)
@@ -159,4 +159,37 @@ void Store::printResponseMessage(Response& response) {
         std::cout << "Response Message: Not enought money.\n";
     else if (response == Response::lack_of_space)
         std::cout << "Response Message: Not enouhg space.\n";
+}
+
+std::ostream& operator<<(std::ostream& out, const Store& store)
+{
+    for (const auto& cargo : store.cargo_) {
+        out << "Product: " << cargo->getName() << '\n';
+        out << "Amount: " << cargo->getAmount() << '\n';
+        out << "Base price: " << cargo->getBasePrice() << '\n';
+
+        if (typeid(*cargo) == typeid(Fruit)) {
+            Fruit* fruit = static_cast<Fruit*>(cargo.get());
+            out << "Current price: " << fruit->getPrice() << '\n';
+            out << "Expires in: " << fruit->getTimeToSpoilLeft() << '\n';
+        } else if (typeid(*cargo) == typeid(Item)) {
+            Item* item = static_cast<Item*>(cargo.get());
+            out << "Current price: " << item->getPrice() << '\n';
+            switch (item->getRarity()) {
+                case (Item::Rarity::common):
+                    out << "Rarity: common\n";
+                    break;
+                case (Item::Rarity::epic):
+                    out << "Rarity: epic\n";
+                    break;
+                case (Item::Rarity::legendary):
+                    out << "Rarity: legendary\n";
+                    break;
+                case (Item::Rarity::rare):
+                    out << "Rarity: rare\n";
+                    break;
+            }
+        }
+    }
+    return out;
 }

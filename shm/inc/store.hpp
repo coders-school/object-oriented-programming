@@ -7,20 +7,12 @@
 constexpr size_t DEFAULT_CAPACITY = 1000;
 constexpr size_t DEFAULT_FUNDS = 1000;
 
-class Store {
+class Store
+{
 public:
-    enum class Response {
-        invalid_cargo,
-        done,
-        lack_of_money,
-        lack_of_cargo,
-        lack_of_space
-    };
+    enum class Response { invalid_cargo, done, lack_of_money, lack_of_cargo, lack_of_space };
 
-    enum updateMode {
-        BUY = 0,
-        SELL = 1
-    };
+    enum updateMode { BUY = 0, SELL = 1 };
 
     Store();
     Store(size_t capacity, size_t avaiableFunds);
@@ -37,6 +29,7 @@ public:
     Cargo* getCargo(const std::string& name);
     void printCargo();
     void printResponseMessage(Response& response);
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
 private:
     size_t capacity_;
