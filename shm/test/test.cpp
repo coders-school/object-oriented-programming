@@ -1,11 +1,15 @@
 #include "gtest/gtest.h"
 
+#include "fruit.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "time.hpp"
+#include "store.hpp"
 
 namespace SHM_test {
 
+constexpr size_t SHIP_CAPACITY = 500;
+constexpr char SHIP_NAME[] = "BestShipEver";
 constexpr int SHIP_MAX_CREW = 20;
 constexpr int SHIP_SPEED = 666;
 constexpr size_t SHIP_ID = 7;
@@ -13,10 +17,21 @@ constexpr int SHIP_CREW = 5;
 constexpr size_t MONEY = 1000;
 constexpr size_t SALARY = 20;
 constexpr size_t AVAILABLE_SPACE = 100;
+constexpr char FRUIT_MELON[] = "Melon";
+constexpr size_t FRUIT_MELON_SPOIL_TIME = 5;
+constexpr size_t FRUIT_MELON_BASEPRICE = 10;
+constexpr size_t FRUIT_MELON_AMOUNT = 24;
+
+constexpr char APPLE[] = "Apple";
+constexpr size_t APPLE_AMOUNT = 16;
+constexpr size_t APPLE_HALF_AMOUNT = 8;
+constexpr size_t APPLE_BASEPRICE = 3;
+constexpr size_t APPLE_SPOILTIME = 8;
 
 Time time;
-Ship ship(SHIP_MAX_CREW, SHIP_SPEED, SHIP_ID, &time);
+Ship ship(SHIP_CAPACITY, SHIP_MAX_CREW, SHIP_SPEED, SHIP_NAME, SHIP_ID, &time);
 Player player(ship, MONEY, AVAILABLE_SPACE);
+Fruit apple(APPLE, APPLE_AMOUNT, APPLE_BASEPRICE, APPLE_SPOILTIME, &time);
 
 TEST(ShipTest, ShouldInitShip) {
     EXPECT_EQ(ship.getMaxCrew(), SHIP_MAX_CREW);
@@ -44,5 +59,26 @@ TEST(PlayerTest, ShouldPayCrew) {
 TEST(TimeTest, ShouldTimePass) {
     ++time;
     EXPECT_EQ(time.getElapsedTime(), 2);
+}
+TEST(StoreTest, ShouldHandleBuySell) {
+    Store store;
+
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::invalid_cargo);
+    store.addCargo(&apple);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2, &player), Store::Response::lack_of_cargo);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT*2000, &player), Store::Response::lack_of_money);
+    EXPECT_EQ(store.buy(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
+    EXPECT_EQ(store.sell(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
+}
+TEST(FruitTest, ShouldSpoil) {
+    size_t spoilTime = FRUIT_MELON_SPOIL_TIME;
+
+    Fruit fruit(FRUIT_MELON, FRUIT_MELON_AMOUNT, FRUIT_MELON_BASEPRICE, FRUIT_MELON_SPOIL_TIME, &time);
+
+    while (spoilTime) {
+        ++time;
+        --spoilTime;
+    }
+    EXPECT_EQ(fruit.getAmount(), 0);
 }
 }

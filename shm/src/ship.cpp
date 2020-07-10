@@ -1,5 +1,6 @@
 #include "ship.hpp"
 
+#include <algorithm>
 #include <numeric>
 
 Ship::Ship(int maxCrew, int speed, size_t id, Time* time, Delegate* delegate)
@@ -39,7 +40,8 @@ Ship& Ship::operator+=(const size_t crew) {
 
 void Ship::setName(const std::string& name) { name_ = name; }
 void Ship::setDelegate(Delegate* delegate) { 
-    delegate_ = delegate; }
+    delegate_ = delegate; 
+}
 
 size_t Ship::getCapacity() const { return capacity_; }
 size_t Ship::getMaxCrew() const { return maxCrew_; }
@@ -48,20 +50,42 @@ size_t Ship::getSpeed() const { return speed_; }
 std::string Ship::getName() const { return name_; }
 size_t Ship::getId() const { return id_; }
 
-std::shared_ptr<Cargo> Ship::getCargo(const size_t index) {
-    if (index >= cargo_.size()) {
-        return nullptr;
-    }
-    return cargo_[index];
+Cargo* Ship::getCargo(const std::string& name) {
+    return Common::getCargo(name, cargo_);
 }
+
 size_t Ship::getAvailableSpace() const {
-    size_t occupied = std::accumulate(cargo_.begin(),
-                                      cargo_.end(),
-                                      0,
-                                      [](size_t sum, const auto& cargo) {
-                                          return sum += cargo->getAmount();
-                                      });
-    return capacity_ - occupied;
+    return Common::getAvailableSpace(capacity_, cargo_);
+}
+
+void Ship::load(std::unique_ptr<Cargo> cargo) {
+    if (getAvailableSpace() >= cargo->getAmount()) {
+        auto ptrCargo = getCargo(cargo->getName());
+        if (ptrCargo == nullptr) {
+            cargo_.emplace_back(std::move(cargo));
+        } else {
+            *ptrCargo += cargo->getAmount();
+        }
+    }
+}
+
+void Ship::unload(Cargo* cargo) {
+    auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](std::unique_ptr<Cargo>& el) {
+        return el->getName() == cargo->getName();
+    });
+
+    if (it != cargo_.end()) {
+        size_t currentAmount = (*it)->getAmount(); 
+        if (cargo->getAmount() >= currentAmount ) {
+            cargo_.erase(it); 
+        } else {
+            *(*it) -= cargo->getAmount();
+        }
+    }
+}
+
+void Ship::printCargo() {
+    Common::printCargo(cargo_);
 }
 void Ship::nextDay() {
     if (delegate_) {

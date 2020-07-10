@@ -1,17 +1,20 @@
 #pragma once
 
-#include <string>
 #include <memory>
+#include <string>
 
 #include "cargo.hpp"
+#include "time.hpp"
 
-class Alcohol : public Cargo {
+class Alcohol : public Cargo
+{
 public:
-    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t timeToSpoil)
-            : Cargo(name, amount, basePrice)
-            , timeToSpoil_(timeToSpoil)
-    {}
-    
+    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t timeToSpoil, Time* time)
+        : Cargo(name, amount, basePrice, time),
+          timeToSpoil_(timeToSpoil)
+    {
+    }
+
     Alcohol& operator--();
     Alcohol& operator--(int);
     bool operator==(const Cargo& alcohol) const override;
@@ -26,7 +29,10 @@ public:
     size_t getTimeToSpoil() const;
     size_t getTimeToSpoilLeft() const;
 
-    Cargo* clone() override;
+    std::unique_ptr<Cargo> clone() override;
+
+    void nextDay() {}
+
 private:
     const size_t timeToSpoil_;
     size_t timeToSpoilLeft_ = timeToSpoil_;

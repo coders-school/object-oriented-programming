@@ -66,6 +66,8 @@ set(SOURCES
     ${SOURCE_DIR}/fruit.cpp
     ${SOURCE_DIR}/item.cpp
     ${SOURCE_DIR}/alcohol.cpp
+    ${SOURCE_DIR}/store.cpp
+    ${SOURCE_DIR}/common.cpp
 )
 
 add_library(${CMAKE_PROJECT_NAME}-lib STATIC ${SOURCES})
