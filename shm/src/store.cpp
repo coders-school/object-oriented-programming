@@ -192,7 +192,6 @@ std::ostream& operator<<(std::ostream& out, const Store& store)
             }
         } else if (typeid(*cargo) == typeid(Alcohol)) {
             Alcohol* alcohol = static_cast<Alcohol*>(cargo.get());
-            alcohol->getPrice();
             out << "Current price: " << alcohol->getPrice() << '\n';
             out << "Expires in: " << alcohol->getTimeToSpoilLeft() << '\n';
         }
