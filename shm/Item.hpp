@@ -26,5 +26,5 @@ public:
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
-    Rarity getRarityLevel() const { return rarity_; }
+    Rarity getRarity() const { return rarity_; }
 };
