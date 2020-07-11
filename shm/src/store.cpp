@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <numeric>
+#include <random>
 
 #include "alcohol.hpp"
 #include "fruit.hpp"
@@ -197,4 +198,14 @@ std::ostream& operator<<(std::ostream& out, const Store& store)
         }
     }
     return out;
+}
+
+void Store::nextDay() {
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<size_t> amountAvailable(AMOUNT_MIN, AMOUNT_MAX);
+
+    for (const auto& item : cargo_) {
+        item->setAmount(amountAvailable(generator));
+    }
 }
