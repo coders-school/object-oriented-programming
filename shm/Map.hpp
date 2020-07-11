@@ -4,9 +4,9 @@
 
 #include "Island.hpp"
 
-constexpr size_t amountOfIslands = 10;
-constexpr size_t minPositionXY = 0;
-constexpr size_t maxPositionXY = 10;
+constexpr size_t amountOfIslands{10};
+constexpr size_t minPositionXY{0};
+constexpr size_t maxPositionXY{10};
 
 class Map {
 private:
