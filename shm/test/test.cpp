@@ -88,4 +88,14 @@ TEST(FruitTest, ShouldSpoil)
     }
     EXPECT_EQ(fruit.getAmount(), 0);
 }
+TEST(StoreNextDay, ShouldGenerateRandomAmountOfCargo)
+{
+    Store store;
+    Time time;
+    Fruit fruit("banana", 10, 25, 99, &time);
+    store.addCargo(&fruit);
+    store.nextDay();
+    std::cout << "\n* Amount of " << fruit.getName() << " is NOW: " <<
+                 store.getCargo("banana")->getAmount() << " *\n\n";
+}
 }  // namespace SHM_test
