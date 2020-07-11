@@ -6,6 +6,8 @@
 
 constexpr size_t DEFAULT_CAPACITY = 1000;
 constexpr size_t DEFAULT_FUNDS = 1000;
+constexpr size_t AMOUNT_MIN = 0;
+constexpr size_t AMOUNT_MAX = 50;
 
 class Store
 {
@@ -30,6 +32,7 @@ public:
     void printCargo();
     void printResponseMessage(Response& response);
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
+    void nextDay();
 
 private:
     size_t capacity_;
