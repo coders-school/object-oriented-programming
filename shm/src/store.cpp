@@ -2,6 +2,7 @@
 #include <iostream>
 #include <numeric>
 
+#include "alcohol.hpp"
 #include "fruit.hpp"
 #include "item.hpp"
 #include "store.hpp"
@@ -189,6 +190,10 @@ std::ostream& operator<<(std::ostream& out, const Store& store)
                     out << "Rarity: rare\n";
                     break;
             }
+        } else if (typeid(*cargo) == typeid(Alcohol)) {
+            Alcohol* alcohol = static_cast<Alcohol*>(cargo.get());
+            out << "Current price: " << alcohol->getPrice() << '\n';
+            out << "Expires in: " << alcohol->getTimeToSpoilLeft() << '\n';
         }
     }
     return out;
