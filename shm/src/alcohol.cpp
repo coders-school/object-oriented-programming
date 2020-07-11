@@ -2,8 +2,7 @@
 
 size_t Alcohol::getPrice() const
 {
-    return static_cast<size_t>((static_cast<float>(timeToSpoilLeft_) / static_cast<float>(timeToSpoil_)) *
-                               static_cast<float>(basePrice_));
+    return static_cast<size_t>(static_cast<size_t>(basePrice_) * (strength_ / MAX_STRENGTH));
 }
 
 std::string Alcohol::getName() const
@@ -18,26 +17,22 @@ size_t Alcohol::getBasePrice() const
 {
     return basePrice_;
 }
-size_t Alcohol::getTimeToSpoil() const
+size_t Alcohol::getStrength() const
 {
-    return timeToSpoil_;
-}
-size_t Alcohol::getTimeToSpoilLeft() const
-{
-    return timeToSpoilLeft_;
+    return strength_;
 }
 
 Alcohol& Alcohol::operator--()
 {
-    if (timeToSpoilLeft_ > 0) {
-        --timeToSpoilLeft_;
+    if (amount_ > 0) {
+        --amount_;
     }
     return *this;
 }
 Alcohol& Alcohol::operator--(int)
 {
     Alcohol& temp(*this);
-    if (timeToSpoilLeft_ > 0) {
+    if (amount_ > 0) {
         operator--();
     }
     return temp;
@@ -46,9 +41,10 @@ bool Alcohol::operator==(const Cargo& cargo) const
 {
     if (typeid(cargo) == typeid(Alcohol)) {
         const Alcohol* alcohol = static_cast<const Alcohol*>(&cargo);
-        return name_ == alcohol->getName() && amount_ == alcohol->getAmount() &&
-               basePrice_ == alcohol->getBasePrice() && timeToSpoil_ == alcohol->getTimeToSpoil() &&
-               timeToSpoilLeft_ == alcohol->getTimeToSpoilLeft();
+        return name_ == alcohol->getName() &&
+               amount_ == alcohol->getAmount() &&
+               basePrice_ == alcohol->getBasePrice() &&
+               strength_ == alcohol->getStrength();
     }
     return false;
 }
@@ -78,4 +74,9 @@ std::unique_ptr<Cargo> Alcohol::clone()
 {
     std::unique_ptr<Alcohol> alcohol = std::make_unique<Alcohol>(*this);
     return alcohol;
+}
+
+void Alcohol::nextDay()
+{
+    return;
 }

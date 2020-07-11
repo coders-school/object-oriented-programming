@@ -6,12 +6,15 @@
 #include "cargo.hpp"
 #include "time.hpp"
 
-class Alcohol : public Cargo
-{
+namespace {
+constexpr size_t MAX_STRENGTH = 96;
+}
+
+class Alcohol : public Cargo {
 public:
-    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t timeToSpoil, Time* time)
+    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t strength, Time* time)
         : Cargo(name, amount, basePrice, time),
-          timeToSpoil_(timeToSpoil)
+          strength_(strength)
     {
     }
 
@@ -26,14 +29,12 @@ public:
     std::string getName() const override;
     size_t getAmount() const override;
     size_t getBasePrice() const override;
-    size_t getTimeToSpoil() const;
-    size_t getTimeToSpoilLeft() const;
+    size_t getStrength () const;
 
     std::unique_ptr<Cargo> clone() override;
 
-    void nextDay() {}
+    void nextDay();
 
 private:
-    const size_t timeToSpoil_;
-    size_t timeToSpoilLeft_ = timeToSpoil_;
+    const size_t strength_;
 };
