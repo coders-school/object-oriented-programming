@@ -65,14 +65,11 @@ Response Store::sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& pla
     if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() > amount) {
         return Response::lack_of_space;
     }
-    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() == 0) {
-    //if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() == amount) {
-        player->getShip()->Unload(cargo.get());
-        *cargo.get() += amount;
-        size_t money = amount * cargo->getPrice();
-        player->addMoney(money);
-    }
 
+    player->getShip()->Unload(cargo.get());
+    *cargo.get() += amount;
+    size_t money = amount * cargo->getPrice();
+    player->addMoney(money);
     return Response::done;
 }
 
