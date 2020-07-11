@@ -11,7 +11,7 @@ enum class Rarity {
 
 class Item : public Cargo {
 private:
-    const Rarity rarity_ = Rarity::common;
+    const Rarity rarity_{Rarity::common};
 
 public:
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);

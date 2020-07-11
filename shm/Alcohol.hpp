@@ -2,11 +2,11 @@
 
 #include "Cargo.hpp"
 
-constexpr size_t maximumAlcoholContent = 96;
+constexpr size_t maximumAlcoholContent{96};
 
 class Alcohol : public Cargo {
 private:
-    const size_t alcoholContent_ = 96;
+    const size_t alcoholContent_{96};
 
 public:
     Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t alcoholContent);

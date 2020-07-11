@@ -4,8 +4,8 @@
 
 class Fruit : public Cargo {
 private:
-    size_t daysToRot_ = 10;
-    const size_t expirationDays_ = 10;
+    size_t daysToRot_{10};
+    const size_t expirationDays_{10};
 
 public:
     Fruit(const std::string& name, size_t amount, size_t basePrice);
