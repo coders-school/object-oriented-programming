@@ -14,13 +14,16 @@ private:
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
+    void PrintOptions();
+    //void MakeAction(Action choice);
 
 public:
     Game(size_t money, size_t days, size_t final_goal);
 
     enum class Action {
-        buy,
-        sell,
-        travel,
+        Travel,
+        Buy,
+        Sell,
+        //Exit,
     };
 };
