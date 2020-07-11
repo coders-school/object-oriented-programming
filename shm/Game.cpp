@@ -20,21 +20,21 @@ void Game::PrintOptions() {
     std::cout << "3. Sell \n";
 }
 
-// void Game::MakeAction(Action choice) {
-//     switch (choice) {
-//         case Action::Exit:
-//             Exit();
-//             break;
-//         case Action::Travel:
-//             Travel();
-//             break;
-//         case Action::Buy:
-//             Buy();
-//             break;
-//         case Action::Sell:
-//             Sell();
-//             break;
-//         default:
-//         break;        
-//     }
-// }
+void Game::MakeAction(Action choice) {
+    switch (choice) {
+        case Action::Exit:
+            Exit();
+            break;
+        case Action::Travel:
+            Travel();
+            break;
+        case Action::Buy:
+            Buy();
+            break;
+        case Action::Sell:
+            Sell();
+            break;
+        default:
+        break;        
+    }
+}

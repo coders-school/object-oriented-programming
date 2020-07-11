@@ -4,6 +4,16 @@
 #include "Player.hpp"
 
 class Game {
+public:
+    Game(size_t money, size_t days, size_t final_goal);
+
+    enum class Action {
+        Exit,
+        Travel,
+        Buy,
+        Sell,
+    };
+
 private:
     size_t money_;
     size_t days_;
@@ -15,15 +25,9 @@ private:
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
     void PrintOptions();
-    //void MakeAction(Action choice);
-
-public:
-    Game(size_t money, size_t days, size_t final_goal);
-
-    enum class Action {
-        Travel,
-        Buy,
-        Sell,
-        //Exit,
-    };
+    void MakeAction(Action choice);
+    void Exit();
+    void Travel();
+    void Buy();
+    void Sell();
 };
