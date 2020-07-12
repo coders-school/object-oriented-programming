@@ -59,18 +59,17 @@ Response Store::buy(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& play
 }
 
 Response Store::sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& player) {
-    if (!player->getShip()->FindMatchCargo(cargo.get())) {
-        return Response::lack_of_cargo;
-    }
-    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() > amount) {
+    if (player->getShip()->FindMatchCargo(cargo.get())->getAmount() < amount) {
         return Response::lack_of_space;
     }
-
-    player->getShip()->Unload(cargo.get());
-    *cargo.get() += amount;
-    size_t money = amount * cargo->getPrice();
-    player->addMoney(money);
-    return Response::done;
+    if (player->getShip()->FindMatchCargo(cargo.get())) {
+        *cargo.get() += amount;
+        size_t money = amount * cargo->getPrice();
+        player->addMoney(money);
+        player->getShip()->Unload(cargo.get(), amount);
+        return Response::done;
+    }
+    return Response::lack_of_cargo;
 }
 
 void Store::nextDay() {
