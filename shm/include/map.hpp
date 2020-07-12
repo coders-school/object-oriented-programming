@@ -8,6 +8,7 @@ class Map {
 public:
     Map();
     Island* getIsland(const Coordinates& coordinate);
+    Island* getCurrentPosition() const { return currentPosition_; };
 
 private:
     std::vector<Island> Islands_;

@@ -19,8 +19,8 @@ void Player::loadShip(std::shared_ptr<Cargo> cargo) {
     countAvailableSpace();
 }
 
-void Player::unloadShip(Cargo* cargo) {
-    ship_->unload(cargo);
+void Player::unloadShip(Cargo* cargo, size_t amount) {
+  ship_->unload(cargo, amount);
     countAvailableSpace();
 }
 

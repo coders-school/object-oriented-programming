@@ -17,7 +17,7 @@ public:
     void payCrew(size_t money) override;
 
     void loadShip(std::shared_ptr<Cargo> cargo);
-    void unloadShip(Cargo* cargo);
+  void unloadShip(Cargo* cargo, size_t amount);
 
 private:
     std::unique_ptr<Ship> ship_;

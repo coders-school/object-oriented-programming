@@ -10,22 +10,27 @@
 class Store : public Observer {
 public:
     enum class Response { done, lack_of_money, lack_of_cargo, lack_of_space };
-  
-    Store(const std::vector<std::shared_ptr<Cargo>>& stock, Time* time);
+    Store();
+    Store(const std::vector<std::shared_ptr<Cargo>>& stock);
+
     // override from Observer
     ~Store() override;
 
-    Response buy(Cargo* cargo, Player* player);
-    Response sell(Cargo* cargo, Player* player);
+    Response buy(Cargo* cargo, size_t amount, Player* player);
+    Response sell(Cargo* cargo, size_t amount, Player* player);
+    Cargo* getCargo(const size_t position);
     // override from Observer
     void nextDay() override;
-    friend std::ostream & operator<<(std::ostream & str, const Store& store);
+    friend std::ostream& operator<<(std::ostream& str, const Store& store);
 
 private:
     std::vector<std::shared_ptr<Cargo>> stock_;
-
-    void load(std::shared_ptr<Cargo> cargo);
-    void unload(Cargo* cargo);
+    void load(std::shared_ptr<Cargo> cargo, size_t amount);
+    void unload(Cargo* cargo, size_t amount);
     std::vector<std::shared_ptr<Cargo>>::iterator findStock(Cargo* cargo);
-    Time* time_;
+    void randomizeRegularCargo(
+        const std::vector<std::shared_ptr<Cargo>>& possibleRegularCargo);
+    void randomizeItems(const std::vector<std::shared_ptr<Cargo>>& items);
+    void generateRegularCargo();
+    void generateItems();
 };

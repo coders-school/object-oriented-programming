@@ -16,6 +16,7 @@ Map::Map() {
         }
         Islands_.push_back(temp);
     }
+    currentPosition_ = &(*std::next(Islands_.begin()));
 }
 Island* Map::getIsland(const Coordinates& coordinate) {
     auto result =

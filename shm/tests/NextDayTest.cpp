@@ -1,7 +1,9 @@
 #include "alcohol.hpp"
 #include "fruit.hpp"
 #include "gtest/gtest.h"
+#include "island.hpp"
 #include "item.hpp"
+#include "locators.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "store.hpp"
@@ -9,7 +11,6 @@
 
 class NextDayTest : public ::testing::Test {
 public:
-    Time time;
     Player player;
     Alcohol alco;
     Item item;
@@ -17,17 +18,17 @@ public:
     std::vector<std::shared_ptr<Cargo>> test_stock;
     Store store;
     Ship ship;
+
     NextDayTest()
-        : time(),
-          player(std::make_unique<Ship>(30, 10, 1, &player, &time), 100),
+        : player(std::make_unique<Ship>(30, 10, 1, &player), 100),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
           test_stock({{std::make_shared<Alcohol>(alco)},
                       {std::make_shared<Item>(item)},
                       {std::make_shared<Fruit>(fruit)}}),
-          store(test_stock, &time),
-          ship(30, 10, 1, &player, &time) {}
+          store(test_stock),
+          ship(30, 10, 1, &player) {}
 };
 
 TEST_F(NextDayTest, NextDayShouldDoNothingToAlcohol) {
@@ -45,7 +46,8 @@ TEST_F(NextDayTest, NextDayShouldDoNothingToItem) {
 TEST_F(NextDayTest, NextDayShouldSpoilFruit) {
     auto time_to_spoil = 9;
     auto expiry_date = 10;
-    auto expected_price = static_cast<size_t>(fruit.getBasePrice() * (float(time_to_spoil) / expiry_date));
+    auto expected_price =
+        static_cast<size_t>(fruit.getBasePrice() * (float(time_to_spoil) / expiry_date));
     fruit.nextDay();
     ASSERT_EQ(expected_price, fruit.getPrice());
 }
@@ -65,7 +67,20 @@ TEST_F(NextDayTest, NextDayShouldChangeStockInStore) {
 
 TEST_F(NextDayTest, NextDayShouldPayCrew) {
     auto player_money = player.getMoney();
+    Ship ship = Ship(30, 10, 1, &player);
     ship += 5;
     ship.nextDay();
     ASSERT_EQ(player_money - 5, player.getMoney());
+}
+
+TEST(TestWithoutFixtureTemp, StoreShouldBeGeneratedWithNoArgConstructor) {
+    auto time = std::make_shared<Time>();
+    TimeServiceLocator::provide(time.get());
+
+    Store testStore = Store();
+    Island testIsland = Island(20, 20);
+    auto store = testIsland.getStore()->getCargo(0);
+    // TODO:  Can toggle due to randomness - We got to find out method, how to test it
+    // wisely
+    ASSERT_NE(store, nullptr);
 }
