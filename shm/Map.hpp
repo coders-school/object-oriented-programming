@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <ostream>
 #include "Island.hpp"
 
 constexpr size_t amountOfIslands = 10;
@@ -18,4 +19,6 @@ public:
     void setCurrentPosition(Island* const currentPosition);
     void addIsland(const Island& newIsland);
     Island* getIsland(const Coordinates& coordinate);
+    friend std::ostream& operator<<(std::ostream& out, const Map& map); //TODO: Implement <<operator
+    size_t getDistanceToIsland(Island* destination);
 };

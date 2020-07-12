@@ -43,3 +43,7 @@ Island* Map::getIsland(const Coordinates& coordinate) {
 
     return (island != islandsLocations_.end()) ? &(*island) : nullptr;
 }
+
+size_t Map::getDistanceToIsland(Island *destination) {
+    return Coordinates::distance(currentPosition_->getPosition(), destination->getPosition());
+}
