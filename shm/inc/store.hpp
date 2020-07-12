@@ -16,17 +16,18 @@ public:
 
     enum updateMode { BUY = 0, SELL = 1 };
 
-    Store();
-    Store(size_t capacity, size_t avaiableFunds);
-    ~Store() = default;
+    Store(Time* time,
+          size_t capacity = DEFAULT_CAPACITY,
+          size_t availableFunds = DEFAULT_FUNDS);
+    ~Store() override;
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
     bool addCargo(Cargo* cargo);
     size_t getAvaiableSpace() const;
-    size_t getAvaiableFunds() const { return avaiableFunds_; };
+    size_t getAvailableFunds() const { return availableFunds_; };
     void setCapacity(const size_t amount) { capacity_ = amount; }
-    void setAvaiableFunds(const size_t amount) { avaiableFunds_ = amount; }
+    void setAvailableFunds(const size_t amount) { availableFunds_ = amount; }
 
     Cargo* getCargo(const std::string& name);
     void printCargo();
@@ -36,8 +37,9 @@ public:
 
 private:
     size_t capacity_;
-    size_t avaiableFunds_;
+    size_t availableFunds_;
     std::vector<std::unique_ptr<Cargo>> cargo_;
+    Time* time_;
 
     void updateCargo(Cargo* cargo, size_t amount, updateMode mode);
 };
