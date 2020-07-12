@@ -1,6 +1,7 @@
 #include "map.hpp"
 
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 #include <random>
 
@@ -28,6 +29,7 @@ Map::Map() {
             vectorOfIslands_.push_back(Island(posX, posY));
         }
     }
+    currentPosition_ = &(vectorOfIslands_.at(0));
 }
 
 Map::~Map() {}
@@ -45,10 +47,35 @@ Island* Map::getIsland(const Coordinates& coordinates) {
 }
 
 void Map::printMap() {
-    std::cout << "\nNumber of Islands: " << vectorOfIslands_.size() << "\n";
+    std::cout << "Number of Islands: " << vectorOfIslands_.size() << "\n";
     for (const auto &el : vectorOfIslands_) {
         std::cout << "Coordinate (X, Y): "
                   << "(" << el.getPosition().getPositionX() << ", "
                   << el.getPosition().getPositionY() << ")\n";
     }
+}
+
+void Map::travel(Island* island) {
+    currentPosition_ = island;
+}
+
+size_t Map::getDistanceToIsland(Island* destination) const {
+    std::cout << "\nTravelling from ("
+              << currentPosition_->getPosition().getPositionX() << ", "
+              << currentPosition_->getPosition().getPositionY() << ") to ("
+              << destination->getPosition().getPositionX() << ", "
+              << destination->getPosition().getPositionY() << ")\n";
+
+    auto xCurr = currentPosition_->getPosition().getPositionX();
+    auto yCurr = currentPosition_->getPosition().getPositionY();
+    auto xDest = destination->getPosition().getPositionX();
+    auto yDest = destination->getPosition().getPositionY();
+    auto xLength = std::max(xCurr, xDest) - std::min(xCurr, xDest);
+    auto yLength = std::max(yCurr, yDest) - std::min(yCurr, yDest);
+
+    return static_cast<size_t>(std::floor(std::hypot(xLength, yLength)));
+}
+
+Island* Map::getCurrentPosition() const {
+    return currentPosition_;
 }
