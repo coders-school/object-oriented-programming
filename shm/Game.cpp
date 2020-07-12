@@ -21,8 +21,8 @@ void Game::Travel() {
         return;
     }
 
-    map_->setCurrentPosition(destination);
     auto distance = map_->getDistanceToIsland(destination);
+    map_->setCurrentPosition(destination);
     advanceTimeTraveling(distance);
 
 }
