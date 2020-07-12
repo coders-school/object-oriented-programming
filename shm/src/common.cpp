@@ -13,7 +13,7 @@ void Common::printCargo(const std::vector<std::unique_ptr<Cargo>>& vecOfCargo) {
     for (auto& el : vecOfCargo) {
         std::cout << "|Name| " << std::setw(15) << std::left << el->getName()
                   << "|Amount| " << std::setw(15) << std::left << el->getAmount()
-                  << "|BbasePrice| " << std::setw(15) << std::left
+                  << "|BasePrice| " << std::setw(15) << std::left
                   << el->getBasePrice() << "\n";
     }
 }
