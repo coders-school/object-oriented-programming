@@ -15,6 +15,8 @@ public:
     [[nodiscard]] Cargo* getCargo(size_t index) const { return ship_->getCargo(index); };
     [[nodiscard]] size_t getAvailableSpace() const { return availableSpace_; }
     void setMoney(size_t amount) { money_ = amount; }
+    void spendMoney(size_t amount);
+    void earnMoney(size_t amount);
 
 private:
     std::unique_ptr<Ship> ship_;
