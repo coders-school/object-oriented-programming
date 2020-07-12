@@ -21,7 +21,7 @@ public:
     void sellCargo(Cargo* cargo, size_t price);
 
 private:
-    Ship *ship_;
+    Ship* ship_;
     size_t money_;
     size_t availableSpace_;
 };
