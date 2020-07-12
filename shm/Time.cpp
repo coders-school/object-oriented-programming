@@ -1,4 +1,5 @@
 #include "Time.hpp"
+
 #include <algorithm>
 
 void Time::addObserver(Observer* observer) {

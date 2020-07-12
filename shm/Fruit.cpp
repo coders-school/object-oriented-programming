@@ -1,5 +1,9 @@
 #include "Fruit.hpp"
 
+Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice)
+    : Cargo(name, amount, basePrice) {
+}
+
 Fruit& Fruit::operator--() {
     daysToRot_ == 0 ? /*do nothing*/ : --daysToRot_;
     return *this;

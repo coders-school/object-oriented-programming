@@ -36,6 +36,7 @@ void Player::purchaseCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t p
     money_ -= price;
     availableSpace_ -= amount;
 }
+
 void Player::sellCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
     ship_->unload(cargo.get());
     money_ += price;
