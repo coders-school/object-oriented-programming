@@ -9,7 +9,7 @@ constexpr size_t DEFAULT_FUNDS = 1000;
 constexpr size_t AMOUNT_MIN = 0;
 constexpr size_t AMOUNT_MAX = 50;
 
-class Store
+class Store : public Observer
 {
 public:
     enum class Response { invalid_cargo, done, lack_of_money, lack_of_cargo, lack_of_space };
@@ -32,7 +32,7 @@ public:
     void printCargo();
     void printResponseMessage(Response& response);
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
-    void nextDay();
+    void nextDay() override;
 
 private:
     size_t capacity_;
