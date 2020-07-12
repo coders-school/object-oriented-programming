@@ -29,4 +29,3 @@ void Player::sellCargo(Cargo* cargo, size_t price) {
     money_ += price;
     ship_->unload(cargo);
 }
-
