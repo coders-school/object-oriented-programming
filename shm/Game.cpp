@@ -14,10 +14,10 @@ bool Game::checkLoseCondition() const {
 
 void Game::PrintOptions() {
     std::cout << "Ahoy captain! We're waiting for your commands! \n";
-    std::cout << "0. Exit \n";
     std::cout << "1. Travel \n";
     std::cout << "2. Buy \n";
     std::cout << "3. Sell \n";
+    std::cout << "0. Exit \n";
 }
 
 void Game::MakeAction(Action choice) {

@@ -3,17 +3,14 @@
 #include "Map.hpp"
 #include "Player.hpp"
 
-class Game {
-public:
-    Game(size_t money, size_t days, size_t final_goal);
-
-    enum class Action {
+enum class Action {
         Exit,
         Travel,
         Buy,
         Sell,
-    };
+};
 
+class Game {
 private:
     size_t money_;
     size_t days_;
@@ -30,4 +27,7 @@ private:
     void Travel();
     void Buy();
     void Sell();
+
+public:
+    Game(size_t money, size_t days, size_t final_goal);    
 };
