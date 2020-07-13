@@ -17,7 +17,7 @@ bool Game::checkLoseCondition() const {
 void Game::Travel() {
     std::cout << *map_; //unimplemented << operator for map
     auto destination = map_->getIsland(getTravelLocation());
-    if(!destination) {
+    if (!destination) {
         return;
     }
 
@@ -40,7 +40,7 @@ Coordinates Game::getTravelLocation() {
 }
 
 void Game::advanceTimeTraveling(size_t distance) {
-    while(distance > 0) {
+    while (distance > 0) {
         distance -= distancePerDay;
         time_++;
         days_++;
