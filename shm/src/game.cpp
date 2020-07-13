@@ -175,17 +175,17 @@ void Game::buy() {
 void Game::sell() {
     std::cout << "Sell\n";
     auto actualIslandStore = map_->getCurrentPosition()->getStore();
-    //std::cout << actualIslandStore << '\n';
+    std::cout << actualIslandStore <<"\nYou can sell:\n";
     player_ -> printCargo();
     size_t cargoNr, amountNr;
-    std::cout << "Please, write cargo number: ";
+    std::cout << "Please, write cargo index in shop: ";
     std::cin >> cargoNr;
     std::cout << "Please, write amount: ";
     std::cin >> amountNr;
-    while (std::cin.fail() || cargoNr < 0 || cargoNr > player_ -> getCargoAmount()) {
+    while (std::cin.fail() || cargoNr < 1) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Wrong data. First digit from 0 to " << player_ -> getCargoAmount() << ": ";
+        std::cout << "Wrong data. First digit from 1 to " << player_ -> getCargoAmount() << ": ";
         std::cin >> cargoNr;
     }
     --cargoNr;
