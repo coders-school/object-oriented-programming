@@ -1,15 +1,25 @@
 #include <algorithm>
 #include <iostream>
 #include <numeric>
+#include <random>
 
 #include "alcohol.hpp"
 #include "fruit.hpp"
 #include "item.hpp"
 #include "store.hpp"
 
-Store::Store(size_t capacity, size_t avaiableFunds) : capacity_(capacity), avaiableFunds_(avaiableFunds) {}
+Store::Store(Time* time, size_t capacity,size_t availableFunds) :
+    capacity_(capacity),    
+    availableFunds_(availableFunds),
+    time_(time)
+{
+     time_->addObserver(this);
+}
 
-Store::Store() : Store(DEFAULT_CAPACITY, DEFAULT_FUNDS) {}
+Store::~Store()
+{
+    time_->removeObserver(this);
+}
 
 /*public*/
 //-----------------------------------------------------------------------------------
@@ -30,7 +40,7 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player)
             if (player->getAvailableSpace() < getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
-            setAvaiableFunds(getAvaiableFunds() + totalPrice);
+            setAvailableFunds(getAvailableFunds() + totalPrice);
             updateCargo(cargo, amount, updateMode::BUY);
 
             std::unique_ptr<Cargo> purchase = cargo->clone();
@@ -53,7 +63,7 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player)
         if (getCargo(cargo->getName()) != nullptr) {
             size_t totalPrice = player->getCargo(cargo->getName())->getPrice() * amount;
 
-            if (getAvaiableFunds() < totalPrice)
+            if (getAvailableFunds() < totalPrice)
                 return Response::lack_of_money;
 
             if (player->getCargo(cargo->getName())->getAmount() < amount)
@@ -62,7 +72,7 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player)
             if (getAvaiableSpace() < player->getCargo(cargo->getName())->getAmount())
                 return Response::lack_of_space;
 
-            setAvaiableFunds(getAvaiableFunds() - totalPrice);
+            setAvailableFunds(getAvailableFunds() - totalPrice);
             updateCargo(cargo, amount, updateMode::SELL);
 
             player->sellCargo(cargo, totalPrice);
@@ -197,4 +207,14 @@ std::ostream& operator<<(std::ostream& out, const Store& store)
         }
     }
     return out;
+}
+
+void Store::nextDay() {
+    std::random_device rd;
+    std::mt19937 generator(rd());
+    std::uniform_int_distribution<size_t> amountAvailable(AMOUNT_MIN, AMOUNT_MAX);
+
+    for (const auto& item : cargo_) {
+        item->setAmount(amountAvailable(generator));
+    }
 }

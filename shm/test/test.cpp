@@ -67,7 +67,7 @@ TEST(TimeTest, ShouldTimePass)
 }
 TEST(StoreTest, ShouldHandleBuySell)
 {
-    Store store;
+    Store store(&time);
 
     EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::invalid_cargo);
     store.addCargo(&apple);
