@@ -42,4 +42,5 @@ private:
     Time* time_;
 
     void updateCargo(Cargo* cargo, size_t amount, updateMode mode);
+    void generateCargo();
 };

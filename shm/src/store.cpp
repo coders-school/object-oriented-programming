@@ -14,6 +14,7 @@ Store::Store(Time* time, size_t capacity,size_t availableFunds) :
     time_(time)
 {
      time_->addObserver(this);
+     generateCargo();
 }
 
 Store::~Store()
@@ -209,7 +210,8 @@ std::ostream& operator<<(std::ostream& out, const Store& store)
     return out;
 }
 
-void Store::nextDay() {
+void Store::nextDay() 
+{
     std::random_device rd;
     std::mt19937 generator(rd());
     std::uniform_int_distribution<size_t> amountAvailable(AMOUNT_MIN, AMOUNT_MAX);
@@ -217,4 +219,9 @@ void Store::nextDay() {
     for (const auto& item : cargo_) {
         item->setAmount(amountAvailable(generator));
     }
+}
+
+void Store::generateCargo() 
+{
+    // Implement me
 }
