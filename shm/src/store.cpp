@@ -8,6 +8,21 @@
 #include "item.hpp"
 #include "store.hpp"
 
+constexpr char FRUIT_MELON[] = "Melon";
+constexpr size_t FRUIT_MELON_SPOIL_TIME = 5;
+constexpr size_t FRUIT_MELON_BASEPRICE = 10;
+constexpr size_t FRUIT_MELON_AMOUNT = 100;
+
+constexpr char ITEM_COFFEE[] = "Coffee";
+constexpr size_t ITEM_COFFEE_AMOUNT = 100;
+constexpr size_t ITEM_COFFEE_BASEPRICE = 70;
+constexpr Item::Rarity ITEM_COFFEE_RARITY = Item::Rarity::epic;
+
+constexpr char ALCOHOL_BACZEWSKI[] = "Baczewski";
+constexpr size_t ALCOHOL_BACZEWSKI_BASEPRICE = 20;
+constexpr size_t ALCOHOL_BACZEWSKI_STRENGTH = 40;
+constexpr size_t ALCOHOL_BACZEWSKI_AMOUNT = 100;
+
 Store::Store(Time* time, size_t capacity,size_t availableFunds) :
     capacity_(capacity),    
     availableFunds_(availableFunds),
@@ -223,5 +238,16 @@ void Store::nextDay()
 
 void Store::generateCargo() 
 {
-    // Implement me
+    Fruit melon(FRUIT_MELON, FRUIT_MELON_AMOUNT, FRUIT_MELON_BASEPRICE, FRUIT_MELON_SPOIL_TIME, time_);
+    addCargo(&melon);
+
+    Item coffee(ITEM_COFFEE, ITEM_COFFEE_AMOUNT, ITEM_COFFEE_BASEPRICE, ITEM_COFFEE_RARITY, time_);
+    addCargo(&coffee);
+
+    Alcohol baczewski(ALCOHOL_BACZEWSKI, 
+                      ALCOHOL_BACZEWSKI_AMOUNT, 
+                      ALCOHOL_BACZEWSKI_BASEPRICE, 
+                      ALCOHOL_BACZEWSKI_STRENGTH, 
+                      time_);
+    addCargo(&baczewski);
 }
