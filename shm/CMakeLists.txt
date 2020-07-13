@@ -64,6 +64,7 @@ set(SOURCES
     ${SOURCE_DIR}/alcohol.cpp
     ${SOURCE_DIR}/store.cpp
     ${SOURCE_DIR}/common.cpp
+    ${SOURCE_DIR}/game.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
