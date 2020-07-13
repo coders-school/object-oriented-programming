@@ -73,9 +73,8 @@ Response Store::sell(cargoPtr cargo, size_t amount, std::unique_ptr<Player>& pla
 }
 
 void Store::nextDay() {
-    for (auto el : cargo_) {
-        *el.get() += 1;
-    }
+    cargo_.clear();
+    GenerateCargo();
 }
 
 cargoPtr Store::GetCargo(const size_t pos) {
