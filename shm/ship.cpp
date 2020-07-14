@@ -55,6 +55,18 @@ void Ship::load(std::shared_ptr<Cargo> cargo, size_t amount) {
     }
 }
 
+void Ship::unload(std::shared_ptr<Cargo> cargo, size_t amount) {
+    auto shipCargo = findCargoByName(cargo->getName());
+
+    if (shipCargo) {
+        shipCargo -= amount;
+
+        if (shipCargo->getAmount() <= 0) {
+            removeCargo(shipCargo);
+        }
+    }
+}
+
 Ship& Ship::operator-=(size_t crewman) {
     if (crew_ > crewman) {
         crew_ -= crewman;

@@ -31,6 +31,7 @@ size_t Store::getTotalBuyPrice(std::shared_ptr<Cargo> cargo, size_t amount) {
 size_t Store::getTotalSellPrice(std::shared_ptr<Cargo> cargo, size_t amount) {
     size_t totalPrice = 0;
 
+    totalPrice = cargo->getBasePrice() * amount;
     return totalPrice;
 }
 
@@ -53,19 +54,16 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player)
 }
 
 Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player) {
-    if (cargo->getAmount() < amount) {
-        return Response::lack_of_cargo;
+    if (cargo->getAmount() + amount > constValues::maxAmount) {
+        return Response::lack_of_space;
     }
-    *cargo -= amount;
     size_t totalPrice = cargo->getPrice() * amount;
 
-    player->giveMoney(totalPrice);
+    player->sellCargo(cargo, totalPrice, amount);
 
-    if (cargo->getAmount() == 0) {
-        player->removeCargo(cargo);
-    }
     return Response::done;
 }
+
 void Store::generateGoods() {
     cargoToSell_.clear();
     std::random_device device;

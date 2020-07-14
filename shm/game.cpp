@@ -276,6 +276,68 @@ void Game::buy() {
 }
 
 void Game::sell() {
+    showCargo();
+    while (true) {
+        Island* currentIsland = map_->getCurrentPosition();
+        Store* store = currentIsland->getStore().get();
+        std::cout << "\n" << *store << "\n";
+        printTrail('-');
+        std::cout << "Select product name and amount: (0 0 to exit)";
+        std::string name;
+        size_t amount = 0;
+        std::cin >> name >> amount;
+
+        if (amount == 0 && name == "0") {
+            return;
+        }
+
+        std::shared_ptr<Cargo> cargo = store->getCargo(name);
+        printTrail('-');
+
+        if (!cargo) {
+            std::cout << "Wrong cargo name. Try again.\n";
+            continue;
+        }
+
+        auto foundedCargo = ship_->findCargoByName(name);
+
+        if (!foundedCargo) {
+            std::cout << "You don't have " << name << " on ship. Select another product.\n";
+            continue;
+        }
+
+        if (foundedCargo->getAmount() < amount) {
+            std::cout << "You have only " << foundedCargo->getAmount() << " " << name 
+            << ". Try to sell less product.\n";
+            continue;
+        }
+
+        while (true) {
+            std::cout << "Total price is: " << store->getTotalSellPrice(cargo, amount) << '\n';
+            std::cout << "Do you want to sell cargo? (Y/N) ";
+            char answer;
+            std::cin >> answer;
+            if (std::tolower(answer) == 'n')
+                return;
+            else if (std::tolower(answer) == 'y')
+                break;
+
+            std::cin.clear();
+            std::cout << "Wrong answer! Operation interrupted.\n";
+        }
+
+        switch (store->sell(cargo, amount, player_.get())) {
+        case Response::done:
+            std::cout << "Sell " << amount << " " << name << '\n';
+            return;
+            break;
+        case Response::lack_of_space:
+            std::cout << "There is no enough space in store. Try to sell less product.\n";
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void Game::showCargo() {
