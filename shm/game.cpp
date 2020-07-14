@@ -2,11 +2,13 @@
 
 #include <algorithm>
 #include <cctype>
+#include <chrono>
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
 #include <memory>
 #include <string>
+#include <thread>
 
 #include "cargo.hpp"
 #include "island.hpp"
@@ -275,8 +277,34 @@ void Game::buy() {
     }
 }
 
+bool Game::isCargoCorrect(std::shared_ptr<Cargo> cargo, std::string& name, size_t amount) {
+            if (!cargo) {
+            std::cout << "Wrong cargo name. Try again.\n";
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+            return false;
+        }
+
+        auto foundedCargo = ship_->findCargoByName(name);
+
+        if (!foundedCargo) {
+            std::cout << "You don't have " << name << " on ship. Select another product.\n";
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+            return false;
+        }
+
+        if (foundedCargo->getAmount() < amount) {
+            std::cout << "You have only " << foundedCargo->getAmount() << " " << name 
+            << ". Try to sell less product.\n";
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+            return false;
+        }
+
+        return true;
+}
+
 void Game::sell() {
     showCargo();
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     while (true) {
         Island* currentIsland = map_->getCurrentPosition();
         Store* store = currentIsland->getStore().get();
@@ -294,21 +322,7 @@ void Game::sell() {
         std::shared_ptr<Cargo> cargo = store->getCargo(name);
         printTrail('-');
 
-        if (!cargo) {
-            std::cout << "Wrong cargo name. Try again.\n";
-            continue;
-        }
-
-        auto foundedCargo = ship_->findCargoByName(name);
-
-        if (!foundedCargo) {
-            std::cout << "You don't have " << name << " on ship. Select another product.\n";
-            continue;
-        }
-
-        if (foundedCargo->getAmount() < amount) {
-            std::cout << "You have only " << foundedCargo->getAmount() << " " << name 
-            << ". Try to sell less product.\n";
+        if(!isCargoCorrect(cargo, name, amount)) {
             continue;
         }
 
@@ -324,6 +338,7 @@ void Game::sell() {
 
             std::cin.clear();
             std::cout << "Wrong answer! Operation interrupted.\n";
+            std::this_thread::sleep_for(std::chrono::seconds(3));
         }
 
         switch (store->sell(cargo, amount, player_.get())) {
@@ -337,6 +352,7 @@ void Game::sell() {
         default:
             break;
         }
+        std::this_thread::sleep_for(std::chrono::seconds(3));
     }
 }
 

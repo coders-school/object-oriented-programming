@@ -149,7 +149,7 @@ Cargo* Ship::findCargo(Cargo* cargo) const {
 
 void Ship::removeCargo(Cargo* cargo) {
     auto cargoToDelete = std::find_if(cargo_.begin(), cargo_.end(), 
-                                     [cargo](const auto& element) { return false; });
+                                     [cargo](const auto& element) { return cargo == element.get(); });
     if(cargoToDelete != cargo_.end())
         cargo_.erase(cargoToDelete);
 }
@@ -157,7 +157,7 @@ void Ship::removeCargo(Cargo* cargo) {
 void Ship::printCargo() const {
     std::for_each(cargo_.begin(), cargo_.end(), [i{0}](const auto& index) mutable {
         std::cout << ++i << "* ";
-        std::cout << index->getName() << ": " << index->getAmount();
+        std::cout << index->getName() << ": " << index->getAmount() << "\n";
     });
 }
 

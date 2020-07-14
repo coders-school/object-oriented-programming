@@ -49,4 +49,6 @@ private:
     void buy();
     void sell();
     void showCargo();
+    bool isCargoCorrect(std::shared_ptr<Cargo> cargo, std::string& name, size_t amount);
+
 };
