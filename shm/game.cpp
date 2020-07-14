@@ -328,7 +328,7 @@ void Game::sell() {
 
         switch (store->sell(cargo, amount, player_.get())) {
         case Response::done:
-            std::cout << "Sell " << amount << " " << name << '\n';
+            std::cout << "Sold " << amount << " " << name << '\n';
             return;
             break;
         case Response::lack_of_space:

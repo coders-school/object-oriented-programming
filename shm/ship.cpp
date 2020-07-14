@@ -59,7 +59,7 @@ void Ship::unload(std::shared_ptr<Cargo> cargo, size_t amount) {
     auto shipCargo = findCargoByName(cargo->getName());
 
     if (shipCargo) {
-        shipCargo -= amount;
+        *shipCargo -= amount;
 
         if (shipCargo->getAmount() <= 0) {
             removeCargo(shipCargo);
@@ -131,8 +131,7 @@ size_t Ship::fillInCrew() {
 }
 
 Cargo* Ship::findCargoByName(const std::string& name) const {
-    auto found =
-        std::find_if(cargo_.begin(), cargo_.end(), [name](const auto element) { return name == element->getName(); });
+    auto found = std::find_if(cargo_.begin(), cargo_.end(), [name](const auto element) { return name == element->getName(); });
     if (found != cargo_.end()) {
         return (*found).get();
     }
@@ -149,8 +148,10 @@ Cargo* Ship::findCargo(Cargo* cargo) const {
 }
 
 void Ship::removeCargo(Cargo* cargo) {
-    cargo_.erase(
-        std::find_if(cargo_.begin(), cargo_.end(), [&cargo](const auto& element) { return *element == *cargo; }));
+    auto cargoToDelete = std::find_if(cargo_.begin(), cargo_.end(), 
+                                     [cargo](const auto& element) { return false; });
+    if(cargoToDelete != cargo_.end())
+        cargo_.erase(cargoToDelete);
 }
 
 void Ship::printCargo() const {
