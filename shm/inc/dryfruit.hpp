@@ -16,9 +16,10 @@ public:
     // override from Cargo.Fruit
     std::string getName() const override { return "Dry " + name_; }
     size_t getPrice() const override;
+    std::string oneLineDescription() const override;
     std::shared_ptr<Cargo> getShared() override { return std::make_shared<DryFruit>(DryFruit(*this)); }
 
-    //override from Observer
+    //override from Time::Observer
     void nextDay() override;
 
     ~DryFruit() override;

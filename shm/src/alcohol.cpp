@@ -1,7 +1,8 @@
 #include "alcohol.hpp"
-#include "globaltime.hpp"
 
 #include <iostream>
+
+#include "globaltime.hpp"
 
 Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice)
     : Alcohol(name, amount, basePrice, kBasePower) {
@@ -13,6 +14,10 @@ Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, float
 
 size_t Alcohol::getPrice() const {
     return static_cast<size_t>(static_cast<float>(basePrice_) * (power_ / kBasePower));
+}
+
+std::string Alcohol::oneLineDescription() const {
+    return Cargo::oneLineDescription() + "\tPower: " + std::to_string(getPower());
 }
 
 void Alcohol::nextDay() {
@@ -49,5 +54,4 @@ Cargo& Alcohol::operator-=(size_t amount) {
         std::cerr << "Amount equal zero\n";
     }
     return *this;
-
 }

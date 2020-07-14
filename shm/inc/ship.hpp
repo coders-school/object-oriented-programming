@@ -5,12 +5,17 @@
 
 #include "cargo.hpp"
 #include "cargoHolder.hpp"
-#include "delegate.hpp"
 #include "time.hpp"
 
 class Ship : public CargoHolder,
-             public Observer {
+             public Time::Observer {
 public:
+    class Delegate {
+    public:
+        virtual void payCrew(size_t money) = 0;
+        virtual ~Delegate() {}
+    };
+
     Ship();
 
     Ship(int capacity, int maxCrew, int speed, const std::string& name, unsigned int id, Delegate* delegate = nullptr, Time* time = nullptr);
@@ -37,15 +42,16 @@ public:
     void unload(const Cargo* const& cargo);
 
     /* override from CargoHolder */
+    const std::vector<std::shared_ptr<Cargo>>& getAllCargo() const override { return cargo_; };
     void receiveCargo(Cargo* cargo, size_t amount, CargoHolder* cargoHolder) override;
     void clearEmptyCargos() override;
-    //override from Observer
+    //override from Time::Observer
     void nextDay() override;
 
     ~Ship() override;
 
 private:
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargo_ = {};
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;

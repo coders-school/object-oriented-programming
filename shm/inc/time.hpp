@@ -2,10 +2,14 @@
 
 #include <vector>
 
-#include "observer.hpp"
-
 class Time {
 public:
+    class Observer {
+    public:
+        virtual void nextDay() = 0;
+        virtual ~Observer(){};
+    };
+
     Time();
     void addObserver(Observer* obs);
     void removeObserver(Observer* obs);
