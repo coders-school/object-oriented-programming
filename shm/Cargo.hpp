@@ -8,8 +8,9 @@ public:
 
     Cargo& operator+=(const size_t& amount);
     Cargo& operator-=(const size_t& amount);
+    bool operator==(const Cargo& cargo) const;
     
-    std::string const getName();
+    std::string getName() const;
 
 private:
     size_t amount_;

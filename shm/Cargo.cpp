@@ -12,7 +12,10 @@ Cargo& Cargo::operator-=(const size_t& amount) {
     amount_ -= amount;
     return *this;
 }
+bool Cargo::operator==(const Cargo& cargo) const {
+    return (name_ == cargo.name_);
+}
 
-std::string const Cargo::getName() {
+std::string Cargo::getName() const {
     return name_;
 }
