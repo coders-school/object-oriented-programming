@@ -1,6 +1,6 @@
 #include "dryfruit.hpp"
-#include "globaltime.hpp"
 
+#include "globaltime.hpp"
 Fruit& DryFruit::operator--() {
     spoilDelay_--;
     if (spoilDelay_ == 0) {
@@ -12,6 +12,10 @@ Fruit& DryFruit::operator--() {
 
 size_t DryFruit::getPrice() const {
     return Fruit::getPrice() * kDrynessPriceMultiplier;
+}
+
+std::string DryFruit::oneLineDescription() const {
+    return Fruit::oneLineDescription() + " (dry)";
 }
 
 void DryFruit::nextDay() {

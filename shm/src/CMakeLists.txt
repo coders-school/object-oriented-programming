@@ -6,6 +6,7 @@ set(SOURCES
     coordinates.cpp
     dryfruit.cpp
     fruit.cpp
+    game.cpp
     globaltime.cpp
     island.cpp
     item.cpp
@@ -16,10 +17,10 @@ set(SOURCES
     time.cpp
     )
 
-add_library(${PROJECT_NAME}_lib STATIC ${SOURCES})
+add_library(${shm_lib} STATIC ${SOURCES})
 
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCE_DIR}/main.cpp)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion)
 target_include_directories(${PROJECT_NAME} PRIVATE inc)
-target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}_lib)
+target_link_libraries(${PROJECT_NAME} ${shm_lib})

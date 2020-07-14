@@ -19,12 +19,13 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getPrice() const override;
     size_t getBasePrice() const override { return basePrice_; }
+    std::string oneLineDescription() const override;
     bool operator==(const Cargo& cargoToCheck) const override;
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
     std::shared_ptr<Cargo> getShared() override { return std::make_shared<Fruit>(Fruit(*this)); }
 
-    //override from Observer
+    //override from Time::Observer
     void nextDay() override;
 
 private:

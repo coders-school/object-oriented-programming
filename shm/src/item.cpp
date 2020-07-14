@@ -4,6 +4,12 @@
 
 #include "globaltime.hpp"
 
+const std::map<Item::Rarity, std::string> Item::rarityStringMapping = {
+    {Item::Rarity::common, "common"},
+    {Item::Rarity::rare, "rare"},
+    {Item::Rarity::epic, "epic"},
+    {Item::Rarity::legendary, "legendary"}};
+
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), rarity_(rarity) {
     GlobalTime::getGlobalTime()->addObserver(this);
@@ -11,6 +17,9 @@ Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rari
 
 size_t Item::getPrice() const {
     return basePrice_ * static_cast<int>(rarity_);
+}
+std::string Item::oneLineDescription() const {
+    return Cargo::oneLineDescription() + "\tRarity: " + rarityStringMapping.at(getRarity());
 }
 
 void Item::nextDay() {

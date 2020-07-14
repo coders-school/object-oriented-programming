@@ -3,7 +3,7 @@
 #include <iostream>
 
 Player::Player(Ship& ship, size_t money, size_t availableSpace)
-    : ship_(std::make_unique<Ship>(ship)), money_(money), availableSpace_(availableSpace) {}
+    : ship_(std::make_shared<Ship>(ship)), money_(money), availableSpace_(availableSpace) {}
 
 void Player::changeMoney(size_t amount) {
     if (amount < (-1) * money_) {
