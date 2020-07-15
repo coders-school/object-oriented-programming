@@ -164,7 +164,7 @@ void Game::makeAction(Action pickAction) {
     default: {
         std::cout << "I can't do this! \n";
     }
-}
+}}
 
 Island* Game::pickTargetIsland() {
     std::cout << *map_;
@@ -232,35 +232,44 @@ void Game::showCargo() {
     std::cout << "You have: \n";
     ship_->printCargo();
 }
+
 void Game::hireFullCrew() {
         size_t howManyHired = ship_->fillInCrew();
         player_->takeMoney(howManyHired * constValues::hiringCost);
-        std::cout << "Now you have: " << ship_->getCrew() << " from maximum of: "<<ship_->getMaxCrew() << '\n'; 
-    }
+}
 
 void Game::fireSailors() {
-        int howManyToFire;
+        size_t howManyToFire;
         std::cout << "How many sailors do you want to fire?\n";
-        std::cout <<"Hiring cost of one sailor is: " << constValues::hiringCost;
-        std::cout << "Now you pay daily: " << constValues::dailySalary << "for each sailor";
+        std::cout << "Now you pay daily: " << constValues::dailySalary << " coins for each sailor\n";
         std::cin >> howManyToFire;
-        *ship_-=howManyToFire;
-        player_->takeMoney(howManyToFire * constValues::hiringCost);
-        std::cout << "Now you have: " << ship_->getCrew() << " from maximum of: "<<ship_->getMaxCrew() << '\n'; 
-
+        if(howManyToFire < ship_->getCrew()) {
+            *ship_-=howManyToFire;
+            std::cout << "Now you have: " << ship_->getCrew() <<" from maximum of: "<<ship_->getMaxCrew() << '\n'; 
+            std::cout << "You reduced your speed to: " << ship_->getSpeed() << " from maximum :" << ship_->getMaxSpeed() <<'\n';
+        }
+        else {
+            std::cout << "You wanted to fire more sailors than you have!\n";
+        }
 }
 
 void Game::hireSailors() {
-        int howManyToHire;
+        size_t howManyToHire;
         std::cout <<"How many sailors do you want to hire?\n";
-        std::cout <<"Hiring cost of one sailor is: " << constValues::hiringCost;
-        std::cout << "Now you pay daily: " << constValues::dailySalary << "for each sailor";
+        std::cout <<"Hiring cost of one sailor is: " << constValues::hiringCost << '\n';
+        std::cout << "Now you pay daily: " << constValues::dailySalary << " coin for each sailor\n";
         std::cin >> howManyToHire;
-        *ship_+=howManyToHire;
-        player_->takeMoney(howManyToHire * constValues::hiringCost);
-        std::cout << "Now you have: " << ship_->getCrew() << " from maximum of: "<<ship_->getMaxCrew() << '\n'; 
-
+        if(howManyToHire <= (ship_->getMaxCrew() - ship_ ->getCrew())){
+            *ship_ += howManyToHire;
+            player_->takeMoney(howManyToHire * constValues::hiringCost);
+            std::cout << "Now you have: " << ship_->getCrew() <<" from maximum of: "<<ship_->getMaxCrew() << '\n'; 
+            std::cout << "You increased your speed to: " << ship_->getSpeed() << " from maximum: " << ship_->getMaxSpeed() <<'\n';
+        }
+        else{
+            std::cout << "You wanted to hire more sailors than you need!";
+        }
 }
+
 void Game::hireAction() {
     std::cout << "What do you want to do with you crew?\n";
     std::cout << "1.Hire full crew\n"

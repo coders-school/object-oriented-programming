@@ -8,7 +8,7 @@ Ship::Ship() : id_(-1) {}
 
 Ship::Ship(size_t capacity,
            size_t maxCrew,
-           size_t speed,
+           size_t maxSpeed,
            const std::string& name,
            int id,
            std::shared_ptr<Time> publisher)
@@ -16,7 +16,8 @@ Ship::Ship(size_t capacity,
 
     maxCrew_(maxCrew), 
     crew_(0), 
-    speed_(speed), 
+    maxSpeed_(maxSpeed), 
+    speed_(maxSpeed),
     name_(name), 
     id_(id), 
     publisher_(publisher) {
@@ -90,17 +91,21 @@ void Ship::load(Item* cargo) {
 Ship& Ship::operator-=(size_t crewman) {
     if (crew_ > crewman) {
         crew_ -= crewman;
+        speed_ = static_cast<int>(static_cast<double>(maxSpeed_)*(static_cast<double>(crew_) / static_cast<double>(maxCrew_)));
+        return *this;
     }
     if (crew_ == crewman){
         crew_ = 0;
+        speed_ = 0;
+        return *this;
     }
-    speed_ *= (crew_/maxCrew_);
-    return *this;
+    else return *this;
 }
 
 Ship& Ship::operator+=(size_t crewman) {
-    if (crew_ + crewman < maxCrew_) {
+    if (crew_ + crewman <= maxCrew_) {
         crew_ += crewman;
+        speed_ = static_cast<int>(static_cast<double>(maxSpeed_)*(static_cast<double>(crew_) / static_cast<double>(maxCrew_)));
     }
     return *this;
 }
@@ -115,6 +120,13 @@ size_t Ship::getCrew() const {
 
 size_t Ship::getMaxCrew() const {
     return maxCrew_;
+}
+
+size_t Ship::getMaxSpeed() const {
+    return maxSpeed_;
+}
+void Ship::setSpeed(double actualSpeed){
+    speed_ = static_cast<int>(actualSpeed);
 }
 
 size_t Ship::getSpeed() const {
@@ -147,11 +159,16 @@ size_t Ship::fillInCrew() {
         size_t previousCrew = crew_;
         crew_ = maxCrew_;
         std::cout << "You hired: " << (maxCrew_ - previousCrew) << " sailors\n";
-
+        std::cout << "You paid for them: " << maxCrew_ - previousCrew << '\n';
+        std::cout << "Your speed is maximum: " << maxSpeed_ << " knots\n";
+        speed_ = maxSpeed_;
         return maxCrew_ - previousCrew;
     }
-    std::cout << "You have maximum number of sailors!\n";
-    return 0;
+    else {
+        std::cout << "You have maximum number of sailors!\n";
+        return 0;
+        }
+
 }
 
 template <typename T>
