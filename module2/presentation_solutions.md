@@ -69,8 +69,8 @@ public:
         Coordinates(size_t pos_x, size_t pos_y)
             : pos_x_(pos_x), pos_y_(pos_y) {}
 
-        bool operator==(const Coordinates& lhs) const {
-            return this->pos_x_ == lhs.pos_x_ && this->pos_y_ == lhs.pos_y_;
+        bool operator==(const Coordinates& rhs) const {
+            return this->pos_x_ == rhs.pos_x_ && this->pos_y_ == rhs.pos_y_;
         }
 
     private:
