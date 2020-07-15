@@ -8,17 +8,12 @@ Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDat
 }
 
 void Fruit::nextDay() {
-    if(timeElapsed_ != expiryDate_) {
-        ++timeElapsed_;
-    }
-    if(timeElapsed_ == expiryDate_) {
-        amount_ = 0;
-    }
+    this->operator--();
 }
 
 size_t Fruit::getPrice() const {
     if (timeToSpoil_) {
-        return static_cast<size_t>(basePrice_ * static_cast<long double>(timeToSpoil_) / expiryDate_);
+        return static_cast<size_t>(basePrice_ * static_cast<long double>(timeToSpoil_) / expiryDate_ );
     }
     return 0;
 }
@@ -36,7 +31,14 @@ size_t Fruit::getBasePrice() const {
 }
 
 Fruit& Fruit::operator--() {
-    basePrice_ = static_cast<int>(static_cast<double>(basePrice_)*0.1);
+    if(timeElapsed_ != expiryDate_) {
+        ++timeElapsed_;
+        timeToSpoil_ = expiryDate_ - timeElapsed_;
+    }
+    if(timeElapsed_ == expiryDate_) {
+        amount_ = 0;
+        timeToSpoil_ = 0;
+    }
     return *this;
 }
 

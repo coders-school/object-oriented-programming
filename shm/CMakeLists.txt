@@ -41,6 +41,7 @@ set(SRC
     alcohol.cpp
     cargo.cpp
     coordinates.cpp
+    dryFruit.cpp
     fruit.cpp
     game.cpp
     island.cpp
@@ -54,7 +55,9 @@ set(SRC
 enable_testing()
 
 set(TEST
-    testShip.cpp)
+    testDryFruit.cpp
+    testShip.cpp
+    )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 
