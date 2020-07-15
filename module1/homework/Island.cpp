@@ -1,6 +1,6 @@
 #include "Island.hpp"
 
-Island::Island(size_t positionX, size_t positionY)
+Island::Island(uint16_t positionX, uint16_t positionY)
     : position_(Coordinates(positionX, positionY)) {}
 
 Coordinates Island::getPosition() const {

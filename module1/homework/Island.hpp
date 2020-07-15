@@ -7,6 +7,6 @@ class Island {
 
 public:
     Island() = default;
-    Island(size_t, size_t);
+    Island(uint16_t, uint16_t);
     Coordinates getPosition() const;
 };

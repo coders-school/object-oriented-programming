@@ -3,13 +3,13 @@
 #include <iostream>
 
 class Coordinates {
-    size_t positionX_;
-    size_t positionY_;
+    uint16_t positionX_;
+    uint16_t positionY_;
 
 public:
     Coordinates() = default;
-    Coordinates(size_t, size_t);
+    Coordinates(uint16_t, uint16_t);
     bool operator==(const Coordinates&) const;
-    size_t getPositionX() const;
-    size_t getPositionY() const;
+    uint16_t getPositionX() const;
+    uint16_t getPositionY() const;
 };

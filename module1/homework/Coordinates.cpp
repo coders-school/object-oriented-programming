@@ -1,12 +1,12 @@
 #include "Coordinates.hpp"
 
-Coordinates::Coordinates(size_t positionX, size_t positionY)
+Coordinates::Coordinates(uint16_t positionX, uint16_t positionY)
     : positionX_(positionX), positionY_(positionY) {}
 
-size_t Coordinates::getPositionX() const {
+uint16_t Coordinates::getPositionX() const {
     return positionX_;
 }
-size_t Coordinates::getPositionY() const {
+uint16_t Coordinates::getPositionY() const {
     return positionY_;
 }
 

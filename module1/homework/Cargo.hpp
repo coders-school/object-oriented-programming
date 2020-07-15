@@ -4,17 +4,17 @@
 
 class Cargo {
     std::string name_;
-    size_t amount_;
-    size_t basePrice_;
+    uint16_t amount_;
+    uint16_t basePrice_;
 
 public:
-    Cargo(const std::string&, size_t, size_t);
+    Cargo(const std::string&, uint16_t, uint16_t);
 
-    Cargo& operator+=(const size_t);
-    Cargo& operator-=(const size_t);
+    Cargo& operator+=(const uint16_t);
+    Cargo& operator-=(const uint16_t);
     bool operator==(const Cargo&) const;
 
     std::string getName() const;
-    size_t getAmount() const;
-    size_t getBasePrice() const;
+    uint16_t getAmount() const;
+    uint16_t getBasePrice() const;
 };
