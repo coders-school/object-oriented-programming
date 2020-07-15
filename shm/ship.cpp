@@ -13,7 +13,6 @@ Ship::Ship(size_t capacity,
            int id,
            std::shared_ptr<Time> publisher)
     : capacity_(capacity), 
-
     maxCrew_(maxCrew), 
     crew_(0), 
     maxSpeed_(maxSpeed), 
@@ -30,7 +29,6 @@ void Ship::setName(const std::string& name) {
 }
 
 void Ship::nextDay() {
-
     int lottery = (rand() % 10 + 1) + (rand() % 10 + 1);
     switch (lottery) {
     case 1:
@@ -67,25 +65,22 @@ void Ship::nextDay() {
             std::cout << "You lost all of your crew during battle with pirates!\n";
             crew_ = 0;
         }
-        break;
     default:
         std::cout << "Fortunately today everyone are still alive!\n";
     }
+
 }
 
-void Ship::load(Alcohol* cargo) {
-    cargo_.push_back(cargo);
-    alcos_.push_back(cargo);
-}
+void Ship::load(std::shared_ptr<Cargo> cargo, size_t amount) {
+    auto it = findSameCargo(cargo.get());
 
-void Ship::load(Fruit* cargo) {
-    cargo_.push_back(cargo);
-    fruits_.push_back(cargo);
-}
-
-void Ship::load(Item* cargo) {
-    cargo_.push_back(cargo);
-    items_.push_back(cargo);
+    if (it != cargo_.end()) {
+        *it->get() += amount;
+    } else {
+        auto newCargo = cargo->Clone();
+        newCargo->setAmount(amount);
+        cargo_.push_back(newCargo);
+    }
 }
 
 Ship& Ship::operator-=(size_t crewman) {
@@ -143,7 +138,7 @@ int Ship::getId() const {
 
 Cargo* Ship::getCargo(size_t index) const {
     if (cargo_.size() > index) {
-        return cargo_[index];
+        return cargo_[index].get();
     }
     return nullptr;
 }
@@ -171,55 +166,31 @@ size_t Ship::fillInCrew() {
 
 }
 
-template <typename T>
-T Ship::findCargoByName(const std::string& name, std::vector<T>& where) {
+
+Cargo* Ship::findCargoByName(const std::string& name) const {
     auto found =
-        std::find_if(where.begin(), where.end(), [name](const auto element) { return name == element->getName(); });
-    if (found != where.end()) {
-        return *found;
+        std::find_if(cargo_.begin(), cargo_.end(), [name](const auto element) { return name == element->getName(); });
+    if (found != cargo_.end()) {
+        return (*found).get();
     }
     return nullptr;
 }
 
-Alcohol* Ship::findAlcoByName(const std::string& name) {
-    return findCargoByName(name, alcos_);
-}
-
-Fruit* Ship::findFruitByName(const std::string& name) {
-    return findCargoByName(name, fruits_);
-}
-
-Item* Ship::findItemByName(const std::string& name) {
-    return findCargoByName(name, items_);
-}
-
-Cargo* Ship::findCargo(Cargo* cargo) {
+Cargo* Ship::findCargo(Cargo* cargo) const {
     auto found =
         std::find_if(cargo_.begin(), cargo_.end(), [&cargo](const auto element) { return *cargo == *element; });
     if (found != cargo_.end()) {
-        return *found;
+        return (*found).get();
     }
     return nullptr;
 }
 
-template <typename T>
-void Ship::removeCargo(T cargo, std::vector<T>& where) {
-    where.erase(std::find_if(where.begin(), where.end(), [&cargo](const auto& element) { return *element == *cargo; }));
+
+void Ship::removeCargo(Cargo* cargo) {
     cargo_.erase(
         std::find_if(cargo_.begin(), cargo_.end(), [&cargo](const auto& element) { return *element == *cargo; }));
 }
 
-void Ship::removeAlco(Alcohol* cargo) {
-    removeCargo(cargo, alcos_);
-}
-
-void Ship::removeFruit(Fruit* cargo) {
-    removeCargo(cargo, fruits_);
-}
-
-void Ship::removeItem(Item* cargo) {
-    removeCargo(cargo, items_);
-}
 
 void Ship::printCargo() const {
     std::for_each(cargo_.begin(), cargo_.end(), [i{0}](const auto& index) mutable {
@@ -227,3 +198,37 @@ void Ship::printCargo() const {
         std::cout << index->getName() << ": " << index->getAmount();
     });
 }
+
+CargoIt Ship::findSameCargo(Cargo* cargo) {
+    Fruit* fruit = dynamic_cast<Fruit*>(cargo);
+    Alcohol* alcohol = nullptr;
+    Item* item = nullptr;
+    CargoIt result = cargo_.end();
+
+    if (fruit) {
+        result = findIdenticalCargo(fruit);
+    } else if (alcohol = dynamic_cast<Alcohol*>(cargo)) {
+        result = findIdenticalCargo(alcohol);
+    } else if (item = dynamic_cast<Item*>(cargo)) {
+        result = findIdenticalCargo(item);
+    }
+
+    return result;
+}
+
+template <class T>
+CargoIt Ship::findIdenticalCargo(T* concreteCargo) {
+    auto it = std::find_if(cargo_.begin(), cargo_.end(), [concreteCargo](const auto& cargo){
+        T* t = dynamic_cast<T*>(cargo.get());
+
+        if(t){
+            return *concreteCargo == *t;
+        }
+        else {
+            return false;
+        }
+    });
+
+    return it;
+}
+

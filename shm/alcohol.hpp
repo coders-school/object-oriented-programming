@@ -14,6 +14,8 @@ public:
     ~Alcohol() {
         this->Publisher_->removeObserver(this);
     };
+    //override from Cargo
+    virtual std::shared_ptr<Cargo> Clone() override { return std::make_shared<Alcohol>(*this); }
 
     //Override from Observer
     void nextDay() override;
