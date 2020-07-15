@@ -247,11 +247,11 @@ Cargo* Player::getCargo(size_t index) const {
 }
 
 size_t Player::getAvailableSpace() const {
-    available_space_ = 0;
+    size_t total_cargo_amount = 0;
     for (const auto cargo : ship_->getCargos()) {
-        available_space_ += cargo->getAmount();
+        total_cargo_amount += cargo->getAmount();
     }
-
+    available_space_ = ship_->getCapacity() - total_cargo_amount;
     return available_space_;
 }
 ```
