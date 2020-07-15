@@ -65,6 +65,7 @@ void Ship::nextDay() {
             std::cout << "You lost all of your crew during battle with pirates!\n";
             crew_ = 0;
         }
+        break;
     default:
         std::cout << "Fortunately today everyone are still alive!\n";
     }
