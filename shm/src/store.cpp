@@ -84,17 +84,23 @@ std::vector<std::shared_ptr<Cargo>>::iterator Store::findStock(Cargo* cargo) {
     });
 }
 
+constexpr int subtract = 0;
+constexpr int add = 1;
+constexpr int lowerBound = 1;
+constexpr int upperBound = 20;
+
 void Store::nextDay() {
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> distrib(0, 1);
-    std::uniform_int_distribution<> distrib2(1, 20);
+    std::uniform_int_distribution<> distrib(subtract, add);
+    std::uniform_int_distribution<> distrib2(lowerBound, upperBound);
     for (const auto& cargo_ptr : stock_) {
-        if (distrib(gen)) {
+        if (distrib(gen) == add) {
             *cargo_ptr += distrib2(gen);
         } else {
             *cargo_ptr -= distrib2(gen);
         }
+
     }
 }
 

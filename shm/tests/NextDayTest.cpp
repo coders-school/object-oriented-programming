@@ -20,7 +20,7 @@ public:
     Ship ship;
 
     NextDayTest()
-        : player(std::make_unique<Ship>(30, 10, 1, &player), 100),
+        : player(100),
           alco("alco", 10, 100, 40),
           item("item", 5, 50, Item::Rarity::common),
           fruit("fruit", 30, 20, 10),
@@ -74,9 +74,6 @@ TEST_F(NextDayTest, NextDayShouldPayCrew) {
 }
 
 TEST(TestWithoutFixtureTemp, StoreShouldBeGeneratedWithNoArgConstructor) {
-    auto time = std::make_shared<Time>();
-    TimeServiceLocator::provide(time.get());
-
     Store testStore = Store();
     Island testIsland = Island(20, 20);
     auto store = testIsland.getStore()->getCargo(0);

@@ -14,3 +14,9 @@ size_t Coordinates::distance(const Coordinates& lhs, const Coordinates& rhs) {
     int y_distance = lhs.positionY_ - rhs.positionY_;
     return std::sqrt(x_distance * x_distance + y_distance * y_distance);
 }
+
+std::ostream & operator<<(std::ostream & stream, const Coordinates& coords) {
+    stream << "( " << coords.positionX_ << ", " << coords.positionY_ << " )";
+    return stream;
+}
+
