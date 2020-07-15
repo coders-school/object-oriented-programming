@@ -45,3 +45,28 @@ bool Game::checkWinCondition() const {
 bool Game::checkLoseCondition() const {
     return money_ == 0 || (current_day_ >= days_ && money_ < final_goal_);
 }
+
+void Game::printMenu() {
+    auto elapsedTime = time_->getElapsedTime();
+    std::cout << "Day: " << elapsedTime << " Days left: " << days_ - elapsedTime
+              << " Money: " << player_->getMoney();
+}
+
+void Game::printOptions() {
+    std::cout << '\n'
+              << " 1) Buy \n"
+              << " 2) Sell \n"
+              << " 3) Travel \n"
+              << " 4) Print Cargo \n";
+}
+
+void Game::printWinScreen() {
+    std::cout << "Congratulations! You have earned " << player_->getMoney()
+              << " before the deadline. (days left) " << days_ - time_->getElapsedTime()
+              << ".";
+}
+
+void Game::printLooseScreen() {
+    std::cout << "You have lost. You have earned " << player_->getMoney()
+              << " and the goal was " << final_goal_ << " try harder next time! ";
+}
