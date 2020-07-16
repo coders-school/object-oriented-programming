@@ -14,8 +14,9 @@ class Ship {
     uint16_t capacity_;
     uint16_t crew_;
     std::vector<Cargo*> cargos_;
-    std::vector<Cargo*> getCargos() const { return cargos_; };
+
 public:
+    std::vector<Cargo*> getCargos() const { return cargos_; };
     Ship();
     Ship(uint16_t, const std::string&, uint16_t, uint16_t, uint16_t);
     Ship(uint16_t, uint16_t, uint16_t);
