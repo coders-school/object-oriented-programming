@@ -1,11 +1,16 @@
     #include "Island.hpp"
 
+    Island::Island()
+        : position_(Coordinates(0,0))
+    {}
     Island::Island(int positionX, int positionY)
-        : positionX_(positionX)
-        , positionY_(positionY)
+        : position_(Coordinates(positionX, positionY))
     {}
 
     bool Island::operator==(const Island& island) {
-        return ((positionX_ == island.positionX_) &&
-                (positionY_ == island.positionY_));
+        return (*this).getPosition() == island.getPosition();
+    }
+
+    Coordinates Island::getPosition() const {
+        return position_;
     }

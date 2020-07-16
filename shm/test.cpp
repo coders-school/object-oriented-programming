@@ -26,6 +26,16 @@ protected:
     Island island5{positionX4, positionY5};
 };
 
+class CoordinatesTests : public ::testing::Test {
+protected:
+    Coordinates someCoordinates{2,5};
+    Coordinates someEqualCoordinates{2,5};
+    Coordinates someNotEqualCoordinates1{2,6};
+    Coordinates someNotEqualCoordinates2{1,5};
+    Coordinates someNotEqualCoordinates3{11,19};
+};
+
+
 // CargoTests beginning
 TEST_F(CargoTests, equalOperatorShouldReturnTrue) {
     EXPECT_TRUE(cargo1 == cargo2);
@@ -69,4 +79,16 @@ TEST_F(IslandTests, equalOperatorShouldReturnFalse) {
     EXPECT_FALSE(island3 == island1);
     EXPECT_FALSE(island4 == island1);
     EXPECT_FALSE(island5 == island1);
+}
+
+// CoordinatesTests beginning
+TEST_F(CoordinatesTests, equalOperatorShouldReturnTrue) {
+    EXPECT_TRUE(someCoordinates == someEqualCoordinates);
+    EXPECT_TRUE(someEqualCoordinates == someCoordinates);
+}
+
+TEST_F(CoordinatesTests, equalOperatorShouldReturnFalse) {
+    EXPECT_FALSE(someCoordinates == someNotEqualCoordinates1);
+    EXPECT_FALSE(someCoordinates == someNotEqualCoordinates2);
+    EXPECT_FALSE(someCoordinates == someNotEqualCoordinates3);
 }
