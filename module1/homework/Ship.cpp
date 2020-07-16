@@ -43,3 +43,5 @@ uint16_t Ship::getMaxCrew() const {
 uint16_t Ship::getCapacity() const {
     return capacity_;
 }
+ Cargo* Ship::getCargo(int index) const { return cargos_[index]; }
+ std::vector<Cargo*> Ship::getCargos() const { return cargos_;}
