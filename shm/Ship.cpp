@@ -35,4 +35,6 @@
     Cargo* Ship::getCargo(size_t index) const {
         return cargo_[index].get();
     }
-    
+    std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
+        return cargo_;
+    }

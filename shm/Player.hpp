@@ -12,9 +12,13 @@ public:
     size_t getMoney() const;
     int getSpeed() const;
     Cargo* getCargo(size_t index) const;
+    std::vector<std::shared_ptr<Cargo>> getCargos() const;
+    
 
 private:
+    size_t getAvailableSpace();
+    
     std::unique_ptr<Ship> ship_;
     size_t money_;
-    size_t avaibleSpace_;
+    size_t availableSpace_;
 };

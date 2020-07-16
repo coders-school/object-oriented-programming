@@ -1,5 +1,7 @@
 #pragma once 
 
+#include "Cargo.hpp"
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -20,6 +22,7 @@ public:
     std::string getName() const;
     int getSpeed() const;
     Cargo* getCargo(size_t index) const;
+    std::vector<std::shared_ptr<Cargo>> getCargos() const;
 
 private:
     size_t capacity_;
