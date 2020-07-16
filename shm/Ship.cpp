@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "Ship.hpp"
 #include "ShmExceptions.hpp"
 
@@ -36,7 +37,7 @@ Ship& Ship::operator+=(size_t num)
     return *this;
 }
 
-[[nodiscard]] Cargo* Ship::getCargo(size_t index) const
+[[nodiscard]] std::shared_ptr<Cargo> Ship::getCargo(size_t index) const
 {
     try
     {
@@ -50,4 +51,19 @@ Ship& Ship::operator+=(size_t num)
 void Ship::NextDay()
 {
     // TODO to be implemented
+}
+
+void Ship::load(const std::shared_ptr<Cargo>& cargo)
+{
+    storage_.push_back(cargo);
+
+//    TODO support case, when product is already loaded previusly
+}
+
+void Ship::unload(Cargo* cargo)
+{
+    storage_.erase(
+        std::remove_if(storage_.begin(), storage_.end(), [cargo](auto listedCargo) { return *cargo == *listedCargo; }));
+
+    // TODO support situation when only part od product is sold
 }

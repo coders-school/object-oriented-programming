@@ -12,16 +12,20 @@ public:
 
     [[nodiscard]] size_t getMoney() const { return money_; }
     [[nodiscard]] size_t getSpeed() const { return ship_->getSpeed(); }
-    [[nodiscard]] Cargo* getCargo(size_t index) const { return ship_->getCargo(index); };
+    [[nodiscard]] std::shared_ptr<Cargo> getCargo(size_t index) const { return ship_->getCargo(index); };
+    [[nodiscard]] std::vector<std::shared_ptr<Cargo>> getCargos() const;
     [[nodiscard]] size_t getAvailableSpace() const { return availableSpace_; }
     void setMoney(size_t amount) { money_ = amount; }
     void spendMoney(size_t amount);
+
     void earnMoney(size_t amount);
 
+    [[nodiscard]] Ship* getShip() const;
 private:
     std::unique_ptr<Ship> ship_;
-    size_t money_;
-    size_t availableSpace_;
 
+    size_t money_;
+
+    size_t availableSpace_;
     void updateAvailableSpace();
 };

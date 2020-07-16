@@ -15,17 +15,21 @@ private:
     enum class Response {
         lack_of_money,
         lack_of_cargo,
-        lack_of_space
+        lack_of_space,
+        done
     };
 
 public:
     //    Store(Time* time);  # TODO after implementation Time class
     Store();
     ~Store() override;
+
     void NextDay() override;
+
     Cargo* GetCargo(const size_t pos);
-    Response Buy(Cargo* cargo, size_t amount, Player* player);
-    Response Sell(Cargo* cargo, size_t amount, Player* player);
+    static Response Buy(Cargo* cargo, size_t amount, Player* player);
+    static Response Sell(Cargo* cargo, size_t amount, Player* player);
+
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
 private:

@@ -29,3 +29,11 @@ void Player::spendMoney(size_t amount)
 
     money_ -= amount;
 }
+
+Ship* Player::getShip() const {
+    return ship_.get();
+}
+
+std::vector<std::shared_ptr<Cargo>> Player::getCargos() const {
+    return ship_->getCargos();
+}
