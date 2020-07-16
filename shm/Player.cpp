@@ -29,7 +29,7 @@ size_t Player::getAvailableSpace() {
                                                 std::end(cargos),
                                                 startingSumValue,
                                                 [](size_t sum, const auto& element) {
-                                                    return sum += element->getAmount();
+                                                    return sum + element->getAmount();
                                                 });
     return ship_->getCapacity() - sumOfCargoAmount;
 }
