@@ -12,6 +12,7 @@ public:
 
 private:
     void islandGenerator(size_t amount);
+    Island* getIsland(const Coordinates& coordinates);
 
     size_t sizeX_;
     size_t sizeY_;

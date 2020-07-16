@@ -24,3 +24,14 @@ void Map::islandGenerator(size_t amount) {
                                             (temporaryMap_[i] / sizeX_)  % sizeY_));
     }
 }
+Island* Map::getIsland(const Coordinates& coordinates) {
+    auto islandIterator = std::find_if(std::begin(islandsArrangement_),
+                               std::end(islandsArrangement_),
+                               [&coordinates](const auto& island) {
+                                   return island.getPosition() == coordinates;
+                               });
+    if(islandIterator != std::end(islandsArrangement_)) {
+        return &(*islandIterator);
+    }
+    return nullptr;
+}
