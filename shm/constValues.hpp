@@ -10,5 +10,6 @@ namespace constValues {
     constexpr size_t maxExpiryDate = 20;
     constexpr size_t minAmount = 0;
     constexpr size_t maxAmount = 1000;
+    constexpr double sellPriceFactor = 0.95;
 } 
 

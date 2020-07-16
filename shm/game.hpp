@@ -56,4 +56,6 @@ private:
     void hireFullCrew();
     void fireSailors();
     void hireSailors();
+    bool isCargoCorrect(std::shared_ptr<Cargo> cargo, std::string& name, size_t amount);
+
 };

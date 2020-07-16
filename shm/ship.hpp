@@ -30,6 +30,7 @@ public:
 
     void setName(const std::string& name);
     void load(std::shared_ptr<Cargo> cargo, size_t amount);
+    void unload(std::shared_ptr<Cargo> cargo, size_t amount);
     void nextDay() override;
 
     Ship& operator-=(size_t crewman);
@@ -44,6 +45,7 @@ public:
     std::string getName() const;
     int getId() const;
     Cargo* getCargo(size_t index) const;
+    Cargo* findCargoByName(const std::string& name) const;
     Fruit* findFruitByName(const std::string& name);
     Item* findItemByName(const std::string& name);
     size_t countAvailableSpace() const;
@@ -53,7 +55,6 @@ public:
 
 private:
     Cargo* findCargo(Cargo* cargo) const;
-    Cargo* findCargoByName(const std::string& name) const;
     CargoIt findSameCargo(Cargo* cargo);
     template <typename T>
     CargoIt findIdenticalCargo(T* concreteCargo);
