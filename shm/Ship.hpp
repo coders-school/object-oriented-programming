@@ -17,7 +17,7 @@ public:
     size_t getId() const;
     size_t getMaxCrew() const;
     std::string getName() const;
-    size_t getSpeed() const;
+    int getSpeed() const;
 
 private:
     size_t capacity_;
@@ -25,5 +25,5 @@ private:
     const size_t id_;
     size_t maxCrew_;
     std::string name_;
-    size_t speed_;
+    int speed_;
 };
