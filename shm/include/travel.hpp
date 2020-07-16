@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Command.hpp"
 #include <cstddef>
+
+#include "command.hpp"
 
 class Map;
 class Time;

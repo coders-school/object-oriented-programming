@@ -67,7 +67,6 @@ TEST_F(NextDayTest, NextDayShouldChangeStockInStore) {
 
 TEST_F(NextDayTest, NextDayShouldPayCrew) {
     auto player_money = player.getMoney();
-    Ship ship = Ship(30, 10, 1, &player);
     ship += 5;
     ship.nextDay();
     ASSERT_EQ(player_money - 5, player.getMoney());

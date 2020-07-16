@@ -1,7 +1,7 @@
 #include "player.hpp"
 
 
-constexpr char* shipName = "ship";
+constexpr auto shipName = "ship";
 constexpr int shipCapacity = 100;
 constexpr int shipMaxCrew = 30;
 constexpr int shipSpeed = 10;

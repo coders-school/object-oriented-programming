@@ -52,7 +52,10 @@ set(SOURCE
     src/time.cpp
     src/game.cpp
     src/locators.cpp
-    src/Travel.cpp
+    src/travel.cpp
+    src/print_cargo.cpp
+    src/buy.cpp
+    src/sell.cpp
 )
 
 set (TEST_FILES

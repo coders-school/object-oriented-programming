@@ -19,11 +19,11 @@ Ship::Ship(int capacity,
       speed_(speed),
       name_(name),
       id_(id) {
-  TimeServiceLocator::getTime()->addObserver(this);
+    TimeServiceLocator::getTime()->addObserver(this);
 }
 
 Ship::Ship(int maxCrew, int speed, size_t id, Delegate* delegate)
-    : Ship(0, maxCrew, speed, "", id, delegate) {}
+    : Ship(100, maxCrew, speed, "", id, delegate) {}
 
 void Ship::setName(const std::string& name) {
     name_ = name;
@@ -43,7 +43,6 @@ void Ship::load(std::shared_ptr<Cargo> cargo) {
     for (const auto& el : cargo_) {
         allAmount += el->getAmount();
     }
-
     if (allAmount + cargo->getAmount() > getCapacity()) {
         std::cerr << "Could not load, to little space\n";
         return;
@@ -84,5 +83,5 @@ void Ship::nextDay() {
 }
 
 Ship::~Ship() {
-  TimeServiceLocator::getTime()->removeObserver(this);
+    TimeServiceLocator::getTime()->removeObserver(this);
 }

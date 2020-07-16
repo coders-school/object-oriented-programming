@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Command.hpp"
+#include <memory>
+
+#include "command.hpp"
+#include "store.hpp"
 
 class Map;
 
@@ -11,6 +14,7 @@ public:
     // Overrides from ICommand
     ~Buy() override = default;
     void execute(Player* player) override;
+    void displayStore(std::shared_ptr<Store> store);
 
 private:
     Map* map_;

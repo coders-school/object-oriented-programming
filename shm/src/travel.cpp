@@ -1,10 +1,11 @@
-#include "Travel.hpp"
+
 
 #include <iostream>
 
 #include "locators.hpp"
 #include "map.hpp"
 #include "player.hpp"
+#include "travel.hpp"
 
 Travel::Travel(Map* map, Time* time)
     : map_(map), time_(time), coordinate_x(-1), coordinate_y(-1) {}
