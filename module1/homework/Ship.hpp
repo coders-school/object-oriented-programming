@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+
+#include "Cargo.hpp"
 
 class Ship {
     uint16_t id_;
@@ -10,7 +13,8 @@ class Ship {
     uint16_t maxCrew_;
     uint16_t capacity_;
     uint16_t crew_;
-
+    std::vector<Cargo*> cargos_;
+    std::vector<Cargo*> getCargos() const { return cargos_; };
 public:
     Ship();
     Ship(uint16_t, const std::string&, uint16_t, uint16_t, uint16_t);
