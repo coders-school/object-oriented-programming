@@ -10,6 +10,7 @@
 #include <thread>
 
 #include "cargo.hpp"
+#include "dicegame.hpp"
 #include "island.hpp"
 #include "store.hpp"
 
@@ -118,9 +119,12 @@ void Game::printLoseScreen() {
 
 void Game::printStats() {
     printTrail('=');
-    std::cout << "Money: " << player_->getMoney() << " | "
-              << "Day: " << publisher_->getElapsedTime() << " | "
+    std::cout << "You are captain of * " << ship_->getName() << " *"
+              << " and you command " << ship_->getCrew() << " sailors.\n";
+    printTrail('-');
+    std::cout << "Day: " << publisher_->getElapsedTime() << " | "
               << "Days left: " << days_ - publisher_->getElapsedTime() << " | "
+              << "Money: " << player_->getMoney() << " | "
               << "Money to earn: " << finalGoal_ - player_->getMoney() << " | "
               << "Current position: " << map_->getCurrentPosition()->getCoordinates() << '\n';
     printTrail('=');
@@ -128,13 +132,15 @@ void Game::printStats() {
 
 void Game::printOptions() {
     printTrail('-');
-    std::cout << "What do you want to do? \n"
-              << "1. Travel \n"
-              << "2. Buy \n"
-              << "3. Sell \n"
-              << "4. Hire or fire crew \n"
-              << "5. Print cargo \n"
-              << "0. Exit game \n";
+    std::cout << "What do you want to do?\n"
+              << "1. Travel\n"
+              << "2. Buy\n"
+              << "3. Sell\n"
+              << "4. Hire or fire crew\n"
+              << "5. Print cargo\n"
+              << "6. Change the name of ship\n"
+              << "7. Play minigame\n"
+              << "0. Exit game\n";
     printTrail('-');
 }
 
@@ -163,6 +169,14 @@ void Game::makeAction(Action pickAction) {
     }
     case Action::printCargo: {
         showCargo();
+        break;
+    }
+    case Action::changeShipsName: {
+        changeShipsName();
+        break;
+    }
+    case Action::playMiniGame: {
+        playMiniGame();
         break;
     }
     default: {
@@ -423,4 +437,18 @@ void Game::hireAction() {
         break;
     }
 
+}
+
+void Game::changeShipsName() {
+    std::cout << "Give new name of your ship\n";
+    std::string newName;
+    std::cin >> newName;
+    ship_->setName(newName);
+}
+
+void Game::playMiniGame() {
+    diceGame dGame;
+    if (dGame.startDiceGame(constValues::pointsToGetMoneyInDiceGame, constValues::moneyForWinInDiceGame)) {
+        money_ += constValues::moneyForWinInDiceGame;
+    }
 }

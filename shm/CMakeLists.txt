@@ -41,6 +41,7 @@ set(SRC
     alcohol.cpp
     cargo.cpp
     coordinates.cpp
+    dicegame.cpp
     dryFruit.cpp
     fruit.cpp
     game.cpp
