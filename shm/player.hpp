@@ -28,7 +28,8 @@ public:
     void payCrew(size_t crew);
     void nextDay();
     void purchaseCargo(std::shared_ptr<Cargo> cargo, size_t price, size_t amount);
-
+    void sellCargo(std::shared_ptr<Cargo> cargo, size_t price, size_t amount);
+    
 private:
     std::shared_ptr<Ship> ship_;
     std::shared_ptr<Time> publisher_;
