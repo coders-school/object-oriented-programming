@@ -40,6 +40,8 @@ public:
     size_t getCrew() const;
     size_t getMaxCrew() const;
     size_t getSpeed() const;
+    size_t getMaxSpeed() const;
+    void setSpeed(double actualSpeed);
     std::string getName() const;
     int getId() const;
     Cargo* getCargo(size_t index) const;
@@ -60,6 +62,7 @@ private:
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
+    size_t maxSpeed_;
     size_t speed_;
     std::string name_;
     int id_;

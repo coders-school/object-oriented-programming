@@ -1,10 +1,10 @@
 #pragma once
 
 #include <memory>
-
 #include "cargo.hpp"
 #include "ship.hpp"
 #include "timeSHM.hpp"
+
 
 class Coordinates;
 class Player : public Observer {

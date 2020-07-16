@@ -1,19 +1,28 @@
 #include "ship.hpp"
 
 #include <algorithm>
+#include <iostream>
 #include <numeric>
 
 Ship::Ship() : id_(-1) {}
 
 Ship::Ship(size_t capacity,
            size_t maxCrew,
-           size_t speed,
+           size_t maxSpeed,
            const std::string& name,
            int id,
            std::shared_ptr<Time> publisher)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), publisher_(publisher) {
+    : capacity_(capacity), 
+    maxCrew_(maxCrew), 
+    crew_(0), 
+    maxSpeed_(maxSpeed), 
+    speed_(maxSpeed),
+    name_(name), 
+    id_(id), 
+    publisher_(publisher) {
     this->publisher_->addObserver(this);
-}
+    }
+
 
 void Ship::setName(const std::string& name) {
     name_ = name;
@@ -24,23 +33,43 @@ void Ship::nextDay() {
     switch (lottery) {
     case 1:
         std::cout << "One of your sailor has drown!\n";
-        --crew_;
+        if (crew_ >= 1) {
+            --crew_;
+        } else {
+            crew_ = 0;
+        }
         break;
     case 6:
         std::cout << "One of your sailor died because of malaria!\n";
-        --crew_;
+        if (crew_ >= 1) {
+            --crew_;
+        } else {
+        std::cout << "You lost all of your crew";
+            crew_ = 0;
+        }
         break;
     case 15:
-        std::cout << "One of your sailor rebelled and drowned under the keel\n";
-        --crew_;
+        if (crew_ >= 1) {
+            std::cout << "One of your sailor rebelled and drowned under the keel\n";
+            --crew_;
+        } else {
+            std::cout << "You lost all of your crew";
+            crew_ = 0;
+        }
         break;
     case 20:
-        std::cout << "You lost half of your crew during battle with pirates!\n";
-        crew_ = crew_ / 2;
+        if (crew_ >= 2) {
+            std::cout << "You lost half of your crew during battle with pirates!\n";
+            crew_ = crew_ / 2;
+        } else {
+            std::cout << "You lost all of your crew during battle with pirates!\n";
+            crew_ = 0;
+        }
         break;
     default:
         std::cout << "Fortunately today everyone are still alive!\n";
     }
+
 }
 
 void Ship::load(std::shared_ptr<Cargo> cargo, size_t amount) {
@@ -70,13 +99,21 @@ void Ship::unload(std::shared_ptr<Cargo> cargo, size_t amount) {
 Ship& Ship::operator-=(size_t crewman) {
     if (crew_ > crewman) {
         crew_ -= crewman;
+        speed_ = static_cast<int>(static_cast<double>(maxSpeed_)*(static_cast<double>(crew_) / static_cast<double>(maxCrew_)));
+        return *this;
     }
-    return *this;
+    if (crew_ == crewman){
+        crew_ = 0;
+        speed_ = 0;
+        return *this;
+    }
+    else return *this;
 }
 
 Ship& Ship::operator+=(size_t crewman) {
-    if (crew_ + crewman < maxCrew_) {
+    if (crew_ + crewman <= maxCrew_) {
         crew_ += crewman;
+        speed_ = static_cast<int>(static_cast<double>(maxSpeed_)*(static_cast<double>(crew_) / static_cast<double>(maxCrew_)));
     }
     return *this;
 }
@@ -91,6 +128,13 @@ size_t Ship::getCrew() const {
 
 size_t Ship::getMaxCrew() const {
     return maxCrew_;
+}
+
+size_t Ship::getMaxSpeed() const {
+    return maxSpeed_;
+}
+void Ship::setSpeed(double actualSpeed){
+    speed_ = static_cast<int>(actualSpeed);
 }
 
 size_t Ship::getSpeed() const {
@@ -123,12 +167,18 @@ size_t Ship::fillInCrew() {
         size_t previousCrew = crew_;
         crew_ = maxCrew_;
         std::cout << "You hired: " << (maxCrew_ - previousCrew) << " sailors\n";
-
+        std::cout << "You paid for them: " << maxCrew_ - previousCrew << '\n';
+        std::cout << "Your speed is maximum: " << maxSpeed_ << " knots\n";
+        speed_ = maxSpeed_;
         return maxCrew_ - previousCrew;
     }
-    std::cout << "You have maximum number of sailors!\n";
-    return 0;
+    else {
+        std::cout << "You have maximum number of sailors!\n";
+        return 0;
+        }
+
 }
+
 
 Cargo* Ship::findCargoByName(const std::string& name) const {
     auto found = std::find_if(cargo_.begin(), cargo_.end(), [name](const auto element) { return name == element->getName(); });
@@ -147,12 +197,14 @@ Cargo* Ship::findCargo(Cargo* cargo) const {
     return nullptr;
 }
 
+
 void Ship::removeCargo(Cargo* cargo) {
     auto cargoToDelete = std::find_if(cargo_.begin(), cargo_.end(), 
                                      [cargo](const auto& element) { return cargo == element.get(); });
     if(cargoToDelete != cargo_.end())
         cargo_.erase(cargoToDelete);
 }
+
 
 void Ship::printCargo() const {
     std::for_each(cargo_.begin(), cargo_.end(), [i{0}](const auto& index) mutable {
@@ -193,3 +245,4 @@ CargoIt Ship::findIdenticalCargo(T* concreteCargo) {
 
     return it;
 }
+

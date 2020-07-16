@@ -1,8 +1,10 @@
+#pragma once
+
 #include "map.hpp"
 #include "player.hpp"
 #include "ship.hpp"
 #include "timeSHM.hpp"
-
+#include "constValues.hpp"
 
 class Game {
 public:
@@ -11,7 +13,8 @@ public:
         travel = 1,
         buy = 2,
         sell = 3,
-        printCargo = 4
+        hireCrew = 4,
+        printCargo = 5
     };
 
     Game(size_t money, size_t days, size_t finalGoal);
@@ -49,6 +52,10 @@ private:
     void buy();
     void sell();
     void showCargo();
+    void hireAction();
+    void hireFullCrew();
+    void fireSailors();
+    void hireSailors();
     bool isCargoCorrect(std::shared_ptr<Cargo> cargo, std::string& name, size_t amount);
 
 };

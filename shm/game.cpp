@@ -1,5 +1,4 @@
 #include "game.hpp"
-
 #include <algorithm>
 #include <cctype>
 #include <chrono>
@@ -133,38 +132,43 @@ void Game::printOptions() {
               << "1. Travel \n"
               << "2. Buy \n"
               << "3. Sell \n"
-              << "4. Print cargo \n"
+              << "4. Hire or fire crew \n"
+              << "5. Print cargo \n"
               << "0. Exit game \n";
     printTrail('-');
 }
 
 void Game::makeAction(Action pickAction) {
     switch (pickAction) {
-        case Action::exit: {
-            std::cout << "Bye, bye \n";
-            break;
-        }
-        case Action::travel: {
-            travel();
-            break;
-        }
-        case Action::buy: {
-            buy();
-            break;
-        }
-        case Action::sell: {
-            sell();
-            break;
-        }
-        case Action::printCargo: {
-            showCargo();
-            break;
-        }
-        default: {
-            std::cout << "I can't do this! \n";
-        }
+
+    case Action::exit: {
+        std::cout << "Bye, bye \n";
+        break;
     }
-}
+    case Action::travel: {
+        travel();
+        break;
+    }
+    case Action::buy: {
+        buy();
+        break;
+    }
+    case Action::sell: {
+        sell();
+        break;
+    }
+    case Action::hireCrew: {
+        hireAction();
+        break;
+    }
+    case Action::printCargo: {
+        showCargo();
+        break;
+    }
+    default: {
+        std::cout << "I can't do this! \n";
+    }
+}}
 
 Island* Game::pickTargetIsland() {
     std::cout << *map_;
@@ -359,4 +363,64 @@ void Game::sell() {
 void Game::showCargo() {
     std::cout << "You have: \n";
     ship_->printCargo();
+}
+
+void Game::hireFullCrew() {
+        size_t howManyHired = ship_->fillInCrew();
+        player_->takeMoney(howManyHired * constValues::hiringCost);
+}
+
+void Game::fireSailors() {
+        size_t howManyToFire;
+        std::cout << "How many sailors do you want to fire?\n";
+        std::cout << "Now you pay daily: " << constValues::dailySalary << " coins for each sailor\n";
+        std::cin >> howManyToFire;
+        if(howManyToFire < ship_->getCrew()) {
+            *ship_-=howManyToFire;
+            std::cout << "Now you have: " << ship_->getCrew() <<" from maximum of: "<<ship_->getMaxCrew() << '\n'; 
+            std::cout << "You reduced your speed to: " << ship_->getSpeed() << " from maximum :" << ship_->getMaxSpeed() <<'\n';
+        }
+        else {
+            std::cout << "You wanted to fire more sailors than you have!\n";
+        }
+}
+
+void Game::hireSailors() {
+        size_t howManyToHire;
+        std::cout <<"How many sailors do you want to hire?\n";
+        std::cout <<"Hiring cost of one sailor is: " << constValues::hiringCost << '\n';
+        std::cout << "Now you pay daily: " << constValues::dailySalary << " coin for each sailor\n";
+        std::cin >> howManyToHire;
+        if(howManyToHire <= (ship_->getMaxCrew() - ship_ ->getCrew())){
+            *ship_ += howManyToHire;
+            player_->takeMoney(howManyToHire * constValues::hiringCost);
+            std::cout << "Now you have: " << ship_->getCrew() <<" from maximum of: "<<ship_->getMaxCrew() << '\n'; 
+            std::cout << "You increased your speed to: " << ship_->getSpeed() << " from maximum: " << ship_->getMaxSpeed() <<'\n';
+        }
+        else{
+            std::cout << "You wanted to hire more sailors than you need!";
+        }
+}
+
+void Game::hireAction() {
+    std::cout << "What do you want to do with you crew?\n";
+    std::cout << "1.Hire full crew\n"
+              << "2.Fire sailors\n"
+              << "3.Hire sailors\n";
+    int action;
+    std::cin >> action;
+    switch(action){
+    case 1:
+        hireFullCrew();
+        break;
+    case 2:
+        fireSailors();
+        break;
+    case 3:
+        hireSailors();
+        break;
+    default: 
+        break;
+    }
+
 }
