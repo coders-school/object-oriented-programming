@@ -18,7 +18,7 @@ public:
     void payCrew(size_t money) override;
 
     void purchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
-    void sellCargo(Cargo* cargo, size_t price);
+    void sellCargo(std::unique_ptr<Cargo> cargo, size_t price);
 
 private:
     Ship* ship_;
