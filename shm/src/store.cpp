@@ -59,9 +59,6 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player, Store* s
             setAvailableFunds(getAvailableFunds() + totalPrice);
             updateCargo(cargo, amount, updateMode::BUY);
 
-            std::cout << "\n# Unit price: " << store->getCargo(cargo->getName())->getPrice() << '\n';
-            std::cout << "# Total price: " << totalPrice << '\n';
-
             std::unique_ptr<Cargo> purchase = cargo->clone();
             purchase->setAmount(amount);
             player->purchaseCargo(std::move(purchase), totalPrice);
@@ -93,9 +90,6 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player)
 
             setAvailableFunds(getAvailableFunds() - totalPrice);
             updateCargo(cargo, amount, updateMode::SELL);
-
-            std::cout << "\n# Unit price: " << player->getCargo(cargo->getName())->getPrice() << '\n';
-            std::cout << "# Total price: " << totalPrice << '\n';
 
             std::unique_ptr<Cargo> sale = cargo->clone();
             sale->setAmount(amount);
