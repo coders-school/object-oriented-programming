@@ -4,6 +4,13 @@
 #include "Player.hpp"
 #include "Time.hpp"
 
+enum class Action {
+        Exit,
+        Travel,
+        Buy,
+        Sell,
+};
+
 class Game {
 private:
     size_t money_;
@@ -16,18 +23,17 @@ private:
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
+
     void Travel();
     Coordinates getTravelLocation();
     void advanceTimeTraveling(size_t distance);
-
-
+    void PrintOptions();
+    void MakeAction(Action choice);
+    void Exit();
+    void Travel();
+    void Buy();
+    void Sell();
 
 public:
-    Game(size_t money, size_t days, size_t final_goal);
-
-    enum class Action {
-        buy,
-        sell,
-        travel,
-    };
+    Game(size_t money, size_t days, size_t final_goal);    
 };
