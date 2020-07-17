@@ -138,7 +138,7 @@ void Game::travel() {
 
 void Game::sell() {
     while (true) {
-        std::cout << "Available cargo to sell:\n";
+        std::cout << "\nAvailable cargo to sell:\n";
         player_->printShipCargo();
 
         std::string cargoName;
@@ -155,19 +155,19 @@ void Game::sell() {
 
         switch (response) {
         case Store::Response::done:
-            std::cout << "Sold " << cargoAmount << " of " << cargoName << "\n";
+            std::cout << "# Sold " << cargoAmount << " of " << cargoName << '\n';
             return;
         case Store::Response::lack_of_cargo:
-            std::cout << "There is no enough cargo to sell\n";
+            std::cout << "\nThere is no enough cargo to sell!\n";
             break;
         case Store::Response::lack_of_space:
-            std::cout << "There is no enough space in store\n";
+            std::cout << "\nThere is no enough space in store!\n";
             break;
         case Store::Response::invalid_cargo:
-            std::cout << "There is no such cargo\n";
+            std::cout << "\nThere is no such cargo!\n";
             break;
         case Store::Response::lack_of_money:
-            std::cout << "You do not have enough money\n";
+            std::cout << "\nYou do not have enough money!\n";
             break;
         }
     }
@@ -175,7 +175,7 @@ void Game::sell() {
 
 void Game::buy() {
     while (true) {
-        std::cout << "Available cargo to buy:\n";
+        std::cout << "\nAvailable cargo to buy:\n";
         store_->printCargo();
 
         std::string cargoName;
@@ -187,35 +187,35 @@ void Game::buy() {
         std::cout << "Cargo quantity: ";
         std::cin >> cargoAmount;
 
-        Cargo* cargo = player_->getCargo(cargoName);
-        Store::Response response = store_->buy(cargo, cargoAmount, player_.get());
+        Cargo* cargo = store_->getCargo(cargoName);
+        Store::Response response = store_->buy(cargo, cargoAmount, player_.get(), store_.get());
         
         switch (response) {
         case Store::Response::done:
-            std::cout << "Bought " << cargoAmount << " of " << cargoName << "\n";
+            std::cout << "# Bought " << cargoAmount << " of " << cargoName << '\n';
             return;
         case Store::Response::lack_of_cargo:
-            std::cout << "There is no enough cargo to buy\n";
+            std::cout << "\nThere is no enough cargo to buy!\n";
             break;
         case Store::Response::lack_of_space:
-            std::cout << "You do not have enough space on your ship\n";
+            std::cout << "\nYou do not have enough space on your ship!\n";
             break;
         case Store::Response::invalid_cargo:
-            std::cout << "There is no such cargo\n";
+            std::cout << "\nThere is no such cargo!\n";
             break;
         case Store::Response::lack_of_money:
-            std::cout << "You do not have enough money\n";
+            std::cout << "\nYou do not have enough money!\n";
             break;
         }
     }
 }
 
 void Game::printShipCargo() {
-    std::cout << "Cargo on your ship:\n";
+    std::cout << "\nCargo on your ship:\n";
     player_->printShipCargo();
 }
 
 void Game::printStoreCargo() {
-    std::cout << "Cargo in store:\n";
+    std::cout << "\nCargo in store:\n";
     store_->printCargo();
 }
