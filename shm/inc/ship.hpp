@@ -37,7 +37,7 @@ public:
     void printCargo();
 
     void load(std::unique_ptr<Cargo> cargo);
-    void unload(Cargo* cargo);
+    void unload(std::unique_ptr<Cargo> cargo);
 
 private:
     size_t capacity_;
