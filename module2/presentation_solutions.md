@@ -69,8 +69,8 @@ public:
         Coordinates(size_t pos_x, size_t pos_y)
             : pos_x_(pos_x), pos_y_(pos_y) {}
 
-        bool operator==(const Coordinates& lhs) const {
-            return this->pos_x_ == lhs.pos_x_ && this->pos_y_ == lhs.pos_y_;
+        bool operator==(const Coordinates& rhs) const {
+            return this->pos_x_ == rhs.pos_x_ && this->pos_y_ == rhs.pos_y_;
         }
 
     private:
@@ -247,11 +247,11 @@ Cargo* Player::getCargo(size_t index) const {
 }
 
 size_t Player::getAvailableSpace() const {
-    available_space_ = 0;
+    size_t total_cargo_amount = 0;
     for (const auto cargo : ship_->getCargos()) {
-        available_space_ += cargo->getAmount();
+        total_cargo_amount += cargo->getAmount();
     }
-
+    available_space_ = ship_->getCapacity() - total_cargo_amount;
     return available_space_;
 }
 ```
