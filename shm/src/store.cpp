@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <numeric>
 #include <random>
@@ -7,6 +8,8 @@
 #include "fruit.hpp"
 #include "item.hpp"
 #include "store.hpp"
+
+constexpr size_t COLUMN_WIDTH = 6;
 
 constexpr char FRUIT_NAME[] = "melon";
 constexpr size_t FRUIT_SPOIL_TIME = 5;
@@ -46,15 +49,16 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player, Store* s
     if (cargo) {
         if (getCargo(cargo->getName()) != nullptr) {
             size_t totalPrice = store->getCargo(cargo->getName())->getPrice() * amount;
-    
-            if (player->getMoney() < totalPrice)
+
+            if (player->getMoney() < totalPrice) {
                 return Response::lack_of_money;
-
-            if (getCargo(cargo->getName())->getAmount() < amount)
+            }
+            if (getCargo(cargo->getName())->getAmount() < amount) {
                 return Response::lack_of_cargo;
-
-            if (player->getAvailableSpace() < getCargo(cargo->getName())->getAmount())
+            }
+            if (player->getAvailableSpace() < getCargo(cargo->getName())->getAmount()) {
                 return Response::lack_of_space;
+            }
 
             setAvailableFunds(getAvailableFunds() + totalPrice);
             updateCargo(cargo, amount, updateMode::BUY);
@@ -79,14 +83,15 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player)
         if (getCargo(cargo->getName()) != nullptr) {
             size_t totalPrice = player->getCargo(cargo->getName())->getPrice() * amount;
 
-            if (getAvailableFunds() < totalPrice)
+            if (getAvailableFunds() < totalPrice) {
                 return Response::lack_of_money;
-
-            if (player->getCargo(cargo->getName())->getAmount() < amount)
+            }
+            if (player->getCargo(cargo->getName())->getAmount() < amount) {
                 return Response::lack_of_cargo;
-
-            if (getAvaiableSpace() < player->getCargo(cargo->getName())->getAmount())
+            }
+            if (getAvaiableSpace() < player->getCargo(cargo->getName())->getAmount()) {
                 return Response::lack_of_space;
+            }
 
             setAvailableFunds(getAvailableFunds() - totalPrice);
             updateCargo(cargo, amount, updateMode::SELL);
@@ -218,35 +223,44 @@ void Store::printResponseMessage(Response& response)
 std::ostream& operator<<(std::ostream& out, const Store& store)
 {
     for (const auto& cargo : store.cargo_) {
-        out << "Product: " << cargo->getName() << '\n';
-        out << "Amount: " << cargo->getAmount() << '\n';
-        out << "Base price: " << cargo->getBasePrice() << '\n';
+        out << std::left
+            << "Product: " 
+            << std::setw(COLUMN_WIDTH * 2) << cargo->getName()
+            << "Amount: " 
+            << std::setw(COLUMN_WIDTH) << cargo->getAmount()
+            << "Base price: " 
+            << std::setw(COLUMN_WIDTH) << cargo->getBasePrice();
 
         if (typeid(*cargo) == typeid(Fruit)) {
             Fruit* fruit = static_cast<Fruit*>(cargo.get());
-            out << "Current price: " << fruit->getPrice() << '\n';
-            out << "Expires in: " << fruit->getTimeToSpoilLeft() << '\n';
+            out << "Current price: "
+                << std::setw(COLUMN_WIDTH) << fruit->getPrice();
+            out << "Expires in: " 
+                << std::setw(COLUMN_WIDTH) << fruit->getTimeToSpoilLeft() << '\n';
         } else if (typeid(*cargo) == typeid(Item)) {
             Item* item = static_cast<Item*>(cargo.get());
-            out << "Current price: " << item->getPrice() << '\n';
+            out << "Current price: "
+                << std::setw(COLUMN_WIDTH) << item->getPrice();
             switch (item->getRarity()) {
-                case (Item::Rarity::common):
-                    out << "Rarity: common\n";
-                    break;
-                case (Item::Rarity::epic):
-                    out << "Rarity: epic\n";
-                    break;
-                case (Item::Rarity::legendary):
-                    out << "Rarity: legendary\n";
-                    break;
-                case (Item::Rarity::rare):
-                    out << "Rarity: rare\n";
-                    break;
+            case (Item::Rarity::common):
+                out << "Rarity: common\n";
+                break;
+            case (Item::Rarity::epic):
+                out << "Rarity: epic\n";
+                break;
+            case (Item::Rarity::legendary):
+                out << "Rarity: legendary\n";
+                break;
+            case (Item::Rarity::rare):
+                out << "Rarity: rare\n";
+                break;
             }
         } else if (typeid(*cargo) == typeid(Alcohol)) {
             Alcohol* alcohol = static_cast<Alcohol*>(cargo.get());
-            out << "Strength: " << alcohol->getStrength() << '\n';
-            out << "Price: " << alcohol->getPrice() << '\n';
+            out << "Current price: "
+                << std::setw(COLUMN_WIDTH) << alcohol->getPrice();
+            out << "Strength: "
+                << std::setw(COLUMN_WIDTH) << alcohol->getStrength() << '\n';
         }
     }
     return out;
