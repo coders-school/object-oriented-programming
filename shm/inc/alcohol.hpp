@@ -15,8 +15,7 @@ public:
     Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t strength, Time* time)
         : Cargo(name, amount, basePrice, time),
           strength_(strength)
-    {
-    }
+    {}
 
     Alcohol& operator--();
     Alcohol& operator--(int);
@@ -34,6 +33,7 @@ public:
     std::unique_ptr<Cargo> clone() override;
 
     void nextDay();
+    void setAmount(const size_t amount) override;
 
 private:
     const size_t strength_;

@@ -35,6 +35,7 @@ public:
     void nextDay() override;
 
     std::unique_ptr<Cargo> clone() override;
+    void setAmount(const size_t amount) override;
 
 private:
     const Rarity rairty_;
