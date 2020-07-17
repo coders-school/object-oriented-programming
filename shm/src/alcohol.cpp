@@ -1,8 +1,10 @@
 #include "alcohol.hpp"
 
+#include <iostream>
+
 size_t Alcohol::getPrice() const
 {
-    return static_cast<size_t>(static_cast<size_t>(basePrice_) * (strength_ / MAX_STRENGTH));
+    return static_cast<size_t>(basePrice_ * strength_ / MAX_STRENGTH);
 }
 
 std::string Alcohol::getName() const
@@ -79,4 +81,9 @@ std::unique_ptr<Cargo> Alcohol::clone()
 void Alcohol::nextDay()
 {
     return;
+}
+
+void Alcohol::setAmount(const size_t amount)
+{
+    amount_ = amount;
 }
