@@ -88,7 +88,8 @@ void Game::makeAction(Action choice) {
         printShipCargo();
         break;
     case Action::StoreCargo:
-        printStoreCargo();
+        // printStoreCargo();
+        printStore(*store_.get());
         break;
     default:
         std::cout << "Wrong option!\n";
@@ -148,14 +149,13 @@ void Game::sell() {
         Cargo* cargo = player_->getCargo(cargoName);
         Store::Response response = store_->sell(cargo, cargoAmount, player_.get());
 
-        std::cout << "\n# Unit price: " 
-                  << store_->getCargo(cargo->getName())->getPrice() << '\n';
-        std::cout << "# Total price: "
-                  << store_->getCargo(cargo->getName())->getPrice() * cargoAmount << '\n';
-
         switch (response) {
         case Store::Response::done:
-            std::cout << "# Sold " << cargoAmount << " of " << cargoName << '\n';
+            std::cout << "\n# Unit price: "
+                      << store_->getCargo(cargo->getName())->getPrice() << '\n'
+                      << "# Total price: "
+                      << store_->getCargo(cargo->getName())->getPrice() * cargoAmount << '\n'
+                      << "# Sold " << cargoAmount << " of " << cargoName << '\n';
             return;
         case Store::Response::lack_of_cargo:
             std::cout << "\nThere is no enough cargo to sell!\n";
@@ -180,8 +180,8 @@ void Game::buy() {
         std::string cargoName;
         size_t cargoAmount;
 
-        std::cout << "\nChoosing cargo to buy...\n";
-        std::cout << "Cargo name: ";
+        std::cout << "\nChoosing cargo to buy...\n"
+                  << "Cargo name: ";
         std::cin >> cargoName;
         std::cout << "Cargo quantity: ";
         std::cin >> cargoAmount;
@@ -189,14 +189,13 @@ void Game::buy() {
         Cargo* cargo = store_->getCargo(cargoName);
         Store::Response response = store_->buy(cargo, cargoAmount, player_.get(), store_.get());
 
-        std::cout << "\n# Unit price: " 
-                  << player_->getCargo(cargo->getName())->getPrice() << '\n';
-        std::cout << "# Total price: " 
-                  << player_->getCargo(cargo->getName())->getPrice() * cargoAmount << '\n';
-
         switch (response) {
         case Store::Response::done:
-            std::cout << "# Bought " << cargoAmount << " of " << cargoName << '\n';
+            std::cout << "\n# Unit price: " 
+                      << player_->getCargo(cargo->getName())->getPrice() << '\n'
+                      << "# Total price: "
+                      << player_->getCargo(cargo->getName())->getPrice() * cargoAmount << '\n'
+                      << "# Bought " << cargoAmount << " of " << cargoName << '\n';
             return;
         case Store::Response::lack_of_cargo:
             std::cout << "\nThere is no enough cargo to buy!\n";
@@ -223,4 +222,9 @@ bool Game::printShipCargo() {
 bool Game::printStoreCargo() {
     std::cout << "\nCargo in store:\n";
     return store_->printStoreCargo();
+}
+
+void Game::printStore(const Store& store) {
+    std::cout << "\nCargo in store (detailed):\n";
+    std::cout << store;
 }
