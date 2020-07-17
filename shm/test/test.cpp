@@ -69,11 +69,11 @@ TEST(StoreTest, ShouldHandleBuySell)
 {
     Store store(&time);
 
-    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player), Store::Response::invalid_cargo);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT, &player, &store), Store::Response::invalid_cargo);
     store.addCargo(&apple);
-    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT * 2, &player), Store::Response::lack_of_cargo);
-    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT * 2000, &player), Store::Response::lack_of_money);
-    EXPECT_EQ(store.buy(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT * 2, &player, &store), Store::Response::lack_of_cargo);
+    EXPECT_EQ(store.buy(&apple, APPLE_AMOUNT * 2000, &player, &store), Store::Response::lack_of_money);
+    EXPECT_EQ(store.buy(&apple, APPLE_HALF_AMOUNT, &player, &store), Store::Response::done);
     EXPECT_EQ(store.sell(&apple, APPLE_HALF_AMOUNT, &player), Store::Response::done);
 }
 TEST(FruitTest, ShouldSpoil)
