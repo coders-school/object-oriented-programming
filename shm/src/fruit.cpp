@@ -88,3 +88,8 @@ std::unique_ptr<Cargo> Fruit::clone()
     std::unique_ptr<Fruit> fruit = std::make_unique<Fruit>(*this);
     return fruit;
 }
+
+void Fruit::setAmount(const size_t amount)
+{
+    amount_ = amount;
+}
