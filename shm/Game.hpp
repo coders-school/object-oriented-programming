@@ -2,6 +2,7 @@
 
 #include "Map.hpp"
 #include "Player.hpp"
+#include "Time.hpp"
 
 enum class Action {
         Exit,
@@ -18,9 +19,14 @@ private:
     size_t current_day_;
     Map* map_;
     Player* player_;
+    Time* time_;
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
+
+    void Travel();
+    Coordinates getTravelLocation();
+    void advanceTimeTraveling(size_t distance);
     void PrintOptions();
     void MakeAction(Action choice);
     void Exit();
