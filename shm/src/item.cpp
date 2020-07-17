@@ -63,3 +63,8 @@ std::unique_ptr<Cargo> Item::clone()
     std::unique_ptr<Item> item = std::make_unique<Item>(*this);
     return item;
 }
+
+void Item::setAmount(const size_t amount)
+{
+    amount_ = amount;
+}
