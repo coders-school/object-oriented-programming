@@ -8,7 +8,7 @@ Player::Player(std::shared_ptr<Ship> ship,int money,size_t space):money_(money),
 void Player::updateAvailableSpace()
 {
     size_t space=ship_->getCapacity();
-    for (const auto cargo : ship_->getAllCargos())
+    for (const auto cargo : ship_->getCargos())
     {
         space -= cargo->getAmount();
     }
