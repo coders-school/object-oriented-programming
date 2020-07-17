@@ -34,6 +34,7 @@ private:
     void sell();
     bool printShipCargo();
     bool printStoreCargo();
+    void printStore(const Store& store);
 
     size_t money_;
     size_t days_;
