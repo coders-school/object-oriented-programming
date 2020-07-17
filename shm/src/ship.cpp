@@ -69,10 +69,11 @@ void Ship::load(std::unique_ptr<Cargo> cargo) {
     }
 }
 
-void Ship::unload(Cargo* cargo) {
-    auto it = std::find_if(cargo_.begin(), cargo_.end(), [=](std::unique_ptr<Cargo>& el) {
-        return el->getName() == cargo->getName();
-    });
+void Ship::unload(std::unique_ptr<Cargo> cargo) {
+    auto it = std::find_if(cargo_.begin(), cargo_.end(),
+                           [&](std::unique_ptr<Cargo>& el) {
+                               return el->getName() == cargo->getName();
+                           });
 
     if (it != cargo_.end()) {
         size_t currentAmount = (*it)->getAmount(); 
