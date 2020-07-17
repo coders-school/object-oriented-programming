@@ -8,20 +8,20 @@
 #include "item.hpp"
 #include "store.hpp"
 
-constexpr char FRUIT_MELON[] = "Melon";
-constexpr size_t FRUIT_MELON_SPOIL_TIME = 5;
-constexpr size_t FRUIT_MELON_BASEPRICE = 10;
-constexpr size_t FRUIT_MELON_AMOUNT = 100;
+constexpr char FRUIT_NAME[] = "melon";
+constexpr size_t FRUIT_SPOIL_TIME = 5;
+constexpr size_t FRUIT_BASEPRICE = 10;
+constexpr size_t FRUIT_AMOUNT = 100;
 
-constexpr char ITEM_COFFEE[] = "Coffee";
-constexpr size_t ITEM_COFFEE_AMOUNT = 100;
-constexpr size_t ITEM_COFFEE_BASEPRICE = 70;
-constexpr Item::Rarity ITEM_COFFEE_RARITY = Item::Rarity::epic;
+constexpr char ITEM_NAME[] = "coffee";
+constexpr size_t ITEM_AMOUNT = 100;
+constexpr size_t ITEM_BASEPRICE = 30;
+constexpr Item::Rarity ITEM_RARITY = Item::Rarity::common;
 
-constexpr char ALCOHOL_BACZEWSKI[] = "Baczewski";
-constexpr size_t ALCOHOL_BACZEWSKI_BASEPRICE = 20;
-constexpr size_t ALCOHOL_BACZEWSKI_STRENGTH = 40;
-constexpr size_t ALCOHOL_BACZEWSKI_AMOUNT = 100;
+constexpr char ALCOHOL_NAME[] = "vodka";
+constexpr size_t ALCOHOL_BASEPRICE = 20;
+constexpr size_t ALCOHOL_STRENGTH = 40;
+constexpr size_t ALCOHOL_AMOUNT = 100;
 
 Store::Store(Time* time, size_t capacity,size_t availableFunds) :
     capacity_(capacity),    
@@ -41,12 +41,12 @@ Store::~Store()
 //-----------------------------------------------------------------------------------
 // <summary> The buy method allows Player to purchase cargo in store
 //-----------------------------------------------------------------------------------
-Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player)
+Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player, Store* store)
 {
     if (cargo) {
         if (getCargo(cargo->getName()) != nullptr) {
-            size_t totalPrice = getCargo(cargo->getName())->getBasePrice() * amount;
-
+            size_t totalPrice = store->getCargo(cargo->getName())->getPrice() * amount;
+    
             if (player->getMoney() < totalPrice)
                 return Response::lack_of_money;
 
@@ -58,6 +58,9 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player)
 
             setAvailableFunds(getAvailableFunds() + totalPrice);
             updateCargo(cargo, amount, updateMode::BUY);
+
+            std::cout << "\n# Unit price: " << store->getCargo(cargo->getName())->getPrice() << '\n';
+            std::cout << "# Total price: " << totalPrice << '\n';
 
             std::unique_ptr<Cargo> purchase = cargo->clone();
             purchase->setAmount(amount);
@@ -91,7 +94,12 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player)
             setAvailableFunds(getAvailableFunds() - totalPrice);
             updateCargo(cargo, amount, updateMode::SELL);
 
-            player->sellCargo(cargo, totalPrice);
+            std::cout << "\n# Unit price: " << player->getCargo(cargo->getName())->getPrice() << '\n';
+            std::cout << "# Total price: " << totalPrice << '\n';
+
+            std::unique_ptr<Cargo> sale = cargo->clone();
+            sale->setAmount(amount);
+            player->sellCargo(std::move(sale), totalPrice);
 
             return Response::done;
         }
@@ -139,6 +147,33 @@ size_t Store::getAvaiableSpace() const
 
 /*public*/
 //-----------------------------------------------------------------------------------
+// <summary> Checks the Store's avaiable funds
+//-----------------------------------------------------------------------------------
+size_t Store::getAvailableFunds() const 
+{
+    return availableFunds_;
+}
+
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> Sets the Store's avaiable capacity
+//-----------------------------------------------------------------------------------
+void Store::setCapacity(const size_t amount)
+{
+    capacity_ = amount;
+}
+
+/*public*/
+//-----------------------------------------------------------------------------------
+// <summary> Sets the Store's avaiable funds
+//-----------------------------------------------------------------------------------
+void Store::setAvailableFunds(const size_t amount)
+{
+    availableFunds_ = amount;
+}
+
+/*public*/
+//-----------------------------------------------------------------------------------
 // <summary> Prints out the cargo vector content
 //-----------------------------------------------------------------------------------
 void Store::printCargo()
@@ -158,12 +193,10 @@ void Store::updateCargo(Cargo* cargo, size_t amount, updateMode mode)
             auto it = std::find_if(cargo_.begin(), cargo_.end(),
                                    [=](std::unique_ptr<Cargo>& el) { return el->getName() == cargo->getName(); });
             cargo_.erase(it);
-
         } else {
             size_t tmpAmount = getCargo(cargo->getName())->getAmount() - amount;
             getCargo(cargo->getName())->setAmount(tmpAmount);
         }
-
     } else if (mode == SELL) {
         size_t tmpAmount = getCargo(cargo->getName())->getAmount() + amount;
         getCargo(cargo->getName())->setAmount(tmpAmount);
@@ -238,16 +271,16 @@ void Store::nextDay()
 
 void Store::generateCargo() 
 {
-    Fruit melon(FRUIT_MELON, FRUIT_MELON_AMOUNT, FRUIT_MELON_BASEPRICE, FRUIT_MELON_SPOIL_TIME, time_);
-    addCargo(&melon);
+    Fruit fruit(FRUIT_NAME, FRUIT_AMOUNT, FRUIT_BASEPRICE, FRUIT_SPOIL_TIME, time_);
+    addCargo(&fruit);
 
-    Item coffee(ITEM_COFFEE, ITEM_COFFEE_AMOUNT, ITEM_COFFEE_BASEPRICE, ITEM_COFFEE_RARITY, time_);
-    addCargo(&coffee);
+    Item item(ITEM_NAME, ITEM_AMOUNT, ITEM_BASEPRICE, ITEM_RARITY, time_);
+    addCargo(&item);
 
-    Alcohol baczewski(ALCOHOL_BACZEWSKI, 
-                      ALCOHOL_BACZEWSKI_AMOUNT, 
-                      ALCOHOL_BACZEWSKI_BASEPRICE, 
-                      ALCOHOL_BACZEWSKI_STRENGTH, 
+    Alcohol alcohol(ALCOHOL_NAME, 
+                      ALCOHOL_AMOUNT, 
+                      ALCOHOL_BASEPRICE, 
+                      ALCOHOL_STRENGTH, 
                       time_);
-    addCargo(&baczewski);
+    addCargo(&alcohol);
 }
