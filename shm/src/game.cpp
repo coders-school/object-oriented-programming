@@ -97,50 +97,45 @@ void Game::makeAction(Action choice) {
 }
 
 void Game::travel() {
-    while (true) {
-        std::cout << "\n";
-        map_->printMap();
-        std::cout << "\nYou are at island: ("
-                  << map_->getCurrentPosition()->getPosition().getPositionX() << ", "
-                  << map_->getCurrentPosition()->getPosition().getPositionY() << ")\n";
+    map_->printMap();
+    std::cout << "\nYou are at island: ("
+                << map_->getCurrentPosition()->getPosition().getPositionX() << ", "
+                << map_->getCurrentPosition()->getPosition().getPositionY() << ")\n";
 
-        std::cout << "Choosing island to travel to...\n";
-        size_t posX, posY;
-        std::cout << "Coordinate X: ";
-        std::cin >> posX;
-        std::cout << "Coordinate Y: ";
-        std::cin >> posY;
-        Island* island = map_->getIsland(Coordinates(posX, posY));
-        if (island != nullptr) {
-            const size_t distance = map_->getDistanceToIsland(island);
-            const size_t playerSpeed = player_->getSpeed();
-            const size_t travelTime = (distance * 10) / playerSpeed;
-     
-            std::cout << "# distance: " << distance << "\n";
-            std::cout << "# at speed: " << playerSpeed << "\n";
-            
-            map_->travel(island);
-            std::cout << "You have reached the island at ("
-                      << map_->getCurrentPosition()->getPosition().getPositionX() << ", "
-                      << map_->getCurrentPosition()->getPosition().getPositionY() << ")\n";
-            std::cout << "# travel time: " << travelTime << "\n";
+    std::cout << "Choosing island to travel to...\n";
+    size_t posX, posY;
+    std::cout << "Coordinate X: ";
+    std::cin >> posX;
+    std::cout << "Coordinate Y: ";
+    std::cin >> posY;
 
-            for (size_t i = 0; i < travelTime; i++) {
-                ++*time_;
-            }
-            current_day_ = time_->getElapsedTime();
-            break;
-        } else {
-            std::cout << "\nWrong coordinates!\n";
+    Island* island = map_->getIsland(Coordinates(posX, posY));
+    if (island != nullptr) {
+        const size_t distance = map_->getDistanceToIsland(island);
+        const size_t playerSpeed = player_->getSpeed();
+        const size_t travelTime = (distance * 10) / playerSpeed;
+    
+        std::cout << "# distance: " << distance << "\n";
+        std::cout << "# at speed: " << playerSpeed << "\n";
+        
+        map_->travel(island);
+        std::cout << "You have reached the island at ("
+                    << map_->getCurrentPosition()->getPosition().getPositionX() << ", "
+                    << map_->getCurrentPosition()->getPosition().getPositionY() << ")\n";
+        std::cout << "# travel time: " << travelTime << "\n";
+
+        for (size_t i = 0; i < travelTime; i++) {
+            ++*time_;
         }
+        current_day_ = time_->getElapsedTime();
+    } else {
+        std::cout << "\nWrong coordinates!\n";
     }
 }
 
 void Game::sell() {
-    while (true) {
-        std::cout << "\nAvailable cargo to sell:\n";
-        player_->printShipCargo();
-
+    std::cout << "\nAvailable cargo to sell:\n";
+    if (player_->printShipCargo()) {
         std::string cargoName;
         size_t cargoAmount;
 
@@ -159,25 +154,24 @@ void Game::sell() {
             return;
         case Store::Response::lack_of_cargo:
             std::cout << "\nThere is no enough cargo to sell!\n";
-            break;
+            return;
         case Store::Response::lack_of_space:
             std::cout << "\nThere is no enough space in store!\n";
-            break;
+            return;
         case Store::Response::invalid_cargo:
             std::cout << "\nThere is no such cargo!\n";
-            break;
+            return;
         case Store::Response::lack_of_money:
             std::cout << "\nYou do not have enough money!\n";
-            break;
+            return;
         }
     }
+    return;
 }
 
 void Game::buy() {
-    while (true) {
-        std::cout << "\nAvailable cargo to buy:\n";
-        store_->printCargo();
-
+    std::cout << "\nAvailable cargo to buy:\n";
+    if (store_->printStoreCargo()) {
         std::string cargoName;
         size_t cargoAmount;
 
@@ -196,26 +190,27 @@ void Game::buy() {
             return;
         case Store::Response::lack_of_cargo:
             std::cout << "\nThere is no enough cargo to buy!\n";
-            break;
+            return;
         case Store::Response::lack_of_space:
             std::cout << "\nYou do not have enough space on your ship!\n";
-            break;
+            return;
         case Store::Response::invalid_cargo:
             std::cout << "\nThere is no such cargo!\n";
-            break;
+            return;
         case Store::Response::lack_of_money:
             std::cout << "\nYou do not have enough money!\n";
-            break;
+            return;
         }
     }
+    return;
 }
 
-void Game::printShipCargo() {
+bool Game::printShipCargo() {
     std::cout << "\nCargo on your ship:\n";
-    player_->printShipCargo();
+    return player_->printShipCargo();
 }
 
-void Game::printStoreCargo() {
+bool Game::printStoreCargo() {
     std::cout << "\nCargo in store:\n";
-    store_->printCargo();
+    return store_->printStoreCargo();
 }
