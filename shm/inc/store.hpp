@@ -21,13 +21,13 @@ public:
           size_t availableFunds = DEFAULT_FUNDS);
     ~Store() override;
 
-    Response buy(Cargo* cargo, size_t amount, Player* player);
+    Response buy(Cargo* cargo, size_t amount, Player* player, Store* store);
     Response sell(Cargo* cargo, size_t amount, Player* player);
     bool addCargo(Cargo* cargo);
     size_t getAvaiableSpace() const;
-    size_t getAvailableFunds() const { return availableFunds_; };
-    void setCapacity(const size_t amount) { capacity_ = amount; }
-    void setAvailableFunds(const size_t amount) { availableFunds_ = amount; }
+    size_t getAvailableFunds() const;
+    void setCapacity(const size_t amount);
+    void setAvailableFunds(const size_t amount);
 
     Cargo* getCargo(const std::string& name);
     void printCargo();
