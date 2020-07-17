@@ -31,7 +31,7 @@ Ship& Ship::operator-=(uint16_t retireesCrewMembers) {
 uint16_t Ship::getId() const {
     return id_;
 }
-std::string Ship::getName() {
+std::string Ship::getName() const {
     return name_;
 }
 uint16_t Ship::getSpeed() const {
@@ -42,4 +42,10 @@ uint16_t Ship::getMaxCrew() const {
 }
 uint16_t Ship::getCapacity() const {
     return capacity_;
+}
+Cargo* Ship::getCargo(uint16_t index) const {
+    return cargos_[index];
+}
+std::vector<Cargo*> Ship::getCargos() const {
+    return cargos_;
 }
