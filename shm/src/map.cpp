@@ -47,7 +47,7 @@ Island* Map::getIsland(const Coordinates& coordinates) {
 }
 
 void Map::printMap() {
-    std::cout << "Number of Islands: " << vectorOfIslands_.size() << "\n";
+    std::cout << "\nNumber of Islands: " << vectorOfIslands_.size() << "\n";
     for (const auto &el : vectorOfIslands_) {
         std::cout << "Coordinate (X, Y): "
                   << "(" << el.getPosition().getPositionX() << ", "

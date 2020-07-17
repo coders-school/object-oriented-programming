@@ -30,7 +30,7 @@ public:
     void setAvailableFunds(const size_t amount);
 
     Cargo* getCargo(const std::string& name);
-    void printCargo();
+    bool printStoreCargo();
     void printResponseMessage(Response& response);
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
     void nextDay() override;

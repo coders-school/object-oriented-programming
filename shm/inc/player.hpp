@@ -13,7 +13,7 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const;
     Cargo* getCargo(const std::string& name) const;
 
-    void printShipCargo();
+    bool printShipCargo();
 
     void payCrew(size_t money) override;
 

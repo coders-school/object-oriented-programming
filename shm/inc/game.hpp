@@ -32,8 +32,8 @@ private:
     void travel();
     void buy();
     void sell();
-    void printShipCargo();
-    void printStoreCargo();
+    bool printShipCargo();
+    bool printStoreCargo();
 
     size_t money_;
     size_t days_;

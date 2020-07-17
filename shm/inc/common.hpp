@@ -8,7 +8,7 @@
 
 class Common {
 public:
-    static void printCargo(const std::vector<std::unique_ptr<Cargo>>& vecOfCargo);
+    static bool printCargo(const std::vector<std::unique_ptr<Cargo>>& vecOfCargo);
     static Cargo* getCargo(const std::string& name,
                            const std::vector<std::unique_ptr<Cargo>>& vecOfCargo);
     static size_t getAvailableSpace(size_t capacity,

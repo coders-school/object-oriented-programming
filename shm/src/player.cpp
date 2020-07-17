@@ -10,8 +10,8 @@ Cargo* Player::getCargo(const std::string& name) const {
     return ship_->getCargo(name);
 }
 
-void Player::printShipCargo() {
-    ship_->printCargo();
+bool Player::printShipCargo() {
+    return ship_->printShipCargo();
 }
 
 void Player::payCrew(size_t money) {

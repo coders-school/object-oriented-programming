@@ -85,8 +85,8 @@ void Ship::unload(std::unique_ptr<Cargo> cargo) {
     }
 }
 
-void Ship::printCargo() {
-    Common::printCargo(cargo_);
+bool Ship::printShipCargo() {
+    return Common::printCargo(cargo_);
 }
 void Ship::nextDay() {
     if (delegate_) {

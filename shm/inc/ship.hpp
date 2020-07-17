@@ -34,7 +34,7 @@ public:
     Cargo* getCargo(const std::string& name);
     size_t getAvailableSpace() const;
 
-    void printCargo();
+    bool printShipCargo();
 
     void load(std::unique_ptr<Cargo> cargo);
     void unload(std::unique_ptr<Cargo> cargo);

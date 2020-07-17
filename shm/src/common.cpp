@@ -9,7 +9,7 @@
 //-----------------------------------------------------------------------------------
 // <summary> This method prints out vector of cargo content
 //-----------------------------------------------------------------------------------
-void Common::printCargo(const std::vector<std::unique_ptr<Cargo>>& vecOfCargo) {
+bool Common::printCargo(const std::vector<std::unique_ptr<Cargo>>& vecOfCargo) {
     if (!vecOfCargo.empty()) {
         for (auto& el : vecOfCargo) {
             std::cout << "|Name| " << std::setw(15) << std::left << el->getName()
@@ -17,9 +17,10 @@ void Common::printCargo(const std::vector<std::unique_ptr<Cargo>>& vecOfCargo) {
                     << "|BasePrice| " << std::setw(15) << std::left
                     << el->getBasePrice() << "\n";
         }
-    } else {
-        std::cout << "* there is no cargo *" << '\n';
+        return true;
     }
+    std::cout << "* there is no cargo *" << '\n';
+    return false;
 }
 
 /*static*/ /*public*/

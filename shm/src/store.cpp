@@ -176,9 +176,9 @@ void Store::setAvailableFunds(const size_t amount)
 //-----------------------------------------------------------------------------------
 // <summary> Prints out the cargo vector content
 //-----------------------------------------------------------------------------------
-void Store::printCargo()
+bool Store::printStoreCargo()
 {
-    Common::printCargo(cargo_);
+    return Common::printCargo(cargo_);
 }
 
 /*private*/
