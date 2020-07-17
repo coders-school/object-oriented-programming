@@ -148,6 +148,11 @@ void Game::sell() {
         Cargo* cargo = player_->getCargo(cargoName);
         Store::Response response = store_->sell(cargo, cargoAmount, player_.get());
 
+        std::cout << "\n# Unit price: " 
+                  << store_->getCargo(cargo->getName())->getPrice() << '\n';
+        std::cout << "# Total price: "
+                  << store_->getCargo(cargo->getName())->getPrice() * cargoAmount << '\n';
+
         switch (response) {
         case Store::Response::done:
             std::cout << "# Sold " << cargoAmount << " of " << cargoName << '\n';
@@ -183,7 +188,12 @@ void Game::buy() {
 
         Cargo* cargo = store_->getCargo(cargoName);
         Store::Response response = store_->buy(cargo, cargoAmount, player_.get(), store_.get());
-        
+
+        std::cout << "\n# Unit price: " 
+                  << player_->getCargo(cargo->getName())->getPrice() << '\n';
+        std::cout << "# Total price: " 
+                  << player_->getCargo(cargo->getName())->getPrice() * cargoAmount << '\n';
+
         switch (response) {
         case Store::Response::done:
             std::cout << "# Bought " << cargoAmount << " of " << cargoName << '\n';
