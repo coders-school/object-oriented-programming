@@ -171,7 +171,6 @@ void Game::sell() {
             return;
         }
     }
-    return;
 }
 
 void Game::buy() {
@@ -211,7 +210,6 @@ void Game::buy() {
             return;
         }
     }
-    return;
 }
 
 bool Game::printShipCargo() {
