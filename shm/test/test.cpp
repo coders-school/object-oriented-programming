@@ -62,8 +62,9 @@ TEST(PlayerTest, ShouldPayCrew)
 }
 TEST(TimeTest, ShouldTimePass)
 {
+    size_t elapsedTime = time.getElapsedTime();
     ++time;
-    EXPECT_EQ(time.getElapsedTime(), 2);
+    EXPECT_EQ(time.getElapsedTime(), elapsedTime + 1);
 }
 TEST(StoreTest, ShouldHandleBuySell)
 {
