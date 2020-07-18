@@ -88,7 +88,6 @@ void Game::makeAction(Action choice) {
         printShipCargo();
         break;
     case Action::StoreCargo:
-        // printStoreCargo();
         printStore(*store_.get());
         break;
     default:
@@ -215,11 +214,6 @@ void Game::buy() {
 bool Game::printShipCargo() {
     std::cout << "\nCargo on your ship:\n";
     return player_->printShipCargo();
-}
-
-bool Game::printStoreCargo() {
-    std::cout << "\nCargo in store:\n";
-    return store_->printStoreCargo();
 }
 
 void Game::printStore(const Store& store) {

@@ -33,7 +33,6 @@ private:
     void buy();
     void sell();
     bool printShipCargo();
-    bool printStoreCargo();
     void printStore(const Store& store);
 
     size_t money_;
