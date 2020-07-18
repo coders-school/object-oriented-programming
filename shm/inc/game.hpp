@@ -1,17 +1,20 @@
 #pragma once
 
+#include <memory>
+
 #include "map.hpp"
 #include "player.hpp"
 #include "time.hpp"
 #include "store.hpp"
-
-#include <memory>
 
 class Game {
 public:
     Game(size_t money, size_t days, size_t final_goal);
     ~Game() = default;
 
+    void startGame();
+
+private:    
     enum class Action { Travel = 1,
                         Sell = 2,
                         Buy = 3,
@@ -19,9 +22,6 @@ public:
                         StoreCargo = 5,
                         Exit = 0 };
 
-    void startGame();
-
-private:
     bool checkWinCondition() const;  
     bool checkLooseCodition() const;
     void printInfo();
