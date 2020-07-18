@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include <cstddef>
 
 class Coordinates {
 public:
