@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include <memory>
+#include <string>
 #include <vector>
 
 #include "cargo.hpp"
@@ -22,7 +22,7 @@ public:
     Ship& operator+=(const size_t crew);
 
     void setName(const std::string& name);
-    void setDelegate(Delegate *delegate);
+    void setDelegate(Delegate* delegate);
 
     size_t getCapacity() const;
     size_t getMaxCrew() const;
@@ -38,6 +38,7 @@ public:
 
     void load(std::unique_ptr<Cargo> cargo);
     void unload(std::unique_ptr<Cargo> cargo);
+    void nextDay() override;
 
 private:
     size_t capacity_;
@@ -49,6 +50,4 @@ private:
     std::vector<std::unique_ptr<Cargo>> cargo_;
     Time* time_;
     Delegate* delegate_;
-
-    void nextDay() override;
 };
