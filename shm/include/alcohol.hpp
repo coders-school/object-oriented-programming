@@ -11,6 +11,9 @@ public:
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo& other) const override;
+    std::shared_ptr<Cargo> getShared() const override {
+        return std::make_shared<Alcohol>(Alcohol(*this));
+    };
     // override from Observer
     void nextDay() override {}
 

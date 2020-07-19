@@ -23,7 +23,7 @@ void Buy::execute(Player* player) {
         if (quantity == 0) {
             return;
         }
-        Cargo* cargo = store->getCargo(position);
+        auto cargo = store->getCargo(position)->getShared();
         if (!cargo) {
             std::cout << "Wrong position or cargo does not exist";
             continue;
@@ -32,7 +32,7 @@ void Buy::execute(Player* player) {
         char answer = 'y';
         while (true) {
             std::cout << "The price is " << cargo->getPrice() * quantity
-                      << "Are you sure want to buy it? [y/ other key]";
+                      << " Are you sure want to buy it? [y/ other key]";
             std::cin >> answer;
             if (std::tolower(answer) == 'y') {
                 break;
@@ -41,9 +41,9 @@ void Buy::execute(Player* player) {
             }
         }
 
-        switch (store->buy(cargo, quantity, player)) {
+        switch (store->buy(cargo.get(), quantity, player)) {
         case Store::Response::done:
-            std::cout << "Good one! You have bought " << cargo << " in quantity "
+	  std::cout << "Good one! You have bought " << cargo->getName() << " in quantity "
                       << quantity << "\n";
             return;
 

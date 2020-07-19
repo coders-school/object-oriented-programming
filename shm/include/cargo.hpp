@@ -1,7 +1,7 @@
 #pragma once
 
+#include <memory>
 #include <string>
-
 #include "observer.hpp"
 
 class Cargo : public Observer {
@@ -16,6 +16,7 @@ public:
     virtual std::string getName() const = 0;
     virtual size_t getAmount() const = 0;
     virtual size_t getBasePrice() const = 0;
+    virtual std::shared_ptr<Cargo> getShared() const = 0;
 
 protected:
     std::string name_;

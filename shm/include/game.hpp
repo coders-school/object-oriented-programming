@@ -14,7 +14,7 @@
 class Game {
 public:
     enum class Action {
-        Buy,
+        Buy = 1,
         Sell,
         Travel,
         PrintCargo,

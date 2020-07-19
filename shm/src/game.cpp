@@ -17,6 +17,27 @@ Game::Game(size_t money, size_t days, size_t final_goal)
     print_cargo_command_ = std::make_unique<PrintCargo>();
 }
 
+void Game::startGame() {
+    while (days_ > time_->getElapsedTime()) {
+        printMenu();
+        printOptions();
+        size_t action;
+        std::cin >> action;
+        if (action == 0) {
+            std::cout << "You are exiting the game. Goodbye!\n";
+            return;
+        }
+        makeAction(static_cast<Action>(action));
+        if (checkWinCondition()) {
+            printWinScreen();
+            return;
+        } else if (checkLoseCondition()) {
+            printLooseScreen();
+            return;
+        }
+    }
+}
+
 void Game::makeAction(Action action) {
     switch (action) {
     case Action::Buy:
@@ -56,7 +77,8 @@ void Game::printOptions() {
               << " 1) Buy \n"
               << " 2) Sell \n"
               << " 3) Travel \n"
-              << " 4) Print Cargo \n";
+              << " 4) Print Cargo \n"
+              << " 0) Exit \n";
 }
 
 void Game::printWinScreen() {

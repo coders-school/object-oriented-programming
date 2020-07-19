@@ -27,8 +27,8 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (amount > player->getAvailableSpace()) {
         return Response::lack_of_space;
     }
-
-    auto toBuy = findStock(cargo);
+    auto shared = cargo->getShared();
+    auto toBuy = findStock(shared.get());
 
     if (toBuy == stock_.end() || (*toBuy)->getAmount() < amount) {
         return Response::lack_of_cargo;
@@ -36,16 +36,15 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if ((*toBuy)->getPrice() > player->getMoney()) {
         return Response::lack_of_money;
     }
-
-    unload(cargo, amount);
-    player->loadShip(std::shared_ptr<Cargo>(cargo));
-    player->setMoney(player->getMoney() - cargo->getPrice());
+    unload(shared.get(), amount);
+    player->loadShip(shared);
+    player->setMoney(player->getMoney() - shared.get()->getPrice());
 
     return Response::done;
 }
 
 Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
-    load(std::shared_ptr<Cargo>(cargo), amount);
+    load(cargo->getShared(), amount);
     player->unloadShip(cargo, amount);
     player->setMoney(player->getMoney() + cargo->getPrice());
 
@@ -100,7 +99,6 @@ void Store::nextDay() {
         } else {
             *cargo_ptr -= distrib2(gen);
         }
-
     }
 }
 

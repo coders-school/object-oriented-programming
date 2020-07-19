@@ -20,7 +20,7 @@ void Sell::execute(Player* player) {
         if (quantity == 0) {
             return;
         }
-        Cargo* cargo = store->getCargo(position);
+        auto cargo = store->getCargo(position);
         if (!cargo) {
             std::cout << "Wrong position or cargo does not exist";
             continue;
@@ -29,7 +29,7 @@ void Sell::execute(Player* player) {
         char answer = 'y';
         while (true) {
             std::cout << "The price is " << cargo->getPrice() * quantity
-                      << "Are you sure want to sell it? [y/ other key]";
+                      << " Are you sure want to sell it? [y/ other key] ";
             std::cin >> answer;
             if (std::tolower(answer) == 'y') {
                 break;
@@ -40,7 +40,7 @@ void Sell::execute(Player* player) {
 
         switch (store->sell(cargo, quantity, player)) {
         case Store::Response::done:
-            std::cout << "Good one! You have sell " << cargo << " in quantity "
+	  std::cout << "Good one! You have sell " << cargo->getName() << " in quantity "
                       << quantity << "\n";
             return;
 
