@@ -52,6 +52,7 @@ void Game::gameLoop() {
     }
 }
 
+//static
 void Game::inputValidator() {
     if (std::cin.fail()) {
         std::cin.clear();
