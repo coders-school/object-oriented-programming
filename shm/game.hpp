@@ -14,12 +14,15 @@ public:
         buy = 2,
         sell = 3,
         hireCrew = 4,
-        printCargo = 5
+        printCargo = 5,
+        changeShipsName = 6,
+        playMiniGame = 7
     };
 
     Game(size_t money, size_t days, size_t finalGoal);
 
     void startGame();
+    static void inputValidator();
 
 private:
     size_t money_ {0};
@@ -32,7 +35,6 @@ private:
     std::shared_ptr<Map> map_;
 
     void gameLoop();
-    void inputValidator();
     void printTrail(char sign);
     void printStars(size_t amountOfGalaxy);
     void printHeader();
@@ -57,5 +59,7 @@ private:
     void fireSailors();
     void hireSailors();
     bool isCargoCorrect(std::shared_ptr<Cargo> cargo, std::string& name, size_t amount);
+    void changeShipsName();
+    void playMiniGame();
 
 };

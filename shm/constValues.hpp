@@ -2,6 +2,8 @@
 
 namespace constValues {
 
+    constexpr size_t pointsToGetMoneyInDiceGame = 150;
+    constexpr size_t moneyForWinInDiceGame = 100;
     constexpr size_t dailySalary = 1;
     constexpr size_t hiringCost = 5;
     //consts for Store generator
