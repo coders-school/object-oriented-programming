@@ -4,6 +4,10 @@
 #include <random>
 #include <string>
 
+constexpr size_t numOfIslands = 10;
+constexpr uint16_t mapX = 100;
+constexpr uint16_t mapY = 100;
+
 Map::Map() {
     islands_.reserve(numOfIslands);
     creaIsland(numOfIslands);
@@ -16,8 +20,8 @@ void Map::creaIsland(size_t numb) {
     std::uniform_int_distribution<> yGener(0, mapY);
 
     for (size_t i = 0; i < numOfIslands; i++) {
-        int newX;
-        int newY;
+        uint16_t newX;
+        uint16_t newY;
         do {
             newX = xGener(gen);
             newY = yGener(gen);
