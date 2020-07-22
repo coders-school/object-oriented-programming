@@ -1,7 +1,7 @@
 #include "Fruit.hpp"
 
-Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice)
-    : Cargo(name, amount, basePrice) {
+Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t daysToRot)
+    : Cargo(name, amount, basePrice), daysToRot_(daysToRot) {
 }
 
 Fruit& Fruit::operator--() {

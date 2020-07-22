@@ -1,5 +1,9 @@
-#include "Player.hpp" 
+#include "Store.hpp"
 
-int main() { 
-    return 0; 
+int main() {
+    system("clear");
+    
+    
+
+    return 0;
 }

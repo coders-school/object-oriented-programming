@@ -8,7 +8,7 @@ private:
     const size_t expirationDays_{10};
 
 public:
-    Fruit(const std::string& name, size_t amount, size_t basePrice);
+    Fruit(const std::string& name, size_t amount, size_t basePrice, size_t daysToRot);
 
     //override from Observer
     void nextDay() override { --(*this); }
