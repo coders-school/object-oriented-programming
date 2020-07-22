@@ -13,7 +13,7 @@ void Ship::setName(const std::string& name) {
 
 Ship& Ship::operator+=(uint16_t newCrewMembers) {
     if (crew_ + newCrewMembers > maxCrew_) {
-        std::cerr << "YThe number of crew members cannot be greater than: " << maxCrew_ << "!" << '\n';
+        std::cerr << "The number of crew members cannot be greater than: " << maxCrew_ << "!" << '\n';
         return *this;
     }
     crew_ += newCrewMembers;
@@ -31,7 +31,7 @@ Ship& Ship::operator-=(uint16_t retireesCrewMembers) {
 uint16_t Ship::getId() const {
     return id_;
 }
-std::string Ship::getName() {
+std::string Ship::getName() const {
     return name_;
 }
 uint16_t Ship::getSpeed() const {
@@ -43,5 +43,9 @@ uint16_t Ship::getMaxCrew() const {
 uint16_t Ship::getCapacity() const {
     return capacity_;
 }
- Cargo* Ship::getCargo(int index) const { return cargos_[index]; }
- std::vector<Cargo*> Ship::getCargos() const { return cargos_;}
+Cargo* Ship::getCargo(uint16_t index) const {
+    return cargos_[index];
+}
+std::vector<Cargo*> Ship::getCargos() const {
+    return cargos_;
+}
