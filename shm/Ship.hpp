@@ -36,7 +36,7 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
-    Cargo* getCargo(size_t index) const;
+    std::shared_ptr<Cargo> getCargo(size_t index) const;
     const std::vector<std::shared_ptr<Cargo>>& getAllCargos() const { return cargo_; }
 
     Ship& operator-=(const size_t crew);

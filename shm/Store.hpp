@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include "Cargo.hpp"
 #include "Observer.hpp"
 #include "Player.hpp"
@@ -48,12 +50,17 @@ private:
     Cargos generateAlcos() const;
     Cargos generateItems() const;
     Cargos makeStock(const Cargos& fruits, const Cargos& alcos, const Cargos& items);
+    std::shared_ptr<Cargo> makeCargoToBuy(const std::shared_ptr<Cargo>& cargo, size_t amount) const;
+    void removeFromStore(std::shared_ptr<Cargo> cargo, size_t amount);
 
 public:
     Store(std::shared_ptr<Time>& time);
-    Response buy(Cargo* cargo, size_t amount, Player* player);
-    Response sell(Cargo* cargo, size_t amount, Player* player);
+    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
+    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
+    std::shared_ptr<Cargo> getCargo(size_t index) const;
 
     //Override from Observer
     void nextDay() override;
+
+    friend std::ostream& operator<<(std::ostream& os, const Store& store);
 };

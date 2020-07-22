@@ -16,11 +16,11 @@ Ship::Ship(int maxCrew, int speed, size_t id, std::shared_ptr<Time>& time)
     : Ship(0, maxCrew, speed, "", id, time) {
 }
 
-Cargo* Ship::getCargo(size_t index) const {
+std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
     if (index > cargo_.size() || index == 0) {
         return nullptr;
     }
-    return cargo_[index - 1].get();
+    return cargo_[index - 1];
 }
 
 Ship& Ship::operator-=(const size_t crew) {
