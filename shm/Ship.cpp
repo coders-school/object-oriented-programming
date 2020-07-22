@@ -1,5 +1,6 @@
 #include "Ship.hpp"
 
+#include <iostream>
 #include <algorithm>
 
 Ship::Ship()
@@ -44,11 +45,19 @@ void Ship::load(const std::shared_ptr<Cargo>& cargo) {
     cargo_.push_back(cargo);
 }
 
-void Ship::unload(Cargo* cargo) {
-    if (!cargo->getAmount()) {
-        std::remove_if(cargo_.begin(), cargo_.end(), [cargo](const auto& ptr) {
-            return ptr.get() == cargo;
-        });
+void Ship::unload(const std::shared_ptr<Cargo>& cargo, size_t amount) {
+    if (amount == cargo->getAmount()) {
+        cargo_.erase(std::remove(begin(cargo_), end(cargo_), cargo), cargo_.end());
+    } else {
+        *cargo -= amount;
+    }
+}
+
+void Ship::print() const {
+    size_t i = 1;
+    for(const auto& el : cargo_) {
+        std::cout << i << ". " <<  el->getName() << " | Amount: " << el->getAmount() << " Price: " << el->getPrice() << "\n";
+        i++; 
     }
 }
 
@@ -56,5 +65,5 @@ void Ship::nextDay() {
     if (delegate_) {
         delegate_->payCrew(crew_ * salaryPerWorker);
     }
-    std::for_each(cargo_.begin(), cargo_.end(), [](const auto& el){ el->nextDay(); });
+    std::for_each(cargo_.begin(), cargo_.end(), [](const auto& el) { el->nextDay(); });
 }

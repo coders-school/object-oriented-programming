@@ -43,7 +43,9 @@ public:
     Ship& operator+=(const size_t crew);
 
     void load(const std::shared_ptr<Cargo>& cargo);
-    void unload(Cargo* cargo);
+    void unload(const std::shared_ptr<Cargo>& cargo, size_t amount);
+
+    void print() const;
 
     //Override from Observer
     void nextDay() override;
