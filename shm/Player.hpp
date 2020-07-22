@@ -8,14 +8,14 @@
 
 class Player : public Delegate {
 private:
-    std::unique_ptr<Ship> ship_;
+    std::shared_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
 
     size_t countAvailableSpace();
 
 public:
-    Player(std::unique_ptr<Ship>& ship, size_t money);
+    Player(std::shared_ptr<Ship>& ship, size_t money);
 
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };

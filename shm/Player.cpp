@@ -2,8 +2,8 @@
 
 #include <numeric>
 
-Player::Player(std::unique_ptr<Ship>& ship, size_t money) {
-    ship_ = std::move(ship);  //it might be good to let the Player class to construct Ship for itself
+Player::Player(std::shared_ptr<Ship>& ship, size_t money) {
+    ship_ = ship; /*std::move(ship);*/  //it might be good to let the Player class to construct Ship for itself
     ship_->setDelegate(this);
     money_ = money;
     availableSpace_ = countAvailableSpace();
@@ -38,7 +38,7 @@ void Player::purchaseCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t p
 }
 
 void Player::sellCargo(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
-    ship_->unload(cargo.get());
+    ship_->unload(cargo, amount);
     money_ += price;
     availableSpace_ += amount;
 }
