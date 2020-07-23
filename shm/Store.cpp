@@ -25,9 +25,13 @@ Cargos Store::generateFruits() const {
     Cargos result;
     result.reserve(marketSection);
 
-    for (size_t i = 0; i < marketSection; i++) {
+    size_t i = 0;
+    while(i < marketSection) {
         Fruit fruit(fruitNames[generateRandom(0, 5)], generateRandom(1, 20), generateRandom(10, 30), generateRandom(1, 10));
-        result.emplace_back(std::make_shared<Fruit>(fruit));
+        if(std::none_of(begin(result), end(result),[&fruit](const auto& ptr){ return ptr->getName() == fruit.getName();})) {
+            result.emplace_back(std::make_shared<Fruit>(fruit));
+            i++;
+        }
     }
     result.shrink_to_fit();
 
@@ -38,9 +42,13 @@ Cargos Store::generateAlcos() const {
     Cargos result;
     result.reserve(marketSection);
 
-    for (size_t i = 0; i < marketSection; i++) {
+    size_t i = 0;
+    while(i < marketSection) {
         Alcohol alco(alcoNames[generateRandom(0, 5)], generateRandom(1, 5), generateRandom(30, 100), generateRandom(40, 96));
-        result.emplace_back(std::make_shared<Alcohol>(alco));
+        if(std::none_of(begin(result), end(result),[&alco](const auto& ptr){ return ptr->getName() == alco.getName();})) {
+            result.emplace_back(std::make_shared<Alcohol>(alco));
+            i++;
+        }
     }
     result.shrink_to_fit();
 
@@ -51,9 +59,13 @@ Cargos Store::generateItems() const {
     Cargos result;
     result.reserve(marketSection);
 
-    for (size_t i = 0; i < marketSection; i++) {
+    size_t i = 0;
+    while(i < marketSection) {
         Item item(itemNames[generateRandom(0, 5)], generateRandom(1, 10), generateRandom(30, 100), Rarity::rare);
-        result.emplace_back(std::make_shared<Item>(item));
+        if(std::none_of(begin(result), end(result),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
+            result.emplace_back(std::make_shared<Item>(item));
+            i++;
+        }
     }
     result.shrink_to_fit();
 
