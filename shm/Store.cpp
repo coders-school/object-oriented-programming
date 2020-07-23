@@ -27,8 +27,7 @@ Cargos Store::generateFruits() const {
 
     for (size_t i = 0; i < marketSection; i++) {
         Fruit fruit(fruitNames[generateRandom(0, 5)], generateRandom(1, 20), generateRandom(10, 30), generateRandom(1, 10));
-        auto ptr = std::make_shared<Fruit>(fruit);
-        result.emplace_back(ptr);
+        result.emplace_back(std::make_shared<Fruit>(fruit));
     }
     result.shrink_to_fit();
 
@@ -41,8 +40,7 @@ Cargos Store::generateAlcos() const {
 
     for (size_t i = 0; i < marketSection; i++) {
         Alcohol alco(alcoNames[generateRandom(0, 5)], generateRandom(1, 5), generateRandom(30, 100), generateRandom(40, 96));
-        auto ptr = std::make_shared<Alcohol>(alco);
-        result.emplace_back(ptr);
+        result.emplace_back(std::make_shared<Alcohol>(alco));
     }
     result.shrink_to_fit();
 
@@ -55,8 +53,7 @@ Cargos Store::generateItems() const {
 
     for (size_t i = 0; i < marketSection; i++) {
         Item item(itemNames[generateRandom(0, 5)], generateRandom(1, 10), generateRandom(30, 100), Rarity::rare);
-        auto ptr = std::make_shared<Item>(item);
-        result.emplace_back(ptr);
+        result.emplace_back(std::make_shared<Item>(item));
     }
     result.shrink_to_fit();
 
@@ -65,11 +62,13 @@ Cargos Store::generateItems() const {
 
 Cargos Store::makeStock(const Cargos& fruits, const Cargos& alcos, const Cargos& items) {
     Cargos result;
+    result.reserve(marketSection * 3);
     for (size_t i = 0; i < marketSection; i++) {
         result.push_back(fruits[i]);
         result.push_back(alcos[i]);
         result.push_back(items[i]);
     }
+    result.shrink_to_fit();
 
     return result;
 }
@@ -96,9 +95,8 @@ std::shared_ptr<Cargo> Store::getCargo(size_t index) const {
 void Store::removeFromStore(const std::shared_ptr<Cargo>& cargo, size_t amount) {
     if (amount == cargo->getAmount()) {
         market_.erase(std::remove(begin(market_), end(market_), cargo), market_.end());
-    } else {
-        *cargo -= amount;
     }
+    *cargo -= amount;
 }
 
 Response Store::buy(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player) {
