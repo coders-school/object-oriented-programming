@@ -21,10 +21,11 @@ public:
     size_t getPrice() const override {
         return static_cast<size_t>(basePrice_ * alcoholContent_ / maximumAlcoholContent);
     }
+    size_t getUniqueStat() const override { return alcoholContent_; }
+    
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
-    size_t getAlcoholContent() const { return alcoholContent_; }
 };

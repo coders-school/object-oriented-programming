@@ -75,13 +75,13 @@ Cargos Store::makeStock(const Cargos& fruits, const Cargos& alcos, const Cargos&
 
 std::shared_ptr<Cargo> Store::makeCargoToBuy(const std::shared_ptr<Cargo>& cargo, size_t amount) const {
     if (typeid(*cargo) == typeid(Fruit)) {
-        Fruit fruit(cargo->getName(), amount, cargo->getBasePrice(), (expirationDays * cargo->getPrice() / cargo->getBasePrice()));
+        Fruit fruit(cargo->getName(), amount, cargo->getBasePrice(), cargo->getUniqueStat());
         return std::make_shared<Fruit>(fruit);
     } else if (typeid(*cargo) == typeid(Alcohol)) {
-        Alcohol alco(cargo->getName(), amount, cargo->getBasePrice(), (maximumAlcoholContent * cargo->getPrice() / cargo->getBasePrice()));
+        Alcohol alco(cargo->getName(), amount, cargo->getBasePrice(), cargo->getUniqueStat());
         return std::make_shared<Alcohol>(alco);
     } else if (typeid(*cargo) == typeid(Item)) {
-        Item item(cargo->getName(), amount, cargo->getBasePrice(), static_cast<Rarity>(cargo->getPrice() / cargo->getBasePrice()));
+        Item item(cargo->getName(), amount, cargo->getBasePrice(), static_cast<Rarity>(cargo->getUniqueStat()));
         return std::make_shared<Item>(item);
     }
 

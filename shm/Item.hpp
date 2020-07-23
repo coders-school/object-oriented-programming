@@ -24,10 +24,11 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
     size_t getPrice() const override { return basePrice_ * static_cast<int>(rarity_); }
+    size_t getUniqueStat() const override { return static_cast<size_t>(rarity_); }
+    
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
-    Rarity getRarity() const { return rarity_; }
 };
