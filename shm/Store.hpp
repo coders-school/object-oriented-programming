@@ -51,12 +51,12 @@ private:
     Cargos generateItems() const;
     Cargos makeStock(const Cargos& fruits, const Cargos& alcos, const Cargos& items);
     std::shared_ptr<Cargo> makeCargoToBuy(const std::shared_ptr<Cargo>& cargo, size_t amount) const;
-    void removeFromStore(std::shared_ptr<Cargo> cargo, size_t amount);
+    void removeFromStore(const std::shared_ptr<Cargo>& cargo, size_t amount);
 
 public:
     Store(std::shared_ptr<Time>& time);
-    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
-    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
+    Response buy(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player);
+    Response sell(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player);
     std::shared_ptr<Cargo> getCargo(size_t index) const;
 
     //Override from Observer

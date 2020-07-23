@@ -45,6 +45,7 @@ public:
     void load(const std::shared_ptr<Cargo>& cargo);
     void unload(const std::shared_ptr<Cargo>& cargo, size_t amount);
 
+    //simple function to look inside cargo_, edit later
     void print() const;
 
     //Override from Observer

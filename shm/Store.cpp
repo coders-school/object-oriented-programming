@@ -7,13 +7,9 @@
 #include "Fruit.hpp"
 #include "Item.hpp"
 
-// Store::Store(std::shared_ptr<Time>& time)
-//     : time_(time) {
-//     time_->addObserver(this);
-// }
-
 Store::Store(std::shared_ptr<Time>& time) {
     time_ = time;
+    time->addObserver(this);
     market_ = makeStock(generateFruits(), generateAlcos(), generateItems());
 }
 
@@ -97,7 +93,7 @@ std::shared_ptr<Cargo> Store::getCargo(size_t index) const {
     return market_[index - 1];
 }
 
-void Store::removeFromStore(std::shared_ptr<Cargo> cargo, size_t amount) {
+void Store::removeFromStore(const std::shared_ptr<Cargo>& cargo, size_t amount) {
     if (amount == cargo->getAmount()) {
         market_.erase(std::remove(begin(market_), end(market_), cargo), market_.end());
     } else {
@@ -105,7 +101,7 @@ void Store::removeFromStore(std::shared_ptr<Cargo> cargo, size_t amount) {
     }
 }
 
-Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player) {
+Response Store::buy(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player) {
     const size_t price = amount * cargo->getPrice();
 
     if (cargo->getAmount() < amount) {
@@ -123,7 +119,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr
     return Response::done;
 }
 
-Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player) {
+Response Store::sell(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player) {
     size_t price = cargo->getPrice() * amount;
     player->sellCargo(cargo, amount, price);
 
@@ -134,7 +130,7 @@ void Store::nextDay() {
     //Doing nothing for now. Interface purposes
 }
 
-//simple operator just to know what is inside market, remove later
+//simple operator just to know what is inside market, edit later
 std::ostream& operator<<(std::ostream& os, const Store& store) {
     size_t i = 1;
     for (auto el : store.market_) {
