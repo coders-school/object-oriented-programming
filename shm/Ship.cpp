@@ -1,7 +1,7 @@
 #include "Ship.hpp"
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 Ship::Ship()
     : id_(0) {
@@ -42,7 +42,16 @@ Ship& Ship::operator+=(const size_t crew) {
 }
 
 void Ship::load(const std::shared_ptr<Cargo>& cargo) {
-    cargo_.push_back(cargo);
+    auto it = std::find_if(begin(cargo_), end(cargo_),
+                           [&cargo](const auto& ptr) {
+                               return *cargo == *ptr;
+                           });
+
+    if (it != end(cargo_)) {
+        *(*it) += cargo->getAmount();
+    } else {
+        cargo_.push_back(cargo);
+    }
 }
 
 void Ship::unload(const std::shared_ptr<Cargo>& cargo, size_t amount) {
@@ -55,9 +64,9 @@ void Ship::unload(const std::shared_ptr<Cargo>& cargo, size_t amount) {
 
 void Ship::print() const {
     size_t i = 1;
-    for(const auto& el : cargo_) {
-        std::cout << i << ". " <<  el->getName() << " | Amount: " << el->getAmount() << " Price: " << el->getPrice() << "\n";
-        i++; 
+    for (const auto& el : cargo_) {
+        std::cout << i << ". " << el->getName() << " | Amount: " << el->getAmount() << " Price: " << el->getPrice() << "\n";
+        i++;
     }
 }
 
