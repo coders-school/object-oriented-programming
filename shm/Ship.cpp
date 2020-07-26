@@ -17,7 +17,7 @@ Ship::Ship(int maxCrew, int speed, size_t id, std::shared_ptr<Time>& time)
     : Ship(0, maxCrew, speed, "", id, time) {
 }
 
-std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
+CargoPtr Ship::getCargo(size_t index) const {
     if (index > cargo_.size() || index == 0) {
         return nullptr;
     }
@@ -42,20 +42,26 @@ Ship& Ship::operator+=(const size_t crew) {
     return *this;
 }
 
-void Ship::load(const std::shared_ptr<Cargo>& cargo) {
+CargoPtr Ship::findCargo(const CargoPtr& cargo) const {
     auto it = std::find_if(begin(cargo_), end(cargo_),
                            [&cargo](const auto& ptr) {
                                return *cargo == *ptr;
                            });
+    
+    return (it == end(cargo_)) ? nullptr : *it;
+}
 
-    if (it != end(cargo_)) {
-        *(*it) += cargo->getAmount();
+void Ship::load(const CargoPtr& cargo) {
+    auto cargoPtr = findCargo(cargo);
+    
+    if(cargoPtr) {
+        *cargoPtr += cargo->getAmount();
     } else {
         cargo_.push_back(cargo);
     }
 }
 
-void Ship::unload(const std::shared_ptr<Cargo>& cargo, size_t amount) {
+void Ship::unload(const CargoPtr& cargo, size_t amount) {
     if (amount == cargo->getAmount()) {
         cargo_.erase(std::remove(begin(cargo_), end(cargo_), cargo), cargo_.end());
     } else {

@@ -1,6 +1,8 @@
 #pragma once
 
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "Observer.hpp"
 
@@ -24,3 +26,6 @@ public:
     virtual bool operator==(const Cargo& cargo) const = 0;
     virtual bool operator!=(const Cargo& cargo) const = 0;
 };
+
+using CargoPtr = std::shared_ptr<Cargo>;
+using CargoStock = std::vector<std::shared_ptr<Cargo>>;
