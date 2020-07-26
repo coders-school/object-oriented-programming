@@ -6,6 +6,7 @@
 #include "Player.hpp"
 #include "Map.hpp"
 #include "ShmExceptions.hpp"
+#include "Time.hpp"
 #include "gtest/gtest.h"
 
 TEST(island, twoIslandsPositionsShouldBeEqual)
