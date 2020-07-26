@@ -4,8 +4,9 @@
 
 #include "Cargo.hpp"
 #include "Ship.hpp"
+#include "IDelegate.hpp"
 
-class Player
+class Player : public IDelegate
 {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t space);
@@ -19,8 +20,10 @@ public:
     void spendMoney(size_t amount);
 
     void earnMoney(size_t amount);
+    void PayCrew(size_t amount) override;
 
     [[nodiscard]] Ship* getShip() const;
+
 private:
     std::unique_ptr<Ship> ship_;
 
