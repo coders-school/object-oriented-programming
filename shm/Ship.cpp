@@ -1,6 +1,7 @@
 #include "Ship.hpp"
 
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 
 Ship::Ship()
@@ -62,12 +63,28 @@ void Ship::unload(const std::shared_ptr<Cargo>& cargo, size_t amount) {
     }
 }
 
-void Ship::print() const {
-    size_t i = 1;
-    for (const auto& el : cargo_) {
-        std::cout << i << ". " << el->getName() << " | Amount: " << el->getAmount() << " Price: " << el->getPrice() << "\n";
-        i++;
+std::ostream& operator<<(std::ostream& out, const Ship& ship) {
+    std::string horizontalSeparator(41, '=');
+    std::string headerSeparator(22, '=');
+    int i = 0;
+    out << "\n" << horizontalSeparator
+              << "\n"
+              << "|| SHIP'S  STOCK"
+              << std::setw(15) << "| QTY "
+              << std::setw(5) << "| PRICE"
+              << std::setw(3) << " ||\n"
+              << horizontalSeparator << "\n";
+
+    for (const auto& el : ship.cargo_) {
+        out << "||"
+                  << std::setw(2) << ++i << ". "
+                  << std::setw(18) << std::left << el->getName() << " | "
+                  << std::setw(3) << std::right << el->getAmount() << " | "
+                  << std::setw(5) << std::right << el->getPrice() << " ||\n";
     }
+    out << horizontalSeparator << "\n";
+    
+    return out;
 }
 
 void Ship::nextDay() {

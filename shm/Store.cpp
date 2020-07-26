@@ -143,25 +143,23 @@ void Store::nextDay() {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    const std::string horizontalSeparator(54, '=');
+    const std::string horizontalSeparator(41, '=');
     size_t i = 0;
 
     out << horizontalSeparator 
               << "\n"
-              << "|| NAME"
-              << std::setw(26) << "| PRICE "
-              << std::setw(3) << "| AMOUNT "
-              << std::setw(7) << "| DETAILS"
-              << std::setw(3) << " ||\n"
+              << "|| AVAILABLE PRODUCTS"
+              << std::setw(10) << "| QTY "
+              << std::setw(3) << "| PRICE "
+              << std::setw(3) << "||\n"
               << horizontalSeparator << "\n";
 
     for (const auto& el : store.market_) {
         out << "||"
                   << std::setw(2) << ++i << ". "
                   << std::setw(18) << std::left << el->getName() << " | "
-                  << std::setw(5) << std::right << el->getPrice() << " | "
-                  << std::setw(6) << std::right << el->getAmount() << " | "
-                  << std::setw(7) << std::right << el->getUniqueStat() << " ||\n";
+                  << std::setw(3) << std::right << el->getAmount() << " | " 
+                  << std::setw(5) << std::right << el->getPrice() << " ||\n";
     }
     out << horizontalSeparator << "\n";
     
