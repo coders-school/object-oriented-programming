@@ -1,6 +1,7 @@
 #include "Store.hpp"
 
 #include <algorithm>
+#include <iomanip>
 #include <random>
 
 #include "Alcohol.hpp"
@@ -21,8 +22,8 @@ size_t Store::generateRandom(int min, int max) const {
     return static_cast<size_t>(distirb(gen));
 }
 
-Cargos Store::generateFruits() const {
-    Cargos result;
+CargoStock Store::generateFruits() const {
+    CargoStock result;
     result.reserve(marketSection);
 
     size_t i = 0;
@@ -38,8 +39,8 @@ Cargos Store::generateFruits() const {
     return result;
 }
 
-Cargos Store::generateAlcos() const {
-    Cargos result;
+CargoStock Store::generateAlcos() const {
+    CargoStock result;
     result.reserve(marketSection);
 
     size_t i = 0;
@@ -55,8 +56,8 @@ Cargos Store::generateAlcos() const {
     return result;
 }
 
-Cargos Store::generateItems() const {
-    Cargos result;
+CargoStock Store::generateItems() const {
+    CargoStock result;
     result.reserve(marketSection);
 
     size_t i = 0;
@@ -72,8 +73,8 @@ Cargos Store::generateItems() const {
     return result;
 }
 
-Cargos Store::makeStock(const Cargos& fruits, const Cargos& alcos, const Cargos& items) {
-    Cargos result;
+CargoStock Store::makeStock(const CargoStock& fruits, const CargoStock& alcos, const CargoStock& items) {
+    CargoStock result;
     result.reserve(marketSection * 3);
     for (size_t i = 0; i < marketSection; i++) {
         result.push_back(fruits[i]);
@@ -85,7 +86,7 @@ Cargos Store::makeStock(const Cargos& fruits, const Cargos& alcos, const Cargos&
     return result;
 }
 
-std::shared_ptr<Cargo> Store::makeCargoToBuy(const std::shared_ptr<Cargo>& cargo, size_t amount) const {
+CargoPtr Store::makeCargoToBuy(const CargoPtr& cargo, size_t amount) const {
     if (typeid(*cargo) == typeid(Fruit)) {
         Fruit fruit(cargo->getName(), amount, cargo->getBasePrice(), cargo->getUniqueStat());
         return std::make_shared<Fruit>(fruit);
@@ -100,18 +101,19 @@ std::shared_ptr<Cargo> Store::makeCargoToBuy(const std::shared_ptr<Cargo>& cargo
     return nullptr;
 }
 
-std::shared_ptr<Cargo> Store::getCargo(size_t index) const {
+CargoPtr Store::getCargo(size_t index) const {
     return market_[index - 1];
 }
 
-void Store::removeFromStore(const std::shared_ptr<Cargo>& cargo, size_t amount) {
+void Store::removeFromStore(const CargoPtr& cargo, size_t amount) {
     if (amount == cargo->getAmount()) {
         market_.erase(std::remove(begin(market_), end(market_), cargo), market_.end());
+    } else {
+        *cargo -= amount;
     }
-    *cargo -= amount;
 }
 
-Response Store::buy(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player) {
+Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
     const size_t price = amount * cargo->getPrice();
 
     if (cargo->getAmount() < amount) {
@@ -129,7 +131,7 @@ Response Store::buy(const std::shared_ptr<Cargo>& cargo, size_t amount, const st
     return Response::done;
 }
 
-Response Store::sell(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player) {
+Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
     size_t price = cargo->getPrice() * amount;
     player->sellCargo(cargo, amount, price);
 
@@ -140,13 +142,28 @@ void Store::nextDay() {
     //Doing nothing for now. Interface purposes
 }
 
-//simple operator just to know what is inside market, edit later
-std::ostream& operator<<(std::ostream& os, const Store& store) {
-    size_t i = 1;
-    for (auto el : store.market_) {
-        os << i << ". " << el->getName() << " | Amount: " << el->getAmount() << " | Price: " << el->getPrice() << "\n";
-        i++;
-    }
+std::ostream& operator<<(std::ostream& out, const Store& store) {
+    const std::string horizontalSeparator(54, '=');
+    size_t i = 0;
 
-    return os;
+    out << horizontalSeparator 
+              << "\n"
+              << "|| NAME"
+              << std::setw(26) << "| PRICE "
+              << std::setw(3) << "| AMOUNT "
+              << std::setw(7) << "| DETAILS"
+              << std::setw(3) << " ||\n"
+              << horizontalSeparator << "\n";
+
+    for (const auto& el : store.market_) {
+        out << "||"
+                  << std::setw(2) << ++i << ". "
+                  << std::setw(18) << std::left << el->getName() << " | "
+                  << std::setw(5) << std::right << el->getPrice() << " | "
+                  << std::setw(6) << std::right << el->getAmount() << " | "
+                  << std::setw(7) << std::right << el->getUniqueStat() << " ||\n";
+    }
+    out << horizontalSeparator << "\n";
+    
+    return out;
 }

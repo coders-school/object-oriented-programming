@@ -6,6 +6,9 @@
 #include "Observer.hpp"
 #include "Player.hpp"
 
+using CargoPtr = std::shared_ptr<Cargo>;
+using CargoStock = std::vector<std::shared_ptr<Cargo>>;
+
 const std::vector<std::string> fruitNames = {
     "apple",
     "pineapple",
@@ -31,7 +34,6 @@ const std::vector<std::string> itemNames = {
     "pirate's flag"};
 
 constexpr size_t marketSection = 4;
-using Cargos = std::vector<::std::shared_ptr<Cargo>>;
 
 enum class Response {
     done,
@@ -42,25 +44,25 @@ enum class Response {
 
 class Store : public Observer {
 private:
-    Cargos market_;
+    CargoStock market_;
     std::shared_ptr<Time> time_{nullptr};
 
     size_t generateRandom(int min, int max) const;
-    Cargos generateFruits() const;
-    Cargos generateAlcos() const;
-    Cargos generateItems() const;
-    Cargos makeStock(const Cargos& fruits, const Cargos& alcos, const Cargos& items);
-    std::shared_ptr<Cargo> makeCargoToBuy(const std::shared_ptr<Cargo>& cargo, size_t amount) const;
-    void removeFromStore(const std::shared_ptr<Cargo>& cargo, size_t amount);
+    CargoStock generateFruits() const;
+    CargoStock generateAlcos() const;
+    CargoStock generateItems() const;
+    CargoStock makeStock(const CargoStock& fruits, const CargoStock& alcos, const CargoStock& items);
+    CargoPtr makeCargoToBuy(const CargoPtr& cargo, size_t amount) const;
+    void removeFromStore(const CargoPtr& cargo, size_t amount);
 
 public:
     Store(std::shared_ptr<Time>& time);
-    Response buy(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player);
-    Response sell(const std::shared_ptr<Cargo>& cargo, size_t amount, const std::shared_ptr<Player>& player);
-    std::shared_ptr<Cargo> getCargo(size_t index) const;
+    Response buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
+    Response sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
+    CargoPtr getCargo(size_t index) const;
 
     //Override from Observer
     void nextDay() override;
 
-    friend std::ostream& operator<<(std::ostream& os, const Store& store);
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
 };
