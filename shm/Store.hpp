@@ -47,11 +47,11 @@ private:
     CargoStock market_;
     std::shared_ptr<Time> time_{nullptr};
 
-    size_t generateRandom(int min, int max) const;
+    size_t genRand(int min, int max) const;
     CargoStock generateFruits() const;
     CargoStock generateAlcos() const;
     CargoStock generateItems() const;
-    CargoStock makeStock(const CargoStock& fruits, const CargoStock& alcos, const CargoStock& items);
+    CargoStock makeStock();
     CargoPtr makeCargoToBuy(const CargoPtr& cargo, size_t amount) const;
     void removeFromStore(const CargoPtr& cargo, size_t amount);
 

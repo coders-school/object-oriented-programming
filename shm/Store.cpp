@@ -11,10 +11,10 @@
 Store::Store(std::shared_ptr<Time>& time) {
     time_ = time;
     time->addObserver(this);
-    market_ = makeStock(generateFruits(), generateAlcos(), generateItems());
+    market_ = makeStock();
 }
 
-size_t Store::generateRandom(int min, int max) const {
+size_t Store::genRand(int min, int max) const {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distirb(min, max);
@@ -28,7 +28,7 @@ CargoStock Store::generateFruits() const {
 
     size_t i = 0;
     while(i < marketSection) {
-        Fruit fruit(fruitNames[generateRandom(0, 5)], generateRandom(1, 20), generateRandom(10, 30), generateRandom(1, 10));
+        Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), genRand(1, 10));
         if(std::none_of(begin(result), end(result),[&fruit](const auto& ptr){ return ptr->getName() == fruit.getName();})) {
             result.emplace_back(std::make_shared<Fruit>(fruit));
             i++;
@@ -45,7 +45,7 @@ CargoStock Store::generateAlcos() const {
 
     size_t i = 0;
     while(i < marketSection) {
-        Alcohol alco(alcoNames[generateRandom(0, 5)], generateRandom(1, 5), generateRandom(30, 100), generateRandom(40, 96));
+        Alcohol alco(alcoNames[genRand(0, 5)], genRand(1, 5), genRand(30, 100), genRand(40, 96));
         if(std::none_of(begin(result), end(result),[&alco](const auto& ptr){ return ptr->getName() == alco.getName();})) {
             result.emplace_back(std::make_shared<Alcohol>(alco));
             i++;
@@ -62,7 +62,7 @@ CargoStock Store::generateItems() const {
 
     size_t i = 0;
     while(i < marketSection) {
-        Item item(itemNames[generateRandom(0, 5)], generateRandom(1, 10), generateRandom(30, 100), Rarity::rare);
+        Item item(itemNames[genRand(0, 5)], genRand(1, 10), genRand(30, 100), Rarity::rare);
         if(std::none_of(begin(result), end(result),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
             result.emplace_back(std::make_shared<Item>(item));
             i++;
@@ -73,8 +73,11 @@ CargoStock Store::generateItems() const {
     return result;
 }
 
-CargoStock Store::makeStock(const CargoStock& fruits, const CargoStock& alcos, const CargoStock& items) {
+CargoStock Store::makeStock() {
     CargoStock result;
+    auto fruits = generateFruits();
+    auto alcos = generateAlcos();
+    auto items = generateItems();
     result.reserve(marketSection * 3);
     for (size_t i = 0; i < marketSection; i++) {
         result.push_back(fruits[i]);
