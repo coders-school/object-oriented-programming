@@ -3,8 +3,9 @@
 #include <memory>
 
 #include "Cargo.hpp"
-#include "Player.hpp"
 #include "Observer.hpp"
+#include "Player.hpp"
+#include "Time.hpp"
 
 class Store : public Observer
 {
@@ -20,8 +21,7 @@ private:
     };
 
 public:
-    //    Store(Time* time);  # TODO after implementation Time class
-    Store();
+    explicit Store(Time* time);
     ~Store() override;
 
     void NextDay() override;
@@ -33,6 +33,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
 private:
+    Time* time_;
     void GenerateCargo();
     Cargo* FindMatchCargo(Cargo* cargo);
     void RemoveFromStore(Cargo* cargo);

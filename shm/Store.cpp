@@ -50,3 +50,13 @@ Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player)
 
     return Response::done;
 }
+
+Store::Store(Time* time) : time_(time)
+{
+    time_->addObserver(this);
+}
+
+Store::~Store()
+{
+    time_->removeObserver(this);
+}
