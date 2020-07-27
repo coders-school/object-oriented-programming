@@ -45,6 +45,7 @@ void Game::advanceTimeTraveling(size_t distance) {
         distance -= distancePerDay;
         time_++;
         days_++;
+    }
 }
   
 void Game::PrintOptions() {

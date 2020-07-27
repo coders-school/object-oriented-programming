@@ -30,7 +30,6 @@ private:
     void PrintOptions();
     void MakeAction(Action choice);
     void Exit();
-    void Travel();
     void Buy();
     void Sell();
 
