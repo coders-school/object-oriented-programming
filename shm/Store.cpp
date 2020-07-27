@@ -115,7 +115,7 @@ Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr
 
 void Store::nextDay() {
     market_.clear();
-    
+    makeStock();
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
