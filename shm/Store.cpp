@@ -11,7 +11,7 @@
 Store::Store(std::shared_ptr<Time>& time) {
     time_ = time;
     time->addObserver(this);
-    market_ = makeStock();
+    makeStock();
 }
 
 size_t Store::genRand(int min, int max) const {
@@ -22,71 +22,43 @@ size_t Store::genRand(int min, int max) const {
     return static_cast<size_t>(distirb(gen));
 }
 
-CargoStock Store::generateFruits() const {
-    CargoStock result;
-    result.reserve(marketSection);
-
+void Store::generateFruits() {
     size_t i = 0;
     while(i < marketSection) {
         Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), genRand(1, 10));
-        if(std::none_of(begin(result), end(result),[&fruit](const auto& ptr){ return ptr->getName() == fruit.getName();})) {
-            result.emplace_back(std::make_shared<Fruit>(fruit));
+        if(std::none_of(begin(market_), end(market_),[&fruit](const auto& ptr){ return ptr->getName() == fruit.getName();})) {
+            market_.emplace_back(std::make_shared<Fruit>(fruit));
             i++;
         }
     }
-    result.shrink_to_fit();
-
-    return result;
 }
 
-CargoStock Store::generateAlcos() const {
-    CargoStock result;
-    result.reserve(marketSection);
-
+void Store::generateAlcos() {
     size_t i = 0;
     while(i < marketSection) {
         Alcohol alco(alcoNames[genRand(0, 5)], genRand(1, 5), genRand(30, 100), genRand(40, 96));
-        if(std::none_of(begin(result), end(result),[&alco](const auto& ptr){ return ptr->getName() == alco.getName();})) {
-            result.emplace_back(std::make_shared<Alcohol>(alco));
+        if(std::none_of(begin(market_), end(market_),[&alco](const auto& ptr){ return ptr->getName() == alco.getName();})) {
+            market_.emplace_back(std::make_shared<Alcohol>(alco));
             i++;
         }
     }
-    result.shrink_to_fit();
-
-    return result;
 }
 
-CargoStock Store::generateItems() const {
-    CargoStock result;
-    result.reserve(marketSection);
-
+void Store::generateItems() {
     size_t i = 0;
     while(i < marketSection) {
         Item item(itemNames[genRand(0, 5)], genRand(1, 10), genRand(30, 100), Rarity::rare);
-        if(std::none_of(begin(result), end(result),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
-            result.emplace_back(std::make_shared<Item>(item));
+        if(std::none_of(begin(market_), end(market_),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
+            market_.emplace_back(std::make_shared<Item>(item));
             i++;
         }
     }
-    result.shrink_to_fit();
-
-    return result;
 }
 
-CargoStock Store::makeStock() {
-    CargoStock result;
-    auto fruits = generateFruits();
-    auto alcos = generateAlcos();
-    auto items = generateItems();
-    result.reserve(marketSection * 3);
-    for (size_t i = 0; i < marketSection; i++) {
-        result.push_back(fruits[i]);
-        result.push_back(alcos[i]);
-        result.push_back(items[i]);
-    }
-    result.shrink_to_fit();
-
-    return result;
+void Store::makeStock() {
+    generateFruits();
+    generateAlcos();
+    generateItems();
 }
 
 CargoPtr Store::makeCargoToBuy(const CargoPtr& cargo, size_t amount) const {
@@ -142,7 +114,8 @@ Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr
 }
 
 void Store::nextDay() {
-    //Doing nothing for now. Interface purposes
+    market_.clear();
+    
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {

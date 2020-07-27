@@ -44,14 +44,14 @@ enum class Response {
 
 class Store : public Observer {
 private:
-    CargoStock market_;
+    CargoStock market_{};
     std::shared_ptr<Time> time_{nullptr};
 
     size_t genRand(int min, int max) const;
-    CargoStock generateFruits() const;
-    CargoStock generateAlcos() const;
-    CargoStock generateItems() const;
-    CargoStock makeStock();
+    void generateFruits();
+    void generateAlcos();
+    void generateItems();
+    void makeStock();
     CargoPtr makeCargoToBuy(const CargoPtr& cargo, size_t amount) const;
     void removeFromStore(const CargoPtr& cargo, size_t amount);
 
