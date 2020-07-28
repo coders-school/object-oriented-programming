@@ -24,6 +24,7 @@ public:
     bool operator!=(const Cargo& cargo) const override;
 
     [[nodiscard]] size_t GetPercentage() const;
+    size_t NextDay();
 
 private:
     size_t percentage_;
