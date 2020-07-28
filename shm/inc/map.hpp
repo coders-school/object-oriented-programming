@@ -1,8 +1,8 @@
 #pragma once
 
-#include "island.hpp"
-
 #include <vector>
+
+#include "island.hpp"
 
 class Map {
 public:
