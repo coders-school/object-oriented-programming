@@ -46,7 +46,7 @@ endif()
 enable_testing()
 
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut test.cpp testItem.cpp)
+add_executable(${PROJECT_NAME}-ut test.cpp testItem.cpp testPlayer.cpp)
 
 
 

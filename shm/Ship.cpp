@@ -6,7 +6,7 @@ Ship::Ship() : id_(-1)
 {
 }
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(maxCrew), speed_(speed), name_(name), id_(id)
 {
 }
 
@@ -50,14 +50,22 @@ Ship& Ship::operator+=(size_t num)
 }
 void Ship::NextDay()
 {
-    // TODO to be implemented
+    if (delegate_)
+    {
+        delegate_->PayCrew(crew_ * wage);
+    }
+}
+
+void Ship::addDelegate(IDelegate* delegate)
+{
+    delegate_ = delegate;
 }
 
 void Ship::load(const std::shared_ptr<Cargo>& cargo)
 {
     storage_.push_back(cargo);
 
-//    TODO support case, when product is already loaded previusly
+    //    TODO support case, when product is already loaded previusly
 }
 
 void Ship::unload(Cargo* cargo)

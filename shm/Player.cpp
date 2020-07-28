@@ -3,11 +3,18 @@
 
 void Player::Player::PayCrew(size_t money)
 {
+    if (money_ >= money)
+    {
+        money_ = money_ - money;
+    }
+    else
+        throw AmountException("Not enough money!");
 }
 
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space) : money_(money), availableSpace_(space)
 {
     ship_ = std::move(ship);
+    ship_->addDelegate(this);
 };
 
 void Player::updateAvailableSpace()
