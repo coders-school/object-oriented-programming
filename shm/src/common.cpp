@@ -1,9 +1,9 @@
-#include "common.hpp"
-
 #include <algorithm>
-#include <numeric>
 #include <iomanip>
 #include <iostream>
+#include <numeric>
+
+#include "common.hpp"
 
 /*static*/ /*public*/
 //-----------------------------------------------------------------------------------
