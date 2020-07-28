@@ -4,8 +4,8 @@
 
 #include "map.hpp"
 #include "player.hpp"
-#include "time.hpp"
 #include "store.hpp"
+#include "time.hpp"
 
 class Game {
 public:
