@@ -1,7 +1,8 @@
 #pragma once
 
-#include "observer.hpp"
 #include <vector>
+
+#include "observer.hpp"
 
 class Time {
 public:
