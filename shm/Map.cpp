@@ -61,9 +61,8 @@ void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islan
     if (foundLocation != islandLocations.end()) {
         columnIndex++;
         out << ((foundLocation->getPosition() == currentPosition) ? currentLocationMarker : islandMarker) << "\t";
-    }
-
-    out << waterMarker << '\t';
+    } else
+        out << waterMarker << '\t';
 }
 
 void Map::populateMapScreen(std::ostream& out) const {
