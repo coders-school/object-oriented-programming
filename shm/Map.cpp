@@ -53,19 +53,16 @@ size_t Map::getDistanceToIsland(Island* destination) {
 
 void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, size_t& columnIndex, const Coordinates& currentPosition) {
     const std::string islandMarker = "O";
-    const std::string currentLocation = "X";
+    const std::string currentLocationMarker = "X";
     const std::string waterMarker = " ";
 
-    for (auto& loc : islandLocations) {
-        if (loc.getPosition() == cord) {
-            columnIndex++;
-            if (loc.getPosition() == currentPosition)
-                out << currentLocation << "\t";
-            else
-                out << islandMarker << "\t";
-            break;
-        }
+    auto foundLocation = std::find_if(islandLocations.begin(), islandLocations.end(), [&cord](const auto& el) { return el.getPosition() == cord; });
+
+    if (foundLocation != islandLocations.end()) {
+        columnIndex++;
+        out << ((foundLocation->getPosition() == currentPosition) ? currentLocationMarker : islandMarker) << "\t";
     }
+
     out << waterMarker << '\t';
 }
 
