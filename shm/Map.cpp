@@ -51,7 +51,7 @@ size_t Map::getDistanceToIsland(Island* destination) {
 
 //Start of helper functions for operator<<
 
-void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, size_t& columnIndex, const Coordinates& currentPosition) {
+void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, const Coordinates& currentPosition) {
     const std::string islandMarker = "O";
     const std::string currentLocationMarker = "X";
     const std::string waterMarker = " ";
@@ -59,7 +59,6 @@ void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islan
     auto foundLocation = std::find_if(islandLocations.begin(), islandLocations.end(), [&cord](const auto& el) { return el.getPosition() == cord; });
 
     if (foundLocation != islandLocations.end()) {
-        columnIndex++;
         out << ((foundLocation->getPosition() == currentPosition) ? currentLocationMarker : islandMarker) << "\t";
     } else
         out << waterMarker << '\t';
@@ -71,7 +70,7 @@ void Map::populateMapScreen(std::ostream& out) const {
         out << row << '\t';
         for (size_t column = minPositionXY + 1; column <= maxPositionXY; column++) {
             Coordinates cord(column, row);
-            placeMarkersOnMapScreen(out, islandsLocations_, cord, column, playerPosition);
+            placeMarkersOnMapScreen(out, islandsLocations_, cord, playerPosition);
         }
         out << "\n";
     }
