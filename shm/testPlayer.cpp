@@ -60,3 +60,27 @@ TEST(player, spendMoreMoneyThanHaveShouldResultException)
     size_t spentMoney_ = 1000;
     EXPECT_THROW(player.spendMoney(spentMoney_), AmountException);
 }
+
+TEST(ship, crewShouldBeZero)
+{
+    Ship ship{1, 1, 1, "a", 1};
+    EXPECT_THROW(ship.operator-=(10), AmountException);
+}
+
+TEST(ship, crewShouldNotBeHigherThanMaxCrew)
+{
+    Ship ship{1, 1, 1, "a", 1};
+    EXPECT_THROW(ship.operator+=(10), AmountException);
+}
+
+TEST(player, newMoneyAmountWasSet)
+{
+    size_t space_ = 0;
+    size_t money_ = 0;
+    Player player(std::make_unique<Ship>(), money_, space_);
+    size_t money = 10;
+    player.setMoney(money);
+    EXPECT_EQ(player.getMoney(), money);
+}
+
+
