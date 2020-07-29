@@ -1,4 +1,5 @@
 #include "Map.hpp"
+
 #include <algorithm>
 #include <cstddef>
 #include <random>
@@ -44,33 +45,33 @@ Island* Map::getIsland(const Coordinates& coordinate) {
     return (island != islandsLocations_.end()) ? &(*island) : nullptr;
 }
 
-size_t Map::getDistanceToIsland(Island *destination) {
+size_t Map::getDistanceToIsland(Island* destination) {
     return Coordinates::distance(currentPosition_->getPosition(), destination->getPosition());
 }
 
-std::ostream &operator<<(std::ostream &out, const Map &map) {
+std::ostream& operator<<(std::ostream& out, const Map& map) {
+    std::string islandMarker = "O";
+    std::string emptyMarker = " ";
+    std::string currentLocation = "X";
 
-    std::string islandMarker = "#";
-    std::string emptyMarker = "*";
-    std::string currentLocation = "$";
-
-    for(size_t i = 1; i <= maxPositionXY; i++) {
+    for (size_t i = 1; i <= maxPositionXY; i++) {
         out << '\t' << i;
     }
 
     out << "\n";
 
-    for(size_t i = 1; i <= maxPositionXY; i++) {
+    for (size_t i = 1; i <= maxPositionXY; i++) {
         out << i << "\t";
-        for(size_t j = 1; j <= maxPositionXY; j++) {
+        for (size_t j = 1; j <= maxPositionXY; j++) {
             Coordinates cord(i, j);
-            for(auto& loc : map.islandsLocations_) {
-                if(loc.getPosition() == cord) {
+            for (auto& loc : map.islandsLocations_) {
+                if (loc.getPosition() == cord) {
                     j++;
                     if (loc.getPosition() == map.currentPosition_->getPosition())
                         out << currentLocation << "\t";
                     else
                         out << islandMarker << "\t";
+                    break;
                 }
             }
             out << emptyMarker << "\t";
