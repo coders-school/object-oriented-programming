@@ -14,7 +14,7 @@ private:
     void generateIslands(int numOfIslandsToGenerate);
     Island* currentPosition_{nullptr};
     std::vector<Island> islandsLocations_;
-    friend void populateMapScreen(std::ostream& out, const Map& map);
+    void populateMapScreen(std::ostream& out) const;
 
 public:
     Map();

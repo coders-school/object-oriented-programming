@@ -66,13 +66,13 @@ void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islan
     out << waterMarker << '\t';
 }
 
-void populateMapScreen(std::ostream& out, const Map& map) {
-    auto playerPosition = map.currentPosition_->getPosition();
+void Map::populateMapScreen(std::ostream& out) const {
+    auto playerPosition = currentPosition_->getPosition();
     for (size_t row = minPositionXY + 1; row <= maxPositionXY; row++) {
         out << row << '\t';
         for (size_t column = minPositionXY + 1; column <= maxPositionXY; column++) {
             Coordinates cord(column, row);
-            placeMarkersOnMapScreen(out, map.islandsLocations_, cord, column, playerPosition);
+            placeMarkersOnMapScreen(out, islandsLocations_, cord, column, playerPosition);
         }
         out << "\n";
     }
@@ -89,7 +89,7 @@ void fillXCoordinatesRow(std::ostream& out) {
 
 std::ostream& operator<<(std::ostream& out, const Map& map) {
     fillXCoordinatesRow(out);
-    populateMapScreen(out, map);
+    map.populateMapScreen(out);
 
     return out;
 }
