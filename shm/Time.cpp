@@ -8,15 +8,19 @@ Time& Time::operator++()
     return *this;
 }
 
-void Time::addObserver(Observer* obs) {
+void Time::addObserver(Observer* obs)
+{
     observers_.push_back(obs);
 }
-void Time::removeObserver(Observer* obs) {
+void Time::removeObserver(Observer* obs)
+{
     observers_.erase(std::remove(observers_.begin(), observers_.end(), obs), observers_.end());
 }
 
-void Time::notify() {
-    for (const auto& obs : observers_) {
+void Time::notify()
+{
+    for (const auto& obs : observers_)
+    {
         obs->NextDay();
     }
 }

@@ -62,7 +62,5 @@ size_t Alcohol::GetPercentage() const
 
 size_t Alcohol::NextDay()
 {
-    return  amount_;
+    return amount_;
 }
-
-

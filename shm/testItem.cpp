@@ -96,5 +96,3 @@ TEST(item, AddToOperatorIncreaseAmount)
     itemA += 5;
     EXPECT_EQ(itemA.GetAmount(), 15);
 }
-
-

@@ -6,7 +6,7 @@ class Alcohol : public Cargo
 {
 public:
     Alcohol(size_t amount, const std::string& name, size_t base_price, size_t percentage);
-//    Alcohol(size_t amount, const Alcohol* alcohol);  TODO
+    //    Alcohol(size_t amount, const Alcohol* alcohol);  TODO
 
     ~Alcohol() override = default;
 

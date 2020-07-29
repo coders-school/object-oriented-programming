@@ -64,7 +64,7 @@ size_t Fruit::GetExpiryDate() const
 void Fruit::NextDay()
 {
     time_elapsed_++;
-    if(expiry_date_ <= time_elapsed_)
+    if (expiry_date_ <= time_elapsed_)
     {
         amount_ = 0;
     }
