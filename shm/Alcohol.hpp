@@ -6,7 +6,7 @@ class Alcohol : public Cargo
 {
 public:
     Alcohol(size_t amount, const std::string& name, size_t base_price, size_t percentage);
-//    Alcohol(size_t amount, const Alcohol* alcohol);  TODO
+    //    Alcohol(size_t amount, const Alcohol* alcohol);  TODO
 
     ~Alcohol() override = default;
 
@@ -24,6 +24,7 @@ public:
     bool operator!=(const Cargo& cargo) const override;
 
     [[nodiscard]] size_t GetPercentage() const;
+    size_t NextDay();
 
 private:
     size_t percentage_;

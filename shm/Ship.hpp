@@ -5,6 +5,9 @@
 
 #include "Cargo.hpp"
 #include "Observer.hpp"
+#include "IDelegate.hpp"
+
+constexpr size_t wage = 1;
 
 class Ship : public Observer
 {
@@ -32,6 +35,7 @@ public:
     void unload(Cargo* cargo);
 
     void NextDay() override;
+    void addDelegate(IDelegate* delegate);
 
 private:
     size_t capacity_;
@@ -41,4 +45,5 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> storage_;
+    IDelegate* delegate_ = nullptr;
 };

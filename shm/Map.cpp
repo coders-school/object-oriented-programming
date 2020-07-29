@@ -49,5 +49,3 @@ void Map::randomIslandGenerator(size_t amount)
         islands.push_back(Island(map_[i] % mapXsize, ((map_[i]) / mapXsize) % mapYsize));
     }
 }
-
-

@@ -3,6 +3,7 @@
 void Fruit::Print() const
 {
 }
+
 std::string Fruit::GetName() const
 {
     return name_;
@@ -61,6 +62,15 @@ size_t Fruit::GetExpiryDate() const
     return expiry_date_;
 }
 
+void Fruit::NextDay()
+{
+    time_elapsed_++;
+    if (expiry_date_ <= time_elapsed_)
+    {
+        amount_ = 0;
+    }
+}
+
 Fruit::Fruit(size_t amount, const std::string& name, size_t base_price, size_t expiry_date)
     : Cargo(amount, name, base_price), expiry_date_(expiry_date)
 {
@@ -70,3 +80,4 @@ Fruit::Fruit(size_t amount, const std::string& name, size_t base_price, size_t e
     : Cargo(amount, name, base_price), expiry_date_(expiry_date), time_elapsed_(time_elapsed)
 {
 }
+

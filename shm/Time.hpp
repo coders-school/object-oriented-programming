@@ -3,13 +3,16 @@
 #include "Observer.hpp"
 #include <vector>
 
-class Time {
+
+class Time
+{
 public:
     Time() = default;
 
-    void addObserver(Observer *obs);
-    void removeObserver(Observer *obs);
-    [[nodiscard]] size_t getElapsedTime() const {return time_elapsed_; }
+    void addObserver(Observer* obs);
+    void removeObserver(Observer* obs);
+    [[nodiscard]] size_t getElapsedTime() const { return time_elapsed_; }
+
     Time& operator++();
 
 private:

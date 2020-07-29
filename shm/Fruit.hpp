@@ -10,7 +10,7 @@ public:
 
     ~Fruit() override = default;
 
-    void Print() const override = 0;
+    void Print() const override;
 
     [[nodiscard]] std::string GetName() const override;
     [[nodiscard]] size_t GetPrice() const override;
@@ -25,6 +25,7 @@ public:
 
     [[nodiscard]] size_t GetTimeElapsed() const;
     [[nodiscard]] size_t GetExpiryDate() const;
+    void NextDay();
 
 private:
     size_t time_elapsed_{};

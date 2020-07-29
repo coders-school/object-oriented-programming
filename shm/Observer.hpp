@@ -1,6 +1,7 @@
 #pragma once
 
-class Observer {
+class Observer
+{
 public:
     virtual void NextDay() = 0;
     virtual ~Observer() = default;

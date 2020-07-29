@@ -13,7 +13,8 @@ private:
     std::vector<std::unique_ptr<Cargo>> cargo_;
     //    Time* time_; # TODO after implementation Time class
 
-    enum class Response {
+    enum class Response
+    {
         lack_of_money,
         lack_of_cargo,
         lack_of_space,

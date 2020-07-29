@@ -1,9 +1,20 @@
 #include "Player.hpp"
 #include "ShmExceptions.hpp"
 
+void Player::Player::PayCrew(size_t money)
+{
+    if (money_ >= money)
+    {
+        money_ = money_ - money;
+    }
+    else
+        throw AmountException("Not enough money!");
+}
+
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space) : money_(money), availableSpace_(space)
 {
     ship_ = std::move(ship);
+    ship_->addDelegate(this);
 };
 
 void Player::updateAvailableSpace()
@@ -23,17 +34,20 @@ void Player::earnMoney(size_t amount)
 
 void Player::spendMoney(size_t amount)
 {
-    if(amount > money_) {
+    if (amount > money_)
+    {
         throw AmountException("Not enough money");
     }
 
     money_ -= amount;
 }
 
-Ship* Player::getShip() const {
+Ship* Player::getShip() const
+{
     return ship_.get();
 }
 
-std::vector<std::shared_ptr<Cargo>> Player::getCargos() const {
+std::vector<std::shared_ptr<Cargo>> Player::getCargos() const
+{
     return ship_->getCargos();
 }
