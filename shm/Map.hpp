@@ -15,7 +15,7 @@ private:
     void generateIslands(int numOfIslandsToGenerate);
     Island* currentPosition_{nullptr};
     std::vector<Island> islandsLocations_;
-    friend void populateMapScreen(std::ostream& out, const Map& map);
+    void populateMapScreen(std::ostream& out) const;
 
 public:
     Map();
@@ -26,7 +26,7 @@ public:
     size_t getDistanceToIsland(Island* destination);
 
     Island* getFirstIsland(){return &islandsLocations_[0];} //TEMPORARY
-    void printIsland(){
+    void printIslands(){
         for (const auto& el : islandsLocations_) {
             std::cout<<"island in vec {X;Y} = { "<<el.getPosition().getX()<<" ; "<< el.getPosition().getY()<<" }\n";
         }

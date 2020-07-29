@@ -17,8 +17,6 @@ void Map::generateIslands(int numOfIslandsToGenerate) {
 
     size_t positionX{};
     size_t positionY{};
-    size_t iterations = 0;
-    std::cout<<"wygenerowane wyspy\n";
     while (numOfIslandsToGenerate){
         positionX = distrib(gen);
         positionY = distrib(gen);
@@ -28,11 +26,7 @@ void Map::generateIslands(int numOfIslandsToGenerate) {
                         })) {
             addIsland({positionX, positionY});
             --numOfIslandsToGenerate;
-
-            std::cout<<"iter:\t"<<iterations <<"\tisland {X;Y} = { "<<positionX<<" ; "<<positionY<<" }\n";
         }
-
-        ++iterations;
     }
 }
 
@@ -59,7 +53,7 @@ size_t Map::getDistanceToIsland(Island* destination) {
 
 //Start of helper functions for operator<<
 
-void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, size_t& columnIndex, const Coordinates& currentPosition) {
+void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, const Coordinates& currentPosition) {
     const std::string islandMarker = "O";
     const std::string currentLocationMarker = "X";
     const std::string waterMarker = " ";
@@ -67,42 +61,37 @@ void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islan
     auto foundLocation = std::find_if(islandLocations.begin(), islandLocations.end(), [&cord](const auto& el) { return el.getPosition() == cord; });
 
     if (foundLocation != islandLocations.end()) {
-        // columnIndex++;
-        //out << ((foundLocation->getPosition() == currentPosition) ? currentLocationMarker : islandMarker) << "\t";
-        std::cout<<"found loc {X;Y} = { "<<(*foundLocation).getPosition().getX()<<" ; "<<(*foundLocation).getPosition().getY()<<" }\n";
+        out << ((foundLocation->getPosition() == currentPosition) ? currentLocationMarker : islandMarker) << "\t";
     }
-
-    //out << waterMarker << '\t';
+    else {
+        out << waterMarker << '\t';
+    }
 }
 
-void populateMapScreen(std::ostream& out, const Map& map) {
-    auto playerPosition = map.currentPosition_->getPosition();
-    size_t cnt=0;
-    std::cout<<"\n\nwyspy znalezione find_if'em\n";
-    for (size_t row = minPositionXY; row <= maxPositionXY; row++) {
-        //out << row << '\t';
-        for (size_t column = minPositionXY; column <= maxPositionXY; column++) {
+void Map::populateMapScreen(std::ostream& out) const {
+    auto playerPosition = currentPosition_->getPosition();
+    for (size_t row = minPositionXY + 1; row <= maxPositionXY; row++) {
+        out << row << '\t';
+        for (size_t column = minPositionXY + 1; column <= maxPositionXY; column++) {
             Coordinates cord(column, row);
-            placeMarkersOnMapScreen(out, map.islandsLocations_, cord, column, playerPosition);
-            cnt++;
+            placeMarkersOnMapScreen(out, islandsLocations_, cord, playerPosition);
         }
-        //out << "\n";
+        out << "\n";
     }
-    std::cout<<"cnt: "<<cnt<<"\n";
 }
 
 void fillXCoordinatesRow(std::ostream& out) {
     for (size_t i = minPositionXY; i <= maxPositionXY; i++) {
-        //out << '\t' << i;
+        out << '\t' << i;
     }
-    //out << '\n';
+    out << '\n';
 }
 
 //End of helper functions for operator<<
 
 std::ostream& operator<<(std::ostream& out, const Map& map) {
     fillXCoordinatesRow(out);
-    populateMapScreen(out, map);
+    map.populateMapScreen(out);
 
     return out;
 }
