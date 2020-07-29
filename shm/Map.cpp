@@ -3,11 +3,11 @@
 #include <algorithm>
 #include <cstddef>
 #include <random>
-#include <iostream>
 
 Map::Map() {
     islandsLocations_.reserve(amountOfIslands);
     generateIslands(amountOfIslands);
+    setCurrentPosition(&islandsLocations_[0]);
 }
 
 void Map::generateIslands(int numOfIslandsToGenerate) {

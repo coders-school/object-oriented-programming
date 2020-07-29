@@ -2,7 +2,6 @@
 
 #include <ostream>
 #include <vector>
-#include <iostream>
 
 #include "Island.hpp"
 
@@ -24,11 +23,4 @@ public:
     Island* getIsland(const Coordinates& coordinate);
     friend std::ostream& operator<<(std::ostream& out, const Map& map);
     size_t getDistanceToIsland(Island* destination);
-
-    Island* getFirstIsland(){return &islandsLocations_[0];} //TEMPORARY
-    void printIslands(){
-        for (const auto& el : islandsLocations_) {
-            std::cout<<"island in vec {X;Y} = { "<<el.getPosition().getX()<<" ; "<< el.getPosition().getY()<<" }\n";
-        }
-    }
 };
