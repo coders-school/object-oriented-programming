@@ -8,6 +8,7 @@ Time& Time::operator++()
     return *this;
 }
 
+
 void Time::addObserver(Observer* obs)
 {
     observers_.push_back(obs);
