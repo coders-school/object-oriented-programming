@@ -10,7 +10,7 @@ public:
 
     ~Fruit() override = default;
 
-    void Print() const override = 0;
+    void Print() const override;
 
     [[nodiscard]] std::string GetName() const override;
     [[nodiscard]] size_t GetPrice() const override;

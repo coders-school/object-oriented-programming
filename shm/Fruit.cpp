@@ -3,6 +3,7 @@
 void Fruit::Print() const
 {
 }
+
 std::string Fruit::GetName() const
 {
     return name_;
@@ -79,3 +80,4 @@ Fruit::Fruit(size_t amount, const std::string& name, size_t base_price, size_t e
     : Cargo(amount, name, base_price), expiry_date_(expiry_date), time_elapsed_(time_elapsed)
 {
 }
+

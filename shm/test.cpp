@@ -1,92 +1,24 @@
-#include <vector>
-#include <set>
 
+#include <iostream>
 #include "Cargo.hpp"
-#include "Island.hpp"
-#include "Player.hpp"
-#include "Map.hpp"
+#include "Fruit.hpp"
 #include "ShmExceptions.hpp"
 #include "Time.hpp"
 #include "gtest/gtest.h"
 
-TEST(island, twoIslandsPositionsShouldBeEqual)
+
+TEST(cargo, fruitsSpoilWhenDayPasses)
 {
-    Island A(9, 9), B(9, 9);
-    EXPECT_EQ(A.getPosition(), B.getPosition());
+    size_t time_elapsed = 0; 
+    size_t expiry_date = 2;
+    size_t amount = 2;
+    size_t price = 1;
+
+    Fruit  fruit{amount, "japko", price, expiry_date, time_elapsed};
+    fruit.NextDay();
+    EXPECT_EQ(fruit.GetAmount(), 2);
+    fruit.NextDay();
+    EXPECT_EQ(fruit.GetAmount(), 0);
 }
 
-TEST(ship, crewShouldBeZero)
-{
-    Ship ship{1, 1, 1, "a", 1};
-    EXPECT_THROW(ship.operator-=(10), AmountException);
-}
 
-TEST(ship, crewShouldNotBeHigherThanMaxCrew)
-{
-    Ship ship{1, 1, 1, "a", 1};
-    EXPECT_THROW(ship.operator+=(10), AmountException);
-}
-
-TEST(player, newMoneyAmountWasSet)
-{
-    size_t space_ = 0;
-    size_t money_ = 0;
-    Player player(std::make_unique<Ship>(), money_, space_);
-    size_t money = 10;
-    player.setMoney(money);
-    EXPECT_EQ(player.getMoney(), money);
-}
-
-TEST(map, mapWithOneIsland)
-{
-    Map map_(1, 1, 1);
-    Island island_{Island(0, 0)};
-    EXPECT_EQ(map_.getIslands().at(0).getPosition(), island_.getPosition());
-}
-
-TEST(map, mapWith10uniqueIslands)
-{
-    Map map_;
-    std::vector<Island> islands = map_.getIslands();
-    std::set<std::pair<int, int>> set_;
-    for (auto& is : islands)
-        set_.insert(std::make_pair(is.getPosition().position_x, is.getPosition().position_y));
-
-    EXPECT_EQ(map_.getIslands().size(), set_.size());
-}
-
-TEST(map, getIslandShouldRTeturnIsland)
-{
-    Map map_;
-    std::vector<Island> islands = map_.getIslands();
-    Island island_ = islands[4];
-    Coordinates corr = island_.getPosition();
-
-    EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
-}
-
-TEST(map, getIslandShouldRTeturnCorrectIsland)
-{
-    Map map_{};
-    std::vector<Island> islands = map_.getIslands();
-    Island island_ = islands[4];
-    Coordinates corr = islands[1].getPosition();
-
-    EXPECT_NE(map_.getIsland(corr).getPosition(), island_.getPosition());
-}
-
-TEST(map, getIslandShouldReturnNegativeValueWhenIslandNotFound)
-{
-    Map map_{};
-    Coordinates corr{-1, -1};
-    EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
-}
-
-TEST(map, mapWithTooManyIslandsShouldThroException)
-{
-    EXPECT_THROW(Map(1, 1, 100), AmountException);
-}
-
-TEST(map, emptyTestAddExpectCallHere)
-{
-}
