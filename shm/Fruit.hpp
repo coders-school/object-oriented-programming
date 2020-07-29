@@ -25,6 +25,7 @@ public:
 
     [[nodiscard]] size_t GetTimeElapsed() const;
     [[nodiscard]] size_t GetExpiryDate() const;
+    void NextDay();
 
 private:
     size_t time_elapsed_{};
