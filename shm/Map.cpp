@@ -70,9 +70,9 @@ void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islan
 
 void Map::populateMapScreen(std::ostream& out) const {
     auto playerPosition = currentPosition_->getPosition();
-    for (size_t row = minPositionXY + 1; row <= maxPositionXY; row++) {
+    for (size_t row = minPositionXY; row <= maxPositionXY; row++) {
         out << row << '\t';
-        for (size_t column = minPositionXY + 1; column <= maxPositionXY; column++) {
+        for (size_t column = minPositionXY; column <= maxPositionXY; column++) {
             Coordinates cord(column, row);
             placeMarkersOnMapScreen(out, islandsLocations_, cord, playerPosition);
         }
