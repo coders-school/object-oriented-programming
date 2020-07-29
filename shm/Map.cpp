@@ -51,7 +51,7 @@ size_t Map::getDistanceToIsland(Island* destination) {
 
 //Start of helper functions for operator<<
 
-void placeIslandOrCurrentLocationOnScreen(std::ostream& out, const std::vector<Island> islandLocations, const Coordinates& cord, size_t& jIndex, const Coordinates& currentPosition) {
+void showIslandOrCurrentLocationOnScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, size_t& jIndex, const Coordinates& currentPosition) {
     const std::string islandMarker = "O";
     const std::string currentLocation = "X";
 
@@ -74,7 +74,7 @@ void populateMapScreen(std::ostream& out, const Map& map) {
         out << i << "\t";
         for (size_t j = 1; j <= maxPositionXY; j++) {
             Coordinates cord(j, i);
-            placeIslandOrCurrentLocationOnScreen(out, map.islandsLocations_, cord, j, map.currentPosition_->getPosition());
+            showIslandOrCurrentLocationOnScreen(out, map.islandsLocations_, cord, j, map.currentPosition_->getPosition());
             out << waterMarker
                 << "\t";
         }
