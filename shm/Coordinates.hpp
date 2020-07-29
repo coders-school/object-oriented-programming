@@ -14,7 +14,4 @@ public:
     bool operator!=(const Coordinates& cord) const;
 
     static size_t distance(const Coordinates& lhs, const Coordinates& rhs);
-
-    size_t getX(){return positionX_;}
-    size_t getY(){return positionY_;}
 };
