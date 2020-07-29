@@ -51,13 +51,14 @@ size_t Map::getDistanceToIsland(Island* destination) {
 
 //Start of helper functions for operator<<
 
-void showIslandOrCurrentLocationOnScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, size_t& jIndex, const Coordinates& currentPosition) {
+void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, size_t& columnIndex, const Coordinates& currentPosition) {
     const std::string islandMarker = "O";
     const std::string currentLocation = "X";
+    const std::string waterMarker = " ";
 
     for (auto& loc : islandLocations) {
         if (loc.getPosition() == cord) {
-            jIndex++;
+            columnIndex++;
             if (loc.getPosition() == currentPosition)
                 out << currentLocation << "\t";
             else
@@ -65,25 +66,23 @@ void showIslandOrCurrentLocationOnScreen(std::ostream& out, const std::vector<Is
             break;
         }
     }
+    out << waterMarker << '\t';
 }
 
 void populateMapScreen(std::ostream& out, const Map& map) {
-    const std::string waterMarker = " ";
-
-    for (size_t i = 1; i <= maxPositionXY; i++) {
-        out << i << "\t";
-        for (size_t j = 1; j <= maxPositionXY; j++) {
-            Coordinates cord(j, i);
-            showIslandOrCurrentLocationOnScreen(out, map.islandsLocations_, cord, j, map.currentPosition_->getPosition());
-            out << waterMarker
-                << "\t";
+    auto playerPosition = map.currentPosition_->getPosition();
+    for (size_t row = minPositionXY + 1; row <= maxPositionXY; row++) {
+        out << row << '\t';
+        for (size_t column = minPositionXY + 1; column <= maxPositionXY; column++) {
+            Coordinates cord(column, row);
+            placeMarkersOnMapScreen(out, map.islandsLocations_, cord, column, playerPosition);
         }
         out << "\n";
     }
 }
 
 void fillXCoordinatesRow(std::ostream& out) {
-    for (size_t i = 1; i <= maxPositionXY; i++) {
+    for (size_t i = minPositionXY + 1; i <= maxPositionXY; i++) {
         out << '\t' << i;
     }
     out << '\n';
