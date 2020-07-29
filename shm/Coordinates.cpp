@@ -2,6 +2,10 @@
 
 #include <math.h>
 
+Coordinates::Coordinates(size_t positionX, size_t positionY)
+    : positionX_(positionX), positionY_(positionY) {
+};
+
 bool Coordinates::operator==(const Coordinates& cord) const {
     return (positionX_ == cord.positionX_) && (positionY_ == cord.positionY_);
 }

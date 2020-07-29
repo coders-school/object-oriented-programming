@@ -1,5 +1,11 @@
 #include "Store.hpp"
+
 #include <algorithm>
+
+Store::Store(std::shared_ptr<Time>& time)
+    : time_(time) {
+    time_->addObserver(this);
+}
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     const size_t price = amount * cargo->getBasePrice();
@@ -24,9 +30,4 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 
 void Store::nextDay() {
     //Doing nothing for now. Interface purposes
-}
-
-Store::Store(std::shared_ptr<Time>& time)
-    : time_(time) {
-    time_->addObserver(this);
 }
