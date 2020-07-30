@@ -17,13 +17,13 @@ void Map::generateIslands(int numOfIslandsToGenerate) {
 
     size_t positionX{};
     size_t positionY{};
-    while (numOfIslandsToGenerate){
+    while (numOfIslandsToGenerate) {
         positionX = distrib(gen);
         positionY = distrib(gen);
         if (std::none_of(islandsLocations_.begin(), islandsLocations_.end(),
-                        [positionX, positionY](const auto& island) {
-                            return island.getPosition() == Coordinates(positionX, positionY);
-                        })) {
+                         [positionX, positionY](const auto& island) {
+                             return island.getPosition() == Coordinates(positionX, positionY);
+                         })) {
             addIsland({positionX, positionY});
             --numOfIslandsToGenerate;
         }
@@ -56,14 +56,13 @@ size_t Map::getDistanceToIsland(Island* destination) {
 void placeMarkersOnMapScreen(std::ostream& out, const std::vector<Island>& islandLocations, const Coordinates& cord, const Coordinates& currentPosition) {
     const std::string islandMarker = "O";
     const std::string currentLocationMarker = "X";
-    const std::string waterMarker = " ";
+    const std::string waterMarker = "~";
 
     auto foundLocation = std::find_if(islandLocations.begin(), islandLocations.end(), [&cord](const auto& el) { return el.getPosition() == cord; });
 
     if (foundLocation != islandLocations.end()) {
-        out << ((foundLocation->getPosition() == currentPosition) ? currentLocationMarker : islandMarker) << "\t";
-    }
-    else {
+        out << ((foundLocation->getPosition() == currentPosition) ? currentLocationMarker : islandMarker) << '\t';
+    } else {
         out << waterMarker << '\t';
     }
 }
@@ -76,7 +75,7 @@ void Map::populateMapScreen(std::ostream& out) const {
             Coordinates cord(column, row);
             placeMarkersOnMapScreen(out, islandsLocations_, cord, playerPosition);
         }
-        out << "\n";
+        out << '\n';
     }
 }
 
