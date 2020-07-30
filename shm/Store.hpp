@@ -8,9 +8,6 @@
 #include "Observer.hpp"
 #include "Player.hpp"
 
-using CargoPtr = std::shared_ptr<Cargo>;
-using CargoStock = std::vector<std::shared_ptr<Cargo>>;
-
 const std::vector<std::string> fruitNames = {
     "apple",
     "pineapple",
@@ -54,7 +51,7 @@ private:
     void generateAlcos();
     void generateItems();
     void makeStock();
-    CargoPtr makeCargoToBuy(const CargoPtr& cargo, size_t amount) const;
+    CargoPtr makeNewCargo(const CargoPtr& cargo, size_t amount) const;
     void removeFromStore(const CargoPtr& cargo, size_t amount);
     CargoPtr findCargo(const CargoPtr& cargo) const;
     void addToStore(const CargoPtr& cargo, size_t amount);

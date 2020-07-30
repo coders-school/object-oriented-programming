@@ -63,7 +63,7 @@ void Store::makeStock() {
     market_.shrink_to_fit();
 }
 
-CargoPtr Store::makeCargoToBuy(const CargoPtr& cargo, size_t amount) const {
+CargoPtr Store::makeNewCargo(const CargoPtr& cargo, size_t amount) const {
     if (typeid(*cargo) == typeid(Fruit)) {
         Fruit fruit(cargo->getName(), amount, cargo->getBasePrice(), cargo->getUniqueStat());
         return std::make_shared<Fruit>(fruit);
@@ -101,7 +101,7 @@ Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<
         return Response::lack_of_space;
     }
 
-    auto cargoToBuy = makeCargoToBuy(cargo, amount);
+    auto cargoToBuy = makeNewCargo(cargo, amount);
     player->purchaseCargo(cargoToBuy, amount, price);
     removeFromStore(cargo, amount);
 
@@ -123,15 +123,16 @@ void Store::addToStore(const CargoPtr& cargo, size_t amount) {
     if(ptr) {
         *ptr += amount;
     } else {
-        market_.push_back(ptr);
+        market_.push_back(cargo);
     }
 }
 
 Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
     size_t price = cargo->getPrice() * amount;
 
+    auto cargoToSell = makeNewCargo(cargo, amount);
     player->sellCargo(cargo, amount, price);
-    addToStore(cargo, amount);
+    addToStore(cargoToSell, amount);
 
     return Response::done;
 }
