@@ -1,8 +1,10 @@
 #pragma once
 
 #include <iostream>
+#include <map>
 
 #include "Cargo.hpp"
+#include "Item.hpp"
 #include "Observer.hpp"
 #include "Player.hpp"
 
@@ -31,7 +33,7 @@ const std::vector<std::string> itemNames = {
     "parrot",
     "old coin",
     "rusty gun",
-    "pirate's flag"};
+    "pirate's flag"};  
 
 constexpr size_t marketSection = 4;
 
@@ -54,6 +56,8 @@ private:
     void makeStock();
     CargoPtr makeCargoToBuy(const CargoPtr& cargo, size_t amount) const;
     void removeFromStore(const CargoPtr& cargo, size_t amount);
+    CargoPtr findCargo(const CargoPtr& cargo) const;
+    void addToStore(const CargoPtr& cargo, size_t amount);
 
 public:
     Store(std::shared_ptr<Time>& time);

@@ -56,9 +56,11 @@ void Store::generateItems() {
 }
 
 void Store::makeStock() {
+    market_.reserve(marketSection * 3);
     generateFruits();
     generateAlcos();
     generateItems();
+    market_.shrink_to_fit();
 }
 
 CargoPtr Store::makeCargoToBuy(const CargoPtr& cargo, size_t amount) const {
@@ -106,9 +108,30 @@ Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<
     return Response::done;
 }
 
+CargoPtr Store::findCargo(const CargoPtr& cargo) const {
+    auto it = std::find_if(begin(market_), end(market_),
+    [&cargo](const auto& ptr) {
+        return  *cargo == *ptr;
+    });
+
+    return (it == end(market_)) ? nullptr : *it;
+}
+
+void Store::addToStore(const CargoPtr& cargo, size_t amount) {
+    auto ptr = findCargo(cargo);
+
+    if(ptr) {
+        *ptr += amount;
+    } else {
+        market_.push_back(ptr);
+    }
+}
+
 Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
     size_t price = cargo->getPrice() * amount;
+
     player->sellCargo(cargo, amount, price);
+    addToStore(cargo, amount);
 
     return Response::done;
 }
