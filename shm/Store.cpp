@@ -8,6 +8,9 @@
 #include "Fruit.hpp"
 #include "Item.hpp"
 
+constexpr size_t rarityAmount{4};
+constexpr Rarity possibleRarities[rarityAmount]{Rarity::common, Rarity::rare, Rarity::epic, Rarity::legendary};
+
 Store::Store(std::shared_ptr<Time>& time) {
     time_ = time;
     time->addObserver(this);
@@ -47,7 +50,7 @@ void Store::generateAlcos() {
 void Store::generateItems() {
     size_t i = 0;
     while(i < marketSection) {
-        Item item(itemNames[genRand(0, 5)], genRand(1, 10), genRand(30, 100), Rarity::rare);
+        Item item(itemNames[genRand(0, 5)], genRand(1, 10), genRand(30, 100), possibleRarities[genRand(0, 3)]);
         if(std::none_of(begin(market_), end(market_),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
             market_.emplace_back(std::make_shared<Item>(item));
             i++;
