@@ -28,8 +28,7 @@ int main() {
     system("clear");
     std::cout << store;
     std::cout << "Money: " << playerPtr->getMoney() << " Space: " << playerPtr->getAvailableSpace() << "\n";
-
-    shipPtr->print();
+    std::cout << *shipPtr;
 
     std::cout << "Index, amount\n";
     std::cin >> index >> amount;
@@ -40,17 +39,18 @@ int main() {
     system("clear");
     std::cout << store;
     std::cout << "Money: " << playerPtr->getMoney() << " Space: " << playerPtr->getAvailableSpace() << "\n";
-
-    shipPtr->print();
+    std::cout << *shipPtr;
 
     std::cout << "Index, amount\n";
     std::cin >> index >> amount;
 
     cargo = shipPtr->getCargo(index);
     store.sell(cargo, amount, playerPtr);
-
+    
+    system("clear");
+    std::cout << store;
     std::cout << "Money: " << playerPtr->getMoney() << " Space: " << playerPtr->getAvailableSpace() << "\n";
-    shipPtr->print();
+    std::cout << *shipPtr;
 
 
 
