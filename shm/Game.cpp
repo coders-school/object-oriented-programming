@@ -152,6 +152,7 @@ void Game::startGame() {
 
     Time time;
     auto timePtr = std::make_shared<Time>(time);
+    time_ = timePtr.get();
 
     Map map(timePtr);
     map_ = &map;
@@ -161,9 +162,19 @@ void Game::startGame() {
 
     Player player(shipPtr, money_);
     auto playerPtr = std::make_shared<Player>(player);
+    player_ = playerPtr.get();
 
 
     while (1) {
+        if (checkWinCondition()) {
+            printWinScreen();
+            std::exit(0);
+        }
+        if (checkLoseCondition()) {
+            printLoseScreen();
+            std::exit(0);
+        }
+
         printOptions();
         std::cin >> decision;
         makeAction(Action(decision));
