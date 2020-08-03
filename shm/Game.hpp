@@ -14,7 +14,7 @@ enum class Action {
 class Game {
 private:
     size_t money_;
-    size_t days_;
+    const size_t days_;
     size_t final_goal_;
     size_t current_day_;
     Map* map_;
