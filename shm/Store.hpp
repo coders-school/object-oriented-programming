@@ -6,6 +6,7 @@
 #include "Item.hpp"
 #include "Observer.hpp"
 #include "Player.hpp"
+#include "StockManagement.hpp"
 
 const std::vector<std::string> fruitNames = {
     "apple",
@@ -40,9 +41,8 @@ enum class Response {
     lack_of_space
 };
 
-class Store : public Observer {
+class Store : public Observer , public StockManagement {
 private:
-    CargoStock market_{};
     std::shared_ptr<Time> time_{nullptr};
 
     size_t genRand(size_t min, size_t max) const;
@@ -51,9 +51,11 @@ private:
     void generateItems();
     void makeStock();
     CargoPtr makeNewCargo(const CargoPtr& cargo, size_t amount) const;
-    void removeFromStore(const CargoPtr& cargo, size_t amount);
-    CargoPtr findCargo(const CargoPtr& cargo) const;
-    void addToStore(const CargoPtr& cargo, size_t amount);
+
+    //Override from StockManagement
+    CargoPtr findCargo(const CargoPtr& cargo) const override;
+    void removeCargoFromStock(const CargoPtr& cargo, size_t amount) override;
+    void addCargoToStock(const CargoPtr& cargo, size_t amount) override;
 
 public:
     Store(std::shared_ptr<Time>& time);
