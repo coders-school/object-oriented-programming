@@ -26,6 +26,7 @@ private:
     void printTheEnd() const;
     void printWinScreen() const;
     void printLoseScreen() const;
+    void printEndGameScreen() const;
 
     void Travel();
     Coordinates getTravelLocation();

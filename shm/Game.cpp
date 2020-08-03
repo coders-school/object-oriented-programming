@@ -60,6 +60,23 @@ void Game::printLoseScreen() const {
               << horizontalSeparator << "\n";
 }
 
+void Game::printEndGameScreen() const {
+    std::string horizontalSeparator(59, '=');
+    int i = 0;
+    std::cout << horizontalSeparator << "\n";
+    printTheEnd();
+    std::cout << horizontalSeparator << "\n"
+              << std::string(4, ' ') 
+              << "YOU END THE GAME AFTER " 
+              << time_->getElapsedTime() 
+              << " DAYS WITH SCORE " 
+              << player_->getMoney() 
+              << "\n"
+              << std::string(20, ' ')
+              << "THANKS CAPITAN!" << "\n"
+              << horizontalSeparator << "\n";
+}
+
 void Game::Travel() {
     std::cout << *map_;
     auto destination = map_->getIsland(getTravelLocation());
