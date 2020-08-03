@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Ship.hpp"
 
 #include <iostream>
 
@@ -70,6 +71,30 @@ void Game::MakeAction(Action choice) {
         Sell();
         break;
     default:
+        std::cout << "Incorrect choice! Try again!\n";
         break;
+    }
+}
+
+void Game::startGame() {
+    size_t decision{};
+
+    Time time;
+    auto timePtr = std::make_shared<Time>(time);
+
+    Map map(timePtr);
+    map_ = &map;
+
+    Ship ship(100, 100, 10, "tratwa", 42, timePtr);
+    auto shipPtr = std::make_shared<Ship>(ship);
+
+    Player player(shipPtr, money_);
+    auto playerPtr = std::make_shared<Player>(player);
+
+
+    while (1) {
+        printOptions();
+        std::cin >> decision;
+        makeAction(Action(decision));
     }
 }
