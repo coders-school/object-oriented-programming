@@ -23,6 +23,9 @@ private:
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
+    void printTheEnd() const;
+    void printWinScreen() const;
+    void printLoseScreen() const;
 
     void Travel();
     Coordinates getTravelLocation();

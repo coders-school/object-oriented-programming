@@ -15,6 +15,51 @@ bool Game::checkLoseCondition() const {
     return (player_->getMoney() == 0);
 }
 
+void Game::printTheEnd() const {
+    std::cout <<
+        "######## ##     ## ########    ######## ##    ## ######## " << "\n" << 
+        "   ##    ##     ## ##          ##       ###   ## ##     ##" << "\n" <<  
+        "   ##    ##     ## ##          ##       ####  ## ##     ##" << "\n" <<  
+        "   ##    ######### ######      ######   ## ## ## ##     ##" << "\n" << 
+        "   ##    ##     ## ##          ##       ##  #### ##     ##" << "\n" << 
+        "   ##    ##     ## ##          ##       ##   ### ##     ##" << "\n" << 
+        "   ##    ##     ## ########    ######## ##    ## ######## " << "\n";
+}
+
+void Game::printWinScreen() const {
+    std::string horizontalSeparator(59, '=');
+    int i = 0;
+    std::cout << horizontalSeparator << "\n";
+    printTheEnd();
+    std::cout << horizontalSeparator << "\n"
+              << std::string(4, ' ') 
+              << "YOU WIN THE GAME AFTER " 
+              << time_->getElapsedTime() 
+              << " DAYS WITH SCORE " 
+              << player_->getMoney() 
+              << "\n"
+              << std::string(20, ' ')
+              << "CONGRATULATIONS" << "\n"
+              << horizontalSeparator << "\n";
+}
+
+void Game::printLoseScreen() const {
+    std::string horizontalSeparator(59, '=');
+    int i = 0;
+    std::cout << horizontalSeparator << "\n";
+    printTheEnd();
+    std::cout << horizontalSeparator << "\n"
+              << std::string(4, ' ') 
+              << "YOU LOSE THE GAME AFTER "
+              << time_->getElapsedTime()
+              << " DAYS WITH SCORE " 
+              << player_->getMoney() 
+              << "\n"
+              << std::string(25, ' ')
+              << "TRY AGAIN" << "\n"
+              << horizontalSeparator << "\n";
+}
+
 void Game::Travel() {
     std::cout << *map_;
     auto destination = map_->getIsland(getTravelLocation());
