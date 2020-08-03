@@ -19,7 +19,7 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    CargoStock cargo_;
     Delegate* delegate_{nullptr};
     std::shared_ptr<Time> time_{nullptr};
 
