@@ -116,6 +116,11 @@ void Game::printOptions() const {
     std::cout << "0. Exit \n";
 }
 
+void Game::exit() const {
+    printEndGameScreen();
+    std::exit(0);
+}
+
 void Game::makeAction(Action choice) {
     switch (choice) {
     case Action::Exit:
