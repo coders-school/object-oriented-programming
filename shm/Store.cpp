@@ -17,7 +17,7 @@ Store::Store(std::shared_ptr<Time>& time) {
     makeStock();
 }
 
-size_t Store::genRand(int min, int max) const {
+size_t Store::genRand(size_t min, size_t max) const {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distirb(min, max);

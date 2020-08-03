@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <map>
 
 #include "Cargo.hpp"
 #include "Item.hpp"
@@ -46,7 +45,7 @@ private:
     CargoStock market_{};
     std::shared_ptr<Time> time_{nullptr};
 
-    size_t genRand(int min, int max) const;
+    size_t genRand(size_t min, size_t max) const;
     void generateFruits();
     void generateAlcos();
     void generateItems();
