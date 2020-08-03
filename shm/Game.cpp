@@ -12,7 +12,7 @@ bool Game::checkWinCondition() const {
 }
 
 bool Game::checkLoseCondition() const {
-    return (player_->getMoney() == 0);
+    return (player_->getMoney() == 0 || time_->getElapsedTime() == days_);
 }
 
 void Game::printTheEnd() const {
@@ -88,7 +88,6 @@ void Game::advanceTimeTraveling(size_t distance) {
     while (distance > 0) {
         distance -= distancePerDay;
         time_++;
-        days_++;
     }
 }
 
