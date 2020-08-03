@@ -7,11 +7,12 @@
 #include "Cargo.hpp"
 #include "Delegate.hpp"
 #include "Observer.hpp"
+#include "StockManagement.hpp"
 #include "Time.hpp"
 
 constexpr size_t salaryPerWorker = 1;
 
-class Ship : public Observer {
+class Ship : public Observer, public StockManagement {
 private:
     size_t capacity_;
     size_t maxCrew_;
@@ -19,7 +20,6 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    CargoStock cargo_;
     Delegate* delegate_{nullptr};
     std::shared_ptr<Time> time_{nullptr};
 
@@ -37,14 +37,15 @@ public:
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
     CargoPtr getCargo(size_t index) const;
-    const CargoStock& getAllCargos() const { return cargo_; }
+    CargoStock getAllCargos() const { return stock_; }
 
     Ship& operator-=(const size_t crew);
     Ship& operator+=(const size_t crew);
-
-    CargoPtr findCargo(const CargoPtr& cargo) const;    
-    void load(const CargoPtr& cargo);
-    void unload(const CargoPtr& cargo, size_t amount);
+    
+    //Override from StockManagement
+    CargoPtr findCargo(const CargoPtr& cargo) const override;
+    void removeCargoFromStock(const CargoPtr& cargo, size_t amount) override;
+    void addCargoToStock(const CargoPtr& cargo, size_t amount) override;
 
     friend std::ostream& operator<<(std::ostream& out, const Ship& ship);
 
