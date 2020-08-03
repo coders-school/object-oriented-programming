@@ -71,7 +71,6 @@ void Ship::unload(const CargoPtr& cargo, size_t amount) {
 
 std::ostream& operator<<(std::ostream& out, const Ship& ship) {
     std::string horizontalSeparator(41, '=');
-    std::string headerSeparator(22, '=');
     int i = 0;
     out << "\n" << horizontalSeparator
               << "\n"
