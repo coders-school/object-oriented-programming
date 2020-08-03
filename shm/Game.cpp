@@ -77,7 +77,7 @@ void Game::printEndGameScreen() const {
               << horizontalSeparator << "\n";
 }
 
-void Game::Travel() {
+void Game::travel() {
     std::cout << *map_;
     auto destination = map_->getIsland(getTravelLocation());
     if (!destination) {
@@ -108,7 +108,7 @@ void Game::advanceTimeTraveling(size_t distance) {
     }
 }
 
-void Game::PrintOptions() {
+void Game::printOptions() const {
     std::cout << "Ahoy captain! We're waiting for your commands! \n";
     std::cout << "1. Travel \n";
     std::cout << "2. Buy \n";
@@ -116,19 +116,19 @@ void Game::PrintOptions() {
     std::cout << "0. Exit \n";
 }
 
-void Game::MakeAction(Action choice) {
+void Game::makeAction(Action choice) {
     switch (choice) {
     case Action::Exit:
-        Exit();
+        exit();
         break;
     case Action::Travel:
-        Travel();
+        travel();
         break;
     case Action::Buy:
-        Buy();
+        buy();
         break;
     case Action::Sell:
-        Sell();
+        sell();
         break;
     default:
         break;

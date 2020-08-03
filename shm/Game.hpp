@@ -28,14 +28,14 @@ private:
     void printLoseScreen() const;
     void printEndGameScreen() const;
 
-    void Travel();
+    void travel();
     Coordinates getTravelLocation();
     void advanceTimeTraveling(size_t distance);
-    void PrintOptions();
-    void MakeAction(Action choice);
-    void Exit();
-    void Buy();
-    void Sell();
+    void printOptions() const;
+    void makeAction(Action choice);
+    void exit() const;
+    void buy();
+    void sell();
 
 public:
     Game(size_t money, size_t days, size_t final_goal);    
