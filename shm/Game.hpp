@@ -14,7 +14,7 @@ enum class Action {
 class Game {
 private:
     size_t money_;
-    size_t days_;
+    const size_t days_;
     size_t final_goal_;
     size_t current_day_;
     Map* map_;
@@ -23,15 +23,19 @@ private:
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
+    void printTheEnd() const;
+    void printWinScreen() const;
+    void printLoseScreen() const;
+    void printEndGameScreen() const;
 
-    void Travel();
+    void travel();
     Coordinates getTravelLocation();
     void advanceTimeTraveling(size_t distance);
-    void PrintOptions();
-    void MakeAction(Action choice);
-    void Exit();
-    void Buy();
-    void Sell();
+    void printOptions() const;
+    void makeAction(Action choice);
+    void exit() const;
+    void buy();
+    void sell();
 
 public:
     Game(size_t money, size_t days, size_t final_goal);    
