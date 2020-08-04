@@ -59,10 +59,10 @@ std::ostream& operator<<(std::ostream& out, const Ship& ship) {
     int i = 0;
     out << "\n" << horizontalSeparator
               << "\n"
-              << "|| SHIP'S  STOCK"
-              << std::setw(15) << "| QTY "
-              << std::setw(5) << "| PRICE"
-              << std::setw(3) << " ||\n"
+              << "|| SHIP'S  STOCK" << std::setw(15)
+              << "| QTY "<< std::setw(5)
+              << "| PRICE "<< std::setw(3) 
+              << "||\n"
               << horizontalSeparator << "\n";
 
     for (const auto& el : ship.stock_) {

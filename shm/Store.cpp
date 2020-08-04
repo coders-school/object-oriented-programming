@@ -138,10 +138,10 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
 
     out << horizontalSeparator 
               << "\n"
-              << "|| AVAILABLE PRODUCTS"
-              << std::setw(10) << "| QTY "
-              << std::setw(3) << "| PRICE "
-              << std::setw(3) << "||\n"
+              << "|| AVAILABLE PRODUCTS" << std::setw(10)
+              << "| QTY " << std::setw(3)
+              << "| PRICE " << std::setw(3)
+              << "||\n"
               << horizontalSeparator << "\n";
 
     for (const auto& el : store.stock_) {
