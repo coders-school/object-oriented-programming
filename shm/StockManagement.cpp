@@ -27,5 +27,3 @@ void StockManagement::addCargoToStock(CargoStock& stock_, const CargoPtr& cargo,
         stock_.push_back(cargo);
     }
 }
-
-

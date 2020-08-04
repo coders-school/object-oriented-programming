@@ -11,6 +11,3 @@ public:
     static void addCargoToStock(CargoStock& stock_, const CargoPtr& cargo, size_t amount);
 
 };
-
-
-
