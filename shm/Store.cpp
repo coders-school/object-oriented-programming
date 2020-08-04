@@ -29,8 +29,8 @@ void Store::generateFruits() {
     size_t i = 0;
     while(i < marketSection) {
         Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), genRand(1, 10));
-        if(std::none_of(begin(stock_), end(stock_),[&fruit](const auto& ptr){ return ptr->getName() == fruit.getName();})) {
-            stock_.emplace_back(std::make_shared<Fruit>(fruit));
+        if(std::none_of(begin(market_), end(market_),[&fruit](const auto& ptr){ return ptr->getName() == fruit.getName();})) {
+            market_.emplace_back(std::make_shared<Fruit>(fruit));
             i++;
         }
     }
@@ -40,8 +40,8 @@ void Store::generateAlcos() {
     size_t i = 0;
     while(i < marketSection) {
         Alcohol alco(alcoNames[genRand(0, 5)], genRand(1, 5), genRand(30, 100), genRand(40, 96));
-        if(std::none_of(begin(stock_), end(stock_),[&alco](const auto& ptr){ return ptr->getName() == alco.getName();})) {
-            stock_.emplace_back(std::make_shared<Alcohol>(alco));
+        if(std::none_of(begin(market_), end(market_),[&alco](const auto& ptr){ return ptr->getName() == alco.getName();})) {
+            market_.emplace_back(std::make_shared<Alcohol>(alco));
             i++;
         }
     }
@@ -51,8 +51,8 @@ void Store::generateItems() {
     size_t i = 0;
     while(i < marketSection) {
         Item item(itemNames[genRand(0, 5)], genRand(1, 10), genRand(30, 100), possibleRarities[genRand(0, 3)]);
-        if(std::none_of(begin(stock_), end(stock_),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
-            stock_.emplace_back(std::make_shared<Item>(item));
+        if(std::none_of(begin(market_), end(market_),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
+            market_.emplace_back(std::make_shared<Item>(item));
             i++;
         }
     }
@@ -60,11 +60,11 @@ void Store::generateItems() {
 
 void Store::makeStock() {
     constexpr size_t cargosPerSection{3};
-    stock_.reserve(marketSection * cargosPerSection);
+    market_.reserve(marketSection * cargosPerSection);
     generateFruits();
     generateAlcos();
     generateItems();
-    stock_.shrink_to_fit();
+    market_.shrink_to_fit();
 }
 
 CargoPtr Store::makeNewCargo(const CargoPtr& cargo, size_t amount) const {
@@ -83,19 +83,7 @@ CargoPtr Store::makeNewCargo(const CargoPtr& cargo, size_t amount) const {
 }
 
 CargoPtr Store::getCargo(size_t index) const {
-    return stock_[index - 1];
-}
-
-CargoPtr Store::findCargo(const CargoPtr& cargo) const {
-    return StockManagement::findCargo(cargo);
-}
-
-void Store::removeCargoFromStock(const CargoPtr& cargo, size_t amount) {
-    StockManagement::removeCargoFromStock(cargo, amount);
-}
-
-void Store::addCargoToStock(const CargoPtr& cargo, size_t amount) {
-    StockManagement::addCargoToStock(cargo, amount);
+    return market_[index - 1];
 }
 
 Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
@@ -111,7 +99,7 @@ Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<
 
     auto cargoToBuy = makeNewCargo(cargo, amount);
     player->purchaseCargo(cargoToBuy, amount, price);
-    removeCargoFromStock(cargo, amount);
+    removeCargoFromStock(market_, cargo, amount);
     
 
     return Response::done;
@@ -122,13 +110,13 @@ Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr
 
     auto cargoToSell = makeNewCargo(cargo, amount);
     player->sellCargo(cargo, amount, price);
-    addCargoToStock(cargoToSell, amount);
+    addCargoToStock(market_, cargoToSell, amount);
 
     return Response::done;
 }
 
 void Store::nextDay() {
-    stock_.clear();
+    market_.clear();
     makeStock();
 }
 
@@ -144,7 +132,7 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
               << "||\n"
               << horizontalSeparator << "\n";
 
-    for (const auto& el : store.stock_) {
+    for (const auto& el : store.market_) {
         out << "||"
                   << std::setw(2) << ++i << ". "
                   << std::setw(18) << std::left << el->getName() << " | "

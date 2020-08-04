@@ -3,13 +3,14 @@
 #include "Cargo.hpp"
 
 class StockManagement {
-protected:
-    CargoStock stock_{};
+private:
+    static CargoPtr findCargo(const CargoStock& stock_, const CargoPtr& cargo);
 
 public:
-    virtual CargoPtr findCargo(const CargoPtr& cargo) const = 0;
-    virtual void removeCargoFromStock(const CargoPtr& cargo, size_t amount) = 0;
-    virtual void addCargoToStock(const CargoPtr& cargo, size_t amount) = 0;
+    static void removeCargoFromStock(CargoStock& stock_, const CargoPtr& cargo, size_t amount);
+    static void addCargoToStock(CargoStock& stock_, const CargoPtr& cargo, size_t amount);
+
 };
+
 
 

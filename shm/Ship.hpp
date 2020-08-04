@@ -22,6 +22,7 @@ private:
     const size_t id_;
     Delegate* delegate_{nullptr};
     std::shared_ptr<Time> time_{nullptr};
+    CargoStock stock_;
 
 public:
     Ship();
@@ -42,10 +43,8 @@ public:
     Ship& operator-=(const size_t crew);
     Ship& operator+=(const size_t crew);
     
-    //Override from StockManagement
-    CargoPtr findCargo(const CargoPtr& cargo) const override;
-    void removeCargoFromStock(const CargoPtr& cargo, size_t amount) override;
-    void addCargoToStock(const CargoPtr& cargo, size_t amount) override;
+    void load(const CargoPtr& cargo);
+    void unload(const CargoPtr& cargo, size_t amount);
 
     friend std::ostream& operator<<(std::ostream& out, const Ship& ship);
 

@@ -43,6 +43,7 @@ enum class Response {
 
 class Store : public Observer , public StockManagement {
 private:
+    CargoStock market_;
     std::shared_ptr<Time> time_{nullptr};
 
     size_t genRand(size_t min, size_t max) const;
@@ -51,11 +52,6 @@ private:
     void generateItems();
     void makeStock();
     CargoPtr makeNewCargo(const CargoPtr& cargo, size_t amount) const;
-
-    //Override from StockManagement
-    CargoPtr findCargo(const CargoPtr& cargo) const override;
-    void removeCargoFromStock(const CargoPtr& cargo, size_t amount) override;
-    void addCargoToStock(const CargoPtr& cargo, size_t amount) override;
 
 public:
     Store(std::shared_ptr<Time>& time);

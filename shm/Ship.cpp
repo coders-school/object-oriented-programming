@@ -42,16 +42,12 @@ Ship& Ship::operator+=(const size_t crew) {
     return *this;
 }
 
-CargoPtr Ship::findCargo(const CargoPtr& cargo) const {
-    return StockManagement::findCargo(cargo); 
+void Ship::load(const CargoPtr& cargo) {
+    StockManagement::addCargoToStock(stock_, cargo, cargo->getAmount());
 }
 
-void Ship::removeCargoFromStock(const CargoPtr& cargo, size_t amount) {
-    StockManagement::removeCargoFromStock(cargo, amount);
-}
-
-void Ship::addCargoToStock(const CargoPtr& cargo, size_t amount) {
-    StockManagement::addCargoToStock(cargo, amount);
+void Ship::unload(const CargoPtr& cargo, size_t amount) {
+    StockManagement::removeCargoFromStock(stock_, cargo, amount);
 }
 
 std::ostream& operator<<(std::ostream& out, const Ship& ship) {

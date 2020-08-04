@@ -1,7 +1,7 @@
 #include "StockManagement.hpp"
 #include <algorithm>
 
-CargoPtr StockManagement::findCargo(const CargoPtr& cargo) const {
+CargoPtr StockManagement::findCargo(const CargoStock& stock_, const CargoPtr& cargo) {
     auto it = std::find_if(begin(stock_), end(stock_),
     [&cargo](const auto& ptr) {
         return  *cargo == *ptr;
@@ -10,7 +10,7 @@ CargoPtr StockManagement::findCargo(const CargoPtr& cargo) const {
     return (it == end(stock_)) ? nullptr : *it;
 }
 
-void StockManagement::removeCargoFromStock(const CargoPtr& cargo, size_t amount) {
+void StockManagement::removeCargoFromStock(CargoStock& stock_, const CargoPtr& cargo, size_t amount) {
     if (amount == cargo->getAmount()) {
         stock_.erase(std::remove(begin(stock_), end(stock_), cargo), stock_.end());
     } else {
@@ -18,8 +18,8 @@ void StockManagement::removeCargoFromStock(const CargoPtr& cargo, size_t amount)
     }
 }
 
-void StockManagement::addCargoToStock(const CargoPtr& cargo, size_t amount) {
-    auto ptr = findCargo(cargo);
+void StockManagement::addCargoToStock(CargoStock& stock_, const CargoPtr& cargo, size_t amount) {
+    auto ptr = findCargo(stock_, cargo);
 
     if(ptr) {
         *ptr += amount;
