@@ -7,9 +7,10 @@
 #include "Cargo.hpp"
 #include "Delegate.hpp"
 #include "Observer.hpp"
+#include "StockManagement.hpp"
 #include "Time.hpp"
 
-constexpr size_t salaryPerWorker = 1;
+constexpr size_t salaryPerWorker{1};
 
 class Ship : public Observer {
 private:
@@ -19,9 +20,9 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
     Delegate* delegate_{nullptr};
     std::shared_ptr<Time> time_{nullptr};
+    CargoStock stock_;
 
 public:
     Ship();
@@ -36,14 +37,15 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
-    Cargo* getCargo(size_t index) const;
-    const std::vector<std::shared_ptr<Cargo>>& getAllCargos() const { return cargo_; }
+    CargoStock getAllCargos() const { return stock_; }
 
     Ship& operator-=(const size_t crew);
     Ship& operator+=(const size_t crew);
+    
+    void load(const CargoPtr& cargo);
+    void unload(const CargoPtr& cargo, size_t amount);
 
-    void load(const std::shared_ptr<Cargo>& cargo);
-    void unload(Cargo* cargo);
+    friend std::ostream& operator<<(std::ostream& out, const Ship& ship);
 
     //Override from Observer
     void nextDay() override;
