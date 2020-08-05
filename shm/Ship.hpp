@@ -37,7 +37,6 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
-    CargoPtr getCargo(size_t index) const;
     CargoStock getAllCargos() const { return stock_; }
 
     Ship& operator-=(const size_t crew);

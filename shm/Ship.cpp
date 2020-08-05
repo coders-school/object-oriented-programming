@@ -17,13 +17,6 @@ Ship::Ship(int maxCrew, int speed, size_t id, std::shared_ptr<Time>& time)
     : Ship(0, maxCrew, speed, "", id, time) {
 }
 
-CargoPtr Ship::getCargo(size_t index) const {
-    if (index > stock_.size() || index == 0) {
-        return nullptr;
-    }
-    return stock_[index - 1];
-}
-
 Ship& Ship::operator-=(const size_t crew) {
     if (crew > crew_) {
         crew_ = 0;

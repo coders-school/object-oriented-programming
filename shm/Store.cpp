@@ -82,10 +82,6 @@ CargoPtr Store::makeNewCargo(const CargoPtr& cargo, size_t amount) const {
     return nullptr;
 }
 
-CargoPtr Store::getCargo(size_t index) const {
-    return market_[index - 1];
-}
-
 Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
     const size_t price = amount * cargo->getPrice();
 

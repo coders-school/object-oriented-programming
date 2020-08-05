@@ -57,7 +57,6 @@ public:
     Store(std::shared_ptr<Time>& time);
     Response buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
     Response sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
-    CargoPtr getCargo(size_t index) const;
     CargoStock getAllCargos() const { return market_; }
 
     //Override from Observer
