@@ -29,7 +29,6 @@ void Game::printTheEnd() const {
 
 void Game::printWinScreen() const {
     std::string horizontalSeparator(59, '=');
-    int i = 0;
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
     std::cout << horizontalSeparator << "\n"
@@ -46,7 +45,6 @@ void Game::printWinScreen() const {
 
 void Game::printLoseScreen() const {
     std::string horizontalSeparator(59, '=');
-    int i = 0;
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
     std::cout << horizontalSeparator << "\n"
@@ -63,7 +61,6 @@ void Game::printLoseScreen() const {
 
 void Game::printEndGameScreen() const {
     std::string horizontalSeparator(59, '=');
-    int i = 0;
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
     std::cout << horizontalSeparator << "\n"
