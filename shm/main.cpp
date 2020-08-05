@@ -22,7 +22,7 @@ int main() {
     std::cout << "Index, amount\n";
     std::cin >> index >> amount;
 
-    auto cargo = store.getCargo(index);
+    auto cargo = StockManagement::getCargo(store.getAllCargos(), index);
     store.buy(cargo, amount, playerPtr);
 
     system("clear");
@@ -33,7 +33,7 @@ int main() {
     std::cout << "Index, amount\n";
     std::cin >> index >> amount;
 
-    cargo = store.getCargo(index);
+    cargo = StockManagement::getCargo(store.getAllCargos(), index);
     store.buy(cargo, amount, playerPtr);
 
     system("clear");
@@ -44,7 +44,7 @@ int main() {
     std::cout << "Index, amount\n";
     std::cin >> index >> amount;
 
-    cargo = shipPtr->getCargo(index);
+    cargo = StockManagement::getCargo(shipPtr->getAllCargos(), index);
     store.sell(cargo, amount, playerPtr);
     
     system("clear");
