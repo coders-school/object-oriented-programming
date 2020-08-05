@@ -1,3 +1,4 @@
+#include "Store.hpp"
 #include "Game.hpp"
 
 constexpr size_t startMoney = 1000;
@@ -61,9 +62,6 @@ int main() {
     std::cout << store;
     std::cout << "Money: " << playerPtr->getMoney() << " Space: " << playerPtr->getAvailableSpace() << "\n";
     std::cout << *shipPtr;
-
-
-
 
     return 0;
 }
