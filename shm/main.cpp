@@ -5,7 +5,7 @@ constexpr size_t gameDays = 100;
 constexpr size_t finalGoal = 2000;
 
 int main() {
-    Game gra(start_money, game_days, final_goal);
+    Game gra(startMoney, gameDays, finalGoal);
     gra.startGame();
     
     return 0;
