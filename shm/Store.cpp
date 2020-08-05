@@ -27,9 +27,9 @@ size_t Store::genRand(size_t min, size_t max) const {
 
 void Store::generateFruits() {
     size_t i = 0;
-    while(i < marketSection) {
+    while (i < marketSection) {
         Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), genRand(1, 10));
-        if(std::none_of(begin(market_), end(market_),[&fruit](const auto& ptr){ return ptr->getName() == fruit.getName();})) {
+        if (std::none_of(begin(market_), end(market_), [&fruit](const auto& ptr) { return ptr->getName() == fruit.getName(); })) {
             market_.emplace_back(std::make_shared<Fruit>(fruit));
             i++;
         }
@@ -38,9 +38,9 @@ void Store::generateFruits() {
 
 void Store::generateAlcos() {
     size_t i = 0;
-    while(i < marketSection) {
+    while (i < marketSection) {
         Alcohol alco(alcoNames[genRand(0, 5)], genRand(1, 5), genRand(30, 100), genRand(40, 96));
-        if(std::none_of(begin(market_), end(market_),[&alco](const auto& ptr){ return ptr->getName() == alco.getName();})) {
+        if (std::none_of(begin(market_), end(market_), [&alco](const auto& ptr) { return ptr->getName() == alco.getName(); })) {
             market_.emplace_back(std::make_shared<Alcohol>(alco));
             i++;
         }
@@ -49,9 +49,9 @@ void Store::generateAlcos() {
 
 void Store::generateItems() {
     size_t i = 0;
-    while(i < marketSection) {
+    while (i < marketSection) {
         Item item(itemNames[genRand(0, 5)], genRand(1, 10), genRand(30, 100), possibleRarities[genRand(0, 3)]);
-        if(std::none_of(begin(market_), end(market_),[&item](const auto& ptr){ return ptr->getName() == item.getName();})) {
+        if (std::none_of(begin(market_), end(market_), [&item](const auto& ptr) { return ptr->getName() == item.getName(); })) {
             market_.emplace_back(std::make_shared<Item>(item));
             i++;
         }
@@ -99,8 +99,7 @@ Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<
 
     auto cargoToBuy = makeNewCargo(cargo, amount);
     player->purchaseCargo(cargoToBuy, amount, price);
-    removeCargoFromStock(market_, cargo, amount);
-    
+    StockManagement::removeCargoFromStock(market_, cargo, amount);
 
     return Response::done;
 }
@@ -110,7 +109,7 @@ Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr
 
     auto cargoToSell = makeNewCargo(cargo, amount);
     player->sellCargo(cargo, amount, price);
-    addCargoToStock(market_, cargoToSell, amount);
+    StockManagement::addCargoToStock(market_, cargoToSell, amount);
 
     return Response::done;
 }
@@ -124,22 +123,22 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
     const std::string horizontalSeparator(41, '=');
     size_t i = 0;
 
-    out << horizontalSeparator 
-              << "\n"
-              << "|| AVAILABLE PRODUCTS" << std::setw(10)
-              << "| QTY " << std::setw(3)
-              << "| PRICE " << std::setw(3)
-              << "||\n"
-              << horizontalSeparator << "\n";
+    out << horizontalSeparator
+        << "\n"
+        << "|| AVAILABLE PRODUCTS" << std::setw(10)
+        << "| QTY " << std::setw(3)
+        << "| PRICE " << std::setw(3)
+        << "||\n"
+        << horizontalSeparator << "\n";
 
     for (const auto& el : store.market_) {
         out << "||"
-                  << std::setw(2) << ++i << ". "
-                  << std::setw(18) << std::left << el->getName() << " | "
-                  << std::setw(3) << std::right << el->getAmount() << " | " 
-                  << std::setw(5) << std::right << el->getPrice() << " ||\n";
+            << std::setw(2) << ++i << ". "
+            << std::setw(18) << std::left << el->getName() << " | "
+            << std::setw(3) << std::right << el->getAmount() << " | "
+            << std::setw(5) << std::right << el->getPrice() << " ||\n";
     }
     out << horizontalSeparator << "\n";
-    
+
     return out;
 }

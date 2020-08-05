@@ -10,9 +10,9 @@
 #include "StockManagement.hpp"
 #include "Time.hpp"
 
-constexpr size_t salaryPerWorker = 1;
+constexpr size_t salaryPerWorker{1};
 
-class Ship : public Observer, public StockManagement {
+class Ship : public Observer {
 private:
     size_t capacity_;
     size_t maxCrew_;

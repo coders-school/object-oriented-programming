@@ -30,9 +30,9 @@ const std::vector<std::string> itemNames = {
     "parrot",
     "old coin",
     "rusty gun",
-    "pirate's flag"};  
+    "pirate's flag"};
 
-constexpr size_t marketSection = 4;
+constexpr size_t marketSection{4};
 
 enum class Response {
     done,
@@ -41,7 +41,7 @@ enum class Response {
     lack_of_space
 };
 
-class Store : public Observer , public StockManagement {
+class Store : public Observer {
 private:
     CargoStock market_;
     std::shared_ptr<Time> time_{nullptr};
@@ -58,6 +58,7 @@ public:
     Response buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
     Response sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
     CargoPtr getCargo(size_t index) const;
+    CargoStock getAllCargos() const { return market_; }
 
     //Override from Observer
     void nextDay() override;

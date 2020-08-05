@@ -53,23 +53,24 @@ void Ship::unload(const CargoPtr& cargo, size_t amount) {
 std::ostream& operator<<(std::ostream& out, const Ship& ship) {
     std::string horizontalSeparator(41, '=');
     int i = 0;
-    out << "\n" << horizontalSeparator
-              << "\n"
-              << "|| SHIP'S  STOCK" << std::setw(15)
-              << "| QTY "<< std::setw(5)
-              << "| PRICE "<< std::setw(3) 
-              << "||\n"
-              << horizontalSeparator << "\n";
+    out << "\n"
+        << horizontalSeparator
+        << "\n"
+        << "|| SHIP'S  STOCK" << std::setw(15)
+        << "| QTY " << std::setw(5)
+        << "| PRICE " << std::setw(3)
+        << "||\n"
+        << horizontalSeparator << "\n";
 
     for (const auto& el : ship.stock_) {
         out << "||"
-                  << std::setw(2) << ++i << ". "
-                  << std::setw(18) << std::left << el->getName() << " | "
-                  << std::setw(3) << std::right << el->getAmount() << " | "
-                  << std::setw(5) << std::right << el->getPrice() << " ||\n";
+            << std::setw(2) << ++i << ". "
+            << std::setw(18) << std::left << el->getName() << " | "
+            << std::setw(3) << std::right << el->getAmount() << " | "
+            << std::setw(5) << std::right << el->getPrice() << " ||\n";
     }
     out << horizontalSeparator << "\n";
-    
+
     return out;
 }
 

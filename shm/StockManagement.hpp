@@ -9,5 +9,5 @@ private:
 public:
     static void removeCargoFromStock(CargoStock& stock_, const CargoPtr& cargo, size_t amount);
     static void addCargoToStock(CargoStock& stock_, const CargoPtr& cargo, size_t amount);
-
+    static CargoPtr getCargo(const CargoStock& stock, size_t index);
 };
