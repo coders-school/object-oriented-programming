@@ -5,15 +5,15 @@
 
 constexpr size_t distancePerDay{2};
 
-Game::Game(size_t money, size_t days, size_t final_goal)
-    : money_(money), days_(days), final_goal_(final_goal) {}
+Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
+    : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {}
 
 bool Game::checkWinCondition() const {
-    return (player_->getMoney() >= final_goal_);
+    return (player_->getMoney() >= finalGoal_);
 }
 
 bool Game::checkLoseCondition() const {
-    return (player_->getMoney() == 0 || time_->getElapsedTime() == days_);
+    return (player_->getMoney() == 0 || time_->getElapsedTime() == timeLimit_);
 }
 
 void Game::printTheEnd() const {
