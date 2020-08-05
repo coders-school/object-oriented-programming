@@ -4,8 +4,8 @@
 
 constexpr size_t distancePerDay{2};
 
-Game::Game(size_t money, size_t days, size_t finalGoal)
-    : money_(money), timeLimit_(days), finalGoal_(finalGoal) {}
+Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
+    : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {}
 
 bool Game::checkWinCondition() const {
     return (player_->getMoney() >= finalGoal_);

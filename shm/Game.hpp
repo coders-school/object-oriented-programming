@@ -37,5 +37,5 @@ private:
     void sell();
 
 public:
-    Game(size_t money, size_t days, size_t finalGoal);    
+    Game(size_t money, size_t timeLimit, size_t finalGoal);    
 };
