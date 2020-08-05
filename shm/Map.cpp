@@ -77,9 +77,11 @@ void Map::populateMapScreen(std::ostream& out) const {
         }
         out << '\n';
     }
+    out << '\n';
 }
 
 void fillXCoordinatesRow(std::ostream& out) {
+    out << "Y \\ X";
     for (size_t i = minPositionXY; i <= maxPositionXY; i++) {
         out << '\t' << i;
     }

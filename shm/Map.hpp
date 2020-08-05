@@ -22,6 +22,7 @@ private:
 public:
     Map(std::shared_ptr<Time>& time);
     void setCurrentPosition(Island* const currentPosition);
+    Island* getCurrentPosition() const { return currentPosition_; };
     void addIsland(const Island& newIsland);
     Island* getIsland(const Coordinates& coordinate);
     friend std::ostream& operator<<(std::ostream& out, const Map& map);

@@ -14,6 +14,7 @@ constexpr Rarity possibleRarities[rarityAmount]{Rarity::common, Rarity::rare, Ra
 Store::Store(std::shared_ptr<Time>& time) {
     time_ = time;
     time->addObserver(this);
+    defineStoreEconomy();
     makeStock();
 }
 
@@ -83,7 +84,7 @@ CargoPtr Store::makeNewCargo(const CargoPtr& cargo, size_t amount) const {
 }
 
 Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
-    const size_t price = amount * cargo->getPrice();
+    const size_t price = amount * this->calculateBuyPrice(cargo);
 
     if (cargo->getAmount() < amount) {
         return Response::lack_of_cargo;
@@ -116,14 +117,15 @@ void Store::nextDay() {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    const std::string horizontalSeparator(41, '=');
+    const std::string horizontalSeparator(58, '=');
     size_t i = 0;
 
     out << horizontalSeparator
         << "\n"
         << "|| AVAILABLE PRODUCTS" << std::setw(10)
         << "| QTY " << std::setw(3)
-        << "| PRICE " << std::setw(3)
+        << "| BUY PRICE " << std::setw(13)
+        << "| SELL PRICE " << std::setw(3)
         << "||\n"
         << horizontalSeparator << "\n";
 
@@ -132,9 +134,29 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
             << std::setw(2) << ++i << ". "
             << std::setw(18) << std::left << el->getName() << " | "
             << std::setw(3) << std::right << el->getAmount() << " | "
-            << std::setw(5) << std::right << el->getPrice() << " ||\n";
+            << std::setw(10) << std::right << store.calculateBuyPrice(el) << " | "
+            << std::setw(9) << std::right << el->getPrice() << " ||\n";
     }
     out << horizontalSeparator << "\n";
 
     return out;
+}
+
+size_t Store::calculateBuyPrice(const CargoPtr& cargo) const {
+    size_t cargoPrice = cargo->getPrice();
+    double buyPriceMultiplier = (cargoPrice <= cargoPriceThreshold_ ? belowThreshMultiplier_ : aboveThreshMultiplier_);
+
+    return static_cast<size_t>(cargoPrice * buyPriceMultiplier);
+}
+
+void Store::defineStoreEconomy() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> priceThresh(10, 20);
+    std::uniform_real_distribution<> below(1.5, 1.9);
+    std::uniform_real_distribution<> above(1.2, 1.5);
+
+    cargoPriceThreshold_ = priceThresh(gen);
+    belowThreshMultiplier_ = below(gen);
+    aboveThreshMultiplier_ = above(gen);
 }

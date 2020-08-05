@@ -12,4 +12,7 @@ private:
 public:
     Island(size_t positionX, size_t positionY, std::shared_ptr<Time>& time);
     Coordinates getPosition() const { return position_; };
+    std::shared_ptr<Store> getStore() const { return store_; };
+
+    //TODO operator<<
 };

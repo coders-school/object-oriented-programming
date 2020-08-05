@@ -1,6 +1,7 @@
 #include "StockManagement.hpp"
 
 #include <algorithm>
+#include <iostream>
 
 CargoPtr StockManagement::findCargo(const CargoStock& stock, const CargoPtr& cargo) {
     auto it = std::find_if(begin(stock), end(stock),

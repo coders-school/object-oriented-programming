@@ -1,6 +1,8 @@
 #include "Player.hpp"
 
 #include <numeric>
+#include <ostream>
+#include <string>
 
 Player::Player(std::shared_ptr<Ship>& ship, size_t money) {
     ship_ = ship; /*std::move(ship);*/  //it might be good to let the Player class to construct Ship for itself
@@ -41,4 +43,10 @@ void Player::sellCargo(const CargoPtr& cargo, size_t amount, size_t price) {
     ship_->unload(cargo, amount);
     money_ += price;
     availableSpace_ += amount;
+}
+
+std::ostream& operator<<(std::ostream& out, const Player& player) {
+    out << "Money = " << player.money_ << "\tSpace = " << player.availableSpace_ << "\n";
+    out << *(player.ship_);
+    return out;
 }

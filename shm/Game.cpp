@@ -13,7 +13,14 @@ bool Game::checkWinCondition() const {
 }
 
 bool Game::checkLoseCondition() const {
-    return (player_->getMoney() == 0 || time_->getElapsedTime() == timeLimit_);
+    return (player_->getMoney() == 0 || time_->getElapsedTime() >= timeLimit_);
+}
+
+void Game::getKeyPress() const {
+    std::cin.get();
+    do {
+        std::cout << '\n' << "Press enter to continue...";
+    } while (std::cin.get() != '\n');
 }
 
 void Game::printTheEnd() const {
@@ -28,6 +35,7 @@ void Game::printTheEnd() const {
 }
 
 void Game::printWinScreen() const {
+    system("clear");
     std::string horizontalSeparator(59, '=');
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
@@ -44,6 +52,7 @@ void Game::printWinScreen() const {
 }
 
 void Game::printLoseScreen() const {
+    system("clear");
     std::string horizontalSeparator(59, '=');
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
@@ -60,6 +69,7 @@ void Game::printLoseScreen() const {
 }
 
 void Game::printEndGameScreen() const {
+    system("clear");
     std::string horizontalSeparator(59, '=');
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
@@ -76,25 +86,36 @@ void Game::printEndGameScreen() const {
 }
 
 void Game::travel() {
+    system("clear");
+    auto currentIsland = map_->getCurrentPosition();
+    std::cout << "Your current position is [ X = " 
+              << currentIsland->getPosition().getX() 
+              << " ; Y = "
+              << currentIsland->getPosition().getY() 
+              << " ]\n";
     std::cout << *map_;
     auto destination = map_->getIsland(getTravelLocation());
     if (!destination) {
+        std::cout << "Hey Pirate! Are you sure these coordinates are correct?\n";
+        getKeyPress();
         return;
     }
 
     auto distance = map_->getDistanceToIsland(destination);
     map_->setCurrentPosition(destination);
     advanceTimeTraveling(distance);
+
+    std::cout<< "Capitan! Let's go for " << distance <<" units long trip!\n";
+    getKeyPress();
 }
 
 Coordinates Game::getTravelLocation() {
     std::cout << "Type position X of an Island to travel to: ";
     size_t X{};
     std::cin >> X;
-    std::cout << "\nType position Y of an Island to travel to: ";
+    std::cout << "Type position Y of an Island to travel to: ";
     size_t Y{};
     std::cin >> Y;
-    std::cout << "\n";
 
     return Coordinates(X, Y);
 }
@@ -107,21 +128,89 @@ void Game::advanceTimeTraveling(size_t distance) {
         else {
             distance -= distancePerDay;
         }
-        time_++;
+        time_->operator++();
     }
 }
 
+void Game::printHomeScreen() const {
+    system("clear");
+    auto currentIsland = map_->getCurrentPosition();
+
+    std::cout << "Ahoy Captain! It's day " << time_->getElapsedTime() << " of our game.\n"
+              << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end.\n\n";
+    std::cout << "Your resources are:\n" 
+              << *player_ << "\n";
+    std::cout << "Welcome on the island [ X = " 
+              << currentIsland->getPosition().getX() 
+              << " ; Y = "
+              << currentIsland->getPosition().getY() 
+              << " ]\n";
+    std::cout << "On this island we have a shop with goods listed below\n" 
+              << *(currentIsland->getStore()) << "\n";
+              
+    printOptions();
+}
+
 void Game::printOptions() const {
-    std::cout << "Ahoy captain! We're waiting for your commands! \n";
+    std::cout << "We're waiting for your commands!\n";
     std::cout << "1. Travel \n";
     std::cout << "2. Buy \n";
     std::cout << "3. Sell \n";
+    // std::cout << "4. Show my storage \n";
     std::cout << "0. Exit \n";
 }
 
 void Game::exit() const {
     printEndGameScreen();
     std::exit(0);
+}
+
+void Game::buy() {
+    size_t productIndex{};
+    size_t amount{};
+    auto currentIslandStore = map_->getCurrentPosition()->getStore();
+
+    std::cout << "Let's buy something\n";
+    //std::cout << *currentIslandStore;
+    std::cout << "Select what do you want buy, by product number: ";
+    std::cin >> productIndex;
+    std::cout << "What about amount you need: ";
+    std::cin >> amount;
+    std::cout << "\n";
+   
+    auto cargo = StockManagement::getCargo(currentIslandStore->getAllCargos(), productIndex);
+    // TODO it would be better to call 
+    // currentIslandStore.getCargo(productIndex); 
+    // to achive it Store and Ship have to inherit from StockMgmt and StockMgmt should have it's Stock inside itself as protected member
+    auto resp = currentIslandStore->buy(cargo, amount, player_);
+    switch (resp) {
+    case Response::done:
+        std::cout << "Thanks for the transaction!\n";
+        break;
+    case Response::lack_of_cargo:
+        std::cout << "Sorry, we have not enough of selected product\n";
+        break;
+    case Response::lack_of_money:
+        std::cout << "You don't have enough money!\n";
+        break;
+    case Response::lack_of_space:
+        std::cout << "You don't have enough space!\n";
+        break;
+    default:
+        std::cout << "Unknown response\n";
+        break;
+    }
+    getKeyPress();
+}
+
+void Game::sell() {
+    std::cout << "Gimme Gimme Gimme!\n";
+    //TBD
+    getKeyPress();
+}
+
+void Game::showPlayerStorage() const {
+    std::cout << *player_;
 }
 
 void Game::makeAction(Action choice) {
@@ -139,13 +228,12 @@ void Game::makeAction(Action choice) {
         sell();
         break;
     default:
-        std::cout << "Incorrect choice! Try again!\n";
         break;
     }
 }
 
 void Game::startGame() {
-    size_t decision{};
+    size_t decision{0};
 
     Time time;
     auto timePtr = std::make_shared<Time>(time);
@@ -157,10 +245,12 @@ void Game::startGame() {
     Ship ship(100, 100, 10, "tratwa", 42, timePtr);
     auto shipPtr = std::make_shared<Ship>(ship);
 
-    Player player(shipPtr, money_);
-    auto playerPtr = std::make_shared<Player>(player);
-    player_ = playerPtr.get();
+    player_ = std::make_shared<Player>(shipPtr, money_);
 
+    if (!time_ || !map_ || !player_) {
+        std::cout << "Something went wrong\n";
+        std::exit(-1);
+    }
 
     while (1) {
         if (checkWinCondition()) {
@@ -172,8 +262,9 @@ void Game::startGame() {
             std::exit(0);
         }
 
-        printOptions();
+        printHomeScreen();
         std::cin >> decision;
+        std::cout << "\n";
         makeAction(Action(decision));
     }
 }

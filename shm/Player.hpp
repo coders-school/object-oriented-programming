@@ -26,4 +26,6 @@ public:
 
     //override from Delegate
     void payCrew(size_t money) override;
+
+    friend std::ostream& operator<<(std::ostream& out, const Player& player);
 };
