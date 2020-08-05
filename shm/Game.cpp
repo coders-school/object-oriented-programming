@@ -4,18 +4,77 @@
 
 constexpr size_t distancePerDay{2};
 
-Game::Game(size_t money, size_t days, size_t final_goal)
-    : money_(money), days_(days), final_goal_(final_goal) {}
+Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
+    : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {}
 
 bool Game::checkWinCondition() const {
-    return (player_->getMoney() >= final_goal_);
+    return (player_->getMoney() >= finalGoal_);
 }
 
 bool Game::checkLoseCondition() const {
-    return (player_->getMoney() == 0);
+    return (player_->getMoney() == 0 || time_->getElapsedTime() == timeLimit_);
 }
 
-void Game::Travel() {
+void Game::printTheEnd() const {
+    std::cout <<
+        "######## ##     ## ########    ######## ##    ## ######## " << "\n" << 
+        "   ##    ##     ## ##          ##       ###   ## ##     ##" << "\n" <<  
+        "   ##    ##     ## ##          ##       ####  ## ##     ##" << "\n" <<  
+        "   ##    ######### ######      ######   ## ## ## ##     ##" << "\n" << 
+        "   ##    ##     ## ##          ##       ##  #### ##     ##" << "\n" << 
+        "   ##    ##     ## ##          ##       ##   ### ##     ##" << "\n" << 
+        "   ##    ##     ## ########    ######## ##    ## ######## " << "\n";
+}
+
+void Game::printWinScreen() const {
+    std::string horizontalSeparator(59, '=');
+    std::cout << horizontalSeparator << "\n";
+    printTheEnd();
+    std::cout << horizontalSeparator << "\n"
+              << std::string(4, ' ') 
+              << "YOU WIN THE GAME AFTER " 
+              << time_->getElapsedTime() 
+              << " DAYS WITH SCORE " 
+              << player_->getMoney() 
+              << "\n"
+              << std::string(20, ' ')
+              << "CONGRATULATIONS" << "\n"
+              << horizontalSeparator << "\n";
+}
+
+void Game::printLoseScreen() const {
+    std::string horizontalSeparator(59, '=');
+    std::cout << horizontalSeparator << "\n";
+    printTheEnd();
+    std::cout << horizontalSeparator << "\n"
+              << std::string(4, ' ') 
+              << "YOU LOSE THE GAME AFTER "
+              << time_->getElapsedTime()
+              << " DAYS WITH SCORE " 
+              << player_->getMoney() 
+              << "\n"
+              << std::string(25, ' ')
+              << "TRY AGAIN" << "\n"
+              << horizontalSeparator << "\n";
+}
+
+void Game::printEndGameScreen() const {
+    std::string horizontalSeparator(59, '=');
+    std::cout << horizontalSeparator << "\n";
+    printTheEnd();
+    std::cout << horizontalSeparator << "\n"
+              << std::string(4, ' ') 
+              << "YOU END THE GAME AFTER " 
+              << time_->getElapsedTime() 
+              << " DAYS WITH SCORE " 
+              << player_->getMoney() 
+              << "\n"
+              << std::string(20, ' ')
+              << "THANKS CAPITAN!" << "\n"
+              << horizontalSeparator << "\n";
+}
+
+void Game::travel() {
     std::cout << *map_;
     auto destination = map_->getIsland(getTravelLocation());
     if (!destination) {
@@ -43,11 +102,10 @@ void Game::advanceTimeTraveling(size_t distance) {
     while (distance > 0) {
         distance -= distancePerDay;
         time_++;
-        days_++;
     }
 }
 
-void Game::PrintOptions() {
+void Game::printOptions() const {
     std::cout << "Ahoy captain! We're waiting for your commands! \n";
     std::cout << "1. Travel \n";
     std::cout << "2. Buy \n";
@@ -55,19 +113,24 @@ void Game::PrintOptions() {
     std::cout << "0. Exit \n";
 }
 
-void Game::MakeAction(Action choice) {
+void Game::exit() const {
+    printEndGameScreen();
+    std::exit(0);
+}
+
+void Game::makeAction(Action choice) {
     switch (choice) {
     case Action::Exit:
-        Exit();
+        exit();
         break;
     case Action::Travel:
-        Travel();
+        travel();
         break;
     case Action::Buy:
-        Buy();
+        buy();
         break;
     case Action::Sell:
-        Sell();
+        sell();
         break;
     default:
         break;
