@@ -109,7 +109,7 @@ Coordinates Game::getTravelLocation() {
     return Coordinates(X, Y);
 }
 
-void Game::advanceTimeTraveling(size_t distance) {
+void Game::advanceTimeTraveling(int distance) {
     while (distance > 0) {
         distance -= distancePerDay;
         time_++;
