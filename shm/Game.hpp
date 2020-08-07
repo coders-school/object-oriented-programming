@@ -35,7 +35,9 @@ private:
     void exit() const;
     void buy();
     void sell();
+    Action chooseAction();
 
 public:
-    Game(size_t money, size_t timeLimit, size_t finalGoal);    
+    Game(size_t money, size_t timeLimit, size_t finalGoal);
+    void startGame();
 };
