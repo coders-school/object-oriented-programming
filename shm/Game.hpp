@@ -16,9 +16,9 @@ private:
     size_t money_;
     const size_t timeLimit_;
     size_t finalGoal_;
-    Map* map_;
-    Player* player_;
-    Time* time_;
+    std::unique_ptr<Map> map_;
+    std::unique_ptr<Player> player_;
+    std::shared_ptr<Time> time_;
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
