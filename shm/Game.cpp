@@ -77,8 +77,9 @@ void Game::printEndGameScreen() const {
 void Game::travel() {
     std::cout << *map_;
     auto destination = map_->getIsland(getTravelLocation());
-    if (!destination) {
-        return;
+    while(!destination){
+        std::cout << "\nThere is no Island there. Enter valid Island location\n";
+        destination = map_->getIsland(getTravelLocation());
     }
 
     auto distance = map_->getDistanceToIsland(destination);
