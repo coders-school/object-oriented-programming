@@ -110,7 +110,7 @@ Coordinates Game::getTravelLocation() {
 void Game::advanceTimeTraveling(int distance) {
     while (distance > 0) {
         distance -= distancePerDay;
-        time_->operator++(); //Temporary (I hope) solution
+        ++(*time_);
     }
 }
 
