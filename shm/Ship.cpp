@@ -65,7 +65,7 @@ void Ship::load(const std::shared_ptr<Cargo>& cargo)
 {
     storage_.push_back(cargo);
 
-    //    TODO support case, when product is already loaded previusly
+    //    TODO support case, when product is already loaded previously
 }
 
 void Ship::unload(Cargo* cargo)

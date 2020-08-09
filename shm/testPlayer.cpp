@@ -61,18 +61,6 @@ TEST(player, SpendMoreMoneyThanHaveShouldResultException)
     EXPECT_THROW(player.spendMoney(spentMoney_), AmountException);
 }
 
-TEST(ship, CrewShouldBeZero)
-{
-    Ship ship{1, 1, 1, "a", 1};
-    EXPECT_THROW(ship.operator-=(10), AmountException);
-}
-
-TEST(ship, CrewShouldNotBeHigherThanMaxCrew)
-{
-    Ship ship{1, 1, 1, "a", 1};
-    EXPECT_THROW(ship.operator+=(10), AmountException);
-}
-
 TEST(player, NewMoneyAmountWasSet)
 {
     size_t space_ = 0;
