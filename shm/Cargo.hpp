@@ -21,6 +21,7 @@ public:
     [[nodiscard]] virtual size_t GetPrice() const = 0;
     [[nodiscard]] virtual size_t GetAmount() const = 0;
     [[nodiscard]] virtual size_t GetBasePrice() const = 0;
+    [[nodiscard]] virtual std::string GetDescription() const = 0;
 
     virtual Cargo& operator+=(size_t amount) = 0;
     virtual Cargo& operator-=(size_t amount) = 0;

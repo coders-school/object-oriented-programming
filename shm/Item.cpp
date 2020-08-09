@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "Item.hpp"
 
 Item::Item(size_t amount, const std::string& name, size_t base_price, Rarity rarity)
@@ -60,4 +61,26 @@ bool Item::operator!=(const Cargo& cargo) const
 Item::Rarity Item::GetRarity() const
 {
     return rarity_;
+}
+
+std::string Item::GetDescription() const
+{
+    return "Name: " + name_ + " Amount: " + std::to_string(amount_) + " Price: " + std::to_string(this->GetPrice())
+           + " Rarity: " + GetRarityDesription();
+}
+std::string Item::GetRarityDesription() const
+{
+    switch (GetRarity())
+    {
+        case Item::Rarity::legendary:
+            return "legendary";
+        case Item::Rarity::rare:
+            return "rare";
+        case Item::Rarity::epic:
+            return "epic";
+        case Item::Rarity::common:
+            return "common";
+        default:
+            throw std::invalid_argument("Rarity type not implemented yet");
+    };
 }
