@@ -24,7 +24,7 @@ TEST(player, NotEnoughMoneyToPayCrew)
     EXPECT_THROW(player.getShip()->NextDay(), AmountException);
 }
 
-TEST(player, newSpaceWasSet)
+TEST(player, NewSpaceWasSet)
 {
     size_t space_ = 10;
     size_t money_ = 1;
@@ -32,7 +32,7 @@ TEST(player, newSpaceWasSet)
     EXPECT_EQ(player.getAvailableSpace(), space_);
 }
 
-TEST(player, moneyShouldBeIncreasedAfterErn)
+TEST(player, MoneyShouldBeIncreasedAfterErn)
 {
     size_t space_ = 10;
     size_t money_ = 1;
@@ -42,7 +42,7 @@ TEST(player, moneyShouldBeIncreasedAfterErn)
     EXPECT_EQ(player.getMoney(), money_ + moreMoney_);
 }
 
-TEST(player, moneyShouldBeDecreasedAfterSpend)
+TEST(player, MoneyShouldBeDecreasedAfterSpend)
 {
     size_t space_ = 10;
     size_t money_ = 1000;
@@ -52,7 +52,7 @@ TEST(player, moneyShouldBeDecreasedAfterSpend)
     EXPECT_EQ(player.getMoney(), money_ - spentMoney_);
 }
 
-TEST(player, spendMoreMoneyThanHaveShouldResultException)
+TEST(player, SpendMoreMoneyThanHaveShouldResultException)
 {
     size_t space_ = 10;
     size_t money_ = 100;
@@ -61,19 +61,19 @@ TEST(player, spendMoreMoneyThanHaveShouldResultException)
     EXPECT_THROW(player.spendMoney(spentMoney_), AmountException);
 }
 
-TEST(ship, crewShouldBeZero)
+TEST(ship, CrewShouldBeZero)
 {
     Ship ship{1, 1, 1, "a", 1};
     EXPECT_THROW(ship.operator-=(10), AmountException);
 }
 
-TEST(ship, crewShouldNotBeHigherThanMaxCrew)
+TEST(ship, CrewShouldNotBeHigherThanMaxCrew)
 {
     Ship ship{1, 1, 1, "a", 1};
     EXPECT_THROW(ship.operator+=(10), AmountException);
 }
 
-TEST(player, newMoneyAmountWasSet)
+TEST(player, NewMoneyAmountWasSet)
 {
     size_t space_ = 0;
     size_t money_ = 0;
@@ -82,5 +82,3 @@ TEST(player, newMoneyAmountWasSet)
     player.setMoney(money);
     EXPECT_EQ(player.getMoney(), money);
 }
-
-

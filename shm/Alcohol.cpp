@@ -60,6 +60,12 @@ size_t Alcohol::GetPercentage() const
     return percentage_;
 }
 
+std::string Alcohol::GetDescription() const
+{
+    return "Name: " + name_ + " Amount: " + std::to_string(amount_) + " Price: " + std::to_string(this->GetPrice())
+           + " Percentage: " + std::to_string(percentage_);
+}
+
 size_t Alcohol::NextDay()
 {
     return amount_;

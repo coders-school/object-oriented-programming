@@ -96,3 +96,13 @@ TEST(item, AddToOperatorIncreaseAmount)
     itemA += 5;
     EXPECT_EQ(itemA.GetAmount(), 15);
 }
+
+TEST(item, GetDescriptionReturnFullStringForRegularItemHammer)
+{
+    size_t amount = 50;
+    std::string name = "Hammer";
+    size_t base_price = 15;
+    Item::Rarity rarity = Item::Rarity::common;
+    Item hammer(amount, name, base_price, rarity);
+    EXPECT_EQ(hammer.GetDescription(), "Name: Hammer Amount: 50 Price: 750 Rarity: common");
+}

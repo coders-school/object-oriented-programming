@@ -81,3 +81,8 @@ Fruit::Fruit(size_t amount, const std::string& name, size_t base_price, size_t e
 {
 }
 
+std::string Fruit::GetDescription() const
+{
+    return "Name: " + name_ + " Amount: " + std::to_string(amount_) + " Price: " + std::to_string(this->GetPrice())
+           + " Expiry date: " + std::to_string(expiry_date_);
+}

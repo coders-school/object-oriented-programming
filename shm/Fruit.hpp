@@ -16,6 +16,7 @@ public:
     [[nodiscard]] size_t GetPrice() const override;
     [[nodiscard]] size_t GetAmount() const override;
     [[nodiscard]] size_t GetBasePrice() const override;
+    [[nodiscard]] std::string GetDescription() const override;
 
     Fruit& operator+=(size_t amount) override;
     Fruit& operator-=(size_t amount) override;

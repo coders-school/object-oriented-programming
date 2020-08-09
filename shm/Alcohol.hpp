@@ -10,12 +10,13 @@ public:
 
     ~Alcohol() override = default;
 
-    void Print() const override = 0;
+    void Print() const override;
 
     [[nodiscard]] std::string GetName() const override;
     [[nodiscard]] size_t GetPrice() const override;
     [[nodiscard]] size_t GetAmount() const override;
     [[nodiscard]] size_t GetBasePrice() const override;
+    [[nodiscard]] std::string GetDescription() const override;
 
     Alcohol& operator+=(size_t amount) override;
     Alcohol& operator-=(size_t amount) override;

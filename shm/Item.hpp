@@ -24,6 +24,8 @@ public:
     [[nodiscard]] size_t GetAmount() const override;
     [[nodiscard]] size_t GetBasePrice() const override;
     [[nodiscard]] Item::Rarity GetRarity() const;
+    [[nodiscard]] std::string GetDescription() const override;
+    [[nodiscard]] std::string GetRarityDesription() const;
 
     Item& operator+=(size_t amount) override;
     Item& operator-=(size_t amount) override;

@@ -7,20 +7,20 @@
 #include "Time.hpp"
 #include "gtest/gtest.h"
 
-TEST(island, twoIslandsPositionsShouldBeEqual)
+TEST(island, TwoIslandsPositionsShouldBeEqual)
 {
     Island A(9, 9), B(9, 9);
     EXPECT_EQ(A.getPosition(), B.getPosition());
 }
 
-TEST(map, mapWithOneIsland)
+TEST(map, MapWithOneIsland)
 {
     Map map_(1, 1, 1);
     Island island_{Island(0, 0)};
     EXPECT_EQ(map_.getIslands().at(0).getPosition(), island_.getPosition());
 }
 
-TEST(map, mapWith10uniqueIslands)
+TEST(map, MapWith10uniqueIslands)
 {
     Map map_;
     std::vector<Island> islands = map_.getIslands();
@@ -31,7 +31,7 @@ TEST(map, mapWith10uniqueIslands)
     EXPECT_EQ(map_.getIslands().size(), set_.size());
 }
 
-TEST(map, getIslandShouldRTeturnIsland)
+TEST(map, GetIslandShouldRTeturnIsland)
 {
     Map map_;
     std::vector<Island> islands = map_.getIslands();
@@ -41,7 +41,7 @@ TEST(map, getIslandShouldRTeturnIsland)
     EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
 }
 
-TEST(map, getIslandShouldRTeturnCorrectIsland)
+TEST(map, GetIslandShouldRTeturnCorrectIsland)
 {
     Map map_{};
     std::vector<Island> islands = map_.getIslands();
@@ -51,18 +51,18 @@ TEST(map, getIslandShouldRTeturnCorrectIsland)
     EXPECT_NE(map_.getIsland(corr).getPosition(), island_.getPosition());
 }
 
-TEST(map, getIslandShouldReturnNegativeValueWhenIslandNotFound)
+TEST(map, GetIslandShouldReturnNegativeValueWhenIslandNotFound)
 {
     Map map_{};
     Coordinates corr{-1, -1};
     EXPECT_EQ(map_.getIsland(corr).getPosition(), corr);
 }
 
-TEST(map, mapWithTooManyIslandsShouldThroException)
+TEST(map, MapWithTooManyIslandsShouldThroException)
 {
     EXPECT_THROW(Map(1, 1, 100), AmountException);
 }
 
-TEST(map, emptyTestAddExpectCallHere)
+TEST(map, EmptyTestAddExpectCallHere)
 {
 }
