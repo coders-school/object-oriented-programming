@@ -5,7 +5,17 @@
 constexpr size_t distancePerDay{2};
 
 Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
-    : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {}
+    : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {
+    auto timePtr = std::make_shared<Time>();
+    time_ = timePtr.get();
+
+    auto shipPtr = std::make_shared<Ship>(100, 100, 10, "tratwa", 42, timePtr);
+    auto playerPtr = std::make_shared<Player>(shipPtr, 1000);
+    player_ = playerPtr.get();
+
+    map_ = new Map();
+
+}
 
 bool Game::checkWinCondition() const {
     return (player_->getMoney() >= finalGoal_);
@@ -100,7 +110,7 @@ Coordinates Game::getTravelLocation() {
     return Coordinates(X, Y);
 }
 
-void Game::advanceTimeTraveling(size_t distance) {
+void Game::advanceTimeTraveling(int distance) {
     while (distance > 0) {
         distance -= distancePerDay;
         time_++;
@@ -137,6 +147,42 @@ void Game::makeAction(Action choice) {
     default:
         break;
     }
+}
+
+void Game::startGame() {
+    while(true) {
+
+        if(checkLoseCondition()) {
+            printLoseScreen();
+            return;
+        }
+        else if(checkWinCondition()) {
+            printWinScreen();
+            return;
+        }
+
+        printOptions();
+        makeAction(chooseAction());
+
+    }
+
+}
+
+Action Game::chooseAction() {
+    int action {};
+    std::cout << "Your choice: ";
+    std::cin >> action;
+    std::cout << "\n";
+
+    return Action(action);
+}
+
+void Game::buy() {  //TODO: To be implemented
+
+}
+
+void Game::sell() { //TODO: To be implemented
+
 }
 
 void Game::printPromptInvalidDestination() const {

@@ -30,13 +30,15 @@ private:
 
     void travel();
     Coordinates getTravelLocation();
-    void advanceTimeTraveling(size_t distance);
+    void advanceTimeTraveling(int distance);
     void printOptions() const;
     void makeAction(Action choice);
     void exit() const;
     void buy();
     void sell();
+    Action chooseAction();
 
 public:
-    Game(size_t money, size_t timeLimit, size_t finalGoal);    
+    Game(size_t money, size_t timeLimit, size_t finalGoal);
+    void startGame();
 };
