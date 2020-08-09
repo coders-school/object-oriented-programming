@@ -85,10 +85,9 @@ void Game::printEndGameScreen() const {
 }
 
 void Game::travel() {
-    std::cout << *map_;
     auto destination = map_->getIsland(getTravelLocation());
     while(!destination){
-        std::cout << "\nThere is no Island there. Enter valid Island location\n";
+        printPromptInvalidDestination();
         destination = map_->getIsland(getTravelLocation());
     }
 
@@ -98,7 +97,9 @@ void Game::travel() {
 }
 
 Coordinates Game::getTravelLocation() {
-    std::cout << "Type position X of an Island to travel to: ";
+    std::cout << *map_;
+
+    std::cout << "\nType position X of an Island to travel to: ";
     size_t X{};
     std::cin >> X;
     std::cout << "\nType position Y of an Island to travel to: ";
@@ -182,4 +183,10 @@ void Game::buy() {  //TODO: To be implemented
 
 void Game::sell() { //TODO: To be implemented
 
+}
+
+void Game::printPromptInvalidDestination() const {
+    system("clear");
+    std::cout << *map_;
+    std::cout << "\nThere is no Island there. Enter valid Island location\n";
 }
