@@ -15,8 +15,8 @@ public:
     virtual Cargo& operator+=(const uint16_t);
     virtual Cargo& operator-=(const uint16_t);
     virtual bool operator==(const Cargo&) const;
-    virtual uint16_t GetPrice()const =0;
-    virtual std::string GetName() const;
+    virtual uint16_t getPrice()const =0;
+    virtual std::string getName() const;
     virtual uint16_t getAmount() const;
     virtual uint16_t getBasePrice() const;
 };

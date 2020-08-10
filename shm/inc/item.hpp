@@ -16,8 +16,8 @@ public:
     Rarity getRarity() const { return rarity_; }
 
     //override from Cargo
-      uint16_t GetPrice() const override;
-    std::string GetName() const override;
+      uint16_t getPrice() const override;
+    std::string getName() const override;
     uint16_t getAmount() const override;
     // uint16_t getBasePrice() const override;
     Cargo& operator--();

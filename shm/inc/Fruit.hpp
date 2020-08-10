@@ -8,16 +8,16 @@ public:
 
     // override from Cargo
 
-    uint16_t GetPrice() const override;
-    std::string GetName() const override;
+    uint16_t getPrice() const override;
+    std::string getName() const override;
     uint16_t getAmount() const override;
     // uint16_t getBasePrice() const override;
     Cargo& operator--();
     Cargo& operator+=(uint16_t amount) override;
     Cargo& operator-=(uint16_t amount) override;
     bool operator==(const Cargo&) const override;
-    uint16_t GetTimeElapsed() const;
-    uint16_t GetExpiryDate() const;
+    uint16_t getTimeElapsed() const;
+    uint16_t getExpiryDate() const;
 
 private:
     uint16_t time_elapsed_{0};

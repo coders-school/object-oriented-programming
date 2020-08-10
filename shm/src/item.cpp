@@ -3,11 +3,11 @@
 Item::Item(const std::string& name, uint16_t amount, uint16_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), rarity_(rarity)
 {}
-uint16_t Item::GetPrice() const {
+uint16_t Item::getPrice() const {
     return basePrice_ * static_cast<int>(rarity_);
 }
 
-std::string Item::GetName() const {
+std::string Item::getName() const {
     return name_;
 }
 
@@ -16,7 +16,7 @@ bool Item::operator==(const Cargo& cargoToCheck) const {
         return false;
 
     auto item = static_cast<const Item*>(&cargoToCheck);
-    return name_ == item->GetName() &&
+    return name_ == item->getName() &&
            amount_ == item->getAmount() &&
            basePrice_ == item->getBasePrice() &&
            rarity_ == item->getRarity();
