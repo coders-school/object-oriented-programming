@@ -4,4 +4,5 @@
 
 struct ObserverMock : public Observer
 {
+    MOCK_METHOD0(NextDay, void());
 };

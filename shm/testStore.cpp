@@ -8,13 +8,16 @@
 #include "ObserverMock.hpp"
 
 
+using ::testing::_;
+
 TEST(store, storeCargoShouldBeGenerated)
 {
+    ObserverMock obsMock;
+    TimeMock timeMock;
 
-    ObserverMock* obs = new ObserverMock();
-    TimeMock* timeMock_ptr = new TimeMock();
-    EXPECT_CALL(*timeMock_ptr, addObserver());
 
-    //Store storeA(timeMock_ptr);
+    EXPECT_CALL(timeMock, addObserver(_));
+
+    Store storeA(&timeMock);
 
 }
