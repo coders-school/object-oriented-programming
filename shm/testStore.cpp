@@ -12,8 +12,8 @@ using ::testing::_;
 
 TEST(store, storeCargoShouldBeGenerated)
 {
-    ObserverMock obsMock;
-    TimeMock timeMock;
+    testing::StrictMock<ObserverMock> obsMock;
+    testing::StrictMock<TimeMock> timeMock;
 
     EXPECT_CALL(timeMock, addObserver(_));
     EXPECT_CALL(timeMock, removeObserver(_));
