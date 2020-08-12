@@ -1,6 +1,7 @@
 //
 // Created by adi on 07.07.2020.
 //
+#include <iostream>
 
 #include <algorithm>
 #include "Store.hpp"
@@ -58,6 +59,7 @@ void Store::NextDay()
 Store::Store(Time* time) : time_(time)
 {
     time_->addObserver(this);
+    //here we can receive empty pointer!
 }
 
 Store::~Store()

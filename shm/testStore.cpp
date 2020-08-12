@@ -15,9 +15,8 @@ TEST(store, storeCargoShouldBeGenerated)
     ObserverMock obsMock;
     TimeMock timeMock;
 
-
     EXPECT_CALL(timeMock, addObserver(_));
-
+    EXPECT_CALL(timeMock, removeObserver(_));
     Store storeA(&timeMock);
 
 }

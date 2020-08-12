@@ -9,8 +9,8 @@ class Time
 public:
     Time() = default;
 
-    void addObserver(Observer* obs);
-    void removeObserver(Observer* obs);
+    virtual  void addObserver(Observer* obs);
+    virtual  void removeObserver(Observer* obs);
     [[nodiscard]] size_t getElapsedTime() const { return time_elapsed_; }
 
     Time& operator++();
