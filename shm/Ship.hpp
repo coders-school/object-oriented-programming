@@ -12,7 +12,7 @@
 
 constexpr size_t salaryPerWorker{1};
 
-class Ship : public Observer {
+class Ship : public Observer, public StockManagement {
 private:
     size_t capacity_;
     size_t maxCrew_;
@@ -22,7 +22,6 @@ private:
     const size_t id_;
     Delegate* delegate_{nullptr};
     std::shared_ptr<Time> time_{nullptr};
-    CargoStock stock_;
 
 public:
     Ship();

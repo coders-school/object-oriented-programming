@@ -174,10 +174,7 @@ void Game::buy() {
     std::cin >> amount;
     std::cout << "\n";
    
-    auto cargo = StockManagement::getCargo(currentIslandStore->getAllCargos(), productIndex);
-    // TODO it would be better to call 
-    // currentIslandStore.getCargo(productIndex); 
-    // to achive it Store and Ship have to inherit from StockMgmt and StockMgmt should have it's Stock inside itself as protected member
+    auto cargo = currentIslandStore->getCargo(productIndex);
     auto response = currentIslandStore->buy(cargo, amount, player_);
     switch (response) {
     case Response::done:

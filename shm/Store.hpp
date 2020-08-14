@@ -41,9 +41,8 @@ enum class Response {
     lack_of_space
 };
 
-class Store : public Observer {
+class Store : public Observer, public StockManagement {
 private:
-    CargoStock market_;
     std::shared_ptr<Time> time_{nullptr};
     size_t cargoPriceThreshold_{};
     double belowThreshMultiplier_{};
@@ -62,7 +61,7 @@ public:
     Store(std::shared_ptr<Time>& time);
     Response buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
     Response sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player);
-    CargoStock getAllCargos() const { return market_; }
+    CargoStock getAllCargos() const { return stock_; }
 
     //Override from Observer
     void nextDay() override;

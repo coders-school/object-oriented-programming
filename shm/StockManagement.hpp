@@ -4,10 +4,13 @@
 
 class StockManagement {
 private:
-    static CargoPtr findCargo(const CargoStock& stock, const CargoPtr& cargo);
+    CargoPtr findCargo(const CargoPtr& cargo);
+
+protected:
+    CargoStock stock_;
 
 public:
-    static void removeCargoFromStock(CargoStock& stock, const CargoPtr& cargo, size_t amount);
-    static void addCargoToStock(CargoStock& stock, const CargoPtr& cargo, size_t amount);
-    static CargoPtr getCargo(const CargoStock& stock, size_t index);
+    void removeCargoFromStock(const CargoPtr& cargo, size_t amount);
+    void addCargoToStock(const CargoPtr& cargo, size_t amount);
+    CargoPtr getCargo(size_t index);
 };
