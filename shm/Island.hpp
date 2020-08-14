@@ -14,5 +14,5 @@ public:
     Coordinates getPosition() const { return position_; };
     std::shared_ptr<Store> getStore() const { return store_; };
 
-    //TODO operator<<
+    friend std::ostream& operator<<(std::ostream& out, const Island& island);
 };
