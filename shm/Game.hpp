@@ -8,8 +8,7 @@ enum class Action {
         Exit,
         Travel,
         Buy,
-        Sell,
-        ShowStorage
+        Sell
 };
 
 class Game {
@@ -29,17 +28,17 @@ private:
     void printEndGameScreen() const;
     void getKeyPress() const;
     void printPromptInvalidDestination() const;
+    void printCurrentPositionOnMap() const;
 
     void travel();
     Coordinates getTravelLocation();
-    void advanceTimeTraveling(int distance);
+    void advanceTimeTraveling(size_t distance);
     void printOptions() const;
     void printHomeScreen() const;
     void makeAction(Action choice);
     void exit() const;
     void buy();
     void sell();
-    void showPlayerStorage() const;
 
 public:
     Game(size_t money, size_t timeLimit, size_t finalGoal);    
