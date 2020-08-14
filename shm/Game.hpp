@@ -28,10 +28,11 @@ private:
     void printLoseScreen() const;
     void printEndGameScreen() const;
     void getKeyPress() const;
+    void printPromptInvalidDestination() const;
 
     void travel();
     Coordinates getTravelLocation();
-    void advanceTimeTraveling(size_t distance);
+    void advanceTimeTraveling(int distance);
     void printOptions() const;
     void printHomeScreen() const;
     void makeAction(Action choice);
@@ -42,5 +43,6 @@ private:
 
 public:
     Game(size_t money, size_t timeLimit, size_t finalGoal);    
+    Action chooseAction();
     void startGame();
 };

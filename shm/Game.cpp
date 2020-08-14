@@ -6,7 +6,16 @@
 constexpr size_t distancePerDay{2};
 
 Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
-    : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {}
+    : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {
+    auto timePtr = std::make_shared<Time>();
+    time_ = timePtr.get();
+
+    map_ = new Map(timePtr);
+
+    auto shipPtr = std::make_shared<Ship>(100, 100, 10, "tratwa", 42, timePtr);
+
+    player_ = std::make_shared<Player>(shipPtr, money_);
+}
 
 bool Game::checkWinCondition() const {
     return (player_->getMoney() >= finalGoal_);
@@ -94,11 +103,11 @@ void Game::travel() {
               << currentIsland->getPosition().getY() 
               << " ]\n";
     std::cout << *map_;
-    auto destination = map_->getIsland(getTravelLocation());
-    if (!destination) {
-        std::cout << "Hey Pirate! Are you sure these coordinates are correct?\n";
-        getKeyPress();
-        return;
+        
+    auto destination = map_->getIsland(getTravelLocation()); 
+    while(!destination){
+        printPromptInvalidDestination(); //"Hey Pirate! Are you sure these coordinates are correct?\n";
+        destination = map_->getIsland(getTravelLocation());
     }
 
     auto distance = map_->getDistanceToIsland(destination);
@@ -110,7 +119,9 @@ void Game::travel() {
 }
 
 Coordinates Game::getTravelLocation() {
-    std::cout << "Type position X of an Island to travel to: ";
+    std::cout << *map_;
+
+    std::cout << "\nType position X of an Island to travel to: ";
     size_t X{};
     std::cin >> X;
     std::cout << "Type position Y of an Island to travel to: ";
@@ -120,7 +131,7 @@ Coordinates Game::getTravelLocation() {
     return Coordinates(X, Y);
 }
 
-void Game::advanceTimeTraveling(size_t distance) {
+void Game::advanceTimeTraveling(int distance) {
     while (distance > 0) {
         if (distance < distancePerDay) {
             distance = 0;
@@ -233,38 +244,33 @@ void Game::makeAction(Action choice) {
 }
 
 void Game::startGame() {
-    size_t decision{0};
-
-    Time time;
-    auto timePtr = std::make_shared<Time>(time);
-    time_ = timePtr.get();
-
-    Map map(timePtr);
-    map_ = &map;
-
-    Ship ship(100, 100, 10, "tratwa", 42, timePtr);
-    auto shipPtr = std::make_shared<Ship>(ship);
-
-    player_ = std::make_shared<Player>(shipPtr, money_);
-
-    if (!time_ || !map_ || !player_) {
-        std::cout << "Something went wrong\n";
-        std::exit(-1);
-    }
-
-    while (1) {
-        if (checkWinCondition()) {
-            printWinScreen();
-            std::exit(0);
-        }
-        if (checkLoseCondition()) {
+    while(true) {
+        if(checkLoseCondition()) {
             printLoseScreen();
-            std::exit(0);
+            return;
+        }
+        else if(checkWinCondition()) {
+            printWinScreen();
+            return;
         }
 
         printHomeScreen();
-        std::cin >> decision;
-        std::cout << "\n";
-        makeAction(Action(decision));
+        printOptions();
+        makeAction(chooseAction());
     }
+}
+
+Action Game::chooseAction() {
+    int action {};
+    std::cout << "Your choice: ";
+    std::cin >> action;
+    std::cout << "\n";
+
+    return Action(action);
+}
+
+void Game::printPromptInvalidDestination() const {
+    system("clear");
+    std::cout << *map_;
+    std::cout << "\nThere is no Island there. Enter valid Island location\n";
 }
