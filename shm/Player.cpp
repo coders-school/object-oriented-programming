@@ -46,7 +46,8 @@ void Player::sellCargo(const CargoPtr& cargo, size_t amount, size_t price) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Player& player) {
-    out << "Money = " << player.money_ << "\tSpace = " << player.availableSpace_ << "\n";
+    out << "Money = " << player.money_ << "\tSpace = " << player.availableSpace_;
+    out << " on ship named " << player.ship_->getName() << "\n";
     out << *(player.ship_);
     return out;
 }
