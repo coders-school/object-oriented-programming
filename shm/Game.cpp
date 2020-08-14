@@ -12,7 +12,9 @@ Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
 
     map_ = new Map(timePtr);
 
-    auto shipPtr = std::make_shared<Ship>(100, 100, 10, "tratwa", 42, timePtr);
+    auto shipPtr = std::make_shared<Ship>(100, 100, 10, "Best Tratwa Ever", 42, timePtr);
+    size_t crewAmount = 5;
+    (*shipPtr) += crewAmount;
 
     player_ = std::make_shared<Player>(shipPtr, money_);
 }
