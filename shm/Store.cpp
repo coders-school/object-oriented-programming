@@ -117,15 +117,15 @@ void Store::nextDay() {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    const std::string horizontalSeparator(58, '=');
+    const std::string horizontalSeparator(45, '=');
     size_t i = 0;
 
     out << horizontalSeparator
         << "\n"
         << "|| AVAILABLE PRODUCTS" << std::setw(10)
-        << "| QTY " << std::setw(3)
-        << "| BUY PRICE " << std::setw(13)
-        << "| SELL PRICE " << std::setw(3)
+        << "| QTY " << std::setw(5)
+        << "| BUY PRICE " << std::setw(3)
+        //<< "| SELL PRICE " << std::setw(3)
         << "||\n"
         << horizontalSeparator << "\n";
 
@@ -134,8 +134,10 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
             << std::setw(2) << ++i << ". "
             << std::setw(18) << std::left << el->getName() << " | "
             << std::setw(3) << std::right << el->getAmount() << " | "
-            << std::setw(10) << std::right << store.calculateBuyPrice(el) << " | "
-            << std::setw(9) << std::right << el->getPrice() << " ||\n";
+            << std::setw(9) << std::right << store.calculateBuyPrice(el) 
+            //<< " | "
+            //<< std::setw(9) << std::right << el->getPrice() 
+            << " ||\n";
     }
     out << horizontalSeparator << "\n";
 
