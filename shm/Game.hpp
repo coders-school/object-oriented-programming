@@ -29,6 +29,7 @@ private:
     void getKeyPress() const;
     void printPromptInvalidDestination() const;
     void printCurrentPositionOnMap() const;
+    void printPromptInvalidProductIndex() const;
 
     void travel();
     Coordinates getTravelLocation();

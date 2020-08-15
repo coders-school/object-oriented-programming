@@ -172,11 +172,16 @@ void Game::buy() {
     std::cout << "Let's buy something\n";
     std::cout << "Select what do you want buy, by product number: ";
     std::cin >> productIndex;
+    auto cargo = currentIslandStore->getCargo(--productIndex);
+    while (!cargo) {
+        printPromptInvalidProductIndex();
+        std::cin >> productIndex;
+        cargo = currentIslandStore->getCargo(--productIndex);
+    }
     std::cout << "What about amount you need: ";
     std::cin >> amount;
-    std::cout << "\n";
-   
-    auto cargo = currentIslandStore->getCargo(productIndex);
+    std::cout << "\n";   
+    
     auto response = currentIslandStore->buy(cargo, amount, player_);
     switch (response) {
     case Response::done:
@@ -206,13 +211,17 @@ void Game::sell() {
     std::cout << "Let's sell something\n";
     std::cout << "Select what do you want sell, by product number: ";
     std::cin >> productIndex;
+    auto cargo = player_->getShip()->getCargo(--productIndex);
+    while (!cargo) {
+        printPromptInvalidProductIndex();
+        std::cin >> productIndex;
+        cargo = player_->getShip()->getCargo(--productIndex);
+    }
     std::cout << "What about amount: ";
     std::cin >> amount;
     std::cout << "\n";
-    
-    auto cargo = player_->getShip()->getCargo(productIndex);
+        
     auto response = currentIslandStore->sell(cargo, amount, player_);
-    
     switch (response) {
     case Response::done:
         std::cout << "Thanks for the transaction!\n";
@@ -278,4 +287,8 @@ Action Game::chooseAction() {
 void Game::printPromptInvalidDestination() const {
     system("clear");
     std::cout << "Hey Pirate! There is no Island there. Enter valid Island location.\n";
+}
+
+void Game::printPromptInvalidProductIndex() const {
+    std::cout << "Hey Pirate! Invalid product number. Try again: ";
 }

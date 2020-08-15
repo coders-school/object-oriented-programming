@@ -37,5 +37,9 @@ void StockManagement::addCargoToStock(const CargoPtr& cargo, size_t amount) {
 }
 
 CargoPtr StockManagement::getCargo(size_t index) {
-    return stock_[index - 1];
+    if (index >= stock_.size()) {
+        return nullptr;
+    }
+
+    return stock_[index];
 }
