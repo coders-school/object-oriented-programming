@@ -182,7 +182,7 @@ void Game::buy() {
     std::cin >> amount;
     std::cout << "\n";   
     
-    auto response = currentIslandStore->buy(cargo, amount, player_);
+    auto response = (amount == 0 ) ? Response::done : currentIslandStore->buy(cargo, amount, player_);
     switch (response) {
     case Response::done:
         std::cout << "Thanks for the transaction!\n";
@@ -208,7 +208,15 @@ void Game::sell() {
     size_t amount{};
     auto currentIslandStore = map_->getCurrentPosition()->getStore();
 
+    if (player_->getShip()->isEmpty()) {
+        std::cout << "You have nothing to sell\n";
+        getKeyPress();
+        return;
+    }
+
     std::cout << "Let's sell something\n";
+    std::cout << "If product which you want to sell is in our Store, then we use our SELL PRICE.\n";
+    std::cout << "But if we don't have it, then we use your product PRICE.\n\n";
     std::cout << "Select what do you want sell, by product number: ";
     std::cin >> productIndex;
     auto cargo = player_->getShip()->getCargo(--productIndex);
@@ -221,7 +229,7 @@ void Game::sell() {
     std::cin >> amount;
     std::cout << "\n";
         
-    auto response = currentIslandStore->sell(cargo, amount, player_);
+    auto response = (amount == 0 ) ? Response::done : currentIslandStore->sell(cargo, amount, player_);
     switch (response) {
     case Response::done:
         std::cout << "Thanks for the transaction!\n";
