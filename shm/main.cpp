@@ -1,4 +1,3 @@
-#include "Store.hpp"
 #include "Game.hpp"
 
 constexpr size_t startMoney = 1000;
