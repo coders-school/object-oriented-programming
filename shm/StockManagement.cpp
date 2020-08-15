@@ -13,10 +13,16 @@ CargoPtr StockManagement::findCargo(const CargoPtr& cargo) {
 }
 
 void StockManagement::removeCargoFromStock(const CargoPtr& cargo, size_t amount) {
+    auto ptr = findCargo(cargo);
+
+    if (!ptr) {
+        return;
+    }
+
     if (amount == cargo->getAmount()) {
         stock_.erase(std::remove(begin(stock_), end(stock_), cargo), stock_.end());
     } else {
-        *cargo -= amount;
+        *ptr -= amount;
     }
 }
 
