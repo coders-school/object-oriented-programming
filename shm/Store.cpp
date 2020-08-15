@@ -121,27 +121,36 @@ void Store::nextDay() {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    const std::string horizontalSeparator(45, '=');
+    const std::string horizontalSeparator(74, '=');
     size_t i = 0;
 
     out << horizontalSeparator
         << "\n"
-        << "|| AVAILABLE PRODUCTS" << std::setw(10)
-        << "| QTY " << std::setw(5)
-        << "| BUY PRICE " << std::setw(3)
-        //<< "| SELL PRICE " << std::setw(3)
+        << "|| AVAILABLE PRODUCTS " 
+        << std::setw(25) << "| QTY "
+        << "| BUY PRICE "
+        << "| SELL PRICE " 
         << "||\n"
         << horizontalSeparator << "\n";
 
     for (const auto& el : store.stock_) {
-        out << "||"
+        std::string uniqueStat = "";
+        out << "|| "
             << std::setw(2) << ++i << ". "
-            << std::setw(18) << std::left << el->getName() << " | "
-            << std::setw(3) << std::right << el->getAmount() << " | "
-            << std::setw(9) << std::right << store.calculateBuyPrice(el) 
-            //<< " | "
-            //<< std::setw(9) << std::right << el->getPrice() 
-            << " ||\n";
+            << std::setw(15) << std::left << el->getName(); 
+        if (typeid(*el) == typeid(Alcohol)) {
+            uniqueStat += " (" + std::to_string(el->getUniqueStat()) + "% vol)";
+        }
+        else if (typeid(*el) == typeid(Fruit)) {
+            uniqueStat += " (" + std::to_string(el->getUniqueStat()) + " days to rot)";
+        }
+        else if (typeid(*el) == typeid(Item)) {
+            uniqueStat += " (" + Item::rarityToString((Rarity)el->getUniqueStat()) + ")";
+        }
+        out << std::setw(18) << std::left << uniqueStat << " | ";
+        out << std::setw(3) << std::right << el->getAmount() << " | "
+            << std::setw(9) << std::right << store.calculateBuyPrice(el) << " | "
+            << std::setw(10) << std::right << el->getPrice() << " ||\n";
     }
     out << horizontalSeparator << "\n";
 

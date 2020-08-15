@@ -4,6 +4,10 @@
 #include <iomanip>
 #include <iostream>
 
+#include "Alcohol.hpp"
+#include "Fruit.hpp"
+#include "Item.hpp"
+
 Ship::Ship()
     : id_(0) {
 }
@@ -44,22 +48,34 @@ void Ship::unload(const CargoPtr& cargo, size_t amount) {
 }
 
 std::ostream& operator<<(std::ostream& out, const Ship& ship) {
-    std::string horizontalSeparator(46, '=');
-    int i = 0;
+    std::string horizontalSeparator(57, '=');
+    size_t i = 0;
+
     out << horizontalSeparator
         << "\n"
-        << "|| SHIP'S  STOCK" << std::setw(15)
-        << "| QTY " << std::setw(5)
-        << "| SELL PRICE " << std::setw(3)
+        << "|| SHIP'S STOCK" 
+        << std::setw(32) << "| QTY "
+        << "| PRICE "
         << "||\n"
         << horizontalSeparator << "\n";
 
     for (const auto& el : ship.stock_) {
-        out << "||"
+        std::string uniqueStat = "";
+        out << "|| "
             << std::setw(2) << ++i << ". "
-            << std::setw(18) << std::left << el->getName() << " | "
-            << std::setw(3) << std::right << el->getAmount() << " | "
-            << std::setw(10) << std::right << el->getPrice() << " ||\n";
+            << std::setw(15) << std::left << el->getName();
+        if (typeid(*el) == typeid(Alcohol)) {
+            uniqueStat += " (" + std::to_string(el->getUniqueStat()) + "% vol)";
+        }
+        else if (typeid(*el) == typeid(Fruit)) {
+            uniqueStat += " (" + std::to_string(el->getUniqueStat()) + " days to rot)";
+        }
+        else if (typeid(*el) == typeid(Item)) {
+            uniqueStat += " (" + Item::rarityToString((Rarity)el->getUniqueStat()) + ")";
+        }
+        out << std::setw(18) << std::left << uniqueStat << " | ";
+        out << std::setw(3) << std::right << el->getAmount() << " | "
+            << std::setw(5) << std::right << el->getPrice() << " ||\n";
     }
     out << horizontalSeparator << "\n";
 
