@@ -213,11 +213,18 @@ void Game::sell() {
     auto cargo = player_->getShip()->getCargo(productIndex);
     auto response = currentIslandStore->sell(cargo, amount, player_);
     
-    if (response == Response::done) {
-        std::cout << "Done!\n";
-    } else {
-        std::cout << "Something went wrongn\n";
+    switch (response) {
+    case Response::done:
+        std::cout << "Thanks for the transaction!\n";
+        break;
+    case Response::lack_of_cargo:
+        std::cout << "Sorry, you don't have enough of selected product\n";
+        break;
+    default:
+        std::cout << "Unknown response\n";
+        break;
     }
+
     getKeyPress();
 }
 

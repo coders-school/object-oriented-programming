@@ -102,7 +102,11 @@ Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<
 }
 
 Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
-    size_t price = cargo->getPrice() * amount;
+    const size_t price = cargo->getPrice() * amount;
+
+    if (cargo->getAmount() < amount) {
+        return Response::lack_of_cargo;
+    }
 
     auto cargoToSell = makeNewCargo(cargo, amount);
     player->sellCargo(cargo, amount, price);
