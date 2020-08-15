@@ -13,7 +13,7 @@ Player::Player(std::shared_ptr<Ship>& ship, size_t money) {
 
 void Player::payCrew(size_t money) {
     if (money > money_) {
-        money_ = SIZE_MAX;
+        money_ = 0;
     } else {
         money_ -= money;
     }
