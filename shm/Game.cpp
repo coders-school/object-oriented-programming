@@ -106,6 +106,12 @@ void Game::travel() {
         destination = map_->getIsland(getTravelLocation());
     }
 
+    if (destination == map_->getCurrentPosition()) {
+        std::cout << "Capitan, we are already here!\n";
+        getKeyPress();
+        return;
+    }
+
     auto distance = map_->getDistanceToIsland(destination);
     map_->setCurrentPosition(destination);
     advanceTimeTraveling(distance);
