@@ -29,3 +29,18 @@ bool Item::operator!=(const Cargo& cargo) const {
            getBasePrice() != cargo.getBasePrice() ||
            getPrice() != cargo.getPrice();*/
 }
+
+std::string Item::rarityToString(Rarity rarity) {
+    switch (rarity) {
+    case Rarity::common:
+        return "common";
+    case Rarity::rare:
+        return "rare";
+    case Rarity::epic:
+        return "epic";
+    case Rarity::legendary:
+        return "legendary";
+    default:
+        return "";
+    }
+}

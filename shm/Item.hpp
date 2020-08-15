@@ -31,4 +31,5 @@ public:
     bool operator==(const Cargo& cargo) const override;
     bool operator!=(const Cargo& cargo) const override;
 
+    static std::string rarityToString(Rarity rarity);
 };
