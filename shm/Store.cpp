@@ -168,8 +168,8 @@ void Store::defineStoreEconomy() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> priceThresh(10, 20);
-    std::uniform_real_distribution<> below(1.5, 1.9);
-    std::uniform_real_distribution<> above(1.2, 1.5);
+    std::uniform_real_distribution<> below(1.5, 1.55);
+    std::uniform_real_distribution<> above(1.1, 1.15);
 
     cargoPriceThreshold_ = priceThresh(gen);
     belowThreshMultiplier_ = below(gen);
