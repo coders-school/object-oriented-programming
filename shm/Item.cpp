@@ -19,13 +19,13 @@ Cargo& Item::operator-=(const size_t amount) {
 }
 
 bool Item::operator==(const Cargo& cargo) const {
-    return getName() == cargo.getName() &&
+    return getName() == cargo.getName();/* &&
            getBasePrice() == cargo.getBasePrice() &&
-           getPrice() == cargo.getPrice();
+           getPrice() == cargo.getPrice();*/
 }
 
 bool Item::operator!=(const Cargo& cargo) const {
-    return getName() != cargo.getName() ||
+    return getName() != cargo.getName();/* ||
            getBasePrice() != cargo.getBasePrice() ||
-           getPrice() != cargo.getPrice();
+           getPrice() != cargo.getPrice();*/
 }
