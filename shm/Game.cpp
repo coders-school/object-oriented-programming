@@ -199,8 +199,25 @@ void Game::buy() {
 }
 
 void Game::sell() {
-    std::cout << "Gimme Gimme Gimme!\n";
-    //TBD
+    size_t productIndex{};
+    size_t amount{};
+    auto currentIslandStore = map_->getCurrentPosition()->getStore();
+
+    std::cout << "Let's sell something\n";
+    std::cout << "Select what do you want sell, by product number: ";
+    std::cin >> productIndex;
+    std::cout << "What about amount: ";
+    std::cin >> amount;
+    std::cout << "\n";
+    
+    auto cargo = player_->getShip()->getCargo(productIndex);
+    auto response = currentIslandStore->sell(cargo, amount, player_);
+    
+    if (response == Response::done) {
+        std::cout << "Done!\n";
+    } else {
+        std::cout << "Something went wrongn\n";
+    }
     getKeyPress();
 }
 

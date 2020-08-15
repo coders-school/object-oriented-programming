@@ -20,6 +20,7 @@ public:
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
     size_t getSpeed() const { return ship_->getSpeed(); };
+    std::shared_ptr<Ship> getShip() const { return ship_; };
     
     void purchaseCargo(const CargoPtr& cargo, size_t amount, size_t price);
     void sellCargo(const CargoPtr& cargo, size_t amount, size_t price);
