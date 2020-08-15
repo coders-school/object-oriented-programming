@@ -3,11 +3,10 @@
 #include "Cargo.hpp"
 
 class StockManagement {
-private:
-    CargoPtr findCargo(const CargoPtr& cargo);
-
 protected:
     CargoStock stock_;
+
+    CargoPtr findCargo(const CargoPtr& cargo);
 
 public:
     void removeCargoFromStock(const CargoPtr& cargo, size_t amount);
