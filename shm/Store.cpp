@@ -29,7 +29,7 @@ size_t Store::genRand(size_t min, size_t max) const {
 void Store::generateFruits() {
     size_t i = 0;
     while (i < marketSection) {
-        Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), 10);
+        Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), genRand(6, 10));
         if (std::none_of(begin(stock_), end(stock_), [&fruit](const auto& ptr) { return ptr->getName() == fruit.getName(); })) {
             stock_.emplace_back(std::make_shared<Fruit>(fruit));
             i++;
