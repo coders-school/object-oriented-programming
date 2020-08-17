@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Ship.hpp"
 
 #include <iostream>
 
@@ -9,12 +10,13 @@ Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
     auto timePtr = std::make_shared<Time>();
     time_ = timePtr.get();
 
-    auto shipPtr = std::make_shared<Ship>(100, 100, 10, "tratwa", 42, timePtr);
-    auto playerPtr = std::make_shared<Player>(shipPtr, 1000);
-    player_ = playerPtr.get();
+    map_ = new Map(timePtr);
 
-    map_ = new Map();
+    auto shipPtr = std::make_shared<Ship>(100, 100, 10, "Best Tratwa Ever", 42, timePtr);
+    size_t crewAmount = 5;
+    (*shipPtr) += crewAmount;
 
+    player_ = std::make_shared<Player>(shipPtr, money_);
 }
 
 bool Game::checkWinCondition() const {
@@ -22,7 +24,14 @@ bool Game::checkWinCondition() const {
 }
 
 bool Game::checkLoseCondition() const {
-    return (player_->getMoney() == 0 || time_->getElapsedTime() == timeLimit_);
+    return (player_->getMoney() == 0 || time_->getElapsedTime() >= timeLimit_);
+}
+
+void Game::getKeyPress() const {
+    std::cin.get();
+    do {
+        std::cout << '\n' << "Press enter to continue...";
+    } while (std::cin.get() != '\n');
 }
 
 void Game::printTheEnd() const {
@@ -37,6 +46,7 @@ void Game::printTheEnd() const {
 }
 
 void Game::printWinScreen() const {
+    system("clear");
     std::string horizontalSeparator(59, '=');
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
@@ -53,6 +63,7 @@ void Game::printWinScreen() const {
 }
 
 void Game::printLoseScreen() const {
+    system("clear");
     std::string horizontalSeparator(59, '=');
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
@@ -69,6 +80,7 @@ void Game::printLoseScreen() const {
 }
 
 void Game::printEndGameScreen() const {
+    system("clear");
     std::string horizontalSeparator(59, '=');
     std::cout << horizontalSeparator << "\n";
     printTheEnd();
@@ -85,40 +97,62 @@ void Game::printEndGameScreen() const {
 }
 
 void Game::travel() {
-    auto destination = map_->getIsland(getTravelLocation());
-    while(!destination){
+    system("clear");
+    printCurrentPositionOnMap();        
+    auto destination = map_->getIsland(getTravelLocation()); 
+    while (!destination) {
         printPromptInvalidDestination();
+        printCurrentPositionOnMap();
         destination = map_->getIsland(getTravelLocation());
     }
 
     auto distance = map_->getDistanceToIsland(destination);
     map_->setCurrentPosition(destination);
     advanceTimeTraveling(distance);
+
+    std::cout << "Capitan! Let's go for " << distance << " units long trip!\n";
+    getKeyPress();
+}
+
+void Game::printCurrentPositionOnMap() const {
+    auto currentIsland = map_->getCurrentPosition();
+    std::cout << "Your current position is " << *currentIsland << "\n";
+    std::cout << *map_;
 }
 
 Coordinates Game::getTravelLocation() {
-    std::cout << *map_;
-
-    std::cout << "\nType position X of an Island to travel to: ";
+    std::cout << "Type position X of an Island to travel to: ";
     size_t X{};
     std::cin >> X;
-    std::cout << "\nType position Y of an Island to travel to: ";
+    std::cout << "Type position Y of an Island to travel to: ";
     size_t Y{};
     std::cin >> Y;
-    std::cout << "\n";
 
     return Coordinates(X, Y);
 }
 
-void Game::advanceTimeTraveling(int distance) {
+void Game::advanceTimeTraveling(size_t distance) {
     while (distance > 0) {
-        distance -= distancePerDay;
-        time_++;
+        distance = distance < distancePerDay ? 0 : distance - distancePerDay;
+        time_->operator++();
     }
 }
 
+void Game::printHomeScreen() const {
+    system("clear");
+    auto currentIsland = map_->getCurrentPosition();
+
+    std::cout << "Ahoy Captain! It's day " << time_->getElapsedTime() << " of our game.\n"
+              << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end.\n\n";
+    std::cout << "Your resources are:\n" 
+              << *player_ << "\n";
+    std::cout << "Welcome on the Island " << *currentIsland << "\n";
+    std::cout << "On this Island we have a shop with goods listed below\n" 
+              << *(currentIsland->getStore()) << "\n";
+}
+
 void Game::printOptions() const {
-    std::cout << "Ahoy captain! We're waiting for your commands! \n";
+    std::cout << "We're waiting for your commands!\n";
     std::cout << "1. Travel \n";
     std::cout << "2. Buy \n";
     std::cout << "3. Sell \n";
@@ -128,6 +162,79 @@ void Game::printOptions() const {
 void Game::exit() const {
     printEndGameScreen();
     std::exit(0);
+}
+
+void Game::buy() {
+    size_t productIndex{};
+    size_t amount{};
+    auto currentIslandStore = map_->getCurrentPosition()->getStore();
+
+    std::cout << "Let's buy something\n";
+    std::cout << "Select what do you want buy, by product number: ";
+    std::cin >> productIndex;
+    auto cargo = currentIslandStore->getCargo(--productIndex);
+    while (!cargo) {
+        printPromptInvalidProductIndex();
+        std::cin >> productIndex;
+        cargo = currentIslandStore->getCargo(--productIndex);
+    }
+    std::cout << "What about amount you need: ";
+    std::cin >> amount;
+    std::cout << "\n";   
+    
+    auto response = currentIslandStore->buy(cargo, amount, player_);
+    switch (response) {
+    case Response::done:
+        std::cout << "Thanks for the transaction!\n";
+        break;
+    case Response::lack_of_cargo:
+        std::cout << "Sorry, we have not enough of selected product\n";
+        break;
+    case Response::lack_of_money:
+        std::cout << "You don't have enough money!\n";
+        break;
+    case Response::lack_of_space:
+        std::cout << "You don't have enough space!\n";
+        break;
+    default:
+        std::cout << "Unknown response\n";
+        break;
+    }
+    getKeyPress();
+}
+
+void Game::sell() {
+    size_t productIndex{};
+    size_t amount{};
+    auto currentIslandStore = map_->getCurrentPosition()->getStore();
+
+    std::cout << "Let's sell something\n";
+    std::cout << "Select what do you want sell, by product number: ";
+    std::cin >> productIndex;
+    auto cargo = player_->getShip()->getCargo(--productIndex);
+    while (!cargo) {
+        printPromptInvalidProductIndex();
+        std::cin >> productIndex;
+        cargo = player_->getShip()->getCargo(--productIndex);
+    }
+    std::cout << "What about amount: ";
+    std::cin >> amount;
+    std::cout << "\n";
+        
+    auto response = currentIslandStore->sell(cargo, amount, player_);
+    switch (response) {
+    case Response::done:
+        std::cout << "Thanks for the transaction!\n";
+        break;
+    case Response::lack_of_cargo:
+        std::cout << "Sorry, you don't have enough of selected product\n";
+        break;
+    default:
+        std::cout << "Unknown response\n";
+        break;
+    }
+
+    getKeyPress();
 }
 
 void Game::makeAction(Action choice) {
@@ -145,31 +252,31 @@ void Game::makeAction(Action choice) {
         sell();
         break;
     default:
+        std::cout << "Invalid choice. Try again.\n";
+        getKeyPress();
         break;
     }
 }
 
 void Game::startGame() {
-    while(true) {
-
-        if(checkLoseCondition()) {
+    while (true) {
+        if (checkLoseCondition()) {
             printLoseScreen();
             return;
         }
-        else if(checkWinCondition()) {
+        else if (checkWinCondition()) {
             printWinScreen();
             return;
         }
 
+        printHomeScreen();
         printOptions();
         makeAction(chooseAction());
-
     }
-
 }
 
 Action Game::chooseAction() {
-    int action {};
+    int action{};
     std::cout << "Your choice: ";
     std::cin >> action;
     std::cout << "\n";
@@ -177,16 +284,11 @@ Action Game::chooseAction() {
     return Action(action);
 }
 
-void Game::buy() {  //TODO: To be implemented
-
-}
-
-void Game::sell() { //TODO: To be implemented
-
-}
-
 void Game::printPromptInvalidDestination() const {
     system("clear");
-    std::cout << *map_;
-    std::cout << "\nThere is no Island there. Enter valid Island location\n";
+    std::cout << "Hey Pirate! There is no Island there. Enter valid Island location.\n";
+}
+
+void Game::printPromptInvalidProductIndex() const {
+    std::cout << "Hey Pirate! Invalid product number. Try again: ";
 }

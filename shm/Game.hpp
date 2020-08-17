@@ -8,7 +8,7 @@ enum class Action {
         Exit,
         Travel,
         Buy,
-        Sell,
+        Sell
 };
 
 class Game {
@@ -16,9 +16,9 @@ private:
     size_t money_;
     const size_t timeLimit_;
     size_t finalGoal_;
-    Map* map_;
-    Player* player_;
-    Time* time_;
+    Map* map_{nullptr};
+    std::shared_ptr<Player> player_{nullptr};
+    Time* time_{nullptr};
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
@@ -26,19 +26,23 @@ private:
     void printWinScreen() const;
     void printLoseScreen() const;
     void printEndGameScreen() const;
+    void getKeyPress() const;
     void printPromptInvalidDestination() const;
+    void printCurrentPositionOnMap() const;
+    void printPromptInvalidProductIndex() const;
 
     void travel();
     Coordinates getTravelLocation();
-    void advanceTimeTraveling(int distance);
+    void advanceTimeTraveling(size_t distance);
     void printOptions() const;
+    void printHomeScreen() const;
     void makeAction(Action choice);
     void exit() const;
     void buy();
     void sell();
-    Action chooseAction();
 
 public:
-    Game(size_t money, size_t timeLimit, size_t finalGoal);
+    Game(size_t money, size_t timeLimit, size_t finalGoal);    
+    Action chooseAction();
     void startGame();
 };
