@@ -31,4 +31,5 @@ public:
     Fruit& operator--();
     size_t getExpirationDays() const { return expirationDays; }
 
+    void setDaysToRot(size_t daysToRot) { daysToRot_ = daysToRot; }
 };
