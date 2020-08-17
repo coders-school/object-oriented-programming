@@ -100,16 +100,15 @@ void Game::travel() {
     system("clear");
     printCurrentPositionOnMap();        
     auto destination = map_->getIsland(getTravelLocation()); 
-    while (!destination) {
-        printPromptInvalidDestination();
+    while (!destination || destination == currentPosition_) {
+        if (!destination) {
+            printPromptInvalidDestination();
+        }
+        if (destination == currentPosition_) {
+            printPromptCurrentPositionEqualsDestination();
+        }
         printCurrentPositionOnMap();
         destination = map_->getIsland(getTravelLocation());
-    }
-
-    if (destination == map_->getCurrentPosition()) {
-        std::cout << "Capitan, we are already here!\n";
-        getKeyPress();
-        return;
     }
 
     auto distance = map_->getDistanceToIsland(destination);
@@ -301,6 +300,11 @@ Action Game::chooseAction() {
 void Game::printPromptInvalidDestination() const {
     system("clear");
     std::cout << "Hey Pirate! There is no Island there. Enter valid Island location.\n";
+}
+
+void Game::printPromptCurrentPositionEqualsDestination() const {
+    system("clear");
+    std::cout << "Capitan, we are already here!\n";
 }
 
 void Game::printPromptInvalidProductIndex() const {
