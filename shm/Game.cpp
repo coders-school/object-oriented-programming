@@ -120,8 +120,7 @@ void Game::travel() {
 }
 
 void Game::printCurrentPositionOnMap() const {
-    auto currentIsland = map_->getCurrentPosition();
-    std::cout << "Your current position is " << *currentIsland << "\n";
+    std::cout << "Your current position is " << *currentPosition_ << "\n";
     std::cout << *map_;
 }
 
@@ -145,15 +144,14 @@ void Game::advanceTimeTraveling(size_t distance) {
 
 void Game::printHomeScreen() const {
     system("clear");
-    auto currentIsland = map_->getCurrentPosition();
 
     std::cout << "Ahoy Captain! It's day " << time_->getElapsedTime() << " of our game.\n"
               << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end.\n\n";
     std::cout << "Your resources are:\n" 
               << *player_ << "\n";
-    std::cout << "Welcome on the Island " << *currentIsland << "\n";
+    std::cout << "Welcome on the Island " << *currentPosition_ << "\n";
     std::cout << "On this Island we have a shop with goods listed below\n" 
-              << *(currentIsland->getStore()) << "\n";
+              << *(currentPosition_->getStore()) << "\n";
 }
 
 void Game::printOptions() const {
@@ -172,7 +170,7 @@ void Game::exit() const {
 void Game::buy() {
     size_t productIndex{};
     size_t amount{};
-    auto currentIslandStore = map_->getCurrentPosition()->getStore();
+    auto currentIslandStore = currentPosition_->getStore();
 
     std::cout << "Let's buy something\n";
     std::cout << "Select what do you want buy, by product number: ";
@@ -211,7 +209,7 @@ void Game::buy() {
 void Game::sell() {
     size_t productIndex{};
     size_t amount{};
-    auto currentIslandStore = map_->getCurrentPosition()->getStore();
+    auto currentIslandStore = currentPosition_->getStore();
 
     if (player_->getShip()->isEmpty()) {
         std::cout << "You have nothing to sell\n";
@@ -273,6 +271,8 @@ void Game::makeAction(Action choice) {
 
 void Game::startGame() {
     while (true) {
+        currentPosition_ = map_->getCurrentPosition();
+
         if (checkLoseCondition()) {
             printLoseScreen();
             return;
