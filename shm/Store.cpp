@@ -101,18 +101,31 @@ Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<
     return Response::done;
 }
 
-Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
-    if (cargo->getAmount() < amount) {
+Response Store::sell(const CargoPtr& playersCargo, size_t amount, const std::shared_ptr<Player>& player) {
+    if (playersCargo->getAmount() < amount) {
         return Response::lack_of_cargo;
     }    
     
-    const auto& cargoFoundInStore = findCargo(cargo);
-    const size_t price = cargoFoundInStore ? cargoFoundInStore->getPrice() * amount : cargo->getPrice() * amount;
+    const auto& cargoFoundInStore = findCargo(playersCargo);
+    double unitPrice{0.0};
 
-    auto cargoToSell = makeNewCargo(cargo, amount);
-    player->sellCargo(cargo, amount, price);
+    if (!cargoFoundInStore) {
+        unitPrice = playersCargo->getPrice();
+    }
+    else {
+        unitPrice = cargoFoundInStore->getPrice();
+        if ((playersCargo->getUniqueStat() < cargoFoundInStore->getUniqueStat()) 
+                && (typeid(*playersCargo) == typeid(Fruit) || typeid(*playersCargo) == typeid(Alcohol))) {
+            unitPrice *= (double)(cargoFoundInStore->getUniqueStat() + playersCargo->getUniqueStat()) / 2;
+            unitPrice /= cargoFoundInStore->getUniqueStat();
+        }
+    }
+    size_t price = (size_t)(unitPrice * amount);
+
+    auto cargoToSell = makeNewCargo(playersCargo, amount);
+    player->sellCargo(playersCargo, amount, price);
     addCargoToStock(cargoToSell, amount);
-
+    
     return Response::done;
 }
 
