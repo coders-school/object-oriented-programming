@@ -100,11 +100,11 @@ void Game::travel() {
     system("clear");
     printCurrentPositionOnMap();        
     auto destination = map_->getIsland(getTravelLocation()); 
-    while (!destination || destination == currentPosition_) {
+    while (!destination || destination->getPosition() == currentPosition_->getPosition()) {
         if (!destination) {
             printPromptInvalidDestination();
         }
-        if (destination == currentPosition_) {
+        else if (destination->getPosition() == currentPosition_->getPosition()) {
             printPromptCurrentPositionEqualsDestination();
         }
         printCurrentPositionOnMap();
@@ -112,8 +112,8 @@ void Game::travel() {
     }
 
     auto distance = map_->getDistanceToIsland(destination);
-    currentPosition_ = destination;
-    map_->setCurrentPosition(currentPosition_);
+    currentPosition_ = std::make_unique<Island>(*destination);
+    map_->setCurrentPosition(currentPosition_.get());
     advanceTimeTraveling(distance);
 
     std::cout << "Capitan! Let's go for " << distance << " units long trip!\n";
@@ -271,7 +271,7 @@ void Game::makeAction(Action choice) {
 }
 
 void Game::startGame() {
-    currentPosition_ = map_->getCurrentPosition();
+    currentPosition_ = std::make_unique<Island>(*(map_->getCurrentPosition()));
     while (true) {
         if (checkLoseCondition()) {
             printLoseScreen();
