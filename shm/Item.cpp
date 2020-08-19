@@ -19,15 +19,11 @@ Cargo& Item::operator-=(const size_t amount) {
 }
 
 bool Item::operator==(const Cargo& cargo) const {
-    return getName() == cargo.getName();/* &&
-           getBasePrice() == cargo.getBasePrice() &&
-           getPrice() == cargo.getPrice();*/
+    return getName() == cargo.getName();
 }
 
 bool Item::operator!=(const Cargo& cargo) const {
-    return getName() != cargo.getName();/* ||
-           getBasePrice() != cargo.getBasePrice() ||
-           getPrice() != cargo.getPrice();*/
+    return getName() != cargo.getName();
 }
 
 std::string Item::rarityToString(Rarity rarity) {
