@@ -43,7 +43,7 @@ void Ship::load(const CargoPtr& cargo) {
     auto foundCargo = findCargo(cargo);
     if (typeid(*cargo) == typeid(Fruit) && foundCargo) {
         size_t averageDaysToRot = (foundCargo->getUniqueStat() + cargo->getUniqueStat()) / 2;
-        ((Fruit*)(foundCargo.get()))->setDaysToRot(averageDaysToRot);
+        (static_cast<Fruit*>(foundCargo.get()))->setDaysToRot(averageDaysToRot);
     }
     addCargoToStock(cargo, cargo->getAmount());
 }

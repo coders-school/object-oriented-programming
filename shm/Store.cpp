@@ -116,11 +116,11 @@ Response Store::sell(const CargoPtr& playersCargo, size_t amount, const std::sha
         unitPrice = cargoFoundInStore->getPrice();
         if ((playersCargo->getUniqueStat() < cargoFoundInStore->getUniqueStat()) 
                 && (typeid(*playersCargo) == typeid(Fruit) || typeid(*playersCargo) == typeid(Alcohol))) {
-            unitPrice *= (double)(cargoFoundInStore->getUniqueStat() + playersCargo->getUniqueStat()) / 2;
+            unitPrice *= static_cast<double>(cargoFoundInStore->getUniqueStat() + playersCargo->getUniqueStat()) / 2;
             unitPrice /= cargoFoundInStore->getUniqueStat();
         }
     }
-    size_t price = (size_t)(unitPrice * amount);
+    size_t price = static_cast<size_t>(unitPrice * amount);
 
     auto cargoToSell = makeNewCargo(playersCargo, amount);
     player->sellCargo(playersCargo, amount, price);
