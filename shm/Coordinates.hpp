@@ -13,5 +13,8 @@ public:
     bool operator==(const Coordinates& cord) const;
     bool operator!=(const Coordinates& cord) const;
 
+    size_t getX() const { return positionX_; };
+    size_t getY() const { return positionY_; };
+
     static size_t distance(const Coordinates& lhs, const Coordinates& rhs);
 };

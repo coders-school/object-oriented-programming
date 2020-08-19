@@ -4,13 +4,13 @@
 #include <cstddef>
 #include <random>
 
-Map::Map() {
+Map::Map(std::shared_ptr<Time>& time) {
     islandsLocations_.reserve(amountOfIslands);
-    generateIslands(amountOfIslands);
+    generateIslands(amountOfIslands, time);
     setCurrentPosition(&islandsLocations_[0]);
 }
 
-void Map::generateIslands(int numOfIslandsToGenerate) {
+void Map::generateIslands(int numOfIslandsToGenerate, std::shared_ptr<Time>& time) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distrib(minPositionXY, maxPositionXY);
@@ -24,7 +24,7 @@ void Map::generateIslands(int numOfIslandsToGenerate) {
                          [positionX, positionY](const auto& island) {
                              return island.getPosition() == Coordinates(positionX, positionY);
                          })) {
-            addIsland({positionX, positionY});
+            addIsland({positionX, positionY, time});
             --numOfIslandsToGenerate;
         }
     }
@@ -77,9 +77,11 @@ void Map::populateMapScreen(std::ostream& out) const {
         }
         out << '\n';
     }
+    out << '\n';
 }
 
 void fillXCoordinatesRow(std::ostream& out) {
+    out << "Y \\ X";
     for (size_t i = minPositionXY; i <= maxPositionXY; i++) {
         out << '\t' << i;
     }
