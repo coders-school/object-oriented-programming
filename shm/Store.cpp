@@ -108,9 +108,10 @@ Response Store::sell(const CargoPtr& playersCargo, size_t amount, const std::sha
     
     const auto& cargoFoundInStore = findCargo(playersCargo);
     double unitPrice{0.0};
+    const size_t priceMultipier{2};
 
     if (!cargoFoundInStore) {
-        unitPrice = playersCargo->getPrice();
+        unitPrice = priceMultipier * playersCargo->getPrice();
     }
     else {
         unitPrice = cargoFoundInStore->getPrice();

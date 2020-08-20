@@ -220,7 +220,7 @@ void Game::sell() {
 
     std::cout << "Let's sell something\n";
     std::cout << "If product which you want to sell is in our Store, then we use our SELL PRICE.\n";
-    std::cout << "But if we don't have it, then we use your product PRICE.\n\n";
+    std::cout << "But if we don't have it, then we use twice the PRICE given by your stock.\n\n";
     std::cout << "Select what do you want sell, by product number: ";
     std::cin >> productIndex;
     auto cargo = player_->getShip()->getCargo(--productIndex);
