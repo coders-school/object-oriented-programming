@@ -22,7 +22,7 @@ private:
     };
 
 public:
-    explicit Store(Time* time);
+    explicit Store(Time& time);
     ~Store() override;
 
     void NextDay() override;
@@ -34,7 +34,7 @@ public:
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
 private:
-    Time* time_;
+    Time& time_;
     void GenerateCargo();
     Cargo* FindMatchCargo(Cargo* cargo);
     void RemoveFromStore(Cargo* cargo);
