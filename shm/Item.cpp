@@ -29,13 +29,13 @@ bool Item::operator!=(const Cargo& cargo) const {
 std::string Item::rarityToString(Rarity rarity) {
     switch (rarity) {
     case Rarity::common:
-        return "common";
+        return "Common";
     case Rarity::rare:
-        return "rare";
+        return "Rare";
     case Rarity::epic:
-        return "epic";
+        return "Epic";
     case Rarity::legendary:
-        return "legendary";
+        return "Legendary";
     default:
         return "";
     }
