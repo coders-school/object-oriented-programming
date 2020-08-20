@@ -33,9 +33,12 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
+
 private:
     Time& time_;
     void GenerateCargo();
     Cargo* FindMatchCargo(Cargo* cargo);
     void RemoveFromStore(Cargo* cargo);
+
+
 };

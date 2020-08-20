@@ -20,3 +20,4 @@ TEST(store, storeCargoShouldBeGenerated)
     Store storeA(timeMock);
 
 }
+

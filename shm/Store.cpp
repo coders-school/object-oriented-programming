@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <algorithm>
+#include <random>
 
 #include "Store.hpp"
 #include "Alcohol.hpp"
@@ -54,15 +55,22 @@ Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player)
 
     return Response::done;
 }
-void Store::NextDay()
-{
-}
 
+void Store::NextDay() 
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> amount(-100,100);
+    for(const auto& cargo_ptr : cargo_) 
+    {
+                *cargo_ptr += amount(gen);
+    }
+    
+}
 
 Store::Store(Time& time) : time_(time)
 {
     time_.addObserver(this);
-    //here we can receive empty pointer!
 }
 
 Store::~Store()
@@ -72,16 +80,15 @@ Store::~Store()
 
 void Store::GenerateCargo()
 {
-    std::vector<std::unique_ptr<Cargo>> cargo_
-    {
-        std::make_unique<Fruit>(std::move(Fruit(10, "Apple", 3, 12))),
-        std::make_unique<Fruit>(std::move(Fruit(100, "RottenApple", 1, 12, 11))),
-        std::make_unique<Alcohol>(std::move(Alcohol(100, "TemerskaCytrynowka", 10, 40))),
-        std::make_unique<Alcohol>(std::move(Alcohol(500, "KadwenskiLager", 2, 12))),
-        std::make_unique<Alcohol>(std::move(Alcohol(100, "MahakamskiSpirytus", 10, 97)))
-    };
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> Amount(0, 200);
 
-
-
-
+    cargo_.push_back(std::make_unique<Fruit>(Amount(gen), "Apple", 3, 12));
+    cargo_.push_back(std::make_unique<Fruit>(Amount(gen), "RottenApple", 1, 12, 11));
+    cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "TemerskaZytnia", 10, 40));
+    cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "KadwenskiLager", 2, 12));
+    cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "MahakamskiSpirytus", 10, 197));
+    
 }
+
