@@ -16,9 +16,9 @@ private:
     size_t money_;
     const size_t timeLimit_;
     size_t finalGoal_;
-    Map* map_{nullptr};
-    std::shared_ptr<Player> player_{nullptr};
-    Time* time_{nullptr};
+    std::unique_ptr<Map> map_;
+    std::shared_ptr<Player> player_;
+    std::shared_ptr<Time> time_;
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;
@@ -33,7 +33,7 @@ private:
 
     void travel();
     Coordinates getTravelLocation();
-    void advanceTimeTraveling(size_t distance);
+    void advanceTimeTraveling(int distance);
     void printOptions() const;
     void printHomeScreen() const;
     void makeAction(Action choice);
