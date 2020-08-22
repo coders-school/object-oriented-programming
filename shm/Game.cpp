@@ -15,7 +15,7 @@ Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
     size_t crewAmount = 5;
     (*ship) += crewAmount;
 
-    player_ = std::make_shared<Player>(ship, 1000);
+    player_ = std::make_shared<Player>(ship, money_);
 
 }
 
