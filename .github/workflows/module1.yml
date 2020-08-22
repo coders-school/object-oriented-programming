@@ -1,4 +1,4 @@
-name: C++ with CMake CI
+name: Module 1 homework
 
 on: [push, pull_request]
 
@@ -9,7 +9,7 @@ jobs:
     - name: Check out code
       uses: actions/checkout@master
     - name: Run check.sh
-      working-directory: shm
+      working-directory: module1/homework/shm
       run: |
         chmod +x check.sh
         sudo apt install -y pcregrep
