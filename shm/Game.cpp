@@ -146,7 +146,7 @@ void Game::printHomeScreen() const {
     system("clear");
 
     std::cout << "Ahoy Captain! It's day " << time_->getElapsedTime() << " of our game.\n"
-              << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end.\n\n";
+              << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end. Get " << finalGoal_ << " money to win.\n\n";
     std::cout << "Your resources are:\n" 
               << *player_ << "\n";
     std::cout << "Welcome on the Island " << *(map_->getCurrentPosition()) << "\n";
