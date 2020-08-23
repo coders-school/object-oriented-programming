@@ -29,8 +29,7 @@ public:
     Ship(int maxCrew, int speed, size_t id, std::shared_ptr<Time>& time);
 
     void setName(const std::string& name) { name_ = name; }
-    void setDelegate(Delegate* const delegate) { delegate_ = delegate; }  //it might be good to integrate it with Ship constructor
-                                                                          //but it then requires Player class to construct Ship for itself
+    void setDelegate(Delegate* const delegate) { delegate_ = delegate; }
     size_t getCapacity() const { return capacity_; }
     size_t getMaxCrew() const { return maxCrew_; }
     size_t getSpeed() const { return speed_; }
