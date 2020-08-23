@@ -19,7 +19,6 @@ private:
     Map* map_{nullptr};
     std::shared_ptr<Player> player_{nullptr};
     Time* time_{nullptr};
-    std::unique_ptr<Island> currentPosition_{nullptr};
 
     bool checkWinCondition() const;
     bool checkLoseCondition() const;

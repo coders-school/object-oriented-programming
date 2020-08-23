@@ -100,11 +100,11 @@ void Game::travel() {
     system("clear");
     printCurrentPositionOnMap();        
     auto destination = map_->getIsland(getTravelLocation()); 
-    while (!destination || destination->getPosition() == currentPosition_->getPosition()) {
+    while (!destination || destination->getPosition() == map_->getCurrentPosition()->getPosition()) {
         if (!destination) {
             printPromptInvalidDestination();
         }
-        else if (destination->getPosition() == currentPosition_->getPosition()) {
+        else if (destination->getPosition() == map_->getCurrentPosition()->getPosition()) {
             printPromptCurrentPositionEqualsDestination();
         }
         printCurrentPositionOnMap();
@@ -112,8 +112,7 @@ void Game::travel() {
     }
 
     auto distance = map_->getDistanceToIsland(destination);
-    currentPosition_ = std::make_unique<Island>(*destination);
-    map_->setCurrentPosition(currentPosition_.get());
+    map_->setCurrentPosition(destination);
     advanceTimeTraveling(distance);
 
     std::cout << "Capitan! Let's go for " << distance << " units long trip!\n";
@@ -121,7 +120,7 @@ void Game::travel() {
 }
 
 void Game::printCurrentPositionOnMap() const {
-    std::cout << "Your current position is " << *currentPosition_ << "\n";
+    std::cout << "Your current position is " << *(map_->getCurrentPosition()) << "\n";
     std::cout << *map_;
 }
 
@@ -150,9 +149,9 @@ void Game::printHomeScreen() const {
               << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end.\n\n";
     std::cout << "Your resources are:\n" 
               << *player_ << "\n";
-    std::cout << "Welcome on the Island " << *currentPosition_ << "\n";
+    std::cout << "Welcome on the Island " << *(map_->getCurrentPosition()) << "\n";
     std::cout << "On this Island we have a shop with goods listed below\n" 
-              << *(currentPosition_->getStore()) << "\n";
+              << *(map_->getCurrentPosition()->getStore()) << "\n";
 }
 
 void Game::printOptions() const {
@@ -171,7 +170,7 @@ void Game::exit() const {
 void Game::buy() {
     size_t productIndex{};
     size_t amount{};
-    auto currentIslandStore = currentPosition_->getStore();
+    auto currentIslandStore = map_->getCurrentPosition()->getStore();
 
     std::cout << "Let's buy something\n";
     std::cout << "Select what do you want buy, by product number: ";
@@ -210,7 +209,7 @@ void Game::buy() {
 void Game::sell() {
     size_t productIndex{};
     size_t amount{};
-    auto currentIslandStore = currentPosition_->getStore();
+    auto currentIslandStore = map_->getCurrentPosition()->getStore();
 
     if (player_->getShip()->isEmpty()) {
         std::cout << "You have nothing to sell\n";
@@ -271,7 +270,6 @@ void Game::makeAction(Action choice) {
 }
 
 void Game::startGame() {
-    currentPosition_ = std::make_unique<Island>(*(map_->getCurrentPosition()));
     while (true) {
         if (checkLoseCondition()) {
             printLoseScreen();
