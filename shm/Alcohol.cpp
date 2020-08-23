@@ -19,13 +19,9 @@ Cargo& Alcohol::operator-=(const size_t amount) {
 }
 
 bool Alcohol::operator==(const Cargo& cargo) const {
-    return getName() == cargo.getName() &&
-           getBasePrice() == cargo.getBasePrice() &&
-           getPrice() == cargo.getPrice();
+    return getName() == cargo.getName();
 }
 
 bool Alcohol::operator!=(const Cargo& cargo) const {
-    return getName() != cargo.getName() ||
-           getBasePrice() != cargo.getBasePrice() ||
-           getPrice() != cargo.getPrice();
+    return getName() != cargo.getName();
 }

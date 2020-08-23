@@ -36,13 +36,13 @@ void Game::getKeyPress() const {
 
 void Game::printTheEnd() const {
     std::cout <<
-        "######## ##     ## ########    ######## ##    ## ######## " << "\n" << 
-        "   ##    ##     ## ##          ##       ###   ## ##     ##" << "\n" <<  
-        "   ##    ##     ## ##          ##       ####  ## ##     ##" << "\n" <<  
-        "   ##    ######### ######      ######   ## ## ## ##     ##" << "\n" << 
-        "   ##    ##     ## ##          ##       ##  #### ##     ##" << "\n" << 
-        "   ##    ##     ## ##          ##       ##   ### ##     ##" << "\n" << 
-        "   ##    ##     ## ########    ######## ##    ## ######## " << "\n";
+        "######## ##     ## ########     ######## ##    ## ######## " << "\n" << 
+        "   ##    ##     ## ##           ##       ###   ## ##     ##" << "\n" <<  
+        "   ##    ##     ## ##           ##       ####  ## ##     ##" << "\n" <<  
+        "   ##    ######### ######       ######   ## ## ## ##     ##" << "\n" << 
+        "   ##    ##     ## ##           ##       ##  #### ##     ##" << "\n" << 
+        "   ##    ##     ## ##           ##       ##   ### ##     ##" << "\n" << 
+        "   ##    ##     ## ########     ######## ##    ## ######## " << "\n";
 }
 
 void Game::printWinScreen() const {
@@ -100,8 +100,13 @@ void Game::travel() {
     system("clear");
     printCurrentPositionOnMap();        
     auto destination = map_->getIsland(getTravelLocation()); 
-    while (!destination) {
-        printPromptInvalidDestination();
+    while (!destination || destination->getPosition() == map_->getCurrentPosition()->getPosition()) {
+        if (!destination) {
+            printPromptInvalidDestination();
+        }
+        else if (destination->getPosition() == map_->getCurrentPosition()->getPosition()) {
+            printPromptCurrentPositionEqualsDestination();
+        }
         printCurrentPositionOnMap();
         destination = map_->getIsland(getTravelLocation());
     }
@@ -115,8 +120,7 @@ void Game::travel() {
 }
 
 void Game::printCurrentPositionOnMap() const {
-    auto currentIsland = map_->getCurrentPosition();
-    std::cout << "Your current position is " << *currentIsland << "\n";
+    std::cout << "Your current position is " << *(map_->getCurrentPosition()) << "\n";
     std::cout << *map_;
 }
 
@@ -140,15 +144,14 @@ void Game::advanceTimeTraveling(int distance) {
 
 void Game::printHomeScreen() const {
     system("clear");
-    auto currentIsland = map_->getCurrentPosition();
 
     std::cout << "Ahoy Captain! It's day " << time_->getElapsedTime() << " of our game.\n"
-              << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end.\n\n";
+              << "You still have " << timeLimit_ - time_->getElapsedTime() << " days to the end. Get " << finalGoal_ << " money to win.\n\n";
     std::cout << "Your resources are:\n" 
               << *player_ << "\n";
-    std::cout << "Welcome on the Island " << *currentIsland << "\n";
+    std::cout << "Welcome on the Island " << *(map_->getCurrentPosition()) << "\n";
     std::cout << "On this Island we have a shop with goods listed below\n" 
-              << *(currentIsland->getStore()) << "\n";
+              << *(map_->getCurrentPosition()->getStore()) << "\n";
 }
 
 void Game::printOptions() const {
@@ -182,7 +185,7 @@ void Game::buy() {
     std::cin >> amount;
     std::cout << "\n";   
     
-    auto response = currentIslandStore->buy(cargo, amount, player_);
+    auto response = (amount == 0 ) ? Response::done : currentIslandStore->buy(cargo, amount, player_);
     switch (response) {
     case Response::done:
         std::cout << "Thanks for the transaction!\n";
@@ -208,7 +211,15 @@ void Game::sell() {
     size_t amount{};
     auto currentIslandStore = map_->getCurrentPosition()->getStore();
 
+    if (player_->getShip()->isEmpty()) {
+        std::cout << "You have nothing to sell\n";
+        getKeyPress();
+        return;
+    }
+
     std::cout << "Let's sell something\n";
+    std::cout << "If product which you want to sell is in our Store, then we use our SELL PRICE.\n";
+    std::cout << "But if we don't have it, then we use twice the PRICE given by your stock.\n\n";
     std::cout << "Select what do you want sell, by product number: ";
     std::cin >> productIndex;
     auto cargo = player_->getShip()->getCargo(--productIndex);
@@ -221,7 +232,7 @@ void Game::sell() {
     std::cin >> amount;
     std::cout << "\n";
         
-    auto response = currentIslandStore->sell(cargo, amount, player_);
+    auto response = (amount == 0 ) ? Response::done : currentIslandStore->sell(cargo, amount, player_);
     switch (response) {
     case Response::done:
         std::cout << "Thanks for the transaction!\n";
@@ -287,6 +298,11 @@ Action Game::chooseAction() {
 void Game::printPromptInvalidDestination() const {
     system("clear");
     std::cout << "Hey Pirate! There is no Island there. Enter valid Island location.\n";
+}
+
+void Game::printPromptCurrentPositionEqualsDestination() const {
+    system("clear");
+    std::cout << "Capitan, we are already here!\n";
 }
 
 void Game::printPromptInvalidProductIndex() const {

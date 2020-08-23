@@ -30,6 +30,7 @@ private:
     void printPromptInvalidDestination() const;
     void printCurrentPositionOnMap() const;
     void printPromptInvalidProductIndex() const;
+    void printPromptCurrentPositionEqualsDestination() const;
 
     void travel();
     Coordinates getTravelLocation();

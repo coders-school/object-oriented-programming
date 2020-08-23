@@ -24,13 +24,9 @@ Cargo& Fruit::operator-=(const size_t amount) {
 }
 
 bool Fruit::operator==(const Cargo& cargo) const {
-    return getName() == cargo.getName() &&
-           getBasePrice() == cargo.getBasePrice() &&
-           getPrice() == cargo.getPrice();
+    return getName() == cargo.getName();
 }
 
 bool Fruit::operator!=(const Cargo& cargo) const {
-    return getName() != cargo.getName() ||
-           getBasePrice() != cargo.getBasePrice() ||
-           getPrice() != cargo.getPrice();
+    return getName() != cargo.getName();
 }

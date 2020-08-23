@@ -29,7 +29,7 @@ size_t Store::genRand(size_t min, size_t max) const {
 void Store::generateFruits() {
     size_t i = 0;
     while (i < marketSection) {
-        Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), genRand(1, 10));
+        Fruit fruit(fruitNames[genRand(0, 5)], genRand(1, 20), genRand(10, 30), genRand(6, 10));
         if (std::none_of(begin(stock_), end(stock_), [&fruit](const auto& ptr) { return ptr->getName() == fruit.getName(); })) {
             stock_.emplace_back(std::make_shared<Fruit>(fruit));
             i++;
@@ -101,17 +101,32 @@ Response Store::buy(const CargoPtr& cargo, size_t amount, const std::shared_ptr<
     return Response::done;
 }
 
-Response Store::sell(const CargoPtr& cargo, size_t amount, const std::shared_ptr<Player>& player) {
-    const size_t price = cargo->getPrice() * amount;
-
-    if (cargo->getAmount() < amount) {
+Response Store::sell(const CargoPtr& playersCargo, size_t amount, const std::shared_ptr<Player>& player) {
+    if (playersCargo->getAmount() < amount) {
         return Response::lack_of_cargo;
+    }    
+    
+    const auto& cargoFoundInStore = findCargo(playersCargo);
+    double unitPrice{0.0};
+    const size_t priceMultipier{2};
+
+    if (!cargoFoundInStore) {
+        unitPrice = priceMultipier * playersCargo->getPrice();
     }
+    else {
+        unitPrice = cargoFoundInStore->getPrice();
+        if ((playersCargo->getUniqueStat() < cargoFoundInStore->getUniqueStat()) 
+                && (typeid(*playersCargo) == typeid(Fruit) || typeid(*playersCargo) == typeid(Alcohol))) {
+            unitPrice *= static_cast<double>(cargoFoundInStore->getUniqueStat() + playersCargo->getUniqueStat()) / 2;
+            unitPrice /= cargoFoundInStore->getUniqueStat();
+        }
+    }
+    size_t price = static_cast<size_t>(unitPrice * amount);
 
-    auto cargoToSell = makeNewCargo(cargo, amount);
-    player->sellCargo(cargo, amount, price);
+    auto cargoToSell = makeNewCargo(playersCargo, amount);
+    player->sellCargo(playersCargo, amount, price);
     addCargoToStock(cargoToSell, amount);
-
+    
     return Response::done;
 }
 
@@ -121,27 +136,36 @@ void Store::nextDay() {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    const std::string horizontalSeparator(45, '=');
+    const std::string horizontalSeparator(74, '=');
     size_t i = 0;
 
     out << horizontalSeparator
         << "\n"
-        << "|| AVAILABLE PRODUCTS" << std::setw(10)
-        << "| QTY " << std::setw(5)
-        << "| BUY PRICE " << std::setw(3)
-        //<< "| SELL PRICE " << std::setw(3)
+        << "|| AVAILABLE PRODUCTS " 
+        << std::setw(25) << "| QTY "
+        << "| BUY PRICE "
+        << "| SELL PRICE " 
         << "||\n"
         << horizontalSeparator << "\n";
 
     for (const auto& el : store.stock_) {
-        out << "||"
+        std::string uniqueStat = "";
+        out << "|| "
             << std::setw(2) << ++i << ". "
-            << std::setw(18) << std::left << el->getName() << " | "
-            << std::setw(3) << std::right << el->getAmount() << " | "
-            << std::setw(9) << std::right << store.calculateBuyPrice(el) 
-            //<< " | "
-            //<< std::setw(9) << std::right << el->getPrice() 
-            << " ||\n";
+            << std::setw(15) << std::left << el->getName(); 
+        if (typeid(*el) == typeid(Alcohol)) {
+            uniqueStat += " (" + std::to_string(el->getUniqueStat()) + "% vol)";
+        }
+        else if (typeid(*el) == typeid(Fruit)) {
+            uniqueStat += " (" + std::to_string(el->getUniqueStat()) + " days to rot)";
+        }
+        else if (typeid(*el) == typeid(Item)) {
+            uniqueStat += " (" + Item::rarityToString((Rarity)el->getUniqueStat()) + ")";
+        }
+        out << std::setw(18) << std::left << uniqueStat << " | ";
+        out << std::setw(3) << std::right << el->getAmount() << " | "
+            << std::setw(9) << std::right << store.calculateBuyPrice(el) << " | "
+            << std::setw(10) << std::right << el->getPrice() << " ||\n";
     }
     out << horizontalSeparator << "\n";
 
@@ -159,8 +183,8 @@ void Store::defineStoreEconomy() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> priceThresh(10, 20);
-    std::uniform_real_distribution<> below(1.5, 1.9);
-    std::uniform_real_distribution<> above(1.2, 1.5);
+    std::uniform_real_distribution<> below(1.5, 1.55);
+    std::uniform_real_distribution<> above(1.1, 1.15);
 
     cargoPriceThreshold_ = priceThresh(gen);
     belowThreshMultiplier_ = below(gen);
