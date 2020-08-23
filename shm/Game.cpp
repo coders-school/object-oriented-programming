@@ -7,16 +7,16 @@ constexpr size_t distancePerDay{2};
 
 Game::Game(size_t money, size_t timeLimit, size_t finalGoal)
     : money_(money), timeLimit_(timeLimit), finalGoal_(finalGoal) {
-    auto timePtr = std::make_shared<Time>();
-    time_ = timePtr.get();
+    time_ = std::make_shared<Time>();
 
-    map_ = new Map(timePtr);
+    map_ = std::make_unique<Map>(time_);
 
-    auto shipPtr = std::make_shared<Ship>(100, 100, 10, "Best Tratwa Ever", 42, timePtr);
+    auto ship = std::make_shared<Ship>(100, 100, 10, "tratwa", 42, time_);
     size_t crewAmount = 5;
-    (*shipPtr) += crewAmount;
+    (*ship) += crewAmount;
 
-    player_ = std::make_shared<Player>(shipPtr, money_);
+    player_ = std::make_shared<Player>(ship, money_);
+
 }
 
 bool Game::checkWinCondition() const {
@@ -135,10 +135,10 @@ Coordinates Game::getTravelLocation() {
     return Coordinates(X, Y);
 }
 
-void Game::advanceTimeTraveling(size_t distance) {
+void Game::advanceTimeTraveling(int distance) {
     while (distance > 0) {
-        distance = distance < distancePerDay ? 0 : distance - distancePerDay;
-        time_->operator++();
+        distance -= distancePerDay;
+        ++(*time_);
     }
 }
 
