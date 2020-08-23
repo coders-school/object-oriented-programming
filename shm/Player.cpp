@@ -5,7 +5,7 @@
 #include <string>
 
 Player::Player(std::shared_ptr<Ship>& ship, size_t money) {
-    ship_ = ship; /*std::move(ship);*/  //it might be good to let the Player class to construct Ship for itself
+    ship_ = ship;
     ship_->setDelegate(this);
     money_ = money;
     availableSpace_ = countAvailableSpace();
