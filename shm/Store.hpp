@@ -25,7 +25,7 @@ public:
     explicit Store(Time& time);
     ~Store() override;
 
-    void NextDay() override;
+    virtual void NextDay() override;
 
     Cargo* GetCargo(const size_t pos);
     static Response Buy(Cargo* cargo, size_t amount, Player* player);
