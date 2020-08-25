@@ -8,6 +8,7 @@
 #include "Store.hpp"
 #include "Alcohol.hpp"
 #include "Fruit.hpp"
+#include "Time.hpp"
 
 Store::Response Store::Buy(Cargo* cargo, size_t amount, Player* player)
 {
@@ -56,16 +57,16 @@ Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player)
     return Response::done;
 }
 
-void Store::NextDay() 
+void Store::NextDay()
 {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> amount(-100,100);
-    for(const auto& cargo_ptr : cargo_) 
+    for(const auto& cargo_ptr : cargo_)
     {
                 *cargo_ptr += amount(gen);
     }
-    
+
 }
 
 Store::Store(Time& time) : time_(time)
@@ -89,6 +90,6 @@ void Store::GenerateCargo()
     cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "TemerskaZytnia", 10, 40));
     cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "KadwenskiLager", 2, 12));
     cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "MahakamskiSpirytus", 10, 197));
-    
+
 }
 

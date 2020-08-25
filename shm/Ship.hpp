@@ -6,16 +6,17 @@
 #include "Cargo.hpp"
 #include "Observer.hpp"
 #include "IDelegate.hpp"
+#include "Time.hpp"
 
 constexpr size_t wage = 1;
 
 class Ship : public Observer
 {
 public:
-    Ship();
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id);
-    Ship(int maxCrew, int speed, size_t id);
-    ~Ship() override = default;
+//    Ship();
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time& time_);
+    Ship(int maxCrew, int speed, size_t id, Time& time);
+    ~Ship() override;
 
     void setName(const std::string& name);
 
@@ -46,4 +47,5 @@ private:
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> storage_;
     IDelegate* delegate_ = nullptr;
+    Time& time_;
 };

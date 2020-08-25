@@ -21,13 +21,3 @@ TEST(store, observerShouldBeAddedWhenCargoCreated)
     Store storeA(timeMock);
 }
 
-
-TEST(store, CargosNestDayShouldBecalledWhenNextDayPasses)
-{
-    Time time_;
-    testing::StrictMock<StoreMock> storeMock(&time_);
-    EXPECT_CALL(storeMock, NextDay());
-    ++time_;
-
-}
-
