@@ -42,16 +42,16 @@
 
 ## [Moduł 4](module4/)
 
-### [The four pillars of objectivity](module4/pillars.md)
+### [Cztery filary obiektowości](module4/pillars.md)
 
-### [Abstraction](module4/abstraction.md)
+### [Abstrakcja](module4/abstraction.md)
 
-### [Encapsulation](module4/encapsulation.md)
+### [Enkapsulacja](module4/encapsulation.md)
 
-### [Inheritance](module4/inheritance.md)
+### [Dziedziczenie](module4/inheritance.md)
 
-### [Polymorphism](module4/polymorphism.md)
+### [Polimorfizm](module4/polymorphism.md)
 
-### [Exercise](module4/exercise_cars.md)
+### [Zadanie](module4/exercise_cars.md)
 
 ### [Post-work](module4/post_work.md)
