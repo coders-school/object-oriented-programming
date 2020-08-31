@@ -22,16 +22,6 @@ public:
     Player m_sut;
 };
 
-void BuildPlayerWithTimeMock()
-{
-}
-
-TEST_F(PlayerTestSuite, CrewPayedWhenDayPasses)
-{
-    ++time_;
-    EXPECT_EQ(m_sut.getMoney(), defaultMoney_ - defaultCrew_);
-}
-
 TEST(PlayerWithTimeMock, WhenPlayerBuildObserversAdded)
 {
     size_t space_ = 10;
@@ -41,6 +31,12 @@ TEST(PlayerWithTimeMock, WhenPlayerBuildObserversAdded)
     EXPECT_CALL(timeMock, addObserver(_));
     EXPECT_CALL(timeMock, removeObserver(_));
     Player player(std::make_unique<Ship>(crew, 1, 1, timeMock), money_, space_);
+}
+
+TEST_F(PlayerTestSuite, CrewPayedWhenDayPasses)
+{
+    ++time_;
+    EXPECT_EQ(m_sut.getMoney(), defaultMoney_ - defaultCrew_);
 }
 
 TEST_F(PlayerTestSuite, NotEnoughMoneyToPayCrew)
@@ -70,8 +66,7 @@ TEST_F(PlayerTestSuite, MoneyShouldBeDecreasedAfterSpend)
 
 TEST_F(PlayerTestSuite, SpendMoreMoneyThanHaveShouldResultException)
 {
-    size_t spentMoney_ = defaultMoney_ + 1000;
-    m_sut.spendMoney(spentMoney_);
+    size_t spentMoney_ = defaultMoney_ + 1;
     EXPECT_THROW(m_sut.spendMoney(spentMoney_), AmountException);
 }
 
@@ -81,3 +76,4 @@ TEST_F(PlayerTestSuite, NewMoneyAmountWasSet)
     m_sut.setMoney(money);
     EXPECT_EQ(m_sut.getMoney(), money);
 }
+

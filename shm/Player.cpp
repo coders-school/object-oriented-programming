@@ -38,8 +38,10 @@ void Player::spendMoney(size_t amount)
     {
         throw AmountException("Not enough money");
     }
-
-    money_ -= amount;
+    else
+    {
+        money_ -= amount;
+    }
 }
 
 Ship* Player::getShip() const
