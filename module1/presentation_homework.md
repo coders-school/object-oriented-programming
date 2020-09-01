@@ -30,7 +30,7 @@ ___
 
 ### Pre-work
 
-* Poczytaj pooglądaj wideo o dziedziczeniu i polimorfiźmie
+* Poczytaj i pooglądaj wideo o dziedziczeniu i polimorfizmie
 
 ___
 

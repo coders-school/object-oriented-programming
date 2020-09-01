@@ -12,7 +12,7 @@ ___
 
 ## Hermetyzacja
 
-Aby zabezpieczyć nasz obiekt, przez niepożądanymi modyfikacjami, możemy dokonać, tzw. hermetyzacji lub enkapsulacji.
+Aby zabezpieczyć nasz obiekt, przed niepożądanymi modyfikacjami, możemy dokonać, tzw. hermetyzacji lub enkapsulacji.
 <!-- .element: class="fragment fade-in" -->
 
 Polega ona na umieszczeniu wszystkich właściwości (pól) w sekcji prywatnej, a ich modyfikacje umożliwiać przez publiczne funkcje.

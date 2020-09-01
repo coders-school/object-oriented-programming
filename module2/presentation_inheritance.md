@@ -347,7 +347,7 @@ struct Hummingbird : public Bird {
 };
 ```
 
-Jeszcze bardziej utrudnimy sytuacje, gdy w przyszłości dodamy sobie kolejne klasy jak Struś. Zawsze przed implementacją musimy się zastanowić jak podzielić odpowiedzialność na poszczególne klasy, aby
+Jeszcze bardziej utrudnimy sytuację, gdy w przyszłości dodamy sobie kolejne klasy jak Struś. Zawsze przed implementacją musimy się zastanowić jak podzielić odpowiedzialność na poszczególne klasy, aby
 uniknąć podobnych problemów.
 
 ___

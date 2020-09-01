@@ -4,24 +4,24 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Object-oriented C++</title>
+		<title>Object Oriented Programming - Coders School</title>
 
-		<meta name="description" content="C++11, C++14 and C++17 presentation">
-		<meta name="author" content="Lukasz Ziobron">
+		<meta name="description" content="OOP">
+		<meta name="author" content="Łukasz Ziobroń">
 
-		<link rel="stylesheet" href="../css/reset.css">
-		<link rel="stylesheet" href="../css/reveal.css">
-		<link rel="stylesheet" href="../css/theme/coders.css" id="theme">
+		<link rel="stylesheet" href="../../css/reset.css">
+		<link rel="stylesheet" href="../../css/reveal.css">
+		<link rel="stylesheet" href="../../css/theme/coders.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="../lib/css/monokai.css">
+		<link rel="stylesheet" href="../../lib/css/monokai.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement('link');
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			link.href = window.location.search.match(/print-pdf/gi) ? '../../css/print/pdf.css' : '../../css/print/paper.css';
 			document.getElementsByTagName('head')[0].appendChild(link);
 		</script>
 	</head>
@@ -29,42 +29,78 @@
 
 		<div class="reveal">
 			<div class="slides">
-				<section data-markdown="../md.object_oriented/cover.md" data-separator-vertical="^___"
+				<section>
+                    <section data-background="#111111">
+
+                        <h1>OOP #4</h1>
+                        <h2>Object-Oriented Programming #4</h2>
+                        <a href="https://coders.school">
+                            <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
+                        </a>
+                        <h3>Łukasz Ziobroń</h3>
+
+                    </section>
+                    <section data-markdown>
+                        <textarea data-template>
+
+                        ## Agenda
+
+                        1. <!-- .element: class="fragment fade-in" --> 4 pillars of objectivity
+                        2. <!-- .element: class="fragment fade-in" --> Abstraction
+                        3. <!-- .element: class="fragment fade-in" --> Encapsulation
+                        4. <!-- .element: class="fragment fade-in" --> Inheritance
+                        5. <!-- .element: class="fragment fade-in" --> Polymorphism
+                        
+                        </textarea>
+                    </section>
+                </section>
+                <!--
+                    Note that Windows uses `\r\n` instead of `\n` as its linefeed character.
+                    For a regex that supports all operating systems, use `\r?\n` instead of `\n`.
+                    
+                    Usage:
+                    Install dependencies
+
+                    $ npm install
+                    Serve the presentation and monitor source files for changes
+
+                    $ npm start
+                    Open http://localhost:8000 to view your presentation
+
+                    You can change the port by using npm start -- --port=8001.
+                -->
+				<section data-markdown="pillars.md" data-separator-vertical="^___"
 					data-separator-notes="^Note:">
 				</section>
-				<section data-markdown="../md.object_oriented/agenda.md" data-separator-vertical="^___"
+				<section data-markdown="abstraction.md" data-separator-vertical="^___"
 					data-separator-notes="^Note:">
 				</section>
-				<section data-markdown="../md.object_oriented/pillars.md" data-separator-vertical="^___"
+				<section data-markdown="encapsulation.md" data-separator-vertical="^___"
 					data-separator-notes="^Note:">
 				</section>
-				<section data-markdown="../md.object_oriented/abstraction.md" data-separator-vertical="^___"
+				<section data-markdown="inheritance.md" data-separator-vertical="^___"
 					data-separator-notes="^Note:">
 				</section>
-				<section data-markdown="../md.object_oriented/encapsulation.md" data-separator-vertical="^___"
+				<section data-markdown="polymorphism.md" data-separator-vertical="^___"
 					data-separator-notes="^Note:">
 				</section>
-				<section data-markdown="../md.object_oriented/inheritance.md" data-separator-vertical="^___"
+				<section data-markdown="exercise_cars.md" data-separator-vertical="^___"
 					data-separator-notes="^Note:">
 				</section>
-				<section data-markdown="../md.object_oriented/polymorphism.md" data-separator-vertical="^___"
+				<section data-markdown="post_work.md" data-separator-vertical="^___"
 					data-separator-notes="^Note:">
 				</section>
-				<section data-markdown="../md.object_oriented/exercise_cars.md" data-separator-vertical="^___"
-					data-separator-notes="^Note:">
-				</section>
-				<section data-markdown="../md.object_oriented/post_work.md" data-separator-vertical="^___"
-					data-separator-notes="^Note:">
-				</section>
-				<section data-markdown data-background="#111111">
-					<!-- Added ending slide -->
-					# The End &#128522 !
-				</section>
+				<section data-background="#111111">
+
+                    <h1>Coders School</h1>
+                    <img width="400" data-src="../logo.png" alt="Coders School" class="plain">
+
+                </section>
 			</div>
 
 		</div>
 
-		<script src="../js/reveal.js"></script>
+		<script src="../../js/reveal.js"></script>
 
 		<script>
 			// More info about config & dependencies:
@@ -77,11 +113,11 @@
 					hash: true,
 					pdfSeparateFragments: false,
 					dependencies: [
-							{ src: '../plugin/externalcode/externalcode.js', condition: function() { return !!document.querySelector( '[data-code]' ); } },
-							{ src: '../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-							{ src: '../plugin/markdown/marked.js' },
-							{ src: '../plugin/markdown/markdown.js' },
-							{ src: '../plugin/notes/notes.js', async: true }
+							{ src: '../../plugin/externalcode/externalcode.js', condition: function() { return !!document.querySelector( '[data-code]' ); } },
+							{ src: '../../plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+							{ src: '../../plugin/markdown/marked.js' },
+							{ src: '../../plugin/markdown/markdown.js' },
+							{ src: '../../plugin/notes/notes.js', async: true }
 					]
 			});
 	</script>

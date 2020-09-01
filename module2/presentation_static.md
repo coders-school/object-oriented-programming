@@ -40,7 +40,7 @@ int main() {
 ```
 <!-- .element: class="fragment fade-in" -->
 
-Nawet jeżeli obiekt zajmowałby dużo miejsca w pamięci a my chcielibyśmy tylko jego nazwę i tak musimy go utworzyć, ponieważ tylko na nim możemy zawołać metodę `getName()`.
+Nawet jeżeli obiekt zajmowałby dużo miejsca w pamięci, a my chcielibyśmy tylko jego nazwę i tak musimy go utworzyć, ponieważ tylko na nim możemy zawołać metodę `getName()`.
 <!-- .element: class="fragment fade-in" -->
 
 ___
