@@ -13,7 +13,7 @@ constexpr size_t wage = 1;
 class Ship : public Observer
 {
 public:
-//    Ship();
+
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time& time_);
     Ship(int maxCrew, int speed, size_t id, Time& time);
     ~Ship() override;

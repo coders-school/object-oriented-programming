@@ -8,11 +8,6 @@ Ship::~Ship()
     time_.removeObserver(this);
 }
 
-
-//Ship::Ship() : id_(-1)
-//{
-//}
-
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time& time)
     : capacity_(capacity), maxCrew_(maxCrew), crew_(maxCrew), speed_(speed), name_(name), id_(id), time_(time)
 {
