@@ -11,7 +11,8 @@ class Fruit : public Cargo, public Observer {
 public:
     Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDate, size_t timeElapsed, Time* Publisher);
 
-    ~Fruit() { this->Publisher_->removeObserver(this); };
+    ~Fruit();
+    
     // override from Cargo
     virtual std::shared_ptr<Cargo> Clone() override { return std::make_shared<Fruit>(*this); }
     void nextDay() override;
