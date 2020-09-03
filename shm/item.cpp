@@ -10,6 +10,10 @@ Item::Item(std::string name, size_t amount, size_t basePrice, int rarity, Time* 
     this->Publisher_->addObserver(this);
 }
 
+Item::~Item() {
+    this->Publisher_->removeObserver(this);
+}
+
 void Item::nextDay() {
     int lottery = rand()%100+1; 
     switch(lottery){
