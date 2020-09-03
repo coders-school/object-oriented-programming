@@ -35,6 +35,10 @@ size_t Alcohol::getBasePrice() const {
     return basePrice_;
 }
 
+virtual std::shared_ptr<Cargo> Alcohol::Clone() override {
+    return std::make_shared<Alcohol>(*this);
+}
+
 size_t Alcohol::getPower() const {
     return power_;
 }
