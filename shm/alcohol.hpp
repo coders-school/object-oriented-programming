@@ -21,7 +21,7 @@ public:
     std::string getName() const override;
     size_t getAmount() const override;
     size_t getBasePrice() const override;
-    virtual std::shared_ptr<Cargo> Clone() override;
+    std::shared_ptr<Cargo> Clone() override;
 
     size_t getPower() const;
 
