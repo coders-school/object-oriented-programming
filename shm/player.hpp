@@ -11,10 +11,7 @@ class Player : public Observer {
 public:
     Player(std::shared_ptr<Ship> ship, size_t money, size_t space, std::shared_ptr<Time> publisher);
 
-    ~Player() {
-        this->publisher_->removeObserver(this);
-        std::cout << "Goodbye! I was your Player\n";
-    };
+    ~Player();
 
     size_t getMoney() const { return money_; }
     void giveMoney(size_t money);
