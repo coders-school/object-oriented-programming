@@ -4,6 +4,7 @@
 
 class Coordinates {
 public:
+    Coordinates();
     Coordinates(int positionX, int positionY);
 
     static int Distance(const Coordinates& PointA, const Coordinates& PointB);
