@@ -9,6 +9,10 @@ Alcohol::Alcohol(std::string name, size_t amount, size_t basePrice, size_t power
     this->Publisher_->addObserver(this);
 }
 
+Alcohol::~Alcohol() {
+    this->Publisher_->removeObserver(this);
+}
+
 void Alcohol::nextDay(){
     if(power_ > 0){
         --power_;
