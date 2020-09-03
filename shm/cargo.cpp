@@ -22,3 +22,7 @@ bool Cargo::operator==(const Cargo& cargo) const {
     return (name_ == cargo.getName() &&
             basePrice_ == cargo.getBasePrice());
 }
+
+void Cargo::setAmount(size_t amount) {
+    amount_ = amount;
+}
