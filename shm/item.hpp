@@ -12,7 +12,8 @@ class Item : public Cargo, public Observer {
 public:
     Item(std::string name, size_t amount, size_t basePrice, int rarity, Time* Publisher);
 
-    ~Item() { this->Publisher_->removeObserver(this); };
+    ~Item();
+    
     // override from Cargo
     virtual std::shared_ptr<Cargo> Clone() override { return std::make_shared<Item>(*this); }
     // Override from Observer
