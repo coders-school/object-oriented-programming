@@ -11,9 +11,8 @@ class Alcohol : public Cargo, public Observer {
 public:
     Alcohol(std::string name, size_t amount, size_t basePrice, size_t power, Time* Publisher);
     
-    ~Alcohol() {
-        this->Publisher_->removeObserver(this);
-    };
+    ~Alcohol();
+    
     //override from Cargo
     virtual std::shared_ptr<Cargo> Clone() override { return std::make_shared<Alcohol>(*this); }
 
