@@ -35,7 +35,7 @@ size_t Alcohol::getBasePrice() const {
     return basePrice_;
 }
 
-virtual std::shared_ptr<Cargo> Alcohol::Clone() {
+std::shared_ptr<Cargo> Alcohol::Clone() {
     return std::make_shared<Alcohol>(*this);
 }
 
