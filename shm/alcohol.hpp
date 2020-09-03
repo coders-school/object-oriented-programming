@@ -13,9 +13,6 @@ public:
     
     ~Alcohol();
     
-    //override from Cargo
-    virtual std::shared_ptr<Cargo> Clone() override { return std::make_shared<Alcohol>(*this); }
-
     //Override from Observer
     void nextDay() override;
 
@@ -24,6 +21,8 @@ public:
     std::string getName() const override;
     size_t getAmount() const override;
     size_t getBasePrice() const override;
+    virtual std::shared_ptr<Cargo> Clone() override;
+
     size_t getPower() const;
 
 private:
