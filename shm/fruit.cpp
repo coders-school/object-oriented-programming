@@ -7,6 +7,10 @@ Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t expiryDat
     this->Publisher_->addObserver(this);
 }
 
+Fruit::~Fruit() {
+    this->Publisher_->removeObserver(this);
+}
+
 void Fruit::nextDay() {
     this->operator--();
 }
