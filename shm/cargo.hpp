@@ -18,7 +18,7 @@ public:
     virtual std::string getName() const = 0;
     virtual size_t getAmount() const = 0;
     virtual size_t getBasePrice() const = 0;
-    void setAmount(size_t amount) { amount_ = amount; }
+    void setAmount(size_t amount);
 
 protected:
     std::string name_;
