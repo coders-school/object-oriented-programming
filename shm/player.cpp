@@ -13,6 +13,10 @@ Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t space, std::shar
           this->publisher_->addObserver(this); 
       }
 
+Player::~Player() {
+    this->publisher_->removeObserver(this);
+}
+
 size_t Player::getSpeed() const {
     if (ship_) {
         return ship_->getSpeed();
