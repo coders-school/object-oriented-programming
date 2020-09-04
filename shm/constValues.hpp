@@ -2,12 +2,15 @@
 
 namespace constValues {
 
-    //minigame
-    constexpr size_t pointsToGetMoneyInDiceGame = 150;
-    constexpr size_t moneyForWinInDiceGame = 100;
+    //coordinates
+    int constexpr defaultPositionX = 0;
+    int constexpr defaultPositionY = 0;
     //crew
     constexpr size_t dailySalary = 1;
     constexpr size_t hiringCost = 5;
+    //minigame
+    constexpr size_t pointsToGetMoneyInDiceGame = 150;
+    constexpr size_t moneyForWinInDiceGame = 100;
     //store generator
     constexpr size_t numerOfItems = 4;
     constexpr size_t minExpiryDate = 2;
