@@ -7,7 +7,7 @@ public:
     Coordinates();
     Coordinates(int positionX, int positionY);
 
-    static int Distance(const Coordinates& PointA, const Coordinates& PointB);
+    static int Distance(const Coordinates& pointA, const Coordinates& pointB);
     bool operator==(const Coordinates& currentPosition) const;
 
     int getPositionX() const { return positionX_; }
