@@ -3,8 +3,8 @@
 namespace constValues {
 
     //coordinates
-    int constexpr defaultPositionX = 0;
-    int constexpr defaultPositionY = 0;
+    constexpr int defaultPositionX = 0;
+    constexpr int defaultPositionY = 0;
     //crew
     constexpr size_t dailySalary = 1;
     constexpr size_t hiringCost = 5;
