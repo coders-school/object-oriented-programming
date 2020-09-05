@@ -1,21 +1,18 @@
 #include "map.hpp"
 
 #include <algorithm>
+#include <constValues>
 #include <random>
-
-constexpr int initialAmountOfIsland = 10;
-constexpr int maxX = 100;
-constexpr int maxY = 100;
 
 Map::Map(Time* gameTime) {
     timeTracker_ = gameTime;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_int_distribution<> xesGen(0, maxX);
-    std::uniform_int_distribution<> yesGen(0, maxY);
-    islandsOnMap_.reserve(initialAmountOfIsland);
+    std::uniform_int_distribution<> xesGen(0, constValues::maxX);
+    std::uniform_int_distribution<> yesGen(0, constValues::maxY);
+    islandsOnMap_.reserve(constValues::initialAmountOfIsland);
 
-    for (auto islandCounter = 0; islandCounter < initialAmountOfIsland; ++islandCounter) {
+    for (auto islandCounter = 0; islandCounter < constValues::initialAmountOfIsland; ++islandCounter) {
         while (true) {
             int posX = xesGen(gen);
             int posY = yesGen(gen);
