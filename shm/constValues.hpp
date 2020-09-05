@@ -10,6 +10,10 @@ namespace constValues {
     //crew
     constexpr size_t dailySalary = 1;
     constexpr size_t hiringCost = 5;
+    //map
+    constexpr int initialAmountOfIsland = 10;
+    constexpr int maxX = 100;
+    constexpr int maxY = 100;
     //minigame
     constexpr size_t pointsToGetMoneyInDiceGame = 150;
     constexpr size_t moneyForWinInDiceGame = 100;
