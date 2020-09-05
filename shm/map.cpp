@@ -1,8 +1,9 @@
 #include "map.hpp"
 
 #include <algorithm>
-#include <constValues>
 #include <random>
+
+#include "constValues.hpp"
 
 Map::Map(Time* gameTime) {
     timeTracker_ = gameTime;
