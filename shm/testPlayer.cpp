@@ -3,70 +3,77 @@
 
 #include "Player.hpp"
 #include "ShmExceptions.hpp"
+#include "TimeMock.hpp"
+#include "Time.hpp"
 #include "gtest/gtest.h"
 
-TEST(player, CrewPayedWhenDayPasses)
+using ::testing::_;
+
+class PlayerTestSuite : public ::testing::Test
+{
+public:
+    PlayerTestSuite() : m_sut(std::make_unique<Ship>(defaultCrew_, 1, 1, time_), defaultMoney_, defaultSpace_) {}
+    Time time_;
+
+    testing::StrictMock<TimeMock> timeMock;
+    size_t defaultSpace_ = 10;
+    size_t defaultMoney_ = 10;
+    size_t defaultCrew_ = 10;
+    Player m_sut;
+};
+
+TEST(PlayerWithTimeMock, WhenPlayerBuildObserversAdded)
 {
     size_t space_ = 10;
-    size_t money_ = 10;
+    size_t money_ = 1;
     size_t crew = 10;
-    Player player(std::make_unique<Ship>(crew, 1, 1), money_, space_);
-    player.getShip()->NextDay();
-    EXPECT_EQ(player.getMoney(), money_ - crew);
+    testing::StrictMock<TimeMock> timeMock;
+    EXPECT_CALL(timeMock, addObserver(_));
+    EXPECT_CALL(timeMock, removeObserver(_));
+    Player player(std::make_unique<Ship>(crew, 1, 1, timeMock), money_, space_);
 }
 
-TEST(player, NotEnoughMoneyToPayCrew)
+TEST_F(PlayerTestSuite, CrewPayedWhenDayPasses)
 {
-    size_t space_ = 10;
-    size_t money_ = 10;
-    size_t crew = 100;
-    Player player(std::make_unique<Ship>(crew, 1, 1), money_, space_);
-    EXPECT_THROW(player.getShip()->NextDay(), AmountException);
+    ++time_;
+    EXPECT_EQ(m_sut.getMoney(), defaultMoney_ - defaultCrew_);
 }
 
-TEST(player, NewSpaceWasSet)
+TEST_F(PlayerTestSuite, NotEnoughMoneyToPayCrew)
 {
-    size_t space_ = 10;
-    size_t money_ = 1;
-    Player player(std::make_unique<Ship>(), money_, space_);
-    EXPECT_EQ(player.getAvailableSpace(), space_);
+    m_sut.setMoney(1);
+    EXPECT_THROW(++time_, AmountException);
 }
 
-TEST(player, MoneyShouldBeIncreasedAfterErn)
+TEST_F(PlayerTestSuite, NewSpaceWasSet)
 {
-    size_t space_ = 10;
-    size_t money_ = 1;
-    Player player(std::make_unique<Ship>(), money_, space_);
+    EXPECT_EQ(m_sut.getAvailableSpace(), defaultSpace_);
+}
+
+TEST_F(PlayerTestSuite, MoneyShouldBeIncreasedAfterErn)
+{
     size_t moreMoney_ = 100;
-    player.earnMoney(moreMoney_);
-    EXPECT_EQ(player.getMoney(), money_ + moreMoney_);
+    m_sut.earnMoney(moreMoney_);
+    EXPECT_EQ(m_sut.getMoney(), defaultMoney_ + moreMoney_);
 }
 
-TEST(player, MoneyShouldBeDecreasedAfterSpend)
+TEST_F(PlayerTestSuite, MoneyShouldBeDecreasedAfterSpend)
 {
-    size_t space_ = 10;
-    size_t money_ = 1000;
-    Player player(std::make_unique<Ship>(), money_, space_);
-    size_t spentMoney_ = 100;
-    player.spendMoney(spentMoney_);
-    EXPECT_EQ(player.getMoney(), money_ - spentMoney_);
+    size_t spentMoney_ = 1;
+    m_sut.spendMoney(spentMoney_);
+    EXPECT_EQ(m_sut.getMoney(), defaultMoney_ - spentMoney_);
 }
 
-TEST(player, SpendMoreMoneyThanHaveShouldResultException)
+TEST_F(PlayerTestSuite, SpendMoreMoneyThanHaveShouldResultException)
 {
-    size_t space_ = 10;
-    size_t money_ = 100;
-    Player player(std::make_unique<Ship>(), money_, space_);
-    size_t spentMoney_ = 1000;
-    EXPECT_THROW(player.spendMoney(spentMoney_), AmountException);
+    size_t spentMoney_ = defaultMoney_ + 1;
+    EXPECT_THROW(m_sut.spendMoney(spentMoney_), AmountException);
 }
 
-TEST(player, NewMoneyAmountWasSet)
+TEST_F(PlayerTestSuite, NewMoneyAmountWasSet)
 {
-    size_t space_ = 0;
-    size_t money_ = 0;
-    Player player(std::make_unique<Ship>(), money_, space_);
     size_t money = 10;
-    player.setMoney(money);
-    EXPECT_EQ(player.getMoney(), money);
+    m_sut.setMoney(money);
+    EXPECT_EQ(m_sut.getMoney(), money);
 }
+

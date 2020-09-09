@@ -11,7 +11,6 @@ class Store : public Observer
 {
 private:
     std::vector<std::unique_ptr<Cargo>> cargo_;
-    //    Time* time_; # TODO after implementation Time class
 
     enum class Response
     {
@@ -22,10 +21,10 @@ private:
     };
 
 public:
-    explicit Store(Time* time);
+    explicit Store(Time& time);
     ~Store() override;
 
-    void NextDay() override;
+    virtual void NextDay() override;
 
     Cargo* GetCargo(const size_t pos);
     static Response Buy(Cargo* cargo, size_t amount, Player* player);
@@ -33,9 +32,12 @@ public:
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
+
 private:
-    Time* time_;
+    Time& time_;
     void GenerateCargo();
     Cargo* FindMatchCargo(Cargo* cargo);
     void RemoveFromStore(Cargo* cargo);
+
+
 };

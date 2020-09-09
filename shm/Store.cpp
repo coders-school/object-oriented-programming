@@ -1,9 +1,15 @@
 //
 // Created by adi on 07.07.2020.
 //
-
+#include <iostream>
 #include <algorithm>
+#include <random>
+
 #include "Store.hpp"
+#include "Alcohol.hpp"
+#include "Fruit.hpp"
+#include "Time.hpp"
+
 Store::Response Store::Buy(Cargo* cargo, size_t amount, Player* player)
 {
     auto totalPrice = amount * cargo->GetPrice();
@@ -51,12 +57,39 @@ Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player)
     return Response::done;
 }
 
-Store::Store(Time* time) : time_(time)
+void Store::NextDay()
 {
-    time_->addObserver(this);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> amount(-100,100);
+    for(const auto& cargo_ptr : cargo_)
+    {
+                *cargo_ptr += amount(gen);
+    }
+
+}
+
+Store::Store(Time& time) : time_(time)
+{
+    time_.addObserver(this);
 }
 
 Store::~Store()
 {
-    time_->removeObserver(this);
+    time_.removeObserver(this);
 }
+
+void Store::GenerateCargo()
+{
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> Amount(0, 200);
+
+    cargo_.push_back(std::make_unique<Fruit>(Amount(gen), "Apple", 3, 12));
+    cargo_.push_back(std::make_unique<Fruit>(Amount(gen), "RottenApple", 1, 12, 11));
+    cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "TemerskaZytnia", 10, 40));
+    cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "KadwenskiLager", 2, 12));
+    cargo_.push_back(std::make_unique<Alcohol>(Amount(gen), "MahakamskiSpirytus", 10, 197));
+
+}
+
