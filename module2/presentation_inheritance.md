@@ -82,6 +82,7 @@ private:
     GraphicsCard graphics_card_;
     Memory memory_;
     Screen screen_;
+    Keyboard keyboard_;
 };
 ```
 
@@ -124,6 +125,7 @@ public:
 
 private:
     Screen screen_;
+    Keyboard keyboard_;
 };
 ```
 <!-- .element: class="fragment fade-in" -->
@@ -184,6 +186,7 @@ private:
 <!-- .element: class="fragment fade-in" -->
 
 </div>
+
 <div class="col">
 
 ```cpp
@@ -202,6 +205,7 @@ private:
 <!-- .element: class="fragment fade-in" -->
 
 </div>
+
 </div>
 
 ### Jak uprościć powyższy kod?
