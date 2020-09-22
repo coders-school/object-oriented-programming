@@ -7,8 +7,9 @@ void Player::Player::PayCrew(size_t money)
     {
         money_ = money_ - money;
     }
-    else
+    else {
         throw AmountException("Not enough money!");
+    }
 }
 
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t space) : money_(money), availableSpace_(space)
