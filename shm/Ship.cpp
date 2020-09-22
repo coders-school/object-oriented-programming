@@ -26,18 +26,26 @@ void Ship::setName(const std::string& name)
 Ship& Ship::operator-=(size_t num)
 {
     if (crew_ >= num)
+    {
         crew_ -= num;
+    }
     else
+    {
         throw AmountException("Not enough Crew!");
+    }
     return *this;
 }
 
 Ship& Ship::operator+=(size_t num)
 {
     if ((crew_ + num) <= maxCrew_)
+    {
         crew_ += num;
+    }
     else
+    {
         throw AmountException("Too much Crew!");
+    }
     return *this;
 }
 

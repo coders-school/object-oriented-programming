@@ -7,7 +7,8 @@ void Player::Player::PayCrew(size_t money)
     {
         money_ = money_ - money;
     }
-    else {
+    else
+    {
         throw AmountException("Not enough money!");
     }
 }
