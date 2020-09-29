@@ -42,6 +42,22 @@
 
 ### [Zadanie domowe](module3/03_homework.pl.md)
 
+## [Moduł 4](module4/)
+
+### [Cztery filary obiektowości](module4/00_pillars.pl.md)
+
+### [Abstrakcja](module4/01_abstraction.pl.md)
+
+### [Enkapsulacja](module4/02_encapsulation.pl.md)
+
+### [Dziedziczenie](module4/03_inheritance.pl.md)
+
+### [Polimorfizm](module4/04_polymorphism.pl.md)
+
+### [Zadanie](module4/05_exercise_cars.pl.md)
+
+### [Post-work](module4/06_post_work.pl.md)
+
 ___
 
 # Object Oriented Programming
@@ -83,3 +99,19 @@ ___
 ### [Static variables and functions](module3/02_static.en.md)
 
 ### [Homework](module3/03_homework.en.md)
+
+## [Module 4](module4/)
+
+### [The four pillars of objectivity](module4/00_pillars.en.md)
+
+### [Abstraction](module4/01_abstraction.en.md)
+
+### [Encapsulation](module4/02_encapsulation.en.md)
+
+### [Inheritance](module4/03_inheritance.en.md)
+
+### [Polymorphism](module4/04_polymorphism.en.md)
+
+### [Exercise](module4/05_exercise_cars.en.md)
+
+### [Post-work](module4/06_post_work.en.md)
