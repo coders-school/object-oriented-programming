@@ -18,6 +18,20 @@
 
 ### [Zadanie domowe](module1/05_homework.pl.md)
 
+## [Moduł 2](module2/)
+
+### [Dziedziczenie](module2/00_inheritance.pl.md)
+
+### [Metody wirtualne, interfejsy, klasy abstrakcyjne](module2/01_virtual.pl.md)
+
+### [Polimorfizm](module2/02_polymorphism.pl.md)
+
+### [Zmienne i funkcje statyczne](module2/03_static.pl.md)
+
+### [Zadanie domowe](module2/04_homework.pl.md)
+
+### [Przykładowe rozwiązania](module2/05_solutions.pl.md)
+
 ___
 
 # Object Oriented Programming
@@ -35,3 +49,17 @@ ___
 ### [Exercises](module1/04_tasks.en.md)
 
 ### [Homework](module1/05_homework.en.md)
+
+## [Module 2](module2/)
+
+### [Inheritance](module2/00_inheritance.en.md)
+
+### [Virtual methods, interfaces, abstract classes](module2/01_virtual.en.md)
+
+### [Polymorphism](module2/02_polymorphism.en.md)
+
+### [Static variables and functions](module2/03_static.en.md)
+
+### [Homework](module2/04_homework.en.md)
+
+### [Examples of solutions](module2/05_solutions.en.md)

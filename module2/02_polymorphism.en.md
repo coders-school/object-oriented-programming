@@ -1,8 +1,8 @@
 <!-- .slide: data-background="#111111" -->
 
-# Programowanie obiektowe
+# Object oriented programming
 
-## Polimorfizm
+## Polymorphism
 
 <a href="https://coders.school">
     <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
@@ -10,14 +10,14 @@
 
 ___
 
-## Słowo kluczowe `virtual`
+## Keyword `virtual`
 
-Jeżeli chcemy, aby przy używaniu wskaźników lub referencji na klasę bazową, jakaś metoda zachowywała się inaczej w zależności od prawdziwego typu obiektu, to należy ją oznaczyć słowem kluczowym `virtual`. Jest to tzw. <span class="fragment highlight-green">funkcja wirtualna</span>.
+If we want a method to behave differently depending on the real type of the object when using pointers or references to the base class, then it should be marked with the keyword `virtual`. This is called <span class="fragment highlight-green">virtual function</span>.
 
 ___
 <!-- .slide: style="font-size: 0.9em" -->
 
-## Funkcja nie-wirtualna
+## Non-virtual function
 
 ```cpp
 #include <iostream>
@@ -38,7 +38,7 @@ int main() {
 }
 ```
 
-Co pojawi się na ekranie?
+What will appear on the screen?
 <!-- .element: class="fragment fade-in" -->
 
 `tweet, tweet`
@@ -47,7 +47,7 @@ Co pojawi się na ekranie?
 ___
 <!-- .slide: style="font-size: 0.9em" -->
 
-## Funkcja wirtualna
+## Virtual function
 
 ```cpp
 #include <iostream>
@@ -68,20 +68,20 @@ int main() {
 }
 ```
 
-Co pojawi się na ekranie?
+What will appear on the screen?
 <!-- .element: class="fragment fade-in" -->
 
 `chirp, chirp`
 <!-- .element: class="fragment fade-in" -->
 
-[Sprawdź na ideone.com](https://ideone.com/yW43Tq)
+[Check it out at ideone.com](https://ideone.com/yW43Tq)
 <!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Słowo kluczowe `override`
+## Key word `override`
 
-Jeżeli w klasie pochodnej **nadpisujemy** metodę wirtualną, czyli zmieniamy jej zachowanie, to należy dodać słowo `override`.
+If in the derived class **we overwrite** virtual method, i.e. changing its behavior, you should add a keyword `override`.
 <!-- .element: class="fragment fade-in" -->
 
 ```cpp
@@ -105,25 +105,25 @@ int main() {
 
 ___
 
-### Mała uwaga
+### A little note
 
-`override` jest opcjonalne. Jeśli go nie podamy za sygnaturą funkcji klasy pochodnej to metoda z klasy bazowej i tak zostanie nadpisana.
+`override` is optional. If we do not give it after the signature of the derived class function then the base class method will be overwritten anyway.
 <!-- .element: class="fragment fade-in" -->
 
-Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie nadpisujemy metodę z klasy bazowej i jeśli nie, to program się nie skompiluje.
+Its use, however, is a good practice, because thanks to it the compiler will check whether we are actually overwriting the method from the base class and if not, the program will not compile.
 <!-- .element: class="fragment fade-in" -->
 
-Bez `override` mogłaby zostać utworzona nowa metoda w klasie pochodnej, która nie nadpisuje niczego z klasy bazowej.
+Without `override` a new method could be created in the derived class that does not overwrite anything from the base class.
 <!-- .element: class="fragment fade-in" -->
 
-Metody wirtualne **nadpisujemy**, nie przeciążamy.
+**We overwrite** virtual methods, not overload them.
 <!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Nadpisywanie metod - `override`
+## Overwriting methods - `override`
 
-Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` to klasy pochodne, które dziedziczą po pewnych klasach bazowych jak `Bird`, `Flyable`, `Soundable`, `Swimmable` oraz nadpisują kilka ich metod jak:
+Returning to the bird example, classes `Penguin`, `Hummingbird` and `Goose` are derived classes that inherit from certain base classes like `Bird`, `Flyable`, `Soundable`, `Swimmable` and override some of their methods, such as:
 
 * <!-- .element: class="fragment fade-in" --> <code>void eat() override</code>
 * <!-- .element: class="fragment fade-in" --> <code>void sleep() override</code>
@@ -131,7 +131,7 @@ Wracając do przykładu o ptakach, klasy `Penguin`, `Hummingbird` oraz `Goose` t
 * <!-- .element: class="fragment fade-in" --> <code>void fly() override</code>
 * <!-- .element: class="fragment fade-in" --> <code>void swim() override</code>
 
-Nadpisanie takich metod powoduje, że możemy zmienić ich implementacje.
+Overwriting such methods means that we can change their implementations.
 <!-- .element: class="fragment fade-in" -->
 
 ___
@@ -168,15 +168,15 @@ public:
 
 ___
 
-## Wspólna klasa bazowa
+## Common base class
 
-Ponieważ wspólnym rodzicem wszystkich klas jest klasa `Soundable` możemy przechowywać w kontenerze wskaźniki typu `Soundable`.
+Because the common parent of all classes is the class `Soundable` we can store type pointers in a container `Soundable`.
 
 ```cpp
 std::vector<std::shared_ptr<Soundable>> birds_;
 ```
 
-### Jakie dane otrzymamy na wyjściu? <!-- .element: class="fragment fade-in" -->
+### What data will we get on the output? <!-- .element: class="fragment fade-in" -->
 
 ```cpp
 std::vector<std::shared_ptr<Soundable>> birds_;
@@ -192,36 +192,36 @@ std::cout << birds_[2]->makeSound() << '\n';
 
 ___
 
-## Polimorfizm
+## Polymorphism
 
-Zjawisko, które właśnie zaobserwowaliśmy, nazywa się polimorfizmem.
+The phenomenon we just observed is called polymorphism.
 
-Polimorfizm pozwala funkcji przybrać różne formy (implementacje), tak jak na przykładzie.
+Polymorphism allows a function to take various forms (implementations), as in the example.
 <!-- .element: class="fragment fade-in" -->
 
-Dlatego, jeżeli utworzymy kolejno obiekty `Goose`, `Hen` i `Duck` w zależności od obiektu zostanie wywołana jego wersja metody `makeSound`.
+Therefore, if we create objects `Goose`, `Hen` and `Duck`, depending on the object, its version of the method `makeSound` will be called.
 <!-- .element: class="fragment fade-in" -->
 
-Polimorfizm włącza się, gdy mamy funkcje wirtualne i używamy wskaźników lub referencji na typ bazowy.
+Polymorphism turns on when we have virtual functions and we use pointers or references to the base type.
 <!-- .element: class="fragment fade-in" -->
 
-### Kto grał lub czytał Wiedźmina?
+### Who has played or read The Witcher?
 <!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Doppler :)
+## Doppler 🙂
 
-W uniwersum wykreowanym przez naszego rodzimego pisarza Andrzeja Sapkowskiego, występuje pewna intrygująca i ciekawa rasa zwana Dopplerami.
+In the universe created by our native writer Andrzej Sapkowski, there is an intriguing and interesting race called the Dopplers.
 <!-- .element: class="fragment fade-in" -->
 
-Rasa ta potrafi przyjąć, postać różnych form życia, może stać się człowiekiem, elfem, krasnoludem. Zmienia w ten sposób swoje cechy jak głos, kolor włosów, a nawet ubranie!
+This race can take the form of various life forms, it can become a human, an elf, or a dwarf. It changes its characteristics like voice, hair color and even clothes!
 <!-- .element: class="fragment fade-in" -->
 
-Pomimo że rasa ta jest typu Doppler, potrafi w różnych okolicznościach podszywać się pod inne rasy jak elf, krasnolud czy człowiek.
+Despite the fact that this race is of the Doppler type, it can in various circumstances impersonate other races such as elf, dwarf or human.
 <!-- .element: class="fragment fade-in" -->
 
-Z punktu widzenia C++ nasz Doppler podlega zjawisku polimorfizmu.
+From the C++ point of view, our Doppler is subject to the phenomenon of polymorphism.
 <!-- .element: class="fragment fade-in" -->
 
 ___
@@ -261,15 +261,15 @@ int main() {
 
 <!-- TODO: Pokazać, że bez słowa virtual też kod się skompiluje, ale zachowa się inaczej -->
 
-Jak widzimy, nasz Doppler może przyjąć różne formy i zachowywać się tak jak one. Wskaźnik jest typu Doppler, ale program dobrze wie, kiedy Doppler podszywa się pod człowieka, kiedy pod krasnoluda, a kiedy pod elfa.
+As we can see, our Doppler can take various forms and behave like them. The pointer is Doppler, but the program knows well when a Doppler impersonates a human, a dwarf, and an elf.
 
 ___
 <!-- .slide: style="font-size: 0.9em" -->
 
-## Nie-wirtualne destruktory
+## Non-virtual destructors
 
-Bardzo ważne w przypadku tworzenia metod wirtualnych i dziedziczenia jest tworzenie wirtualnych destruktorów.
-Jeżeli korzystamy z dobroci polimorfizmu i nie oznaczymy destruktor jako `virtual` to destruktor ten nie zostanie wywołany.
+Very important when creating virtual methods and inheritance is creating virtual destructors.
+If we use the goodness of polymorphism and we don't mark the destructor as `virtual` the destructor will not be called.
 
 ```cpp
 #include <iostream>
@@ -294,7 +294,7 @@ int main() {
 
 ___
 
-## Nie-wirtualne destruktory - problem
+## Non-virtual destructors - problem
 
 ```cpp
 #include <iostream>
@@ -324,7 +324,7 @@ int main() {
 
 ___
 
-## Wirtualny destruktor
+## Virtual destructor
 
 ```cpp
 #include <iostream>
@@ -354,14 +354,14 @@ ___
 
 ___
 
-## Zadanie 3
+## Exercise 3
 
-Napisz klasę `DryFruit`, która dziedziczyć będzie po klasie `Fruit`.
+Write a class `DryFruit` that will inherit from the class `Fruit`.
 
-Klasa ta powinna nadpisywać metody `getPrice()`, `getName()` oraz `operator--`.
+This class should override methods `getPrice()`, `getName()` and `operator--`.
 
-`operator--` powinien odejmować zużycie raz na 10 wywołań.
+`operator--` should subtract consumption once every 10 times.
 
-Metoda `getPrice()` powinna zwracać trzykrotnie większą wartość w porównaniu do ceny bazowej.
+Method `getPrice()` should return three times the value of the base price.
 
-Przetestuj wywołania polimorficzne oraz podziel się wnioskami.
+Test polymorphic calls and share your conclusions.

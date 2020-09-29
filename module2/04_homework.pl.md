@@ -39,7 +39,7 @@ ___
 
 Wykorzystajcie kod napisany podczas zajęć. Możecie też skorzystać z kodu w katalogu [solutions](solutions)
 
-Projekt grupowy - kontynuacja. Możecie zmienić grupę jeśli chcecie ;)
+Projekt grupowy - kontynuacja. Możecie zmienić grupę jeśli chcecie 🙂
 
 ___
 
@@ -48,7 +48,7 @@ ___
 * Jak wyglądało wasze daily?
 * Czy Code Review nie jest zaniedbane?
 * Czy współpraca idzie gładko?
-* Zróbcie sobie retrospektywę :)
+* Zróbcie sobie retrospektywę 🙂
 
 ___
 

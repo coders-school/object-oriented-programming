@@ -164,7 +164,7 @@ ___
 
 ## Słowo `virtual` i `override`
 
-Co to za słowa? Co one robią? O tym za chwilę ;)
+Co to za słowa? Co one robią? O tym za chwilę 🙂
 <!-- .element: class="fragment fade-in" -->
 
 ___

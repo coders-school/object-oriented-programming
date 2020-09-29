@@ -1,8 +1,8 @@
 <!-- .slide: data-background="#111111" -->
 
-# Programowanie obiektowe
+# Object oriented programming
 
-## Dziedziczenie
+## Inheritance
 
 <a href="https://coders.school">
     <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
@@ -10,12 +10,12 @@
 
 ___
 
-## Wprowadzenie do dziedziczenia
+## Introduction to Inheritance
 
-Podczas implementacji klas, często możemy zauważyć, że część cech składowych klasy można wykorzystać także w innych klasach.
+When implementing classes, we can often notice that some of the class's component features can also be used in other classes.
 <!-- .element: class="fragment fade-in" -->
 
-Weźmy pod lupę klasę `Computer`. Jeżeli chcielibyśmy utworzyć klasy: `Laptop`, `PC`, `Tablet`, to część metod oraz składowych klasy musielibyśmy powielić.
+Let's take a closer look at the class `Computer`. If we would like to create classes: `Laptop`, `PC`, `Tablet`, we would have to duplicate some of the methods and class members.
 <!-- .element: class="fragment fade-in" -->
 
 ___
@@ -88,7 +88,7 @@ private:
 ___
 <!-- .slide: style="font-size: 0.9em" -->
 
-## Jak uprościć strukturę naszego programu?
+## How to simplify the structure of our program?
 
 ```cpp
 class Computer {
@@ -130,25 +130,25 @@ private:
 
 ___
 
-## Klasy bazowe i pochodne
+## Base classes and derived classes
 
-Klasa, po której dziedziczymy, nazywają się  <span class="fragment highlight-green">**klasą bazową (base class)**</span>.
+The class from which we inherit is called  <span class="fragment highlight-green">**base class**</span>.
 <!-- .element: class="fragment fade-in" -->
 
-Klasa, która dziedziczy nazywa się  <span class="fragment highlight-green">**klasą pochodną (derived class)**</span>.
+The class that it inherits is called  <span class="fragment highlight-green">**derived class**</span>.
 <!-- .element: class="fragment fade-in" -->
 
-Inaczej, klasa, po której dziedziczymy to rodzic (parent class).
+In other words, the class we inherit from is the parent class.
 <!-- .element: class="fragment fade-in" -->
 
-Klasa, która dziedziczy to dziecko (child class).
+The class that inherits is child class.
 <!-- .element: class="fragment fade-in" -->
 
 ___
 
-### Co z metodami klas `Laptop` i `Tablet`?
+### What about class methods `Laptop` and `Tablet`?
 
-#### Czy można wydzielić kolejną klasę?
+#### Is it possible to distinguish another class?
 <!-- .element: class="fragment fade-in" -->
 
 ```cpp
@@ -159,12 +159,12 @@ void getUserInput();
 
 ___
 
-## Klasa `Screen` i `TouchScreen`
+## Classes `Screen` and `TouchScreen`
 
-Załóżmy, że dodajemy klasę `Screen`. Klasa ta wyświetla na bieżąco interfejs użytkownika.
+Suppose we add a class `Screen`. This class displays the user interface in real time.
 <!-- .element: class="fragment fade-in" -->
 
-Chcemy też stworzyć klasę reprezentującą ekran dotykowy - `TouchScreen`, który również umożliwia odczyt akcji od użytkownika i ich wyświetlanie.
+We also want to create a class that represents a touchscreen - `TouchScreen` which also allows you to read actions from the user and display them.
 <!-- .element: class="fragment fade-in" -->
 
 <div class="multicolumn">
@@ -204,12 +204,12 @@ private:
 </div>
 </div>
 
-### Jak uprościć powyższy kod?
+### How to simplify the above code?
 <!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Wykorzystanie dziedziczenia do uproszczenia kodu
+## Using inheritance to simplify code
 
 ```cpp
 class Screen {
@@ -237,7 +237,7 @@ private:
 
 ___
 
-## Wielodziedziczenie
+## Multi-inheritance
 
 ```cpp
 class Screen {
@@ -284,25 +284,25 @@ class Tablet : public Computer,
 
 ___
 
-## Wielodziedziczenie - disclaimer
+## Multi-inheritance - disclaimer
 
-Wielodziedziczenie to dziedziczenie z kliku klas bazowych.
+Multi-inheritance is inheriting from several base classes.
 
-Wybór implementacji zależy od programisty.
+The choice of implementation is up to the developer.
 <!-- .element: class="fragment fade-in" -->
 
-Nie zawsze wielodziedziczenie będzie lepszym rozwiązaniem.
+Multi-inheritance will not always be a better solution.
 <!-- .element: class="fragment fade-in" -->
 
-Należy się zawsze zastanowić czy dziedziczenie po konkretnej klasie uprości nam program i czy nie będzie powodować żadnych komplikacji w dalszym procesie rozbudowy naszego programu.
+You should always consider whether inheriting from a specific class will simplify the program and whether it will not cause any complications in the further process of developing our program.
 <!-- .element: class="fragment fade-in" -->
 
-Najwyżej trzeba będzie refaktoryzować program ;)
+In the worst case, you will have to refactor the program 🙂
 <!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Dziedziczenie - problemy
+## Inheritance - problems
 
 ```cpp
 struct Bird {
@@ -325,9 +325,9 @@ struct Hummingbird {
 ___
 <!-- .slide: style="font-size: 0.9em" -->
 
-## Dziedziczenie - zasada LSP
+## Inheritance - LSP principle
 
-Jeżeli spróbujemy teraz uprościć klasę poprzez dziedziczenie pojawi się problem:
+If we now try to simplify the class through inheritance, the problem will arise:
 
 ```cpp
 struct Bird {
@@ -347,16 +347,16 @@ struct Hummingbird : public Bird {
 };
 ```
 
-Jeszcze bardziej utrudnimy sytuację, gdy w przyszłości dodamy sobie kolejne klasy jak Struś. Zawsze przed implementacją musimy się zastanowić jak podzielić odpowiedzialność na poszczególne klasy, aby
-uniknąć podobnych problemów.
+We will make the situation even more difficult when we add more classes, such as Ostrich, in the future. Before the implementation, we always need to think about how to divide the responsibility into individual classes so that
+avoid similar problems.
 
 ___
 
-### Dla ciekawskich
+### For the curious
 
-Poczytajcie o zasadzie Liskov Substitution Principle (LSP). Mówi ona jak powinno / nie powinno się projektować kodu obiektowego. Ta zasada została złamana w ostatnim przykładzie.
+Read about the Liskov Substitution Principle (LSP). It tells how an object code should / should not be designed. This rule was broken in the last example.
 
-Możecie też poczytać o wszystkich zasadach SOLID.
+You can also read about all SOLID principles.
 
 ___
 
