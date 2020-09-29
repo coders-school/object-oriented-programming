@@ -1,57 +1,37 @@
-# Object Oriented Programming
-
 <a href="https://coders.school">
     <img width="500" data-src="coders_school_logo.png" src="coders_school_logo.png" alt="Coders School" class="plain">
 </a>
 
+# Programowanie obiektowe
+
 ## [Moduł 1](module1/)
 
-### [Wprowadzenie do programowania obiektowego](module1/presentation_oop_intro.md)
+### [Wprowadzenie](module1/00_intro.pl.md)
 
-### [Modyfikatory dostępu](module1/presentation_access_modifiers.md)
+### [Modyfikatory dostępu](module1/01_access_modifiers.pl.md)
 
-### [Konstruktory i destruktory](module1/presentation_ctor_dtor.md)
+### [Konstruktory i destruktory](module1/02_ctor_dtor.pl.md)
 
-### [Hermetyzacja](module1/presentation_hermetization.md)
+### [Hermetyzacja](module1/03_hermetization.pl.md)
 
-### [Zadania](module1/presentation_tasks.md)
+### [Zadania](module1/04_tasks.pl.md)
 
-### [Projekt grupowy](module1/presentation_homework.md)
+### [Zadanie domowe](module1/05_homework.pl.md)
 
-## [Moduł 2](module2/)
+___
 
-### [Dziedziczenie](module2/presentation_inheritance.md)
+# Object Oriented Programming
 
-### [Metody wirtualne, interfejsy, klasy abstrakcyjne](module2/presentation_virtual.md)
+## [Module 1](module1/)
 
-### [Polimorfizm](module2/presentation_polymorphism.md)
+### [Introduction](module1/00_intro.en.md)
 
-### [Zmienne i funkcje statyczne](module2/presentation_static.md)
+### [Access modifiers](module1/01_access_modifiers.en.md)
 
-### [Projekt grupowy](module2/presentation_homework.md)
+### [Constructors and destructors](module1/02_ctor_dtor.en.md)
 
-## [Moduł 3](module3/)
+### [Hermetization](module1/03_hermetization.en.md)
 
-### [Przykładowe rozwiązania](module3/presentation_solutions.md)
+### [Exercises](module1/04_tasks.en.md)
 
-### [Polimorfizm](module3/presentation_polymorphism.md)
-
-### [Zmienne i funkcje statyczne](module3/presentation_static.md)
-
-### [Projekt grupowy](module3/presentation_homework.md)
-
-## [Moduł 4](module4/)
-
-### [Cztery filary obiektowości](module4/pillars.md)
-
-### [Abstrakcja](module4/abstraction.md)
-
-### [Enkapsulacja](module4/encapsulation.md)
-
-### [Dziedziczenie](module4/inheritance.md)
-
-### [Polimorfizm](module4/polymorphism.md)
-
-### [Zadanie](module4/exercise_cars.md)
-
-### [Post-work](module4/post_work.md)
+### [Homework](module1/05_homework.en.md)
