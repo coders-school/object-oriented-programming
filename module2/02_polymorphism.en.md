@@ -79,7 +79,7 @@ What will appear on the screen?
 
 ___
 
-## Key word `override`
+## Keyword `override`
 
 If in the derived class **we overwrite** virtual method, i.e. changing its behavior, you should add a keyword `override`.
 <!-- .element: class="fragment fade-in" -->
