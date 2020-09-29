@@ -32,6 +32,16 @@
 
 ### [Przykładowe rozwiązania](module2/05_solutions.pl.md)
 
+## [Moduł 3](module3/)
+
+### [Przykładowe rozwiązania](module3/00_solutions.pl.md)
+
+### [Polimorfizm](module3/01_polymorphism.pl.md)
+
+### [Zmienne i funkcje statyczne](module3/02_static.pl.md)
+
+### [Zadanie domowe](module3/03_homework.pl.md)
+
 ___
 
 # Object Oriented Programming
@@ -63,3 +73,13 @@ ___
 ### [Homework](module2/04_homework.en.md)
 
 ### [Examples of solutions](module2/05_solutions.en.md)
+
+## [Module 3](module3/)
+
+### [Examples of solutions](module3/00_solutions.en.md)
+
+### [Polymorphism](module3/01_polymorphism.en.md)
+
+### [Static variables and functions](module3/02_static.en.md)
+
+### [Homework](module3/03_homework.en.md)
