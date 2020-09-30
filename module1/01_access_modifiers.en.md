@@ -51,7 +51,7 @@ computer.restart(); // Ok
 
 ___
 
-## Access modifier `protected`
+### Access modifier `protected`
 
 There is one more access modifier in C++ - `protected`.
 

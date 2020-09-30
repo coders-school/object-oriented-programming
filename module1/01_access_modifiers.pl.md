@@ -51,7 +51,7 @@ computer.restart(); // Ok
 
 ___
 
-## Modyfikator dostępu `protected`
+### Modyfikator dostępu `protected`
 
 Istnieje jeszcze jeden modyfikator dostępu w C++ - `protected`.
 

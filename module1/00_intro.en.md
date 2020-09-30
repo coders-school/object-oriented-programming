@@ -8,7 +8,7 @@
 
 ___
 
-## SHM (Sea Trade Simulator)
+## SHM (pol. Symulator Handlu Morskiego) - Sea Trade Simulator
 
 <img height="500" data-src="img/statek.png" src="https://github.com/coders-school/object-oriented-programming/raw/master/module1/img/statek.png" alt="Statek" class="plain">
 
