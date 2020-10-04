@@ -9,10 +9,10 @@
 
 using ::testing::_;
 
-class PlayerTestSuite : public ::testing::Test
+class player : public ::testing::Test
 {
 public:
-    PlayerTestSuite() : m_sut(std::make_unique<Ship>(defaultCrew_, 1, 1, time_), defaultMoney_, defaultSpace_) {}
+    player() : m_sut(std::make_unique<Ship>(defaultCrew_, 1, 1, time_), defaultMoney_, defaultSpace_) {}
     Time time_;
 
     testing::StrictMock<TimeMock> timeMock;
@@ -22,7 +22,7 @@ public:
     Player m_sut;
 };
 
-TEST(PlayerWithTimeMock, WhenPlayerBuildObserversAdded)
+TEST(playerWithTimeMock, WhenPlayerBuildObserversAdded)
 {
     size_t space_ = 10;
     size_t money_ = 1;
@@ -33,44 +33,44 @@ TEST(PlayerWithTimeMock, WhenPlayerBuildObserversAdded)
     Player player(std::make_unique<Ship>(crew, 1, 1, timeMock), money_, space_);
 }
 
-TEST_F(PlayerTestSuite, CrewPayedWhenDayPasses)
+TEST_F(player, CrewPayedWhenDayPasses)
 {
     ++time_;
     EXPECT_EQ(m_sut.getMoney(), defaultMoney_ - defaultCrew_);
 }
 
-TEST_F(PlayerTestSuite, NotEnoughMoneyToPayCrew)
+TEST_F(player, NotEnoughMoneyToPayCrew)
 {
     m_sut.setMoney(1);
     EXPECT_THROW(++time_, AmountException);
 }
 
-TEST_F(PlayerTestSuite, NewSpaceWasSet)
+TEST_F(player, NewSpaceWasSet)
 {
     EXPECT_EQ(m_sut.getAvailableSpace(), defaultSpace_);
 }
 
-TEST_F(PlayerTestSuite, MoneyShouldBeIncreasedAfterErn)
+TEST_F(player, MoneyShouldBeIncreasedAfterErn)
 {
     size_t moreMoney_ = 100;
     m_sut.earnMoney(moreMoney_);
     EXPECT_EQ(m_sut.getMoney(), defaultMoney_ + moreMoney_);
 }
 
-TEST_F(PlayerTestSuite, MoneyShouldBeDecreasedAfterSpend)
+TEST_F(player, MoneyShouldBeDecreasedAfterSpend)
 {
     size_t spentMoney_ = 1;
     m_sut.spendMoney(spentMoney_);
     EXPECT_EQ(m_sut.getMoney(), defaultMoney_ - spentMoney_);
 }
 
-TEST_F(PlayerTestSuite, SpendMoreMoneyThanHaveShouldResultException)
+TEST_F(player, SpendMoreMoneyThanHaveShouldResultException)
 {
     size_t spentMoney_ = defaultMoney_ + 1;
     EXPECT_THROW(m_sut.spendMoney(spentMoney_), AmountException);
 }
 
-TEST_F(PlayerTestSuite, NewMoneyAmountWasSet)
+TEST_F(player, NewMoneyAmountWasSet)
 {
     size_t money = 10;
     m_sut.setMoney(money);
