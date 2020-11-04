@@ -4,6 +4,7 @@
 #include "Cargo.hpp"
 #include "Observer.hpp"
 #include "Player.hpp"
+#include "Time.hpp"
 
 class Store : public Observer {
 public:
@@ -13,6 +14,9 @@ public:
         lack_of_cargo,
         lack_of_space
     };
+
+    Store(Time* time);
+    ~Store();
 
     // override from Observer
     void nextDay() override;
@@ -27,4 +31,6 @@ private:
 
     Cargo* findCargo(Cargo* cargo) const;
     void generateDefaultCargo();
+
+    Time* _time;
 };

@@ -3,11 +3,12 @@
 #include <string>
 
 #include "Observer.hpp"
+#include "Time.hpp"
 
 class Cargo : public Observer {
 public:
-    Cargo(const std::string& name, size_t amount, size_t basePrice);
-    virtual ~Cargo() = default;
+    Cargo(const std::string& name, size_t amount, size_t basePrice, Time* time);
+    virtual ~Cargo();
 
     virtual size_t getPrice() const = 0;
     virtual std::string getName() const = 0;
@@ -29,4 +30,6 @@ protected:
     size_t _basePrice;
 
     size_t _maxAmount = 255;
+
+    Time* _time;
 };

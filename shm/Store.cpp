@@ -7,6 +7,13 @@
 #include "Fruit.hpp"
 #include "Item.hpp"
 
+Store::Store(Time* time):_time(time){
+    _time->addObserver(this);
+};
+Store::~Store(){
+    _time->removeObserver(this);
+};
+
 Cargo* Store::findCargo(Cargo* cargo) const {
     auto matchCargo = std::find_if(std::begin(_cargo), std::end(_cargo),
                                    [cargo](const auto& el) {
@@ -82,11 +89,11 @@ Store::Response Store::Sell(Cargo* cargo, size_t amount, Player* player) {
         }
     } else {
         if (auto* alcoholType = dynamic_cast<Alcohol*>(cargo)) {
-            _cargo.push_back(std::make_shared<Alcohol>(alcoholType->getName(), amount, alcoholType->getBasePrice(), alcoholType->getPower()));
+            _cargo.push_back(std::make_shared<Alcohol>(alcoholType->getName(), amount, alcoholType->getBasePrice(), alcoholType->getPower(), _time));
         } else if (auto* fruitType = dynamic_cast<Fruit*>(cargo)) {
-            _cargo.push_back(std::make_shared<Fruit>(fruitType->getName(), amount, fruitType->getBasePrice(), fruitType->getExpiryDate(), fruitType->getTimeToSpoil()));
+            _cargo.push_back(std::make_shared<Fruit>(fruitType->getName(), amount, fruitType->getBasePrice(), fruitType->getExpiryDate(), fruitType->getTimeToSpoil(), _time));
         } else if (auto* itemType = dynamic_cast<Item*>(cargo)) {
-            _cargo.push_back(std::make_shared<Item>(itemType->getName(), amount, itemType->getBasePrice(), itemType->getRarity()));
+            _cargo.push_back(std::make_shared<Item>(itemType->getName(), amount, itemType->getBasePrice(), itemType->getRarity(), _time));
         }
     }
     *cargo -= amount;
@@ -124,16 +131,16 @@ void Store::generateDefaultCargo() {
     std::uniform_int_distribution<> rarityDist(RARITY_MIN, RARITY_MAX);
 
     _cargo.reserve(12);
-    _cargo.push_back(std::make_shared<Alcohol>("whiskey", amountDist(gen), priceDist(gen), powerDist(gen)));
-    _cargo.push_back(std::make_shared<Alcohol>("koniak", amountDist(gen), priceDist(gen), powerDist(gen)));
-    _cargo.push_back(std::make_shared<Alcohol>("burbon", amountDist(gen), priceDist(gen), powerDist(gen)));
-    _cargo.push_back(std::make_shared<Alcohol>("zytnia", amountDist(gen), priceDist(gen), powerDist(gen)));
-    _cargo.push_back(std::make_shared<Fruit>("malina", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
-    _cargo.push_back(std::make_shared<Fruit>("wisnia", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
-    _cargo.push_back(std::make_shared<Fruit>("porzeczka", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
-    _cargo.push_back(std::make_shared<Fruit>("jagoda", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen)));
-    _cargo.push_back(std::make_shared<Item>("gold", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
-    _cargo.push_back(std::make_shared<Item>("sword", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
-    _cargo.push_back(std::make_shared<Item>("amulet", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
-    _cargo.push_back(std::make_shared<Item>("books", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen))));
+    _cargo.push_back(std::make_shared<Alcohol>("whiskey", amountDist(gen), priceDist(gen), powerDist(gen), _time));
+    _cargo.push_back(std::make_shared<Alcohol>("koniak", amountDist(gen), priceDist(gen), powerDist(gen), _time));
+    _cargo.push_back(std::make_shared<Alcohol>("burbon", amountDist(gen), priceDist(gen), powerDist(gen), _time));
+    _cargo.push_back(std::make_shared<Alcohol>("zytnia", amountDist(gen), priceDist(gen), powerDist(gen), _time));
+    _cargo.push_back(std::make_shared<Fruit>("malina", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen), _time));
+    _cargo.push_back(std::make_shared<Fruit>("wisnia", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen), _time));
+    _cargo.push_back(std::make_shared<Fruit>("porzeczka", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen), _time));
+    _cargo.push_back(std::make_shared<Fruit>("jagoda", amountDist(gen), priceDist(gen), dateDist(gen), timeDist(gen), _time));
+    _cargo.push_back(std::make_shared<Item>("gold", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen)), _time));
+    _cargo.push_back(std::make_shared<Item>("sword", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen)), _time));
+    _cargo.push_back(std::make_shared<Item>("amulet", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen)), _time));
+    _cargo.push_back(std::make_shared<Item>("books", amountDist(gen), priceDist(gen), Item::ChooseRarity(rarityDist(gen)), _time));
 }

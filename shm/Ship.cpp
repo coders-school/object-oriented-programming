@@ -4,8 +4,8 @@
 
 constexpr size_t CREW = 16;
 
-Ship::Ship()
-    : _id(-1) {
+Ship::Ship(Time* time)
+    : _id(-1), _time(time){
 }
 
 Ship::Ship(int id,
@@ -13,6 +13,7 @@ Ship::Ship(int id,
            size_t speed,
            size_t maxCrew,
            size_t capacity,
+           Time* time,
            Delegate* delegate)
     : _id(id),
     _name(name),
@@ -20,13 +21,20 @@ Ship::Ship(int id,
     _maxCrew(maxCrew),
     _capacity(capacity),
     _crew(CREW),
-    _delegate(delegate) {
+    _delegate(delegate),
+    _time(time){
+        _time->addObserver(this);
 }
 
 Ship::Ship(int id,
            size_t speed,
-           size_t maxCrew)
-    : Ship(id, "", speed, maxCrew, 0, nullptr) {
+           size_t maxCrew,
+           Time* time)
+    : Ship(id, "", speed, maxCrew, 0, time, nullptr) {
+}
+
+Ship::~Ship(){
+    _time->removeObserver(this);
 }
 
 Ship& Ship::operator+=(const size_t crew) {

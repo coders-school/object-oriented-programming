@@ -6,8 +6,8 @@ constexpr size_t MAX_POWER = 96;
 
 class Alcohol : public Cargo {
 public:
-    Alcohol(const std::string& name, size_t amount, size_t basePrice);
-    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t power);
+    Alcohol(const std::string& name, size_t amount, size_t basePrice, Time* time);
+    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t power, Time* time);
     ~Alcohol() override = default;
 
     size_t getPrice() const override;

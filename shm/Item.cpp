@@ -16,8 +16,8 @@ Item::Rarity Item::ChooseRarity(size_t code) {
 	return Item::Rarity::legendary;
 }
 
-Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
-    : Cargo(name, amount, basePrice), _rarity(rarity) {}
+Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity, Time* time)
+    : Cargo(name, amount, basePrice, time), _rarity(rarity) {}
 
 size_t Item::getPrice() const {
     return _basePrice * static_cast<int>(_rarity);

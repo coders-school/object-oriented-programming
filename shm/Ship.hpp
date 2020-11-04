@@ -6,19 +6,23 @@
 
 #include "Cargo.hpp"
 #include "Observer.hpp"
+#include "Time.hpp"
 
 class Ship : public Observer {
 public:
-    Ship();
+    Ship(Time* time);
     Ship(int id,
          const std::string& name,
          size_t speed,
          size_t maxCrew,
          size_t capacity,
+         Time* time,
          Delegate* delegate);
     Ship(int id,
          size_t speed,
-         size_t maxCrew);
+         size_t maxCrew,
+         Time* time);
+    ~Ship();
 
     int getId() const { return _id; }
     std::string getName() const { return _name; }
@@ -48,4 +52,6 @@ private:
     size_t _crew;
     Delegate* _delegate;
     std::vector<std::shared_ptr<Cargo>> _cargo;
+
+    Time* _time;
 };

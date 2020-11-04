@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.2)
+cmake_minimum_required(VERSION 3.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,14 +35,17 @@ if (CMAKE_VERSION VERSION_LESS 2.8.11)
   include_directories("${gtest_SOURCE_DIR}/include")
 endif()
 
-project(SymulatorHandluMorskiego)
+project(SymulatorHandluMorskiego VERSION 0.1.0)
 enable_testing()
 
-set(SOURCE_FILES main.cpp Alcohol.cpp Cargo.cpp Coordinates.cpp Fruit.cpp Game.cpp Island.cpp Item.cpp Map.cpp Observer.cpp Player.cpp Ship.cpp Store.cpp Time.cpp)  
+set(SOURCE_FILES Alcohol.cpp Cargo.cpp Coordinates.cpp Fruit.cpp Game.cpp Island.cpp Item.cpp Map.cpp Observer.cpp Player.cpp Ship.cpp Store.cpp Time.cpp)  
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_library(${PROJECT_NAME}-lib STATIC ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+
 #Temp test file
-add_executable(${PROJECT_NAME}-ut ship-unittest.cpp Ship.cpp)
+#add_executable(${PROJECT_NAME}-ut ship-unittest.cpp Ship.cpp)
 
-target_link_libraries(${PROJECT_NAME}-ut gtest_main)
-add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
+#target_link_libraries(${PROJECT_NAME}-ut gtest_main)
+#add_test(NAME ${PROJECT_NAME}_test COMMAND ${PROJECT_NAME}-ut)
