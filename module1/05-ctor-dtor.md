@@ -5,14 +5,14 @@
 ## Konstruktory i destruktory
 
 <a href="https://coders.school">
-    <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
+    <img width="500" src="../coders_school_logo.png" alt="Coders School" class="plain">
 </a>
 
 ___
 
 ## Konstruktor
 
-Konstruktor klasy jest to przepis określający jak ma wyglądać nasza klasa w chwili stworzenia.
+Konstruktor klasy jest to przepis określający jak ma wyglądać obiekt naszej klasy zaraz po utworzeniu.
 <!-- .element: class="fragment fade-in" -->
 
 Jest to specjalna funkcja, która nazywa się tak samo jak klasa.
@@ -56,7 +56,7 @@ ___
 
 ## Lista inicjalizacyjna konstruktora
 
-Do inicjalizacji danych w konstruktorze możemy wykorzystać listę inicjalizacyjną.
+Do inicjalizacji danych w konstruktorze możemy (a raczej powinniśmy) wykorzystać listę inicjalizacyjną.
 <!-- .element: class="fragment fade-in" -->
 
 Listę inicjalizacyjną pisze się za sygnaturą konstruktora po dwukropku.
@@ -78,13 +78,29 @@ public:
 private:
     unsigned clock_;
     size_t cores_;
-}
+};
 ```
 <!-- .element: class="fragment fade-in" -->
 
 ___
 
-## Delegowanie konstruktorów
+## Inicjalizacja w ciele klasy (C++11)
+
+Od C++11 możemy inicjalizować obiekty klasy domyślnymi wartościami w ciele klasy
+<!-- .element: class="fragment fade-in" -->
+
+```cpp
+class Processor {
+private:
+    unsigned clock_ = 3'000'000'000u;    // 3 GHz
+    size_t cores_ = 8u;
+};
+```
+<!-- .element: class="fragment fade-in" -->
+
+___
+
+## Delegowanie konstruktorów (C++11)
 
 Elementem listy inicjalizacyjnej może być nawet inny konstruktor naszej klasy.
 <!-- .element: class="fragment fade-in" -->
@@ -92,12 +108,14 @@ Elementem listy inicjalizacyjnej może być nawet inny konstruktor naszej klasy.
 ```cpp
 class Ship {
 public:
-    Ship(const std::string& name, size_t capacity, size_t crew):
-        name_(name), capacity_(capacity), crew_(crew)
+    Ship(const std::string& name, size_t capacity, size_t crew)
+        : name_(name)
+        , capacity_(capacity)
+        , crew_(crew)
     {}
 
-    Ship(const std::string& name, size_t capacity):
-        Ship(name, capacity, 0)
+    Ship(const std::string& name, size_t capacity)
+        : Ship(name, capacity, 0)
     {}
 
 private:
@@ -109,7 +127,7 @@ private:
 <!-- .element: class="fragment fade-in" -->
 
 ___
-<!-- .slide: style="font-size: 0.9em" -->
+<!-- .slide: style="font-size: 0.8em" -->
 
 ## Destruktor
 
@@ -119,7 +137,10 @@ Destruktor jest specjalną funkcją sprzątającą naszą klasę.
 Musi nazywać się tak samo jak klasa, ale jej nazwa poprzedzona jest znakiem tyldy `~`.
 <!-- .element: class="fragment fade-in" -->
 
-Możemy ją wykorzystać, jeżeli chcemy wywołać konkretne akcje podczas niszczenia obiektu, np. zarejestrowanie tego faktu w dzienniku itp.
+Rzadko powinna być potrzeba pisania własnych destruktorów. Na pewno musisz o nich pamiętać, jeśli jako pól klasy używasz zwykłych wskaźników i alokujesz pamięć w konstruktorze.
+<!-- .element: class="fragment fade-in" -->
+
+Destruktor wykorzystujesz, jeżeli chcesz wywołać konkretne akcje podczas niszczenia obiektu, np. zarejestrowanie tego faktu w dzienniku itp.
 <!-- .element: class="fragment fade-in" -->
 
 ```cpp
@@ -140,7 +161,3 @@ private:
 };
 ```
 <!-- .element: class="fragment fade-in" -->
-
-___
-
-## Q&A

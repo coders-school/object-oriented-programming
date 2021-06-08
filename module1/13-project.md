@@ -2,7 +2,7 @@
 
 # Programowanie obiektowe
 
-## Podsumowanie
+## Projekt grupowy (Premium)
 
 <a href="https://coders.school">
     <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
@@ -10,37 +10,13 @@
 
 ___
 
-## Co pamiętasz z dzisiaj?
-
-### Napisz na czacie jak najwięcej haseł
-<!-- .element: class="fragment fade-in" -->
-
-1. <!-- .element: class="fragment fade-in" --> klasy
-2. <!-- .element: class="fragment fade-in" --> obiekty
-3. <!-- .element: class="fragment fade-in" --> pola, właściwości
-4. <!-- .element: class="fragment fade-in" --> metody, funkcje klasy
-5. <!-- .element: class="fragment fade-in" --> modyfikatory dostępu - `public`, `private`
-6. <!-- .element: class="fragment fade-in" --> konstruktory
-7. <!-- .element: class="fragment fade-in" --> destruktory
-8. <!-- .element: class="fragment fade-in" --> hermetyzacja
-9. <!-- .element: class="fragment fade-in" --> gettery
-10. <!-- .element: class="fragment fade-in" --> settery
-
-___
-
-### Pre-work
-
-* Poczytaj i pooglądaj wideo o dziedziczeniu i polimorfizmie
-
-___
-
-## Projekt grupowy
+## Projekt SHM
 
 Wykorzystajcie kod napisany podczas zajęć. Możecie też skorzystać z kodu w katalogu [solutions](solutions)
 
 Projekt grupowy. Polecane grupy 5 osobowe (4-6 też są ok).
 
-Zróbcie Fork tego repo, a cały projekt ma się znaleźć w katalogu [shm](../shm)
+Zróbcie Fork tego repo, a cały projekt ma się znaleźć w katalogu [shm](../shm) na branchu `shm`.
 
 Współpracujcie na jednym forku za pomocą branchy lub Pull Requestów z waszych własnych forków.
 
