@@ -55,7 +55,6 @@ ___
 2. Walidacja czy numer PESEL jest poprawny [Wiki - poprawność PESEL](https://pl.wikipedia.org/wiki/PESEL#Cyfra_kontrolna_i_sprawdzanie_poprawności_numeru) (trudne)
 3. Wczytywanie z pliku i zapisywanie całej bazy w pliku (trudne)
 
-
 ___
 
 ### Organizacja

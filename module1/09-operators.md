@@ -29,6 +29,7 @@ public:
     unsigned getAge() const { return age_; }
     Person& operator++() {
         age_++;
+        return *this;
     }
 };
 ```
