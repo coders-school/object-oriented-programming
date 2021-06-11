@@ -51,21 +51,21 @@ ___
 Rozwiązaniem tej uciążliwości jest `static`. Co więcej, problem ten możemy rozwiązać na 2 sposoby. Nie musimy w ten sposób tworzyć specjalnie obiektu, aby dostać się do cechy klasy, jaką jest jej nazwa.
 
 ```cpp
-class ObjectA {
+class ClassA {
 public:
-    static std::string getName() { return "ObjectA"; }
+    static std::string getName() { return "ClassA"; }
 };
 
-class ObjectB {
+class ClassB {
 public:
     static std::string name_;
 };
 
-std::string ObjectB::name_{"ObjectB"};
+std::string ClassB::name_{"ClassB"};
 
 int main() {
-    std::cout << ObjectA::getName() << '\n';
-    std::cout << ObjectB::name_ << '\n';
+    std::cout << ClassA::getName() << '\n';
+    std::cout << ClassB::name_ << '\n';
 
     return 0;
 }
