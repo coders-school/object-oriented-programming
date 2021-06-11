@@ -11,7 +11,7 @@
 ___
 <!-- .slide: style="font-size: 0.85em" -->
 
-## "Zmienna lub stała klasy"
+## Zmienna lub stała klasy
 
 Czasami chcielibyśmy przypisać jakąś stałą cechę do klasy.
 Nie konkretnych obiektów, a klasy samej w sobie.
