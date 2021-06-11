@@ -18,7 +18,7 @@ ___
 
 ### Post-work
 
-* Mini-projekt `university-db` (20 XP + 10 XP)
+* Mini-projekt `university-db` (16 XP + 12 XP)
 
 #### Bonusy
 
@@ -34,7 +34,7 @@ Napiszcie od zera program, który będzie akademicką "bazą danych".
 
 Używajcie STLa!
 
-#### Wymagania (20 XP):
+#### Wymagania (16 XP):
 
 1. Przechowywanie rekordów studentów o strukturze: Imię, nazwisko, adres, nr indeksu, PESEL, płeć
 2. Dodawanie nowych studentów
@@ -49,7 +49,7 @@ ___
 
 ### `university-db`
 
-#### Opcjonalne wymagania (10 XP):
+#### Opcjonalne wymagania (12 XP):
 
 1. Wyświetlanie zawartości bazy
 2. Walidacja czy numer PESEL jest poprawny [Wiki - poprawność PESEL](https://pl.wikipedia.org/wiki/PESEL#Cyfra_kontrolna_i_sprawdzanie_poprawności_numeru) (trudne)
@@ -59,7 +59,7 @@ ___
 
 ### Organizacja
 
-Zorganizujcie się w grupy 2-4 osobowe.
+Zorganizujcie się w grupy 3-4 osobowe.
 
 Tym razem zaczynacie projekt od zera. Sami musicie założyć sobie na niego repozytorium i dogadać się co do podziału prac. Nie będzie to łatwe, bo zadania są zależne od siebie 😉
 
@@ -89,16 +89,18 @@ ___
 
 #### Testy
 
-Tym razem testy musicie napisać sami. Ale spokojnie, nie wymagamy jeszcze pisania ich we frameworku GTest (chociaż jeśli chcecie to śmiało!).
+Tym razem testy musicie napisać sami. Ale spokojnie, nie wymagamy jeszcze pisania ich we frameworku GTest lub Catch2 (chociaż jeśli chcecie to śmiało!).
 
 Wystarczy, że w funkcji `main()` użyjecie każdej zaimplementowanej przez was funkcji.
 
-Tylko koniecznie dopiszcie funkcję, która zwraca całą kolekcję studentów, aby po każdej operacji sprawdzać, czy jej zawartość jest taka jak oczekiwano.
+Testy będą polegały na sprawdzeniu zawartości bazy danych po poszczególnych operacjach. Najlepiej dopisać funkcję, która zwraca całą kolekcję studentów, aby po każdej operacji sprawdzać, czy jej zawartość jest taka jak oczekiwano.
 
 ___
 
 ### Ocenianie
 
 Gdy skończycie napiszcie na kanale `#university-db` i oznaczcie mnie (`@Lukin-2054`). Punkty będę przyznawał manualnie po osobistym code review :) Zastrzegam sobie jednak długi czas na sprawdzenie wszystkiego.
+
+Możliwe że pierwsze review zrobię dopiero w lipcu!
 
 Ale review kodu może zrobić absolutnie każdy! Śmiało komentujcie rozwiązania innych grup!

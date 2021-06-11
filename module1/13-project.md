@@ -28,7 +28,7 @@ Do podziału zadań i śledzenia statusu możecie wykorzystać zakładkę [Proje
 
 ### Planning
 
-Rozpocznijcie planowaniem, na którym utworzycie karteczki na każde zadanie w kolumnie To Do. Najlepiej przekonwertować je na Issues. Dzięki temu można przypisywać się do zadań i pisać w nich komentarze. Napiszcie też przy każdym zadaniu na ile dni pracy je szacujecie. Po zakończonym planningu wyślijcie proszę na kanale `#planning` linka do waszej tablicy projektowej na GitHubie.
+Rozpocznijcie planowaniem, na którym utworzycie karteczki na każde zadanie w kolumnie To Do. Najlepiej przekonwertować je na Issues. Dzięki temu można przypisywać się do zadań i pisać w nich komentarze. Napiszcie też przy każdym zadaniu na ile dni pracy je szacujecie. Po zakończonym planningu wyślijcie proszę na kanale `#shm` linka do waszej tablicy projektowej na GitHubie.
 
 ### Daily
 
@@ -49,9 +49,9 @@ ___
 ### Punktacja
 
 * Każde dostarczone zadanie to 5 punktów
-* 20 punktów za dostarczenie wszystkich 8 zadań przed 28.06.2020 (niedziela) do 23:59
+* 15 punktów za dostarczenie wszystkich 8 zadań do 28.06.2021 (poniedziałek) do 23:59
 * brak punktów bonusowych za dostarczenie tylko części zadań przed 28.06.
-* 6 punktów za pracę w grupie dla każdej osoby z grupy.
+* 8 punktów za pracę w grupie dla każdej osoby z grupy.
 
 ___
 
