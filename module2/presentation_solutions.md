@@ -10,6 +10,12 @@
 
 ___
 
+## Disclaimer
+
+W PDFie te rozwiązania mogą być częściowo ucięte. Przejdź do lekcji na platformie lub na GitHubie, aby zobaczyć je w całości.
+
+___
+
 ### Zadanie 1
 
 Cargo.hpp
@@ -247,11 +253,11 @@ Cargo* Player::getCargo(size_t index) const {
 }
 
 size_t Player::getAvailableSpace() const {
-    size_t total_cargo_amount = 0;
+    available_space_ = 0;
     for (const auto cargo : ship_->getCargos()) {
-        total_cargo_amount += cargo->getAmount();
+        available_space_ += cargo->getAmount();
     }
-    available_space_ = ship_->getCapacity() - total_cargo_amount;
+
     return available_space_;
 }
 ```

@@ -110,7 +110,7 @@ ___
 `override` jest opcjonalne. Jeśli go nie podamy za sygnaturą funkcji klasy pochodnej to metoda z klasy bazowej i tak zostanie nadpisana.
 <!-- .element: class="fragment fade-in" -->
 
-Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi czy faktycznie nadpisujemy metodę z klasy bazowej i jeśli nie, to program się nie skompiluje.
+Jego użycie jest jednak dobrą praktyką, bo dzięki niemu kompilator sprawdzi, czy faktycznie nadpisujemy metodę z klasy bazowej i jeśli nie, to program się nie skompiluje.
 <!-- .element: class="fragment fade-in" -->
 
 Bez `override` mogłaby zostać utworzona nowa metoda w klasie pochodnej, która nie nadpisuje niczego z klasy bazowej.
@@ -230,22 +230,22 @@ ___
 ```cpp
 class Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Doppler!"; }
+    virtual void sayHello() { std::cout << "I'm Doppler!"; }
 };
 
 class Dwarf : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Dwarf!"; }
+    virtual void sayHello() { std::cout << "I'm Dwarf!"; }
 };
 
 class Elf : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Elf!"; }
+    virtual void sayHello() { std::cout << "I'm Elf!"; }
 };
 
 class Human : public Doppler {
 public:
-    virtual sayHello() { std::cout << "I'm Human!"; }
+    virtual void sayHello() { std::cout << "I'm Human!"; }
 };
 
 int main() {

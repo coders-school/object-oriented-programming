@@ -82,15 +82,11 @@ public:
 };
 
 class Hummingbird : public Bird,
-                    public Flyable,
-                    public Soundable {
+                    public Flyable {
 public:
     // Override from Bird
     void eat() override;
     void sleep() override;
-
-    // Override from Soundable
-    void makeSound() override;
 
     // Override from Flyable
     void fly() override;
