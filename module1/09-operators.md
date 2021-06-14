@@ -37,7 +37,7 @@ public:
 
 ```cpp
 int main() {
-    Person adam("Adam", 25)
+    Person adam("Adam", 25);
     ++adam;
     std::cout << adam.getAge() << '\n'; // prints 26
 }
