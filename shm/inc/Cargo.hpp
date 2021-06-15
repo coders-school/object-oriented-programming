@@ -4,11 +4,11 @@
 class Cargo {
 public:
 
-    Cargo& operator+=(const uint16_t);
-    Cargo& operator-=(const uint16_t);
+    Cargo& operator+=(const size_t);
+    Cargo& operator-=(const size_t);
 
 private:
     const std::string name_ { }; 
-    uint16_t amount_ { 0 };
-    uint16_t basePrice_ { 0 }; 
+    size_t amount_ { 0 };
+    size_t basePrice_ { 0 }; 
 };
