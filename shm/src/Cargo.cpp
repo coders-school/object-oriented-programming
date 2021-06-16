@@ -1,3 +1,20 @@
-bool Cargo::operator==(const Cargo& cargo){
+#include "../inc/Cargo.hpp"
+#include <iostream>
+
+Cargo& Cargo::operator+=(const size_t value) {
+    amount_ += value;
+    return *this;
+}
+
+Cargo& Cargo::operator-=(const size_t value) {
+    if (value <= amount_) {
+        amount_ -= value;
+    } else {
+        std::cerr << "Amount of cargo can't be under 0\n";
+    }
+    return *this;
+}
+
+bool Cargo::operator==(const Cargo& cargo) const {
     return cargo.name_ == name_;
 }
