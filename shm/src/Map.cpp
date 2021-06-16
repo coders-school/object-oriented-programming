@@ -1,11 +1,11 @@
 #include "Map.hpp"
 
 #include <algorithm>
+#include <exception>
 #include <iostream>
 #include <memory>
 #include <random>
 #include <stdexcept>
-#include <exception>
 
 constexpr int COORDINATE_MIN = 0;
 constexpr int COORDINATE_MAX = 99;
@@ -19,13 +19,14 @@ Map::Map() {
         COORDINATE_MIN, COORDINATE_MAX
     };
     int count{};
+    vectorOfIslands_.reserve(ISLANDS_COUNT);
     while (vectorOfIslands_.size() != ISLANDS_COUNT || count < TRIALS) {
         auto generatedIslandCoords{
             Island::Coordinates(distribution(generator),
                                 distribution(generator))
         };
-        auto result = std::find_if(vectorOfIslands_.begin(),
-                                   vectorOfIslands_.end(),
+        auto result = std::find_if(vectorOfIslands_.cbegin(),
+                                   vectorOfIslands_.cend(),
                                    [&](const Island& island) {
                                        return island.getCoordinates() ==
                                                generatedIslandCoords;
