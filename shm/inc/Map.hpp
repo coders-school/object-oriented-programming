@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
-
 #include "Island.hpp"
+#include <vector>
 
 class Map {
 public:
+    Map();
 
 private:
     std::vector<Island&> vectorOfIslands_;
