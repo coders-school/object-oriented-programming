@@ -1,4 +1,4 @@
-#include "player.hpp"
+#include "Player.hpp"
 #include <memory>
 #include <utility>
 
@@ -6,7 +6,7 @@ void Player::calculateAvailableSpace() {
     // Implementation will be based on cargo aggregation in ship class - for now does nothing
 }
 
-Player::Player(std::unique_ptr<Ship>& ship, const size_t& money, const size_t availableSpace)
+Player::Player(std::unique_ptr<Ship> ship, const size_t& money, const size_t& availableSpace)
     : ship_{std::move(ship)}, money_{money}, availableSpace_{availableSpace} {}
 
 const std::unique_ptr<Ship>& Player::getShip() const {
