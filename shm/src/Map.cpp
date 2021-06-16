@@ -10,7 +10,6 @@
 constexpr int COORDINATE_MIN = 0;
 constexpr int COORDINATE_MAX = 99;
 constexpr int ISLANDS_COUNT = 10;
-constexpr int TRIALS = ISLANDS_COUNT * 10;
 
 Map::Map() {
     std::random_device rd;
@@ -18,9 +17,8 @@ Map::Map() {
     std::uniform_int_distribution<> distribution{
         COORDINATE_MIN, COORDINATE_MAX
     };
-    int count{};
     vectorOfIslands_.reserve(ISLANDS_COUNT);
-    while (vectorOfIslands_.size() != ISLANDS_COUNT || count < TRIALS) {
+    while (vectorOfIslands_.size() != ISLANDS_COUNT) {
         auto generatedIslandCoords{
             Island::Coordinates(distribution(generator),
                                 distribution(generator))
@@ -34,7 +32,6 @@ Map::Map() {
         if (result == vectorOfIslands_.end()) {
             vectorOfIslands_.push_back(Island(generatedIslandCoords));
         }
-        ++count;
     }
     try {
         currentPosition_ = std::make_unique<Island>(vectorOfIslands_.at(0));
