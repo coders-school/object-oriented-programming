@@ -1,15 +1,13 @@
 #include "../inc/Player.hpp"
 
-Player::Player(std::shared_ptr<Ship>& ptrShip, size_t money, size_t availableSpace)
-    : ptrShip_(std::move(ptrShip)), money_(money), availableSpace_(availableSpace)
-{}
-
-//Foo f (std::make_shared<Stuff>());
+Player::Player(Ship& ship, size_t money, size_t availableSpace)
+        : ship_(std::make_unique<Ship>(ship)), money_(money), availableSpace_(availableSpace)
+    {} 
 
 size_t Player::getSpeed() const {
-    //auto ptrShip_ = std::make_shared<Ship>(ship);
-    return ptrShip_->getSpeed();
+    return ship_->getSpeed();
 };
-Cargo* getCargo(size_t index) const {
 
+Cargo* Player::getCargo(size_t index) const {
+    return ship_->getCargo(index);
 }
