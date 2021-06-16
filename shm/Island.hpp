@@ -1,18 +1,25 @@
 #pragma once
+#include <cstdint>
 
-#include "Coordinates.hpp"
+using coordinateType = std::size_t;
 
 class Island {
 public:
-    Island(size_t posX, size_t posY)
-        : position_{posX, posY} {}
+    Island(coordinateType positionX, coordinateType positionY);
 
-    auto getPosition() const;
+    class Coordinates {
+    public:
+        Coordinates(coordinateType positionsX, coordinateType positionY);
 
-    class Coordinates;
+        bool operator==(const Coordinates& other) const;
+
+    private:
+        const coordinateType positionX_;
+        const coordinateType positionY_;
+    };
+
+    Coordinates getPosition() const;
 
 private:
-    Coordinates position_;
+    const Coordinates position_;
 };
-
-bool operator==(const Coordinates& lhs, const Coordinates& rhs);

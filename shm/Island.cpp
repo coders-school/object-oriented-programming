@@ -1,12 +1,17 @@
 #include "Island.hpp"
-#include "Coordinates.hpp"
 
-auto Island::getPosition() const {
+Island::Island(coordinateType positionX, coordinateType positionY)
+    : position_{positionX, positionY} {}
+
+Island::Coordinates Island::getPosition() const {
     return position_;
 }
 
-bool operator==(const Coordinates& lhs, const Coordinates& rhs) {
-    if (lhs.posX == rhs.posX and lhs.posY == rhs.posY) {
+Island::Coordinates::Coordinates(coordinateType positionX, coordinateType positionY)
+    : positionX_{positionX}, positionY_{positionY} {}
+
+bool Island::Coordinates::operator==(const Coordinates& other) const {
+    if (positionX_ == other.positionX_ and positionY_ == other.positionY_) {
         return true;
     }
     return false;
