@@ -8,6 +8,6 @@ public:
     Map();
 
 private:
-    std::vector<Island&> vectorOfIslands_;
+    std::vector<Island> vectorOfIslands_;
     Island* currentPosition_;
 };
