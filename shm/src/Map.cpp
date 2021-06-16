@@ -1,11 +1,12 @@
 #include "Map.hpp"
 
 #include <algorithm>
+#include <cstddef>
 #include <random>
 
-constexpr int COORDINATE_MIN = 0;
-constexpr int COORDINATE_MAX = 99;
-constexpr int ISLANDS_COUNT = 10;
+constexpr size_t COORDINATE_MIN = 0;
+constexpr size_t COORDINATE_MAX = 99;
+constexpr size_t ISLANDS_COUNT = 10;
 
 Map::Map() {
     std::random_device rd;
