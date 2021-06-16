@@ -30,5 +30,5 @@ Map::Map() {
             vectorOfIslands_.push_back(Island(generatedIslandCoords));
         }
     }
-    currentPosition_ = std::make_unique<Island>(vectorOfIslands_.at(0));
+    currentPosition_ = std::make_unique<Island>(vectorOfIslands_[0]);
 }
