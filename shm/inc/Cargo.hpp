@@ -5,6 +5,7 @@ class Cargo {
 public:
     Cargo& operator+=(const size_t);
     Cargo& operator-=(const size_t);
+    bool operator==(const Cargo&) const;
 
 private:
     const std::string name_; 
