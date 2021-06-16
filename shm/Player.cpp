@@ -1,4 +1,6 @@
 #include "Player.hpp"
+#include "ship.hpp"
+#include "cargo.hpp"
 #include <memory>
 #include <utility>
 
@@ -22,8 +24,7 @@ size_t Player::getAvailableSpace() const {
 }
 
 size_t Player::getSpeed() const {
-    // return ship_->getSpeed(); Uncomment after implementation of Ship.getSpeed()
-    return 0;  // Placeholder
+    return ship_->getSpeed();
 }
 
 Cargo* Player::getCargo(size_t index) const {

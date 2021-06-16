@@ -1,10 +1,8 @@
 #pragma once
 
+#include "ship.hpp"
+#include "cargo.hpp"
 #include <memory>
-
-// Forward declaration, include Ship/Cargo class once they are ready
-class Ship;
-class Cargo;
 
 class Player {
     std::unique_ptr<Ship> ship_;
