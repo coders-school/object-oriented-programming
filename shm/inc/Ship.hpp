@@ -17,9 +17,10 @@ public:
     size_t getCapacity() const { return capacity_; };
 
     void setName(const std::string&);
+
 private:
     const int id_ { -1 };
-    std::string name_ { };
+    std::string name_;
     size_t speed_ { 50 };
     const size_t maxCrew_ { 100 };
     size_t crew_ { };
