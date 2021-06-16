@@ -17,7 +17,7 @@ void addIslandsToMap(std::vector<Island> islandVec_, size_t number) {
             Island newPosition(posX, posY);
    
             auto result = find_if(islandVec_.begin(), islandVec_.end(),
-                        ()[Island position_]{ return position_.getPosition() == newPosition };                   
+                        ()[const Island& position]{ return position.getPosition() == newPosition };                   
    
         } while (result != islandVec_.end());
         
