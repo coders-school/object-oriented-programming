@@ -1,14 +1,16 @@
 #pragma once
 
+#include <iostream> // for size_t
+
 class Island {
 public:
     class Coordinates {
     public:
-        Coordinates(int, int);
-        bool operator==(const Coordinates&);
+        Coordinates(size_t, size_t);
+        bool operator==(const Coordinates&) const;
     private:
-        const int positionX_;
-        const int positionY_;
+        const size_t positionX_ = 0;
+        const size_t positionY_ = 0;
     };
 
     Coordinates getCoordinates() const { return position_; }
