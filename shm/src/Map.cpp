@@ -2,8 +2,10 @@
 
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include <random>
 #include <stdexcept>
+#include <exception>
 
 constexpr int COORDINATE_MIN = 0;
 constexpr int COORDINATE_MAX = 99;
@@ -34,8 +36,10 @@ Map::Map() {
         ++count;
     }
     try {
-        currentPosition_ = &(vectorOfIslands_.at(0));
+        currentPosition_ = std::make_unique<Island>(vectorOfIslands_.at(0));
     } catch (const std::out_of_range& e) {
+        std::cerr << "None of the islands created: " << e.what() << std::endl;
+    } catch (const std::exception& e) {
         std::cerr << "Object construction error: " << e.what() << std::endl;
     }
 }
