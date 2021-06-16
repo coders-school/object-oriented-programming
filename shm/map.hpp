@@ -1,5 +1,6 @@
 #pragma once
 
+#include <random>
 #include <vector>
 #include "Island.hpp"
 class Map {
@@ -7,6 +8,7 @@ class Map {
     Island* currentPosition_;
 
 public:
+    Map();
     std::vector<Island> getIslandVec() const;
     Island* getCurrentPosition() const;
 };
