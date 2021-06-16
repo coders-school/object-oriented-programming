@@ -8,7 +8,7 @@ public:
     bool operator==(const Cargo&) const;
 
 private:
-    const std::string name_ { }; 
+    const std::string name_; 
     size_t amount_ { 0 };
     size_t basePrice_ { 0 }; 
 };
