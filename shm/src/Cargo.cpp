@@ -12,6 +12,5 @@ Cargo& Cargo::operator-=(const size_t value) {
     } else {
         std::cout << "Amount of cargo can't be under 0\n";
     }
-    
     return *this;
 }
