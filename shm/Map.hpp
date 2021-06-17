@@ -15,4 +15,7 @@ public:
     std::vector<Island> getIslandVec() const;
     Island* getCurrentPosition() const;
     Island* getIsland(const Island::Coordinates&);
+
+private:
+    void fillWithRandomIslands();
 };

@@ -2,40 +2,33 @@
 #include <algorithm>
 
 coordinateType generatePosition() {
-    std::random_device rd;  
-    std::mt19937 gen(rd()); 
-    std::uniform_int_distribution<> distrib(0,10);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distrib(0, 10);
 
     return distrib(gen);
 }
 
-void fillWithRandomIslands(std::vector<Island>& vec, size_t number) {
-    // Consider making it method in Map class
-    for (size_t i = 0; i < number; i++) {
-        // while (true) used as a walkaround
-        while (true)
-        {
-            auto posX = generatePosition();
-            auto posY = generatePosition();
-            Island newIsland(posX, posY);
-   
-            auto check = std::find_if(vec.begin(), vec.end(),
-                    [ &newIsland ]( const Island& island ) { 
-                        return island.getPosition() == newIsland.getPosition();
-                    });
-
-            if(check == vec.end()) {
-                vec.push_back(newIsland);
-                break;
-            }
+void Map::fillWithRandomIslands() {
+    const size_t capacity = islandVec_.capacity();
+    while (islandVec_.size() <= capacity) {
+        auto posX = generatePosition();
+        auto posY = generatePosition();
+        Island::Coordinates newCoordinate(posX, posY);
+        auto check = std::find_if(islandVec_.begin(), islandVec_.end(),
+                                  [&newCoordinate](const Island& island) {
+                                      return island.getPosition() == newCoordinate;
+                                  });
+        if (check == islandVec_.end()) {
+            islandVec_.emplace_back(posX, posY);
         }
     }
 }
 
 Map::Map() {
     islandVec_.reserve(defaultIslandsNumber);
-    fillWithRandomIslands(islandVec_, defaultIslandsNumber);
-} 
+    fillWithRandomIslands();
+}
 
 std::vector<Island> Map::getIslandVec() const {
     return islandVec_;
