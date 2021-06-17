@@ -9,8 +9,7 @@ constexpr size_t COORDINATE_MAX = 99;
 constexpr size_t ISLANDS_COUNT = 10;
 
 Map::Map() {
-    std::random_device rd;
-    std::mt19937 generator(rd);
+    std::mt19937 generator(std::random_device{}());
     std::uniform_int_distribution<size_t> distribution{
         COORDINATE_MIN, COORDINATE_MAX
     };
