@@ -10,7 +10,7 @@ coordinateType generatePosition() {
 }
 
 void fillWithRandomIslands(std::vector<Island>& vec, size_t number) {
-    // Consider making it method in Island class
+    // Consider making it method in Map class
     for (size_t i = 0; i < number; i++) {
         // while (true) used as a walkaround
         while (true)
