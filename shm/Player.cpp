@@ -47,8 +47,12 @@ Cargo* Player::getCargo(size_t index) const {
 
 void Player::printCargoManifest() const {
     const auto& cargoVec = ship_->getCargoVec();
+    std::cout << "Ship capacity: " << ship_->getCapacity() << '\n'
+              << "Cargo on board: " << ship_->getCargoVec().size() << '\n'
+              << "Available space: " << availableSpace_ << '\n';
+    size_t i {1};
     for(const auto& cargoUnit : cargoVec) {
-        std::cout << "Name: " << cargoUnit->getName()
+        std::cout << i++ << ". Name: " << cargoUnit->getName()
                   << ", Amount: " << cargoUnit->getAmount()
                   << ", Base price: " << cargoUnit->getBasePrice()
                   << '\n';
