@@ -27,7 +27,7 @@ ___
 
 ## Zadanie 4
 
-Napisz klasę `Map`, która będzie posiadała `std::vector<Island&>` przechowujący wszystkie wyspy na mapie, oraz zmienną `Island* currentPosition_` określającą aktualną pozycję gracza na mapie.
+Napisz klasę `Map`, która będzie posiadała `std::vector<Island>` przechowujący wszystkie wyspy na mapie, oraz zmienną `Island* currentPosition_` określającą aktualną pozycję gracza na mapie.
 
 ___
 
@@ -45,7 +45,7 @@ W klasie `Map` napisz funkcję
 
 `Island* getIsland(const Island::Coordinates& coordinate)`
 
-Powinna ona przeszukać `std::vector<Island&>` i zwrócić szukaną wyspę.
+Powinna ona przeszukać `std::vector<Island>` i zwrócić szukaną wyspę.
 
 ___
 
