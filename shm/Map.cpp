@@ -8,27 +8,28 @@ coordinateType generatePosition() {
     return distrib(gen);
 }
 
-void addIslandsToMap(std::vector<Island> islandVec_, size_t number) {
+void addRandomIsland(const std::vector<Island>& vec, size_t number) {
     for (size_t i = 0, i < number, i++) {    
         do
         {
             auto posX = generatePosition();
             auto posY = generatePosition();
-            Island newPosition(posX, posY);
+            Island newIsland(posX, posY);
    
-            auto result = find_if(islandVec_.begin(), islandVec_.end(),
-                        ()[const Island& position]{ return position.getPosition() == newPosition };                   
+            auto result = find_if(vec.begin(), vec.end(),
+                            ()[const Island& island] { 
+                                return island.getPosition() == newIsland;
+                            };
    
-        } while (result != islandVec_.end());
+        } while (result != vec.end());
         
-        islandVec_.push_back(newPosition);
+        vec.push_back(newIsland);
     }
 }
 
 
 Map::Map() {
-    std::vector<Island> islandVec_;
-    addIslandsToMap(islandVec_, 10);
+    addRandomIsland(islandVec_, 10);
 }
    
 
