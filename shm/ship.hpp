@@ -1,5 +1,8 @@
 #pragma once
+#include <memory>
 #include <string>
+#include <vector>
+#include "cargo.hpp"
 
 class Ship {
     size_t capacity_;
@@ -8,6 +11,7 @@ class Ship {
     size_t speed_;
     std::string name_;
     const size_t id_;
+    std::vector<std::unique_ptr<Cargo>> cargoVec_{};
 
 public:
      Ship();
