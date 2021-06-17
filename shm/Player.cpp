@@ -1,11 +1,21 @@
 #include "Player.hpp"
-#include "ship.hpp"
-#include "cargo.hpp"
+#include "Ship.hpp"
+#include "Cargo.hpp"
 #include <memory>
 #include <utility>
+#include <vector>
 
 void Player::calculateAvailableSpace() {
-    // Implementation will be based on cargo aggregation in ship class - for now does nothing
+    const std::vector<std::unique_ptr<Cargo>>& cargoVec = ship_->getCargoVec();
+    size_t usedSpace {0};
+    size_t shipCapacity = ship_->getCapacity();
+    for(const auto& cargo : cargoVec) {
+        usedSpace += cargo->getAmount();
+    }
+    if(usedSpace > shipCapacity) {
+        availableSpace_ = 0;
+    }
+    availableSpace_ = shipCapacity - usedSpace;
 }
 
 Player::Player(std::unique_ptr<Ship> ship, const size_t& money, const size_t& availableSpace)
@@ -28,6 +38,11 @@ size_t Player::getSpeed() const {
 }
 
 Cargo* Player::getCargo(size_t index) const {
-    // Implementation will be based on cargo aggregation in ship class
-    return nullptr;  // Placeholder
+    Cargo* ptr;
+    try {
+        ptr = ship_->getCargoVec().at(index).get();
+    } catch (...) {
+        return nullptr;
+    }
+    return ptr;
 }

@@ -1,4 +1,4 @@
-#include "map.hpp"
+#include "Map.hpp"
 
 coordinateType generatePosition() {
     std::random_device rd;  
@@ -9,8 +9,10 @@ coordinateType generatePosition() {
 }
 
 void fillWithRandomIslands(std::vector<Island>& vec, size_t number) {
-    for (size_t i = 0, i < number, i++) {    
-        do
+    // Consider making it method in Island class
+    for (size_t i = 0; i < number; i++) {
+        // while (true) used as a walkaround
+        while (true)
         {
             auto posX = generatePosition();
             auto posY = generatePosition();
@@ -20,9 +22,12 @@ void fillWithRandomIslands(std::vector<Island>& vec, size_t number) {
                     [ &newIsland ]( const Island& island ) { 
                         return island.getPosition() == newIsland.getPosition();
                     });
-        } while (check != vec.end());
-        
-        vec.push_back(newIsland);
+
+            if(check == vec.end()) {
+                vec.push_back(newIsland);
+                break;
+            }
+        }
     }
 }
 

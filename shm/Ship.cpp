@@ -1,4 +1,4 @@
-#include "ship.hpp"
+#include "Ship.hpp"
     
 Ship::Ship() 
     : id_(-1)
@@ -53,6 +53,6 @@ size_t Ship::getId() const {
     return id_; 
 }
 
-std::vector<std::unique_ptr<Cargo>> Ship::getCargoVec() const { 
+const std::vector<std::unique_ptr<Cargo>>& Ship::getCargoVec() const { 
     return cargoVec_; 
 }
