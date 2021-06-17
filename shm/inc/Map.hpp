@@ -8,6 +8,7 @@
 class Map {
 public:
     Map();
+    std::unique_ptr<Island> getIsland(const Island::Coordinates&);
 
 private:
     std::vector<Island> vectorOfIslands_;
