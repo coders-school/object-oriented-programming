@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream> // for size_t
+#include <cstddef> // for size_t
 
 class Island {
 public:
@@ -15,6 +15,8 @@ public:
 
     Coordinates getCoordinates() const { return position_; }
     
+    Island(const Island::Coordinates&);
+
 private:
     const Coordinates position_;
 };
