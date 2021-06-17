@@ -42,7 +42,7 @@ Island* Map::getCurrentPosition() const {
 
 Island* Map::getIsland(const Island::Coordinates& coordinate) {
     for (auto& el : islandVec_) {
-        if (&el.getPosition() == &coordinate) {
+        if (el.getPosition().operator==(coordinate)) {
             return &el;
         }
     }
