@@ -17,22 +17,19 @@ void fillWithRandomIslands(std::vector<Island>& vec, size_t number) {
             Island newIsland(posX, posY);
    
             auto check = find_if(vec.begin(), vec.end(),
-                            [ &newIsland ]( const Island& island ) { 
-                                return island.getPosition() == newIsland.getPosition();
-                            });
-   
+                    [ &newIsland ]( const Island& island ) { 
+                        return island.getPosition() == newIsland.getPosition();
+                    });
         } while (check != vec.end());
         
         vec.push_back(newIsland);
     }
 }
 
-
 Map::Map() {
     islandVec_.reserve(defaultIslandsNumber);
     fillWithRandomIslands(islandVec_, defaultIslandsNumber);
-}
-   
+} 
 
 std::vector<Island> Map::getIslandVec() const {
     return islandVec_;
