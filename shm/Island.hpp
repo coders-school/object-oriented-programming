@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <string>
 
 using coordinateType = std::size_t;
 
@@ -10,6 +11,7 @@ public:
     class Coordinates {
     public:
         Coordinates(coordinateType positionsX, coordinateType positionY);
+        std::string toString();
 
         bool operator==(const Coordinates& other) const;
 
