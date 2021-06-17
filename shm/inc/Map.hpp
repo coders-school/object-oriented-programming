@@ -1,7 +1,6 @@
 #pragma once
 
 #include "shm/inc/Island.hpp"
-#include <vector>
 
 #include <memory>
 #include <vector>
