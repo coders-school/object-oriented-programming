@@ -1,7 +1,7 @@
 #include "ship.hpp"
     
 Ship::Ship() 
-    : id_(-1);
+    : id_(-1)
 {}
 
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec)

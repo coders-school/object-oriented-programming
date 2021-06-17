@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ship.hpp"
-#include "cargo.hpp"
+#include "Ship.hpp"
+#include "Cargo.hpp"
 #include <memory>
 
 class Player {
