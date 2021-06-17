@@ -11,11 +11,11 @@ class Ship {
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::unique_ptr<Cargo>> cargoVec_{};
+    std::vector<std::unique_ptr<Cargo>> cargoVec_;
 
 public:
      Ship();
-     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id);
+     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec);
      Ship(int maxCrew, int speed, size_t id);
  
      void setName(const std::string& name);
@@ -28,4 +28,5 @@ public:
      size_t getSpeed() const;   
      std::string getName() const;  
      size_t getId() const;
+     std::vector<std::unique_ptr<Cargo>> getCargoVec() const;
 };
