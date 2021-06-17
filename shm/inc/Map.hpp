@@ -5,12 +5,12 @@
 
 #include <memory>
 #include <vector>
-
 class Map {
 public:
     Map();
 
-    std::shared_ptr<Island> getIsland(Island::Coordinates&);
+    std::unique_ptr<Island> getIsland(const Island::Coordinates&);
+
 private:
     std::vector<Island> vectorOfIslands_;
     std::unique_ptr<Island> currentPosition_;
