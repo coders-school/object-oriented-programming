@@ -4,22 +4,20 @@
 #include <memory>
 #include <utility>
 #include <vector>
+#include <iostream>
 
 void Player::calculateAvailableSpace() {
     const std::vector<std::unique_ptr<Cargo>>& cargoVec = ship_->getCargoVec();
-    size_t usedSpace {0};
-    size_t shipCapacity = ship_->getCapacity();
-    for(const auto& cargo : cargoVec) {
-        usedSpace += cargo->getAmount();
-    }
-    if(usedSpace > shipCapacity) {
+    if(ship_->getCapacity() <= cargoVec.size()) {
         availableSpace_ = 0;
     }
-    availableSpace_ = shipCapacity - usedSpace;
+    availableSpace_ = ship_->getCapacity() - cargoVec.size();
 }
 
-Player::Player(std::unique_ptr<Ship> ship, const size_t& money, const size_t& availableSpace)
-    : ship_{std::move(ship)}, money_{money}, availableSpace_{availableSpace} {}
+Player::Player(std::unique_ptr<Ship> ship, const size_t& money)
+    : ship_{std::move(ship)}, money_{money} {
+        calculateAvailableSpace();
+    }
 
 const std::unique_ptr<Ship>& Player::getShip() const {
     return ship_;
@@ -45,4 +43,15 @@ Cargo* Player::getCargo(size_t index) const {
         return nullptr;
     }
     return ptr;
+}
+
+void Player::printCargoManifest() const {
+    const auto& cargoVec = ship_->getCargoVec();
+    for(const auto& cargoUnit : cargoVec) {
+        std::cout << "Name: " << cargoUnit->getName()
+                  << ", Amount: " << cargoUnit->getAmount()
+                  << ", Base price: " << cargoUnit->getBasePrice()
+                  << '\n';
+    }
+
 }

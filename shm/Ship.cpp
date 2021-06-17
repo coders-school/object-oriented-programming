@@ -11,7 +11,7 @@ Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t
     , speed_(speed)
     , name_(name)
     , id_(id)
-    , cargoVec_(cargoVec_)
+    , cargoVec_(std::move(cargoVec))
 {}
 
 Ship::Ship(int maxCrew, int speed, size_t id)

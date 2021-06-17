@@ -1,4 +1,5 @@
 #include "Map.hpp"
+#include <algorithm>
 
 coordinateType generatePosition() {
     std::random_device rd;  
@@ -18,7 +19,7 @@ void fillWithRandomIslands(std::vector<Island>& vec, size_t number) {
             auto posY = generatePosition();
             Island newIsland(posX, posY);
    
-            auto check = find_if(vec.begin(), vec.end(),
+            auto check = std::find_if(vec.begin(), vec.end(),
                     [ &newIsland ]( const Island& island ) { 
                         return island.getPosition() == newIsland.getPosition();
                     });
