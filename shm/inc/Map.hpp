@@ -10,6 +10,7 @@ class Map {
 public:
     Map();
 
+    std::shared_ptr<Island> getIsland(Island::Coordinates&);
 private:
     std::vector<Island> vectorOfIslands_;
     std::unique_ptr<Island> currentPosition_;
