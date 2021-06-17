@@ -8,7 +8,8 @@ coordinateType generatePosition() {
     return distrib(gen);
 }
 
-void addRandomIsland(const std::vector<Island>& vec, size_t number) {
+void addRandomIsland(std::vector<Island>& vec, size_t number) {
+    vec.reserve(number);
     for (size_t i = 0, i < number, i++) {    
         do
         {
@@ -16,12 +17,12 @@ void addRandomIsland(const std::vector<Island>& vec, size_t number) {
             auto posY = generatePosition();
             Island newIsland(posX, posY);
    
-            auto result = find_if(vec.begin(), vec.end(),
-                            ()[const Island& island] { 
+            auto check = find_if(vec.begin(), vec.end(),
+                            [](const Island& island) { 
                                 return island.getPosition() == newIsland;
                             };
    
-        } while (result != vec.end());
+        } while (check != vec.end());
         
         vec.push_back(newIsland);
     }
