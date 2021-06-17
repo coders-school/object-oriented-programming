@@ -2,7 +2,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "cargo.hpp"
+#include "Cargo.hpp"
 
 class Ship {
     size_t capacity_;
@@ -28,5 +28,5 @@ public:
      size_t getSpeed() const;   
      std::string getName() const;  
      size_t getId() const;
-     std::vector<std::unique_ptr<Cargo>> getCargoVec() const;
+     const std::vector<std::unique_ptr<Cargo>>& getCargoVec() const;
 };

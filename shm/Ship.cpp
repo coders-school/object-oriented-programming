@@ -1,7 +1,7 @@
-#include "ship.hpp"
+#include "Ship.hpp"
     
 Ship::Ship() 
-    : id_(-1);
+    : id_(-1)
 {}
 
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec)
@@ -11,7 +11,7 @@ Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t
     , speed_(speed)
     , name_(name)
     , id_(id)
-    , cargoVec_(cargoVec_)
+    , cargoVec_(std::move(cargoVec))
 {}
 
 Ship::Ship(int maxCrew, int speed, size_t id)
@@ -53,6 +53,6 @@ size_t Ship::getId() const {
     return id_; 
 }
 
-std::vector<std::unique_ptr<Cargo>> Ship::getCargoVec() const { 
+const std::vector<std::unique_ptr<Cargo>>& Ship::getCargoVec() const { 
     return cargoVec_; 
 }
