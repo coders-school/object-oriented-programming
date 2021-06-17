@@ -1,4 +1,4 @@
-#include "Map.hpp"
+#include "shm/inc/Map.hpp"
 
 #include <algorithm>
 #include <cstddef>
@@ -11,7 +11,7 @@ constexpr size_t ISLANDS_COUNT = 10;
 Map::Map() {
     std::random_device rd;
     std::mt19937 generator(rd);
-    std::uniform_int_distribution<> distribution{
+    std::uniform_int_distribution<size_t> distribution{
         COORDINATE_MIN, COORDINATE_MAX
     };
     vectorOfIslands_.reserve(ISLANDS_COUNT);
