@@ -39,4 +39,6 @@ Island* Map::getIsland(const Island::Coordinates& coordinate) {
             return &island;
         }
     }
+
+    return nullptr;
 }
