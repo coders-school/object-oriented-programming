@@ -37,7 +37,8 @@ std::unique_ptr<Cargo> generateCargo() {
     auto randomNumber = rand() % goods.size();
     auto anotherRandomNumber = rand() % 99 + 1;
     auto ptr = std::make_unique<Cargo>(goods.at(randomNumber).first, anotherRandomNumber, goods.at(randomNumber).second);
-    return std::move(ptr);
+    // RVO
+    return ptr;
 }
 
 void testCargoShipPlayer() {
