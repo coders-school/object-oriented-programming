@@ -30,7 +30,7 @@ Map::Map() {
     fillWithRandomIslands();
 }
 
-std::vector<Island> Map::getIslandVec() const {
+const std::vector<Island>& Map::getIslandVec() const {
     return islandVec_;
 }
 
