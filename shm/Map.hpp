@@ -12,7 +12,7 @@ class Map {
 
 public:
     Map();
-    std::vector<Island> getIslandVec() const;
+    const std::vector<Island>& getIslandVec() const;
     Island* getCurrentPosition() const;
     Island* getIsland(const Island::Coordinates&);
 
