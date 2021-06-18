@@ -29,5 +29,15 @@ Map::Map() {
             vectorOfIslands_.push_back(Island(generatedIslandCoords));
         }
     }
-    currentPosition_ = std::make_unique<Island>(vectorOfIslands_[0]);
+    currentPosition_ = &(vectorOfIslands_[0]);
+}
+
+Island* Map::getIsland(const Island::Coordinates& coordinate) {
+    for (auto & island : vectorOfIslands_) {
+        if (island.getCoordinates() == coordinate) {
+            return &island;
+        }
+    }
+
+    return nullptr;
 }
