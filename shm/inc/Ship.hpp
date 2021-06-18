@@ -1,5 +1,5 @@
 #pragma once
-#include "inc/Cargo.hpp"
+#include "../inc/Cargo.hpp"
 #include <memory>
 #include <string>
 #include <vector>

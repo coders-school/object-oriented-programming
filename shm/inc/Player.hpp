@@ -1,6 +1,6 @@
 #pragma once
-#include "inc/Cargo.hpp"
-#include "inc/Ship.hpp"
+#include "../inc/Cargo.hpp"
+#include "../inc/Ship.hpp"
 #include <memory>
 #include <numeric>
 
