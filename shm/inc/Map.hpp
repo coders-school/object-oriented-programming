@@ -7,8 +7,6 @@
 class Map {
 public:
     Map();
-    std::unique_ptr<Island> getIsland(const Island::Coordinates&);
-
     Island* getIsland(const Island::Coordinates&);
 
 private:
