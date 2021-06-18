@@ -6,9 +6,9 @@
 
 class Player {
 public:
-    Player(std::shared_ptr<Ship>, size_t, size_t);
+    Player(std::unique_ptr<Ship>, size_t, size_t);
 
-    std::shared_ptr<Ship> getShip() const { return ship_; };
+    Ship* getShip() const { return ship_.get(); };
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
 
@@ -16,7 +16,7 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const;
 
 private:
-    std::shared_ptr<Ship> ship_;
+    std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
     size_t countAvailableSpace() const { return ship_->countAvailableSpace(); };
