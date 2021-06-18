@@ -1,4 +1,4 @@
-#include "../inc/Island.hpp"
+#include "shm/inc/Island.hpp"
 
 Island::Coordinates::Coordinates(size_t positionX, size_t positionY) 
     : positionX_(positionX)
