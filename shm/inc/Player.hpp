@@ -1,6 +1,7 @@
 #pragma once
-#include "Cargo.hpp"
-#include "Ship.hpp"
+#include "../inc/Cargo.hpp"
+#include "../inc/Ship.hpp"
+#include <numeric>
 #include <memory>
 
 class Player {
@@ -18,4 +19,5 @@ private:
     std::shared_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
+    size_t countAvailableSpace() const { return ship_->countAvailableSpace(); };
 };

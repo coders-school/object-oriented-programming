@@ -21,6 +21,7 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const;
 
     void setName(const std::string&);
+    size_t countAvailableSpace() const;
 
 private:
     const int id_ { -1 };
