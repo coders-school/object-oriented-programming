@@ -10,6 +10,19 @@ size_t Player::getSpeed() const {
 std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
 }
+ 
+/*size_t Player::countAvailableSpace() const {
+    size_t availableSpace = ship_->getCapacity();
+    if (ship_) {
+        for (size_t i = 0; i < ship_->getHowManyCargos(); i++) {
+            availableSpace -= ship_->getCargo(i)->getAmount();
+        }
+    }
+    return availableSpace;
+}*/
 
+size_t Player::countAvailableSpace() const {
+    return ship_->getCapacity() - std::accumulate(ship_->getVectorCargo().cbegin(), ship_->getVectorCargo().cend(), 0);
+}
 
 

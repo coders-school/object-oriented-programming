@@ -2,6 +2,7 @@
 #include "../inc/Cargo.hpp"
 #include "../inc/Ship.hpp"
 #include <memory>
+#include <numeric>
 
 class Player {
 public:
@@ -18,5 +19,5 @@ private:
     std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
-    size_t countAvailableSpace() const { return ship_->countAvailableSpace(); };
+    size_t countAvailableSpace() const;
 };
