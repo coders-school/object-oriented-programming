@@ -1,5 +1,5 @@
 #pragma once
-#include "../inc/Cargo.hpp"
+#include "inc/Cargo.hpp"
 #include <memory>
 #include <string>
 #include <vector>
@@ -19,7 +19,7 @@ public:
     size_t getMaxCrew() const { return maxCrew_; };
     size_t getCapacity() const { return capacity_; };
     std::shared_ptr<Cargo> getCargo(size_t index) const;
-    size_t getHowManyCargos() const { return cargo_.size(); };
+    //size_t getHowManyCargos() const { return cargo_.size(); };
     std::vector<std::shared_ptr<Cargo>> getVectorCargo() const { return cargo_; };
 
     void setName(const std::string&);
