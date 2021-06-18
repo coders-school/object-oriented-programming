@@ -1,7 +1,6 @@
 #pragma once
 #include "../inc/Cargo.hpp"
 #include "../inc/Ship.hpp"
-#include <numeric>
 #include <memory>
 
 class Player {

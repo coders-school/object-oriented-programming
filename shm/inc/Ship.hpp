@@ -1,6 +1,7 @@
 #pragma once
 #include "../inc/Cargo.hpp"
 #include <memory>
+#include <numeric>
 #include <string>
 #include <vector>
 

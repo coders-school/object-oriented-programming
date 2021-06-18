@@ -43,9 +43,5 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
 }
 
 size_t Ship::countAvailableSpace() const {
-    size_t usedSpace = std::accumulate(cargo_.begin(), cargo_.end(), 0,
-                                       [](size_t amount, const auto& cargo) {
-                                           return amount += cargo->getAmount();
-                                       });
-        return capacity_ - usedSpace;
+    return capacity_ - std::accumulate(cargo_.cbegin(), cargo_.cend(), 0);
 }
