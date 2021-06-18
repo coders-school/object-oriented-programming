@@ -9,9 +9,10 @@ class Map {
 public:
     Map();
 
-    std::unique_ptr<Island> getIsland(const Island::Coordinates&);
+    //std::unique_ptr<Island> getIsland(const Island::Coordinates&);
+    Island* getIsland(const Island::Coordinates&);
 
 private:
     std::vector<Island> vectorOfIslands_;
-    std::unique_ptr<Island> currentPosition_;
+    Island* currentPosition_;
 };

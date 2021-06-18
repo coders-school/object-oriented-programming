@@ -30,16 +30,13 @@ Map::Map() {
             vectorOfIslands_.push_back(Island(generatedIslandCoords));
         }
     }
-    currentPosition_ = std::make_unique<Island>(vectorOfIslands_[0]);
+    currentPosition_ = &(vectorOfIslands_[0]);
 }
 
-std::unique_ptr<Island> Map::getIsland(const Island::Coordinates& coordinate) {
-    for (auto const& vec : vectorOfIslands_) {
-        if (vec.getCoordinates() == coordinate) {
-            std::unique_ptr<Island> islandPtr = std::make_unique<Island>(vec);
-            return islandPtr;
+Island* Map::getIsland(const Island::Coordinates& coordinate) {
+    for (auto & island : vectorOfIslands_) {
+        if (island.getCoordinates() == coordinate) {
+            return &island;
         }
     }
-    return nullptr;
 }
-
