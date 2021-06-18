@@ -1,4 +1,5 @@
 #pragma once
+#include "../inc/Player.hpp"
 #include <string>
 
 class Cargo {
