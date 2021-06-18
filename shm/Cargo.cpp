@@ -29,4 +29,3 @@ size_t Cargo::getAmount() const {
 size_t Cargo::getBasePrice() const {
     return basePrice_;
 }
-
