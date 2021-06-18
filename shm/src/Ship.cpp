@@ -1,7 +1,8 @@
-#include "../inc/Ship.hpp"
+#include "shm/inc/Ship.hpp"
+
 #include <iostream>
 
-Ship::Ship(size_t id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity)
+Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity)
     : id_(id)
     , name_(name)
     , speed_(speed)
@@ -9,7 +10,7 @@ Ship::Ship(size_t id, const std::string& name, size_t speed, size_t maxCrew, siz
     , capacity_(capacity)
 {}
 
-Ship::Ship(size_t id, size_t speed, size_t maxCrew) 
+Ship::Ship(int id, size_t speed, size_t maxCrew) 
     : Ship(id, "Ship", speed, maxCrew, 100)
 {}
 
