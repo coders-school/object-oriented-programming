@@ -9,10 +9,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/inc)
+set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/..)
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
-
-include_directories(${INCLUDE_DIR})
 
 set(SOURCES
     ${SOURCE_DIR}/Cargo.cpp
@@ -22,6 +20,7 @@ set(SOURCES
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
+target_include_directories(${PROJECT_NAME}-lib PUBLIC ${INCLUDE_DIR})
 target_compile_options(${PROJECT_NAME}-lib PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion -O3)
 
 add_executable(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/main.cpp)
