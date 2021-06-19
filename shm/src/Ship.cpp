@@ -1,5 +1,4 @@
-#include "../inc/Ship.hpp"
-#include <iostream>
+#include "shm/inc/Ship.hpp"
 
 Ship::Ship(size_t id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity)
     : id_(id)
@@ -33,4 +32,11 @@ Ship& Ship::operator-=(const size_t amount) {
 
 void Ship::setName(const std::string& name) {
     name_ = name;
+}
+
+std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
+    if (cargo_.size() <= index) {
+        return nullptr;
+    }
+    return cargo_[index];
 }
