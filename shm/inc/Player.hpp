@@ -1,6 +1,7 @@
 #pragma once
 #include "../inc/Cargo.hpp"
 #include "../inc/Ship.hpp"
+#include <algorithm>
 #include <memory>
 #include <numeric>
 

@@ -23,8 +23,12 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
 }*/
 
 size_t Player::countAvailableSpace() const {
-    size_t usedSpace = std::accumulate(ship_->getVectorCargo().cbegin(), ship_->getVectorCargo().cend(), 0);
-    if (usedSpace <= ship_->getCapacity()) {
+    size_t usedSpace = 0;
+    /*size_t usedSpace = std::accumulate(ship_->getVectorCargo().cbegin(), ship_->getVectorCargo().cend(), 0),
+        [&](auto& rhs, auto& lhs){ return (*rhs + *lhs); };*/
+    std::for_each(ship_->getVectorCargo().cbegin(), ship_->getVectorCargo().cend(), 
+        [&usedSpace](const auto& ptrCargo){ usedSpace += *ptrCargo; });
+    if (usedSpace<= ship_->getCapacity()) {
         return ship_->getCapacity() - usedSpace;
     }
     return 0;
