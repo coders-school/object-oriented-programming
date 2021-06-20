@@ -4,7 +4,7 @@
 
 int main() {
 
-    Cargo testCargo;
+    Cargo testCargo("test cargo", 12, 13);
     Ship testShip;
 
     return 0;
