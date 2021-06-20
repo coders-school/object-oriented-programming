@@ -20,4 +20,5 @@ size_t Player::countAvailableSpace() const {
                     [](size_t sum, const auto& cargo) {
                         return sum += cargo->getAmount();
                     });
+    return ship->getCapcity() - usedSpace;
 }
