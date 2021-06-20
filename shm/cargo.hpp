@@ -3,14 +3,8 @@
 
 class Cargo {
 public:
-    Cargo& operator+=(size_t amount) {
-        amount_ += amount;
-        return *this;
-    }
-    Cargo& operator-=(size_t amount) {
-        amount_ -= amount;
-        return *this;
-    }
+    Cargo& operator+=(size_t amount);
+    Cargo& operator-=(size_t amount);
 
 protected:
     std::string name_;

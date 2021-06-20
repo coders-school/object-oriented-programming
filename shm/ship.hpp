@@ -18,23 +18,17 @@ public:
         : Ship(0, maxCrew, speed, "", id)
     {}
 
-    void setName(const std::string& name) { name_ = name; }
+    Ship& operator-=(size_t num);
+    Ship& operator+=(size_t num);
 
-    Ship& operator-=(size_t num) {
-        crew_ -= num;
-        return *this;
-    }
-    Ship& operator+=(size_t num) {
-        crew_ += num;
-        return *this;
-    }
+    size_t getCapacity() const;
+    size_t getMaxCrew() const;
+    size_t getSpeed() const;
+    std::string getName() const;
+    size_t getId() const;
 
-    size_t getCapacity() const  { return capacity_; }
-    size_t getMaxCrew() const   { return maxCrew_; }
-    size_t getSpeed() const     { return speed_; }
-    std::string getName() const { return name_; }
-    size_t getId() const        { return id_; }
-
+    void setName(const std::string& name);
+    
 private:
     size_t capacity_;
     size_t maxCrew_;
