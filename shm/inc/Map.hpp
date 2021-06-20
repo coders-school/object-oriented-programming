@@ -2,8 +2,8 @@
 
 #include "shm/inc/Island.hpp"
 
-#include <memory>
 #include <vector>
+
 class Map {
 public:
     Map();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstddef> // for size_t
+#include <cstddef> 
 
 class Island {
 public:
