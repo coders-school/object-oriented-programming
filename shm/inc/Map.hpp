@@ -3,14 +3,13 @@
 #include "shm/inc/Island.hpp"
 
 #include <vector>
-#include <memory>
-
 
 class Map {
 public:
     Map();
+    Island* getIsland(const Island::Coordinates&);
 
 private:
     std::vector<Island> vectorOfIslands_;
-    std::unique_ptr<Island> currentPosition_;
+    Island* currentPosition_;
 };

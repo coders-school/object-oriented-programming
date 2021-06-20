@@ -9,8 +9,8 @@
 class Ship {
 public:
     Ship() = default;
-    Ship(size_t, const std::string&, size_t, size_t, size_t);
-    Ship(size_t, size_t, size_t);
+    Ship(int, const std::string&, size_t, size_t, size_t);
+    Ship(int, size_t, size_t);
 
     Ship& operator+=(const size_t);
     Ship& operator-=(const size_t);

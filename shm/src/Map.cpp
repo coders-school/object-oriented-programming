@@ -9,9 +9,8 @@ constexpr size_t COORDINATE_MAX = 99;
 constexpr size_t ISLANDS_COUNT = 10;
 
 Map::Map() {
-    std::random_device rd;
-    std::mt19937 generator(rd);
-    std::uniform_int_distribution<> distribution{
+    std::mt19937 generator(std::random_device{}());
+    std::uniform_int_distribution<size_t> distribution{
         COORDINATE_MIN, COORDINATE_MAX
     };
     vectorOfIslands_.reserve(ISLANDS_COUNT);
@@ -30,5 +29,15 @@ Map::Map() {
             vectorOfIslands_.push_back(Island(generatedIslandCoords));
         }
     }
-    currentPosition_ = std::make_unique<Island>(vectorOfIslands_[0]);
+    currentPosition_ = &(vectorOfIslands_[0]);
+}
+
+Island* Map::getIsland(const Island::Coordinates& coordinate) {
+    for (auto & island : vectorOfIslands_) {
+        if (island.getCoordinates() == coordinate) {
+            return &island;
+        }
+    }
+
+    return nullptr;
 }
