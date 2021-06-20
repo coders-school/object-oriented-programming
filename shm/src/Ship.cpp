@@ -1,5 +1,4 @@
-#include "../inc/Ship.hpp"
-#include <iostream>
+#include "shm/inc/Ship.hpp"
 
 Ship::Ship(size_t id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity)
     : id_(id)

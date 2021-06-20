@@ -1,6 +1,8 @@
 #pragma once
-#include "../inc/Cargo.hpp"
-#include "../inc/Ship.hpp"
+
+#include "shm/inc/Cargo.hpp"
+#include "shm/inc/Ship.hpp"
+
 #include <algorithm>
 #include <memory>
 #include <numeric>
@@ -12,7 +14,6 @@ public:
     Ship* getShip() const { return ship_.get(); };
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
-
     size_t getSpeed() const;
     std::shared_ptr<Cargo> getCargo(size_t index) const;
 

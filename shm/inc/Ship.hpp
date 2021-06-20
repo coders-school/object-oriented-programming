@@ -1,8 +1,10 @@
 #pragma once
-#include "../inc/Cargo.hpp"
+
 #include <memory>
 #include <string>
 #include <vector>
+
+#include "shm/inc/Cargo.hpp"
 
 class Ship {
 public:
@@ -13,13 +15,12 @@ public:
     Ship& operator+=(const size_t);
     Ship& operator-=(const size_t);
 
-    size_t getId() const { return id_; };
+    int getId() const { return id_; };
     std::string getName() const { return name_; };
     size_t getSpeed() const { return speed_; };
     size_t getMaxCrew() const { return maxCrew_; };
     size_t getCapacity() const { return capacity_; };
     std::shared_ptr<Cargo> getCargo(size_t index) const;
-    //size_t getHowManyCargos() const { return cargo_.size(); };
     std::vector<std::shared_ptr<Cargo>> getVectorCargo() const { return cargo_; };
 
     void setName(const std::string&);
