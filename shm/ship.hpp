@@ -20,14 +20,8 @@ public:
 
     void setName(const std::string& name) { name_ = name; }
 
-    Ship& operator-=(size_t num) {
-        crew_ -= num;
-        return *this;
-    }
-    Ship& operator+=(size_t num) {
-        crew_ += num;
-        return *this;
-    }
+    Ship& operator-=(size_t num);
+    Ship& operator+=(size_t num);
 
     size_t getCapacity() const  { return capacity_; }
     size_t getMaxCrew() const   { return maxCrew_; }

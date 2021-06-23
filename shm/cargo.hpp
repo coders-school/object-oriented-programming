@@ -1,16 +1,12 @@
 #pragma once
 #include <string>
 
-class Cargo {
+class Cargo
+{
 public:
-    Cargo& operator+=(size_t amount) {
-        amount_ += amount;
-        return *this;
-    }
-    Cargo& operator-=(size_t amount) {
-        amount_ -= amount;
-        return *this;
-    }
+    Cargo &operator+=(size_t amount);
+    Cargo &operator-=(size_t amount);
+    bool operator==(const Cargo &cargo) const;
 
 protected:
     std::string name_;
