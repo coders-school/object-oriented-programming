@@ -6,10 +6,10 @@ public:
     Cargo(size_t amount, std::string name, size_t base_price);
     virtual ~Cargo() = default;
 
-    virtual size_t GetPrice() const = 0;
-    virtual std::string GetName() const = 0;
-    virtual size_t GetAmount() const = 0;
-    virtual size_t GetBasePrice() const = 0;
+    virtual size_t getPrice() const = 0;
+    virtual std::string getName() const = 0;
+    virtual size_t getAmount() const = 0;
+    virtual size_t getBasePrice() const = 0;
     virtual Cargo& operator+=(size_t amount) = 0;
     virtual Cargo& operator-=(size_t amount) = 0;
 
@@ -25,15 +25,15 @@ public:
     ~Fruit() override;
 
     // override from Cargo
-    size_t GetPrice() const override {
+    size_t getPrice() const override {
         if (time_elapsed_ >= expiry_date_)
             return 0;
         return static_cast<size_t>(
             base_price_ * ((float)(expiry_date_ - time_elapsed_)) / expiry_date_);
     }
-    std::string GetName() const override { return name_; }
-    size_t GetAmount() const override { return amount_; }
-    size_t GetBasePrice() const override { return base_price_; }
+    std::string getName() const override { return name_; }
+    size_t getAmount() const override { return amount_; }
+    size_t getBasePrice() const override { return base_price_; }
     Cargo& operator--() {
         --amount_;
         return *this;
@@ -47,8 +47,8 @@ public:
         return *this;
     }
 
-    size_t GetTimeElapsed() const { return time_elapsed_; }
-    size_t GetExpiryDate() const { return expiry_date_; }
+    size_t getTimeElapsed() const { return time_elapsed_; }
+    size_t getExpiryDate() const { return expiry_date_; }
 
 private:
     size_t time_elapsed_{0};
@@ -61,10 +61,10 @@ public:
     ~Alcohol() override = default;
 
     // override from Cargo
-    size_t GetPrice() const override { return base_price_ * percentage_ / 96; }
-    std::string GetName() const override { return name_; }
-    size_t GetAmount() const override { return amount_; }
-    size_t GetBasePrice() const override { return base_price_; }
+    size_t getPrice() const override { return base_price_ * percentage_ / 96; }
+    std::string getName() const override { return name_; }
+    size_t getAmount() const override { return amount_; }
+    size_t getBasePrice() const override { return base_price_; }
     Cargo& operator+=(size_t amount) {
         amount_ += amount;
         return *this;
@@ -74,7 +74,7 @@ public:
         return *this;
     }
 
-    size_t GetPercentage() const { return percentage_; }
+    size_t getPercentage() const { return percentage_; }
 
 private:
     size_t percentage_;
@@ -91,10 +91,10 @@ public:
     ~Item() override = default;
 
     // override from Cargo
-    size_t GetPrice() const override { return base_price_ * static_cast<int>(rarity_); }
-    std::string GetName() const override { return name_; }
-    size_t GetAmount() const override { return amount_; }
-    size_t GetBasePrice() const override { return base_price_; }
+    size_t getPrice() const override { return base_price_ * static_cast<int>(rarity_); }
+    std::string getName() const override { return name_; }
+    size_t getAmount() const override { return amount_; }
+    size_t getBasePrice() const override { return base_price_; }
     Cargo& operator+=(size_t amount) {
         amount_ += amount;
         return *this;
@@ -104,7 +104,7 @@ public:
         return *this;
     }
 
-    Rarity GetRarity() const { return rarity_; }
+    Rarity getRarity() const { return rarity_; }
 
 private:
     Rarity rarity_;

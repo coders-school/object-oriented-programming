@@ -4,8 +4,8 @@
 class DryFruit : public Fruit {
 public:
     // override from Cargo
-    std::string GetName() const override { return "Dry Fruit"; }
-    size_t GetPrice() const override {
+    std::string getName() const override { return "Dry Fruit"; }
+    size_t getPrice() const override {
         if (time_elapsed_ >= expiry_date_)
             return 0;
         return static_cast<size_t>(

@@ -6,7 +6,7 @@ public:
     Coordinates() = default;
     Coordinates(size_t pos_x, size_t pos_y)
         : pos_x_(pos_x), pos_y_(pos_y) {}
-    static size_t Distance(const Coordinates& lhs, const Coordinates& rhs) {
+    static size_t distance(const Coordinates& lhs, const Coordinates& rhs) {
         return std::sqrt(std::pow((int)lhs.pos_x_ - (int)rhs.pos_x_, 2) + std::pow((int)lhs.pos_y_ - (int)rhs.pos_y_, 2));
     }
     bool operator==(const Coordinates& lhs) const {

@@ -12,7 +12,9 @@ ___
 
 ## Zadanie 8
 
-Przekształć klasę bazową `Coordinates`, tak aby miała funkcję statyczną
+Napisz/przekształć klasę `Coordinates`, która ma określać współrzędne na mapie. Powinna ona przyjmować w konstruktorze 2 parametry `positionX`, `positionY` oraz operator porównania.
+
+Ma ona posiadać funkcję statyczną `distance`:
 
 ```cpp
 static size_t distance(const Coordinates& lhs, const Coordinates& rhs)

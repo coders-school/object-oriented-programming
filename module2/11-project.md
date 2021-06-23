@@ -2,36 +2,11 @@
 
 # Programowanie obiektowe
 
-## Podsumowanie
+## Projekt SHM
 
 <a href="https://coders.school">
     <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
 </a>
-
-___
-
-## Co pamiętasz z dzisiaj?
-
-### Napisz na czacie jak najwięcej haseł
-<!-- .element: class="fragment fade-in" -->
-
-1. <!-- .element: class="fragment fade-in" --> dziedziczenie
-2. <!-- .element: class="fragment fade-in" --> wielodziedziczenie
-3. <!-- .element: class="fragment fade-in" --> funkcje wirtualne
-4. <!-- .element: class="fragment fade-in" --> funkcje czysto wirtualne
-5. <!-- .element: class="fragment fade-in" --> klasy abstrakcyjne
-6. <!-- .element: class="fragment fade-in" --> interfejsy
-7. <!-- .element: class="fragment fade-in" --> polimorfizm
-8. <!-- .element: class="fragment fade-in" --> pola i metody statyczne
-
-___
-
-### Pre-work
-
-* Dowiedzcie się czym jest problem diamentowy
-* Poczytajcie o zasadach SOLID, dotyczących pisania dobrego kodu obiektowego
-* Lektura o wzorcach projektowych z przykładami w C++ - [refactoring.guru](https://refactoring.guru/design-patterns)
-* Spróbujcie w grupie metodą Copy & Paste dorzucić system budowania cmake do projektu. W tym celu popatrzcie na dotychczasowe zadania domowe i plik CMakeLists.txt.
 
 ___
 

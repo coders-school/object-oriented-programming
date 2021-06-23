@@ -44,7 +44,7 @@ Nawet jeżeli obiekt zajmowałby dużo miejsca w pamięci, a my chcielibyśmy ty
 <!-- .element: class="fragment fade-in" -->
 
 ___
-<!-- .slide: style="font-size: 0.9em" -->
+<!-- .slide: style="font-size: 0.8em" -->
 
 ## `static`
 
@@ -66,10 +66,11 @@ std::string ClassB::name_{"ClassB"};
 int main() {
     std::cout << ClassA::getName() << '\n';
     std::cout << ClassB::name_ << '\n';
-    ClassA obj;
-    std::cout << obj.getName() << '\n';
-    ClassB obj;
-    std::cout << obj.name_ << '\n';
+
+    ClassA objA;
+    std::cout << objA.getName() << '\n';
+    ClassB objB;
+    std::cout << objB.name_ << '\n';
 
     return 0;
 }

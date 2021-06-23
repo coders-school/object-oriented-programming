@@ -16,9 +16,9 @@ ___
 ```cpp
 class Bird {
 public:
-    size_t getWeight()    { return weight_; }
-    size_t getHeight()    { return height_; }
-    std::string getName() { return name_; }
+    size_t getWeight() const    { return weight_; }
+    size_t getHeight() const    { return height_; }
+    std::string getName() const { return name_; }
 
     // Pure virtual function without implementation
     virtual void eat() = 0;
@@ -165,5 +165,5 @@ ___
 
 ## Słowo `virtual` i `override`
 
-Co to za słowa? Co one robią? O tym za chwilę ;)
+Co to za słowa? Co one robią? O tym w jednym z następnych wideo ;)
 <!-- .element: class="fragment fade-in" -->
