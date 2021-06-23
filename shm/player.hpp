@@ -10,9 +10,11 @@ public:
     Player(std::shared_ptr<Ship> ship, uint16_t money, uint8_t availableSpace);
     ~Player();
 
-    std::shared_ptr<Ship> getShip() const;
     uint16_t getMoney() const;
     uint16_t getAvailableSpace() const;
+    std::shared_ptr<Ship> getShip() const;
+    size_t getSpeed() const;
+    //Cargo* getCargo(size_t index) const;
 
 private:
     std::shared_ptr<Ship> ship_;
