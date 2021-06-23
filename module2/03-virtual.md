@@ -2,10 +2,10 @@
 
 # Programowanie obiektowe
 
-## Metody wirtualne, interfejsy, klasy abstrakcyjne
+## Metody czysto wirtualne, interfejsy, klasy abstrakcyjne
 
 <a href="https://coders.school">
-    <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
+    <img width="500" src="../coders_school_logo.png" alt="Coders School" class="plain">
 </a>
 
 ___
@@ -16,9 +16,9 @@ ___
 ```cpp
 class Bird {
 public:
-    size_t getWeight();
-    size_t getHeight();
-    size_t getName();
+    size_t getWeight()    { return weight_; }
+    size_t getHeight()    { return height_; }
+    std::string getName() { return name_; }
 
     // Pure virtual function without implementation
     virtual void eat() = 0;
@@ -32,7 +32,7 @@ protected:
 ```
 <!-- .element: class="fragment fade-in" -->
 
-Metody `eat()` oraz `sleep()` to tzw. metody czysto wirtualne. Świadczy o tym `= 0;`. Oznacza to, że nigdzie nie znajdziemy ich implementacji dla klasy `Bird`. Klasy które dziedziczą po `Bird` będą ją musiały zaimplementować same.
+Metody `eat()` oraz `sleep()` to tzw. metody czysto wirtualne (ang. pure virtual functions). Świadczy o tym `= 0;`. Oznacza to, że nigdzie nie znajdziemy ich implementacji dla klasy `Bird`. Klasy które dziedziczą po `Bird` będą ją musiały zaimplementować same.
 <!-- .element: class="fragment fade-in" -->
 
 Znaczenie słowa `virtual` na razie przemilczymy. Jedyne co trzeba na teraz wiedzieć, to aby metoda była czysto wirtualna `= 0;` to musi być przed nią słowo `virtual`.
@@ -71,7 +71,9 @@ ___
 ## Użycie interfejsów
 
 ```cpp
-class Penguin : public Bird, public Swimmable {
+class Penguin : public Bird,
+                public Swimmable,
+                public Soundable {
 public:
     // Override from Bird
     void eat() override;
@@ -79,6 +81,9 @@ public:
 
     // Override from Swimmable
     void swim() override;
+
+    // Override from Soundable
+    void makeSound() override;
 };
 
 class Hummingbird : public Bird,
@@ -162,48 +167,3 @@ ___
 
 Co to za słowa? Co one robią? O tym za chwilę ;)
 <!-- .element: class="fragment fade-in" -->
-
-___
-
-## Q&A
-
-___
-
-## Zadanie 1
-
-Przekształć klasę `Cargo` w interfejs z 4 czysto wirtualnymi metodami.
-
-```cpp
-virtual size_t getPrice() const = 0;
-virtual std::string getName() const = 0;
-virtual size_t getAmount() const = 0;
-virtual size_t getBasePrice() const = 0;
-```
-
-___
-
-## Zadanie 1 cd.
-
-Utwórz 3 pochodne klasy `Cargo`:
-
-* `Fruit`
-* `Alcohol`
-* `Item`
-
-Klasa `Fruit` powinna mieć dodatkową zmienną określającą czas do zepsucia oraz `operator--` który będzie odejmował ten czas o 1.
-Metoda `getPrice()` powinna redukować cenę odpowiednio wraz z czasem psucia naszego owocu.
-
-Klasa `Alcohol` powinna mieć dodatkową zmienną określającą procentowy udział spirytusu.
-Metoda `getPrice()` powinna być proporcjonalnie wyższa w zależności od mocy alkoholu.
-Należy ustalić bazową cenę za spirytus 96%.
-
-Klasa `Item` powinna mieć dodatkową zmienną enum określającą rzadkość przedmiotu (common, rare, epic, legendary).
-Metoda `getPrice()` powinna być adekwatnie wyliczana od poziomu rzadkości przedmiotu.
-
-___
-
-## Zadanie 2
-
-Wykorzystując wspólną klasę bazową `Cargo` spróbuj przechowywać wszystkie towary w jednym wektorze w klasie `Ship`.
-
-Dodaj funkcję `void load(std::shared_ptr<Cargo> cargo)`, która dodaje towar i (dla chętnych) `void unload(Cargo* cargo)`, która usuwa towar z obiektu klasy `Ship`.

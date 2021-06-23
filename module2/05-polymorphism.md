@@ -5,7 +5,7 @@
 ## Polimorfizm
 
 <a href="https://coders.school">
-    <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
+    <img width="500" src="../coders_school_logo.png" alt="Coders School" class="plain">
 </a>
 
 ___
@@ -92,7 +92,7 @@ public:
 
 class SomeClass : public Interface {
 public:
-    void doSth() override;   // there should be an implementation in cpp file
+    void doSth() override;   // there should be an implementation in the cpp file
 };
 
 int main() {
@@ -347,21 +347,3 @@ int main() {
     std::unique_ptr<Parent> child2 = std::make_unique<Child>();
 }
 ```
-
-___
-
-## Q&A
-
-___
-
-## Zadanie 3
-
-Napisz klasę `DryFruit`, która dziedziczyć będzie po klasie `Fruit`.
-
-Klasa ta powinna nadpisywać metody `getPrice()`, `getName()` oraz `operator--`.
-
-`operator--` powinien odejmować zużycie raz na 10 wywołań.
-
-Metoda `getPrice()` powinna zwracać trzykrotnie większą wartość w porównaniu do ceny bazowej.
-
-Przetestuj wywołania polimorficzne oraz podziel się wnioskami.

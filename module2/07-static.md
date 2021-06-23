@@ -2,26 +2,26 @@
 
 # Programowanie obiektowe
 
-## Zmienne i funkcje statyczne
+## Pola i funkcje statyczne
 
 <a href="https://coders.school">
-    <img width="500" data-src="../coders_school_logo.png" alt="Coders School" class="plain">
+    <img width="500" src="../coders_school_logo.png" alt="Coders School" class="plain">
 </a>
 
 ___
 <!-- .slide: style="font-size: 0.85em" -->
 
-## Zmienna lub stała klasy
+## Pola klasy
 
 Czasami chcielibyśmy przypisać jakąś stałą cechę do klasy.
-Nie konkretnych obiektów, a klasy samej w sobie.
+Nie konkretnych obiektów, a klasy samej w sobie, tak, aby była ona wspólna dla wszystkich obiektów tej klasy.
 Np. każdy obiekt klasy ma nazwę "Object".
 <!-- .element: class="fragment fade-in" -->
 
 ```cpp
 class Object {
 public:
-    std::string GetName() const { return name_; }
+    std::string getName() const { return name_; }
 
 private:
     const std::string name_ = "Object";
@@ -66,6 +66,10 @@ std::string ClassB::name_{"ClassB"};
 int main() {
     std::cout << ClassA::getName() << '\n';
     std::cout << ClassB::name_ << '\n';
+    ClassA obj;
+    std::cout << obj.getName() << '\n';
+    ClassB obj;
+    std::cout << obj.name_ << '\n';
 
     return 0;
 }
@@ -73,19 +77,3 @@ int main() {
 <!-- .element: class="fragment fade-in" -->
 
 <!-- TODO: Brakuje tu motywacji na jakimś konkretnym przykładzie -->
-
-___
-
-## Q&A
-
-___
-
-## Zadanie 4
-
-Przekształć klasę bazową `Coordinates`, tak aby miała funkcję statyczną
-
-```cpp
-static size_t distance(const Coordinates& lhs, const Coordinates& rhs)
-```
-
-Funkcja ta powinna zwracać dystans pomiędzy dwoma pozycjami.
