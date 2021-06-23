@@ -12,7 +12,7 @@ ___
 
 ## Co pamiętasz z dzisiaj?
 
-### Napisz na czacie jak najwięcej haseł
+### Zapisz w notatkach jak najwięcej haseł
 <!-- .element: class="fragment fade-in" -->
 
 1. <!-- .element: class="fragment fade-in" --> dziedziczenie

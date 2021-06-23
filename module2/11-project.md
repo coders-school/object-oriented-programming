@@ -14,7 +14,7 @@ ___
 
 Wykorzystajcie kod napisany podczas zajęć. Możecie też skorzystać z kodu w katalogu [solutions](solutions)
 
-Projekt grupowy - kontynuacja. Możecie zmienić grupę jeśli chcecie ;)
+Kontynuujemy i rozwijamy dotychczasową aplikację 🙂
 
 ___
 
@@ -29,11 +29,11 @@ ___
 
 ### Punktacja
 
-* 3 pierwsze zadania - 5 punktów
+* zadania 1, 2, 3 - 5 punktów
 * zadania 4, 5, 6 - 8 punktów
-* 20 punktów za dostarczenie wszystkich 6 zadań przed 05.07.2020 (niedziela) do 23:59
-* brak punktów bonusowych za dostarczenie tylko części zadań przed 05.07
-* 6 punktów za pracę w grupie dla każdej osoby z grupy.
+* 15 punktów za dostarczenie wszystkich 6 zadań przed 18.07.2020 (niedziela) do 23:59
+* brak punktów bonusowych za dostarczenie tylko części zadań w terminie
+* 6 punktów za pracę w grupie dla każdej osoby z grupy
 
 ___
 

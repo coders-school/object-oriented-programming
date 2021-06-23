@@ -50,8 +50,8 @@ ___
 
 * Każde dostarczone zadanie to 5 punktów
 * 15 punktów za dostarczenie wszystkich 8 zadań do 28.06.2021 (poniedziałek) do 23:59
-* brak punktów bonusowych za dostarczenie tylko części zadań przed 28.06.
-* 8 punktów za pracę w grupie dla każdej osoby z grupy.
+* brak punktów bonusowych za dostarczenie tylko części zadań przed 28.06
+* 8 punktów za pracę w grupie dla każdej osoby z grupy
 
 ___
 
