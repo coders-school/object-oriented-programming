@@ -1,9 +1,15 @@
 #include "player.hpp"
 
+// constructors
 Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace)
-    : ship_(ship), money_(money), availableSpace_(availableSpace) {}
+    : ship_(ship)
+    , money_(money)
+    , availableSpace_(availableSpace) 
+    {}
 
 Player::~Player(){};
+
+//getters
 
 size_t Player::getMoney() const {
     return money_;
@@ -21,3 +27,9 @@ size_t Player::getSpeed() const {
 std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
 }
+
+
+//methods
+
+
+
