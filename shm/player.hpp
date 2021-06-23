@@ -7,17 +7,17 @@
 
 class Player {
 public:
-    Player(std::shared_ptr<Ship> ship, uint16_t money, uint8_t availableSpace);
+    Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace);
     ~Player();
 
-    uint16_t getMoney() const;
-    uint16_t getAvailableSpace() const;
+    size_t getMoney() const;
+    size_t getAvailableSpace() const;
     std::shared_ptr<Ship> getShip() const;
     size_t getSpeed() const;
-    //Cargo* getCargo(size_t index) const;
+    std::shared_ptr<Cargo> getCargo(size_t index) const;
 
 private:
     std::shared_ptr<Ship> ship_;
-    uint16_t money_;
-    uint16_t availableSpace_;
+    size_t money_;
+    size_t availableSpace_;
 };
