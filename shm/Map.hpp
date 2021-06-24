@@ -1,7 +1,6 @@
 #pragma once
 #include <algorithm>
 #include <vector>
-#include <iostream>
 
 #include "Fortune.hpp"
 #include "Island.hpp"
@@ -31,6 +30,15 @@ public:
 		return *this;
 	}
 
+	Island* getIsland(const Island::Coordinates& coordinate) {
+		for (auto& island : islands_) {
+			if (island.getPosition() == coordinate) {
+				return &island;
+			}
+		}
+		return nullptr;
+	}
+
 private:
 	std::vector<Island> generateIslands(const size_t numberOfIslands) const {
 		if (numberOfIslands < 1) {
@@ -40,7 +48,7 @@ private:
 		std::vector<Island> islands;
 		islands.reserve(xyPositions.size() / 2);
 		for (size_t i = 1; i < xyPositions.size(); i += 2) {
-			islands.emplace_back(Coordinates(xyPositions.at(i - 1), xyPositions.at(i)));
+			islands.emplace_back(Island::Coordinates(xyPositions.at(i - 1), xyPositions.at(i)));
 		}		
 		return islands;
 	}
@@ -52,5 +60,4 @@ private:
 		Fortune::shuffle(positions);
 		return positions;
 	}
-
 };
