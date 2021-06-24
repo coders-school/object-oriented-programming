@@ -45,7 +45,13 @@ public:
     size_t getSpeed() const     { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
-    Cargo* getCargo(const size_t index) { return &cargo_.at(index); }
+    
+    Cargo* getCargo(const size_t index) { 
+        if (index < cargo_.size()) {            
+            return &cargo_.at(index);
+        }
+        return nullptr; 
+    }
 
 private:
     size_t capacity_;
