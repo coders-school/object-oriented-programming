@@ -3,6 +3,12 @@
 
 class Cargo {
 public:
+    Cargo(const std::string& name, const size_t amount, const size_t basePrice):
+        name_(name),
+        amount_(amount),
+        basePrice_(basePrice)
+    {}
+
     bool operator==(const Cargo& cargo) const {
         if (name_ != cargo.getName()) {
             return false;
