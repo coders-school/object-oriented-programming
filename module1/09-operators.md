@@ -58,7 +58,7 @@ T& T::operator +=(const T2& b);
 
 ```cpp
 Computer& Computer::operator+=(Memory amount) {
-    ramAmount_ += number;
+    ramAmount_ += amount;
     std::cout << "Ram memory extended\n";
     return *this;
 }
