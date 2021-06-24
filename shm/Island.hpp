@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Coordinates.hpp"
-
 struct Island {
 	struct Coordinates {
 		int positionX;
@@ -26,5 +24,4 @@ public:
 
 private:
 	Coordinates position_;
-
 };

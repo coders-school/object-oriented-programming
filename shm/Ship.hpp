@@ -44,8 +44,8 @@ public:
     size_t getMaxCrew() const   { return maxCrew_; }
     size_t getSpeed() const     { return speed_; }
     std::string getName() const { return name_; }
-    Cargo& getCargo(const size_t index) { return cargo_.at(index); }
     size_t getId() const        { return id_; }
+    Cargo* getCargo(const size_t index) { return &cargo_.at(index); }
 
 private:
     size_t capacity_;
