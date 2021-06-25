@@ -6,7 +6,7 @@ Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
 
 size_t Player::getSpeed() const {
     return ship_->getSpeed();
-};
+}
   
 std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
