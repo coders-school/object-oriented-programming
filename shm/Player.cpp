@@ -7,7 +7,7 @@
 #include <iostream>
 
 void Player::calculateAvailableSpace() {
-    const std::vector<std::unique_ptr<Cargo>>& cargoVec = ship_->getCargoVec();
+    const auto& cargoVec = ship_->getCargoVec();
     if(ship_->getCapacity() <= cargoVec.size()) {
         availableSpace_ = 0;
     }
