@@ -11,7 +11,7 @@ class Player {
 public:
     Player(std::unique_ptr<Ship>, size_t, size_t);
 
-    Ship* getShip() const { return ship_.get(); };
+    std::unique_ptr<Ship> getShip() { return std::move(ship_); };
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
     size_t getSpeed() const;
