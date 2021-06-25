@@ -1,4 +1,4 @@
-name: task_3
+name: task_4
 
 on: [push, pull_request, workflow_dispatch]
 
@@ -6,7 +6,7 @@ jobs:
   remove-vowels:
     runs-on: ubuntu-latest
     env:
-      path: homework/task_3/build
+      path: homework/task_4/build
     steps:
     - name: Check out code
       uses: actions/checkout@master
