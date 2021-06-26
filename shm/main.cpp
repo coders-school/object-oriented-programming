@@ -26,4 +26,7 @@ int main()
     /*std::unique_ptr<Ship> Rudy102 = std::make_unique<Ship>(Titanic);
     Player Zdzichu(Rudy102, 170, 3);
     std::cout << Zdzichu.getShip()->getId() << "Utonął!";*/
+    Map map;
+    map.DebugPrintIsland();
+    
 }
