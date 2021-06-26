@@ -23,6 +23,6 @@ private:
     size_t money_;
     size_t availableSpace_;
 
-    //metods
+    //methods
    // size_t availableSpace();
 };

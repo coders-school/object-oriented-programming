@@ -10,7 +10,13 @@ public:
     Ship()
         : id_(-1) {}
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-        : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+        : capacity_(capacity)
+        , maxCrew_(maxCrew)
+        , crew_(0)
+        , speed_(speed)
+        , name_(name)
+        , id_(id)
+     {}
     Ship(int maxCrew, int speed, size_t id)
         : Ship(0, maxCrew, speed, "", id) {}
 
@@ -33,5 +39,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargos_;
 };
