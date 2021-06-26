@@ -3,7 +3,7 @@ name: task_3
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  remove-vowels:
+  task_3:
     runs-on: ubuntu-latest
     env:
       path: homework/task_3/build
