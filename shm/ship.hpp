@@ -1,22 +1,18 @@
 #pragma once
+#include <memory>
 #include <string>
+#include <vector>
+
+#include "cargo.hpp"
 
 class Ship {
 public:
     Ship()
-        : id_(-1)
-    {}
+        : id_(-1) {}
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-        : capacity_(capacity)
-        , maxCrew_(maxCrew)
-        , crew_(0)
-        , speed_(speed)
-        , name_(name)
-        , id_(id)
-    {}
+        : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
     Ship(int maxCrew, int speed, size_t id)
-        : Ship(0, maxCrew, speed, "", id)
-    {}
+        : Ship(0, maxCrew, speed, "", id) {}
 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
@@ -26,9 +22,10 @@ public:
     size_t getSpeed() const;
     std::string getName() const;
     size_t getId() const;
+    std::shared_ptr<Cargo> Ship::getCargo(size_t index) const;
 
     void setName(const std::string& name);
-    
+
 private:
     size_t capacity_;
     size_t maxCrew_;
@@ -36,4 +33,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
 };
