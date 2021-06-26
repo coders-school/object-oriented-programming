@@ -1,5 +1,7 @@
 #pragma once
+#include "cargo.hpp"
 #include <string>
+#include <vector>
 
 class Ship {
 public:
@@ -25,12 +27,15 @@ public:
 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
+    
+    void addCargo(Cargo* item);
 
     size_t getCapacity() const  { return capacity_; }
     size_t getMaxCrew() const   { return maxCrew_; }
     size_t getSpeed() const     { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
+    std::vector<Cargo*> getCargo() const { return shipCargo;}
 
 private:
     size_t capacity_;
@@ -39,4 +44,5 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
+    std::vector<Cargo*> shipCargo;
 };
