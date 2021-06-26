@@ -1,3 +1,4 @@
+#pragma once
 #include "coordinates.hpp"
 
 class Island {

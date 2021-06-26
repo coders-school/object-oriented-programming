@@ -1,3 +1,5 @@
+#pragma once
+
 class Coordinates {
 private:
     float positionX_;
@@ -17,9 +19,6 @@ public:
     void SetPositionX(const float& positionX) { positionX_ = positionX; }
     void SetPositionY(const float& positionY) { positionY_ = positionY; }
 
-    friend bool operator==(Coordinates& c1, Coordinates& c2);
+    bool operator==(const Coordinates& c1) const;
+    
 };
-
-bool operator==(Coordinates& c1, Coordinates& c2) {
-    return c1.GetPositionX() == c2.GetPositionX() && c1.GetPositionY() == c2.GetPositionY();
-}
