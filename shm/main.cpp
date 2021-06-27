@@ -25,17 +25,16 @@ int main()
     std::cout << "Titanic cargo: " << Titanic.getCargo()[0]->getName() << '\n';
 
     std::cout << Titanic.getCargo()[0]->getAmount() << std::endl;
-    // std::unique_ptr<Ship> Rudy102 = std::make_unique<Ship>();
-    // Player Zdzichu(Rudy102, 170, 3);
-    // std::cout << Zdzichu.getShip()->getId() << "Utonął!";
-    auto ship = std::make_unique<Ship>(1, 2, 3);
-    ship->addCargo(&bananas);
+
+    auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
+    ship->addCargo(&bananas);    
+    size_t shipCargoSize = ship->getCargo().size();
     Player player (ship, 1, 1);
-    std::cout << "Vector size: " << ship->getCargo().size() << '\n';
-    // std::cout << "Vector size: " << ship.get()->getCargo().size() << '\n'; //    std::cout << "Vector size: " << ship.get()->getCargo().size() << '\n';
-    // std::cout << "Player's ship speed: " <<  player.getShip()->getSpeed() << '\n';
-    // std::cout << "Player's ship cargo: " << player.getCargo(0)->getName() << '\n';
-    
+    std::cout << "Vector size: " << shipCargoSize << '\n';
+    std::cout << "Player's ship speed: " <<  player.getShip()->getSpeed() << '\n';
+    std::cout << "Player's ship cargo: " << player.getCargo(0)->getName() << '\n';
+    std::cout << "Available space: " << player.getAvailableSpace() << '\n';
+
     Map map;
     map.DebugPrintIsland();
     

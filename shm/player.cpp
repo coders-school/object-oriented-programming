@@ -3,7 +3,7 @@
 Player::Player(std::unique_ptr<Ship>& ship, int money, int availableSpace)
     : ship_(std::move(ship))
     , money_(money)
-    , availableSpace_(availableSpace)
+    , availableSpace_(calculateAvailableSpace())
     {}
 
 std::unique_ptr<Ship>& Player::getShip() { 
@@ -26,12 +26,17 @@ Cargo* Player::getCargo(size_t index) const {
     return ship_->getCargo()[index];
 }
 
-void Player::calculateAvailableSpace() {
-    // size_t cargoAmount = 0;
-    // std::vector<Cargo*> shipCargo = ship_.;
-    // for(int i = 0; i < shipCargo.size(); i++){
-    //     cargoAmount += getCargo(i)->getAmount();
-    // }
+size_t Player::calculateAvailableSpace() {
+     int cargoAmount = 0;
+     int capacity = ship_->getCapacity();
+     std::vector<Cargo*> shipCargo = ship_->getCargo();
+     for(int i = 0; i < shipCargo.size(); i++){
+         cargoAmount += getCargo(i)->getAmount();
+     }
+    if(capacity - cargoAmount < 0)
+    {
+        return 0;
+    }
 
-    // availableSpace_ = ship_.getCapacity() - cargoAmount;
+     return capacity - cargoAmount;
 }

@@ -9,7 +9,7 @@ private:
     std::unique_ptr<Ship> ship_;
     int money_;
     size_t availableSpace_;
-    void calculateAvailableSpace();
+    size_t calculateAvailableSpace();
 
 public:
     Player(std::unique_ptr<Ship>& ship, int money, int availableSpace);
