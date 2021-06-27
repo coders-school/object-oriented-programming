@@ -9,6 +9,6 @@ public:
     Island(Coordinates position) {
         position_ = position;
     }
-    Coordinates GetPosition() { return position_; }
+    Coordinates getPosition() { return position_; }
     void SetPosition(const Coordinates& position) { position_ = position; }
 };

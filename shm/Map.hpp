@@ -15,6 +15,8 @@ class Map {
 public:
     Map();
     void DebugPrintIsland();
+    Island* getIsland(const Coordinates& coordinate);
+    void addIsland(Coordinates& coordinate);
 private:
     Island *current_pos_;
     std::vector<Island> islands_;

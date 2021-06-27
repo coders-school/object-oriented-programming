@@ -23,10 +23,17 @@ int main()
     Titanic.addCargo(&bananas);
 
     std::cout << Titanic.getCargo()[0]->getAmount() << std::endl;
-    /*std::unique_ptr<Ship> Rudy102 = std::make_unique<Ship>(Titanic);
-    Player Zdzichu(Rudy102, 170, 3);
-    std::cout << Zdzichu.getShip()->getId() << "Utonął!";*/
+    // std::unique_ptr<Ship> Rudy102 = std::make_unique<Ship>();
+    // Player Zdzichu(Rudy102, 170, 3);
+    // std::cout << Zdzichu.getShip()->getId() << "Utonął!";
+    auto ship {std::make_unique<Ship>(1, 2, 3)};
+    Player player (ship, 1, 1);
+    std::cout << player.getShip()->getSpeed() << '\n';
+    
     Map map;
     map.DebugPrintIsland();
     
+    map.addIsland(miami);
+    Island* is = map.getIsland(miami);
+    std::cout << is->getPosition().GetPositionX() << " " << is->getPosition().GetPositionY();
 }

@@ -23,7 +23,7 @@ Map::Map() {
 }
 void Map::DebugPrintIsland () {
     for (auto &el : islands_) {
-        std::cout << el.GetPosition().GetPositionX() << " | " << el.GetPosition().GetPositionY() << '\n';
+        std::cout << el.getPosition().GetPositionX() << " | " << el.getPosition().GetPositionY() << '\n';
     }
 }
 
@@ -32,4 +32,17 @@ bool Map::contains(std::vector<Coordinates> vec, Coordinates c) {
         return true;
     }
     return false;
+}
+
+Island* Map::getIsland(const Coordinates& coordinate){
+    for(int i = 0; i < islands_.size(); i++){
+        if(islands_[i].getPosition() == coordinate){
+            return &islands_[i];
+        }
+    }
+    return nullptr;
+}
+
+void Map::addIsland(Coordinates& coordinate){
+    islands_.push_back(Island (coordinate));
 }

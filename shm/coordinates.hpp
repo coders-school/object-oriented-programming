@@ -8,7 +8,7 @@ private:
 public:
     Coordinates(float positionX, float positionY) {
         positionX_ = positionX;
-        positionY_ = positionX;
+        positionY_ = positionY;
     }
     Coordinates()
         : Coordinates(0.f, 0.f) {}

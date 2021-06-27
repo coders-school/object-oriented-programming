@@ -1,7 +1,7 @@
 #include "player.hpp"
 
 Player::Player(std::unique_ptr<Ship>& ship, int money, int availableSpace)
-    : ship_(std::move(ship_))
+    : ship_(std::move(ship))
     , money_(money)
     , availableSpace_(availableSpace)
     {}
