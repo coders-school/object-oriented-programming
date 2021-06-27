@@ -1,5 +1,5 @@
 #include <memory>
-
+#include <iostream>
 #include "cargo.hpp"
 #include "ship.hpp"
 
@@ -29,6 +29,9 @@ size_t Ship::getId() const {
     return id_;
 }
 std::shared_ptr<Cargo>Ship::getCargo(size_t index) const {
+    if(index < 0) {
+        std::cerr << "\nInvalid Cargo\n";
+    }
     return cargos_[index];
 }
 
