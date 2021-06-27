@@ -9,12 +9,13 @@ private:
     std::unique_ptr<Ship> ship_;
     int money_;
     size_t availableSpace_;
+    void calculateAvailableSpace();
 
 public:
     Player(std::unique_ptr<Ship>& ship, int money, int availableSpace);
 
     std::unique_ptr<Ship>& getShip();
-    size_t getMoney();
+    int getMoney();
     size_t getAvailableSpace();
 
     size_t getSpeed() const;
