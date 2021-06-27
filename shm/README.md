@@ -1,6 +1,6 @@
 # Symulator Handlu Morskiego - SHM
 
-Wykorzystaj kod napisany podczas zajęć. Jeśli go nie masz to skorzystaj z kodu w katalogu [solutions](../module1/solutions)
+Wykorzystaj kod napisany podczas zajęć. Jeśli go nie masz to skorzystaj z kodu w katalogu `solutions` (branch `master`)
 
 ___
 
