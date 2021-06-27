@@ -42,5 +42,4 @@ private:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    Cargo cargo_;
 };
