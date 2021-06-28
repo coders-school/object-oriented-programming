@@ -8,6 +8,7 @@ class map {
 public:
     map();
     void printIslands() const;
+    Island* getIsland( const Coordinates&)const;
 
 private:
     std::vector<std::pair<int, int>> generateIslandPosition();
