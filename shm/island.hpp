@@ -3,7 +3,7 @@
 
 class Island {
 public:
-    Island(Coordinates& position)
+    Island(const Coordinates& position)
         : position_(position)
     {}
     Coordinates getPosition() const { return position_; }
