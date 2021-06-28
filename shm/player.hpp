@@ -25,5 +25,5 @@ public:
     size_t getMoney() const;
     size_t getAvailableSpace() const;
     size_t getSpeed() const;
-    std::vector<std::shared_ptr<Cargo>> getCargo(size_t index) const;
+    std::shared_ptr<Cargo> getCargo(size_t index) const;
 };
