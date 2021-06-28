@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <string>
 
@@ -18,7 +19,7 @@ public:
     Cargo& operator-=(size_t amount);
     bool operator==(Cargo& cargo);
 
-    std::string getName()   { return name_; }
-    size_t getAmount()      { return amount_; }
-    size_t getPrice()       { return basePrice_; }
+    std::string getName() { return name_; }
+    size_t getAmount()    { return amount_; }
+    size_t getPrice()     { return basePrice_; }
 };
