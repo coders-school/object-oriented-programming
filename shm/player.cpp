@@ -1,19 +1,12 @@
 #include "player.hpp"
-
 #include <iostream>
 #include <numeric>
-
-// constructors
 
 Player::Player(Ship& ship , size_t money , size_t availableSpace )
     : ship_(std::make_shared<Ship> (ship ))
     , money_(money)
     , availableSpace_(availableSpace) 
     {}
-
-//Player::~Player(){};
-
-//getters
 
 size_t Player::getMoney() const {
     return money_;
@@ -44,10 +37,3 @@ size_t Player::countAvailableSpace() const {
 
    return ship_->getCapacity() - sumOfAmounts;
 }
-
-
-
-//methods
-
-
-
