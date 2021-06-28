@@ -15,10 +15,11 @@ int Island::Coordinates::getPositionY() const {
 }
 
 bool Island::Coordinates::operator== (const Coordinates& n_pos) const {
-    if ( positionX_ == n_pos.positionX_ && positionY_ == n_pos.positionY_) {
-        return true;
-    }
-    return false;
+    // if ( positionX_ == n_pos.positionX_ && positionY_ == n_pos.positionY_) {
+    //     return true;
+    // }
+    // return false;
+    return positionX_ == n_pos.positionX_ && positionY_ == n_pos.positionY_;
 }
 
 Island::Coordinates Island::getPosition() const {
