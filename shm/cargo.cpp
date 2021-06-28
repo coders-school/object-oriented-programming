@@ -12,5 +12,5 @@ Cargo& Cargo::operator-=(size_t amount) {
 }
 
 bool Cargo::operator==(Cargo& cargo) {
-    return (cargo.getName() == name_ && cargo.getAmount() == amount_);
+    return (cargo.getName() == name_ and cargo.getAmount() == amount_);
 }
