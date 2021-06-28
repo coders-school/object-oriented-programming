@@ -13,6 +13,6 @@ private:
     const int maxWidth_ = 99;
     const int maxHeight_ = 99;
     const int islandsQuantity_ = 10;
-    std::vector<Island> islands_;
+    std::vector<Island&> islands_;
     Island* currentPostion_;
 };
