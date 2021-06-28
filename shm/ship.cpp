@@ -2,6 +2,8 @@
 #include <iostream>
 #include "cargo.hpp"
 #include "ship.hpp"
+#include <algorithm>
+#include <numeric>
 
 Ship& Ship::operator-=(size_t num) {
     crew_ -= num;
@@ -42,3 +44,4 @@ std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
+
