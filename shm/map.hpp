@@ -6,14 +6,13 @@
 
 class Map {
 public:
-    Map() = default;
-    Map(Island* currentPosition) //I dont know, if i want to fill vector of islands, i need to put island into constructor, or filling the vector will be done only by function
-        : currentPostion_(currentPosition)
-        {}
-    void initializeMap(Island& island);
+    Map();
     Island* const getPosition();
     Island* getIsland(const Island::Coordinates& coordinate);
 private:
-    std::vector<Island&> islands_; //I dont know if this vector is going to be the only place where we are collecting islands. If its the only way to somehow "remember" islands, then pointer is pointless (hehe) 
+    const int maxWidth_ = 99;
+    const int maxHeight_ = 99;
+    const int islandsQuantity_ = 10;
+    std::vector<Island> islands_;
     Island* currentPostion_;
 };
