@@ -1,12 +1,14 @@
 #pragma once
 
-class Coordinates {
+class Coordinates
+{
 private:
     float positionX_;
     float positionY_;
 
 public:
-    Coordinates(float positionX, float positionY) {
+    Coordinates(float positionX, float positionY)
+    {
         positionX_ = positionX;
         positionY_ = positionY;
     }
@@ -16,9 +18,8 @@ public:
     float GetPositionX() { return positionX_; }
     float GetPositionY() { return positionY_; }
 
-    void SetPositionX(const float& positionX) { positionX_ = positionX; }
-    void SetPositionY(const float& positionY) { positionY_ = positionY; }
+    void SetPositionX(const float &positionX) { positionX_ = positionX; }
+    void SetPositionY(const float &positionY) { positionY_ = positionY; }
 
-    bool operator==(const Coordinates& c1) const;
-    
+    bool operator==(const Coordinates &c1) const;
 };

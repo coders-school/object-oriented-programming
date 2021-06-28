@@ -4,7 +4,8 @@
 #include "cargo.hpp"
 #include <memory>
 
-class Player {
+class Player
+{
 private:
     std::unique_ptr<Ship> ship_;
     int money_;
@@ -12,12 +13,12 @@ private:
     size_t calculateAvailableSpace();
 
 public:
-    Player(std::unique_ptr<Ship>& ship, int money, int availableSpace);
+    Player(std::unique_ptr<Ship> &ship, int money, int availableSpace);
 
-    std::unique_ptr<Ship>& getShip();
+    std::unique_ptr<Ship> &getShip();
     int getMoney();
     size_t getAvailableSpace();
 
     size_t getSpeed() const;
-    Cargo* getCargo(size_t index) const;
+    Cargo *getCargo(size_t index) const;
 };
