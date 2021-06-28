@@ -10,6 +10,13 @@ private:
     std::shared_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
+
+    size_t calculateAvSpace(size_t capacity, size_t cargo) {
+        auto capacity = ship_->getCapacity();
+        auto cargo = ship_->getCargo();
+        auto avSpace = capacity - cargo;
+    }
+
 public:
     Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace)
         : ship_(ship)
