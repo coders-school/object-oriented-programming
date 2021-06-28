@@ -15,14 +15,11 @@ map::map() {
 }
 
 void map::printIslands() const {
-    // for (auto& a : map_) {
-    //     std::cout << a.get().getPosition().getPositionX() << ' ' << a.get().getPosition().getPositionY() << '\n';
-    // }
-    // for (int i = 0; i < MAX_ISLANDS; ++i) {
-    //     std::cout << map_[i].get().getPosition().getPositionX() << ' ' << map_[i].get().getPosition().getPositionY() << '\n';
-
-    std::cout << map_.size()<<'\n' << map_[0].get()->getPosition().getPositionX() << ' '<<map_[0].get()->getPosition().getPositionY()<<'\n';
+    for (auto& a : map_) {
+        std::cout << a.get()->getPosition().getPositionX() << ' ' << a.get()->getPosition().getPositionY() << '\n';
+    }
 }
+
 std::vector<std::pair<int, int>> map::generateIslandPosition() {
     std::map<int, int> vecOfPairs{};
     std::random_device rd;
