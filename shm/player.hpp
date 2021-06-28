@@ -14,7 +14,7 @@ private:
     size_t calculateAvSpace(size_t capacity, size_t cargo) {
         auto capacity = ship_->getCapacity();
         auto cargo = ship_->getCargo();
-        auto avSpace = capacity - cargo;
+        return capacity - cargo;
     }
 
 public:
