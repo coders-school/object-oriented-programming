@@ -56,3 +56,25 @@ size_t Ship::getId() const {
 const std::vector<std::unique_ptr<Cargo>>& Ship::getCargoVec() const { 
     return cargoVec_; 
 }
+
+void Ship::load(std::unique_ptr<Cargo> cargo){
+    bool check = true;
+    for (auto el : cargoVec_) {
+        if ((*cargo) == (*el)) {
+            (*el) += cargo->getAmount();
+            check = false;
+            break;
+        }
+    }
+    if(!check){
+        cargoVec_.push_back(move(cargo));
+    }
+}
+
+void Ship::unload(Cargo* cargo){
+    cargoVec_.erase(std::remove_if(cargoVec_.begin(), cargoVec_.end(), 
+                [ &cargo ]( unique_ptr<Cargo> cargoOnBoard ) {
+                    return cargo == cargoOnBoard.get();
+                }), cargoVec_.end());
+}
+

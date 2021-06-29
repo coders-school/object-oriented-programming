@@ -16,16 +16,5 @@ Cargo& Cargo::operator-=(size_t amount) {
 
 bool Cargo::operator==(const Cargo& other) const {
     return (name_ == other.name_ and amount_ == other.amount_ and basePrice_ == other.basePrice_);
-}
+} //???
 
-std::string Cargo::getName() const {
-    return name_;
-}
-
-size_t Cargo::getAmount() const {
-    return amount_;
-}
-
-size_t Cargo::getBasePrice() const {
-    return basePrice_;
-}
