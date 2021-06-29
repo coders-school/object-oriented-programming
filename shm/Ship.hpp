@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 #include "Cargo.hpp"
-#include <algorithm>
 
 class Ship {
     size_t capacity_;
@@ -30,8 +29,4 @@ public:
      std::string getName() const;  
      size_t getId() const;
      const std::vector<std::unique_ptr<Cargo>>& getCargoVec() const;
-
-     void load(std::unique_ptr<Cargo> cargo);
-     void unload(Cargo* cargo);
-
 };
