@@ -275,6 +275,8 @@ protected:
 class Laptop : public Computer,
                public Screen {
     Keyboard keyboard_;
+public:
+    void getUserInput();
 };
 
 class Tablet : public Computer,
