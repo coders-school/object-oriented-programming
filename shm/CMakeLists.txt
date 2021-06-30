@@ -14,6 +14,7 @@ set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 
 set(SOURCES
     ${SOURCE_DIR}/Island.cpp
+    ${SOURCE_DIR}/Cargo.cpp
     ${SOURCE_DIR}/Map.cpp
     ${SOURCE_DIR}/Ship.cpp
 )
