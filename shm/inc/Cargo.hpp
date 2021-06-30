@@ -4,7 +4,7 @@
 
 class Cargo {
 public:
-    Cargo(const std::string& name, size_t amount, size_t basePrice_);
+    Cargo(const std::string& name, size_t amount, size_t basePrice);
 
     virtual ~Cargo();
 
