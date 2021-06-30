@@ -24,5 +24,3 @@ public:
 private:
     const Rarity rarity_;
 };
-
-
