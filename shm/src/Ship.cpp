@@ -1,5 +1,6 @@
 #include "shm/inc/Ship.hpp"
 
+#include <algorithm>
 #include <iostream>
 
 Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity)
@@ -41,4 +42,18 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
         return nullptr;
     }
     return cargo_[index];
+}
+
+void Ship::load(std::shared_ptr<Cargo>cargo) {
+    bool ifExistCargo = false;
+    for (auto & element : cargo_) {
+        if (element == cargo) {
+            *element+=cargo->getAmount();
+            ifExistCargo = true;
+            break;
+        }
+    }
+    if (ifExistCargo == false) {
+        cargo_.push_back(cargo);
+    }
 }

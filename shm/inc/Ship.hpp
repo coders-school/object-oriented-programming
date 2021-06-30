@@ -25,6 +25,8 @@ public:
 
     void setName(const std::string&);
 
+    void load(std::shared_ptr<Cargo>);
+
 private:
     const int id_ { -1 };
     std::string name_;
