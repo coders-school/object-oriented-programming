@@ -32,7 +32,10 @@ size_t Player::getAvailableSpace() const {
 }
 
 size_t Player::getSpeed() const {
-    return ship_->getSpeed();
+    if(ship_) {
+        return ship_->getSpeed();
+    }
+    return 0;
 }
 
 Cargo* Player::getCargo(size_t index) const {
