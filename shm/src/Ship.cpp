@@ -44,9 +44,9 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
     return cargo_[index];
 }
 
-void Ship::load(std::shared_ptr<Cargo>cargo) {
+void Ship::load(const std::shared_ptr<Cargo>cargo) {
     bool ifExistCargo = false;
-    for (auto & element : cargo_) {
+    for (auto const & element : cargo_) {
         if (element == cargo) {
             *element+=cargo->getAmount();
             ifExistCargo = true;
@@ -55,5 +55,24 @@ void Ship::load(std::shared_ptr<Cargo>cargo) {
     }
     if (ifExistCargo == false) {
         cargo_.push_back(cargo);
+    }
+}
+
+void Ship::unload(Cargo* cargo) {
+    int it = -1;
+    for (int i = 0; i < static_cast<int>(cargo_.size()); i++) {
+        if (*(cargo_[i].get()) == *cargo) {
+            it = i;
+            break;
+        }
+    }
+    if (it == -1) {
+        std::cerr << "Cargo not exist in ship\n";
+    } else if (cargo->getAmount() > cargo[it].getAmount()) {
+        std::cerr << "Wrong value, you wanna unload more then exist in ship\n";
+    } else if (cargo->getAmount() == cargo[it].getAmount()) {
+        cargo_.erase(std::remove(cargo_.begin(), cargo_.end(), cargo_[it]), cargo_.end());
+    } else {
+        *cargo_[it]-= cargo->getAmount();
     }
 }
