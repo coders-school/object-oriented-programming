@@ -1,5 +1,5 @@
+
 #include "cargo.hpp"
-#include "ship.hpp"
 
 Cargo& Cargo::operator+=(size_t amount) {
     amount_ += amount;
@@ -7,10 +7,15 @@ Cargo& Cargo::operator+=(size_t amount) {
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
-    amount_ -= amount;
+    if(amount_ <= amount) {
+        amount_ = 0;
+    }
+    else {
+        amount_ -= amount;
+    }
     return *this;
 }
 
 bool Cargo::operator==(Cargo& cargo) {
-    return (cargo.getName() == name_ && cargo.getAmount() == amount_);
+    return cargo.getName() == name_ && cargo.getAmount() == amount_;
 }
