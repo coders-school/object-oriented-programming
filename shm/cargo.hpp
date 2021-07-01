@@ -10,19 +10,15 @@ private:
     size_t basePrice_;
 
 public:
-    Cargo(const std::string name, size_t amount, size_t basePrice)
-        : name_(name)
-        , amount_(amount)
-        , basePrice_(basePrice)
-    {}
-//operators will be used to add, subtract and copare how many and  what we have
+    Cargo(const std::string&, size_t, size_t);
+
+    //operators will be used to add, subtract and copare how many and  what we have
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
     bool operator==(Cargo& cargo);
 
-///simple getters
-    std::string getName()   { return name_; }
-    size_t getAmount()      { return amount_; }
-    size_t getPrice()       { return basePrice_; }
-
+    ///simple getters
+    const std::string& getName() const { return name_; }
+    size_t getAmount() const { return amount_; }
+    size_t getPrice() const { return basePrice_; }
 };
