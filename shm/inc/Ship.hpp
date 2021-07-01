@@ -5,15 +5,16 @@
 #include <vector>
 
 #include "shm/inc/Cargo.hpp"
+#include "shm/inc/Delegate.hpp"
 
 class Ship {
 public:
     Ship() = default;
-    Ship(int, const std::string&, size_t, size_t, size_t);
-    Ship(int, size_t, size_t);
+    Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate);
+    Ship(int id, size_t speed, size_t maxCrew, Delegate* delegate);
 
-    Ship& operator+=(const size_t);
-    Ship& operator-=(const size_t);
+    Ship& operator+=(const size_t amount);
+    Ship& operator-=(const size_t amount);
 
     int getId() const { return id_; };
     std::string getName() const { return name_; };
@@ -23,7 +24,7 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const;
     std::vector<std::shared_ptr<Cargo>> getVectorCargo() const { return cargo_; };
 
-    void setName(const std::string&);
+    void setName(const std::string& name);
 
     void nextDay();
 
@@ -35,6 +36,7 @@ private:
     size_t crew_ { };
     const size_t capacity_ { 80 };
     std::vector<std::shared_ptr<Cargo>> cargo_;
+    Delegate* delegate_;
 };
 
 
