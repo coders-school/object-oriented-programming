@@ -7,14 +7,14 @@ Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice)
 }
 
 Fruit& Fruit::operator--() {
-    if (rottenTime !=0){
+    if (rottenTime != 0){
         rottenTime--;
     } else {
-        std::cout << "Fruit is completely rotten\n";
+        std::cerr << "Fruit is completely rotten\n";
     }
     return *this;
 }
 
-std::size_t Fruit::getPrice() {
+std::size_t Fruit::getPrice() const {
     return basePrice_ * (rottenTime / 10);
 }
