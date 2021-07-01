@@ -2,6 +2,7 @@
 
 #include <string>
 
+//class resposible for manage commodity in game
 class Cargo {
 public:
     Cargo(const std::string&, size_t, size_t);
@@ -12,7 +13,7 @@ public:
 
     std::string getName() const { return name_; }
     size_t getAmount() const { return amount_; }
-    size_t getBestPrice() const { return basePrice_; }
+    size_t getBasePrice() const { return basePrice_; }
 
 private:
     const std::string name_; 

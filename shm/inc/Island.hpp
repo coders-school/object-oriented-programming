@@ -2,8 +2,11 @@
 
 #include <cstddef> 
 
+//class responsible for manage landmass in game
 class Island {
 public:
+
+    //class responsible for manage coordinates of islands in game
     class Coordinates {
     public:
         Coordinates(size_t, size_t);

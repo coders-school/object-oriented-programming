@@ -4,6 +4,7 @@
 
 #include <vector>
 
+//class responsible for manage cartography in game
 class Map {
 public:
     Map();

@@ -6,6 +6,7 @@
 
 #include "shm/inc/Cargo.hpp"
 
+//class responsible for manage ship(s) in game
 class Ship {
 public:
     Ship() = default;

@@ -7,6 +7,7 @@
 #include <memory>
 #include <numeric>
 
+//class responsible for manage user in game
 class Player {
 public:
     Player(std::unique_ptr<Ship>, size_t, size_t);
