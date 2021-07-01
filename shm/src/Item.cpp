@@ -7,7 +7,7 @@ Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rari
 bool Item::operator==(const Cargo& cargo) const {
     if (typeid(cargo) == typeid(Item)) {
         const Item* item = static_cast<const Item*>(&cargo);
-        return name_ == item->getName() && amount_ == item->getAmount() && basePrice_ == item->getBasePrice() &&
+        return name_ == item->getName() && basePrice_ == item->getBasePrice() &&
                rarity_ == item->getRarity();
     }
 
@@ -28,7 +28,7 @@ Cargo& Item::operator-=(size_t amount) {
     return *this;
 }
 
-std::string Item::getName() const{
+std::string Item::getName() const {
     return name_;
 }
 
