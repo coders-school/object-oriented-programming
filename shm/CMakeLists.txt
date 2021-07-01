@@ -17,6 +17,7 @@ set(SOURCES
     ${SOURCE_DIR}/Cargo.cpp
     ${SOURCE_DIR}/Map.cpp
     ${SOURCE_DIR}/Ship.cpp
+    ${SOURCE_DIR}/Item.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
