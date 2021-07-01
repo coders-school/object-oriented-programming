@@ -22,6 +22,8 @@ size_t Player::getSpeed() const {
     return ship_->getSpeed();
 }
 
-std::vector<std::shared_ptr<Cargo>> Player::getCargo(size_t index) const {
-    return ship_->getCargo(index);
+std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
+    std::shared_ptr<Cargo> cargoPtr;
+    cargoPtr = ship_->getCargo().at(index);
+    return cargoPtr;
 }

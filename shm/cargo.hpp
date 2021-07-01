@@ -1,4 +1,4 @@
-#include <iostream>
+#pragma once
 #include <string>
 
 //class to store cargos which will be used to sell bought and transport on ship
@@ -20,9 +20,9 @@ public:
     Cargo& operator-=(size_t amount);
     bool operator==(Cargo& cargo);
 
-
 ///simple getters
     std::string getName()   { return name_; }
     size_t getAmount()      { return amount_; }
     size_t getPrice()       { return basePrice_; }
+
 };
