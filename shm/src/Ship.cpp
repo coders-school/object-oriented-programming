@@ -42,3 +42,7 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
     }
     return cargo_[index];
 }
+
+void Ship::nextDay() {
+    
+}

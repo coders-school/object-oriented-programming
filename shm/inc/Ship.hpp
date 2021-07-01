@@ -25,6 +25,8 @@ public:
 
     void setName(const std::string&);
 
+    void nextDay();
+
 private:
     const int id_ { -1 };
     std::string name_;
