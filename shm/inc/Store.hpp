@@ -1,8 +1,9 @@
 #pragma once
+#include "shm/inc/Cargo.hpp"
+#include "shm/inc/Player.hpp"
 
 class Store {
 public:
-    Store();
 
     enum class Response {
         done, 
@@ -11,6 +12,7 @@ public:
         lack_of_space
     };
 
-private:
+    Response buy(Cargo* cargo, size_t amount, Player* player);
 
+private:
 };
