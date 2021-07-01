@@ -68,7 +68,7 @@ void testIslandMap() {
         std::cout << "\n\n--- MAP/ISLAND TEST ---\n";
         for(const auto& island : mapVec) {
             std::cout << num++ << ". ";
-            std::cout << island.getPosition().toString();
+            std::cout << island.getPosition();
             std::cout << '\n';
         }
     }
