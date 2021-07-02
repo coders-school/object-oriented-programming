@@ -33,7 +33,7 @@ private:
     std::string name_;
     size_t speed_ { 50 };
     const size_t maxCrew_ { 100 };
-    size_t crew_ { };
+    size_t crew_ { 50 };
     const size_t capacity_ { 80 };
     std::vector<std::shared_ptr<Cargo>> cargo_;
     Delegate* delegate_;

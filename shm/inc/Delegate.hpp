@@ -2,6 +2,6 @@
 
 class Delegate {
 public: 
-    virtual void payCrew(int payCrew) = 0;
-    virtual ~Delegate() {} ; 
+    virtual void payCrew(size_t payCrew) = 0;
+    virtual ~Delegate() = 0; 
 };

@@ -21,3 +21,9 @@ size_t Player::countAvailableSpace() const {
                         return sum += cargo->getAmount();
                     });
 }
+
+void Player::payCrew(size_t payCrew) override {
+    money_ <= payCrew 
+        ? money_ = 0 
+        : money_ -= payCrew;
+}

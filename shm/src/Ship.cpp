@@ -45,5 +45,5 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
 }
 
 void Ship::nextDay() {
-    
+    delegate_->payCrew(crew_);
 }
