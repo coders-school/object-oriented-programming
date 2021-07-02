@@ -6,6 +6,7 @@ public:
     Cargo(std::string name, size_t amount, size_t basePrice)
         : name_(name), amount_(amount), basePrice_(basePrice) {}
 
+
     virtual Cargo& operator+=(size_t amount) = 0;
     virtual Cargo& operator-=(size_t amount) = 0;
 
@@ -19,6 +20,7 @@ public:
     void setAmount(const size_t amount) {
         amount_ = amount;
     }
+
 
 protected:
     std::string name_;
