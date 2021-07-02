@@ -11,7 +11,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player){
         return Response::lack_of_cargo;
     }
 
-    auto& playerShip = player->getShip();
+    const auto& playerShip = player->getShip();
     if(!playerShip){
         return Response::lack_of_cargo;
     }
@@ -65,7 +65,7 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player){
         return Response::lack_of_space;
     }
 
-    auto& playerShip = player->getShip();
+    const auto& playerShip = player->getShip();
     if(!playerShip){
         return Response::lack_of_space;
     }
