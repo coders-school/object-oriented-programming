@@ -1,20 +1,15 @@
+#include "Cargo.hpp"
 #include "Ship.hpp"
-    
-Ship::Ship() 
-    : id_(-1)
+
+Ship::Ship()
+    : Ship(0, 0, 0, "", -1, {})
 {}
 
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec)
-    : capacity_(capacity)
-    , maxCrew_(maxCrew)
-    , crew_(0)
-    , speed_(speed)
-    , name_(name)
-    , id_(id)
-    , cargoVec_(std::move(cargoVec))
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, const size_t id, CargoVec cargoVec)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), cargoVec_(std::move(cargoVec))
 {}
 
-Ship::Ship(int maxCrew, int speed, size_t id)
+Ship::Ship(size_t maxCrew, size_t speed,const size_t id)
     : Ship(0, maxCrew, speed, "", id, {})
 {}
 
@@ -45,7 +40,7 @@ size_t Ship::getSpeed() const {
     return speed_; 
 }
 
-std::string Ship::getName() const { 
+const std::string& Ship::getName() const { 
     return name_; 
 }
 
@@ -53,6 +48,6 @@ size_t Ship::getId() const {
     return id_; 
 }
 
-const std::vector<std::unique_ptr<Cargo>>& Ship::getCargoVec() const { 
+const Ship::CargoVec& Ship::getCargoVec() const { 
     return cargoVec_; 
 }
