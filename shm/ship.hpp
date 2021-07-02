@@ -4,13 +4,13 @@
 #include <vector>
 #include "cargo.hpp"
 
-class Ship : public Cargo 
+class Ship 
 {
 public:
     Ship()
         : id_(-1) {}
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-        : capacity_(capacity)
+        :  capacity_(capacity)
         , maxCrew_(maxCrew)
         , crew_(0)
         , speed_(speed)
@@ -33,10 +33,7 @@ public:
     
     std::vector<std::shared_ptr<Cargo>> getCargos() const;
     
-
-    void load(std::shared_ptr<Cargo> cargo);
-    void unload(std::shared_ptr<Cargo> cargo);
-
+    
     std::shared_ptr<Cargo> theSame(std::shared_ptr<Cargo> cargo);
 
 

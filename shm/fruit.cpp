@@ -27,13 +27,13 @@ Fruit& Fruit::operator--(int) {
     return *this;
 }
 
-bool Fruit::operator==(const Cargo& fruit) const 
-{
-    if(typeid(fruit) == typeid(Friut)) {
-        const std::shared_ptr<Fruit> fruit = static_cast<const std::shared_ptr<Fruit>>(&cargo);
+// bool Fruit::operator==(const Cargo& fruit) const 
+// {
+//     if(typeid(fruit) == typeid(Friut)) {
+//         const std::shared_ptr<Fruit> fruit = static_cast<const std::shared_ptr<Fruit>>(&cargo);
     
-    }
-}
+//     }
+// }
 
 /// getters
 size_t Fruit::getAmount() const  {

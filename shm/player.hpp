@@ -8,7 +8,7 @@ public:
 
     Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace);
 
-3
+
     size_t getMoney() const;
     size_t getAvailableSpace() const;
     std::shared_ptr<Ship> getShip() const;

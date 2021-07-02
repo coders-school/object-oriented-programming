@@ -2,18 +2,10 @@
 #include <iostream>
 #include <numeric>
 
-<<<<<<< HEAD
 // constructors
 
-Player::Player(Ship& ship, size_t money, size_t availableSpace)
+Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace)
     : ship_(std::make_shared<Ship>(ship)), money_(money), availableSpace_(availableSpace) {}
-=======
-Player::Player(Ship& ship , size_t money , size_t availableSpace )
-    : ship_(std::make_shared<Ship> (ship ))
-    , money_(money)
-    , availableSpace_(availableSpace) 
-    {}
->>>>>>> ff3c21b1c31a36e604a649cf997d38101ed93c13
 
 size_t Player::getMoney() const {
     return money_;
