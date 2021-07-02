@@ -13,8 +13,8 @@ public:
     Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity);
     Ship(int id, size_t speed, size_t maxCrew);
 
-    Ship& operator+=(const size_t amount);
-    Ship& operator-=(const size_t amount);
+    Ship& operator+=(const size_t crew);
+    Ship& operator-=(const size_t crew);
 
     int getId() const { return id_; };
     std::string getName() const { return name_; };

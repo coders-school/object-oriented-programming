@@ -14,21 +14,21 @@ Ship::Ship(int id, size_t speed, size_t maxCrew)
     : Ship(id, "Ship", speed, maxCrew, 100)
 {}
 
-Ship& Ship::operator+=(const size_t amount) {
-    if (amount + crew_ <= maxCrew_) {
-        crew_ += amount;
-    } else {
-        std::cerr << "Maximum amount of crew is " << maxCrew_ << '\n';
+Ship& Ship::operator+=(const size_t crew) {
+    if (crew_ + crew > maxCrew_) {
+        std::cerr << "Too many sailors\n";
+        return *this;
     }
+    crew_ += crew;
     return *this;
 }
 
-Ship& Ship::operator-=(const size_t amount) {
-    if (crew_ <= amount) {
-        crew_ -= amount;
-    } else {
-        std::cerr << "Amount of crew can't be under 0\n";
+Ship& Ship::operator-=(const size_t crew) {
+    if (crew_ < crew) {
+        std::cerr << "Number of sailors lower than 0\n";
+        return *this;
     }
+    crew_ -= crew;
     return *this;
 }
 
