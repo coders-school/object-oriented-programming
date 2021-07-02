@@ -38,6 +38,3 @@ private:
     std::vector<std::shared_ptr<Cargo>> cargo_;
     Delegate* delegate_;
 };
-
-
-

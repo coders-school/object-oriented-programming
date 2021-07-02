@@ -22,7 +22,7 @@ size_t Player::countAvailableSpace() const {
                     });
 }
 
-void Player::payCrew(size_t payCrew) override {
+void Player::payCrew(const size_t payCrew) {
     money_ <= payCrew 
         ? money_ = 0 
         : money_ -= payCrew;
