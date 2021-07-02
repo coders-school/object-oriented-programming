@@ -8,7 +8,7 @@ constexpr size_t basePrice = 96;
 
 class Alcohol : public Cargo {
 public:
-    Alcohol(const std::string&, size_t, size_t, size_t);
+    Alcohol(const std::string& name, size_t amount, size_t, size_t basePrice);
     ~Alcohol() override;
 
     //override Cargo
@@ -16,6 +16,9 @@ public:
     std::string getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
+
+    Cargo& operator+=(size_t amount);
+    Cargo& operator-=(size_t amount);
 
     size_t getPercentage() const { return percentage_; }
 
