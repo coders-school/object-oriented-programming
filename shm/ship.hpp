@@ -28,15 +28,9 @@ public:
     size_t getSpeed() const;
     std::string getName() const;
     size_t getId() const;
-    std::shared_ptr<Cargo> getCargo(size_t index) const;
-
+    std::shared_ptr<Cargo> getCargo(size_t index) const;    
+    std::vector<std::shared_ptr<Cargo>> getCargosVector() const;
     
-    std::vector<std::shared_ptr<Cargo>> getCargos() const;
-    
-    
-    std::shared_ptr<Cargo> theSame(std::shared_ptr<Cargo> cargo);
-
-
     void setName(const std::string& name);
    
 private:

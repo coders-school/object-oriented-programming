@@ -43,13 +43,13 @@ size_t Ship::getId() const {
     return id_;
 }
 std::shared_ptr<Cargo>Ship::getCargo(size_t index) const {
-    if(index < 0) {
-        std::cerr << "\nInvalid Cargo\n";
+    if(cargos_.size() <= index) {
+        return nullptr;
     }
     return cargos_[index];
 }
 
-std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
+std::vector<std::shared_ptr<Cargo>> Ship::getCargosVector() const {
     return cargos_;
 }
 
