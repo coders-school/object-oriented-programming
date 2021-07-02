@@ -10,7 +10,7 @@
 //class responsible for manage user in game
 class Player {
 public:
-    Player(std::unique_ptr<Ship>, size_t, size_t);
+    Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
 
     std::unique_ptr<Ship> getShip() { return std::move(ship_); };
     size_t getMoney() const { return money_; };

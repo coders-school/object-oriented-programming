@@ -8,7 +8,7 @@
 class Map {
 public:
     Map();
-    Island* getIsland(const Island::Coordinates&);
+    Island* getIsland(const Island::Coordinates& position);
 
 private:
     std::vector<Island> vectorOfIslands_;

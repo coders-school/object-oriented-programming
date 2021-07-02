@@ -5,10 +5,11 @@
 //class resposible for manage commodity in game
 class Cargo {
 public:
-    Cargo(const std::string&, size_t, size_t);
+    //constructs an object of cargo in game
+    Cargo(const std::string& name, size_t amount, size_t basePrice);
 
-    Cargo& operator+=(const size_t);
-    Cargo& operator-=(const size_t);
+    Cargo& operator+=(const size_t amount);
+    Cargo& operator-=(const size_t amount);
     bool operator==(const Cargo&) const;
 
     std::string getName() const { return name_; }
