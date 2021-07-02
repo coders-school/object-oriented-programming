@@ -1,11 +1,18 @@
-#include "player.hpp"
+
 #include <iostream>
 #include <numeric>
+#include <utility>
+
+#include "cargo.hpp"
+#include "player.hpp"
+#include "ship.hpp"
 
 // constructors
 
-Player::Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace)
-    : ship_(std::make_shared<Ship>(ship)), money_(money), availableSpace_(availableSpace) {}
+Player::Player(std::shared_ptr<Ship> ship, size_t money)
+    : ship_(std::move(ship)), money_(money) {
+    countAvailableSpace();
+}
 
 size_t Player::getMoney() const {
     return money_;
@@ -24,14 +31,12 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
 }
 
-size_t Player::countAvailableSpace() const {
-    auto sumOfAmounts = std::accumulate(ship_->getCargos().begin(), ship_->getCargos().end(), 0, [](size_t amountAll, const auto& cargo) { return amountAll += cargo.get()->getAmount(); });
-
-    if (ship_->getCapacity() - sumOfAmounts < 0) {
-        return 0;
+void Player::countAvailableSpace() {
+    const auto& cargoVector = ship_->getCargosVector();
+    if (ship_->getCapacity() <= cargoVector.size()) {
+        availableSpace_ = 0;
     }
-
-    return ship_->getCapacity() - sumOfAmounts;
+    availableSpace_ = ship_->getCapacity() - cargoVector.size();
 }
 
 //methods

@@ -3,19 +3,19 @@
 #include "ship.hpp"
 #include "player.hpp"
 #include <memory>
-#include "alcohol.hpp"
+//#include "alcohol.hpp"
 
 int main() {
 
-    Alcohol whisky(50, "wisky", 12, 13);
+    
     // Ship testShip(5000, 50, 30, "Lover", 10);
-    Ship Adam{};
-    auto it = std::make_shared<Ship> (Adam);
+    auto pirateShip = std::make_shared<Ship>(500, 10, 1, "Monica", 2 );
+    
 
-    Player(it, 40000, 50000);
+    Player Tomek(pirateShip, 40000);
 
     
-    
+    std::cout << Tomek.getAvailableSpace();
     
     
     
