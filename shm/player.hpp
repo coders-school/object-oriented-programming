@@ -7,7 +7,7 @@
 
 class Player {
 public:
-    Player(Ship& ship, size_t money, size_t availableSpace);
+    Player(std::shared_ptr<Ship> ship, size_t money, size_t availableSpace);
     //~Player();
     // Player() = default;
 

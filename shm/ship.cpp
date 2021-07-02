@@ -2,6 +2,9 @@
 #include <iostream>
 #include "cargo.hpp"
 #include "ship.hpp"
+#include "alcohol.hpp"
+#include "fruit.hpp"
+#include "item.hpp"
 #include <algorithm>
 #include <numeric>
 
@@ -45,3 +48,30 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
+std::shared_ptr<Cargo> Ship::theSame(std::shared_ptr<Cargo> cargo)
+{
+    /// how the fuck to do that;
+
+    for(auto el : cargos_){
+        if(el->getName() == "Fruit"){
+            if(el->getName() == cargo->getName() && el->getBasePrice() == cargo->getBasePrice() &&  el->
+
+        } else if(el->getName() == "Alcohol"){
+
+        }else {
+
+        }
+
+    }
+}
+
+
+void Ship::load(std::shared_ptr<Cargo> cargo)
+{
+    
+}
+
+void Ship::unload(std::shared_ptr<Cargo> cargo) 
+{
+    cargos_.erase(find_if(begin(cargos_), end(cargos_),[cargo](const auto& el) {return el == cargo;}));
+}

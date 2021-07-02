@@ -5,7 +5,8 @@
 
 #include "cargo.hpp"
 
-class Ship {
+class Ship : public Cargo 
+{
 public:
     Ship()
         : id_(-1) {}
@@ -29,7 +30,17 @@ public:
     std::string getName() const;
     size_t getId() const;
     std::shared_ptr<Cargo> getCargo(size_t index) const;
+
+    
     std::vector<std::shared_ptr<Cargo>> getCargos() const;
+    
+
+    void load(std::shared_ptr<Cargo> cargo);
+    void unload(std::shared_ptr<Cargo> cargo);
+
+    std::shared_ptr<Cargo> theSame(std::shared_ptr<Cargo> cargo);
+
+
     void setName(const std::string& name);
    
     

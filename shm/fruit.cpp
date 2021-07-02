@@ -19,7 +19,7 @@ Fruit& Fruit::operator--() {
 
 Fruit& Fruit::operator--(int) {
     
-    Fruit& temp(*this);
+    
     if(data_ > 0){
         operator--();
     }
@@ -29,7 +29,10 @@ Fruit& Fruit::operator--(int) {
 
 bool Fruit::operator==(const Cargo& fruit) const 
 {
-    // i don't know, what to write here!!!????
+    if(typeid(fruit) == typeid(Friut)) {
+        const std::shared_ptr<Fruit> fruit = static_cast<const std::shared_ptr<Fruit>>(&cargo);
+    
+    }
 }
 
 /// getters
