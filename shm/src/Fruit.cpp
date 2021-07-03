@@ -19,17 +19,12 @@ Fruit& Fruit::operator--() {
 }
 
 Cargo& Fruit::operator+=(const size_t amount) {
-    // Here we have to add a condition for a free space, but I don't know how to write it
     amount_ += amount;
     return *this;
 }
 
 Cargo& Fruit::operator-=(const size_t amount) {
-    if (amount > amount_) {
-        std::cerr << "There is not so much fruit on the ship";
-        return *this;
-    }
-    amount_ -= amount;
+      amount_ -= amount;
     return *this;
 }
 
