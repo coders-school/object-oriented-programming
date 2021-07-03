@@ -8,16 +8,10 @@ size_t Player::getSpeed() const {
     return ship_->getSpeed();
 }
   
-std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
+std::unique_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
 }
 
 size_t Player::countAvailableSpace() const {
-    return ship_->getCapacity() - 
-            std::accumulate(ship_->getVectorCargo().cbegin(),
-                    ship_->getVectorCargo().cend(),
-                    static_cast<size_t>(0),
-                    [](size_t sum, const auto& cargo) {
-                        return sum += cargo->getAmount();
-                    });
+    if (ship)
 }
