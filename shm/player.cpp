@@ -1,3 +1,5 @@
+#include <numeric>
+
 #include "cargo.hpp"
 #include "player.hpp"
 #include "ship.hpp"
@@ -20,25 +22,36 @@ size_t Player::getAvailableSpace () {
     return availableSpace_; 
 }
 
-size_t Player::getSpeed() const { 
-    return ship_->getSpeed(); 
+size_t Player::getSpeed() const {
+    if(ship_)
+    {
+        return ship_->getSpeed(); 
+    }
+    return 0; // TODO add something better
 }
 
 Cargo* Player::getCargo(size_t index) const {
-    return ship_->getCargo()[index];
+    if(ship_)
+    {
+        return ship_->getCargo().at(index);
+    }
+    return nullptr; // TODO add something better
 }
 
 size_t Player::calculateAvailableSpace() {
      int cargoAmount = 0;
      int capacity = ship_->getCapacity();
      std::vector<Cargo*> shipCargo = ship_->getCargo();
-     for(int i = 0; i < shipCargo.size(); i++){
+
+     //cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo c) { return i += c.getAmount(); }); TODO
+    
+    for(int i = 0; i < shipCargo.size(); i++){
          cargoAmount += getCargo(i)->getAmount();
-     }
+    }
     if(capacity - cargoAmount < 0)
     {
         return 0;
     }
-
+    
      return capacity - cargoAmount;
 }

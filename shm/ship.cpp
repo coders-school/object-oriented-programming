@@ -2,7 +2,12 @@
 
 Ship &Ship::operator-=(size_t num)
 {
-    crew_ -= num;
+    if(crew_ < num){
+        crew_ = 0;
+    }
+    else{
+        crew_ -= num;
+    }
     return *this;
 }
 
