@@ -16,10 +16,9 @@ public:
         const size_t positionY_ = 0;
     };
 
+    Island(const Island::Coordinates& position);
     Coordinates getCoordinates() const { return position_; }
     
-    Island(const Island::Coordinates& position);
-
 private:
     const Coordinates position_;
 };
