@@ -1,11 +1,7 @@
 #include "Cargo.hpp"
 #include "Ship.hpp"
 
-Ship::Ship()
-    : Ship(0, 0, 0, "", -1, {})
-{}
-
-Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, const size_t id, CargoVec cargoVec)
+Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec)
     : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), cargoVec_(std::move(cargoVec))
 {}
 
@@ -13,18 +9,23 @@ Ship::Ship(size_t maxCrew, size_t speed,const size_t id)
     : Ship(0, maxCrew, speed, "", id, {})
 {}
 
-
 void Ship::setName(const std::string& name) { 
     name_ = name; 
 }
 
-Ship& Ship::operator-=(size_t num) {
-    crew_ -= num;
+Ship& Ship::operator-=(size_t numCrew) {
+    if (crew_ < numCrew) {
+        throw std::out_of_range("not allow! you will be below zero!");
+    }
+    crew_ -= numCrew;
     return *this;
 }
 
-Ship& Ship::operator+=(size_t num) {
-    crew_ += num;
+Ship& Ship::operator+=(size_t numCrew) {
+    if (crew_ + numCrew > maxCrew_) {
+        throw std::out_of_range("not allow! there will be too many people on the board!");
+    }
+    crew_ += numCrew;
     return *this;
 }
 

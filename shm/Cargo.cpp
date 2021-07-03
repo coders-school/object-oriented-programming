@@ -1,3 +1,5 @@
+#include <stdexcept>
+
 #include "Cargo.hpp"
 
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
@@ -10,12 +12,15 @@ Cargo& Cargo::operator+=(size_t amount) {
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
+    if (amount_ < amount) {
+        throw std::out_of_range("not allow! you will be below zero!");
+    }
     amount_ -= amount;
     return *this;
 }
 
 bool Cargo::operator==(const Cargo& other) const {
-    return (name_ == other.name_ and amount_ == other.amount_ and basePrice_ == other.basePrice_);
+    return name_ == other.name_ and basePrice_ == other.basePrice_;
 }
 
 const std::string& Cargo::getName() const {
