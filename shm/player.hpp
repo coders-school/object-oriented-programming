@@ -1,8 +1,8 @@
 #pragma once
 
-#include "ship.hpp"
-#include "cargo.hpp"
 #include <memory>
+class Ship;
+class Cargo;
 
 class Player {
 private:
@@ -12,9 +12,9 @@ private:
     size_t calculateAvailableSpace();
 
 public:
-    Player(std::unique_ptr<Ship>& ship, int money, int availableSpace);
+    Player(std::unique_ptr<Ship> ship, int money, int availableSpace);
 
-    std::unique_ptr<Ship>& getShip();
+    const std::unique_ptr<Ship>& getShip();
     int getMoney();
     size_t getAvailableSpace();
 

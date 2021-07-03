@@ -1,10 +1,12 @@
-#include "ship.hpp"
+
+#include <iostream>
+
 #include "cargo.hpp"
-#include "player.hpp"
 #include "coordinates.hpp"
 #include "island.hpp"
 #include "Map.hpp"
-#include <iostream>
+#include "player.hpp"
+#include "ship.hpp"
 
 int main()
 {
@@ -29,7 +31,7 @@ int main()
     auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
     ship->addCargo(&bananas);    
     size_t shipCargoSize = ship->getCargo().size();
-    Player player (ship, 1, 1);
+    Player player (std::move(ship), 1, 1);
     std::cout << "Vector size: " << shipCargoSize << '\n';
     std::cout << "Player's ship speed: " <<  player.getShip()->getSpeed() << '\n';
     std::cout << "Player's ship cargo: " << player.getCargo(0)->getName() << '\n';

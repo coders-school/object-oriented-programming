@@ -1,7 +1,9 @@
 #pragma once
-#include "cargo.hpp"
-#include <string>
+
 #include <vector>
+#include <string>
+
+#include "cargo.hpp"
 
 class Ship {
 public:
