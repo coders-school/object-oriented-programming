@@ -21,8 +21,7 @@ public:
     size_t getSpeed() const { return speed_; };
     size_t getMaxCrew() const { return maxCrew_; };
     size_t getCapacity() const { return capacity_; };
-    std::shared_ptr<Cargo> getCargo(size_t index) const;
-    std::vector<std::shared_ptr<Cargo>> getVectorCargo() const { return cargo_; };
+    std::unique_ptr<Cargo> getCargo(size_t index) const;
 
     void setName(const std::string& name);
 
@@ -33,7 +32,7 @@ private:
     const size_t maxCrew_ { 100 };
     size_t crew_ { };
     const size_t capacity_ { 80 };
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::unique_ptr<Cargo>> cargo_;
 };
 
 
