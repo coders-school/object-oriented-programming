@@ -16,6 +16,8 @@ int main()
     std::cout << (onion == bananas) << " " << (bananas == kryptonite) << " " << (onion == kryptonite) << std::endl;
     std::cout << bananas.getAmount() << " " << bananas.getBasePrice() << " " << onion.getName() << std::endl;
 
+    bananas -= 100;
+
     Coordinates miami(125.f, 174.f);
     Coordinates breslau(180.f, 115.f);
     Coordinates chicago(125.f, 174.f);
@@ -42,5 +44,5 @@ int main()
     
     map.addIsland(miami);
     Island* is = map.getIsland(miami);
-    std::cout << is->getPosition().GetPositionX() << " " << is->getPosition().GetPositionY();
+    std::cout << is->getPosition().GetPositionX() << " " << is->getPosition().GetPositionY() << '\n';
 }

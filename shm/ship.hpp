@@ -5,6 +5,7 @@
 
 #include "cargo.hpp"
 
+//Class responsible for representing ship in game
 class Ship {
 public:
     Ship()

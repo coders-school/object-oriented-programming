@@ -1,13 +1,10 @@
 #pragma once
 #include <vector>
 
-constexpr size_t COORDINATE_MIN = 0;
-constexpr size_t COORDINATE_MAX = 99;
-constexpr size_t ISLANDS_COUNT = 10;
-
 class Island;
 class Coordinates;
 
+//Class responsible for representing map in game
 class Map {
 public:
     Map();

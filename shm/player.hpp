@@ -3,13 +3,13 @@
 #include <memory>
 class Ship;
 class Cargo;
-
+//Class responsible for handling Player object
 class Player {
 private:
     std::unique_ptr<Ship> ship_;
     int money_;
     size_t availableSpace_;
-    size_t calculateAvailableSpace();
+    size_t calculateAvailableSpace(); //calculates space available on the ship based on cargo and ship capacity
 
 public:
     Player(std::unique_ptr<Ship> ship, int money, int availableSpace);

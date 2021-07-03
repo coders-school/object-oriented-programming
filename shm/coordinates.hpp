@@ -1,23 +1,24 @@
 #pragma once
 
+//Class responsible for coordinates on map
 class Coordinates {
 private:
-    float positionX_;
-    float positionY_;
+    int positionX_;
+    int positionY_;
 
 public:
-    Coordinates(float positionX, float positionY) {
+    Coordinates(int positionX, int positionY) {
         positionX_ = positionX;
         positionY_ = positionY;
     }
     Coordinates()
-        : Coordinates(0.f, 0.f) {}
+        : Coordinates(0, 0) {}
 
-    float GetPositionX() { return positionX_; }
-    float GetPositionY() { return positionY_; }
+    const int GetPositionX() { return positionX_; }
+    const int GetPositionY() { return positionY_; }
 
-    void SetPositionX(const float& positionX) { positionX_ = positionX; }
-    void SetPositionY(const float& positionY) { positionY_ = positionY; }
+    void SetPositionX(const int& positionX) { positionX_ = positionX; }
+    void SetPositionY(const int& positionY) { positionY_ = positionY; }
 
     bool operator==(const Coordinates& c1) const;
     

@@ -7,19 +7,25 @@
 #include "island.hpp"
 #include "Map.hpp"
 
+namespace constVariables{
+    constexpr size_t COORDINATE_MIN = 0;
+    constexpr size_t COORDINATE_MAX = 99;
+    constexpr size_t ISLANDS_COUNT = 10;
+}
+
 Map::Map() {
     SetUpRandomIsland();
 }
 
 void Map::SetUpRandomIsland(){
-    islands_.reserve(ISLANDS_COUNT);
+    islands_.reserve(constVariables::ISLANDS_COUNT);
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<> distrib(COORDINATE_MIN , COORDINATE_MAX);
+    std::uniform_real_distribution<> distrib(constVariables::COORDINATE_MIN , constVariables::COORDINATE_MAX);
 
     std::vector<Coordinates> cords;
-    cords.reserve(ISLANDS_COUNT);
-    for (int i = 0; i < ISLANDS_COUNT; i++)
+    cords.reserve(constVariables::ISLANDS_COUNT);
+    for (int i = 0; i < constVariables::ISLANDS_COUNT; i++)
     {   
         Coordinates c ((float)distrib(gen), (float)distrib(gen));
 
