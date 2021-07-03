@@ -7,8 +7,9 @@ Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice)
 }
 
 Fruit& Fruit::operator--() {
-    if (rottenTime_ != 0){
+    if (rottenTime_ != 0) {
         rottenTime_--;
+    }
     return *this;
 }
 
