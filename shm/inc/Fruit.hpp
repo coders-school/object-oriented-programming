@@ -17,6 +17,7 @@ public:
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
     bool operator==(const Cargo& cargo) const override;
+    Fruit& operator--();
 
 private:
     size_t rottenTime_ {10};
