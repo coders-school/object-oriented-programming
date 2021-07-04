@@ -20,11 +20,11 @@ Cargo& Cargo::operator+=(const size_t amount) {
 }
 
 Cargo& Cargo::operator-=(const size_t amount) {
-    if (cargo_ < cargo) {
+    if (amount_ < amount) {
         std::cerr << "You don't have that much cargo on the ship\0";
         return *this;
     }
-    cargo_ -= cargo;
+    amount_ -= amount;
     return *this;
 }
 

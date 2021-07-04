@@ -9,7 +9,7 @@ public:
     //class responsible for manage coordinates of islands in game
     class Coordinates {
     public:
-        constexpr Coordinates(size_t positionX, size_t positionY);
+        Coordinates(size_t positionX, size_t positionY);
         bool operator==(const Coordinates& position) const;
     private:
         const size_t positionX_ = 0;

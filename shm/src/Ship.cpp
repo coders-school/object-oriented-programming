@@ -37,7 +37,7 @@ void Ship::setName(const std::string& name) {
 }
 
 std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
-    if (index < 0 || index>= cargos_.size()) {
+    if (index>= cargos_.size()) {
         std::cerr << "Invalid cargo\n";
         return nullptr;
     }
@@ -45,5 +45,5 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
 }
 
 std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
-    return cargo_;
+    return cargos_;
 }
