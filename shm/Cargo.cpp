@@ -31,3 +31,12 @@ size_t Cargo::getAmount() const {
 size_t Cargo::getBasePrice() const {
     return basePrice_;
 }
+
+std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
+    if (!amountPart or amountPart > amount_) {
+        return {};
+    }
+
+    *this -= amountPart;
+    return std::make_unique<Cargo>(name_, amountPart, basePrice_);
+}

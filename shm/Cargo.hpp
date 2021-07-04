@@ -23,12 +23,5 @@ public:
         return basePrice_;
     }
 
-    std::unique_ptr<Cargo> split(size_t amountPart) {
-        if (!amountPart or amountPart > amount_) {
-            return {};
-        }
-
-        *this -= amountPart;
-        return std::make_unique<Cargo>(name_, amountPart, basePrice_);
-    }
+    std::unique_ptr<Cargo> split(size_t amountPart);
 };

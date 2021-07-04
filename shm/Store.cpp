@@ -1,17 +1,11 @@
 #include "Store.hpp"
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
-    if (!cargo) {
-        return Response::lack_of_cargo;
-    }
-    if (!player) {
-        return Response::lack_of_cargo;
-    }
-    if (!amount) {
+    if (!cargo or !player or !amount) {
         return Response::lack_of_cargo;
     }
 
-    const auto& playerShip = player->getShip();
+    Ship* playerShip = player->getShip();
     if (!playerShip) {
         return Response::lack_of_cargo;
     }
@@ -20,7 +14,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     for (const auto& el : playerShip->getCargoVec()) {
         Cargo* currentCargo = el.get();
 
-        if (*soldPlayerCargo == *cargo) {
+        if (*currentCargo == *cargo) {
             if (currentCargo->getAmount() < amount) {
                 return Response::lack_of_cargo;
             }
@@ -36,7 +30,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     //player sell all
     if (soldPlayerCargo->getAmount() == amount) {
         auto ownedCargo = soldPlayerCargo->split(amount);
-        //playerShip->unload(soldPlayerCargo);
+        playerShip->unload(soldPlayerCargo);
         auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
         //player->giveMoney(moneyToPay);
 
@@ -58,33 +52,38 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 }
 
 Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
-    if (!cargo) {
+    if (!cargo or !amount) {
         return Response::lack_of_cargo;
     }
     if (!player) {
         return Response::lack_of_space;
     }
-    if (!amount) {
-        return Response::lack_of_cargo;
-    }
 
-    const auto& playerShip = player->getShip();
+    Ship* playerShip = player->getShip();
     if (!playerShip) {
         return Response::lack_of_space;
     }
 
-    //IMPORTANT: diferent meaning of space we got here !!!
-    if (player->getAvailableSpace() < amount) {  // player dont have space for that cargo
+    //check if player can take cargo on ship
+    bool playerHaveComperableCargo = false;
+    const auto& playerCargo = playerShip->getCargoVec(); // player/ship should have findCargo
+    for(const auto& el : playerCargo){
+        if(cargo == el.get()){
+            playerHaveComperableCargo = true;
+            break;
+        }
+    }
+    if(!playerHaveComperableCargo and !player->getAvailableSpace()){
         return Response::lack_of_space;
     }
 
     auto storeCargo = findCargoInStore(cargo);
 
-    if (!storeCargo) {  //dont find cargo in store
+    if (!storeCargo) {  //can't find cargo in store
         return Response::lack_of_cargo;
     }
 
-    if (storeCargo->getAmount() > amount) {  //to much cargo needed
+    if (storeCargo->getAmount() < amount) {  //to much cargo needed
         return Response::lack_of_cargo;
     }
 
@@ -97,15 +96,15 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
         try {
             auto soldCargo = storeCargo->split(amount);
             unload(storeCargo);
+            playerShip->load(std::move(soldCargo));
         } catch (std::logic_error& err) {
-            //cargo disapear?
+            //rest of cargo disapear in store?
         }
-        //player->getShip()->load(soldCargo);
         return Response::done;
     }
 
     auto soldCargo = storeCargo->split(amount);
-    //player->getShip()->load(soldCargo);
+    playerShip->load(std::move(soldCargo));
     return Response::done;
 }
 
