@@ -69,7 +69,6 @@ void testIslandMap() {
         for(const auto& island : mapVec) {
             std::cout << num++ << ". ";
             std::cout << island.getPosition();
-            std::cout << '\n';
         }
     }
 }
