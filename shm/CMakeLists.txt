@@ -13,16 +13,14 @@ set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/..)
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 
 set(SOURCES
-<<<<<<< HEAD
-=======
     ${SOURCE_DIR}/Alcohol.cpp
     ${SOURCE_DIR}/Cargo.cpp
->>>>>>> ffa2f7ce138d013a60804c93b40d385aebed9463
     ${SOURCE_DIR}/Island.cpp
     ${SOURCE_DIR}/Cargo.cpp
     ${SOURCE_DIR}/Map.cpp
     ${SOURCE_DIR}/Ship.cpp
     ${SOURCE_DIR}/Fruit.cpp
+    ${SOURCE_DIR}/Item.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
