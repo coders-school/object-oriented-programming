@@ -36,6 +36,14 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
-std::unique_ptr<Cargo> Ship::getCargo(size_t index) const {
-    
+std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
+    if (index < 0 || index>= cargos_.size()) {
+        std::cerr << "Invalid cargo\n";
+        return nullptr;
+    }
+    return cargos_[index];
+}
+
+std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
+    return cargo_;
 }

@@ -16,7 +16,7 @@ public:
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
     size_t getSpeed() const;
-    std::unique_ptr<Cargo> getCargo(size_t index) const;
+    std::shared_ptr<Cargo> getCargo(size_t index) const;
 
 private:
     std::unique_ptr<Ship> ship_;

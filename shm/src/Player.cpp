@@ -8,10 +8,13 @@ size_t Player::getSpeed() const {
     return ship_->getSpeed();
 }
   
-std::unique_ptr<Cargo> Player::getCargo(size_t index) const {
-    return ship_->getCargo(index);
+std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
+    if (ship_) {
+        return ship->getCargo(index);
+    }
+    return nullptr;
 }
 
 size_t Player::countAvailableSpace() const {
-    if (ship)
+    size_t availableSpace;
 }
