@@ -5,15 +5,15 @@
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     : name_{name}, amount_{amount}, basePrice_{basePrice} {}
 
-
 Cargo& Cargo::operator+=(size_t amount) {
     amount_ += amount;
     return *this;
 }
 
+//In the situation when we will have negative amount - exception will be thrown - so we have to remember that method which will use this operator, should catch it!
 Cargo& Cargo::operator-=(size_t amount) {
     if (amount_ < amount) {
-        throw std::out_of_range("not allow! you will be below zero!");
+        throw std::invalid_argument("Not allowed! You will be below zero!");
     }
     amount_ -= amount;
     return *this;
