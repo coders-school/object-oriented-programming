@@ -1,12 +1,13 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 class Cargo {
 protected:
-     std::string name_;
-     size_t amount_;
-     size_t basePrice_;
+    std::string name_;
+    size_t amount_;
+    size_t basePrice_;
 
 public:
     Cargo(std::string name, size_t amount, size_t basePrice);
@@ -18,5 +19,9 @@ public:
     std::string getName() const;
     size_t getAmount() const;
     size_t getBasePrice() const;
+    size_t getPrice() const {
+        return basePrice_;
+    }
 
+    std::unique_ptr<Cargo> split(size_t amountPart);
 };
