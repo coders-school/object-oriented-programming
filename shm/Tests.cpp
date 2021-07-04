@@ -3,6 +3,9 @@
 
 #include <catch/catch.hpp>
 
+#include "Alcohol.hpp"
+#include "Fruit.hpp"
+#include "Item.hpp"
 #include "Store.hpp"
 
 constexpr auto moreThanFullQuantity = 101;
@@ -17,12 +20,24 @@ constexpr auto lessCappacity = 6;
 constexpr auto noExistingCargoName = "Dyes";
 constexpr auto existingCargoName = "Wheat";
 
-constexpr auto singleCargoCost = 1;
+constexpr auto singleCargoCost = 10;
 constexpr auto playerMoney = singleCargoCost * fullQuantity * cargoTypes;
 constexpr auto playerMoneyForhalfQuantity = singleCargoCost * halfQuantity;
 
+constexpr auto fruitBestBefore = 5u;
+constexpr auto alcoholPercentage = 40u;
+constexpr auto itemQuality = Quality::rare;
+
+constexpr auto cargoDefaultIndex = 0;
+constexpr auto secondCargoDefaultIndex = 1;
+constexpr auto fruitIndex = 4;
+constexpr auto alcoholIndex = 5;
+constexpr auto itemIndex = 6;
+
+constexpr auto defaultGoodsName = "Towar";
+
 // Return by value to give up ownership
-std::unique_ptr<Cargo> generateCargo(size_t index) {
+std::unique_ptr<Cargo> generateCargo(size_t index, const std::string& differentName = std::string{}) {
     if (index >= cargoTypes) {
         throw std::out_of_range("generateCargo: index is out of bounds.");
     }
@@ -32,18 +47,35 @@ std::unique_ptr<Cargo> generateCargo(size_t index) {
         {"Wood", singleCargoCost},
         {"Adobe Bricks", singleCargoCost},
         {"Wheat", singleCargoCost},
-        {"Fruits", singleCargoCost},
-        {"Corn", singleCargoCost},
-        {"Sugar", singleCargoCost},
-        {"Hemp", singleCargoCost}};
-    auto ptr = std::make_unique<Cargo>(goods[index].first, fullQuantity, goods[index].second);
-    // RVO
-    return ptr;
+        {"Hemp", singleCargoCost},
+        {"Fruits", singleCargoCost},      //4 - fruit
+        {"Corn thing", singleCargoCost},  //5 - alcohol
+        {"Box", singleCargoCost}          //6 - item
+    };
+
+    std::string goodsName;
+    if (differentName.empty()) {
+        goodsName = goods[index].first;
+    } else {
+        goodsName = differentName;
+    }
+
+    switch (index) {
+    case fruitIndex:
+        return std::make_unique<Fruit>(goodsName, fullQuantity, goods[index].second, fruitBestBefore);
+    case alcoholIndex:
+        Alcohol::alcoholBasePriceFor96percent_ = singleCargoCost;
+        return std::make_unique<Alcohol>(goodsName, fullQuantity, alcoholPercentage);
+    case itemIndex:
+        return std::make_unique<Item>(goodsName, fullQuantity, goods[index].second, itemQuality);
+    default:
+        return std::make_unique<CargoDefault>(goodsName, fullQuantity, goods[index].second);
+    }
 }
 
 //return pointer to existing cargo
 Cargo* getStoreCargo(const Store& store, const std::string& cargoName, size_t amount) {
-    Cargo exemplar{cargoName, amount, singleCargoCost};
+    CargoDefault exemplar{cargoName, amount, singleCargoCost};
     auto cargoPtr = store.findCargoInStore(&exemplar);
     if (cargoPtr) {
         std::cout << "Found: " << cargoPtr->getName() << '\n';
@@ -53,15 +85,15 @@ Cargo* getStoreCargo(const Store& store, const std::string& cargoName, size_t am
     return nullptr;
 }
 
-void fillStore(Store& store){
+void fillStore(Store& store) {
     for (int i = 0; i < cargoTypes; ++i) {
         auto cargo = generateCargo(i);
         store.load(std::move(cargo));
     }
 }
 
-void fillShip(Ship* ship){
-    if(!ship){
+void fillShip(Ship* ship) {
+    if (!ship) {
         return;
     }
 
@@ -69,6 +101,59 @@ void fillShip(Ship* ship){
         auto cargo = generateCargo(i);
         ship->load(std::move(cargo));
     }
+}
+
+TEST_CASE("Fruit decrement price over time", "[Fruit]") {
+    auto fruit = generateCargo(fruitIndex);
+
+    REQUIRE(fruit->getPrice() == singleCargoCost);
+    auto& fruitTypeRef = dynamic_cast<Fruit&>(*fruit);
+    for (int i = 1; i <= fruitBestBefore; ++i) {
+        --fruitTypeRef;
+        REQUIRE(fruit->getPrice() == singleCargoCost * (fruitBestBefore - i) / fruitBestBefore);
+    }
+}
+
+TEST_CASE("Compare same CargoDefault", "[Alcohol][Cargo]") {
+    auto cargoDefault = generateCargo(cargoDefaultIndex);
+    auto samecargoDefault = generateCargo(cargoDefaultIndex);
+
+    REQUIRE(*samecargoDefault == *cargoDefault);
+}
+
+TEST_CASE("Compare CargoDefault to CargoDefault with same name", "[Alcohol][Cargo]") {
+    auto cargoDefault = generateCargo(cargoDefaultIndex, defaultGoodsName);
+    auto secondcargoDefault = generateCargo(secondCargoDefaultIndex, defaultGoodsName);
+
+    REQUIRE(*secondcargoDefault == *cargoDefault);  // Unimportant because CargoDefault is temporary
+}
+
+TEST_CASE("Compare different CargoDefault", "[Alcohol][Cargo]") {
+    auto cargoDefault = generateCargo(cargoDefaultIndex);
+    auto secondcargoDefault = generateCargo(secondCargoDefaultIndex);
+
+    REQUIRE(!(*secondcargoDefault == *cargoDefault));
+}
+
+TEST_CASE("Compare Alcohol to CargoDefault with same name", "[Alcohol][Cargo]") {
+    auto alcohol = generateCargo(alcoholIndex, defaultGoodsName);
+    auto cargoDefault = generateCargo(cargoDefaultIndex, defaultGoodsName);
+
+    REQUIRE(!(*alcohol == *cargoDefault));
+}
+
+TEST_CASE("Compare CargoDefault to Alcohol with same name", "[Alcohol][Cargo]") {
+    auto alcohol = generateCargo(alcoholIndex, defaultGoodsName);
+    auto cargoDefault = generateCargo(cargoDefaultIndex, defaultGoodsName);
+
+    CHECK(!(*cargoDefault == *alcohol));  // Unimportant because CargoDefault is temporary
+}
+
+TEST_CASE("Compare Fruit to Alcohol with same name", "[Alcohol][Fruit][Cargo]") {
+    auto alcohol = generateCargo(alcoholIndex, defaultGoodsName);
+    auto fruit = generateCargo(fruitIndex, defaultGoodsName);
+
+    REQUIRE(!(*fruit == *alcohol));
 }
 
 TEST_CASE("findCargoInStore by nullptr", "[Store]") {
@@ -128,7 +213,7 @@ TEST_CASE("unload will throw on wrong ptr", "[Store]") {
     Store store;
     fillStore(store);
 
-    Cargo exemplar{noExistingCargoName, fullQuantity, singleCargoCost};
+    CargoDefault exemplar{noExistingCargoName, fullQuantity, singleCargoCost};
 
     REQUIRE_THROWS(store.unload(&exemplar));
     REQUIRE_THROWS_AS(store.unload(&exemplar), std::logic_error);
@@ -220,7 +305,7 @@ TEST_CASE("player sell more single cargo than have to empty store", "[Player][Sh
 
     auto cargoExample = generateCargo(0);
     auto response = store.buy(cargoExample.get(), moreThanFullQuantity, &player);
-    
+
     REQUIRE(response == Response::lack_of_cargo);
 }
 
@@ -232,7 +317,7 @@ TEST_CASE("player sell half single cargo than have to empty store", "[Player][Sh
 
     auto cargoExample = generateCargo(0);
     auto response = store.buy(cargoExample.get(), halfQuantity, &player);
-    
+
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == 0);
     REQUIRE(store.getCargoNum() == 1);
@@ -246,7 +331,7 @@ TEST_CASE("player sell full single cargo to empty store", "[Player][Ship][Store]
 
     auto cargoExample = generateCargo(0);
     auto response = store.buy(cargoExample.get(), fullQuantity, &player);
-    
+
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == 1);
     REQUIRE(store.getCargoNum() == 1);
@@ -312,7 +397,7 @@ TEST_CASE("rich player with empty ship buy more cargo than have store have", "[P
 
     auto cargoExample = generateCargo(0);
     auto response = store.sell(cargoExample.get(), moreThanFullQuantity, &player);
-    
+
     REQUIRE(response == Response::lack_of_cargo);
 }
 
@@ -324,7 +409,7 @@ TEST_CASE("rich player with empty ship buy half cargo than store have", "[Player
 
     auto cargoExample = generateCargo(0);
     auto response = store.sell(cargoExample.get(), halfQuantity, &player);
-    
+
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == fullCappacity - 1);
     REQUIRE(store.getCargoNum() == cargoTypes);
@@ -338,7 +423,7 @@ TEST_CASE("rich player with empty ship buy full single cargo from empty store", 
 
     auto cargoExample = generateCargo(0);
     auto response = store.sell(cargoExample.get(), fullQuantity, &player);
-    
+
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == fullCappacity - 1);
     REQUIRE(store.getCargoNum() == cargoTypes - 1);

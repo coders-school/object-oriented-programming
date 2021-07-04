@@ -13,13 +13,6 @@ Cargo& Cargo::operator-=(size_t amount) {
     return *this;
 }
 
-bool Cargo::operator==(const Cargo& other) const {
-    return (name_ == other.name_
-            //and amount_ == other.amount_
-            //and basePrice_ == other.basePrice_
-    );
-}
-
 std::string Cargo::getName() const {
     return name_;
 }
@@ -30,13 +23,4 @@ size_t Cargo::getAmount() const {
 
 size_t Cargo::getBasePrice() const {
     return basePrice_;
-}
-
-std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
-    if (!amountPart or amountPart > amount_) {
-        return {};
-    }
-
-    *this -= amountPart;
-    return std::make_unique<Cargo>(name_, amountPart, basePrice_);
 }
