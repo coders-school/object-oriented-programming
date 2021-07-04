@@ -1,4 +1,5 @@
 #include "Cargo.hpp"
+#include <iostream>
 
 Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
     : name_{name}, amount_{amount}, basePrice_{basePrice} {}
@@ -39,4 +40,8 @@ std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
 
     *this -= amountPart;
     return std::make_unique<Cargo>(name_, amountPart, basePrice_);
+}
+
+void Cargo::nextDay() {
+    std::cout << "Next Day in Cargo " << name_ << '\n';
 }

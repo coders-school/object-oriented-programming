@@ -23,5 +23,7 @@ public:
         return basePrice_;
     }
 
+    void nextDay();
+
     std::unique_ptr<Cargo> split(size_t amountPart);
 };

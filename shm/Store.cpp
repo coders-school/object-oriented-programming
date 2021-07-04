@@ -1,4 +1,5 @@
 #include "Store.hpp"
+#include <iostream>
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (!cargo or !player or !amount) {
@@ -106,6 +107,10 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     auto soldCargo = storeCargo->split(amount);
     playerShip->load(std::move(soldCargo));
     return Response::done;
+}
+
+void Store::nextDay() {
+    std::cout << "Next Day in Store\n";
 }
 
 //load will take ownership of cargo

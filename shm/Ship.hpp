@@ -32,4 +32,6 @@ public:
 
     void load(std::unique_ptr<Cargo> cargo);
     void unload(const Cargo* const cargo);
+
+    void nextDay();
 };

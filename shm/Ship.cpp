@@ -1,4 +1,5 @@
 #include "Ship.hpp"
+#include <iostream>
     
 Ship::Ship() 
     : id_(-1)
@@ -97,4 +98,8 @@ void Ship::unload(const Cargo* const cargo) {  //ver A
         }
     }
     throw std::logic_error("Store: Not my Cargo!");
+}
+
+void Ship::nextDay() {
+    std::cout << "Next Day in Ship " << name_ << '\n';
 }

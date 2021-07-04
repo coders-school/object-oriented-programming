@@ -19,7 +19,7 @@ public:
     //store sell to player
     Response sell(Cargo* cargo, size_t amount, Player* player);
 
-    //void nextDay();
+    void nextDay();
 
     size_t getCargoNum() {
         return cargoVec_.size();
