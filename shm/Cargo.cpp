@@ -10,7 +10,6 @@ Cargo& Cargo::operator+=(size_t amount) {
     return *this;
 }
 
-//In the situation when we will have negative amount - exception will be thrown - so we have to remember that method which will use this operator, should catch it!
 Cargo& Cargo::operator-=(size_t amount) {
     if (amount_ < amount) {
         throw std::invalid_argument("Not allowed! You will be below zero!");

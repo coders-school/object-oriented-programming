@@ -13,7 +13,8 @@ public:
     Ship(size_t maxCrew, size_t speed, size_t id);
  
     void setName(const std::string& name);
- 
+
+    //both operators throw std::invalid_argument. if you will use operators remember about try-catch.  
     Ship& operator-=(size_t numCrew);
     Ship& operator+=(size_t numCrew);
  

@@ -13,7 +13,6 @@ void Ship::setName(const std::string& name) {
     name_ = name; 
 }
 
-//In the situation when we will have negative crew - exception will be thrown - so we have to remember that method which will   use this operator, should catch it!
 Ship& Ship::operator-=(size_t numCrew) {
     if (crew_ < numCrew) {
         throw std::invalid_argument("Not allowed! You will be below zero!");
@@ -21,7 +20,7 @@ Ship& Ship::operator-=(size_t numCrew) {
     crew_ -= numCrew;
     return *this;
 }
-//This operator can throw exception - we have to remember that method which will use this operator, should catch it!
+
 Ship& Ship::operator+=(size_t numCrew) {
     if (maxCrew_ - crew_ < numCrew) {
         throw std::invalid_argument("Not allowed! There will be too many people on the board!");
