@@ -1,6 +1,8 @@
 #pragma once
 
-"shm/inc/Fruit.hpp"
+#include "shm/inc/Fruit.hpp"
+
+constexpr size_t DAYS_TO_ROTTEN_DRY_FRUIT { 10 };
 
 class DryFruit : public Fruit {
 public:

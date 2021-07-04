@@ -21,6 +21,7 @@ set(SOURCES
     ${SOURCE_DIR}/Ship.cpp
     ${SOURCE_DIR}/Fruit.cpp
     ${SOURCE_DIR}/Item.cpp
+    ${SOURCE_DIR}/DryFruit.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})

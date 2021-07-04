@@ -64,7 +64,7 @@ void Ship::load(const std::shared_ptr<Cargo>cargo) {
 void Ship::unload(Cargo* cargo) {
     if (cargo != nullptr) {
         int it = -1;
-        for (size_t i = 0; i < cargo_.size(); i++) {
+        for (int i = 0; i < static_cast<int>(cargo_.size()); i++) {
             if (*(cargo_[i].get()) == *cargo) {
                 it = i;
                 break;

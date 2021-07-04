@@ -1,19 +1,26 @@
 #pragma once
 
+#include <string>
+
 #include "shm/inc/Cargo.hpp"
 
-class Fruit : private Cargo {
+constexpr size_t DAYS_TO_ROTTEN { 10 };
+
+class Fruit : public Cargo {
 public:
     Fruit(const std::string& name, size_t amount, size_t basePrice);
 
-    //override from Cargo class
-    Fruit& operator--();
-
-    std::size_t getPrice() const override;
+// Override from Cargo class
     std::string getName() const override { return name_; }
-    std::size_t getAmount() const override { return amount_; }
-    std::size_t getBasePrice() const override{ return basePrice_; }
+    size_t getAmount() const override { return amount_; }
+    size_t getBasePrice() const override { return basePrice_; }
+    virtual size_t getPrice() const override;
 
-private:
+    Cargo& operator+=(const size_t amount) override;
+    Cargo& operator-=(const size_t amount) override;
+    bool operator==(const Cargo& cargo) const override;
+    virtual Fruit& operator--();
+
+protected:
     size_t rottenTime_ { 10 };
 };

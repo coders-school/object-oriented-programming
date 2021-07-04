@@ -13,6 +13,6 @@ DryFruit& DryFruit::operator--() {
     return *this;
 }
 
-std::size_t DryFruit::getPrice() const override {
-    return basePrice_ * (rottenTime_ / 10) * multiplierDryFruit_;
+std::size_t DryFruit::getPrice() const {
+    return basePrice_ * (rottenTime_ / DAYS_TO_ROTTEN_DRY_FRUIT) * multiplierDryFruit_;
 }
