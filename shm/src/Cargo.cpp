@@ -2,6 +2,7 @@
 #include "shm/inc/Player.hpp"
 
 #include <iostream>
+#include <limits>
 
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice) 
     : name_(name)
@@ -10,8 +11,7 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
 {}
 
 Cargo& Cargo::operator+=(const size_t amount) {
-    size_t availableSpace = Player::getAvailableSpace();
-    if (amount_ + amount > availableSpace) {
+    if (amount_ + amount > std::numeric_limits<size_t>::max()) {
         std::cerr << "You don't have enough space on the ship\0";
         return *this;
     }
