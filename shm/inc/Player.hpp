@@ -4,14 +4,11 @@
 #include "shm/inc/Ship.hpp"
 #include "shm/inc/Delegate.hpp"
 
-#include <algorithm>
-#include <memory>
 #include <numeric>
 
 class Player : public Delegate {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
-    ~Player() override;
 
     std::unique_ptr<Ship> getShip() { return std::move(ship_); };
     size_t getMoney() const { return money_; };
