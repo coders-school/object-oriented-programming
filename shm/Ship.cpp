@@ -23,7 +23,7 @@ Ship& Ship::operator-=(size_t numCrew) {
 }
 //This operator can throw exception - we have to remember that method which will use this operator, should catch it!
 Ship& Ship::operator+=(size_t numCrew) {
-    if (crew_ + numCrew > maxCrew_) {
+    if (maxCrew_ - crew_ < numCrew) {
         throw std::invalid_argument("Not allowed! There will be too many people on the board!");
     }
     crew_ += numCrew;
