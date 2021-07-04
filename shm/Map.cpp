@@ -50,11 +50,10 @@ bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
 }
 
 Island* Map::getIsland(const Coordinates& coordinate){
-    // Find way to make find_if works: return std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island i) { return i.getPosition() == coordinate; });
-    for(int i = 0; i < islands_.size(); i++){
-        if(islands_[i].getPosition() == coordinate){
-            return &islands_[i];
-        }
+    auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return i.getPosition() == coordinate; });
+    if(selectedIsland != islands_.end())
+    {
+        return &(*selectedIsland);
     }
     return nullptr;
 }
