@@ -1,5 +1,7 @@
 #include "shm/inc/Item.hpp"
 
+#include <stdexcept>
+
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), rarity_(rarity)
 {}
@@ -10,13 +12,14 @@ bool Item::operator==(const Cargo& cargo) const {
         return name_ == item->getName() && basePrice_ == item->getBasePrice() &&
                rarity_ == item->getRarity();
     }
-
     return false;
 }
 
 Cargo& Item::operator+=(size_t amount) {
+    if (amount_ + amount > MAX_AMOUNT_OF_CARGO) {
+        throw std::out_of_range("Maximum amount of items reached!");
+    }
     amount_ += amount;
-
     return *this;
 }
 
@@ -24,20 +27,11 @@ Cargo& Item::operator-=(size_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
     }
-
     return *this;
 }
 
-std::string Item::getName() const {
-    return name_;
-}
-
-size_t Item::getAmount() const {
-    return amount_;
-}
-
-size_t Item::getBasePrice() const {
-    return basePrice_;
+void Item::nextDay() {
+    // TODO:
 }
 
 size_t Item::getPrice() const {

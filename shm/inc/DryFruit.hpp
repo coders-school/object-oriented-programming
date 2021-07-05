@@ -8,14 +8,16 @@ class DryFruit : public Fruit {
 public:
     DryFruit(const std::string& name, size_t amount, size_t basePrice);
     
-    //override from Fruit
-    ~DryFruit() override; 
+    // override form Cargo (via Fruit)
+    std::size_t getPrice() const override;
+    
+    // override from Fruit
     DryFruit& operator--() override;
 
-    std::size_t getPrice() const override;
-    std::string getName() const override { return name_; }
+    // override from Subscriber (via Fruit & Cargo)
+    void nextDay() override;
 
 private:
-    size_t rottenDryFruit_ { 10 };
+    size_t rottenDryFruit_ { DAYS_TO_ROTTEN_DRY_FRUIT };
     size_t multiplierDryFruit_ { 3 };
 };

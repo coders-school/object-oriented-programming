@@ -4,10 +4,12 @@
 #include <string>
 #include <vector>
 
-#include "shm/inc/Cargo.hpp"
-#include "shm/inc/Delegate.hpp"
+#include "shm/inc/Subscriber.hpp"
 
-class Ship {
+class Cargo;
+class Delegate;
+
+class Ship : public Subscriber {
 public:
     Ship() = default;
     Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate);
@@ -25,19 +27,19 @@ public:
     std::vector<std::shared_ptr<Cargo>> getVectorCargo() const { return cargo_; };
 
     void setName(const std::string& name);
-
-    void nextDay();
-
     void load(const std::shared_ptr<Cargo>);
     void unload(Cargo* cargo);
+
+    // overload form Subscriber
+    void nextDay() override;
 
 private:
     const int id_ { -1 };
     std::string name_;
     size_t speed_ { 50 };
     const size_t maxCrew_ { 100 };
-    size_t crew_ { 50 };
     const size_t capacity_ { 80 };
-    std::vector<std::shared_ptr<Cargo>> cargo_;
     Delegate* delegate_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
+    size_t crew_ { 50 };
 };
