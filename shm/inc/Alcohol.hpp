@@ -8,8 +8,7 @@ constexpr size_t MAX_PERCENTAGE = 96;
 
 class Alcohol : public Cargo {
 public:
-    Alcohol(const std::string& name, size_t amount, size_t, size_t basePrice);
-    ~Alcohol() override;
+    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage);
 
     //override Cargo
     size_t getPrice() const override {
