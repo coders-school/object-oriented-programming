@@ -12,7 +12,7 @@ class Timeable;
 class Time {
 public:
     // Static method which calls private constructor if instance of Time does not exist
-    // otherwise returns reference to the instance pointer
+    // otherwise returns the instance pointer
     static Time* getInstance();
     ~Time();
 
