@@ -1,5 +1,8 @@
 #include "shm/inc/Store.hpp"
 
+#include "shm/inc/Cargo.hpp"
+#include "shm/inc/Player.hpp"
+
 Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (amount * cargo->getPrice() > player->getMoney()){
         return Response::lack_of_money;
