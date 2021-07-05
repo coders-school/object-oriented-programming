@@ -31,7 +31,6 @@ Cargo& Item::operator-=(size_t amount) {
 }
 
 void Item::nextDay() {
-    // TODO:
 }
 
 size_t Item::getPrice() const {

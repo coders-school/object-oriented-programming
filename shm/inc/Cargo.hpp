@@ -12,9 +12,9 @@ public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;
 
-    std::string getName() const;
-    size_t getAmount() const;
-    size_t getBasePrice() const;
+    std::string Cargo::getName() const { return name_; }
+    size_t Cargo::getAmount() const { return amount_; }
+    size_t Cargo::getBasePrice() const { return basePrice_; }
 
     virtual Cargo& operator+=(const size_t amount) = 0;
     virtual Cargo& operator-=(const size_t amount) = 0;

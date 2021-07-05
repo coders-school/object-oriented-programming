@@ -13,6 +13,7 @@ public:
     
     // override from Fruit
     DryFruit& operator--() override;
+    size_t getTimeElapsed() const override { return timeElapsed_; }
 
     // override from Subscriber (via Fruit & Cargo)
     void nextDay() override;
@@ -20,4 +21,5 @@ public:
 private:
     size_t rottenDryFruit_ { DAYS_TO_ROTTEN_DRY_FRUIT };
     size_t multiplierDryFruit_ { 3 };
+    
 };

@@ -31,7 +31,6 @@ size_t Alcohol::getPrice() const {
 }
 
 void Alcohol::nextDay() {
-    // TODO:
 }
 
 
