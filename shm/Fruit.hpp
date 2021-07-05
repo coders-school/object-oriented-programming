@@ -10,6 +10,8 @@ public:
             maxFreshTime_ = freshTime_;
         }
     }
+    
+    ~Fruit() override = default;
 
     size_t getPrice() const override {
         if (!maxFreshTime_) {

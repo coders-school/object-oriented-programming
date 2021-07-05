@@ -14,6 +14,8 @@ public:
     Item(std::string name, size_t amount, size_t basePrice, Quality quality)
         : Cargo(name, amount, basePrice), quality_{quality} {}
 
+    ~Item() override = default;
+
     size_t getPrice() const override {
         return static_cast<size_t>(basePrice_ * static_cast<size_t>(quality_) / 100.0);
     }

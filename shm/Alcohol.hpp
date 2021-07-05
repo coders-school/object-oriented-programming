@@ -15,6 +15,8 @@ public:
         }
     }
 
+    ~Alcohol() override = default;
+
     size_t getPrice() const override {
         return static_cast<size_t>(basePrice_ * percentage_ / static_cast<double>(maxPercentage));
     }

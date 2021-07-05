@@ -22,7 +22,7 @@ constexpr auto existingCargoName = "Wheat";
 
 constexpr auto singleCargoCost = 10;
 constexpr auto playerMoney = singleCargoCost * fullQuantity * cargoTypes;
-constexpr auto playerMoneyForhalfQuantity = singleCargoCost * halfQuantity;
+constexpr auto playerMoneyForHalfQuantity = singleCargoCost * halfQuantity;
 
 constexpr auto fruitBestBefore = 5u;
 constexpr auto alcoholPercentage = 40u;

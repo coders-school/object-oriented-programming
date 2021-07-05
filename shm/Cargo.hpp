@@ -7,6 +7,8 @@ class Cargo {
 public:
     Cargo(std::string name, size_t amount, size_t basePrice);
 
+    virtual ~Cargo() = default;
+
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
     virtual bool operator==(const Cargo& other) const = 0;
@@ -29,6 +31,8 @@ protected:
 class CargoDefault : public Cargo {
 public:
     using Cargo::Cargo;
+    
+    ~CargoDefault() override = default;
 
     size_t getPrice() const override {
         return basePrice_;
