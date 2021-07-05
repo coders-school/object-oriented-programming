@@ -29,7 +29,4 @@ public:
     void nextDay() override;
 
     std::unique_ptr<Cargo> split(size_t amountPart);
-
-private:
-    size_t timeId_ {0};
 };

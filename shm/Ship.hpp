@@ -13,7 +13,6 @@ class Ship : public Timeable {
     size_t speed_;
     std::string name_;
     const size_t id_;
-    size_t timeId_;
     std::vector<std::unique_ptr<Cargo>> cargoVec_;
 
 public:

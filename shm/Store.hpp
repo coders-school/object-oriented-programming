@@ -39,7 +39,6 @@ public:
 
 private:
     StoreCargoVec cargoVec_{};
-    size_t timeId_;
 };
 
 std::ostream& operator<<(std::ostream& out, const Store& store);

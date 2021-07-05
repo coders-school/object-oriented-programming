@@ -104,9 +104,9 @@ void timePassTest() {
 
 int main() {
     srand(time(0));
-    // testCargoShipPlayer();
-    // testIslandMap();
-    // testTime();
+    testCargoShipPlayer();
+    testIslandMap();
+    testTime();
     timePassTest();
     return 0;
 }
