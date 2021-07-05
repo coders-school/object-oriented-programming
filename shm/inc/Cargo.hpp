@@ -16,6 +16,8 @@ public:
     size_t getAmount() const { return amount_; }
     size_t getBasePrice() const { return basePrice_; }
 
+    void setAmount(size_t amount); 
+
     virtual Cargo& operator+=(const size_t amount) = 0;
     virtual Cargo& operator-=(const size_t amount) = 0;
     virtual bool operator==(const Cargo& cargo) const = 0;
