@@ -15,3 +15,7 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     }
     return Response::done;   
 }
+
+void Store::nextDay() {
+    // TODO:
+}
