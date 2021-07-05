@@ -21,7 +21,7 @@ set(SOURCES
     ${SOURCE_DIR}/Item.cpp
     ${SOURCE_DIR}/Map.cpp
     ${SOURCE_DIR}/Player.cpp
-    ${SOURCE_DIR}/Ship.cpp
+    # ${SOURCE_DIR}/Ship.cpp        // temporarily disabled due to errors
     ${SOURCE_DIR}/Store.cpp
 )
 
