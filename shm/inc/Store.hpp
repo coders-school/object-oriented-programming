@@ -7,6 +7,8 @@
 class Cargo;
 class Player;
 
+constexpr size_t STORE_CAPACITY = 1000;
+
 class Store : public Subscriber {
 public:
 
@@ -18,6 +20,7 @@ public:
     };
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
+    Response sell(Cargo* cargo, size_t amount, Player* player);
 
     // override from Subscriber
     void nextDay() override;
