@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <stdexcept>
 
 #include "shm/inc/Cargo.hpp"
 #include "shm/inc/Delegate.hpp"
@@ -19,21 +20,19 @@ Ship::Ship(int id, size_t speed, size_t maxCrew, Delegate* delegate)
     : Ship(id, "Ship", speed, maxCrew, 100, delegate)
 {}
 
-Ship& Ship::operator+=(const size_t amount) {
-    if (amount + crew_ <= maxCrew_) {
-        crew_ += amount;
-    } else {
-        std::cerr << "Maximum amount of crew is " << maxCrew_ << '\n';
-    }
+Ship& Ship::operator+=(const size_t crew) {
+    if (crew + crew_ > maxCrew_) {
+        throw std::out_of_range("Maximum amount of crew reached!"); 
+    } 
+    crew_ += crew;
     return *this;
 }
 
-Ship& Ship::operator-=(const size_t amount) {
-    if (crew_ <= amount) {
-        crew_ -= amount;
-    } else {
-        std::cerr << "Amount of crew can't be under 0\n";
+Ship& Ship::operator-=(const size_t crew) {
+    if (crew_ < crew) {
+        throw std::out_of_range("Amount of crew cannot be under zero!");
     }
+    crew_ -= crew;
     return *this;
 }
 
