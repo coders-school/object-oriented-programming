@@ -17,7 +17,6 @@ public:
     bool operator==(const Cargo& alcohol) const override;
 
     size_t getPercentage() const;
-    void setBasePrice(size_t basePrice);
 
 private:
     size_t percentage_;
