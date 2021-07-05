@@ -3,6 +3,8 @@
 #include <cstddef>
 #include <string>
 
+constexpr size_t MAX_AMOUNT_OF_CARGO{ 1000 };
+
 class Cargo {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
