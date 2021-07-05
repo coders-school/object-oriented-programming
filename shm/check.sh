@@ -85,3 +85,5 @@ if [ $failed == 0 ]; then
 else
     echo -e ❗️❗️❗️ $RED $failed "CHECKS FAILED" ❗️❗️❗️ $DEFAULT
 fi
+
+exit $failed
