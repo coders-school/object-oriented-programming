@@ -17,6 +17,7 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
 }
 
+// TODO:
 size_t Player::countAvailableSpace() const {
     return ship_->getCapacity() - 
             std::accumulate(ship_->getVectorCargo().cbegin(),
