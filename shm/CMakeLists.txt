@@ -21,15 +21,15 @@ set(SOURCES
     ${SOURCE_DIR}/Item.cpp
     ${SOURCE_DIR}/Map.cpp
     ${SOURCE_DIR}/Player.cpp
-    # ${SOURCE_DIR}/Ship.cpp        // temporarily disabled due to errors
+    ${SOURCE_DIR}/Ship.cpp        
     ${SOURCE_DIR}/Store.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
 target_include_directories(${PROJECT_NAME}-lib PUBLIC ${INCLUDE_DIR})
-target_compile_options(${PROJECT_NAME}-lib PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion)
+# target_compile_options(${PROJECT_NAME}-lib PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion)
 
 add_executable(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/main.cpp)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion)
+# target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion)
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)

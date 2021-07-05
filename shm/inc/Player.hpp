@@ -4,8 +4,8 @@
 #include <memory>
 
 #include "shm/inc/Delegate.hpp"
+#include "shm/inc/Ship.hpp"
 
-class Ship;
 class Cargo;
 
 class Player : public Delegate {
