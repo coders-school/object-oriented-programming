@@ -1,8 +1,13 @@
 #pragma once
-#include "shm/inc/Cargo.hpp"
-#include "shm/inc/Player.hpp"
 
-class Store {
+#include <cstddef>
+
+#include "shm/inc/Subscriber.hpp"
+
+class Cargo;
+class Player;
+
+class Store : public Subscriber {
 public:
 
     enum class Response {
@@ -15,4 +20,5 @@ public:
     Response buy(Cargo* cargo, size_t amount, Player* player);
 
 private:
+
 };
