@@ -17,5 +17,18 @@ Cargo& Alcohol::operator-=(size_t amount) {
 
 bool Alcohol::operator==(const Cargo& alcohol) const {
     // TODO:
-    return true;
+    return alcohol.getAmount() == amount_ ? true : false;
 }
+
+size_t Alcohol::getPrice() const {
+    // FIXME:
+    return basePrice_ * percentage_ / MAX_PERCENTAGE;
+}
+
+size_t Alcohol::getPercentage() const {
+    return percentage_;
+}
+
+void Alcohol::setBasePrice(size_t basePrice) {
+    basePrice_ = basePrice;
+} 
