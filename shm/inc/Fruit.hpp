@@ -16,7 +16,10 @@ public:
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
     bool operator==(const Cargo& cargo) const override;
-    
+
+    // override from Subscriber (via Cargo)
+    virtual void nextDay() override;
+
     virtual Fruit& operator--();
 
 protected:

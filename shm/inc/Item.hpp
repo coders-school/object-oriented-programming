@@ -17,6 +17,9 @@ public:
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
 
+    // override from Subscriber (via Cargo)
+    void nextDay() override;
+
     Rarity getRarity() const;
 
 private:

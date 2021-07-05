@@ -30,6 +30,10 @@ Cargo& Item::operator-=(size_t amount) {
     return *this;
 }
 
+void Item::nextDay() {
+    // TODO:
+}
+
 size_t Item::getPrice() const {
     return basePrice_ * static_cast<size_t>(rarity_);
 }

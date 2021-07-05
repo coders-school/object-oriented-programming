@@ -30,6 +30,11 @@ size_t Alcohol::getPrice() const {
     return basePrice_ * percentage_ / MAX_PERCENTAGE;
 }
 
+void Alcohol::nextDay() {
+    // TODO:
+}
+
+
 size_t Alcohol::getPercentage() const {
     return percentage_;
 }

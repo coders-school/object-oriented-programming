@@ -16,6 +16,9 @@ public:
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo& alcohol) const override;
 
+    // override from Subscriber (via Cargo)
+    void nextDay() override;
+
     size_t getPercentage() const;
 
 private:
