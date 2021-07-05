@@ -10,7 +10,6 @@ Store::Store() {
 
 Store::~Store() {
     Time* time = Time::getInstance();
-    std::function<void(void)> function = std::bind(&Store::nextDay, this);
     time->detach(timeId_);
 }
 

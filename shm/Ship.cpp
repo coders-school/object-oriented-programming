@@ -27,7 +27,6 @@ Ship::Ship(int maxCrew, int speed, size_t id)
 
 Ship::~Ship() {
     Time* time = Time::getInstance();
-    std::function<void(void)> function = std::bind(&Ship::nextDay, this);
     time->detach(timeId_);
 }
 

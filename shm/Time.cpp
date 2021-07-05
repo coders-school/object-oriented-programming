@@ -28,14 +28,14 @@ size_t Time::attach(std::function<void(void)> function) {
 }
 
 bool Time::detach(size_t id) {
-        auto result = std::find_if(list_.cbegin(), list_.cend(), [=](std::pair<size_t, std::function<void(void)>> pair){
-            return id == pair.first;
-            });
-        if(result != list_.cend()) {
-            list_.erase(result);
-            return true;
-        }
-        return false;
+    auto result = std::find_if(list_.cbegin(), list_.cend(), [=](std::pair<size_t, std::function<void(void)>> pair){
+        return id == pair.first;
+        });
+    if(result != list_.cend()) {
+        list_.erase(result);
+        return true;
+    }
+    return false;
 }
 
 void Time::update() {

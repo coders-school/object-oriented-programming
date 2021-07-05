@@ -13,7 +13,6 @@ Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
 
 Cargo::~Cargo() {
         Time* time = Time::getInstance();
-        std::function<void(void)> function = std::bind(&Cargo::nextDay, this);
         time->detach(timeId_); 
 }
 
