@@ -20,6 +20,7 @@ public:
 
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
+    bool operator==(const Cargo& alcohol) const override;
 
     size_t getPercentage() const { return percentage_; }
 
