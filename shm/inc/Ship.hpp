@@ -1,11 +1,12 @@
 #pragma once
 
+#include "shm/inc/Delegate.hpp"
 #include <memory>
 #include <string>
 #include <vector>
 
-#include "shm/inc/Cargo.hpp"
-#include "shm/inc/Delegate.hpp"
+class Cargo;
+class Delegate;
 
 class Ship {
 public:
@@ -36,8 +37,8 @@ private:
     std::string name_;
     size_t speed_ { 50 };
     const size_t maxCrew_ { 100 };
-    size_t crew_ { 50 };
     const size_t capacity_ { 80 };
-    std::vector<std::shared_ptr<Cargo>> cargo_;
     Delegate* delegate_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
+    size_t crew_ { 50 };
 };
