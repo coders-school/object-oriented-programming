@@ -1,14 +1,15 @@
 #pragma once
 
-#include "shm/inc/Delegate.hpp"
 #include <memory>
 #include <string>
 #include <vector>
 
+#include "shm/inc/Subscriber.hpp"
+
 class Cargo;
 class Delegate;
 
-class Ship {
+class Ship : public Subscriber {
 public:
     Ship() = default;
     Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate);
@@ -26,11 +27,11 @@ public:
     std::vector<std::shared_ptr<Cargo>> getVectorCargo() const { return cargo_; };
 
     void setName(const std::string& name);
-
-    void nextDay();
-
     void load(const std::shared_ptr<Cargo>);
     void unload(Cargo* cargo);
+
+    // overload form Subscriber
+    void nextDay() override;
 
 private:
     const int id_ { -1 };
