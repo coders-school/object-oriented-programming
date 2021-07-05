@@ -6,12 +6,6 @@ Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice)
    : Cargo(name, amount, basePrice)
 {}
 
-Fruit& Fruit::operator--() {
-    if (rottenTime_ != 0) {
-        rottenTime_--;
-    }
-    return *this;
-}
 
 size_t Fruit::getPrice() const {
     return basePrice_ * (rottenTime_ / DAYS_TO_ROTTEN);
@@ -37,4 +31,15 @@ bool Fruit::operator==(const Cargo& cargo) const {
         return true;
     }
     return false;
+}
+
+void Fruit::nextDay() {
+    // TODO:
+}
+
+Fruit& Fruit::operator--() {
+    if (rottenTime_ != 0) {
+        rottenTime_--;
+    }
+    return *this;
 }
