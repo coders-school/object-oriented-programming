@@ -19,6 +19,9 @@ public:
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
 
+    // override from Subscriber
+    void nextDay() override;
+
 private:
 
 };
