@@ -5,12 +5,12 @@
 Store::Store() {
     Time* time = Time::getInstance();
     std::function<void(void)> function = std::bind(&Store::nextDay, this);
-    timeId_ = time->attach(function);
+    time->attach(this);
 }
 
 Store::~Store() {
     Time* time = Time::getInstance();
-    time->detach(timeId_);
+    time->detach(this);
 }
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {

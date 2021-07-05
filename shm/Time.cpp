@@ -1,6 +1,5 @@
 #include "Time.hpp"
-#include <functional>
-#include <utility>
+#include "Timeable.hpp"
 #include <limits>
 #include <algorithm>
 #include <stdexcept>
@@ -21,16 +20,12 @@ Time::~Time() {
     delete instance_;
 }
 
-size_t Time::attach(std::function<void(void)> function) {
-    size_t id = generateId();
-    list_.push_back(std::make_pair(id, function));
-    return id;
+void Time::attach(Timeable* subscriber) {
+    list_.push_back(subscriber);
 }
 
-bool Time::detach(size_t id) {
-    auto result = std::find_if(list_.cbegin(), list_.cend(), [=](std::pair<size_t, std::function<void(void)>> pair){
-        return id == pair.first;
-        });
+bool Time::detach(Timeable* subscriber) {
+    auto result = std::find(list_.cbegin(), list_.cend(), subscriber);
     if(result != list_.cend()) {
         list_.erase(result);
         return true;
@@ -59,22 +54,9 @@ void Time::update() {
 }
 
 void Time::nextDay() {
-    for(auto& function : list_) {
-        if(function.second) {
-            function.second();
+    for(auto& timableObj : list_) {
+        if(timableObj) {
+            timableObj->nextDay();
         }
     }
-}
-
-size_t Time::generateId() {
-    for(size_t i {0}; i < std::numeric_limits<size_t>::max(); ++i) {
-        auto result = std::find_if(list_.cbegin(), list_.cend(), [=](std::pair<size_t, std::function<void(void)>> pair){
-            return i == pair.first;
-            });
-        if(result == list_.cend()) {
-            return i;
-        }
-    }
-    // I want to intentionally crash the game here
-    throw std::range_error("generateId method has failed");
 }

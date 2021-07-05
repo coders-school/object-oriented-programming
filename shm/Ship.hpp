@@ -4,8 +4,9 @@
 #include <vector>
 #include "Cargo.hpp"
 #include "Time.hpp"
+#include "Timeable.hpp"
 
-class Ship {
+class Ship : public Timeable {
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
@@ -36,5 +37,5 @@ public:
     void load(std::unique_ptr<Cargo> cargo);
     void unload(const Cargo* const cargo);
 
-    void nextDay();
+    void nextDay() override;
 };

@@ -3,8 +3,9 @@
 #include <memory>
 #include <string>
 #include "Time.hpp"
+#include "Timeable.hpp"
 
-class Cargo {
+class Cargo : public Timeable {
 protected:
     std::string name_;
     size_t amount_;
@@ -25,7 +26,7 @@ public:
         return basePrice_;
     }
 
-    void nextDay();
+    void nextDay() override;
 
     std::unique_ptr<Cargo> split(size_t amountPart);
 

@@ -5,6 +5,8 @@
 #include <list>
 #include <chrono>
 
+class Timeable;
+
 // Singleton with global access point
 // Class responsible for managing game time flow
 class Time {
@@ -20,11 +22,11 @@ public:
     // Singletons are not assignable
     void operator=(const Time&) = delete;
 
-    // Returns unique id of subscriber function
-    size_t attach(std::function<void(void)> function);
+    // Add subscription
+    void attach(Timeable* subscriber);
 
-    // Cancels subscription based on provided id
-    bool detach(size_t id);
+    // Cancels subscription
+    bool detach(Timeable* subscriber);
 
     void update();
     void nextDay();
@@ -32,8 +34,7 @@ public:
 private:
     Time() = default;
     static Time* instance_;
-    size_t generateId();
-    std::list<std::pair<size_t, std::function<void(void)>>> list_;
+    std::list<Timeable*> list_;
 
     static constexpr std::chrono::milliseconds dayDuration {5000};
 };

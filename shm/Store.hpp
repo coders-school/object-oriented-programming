@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Player.hpp"
 #include "Time.hpp"
+#include "Timeable.hpp"
 
 enum class Response { done,
                       lack_of_money,
@@ -11,7 +12,7 @@ enum class Response { done,
 
 using StoreCargoVec = std::vector<std::unique_ptr<Cargo>>;
 
-class Store {
+class Store : public Timeable {
 public:
     Store();
     ~Store();
@@ -21,7 +22,7 @@ public:
     //store sell to player
     Response sell(Cargo* cargo, size_t amount, Player* player);
 
-    void nextDay();
+    void nextDay() override;
 
     size_t getCargoNum() {
         return cargoVec_.size();

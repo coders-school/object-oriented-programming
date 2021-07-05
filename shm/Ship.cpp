@@ -1,7 +1,6 @@
 #include "Ship.hpp"
 #include "Time.hpp"
 #include <iostream>
-#include <functional>
     
 Ship::Ship() 
     : id_(-1)
@@ -17,8 +16,7 @@ Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t
     , cargoVec_(std::move(cargoVec))
     {
         Time* time = Time::getInstance();
-        std::function<void(void)> function = std::bind(&Ship::nextDay, this);
-        timeId_ = time->attach(function);
+        time->attach(this);
     }
 
 Ship::Ship(int maxCrew, int speed, size_t id)
@@ -27,7 +25,7 @@ Ship::Ship(int maxCrew, int speed, size_t id)
 
 Ship::~Ship() {
     Time* time = Time::getInstance();
-    time->detach(timeId_);
+    time->detach(this);
 }
 
 

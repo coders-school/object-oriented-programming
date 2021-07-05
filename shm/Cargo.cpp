@@ -1,19 +1,17 @@
 #include "Cargo.hpp"
 #include "Time.hpp"
 #include <iostream>
-#include <functional>
 
 Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
     : name_{name}, amount_{amount}, basePrice_{basePrice}
     {
         Time* time = Time::getInstance();
-        std::function<void(void)> function = std::bind(&Cargo::nextDay, this);
-        timeId_ = time->attach(function); 
+        time->attach(this); 
     }
 
 Cargo::~Cargo() {
         Time* time = Time::getInstance();
-        time->detach(timeId_); 
+        time->detach(this); 
 }
 
 Cargo& Cargo::operator+=(size_t amount) {
