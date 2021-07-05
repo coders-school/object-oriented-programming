@@ -28,7 +28,3 @@ size_t Alcohol::getPrice() const {
 size_t Alcohol::getPercentage() const {
     return percentage_;
 }
-
-void Alcohol::setBasePrice(size_t basePrice) {
-    basePrice_ = basePrice;
-} 
