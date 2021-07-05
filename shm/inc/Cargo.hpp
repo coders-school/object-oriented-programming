@@ -20,6 +20,9 @@ public:
     virtual Cargo& operator-=(const size_t amount) = 0;
     virtual bool operator==(const Cargo& cargo) const = 0;
     virtual size_t getPrice() const = 0;
+    
+    // override from Subscriber
+    virtual void nextDay() override = 0;
 
 protected:
     const std::string name_; 
