@@ -16,6 +16,7 @@ public:
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
     bool operator==(const Cargo& cargo) const override;
+    
     virtual Fruit& operator--();
 
 protected:
