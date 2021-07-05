@@ -31,22 +31,9 @@ protected:
 class CargoDefault : public Cargo {
 public:
     using Cargo::Cargo;
-    
     ~CargoDefault() override = default;
 
-    size_t getPrice() const override {
-        return basePrice_;
-    }
-
-    bool operator==(const Cargo& other) const override {
-        return name_ == other.getName();
-    }
-
-    std::unique_ptr<Cargo> split(size_t amountPart) override {
-        if (!amountPart or amountPart > amount_) {
-            return {};
-        }
-        *this -= amountPart;
-        return std::make_unique<CargoDefault>(name_, amountPart, basePrice_);
-    }
+    size_t getPrice() const override;
+    bool operator==(const Cargo& other) const override;
+    std::unique_ptr<Cargo> split(size_t amountPart) override;
 };

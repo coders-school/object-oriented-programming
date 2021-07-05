@@ -11,29 +11,12 @@ enum class Quality : size_t {
 
 class Item : public Cargo {
 public:
-    Item(std::string name, size_t amount, size_t basePrice, Quality quality)
-        : Cargo(name, amount, basePrice), quality_{quality} {}
-
+    Item(std::string name, size_t amount, size_t basePrice, Quality quality);
     ~Item() override = default;
 
-    size_t getPrice() const override {
-        return static_cast<size_t>(basePrice_ * static_cast<size_t>(quality_) / 100.0);
-    }
-
-    bool operator==(const Cargo& other) const override {
-        if (auto otherItem = dynamic_cast<const Item*>(&other)) {
-            return name_ == otherItem->getName() and quality_ == otherItem->quality_;
-        }
-        return false;
-    }
-
-    std::unique_ptr<Cargo> split(size_t amountPart) override {
-        if (!amountPart or amountPart > amount_) {
-            return {};
-        }
-        *this -= amountPart;
-        return std::make_unique<Item>(name_, amountPart, basePrice_, quality_);
-    }
+    size_t getPrice() const override;
+    bool operator==(const Cargo& other) const override;
+    std::unique_ptr<Cargo> split(size_t amountPart) override;
 
 protected:
     Quality quality_ = Quality::common;
