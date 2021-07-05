@@ -5,3 +5,7 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     , amount_(amount)
     , basePrice_(basePrice)
 {}
+
+std::string Cargo::getName() const { return name_; };
+size_t Cargo::getAmount() const { return amount_; };
+size_t Cargo::getBasePrice() const { return basePrice_; };
