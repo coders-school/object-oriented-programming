@@ -3,9 +3,11 @@
 #include <cstddef>
 #include <string>
 
+#include "shm/inc/Subscriber.hpp"
+
 constexpr size_t MAX_AMOUNT_OF_CARGO{ 1000 };
 
-class Cargo {
+class Cargo : public Subscriber {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;
