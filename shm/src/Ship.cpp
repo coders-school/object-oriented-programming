@@ -3,6 +3,9 @@
 #include <algorithm>
 #include <iostream>
 
+#include "shm/inc/Cargo.hpp"
+#include "shm/inc/Delegate.hpp"
+
 Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate)
     : id_(id)
     , name_(name)
