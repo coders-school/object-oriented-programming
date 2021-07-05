@@ -12,3 +12,10 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     }
     return Response::done;   
 }
+
+Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
+    if (cargo->getAmount() + amount > Store::storeCapacity) {
+        return Response::lack_of_space;
+    }
+    return Response::done;
+}
