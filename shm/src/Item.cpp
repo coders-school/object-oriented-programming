@@ -10,13 +10,11 @@ bool Item::operator==(const Cargo& cargo) const {
         return name_ == item->getName() && basePrice_ == item->getBasePrice() &&
                rarity_ == item->getRarity();
     }
-
     return false;
 }
 
 Cargo& Item::operator+=(size_t amount) {
     amount_ += amount;
-
     return *this;
 }
 
@@ -24,20 +22,7 @@ Cargo& Item::operator-=(size_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
     }
-
     return *this;
-}
-
-std::string Item::getName() const {
-    return name_;
-}
-
-size_t Item::getAmount() const {
-    return amount_;
-}
-
-size_t Item::getBasePrice() const {
-    return basePrice_;
 }
 
 size_t Item::getPrice() const {
