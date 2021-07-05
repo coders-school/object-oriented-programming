@@ -8,7 +8,7 @@ class DryFruit : public Fruit {
 public:
     DryFruit(const std::string& name, size_t amount, size_t basePrice);
     
-    // override form Cargo
+    // override form Cargo (via Fruit)
     std::size_t getPrice() const override;
     
     // override from Fruit
