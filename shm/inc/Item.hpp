@@ -11,14 +11,12 @@ public:
 
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
 
+    // override from Cargo
+    size_t getPrice() const override;
     bool operator==(const Cargo& item) const override;
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
 
-    std::string getName() const override;
-    size_t getAmount() const override;
-    size_t getBasePrice() const override;
-    size_t getPrice() const override;
     Rarity getRarity() const;
 
 private:
