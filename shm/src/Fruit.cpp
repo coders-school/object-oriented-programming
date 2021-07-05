@@ -34,7 +34,7 @@ bool Fruit::operator==(const Cargo& cargo) const {
 }
 
 void Fruit::nextDay() {
-    // TODO:
+    operator--();
 }
 
 Fruit& Fruit::operator--() {

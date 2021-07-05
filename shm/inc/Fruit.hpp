@@ -18,10 +18,12 @@ public:
     bool operator==(const Cargo& cargo) const override;
 
     // override from Subscriber (via Cargo)
-    virtual void nextDay() override;
+    void nextDay() override;
 
     virtual Fruit& operator--();
+    virtual size_t getTimeElapsed() const { return timeElapsed_; }
 
 protected:
     size_t rottenTime_{ DAYS_TO_ROTTEN };
+    size_t timeElapsed_{ };
 };
