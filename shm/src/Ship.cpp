@@ -64,6 +64,7 @@ void Ship::load(const std::shared_ptr<Cargo>cargo) {
     }
 }
 
+// FIXME:
 void Ship::unload(Cargo* cargo) {
     if (cargo != nullptr) {
         int it = -1;
