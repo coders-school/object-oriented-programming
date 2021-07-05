@@ -21,5 +21,4 @@ protected:
     const std::string name_; 
     size_t amount_ {};
     size_t basePrice_ {}; 
-    //test
 };
