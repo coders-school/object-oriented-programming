@@ -12,3 +12,9 @@ void Time::removeSubscriber(Subscriber* subscriber) {
     subscribers_.erase(std::remove(subscribers_.begin(), subscribers_.end(), subscriber),
                        subscribers_.end());
 }
+
+void Time::notifySubscribers() {
+    for (const auto& subscriber : subscribers_) {
+        subscriber->nextDay();
+    }
+}
