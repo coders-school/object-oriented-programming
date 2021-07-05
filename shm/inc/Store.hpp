@@ -7,8 +7,8 @@
 class Cargo;
 class Player;
 
-constexpr size_t MIN_CARGO{ 0 };
-constexpr size_t MAX_CARGO{ 100 };
+constexpr size_t MIN_CARGO_IN_STORE{ 0 };
+constexpr size_t MAX_CARGO_IN_STORE{ 100 };
 
 class Store : public Subscriber {
 public:
