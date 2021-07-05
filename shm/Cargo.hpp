@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include "Time.hpp"
 
 class Cargo {
 protected:
@@ -11,6 +12,7 @@ protected:
 
 public:
     Cargo(std::string name, size_t amount, size_t basePrice);
+    ~Cargo();
 
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
@@ -26,4 +28,7 @@ public:
     void nextDay();
 
     std::unique_ptr<Cargo> split(size_t amountPart);
+
+private:
+    size_t timeId_ {0};
 };

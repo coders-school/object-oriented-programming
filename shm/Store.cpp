@@ -1,5 +1,18 @@
 #include "Store.hpp"
+#include "Time.hpp"
 #include <iostream>
+
+Store::Store() {
+    Time* time = Time::getInstance();
+    std::function<void(void)> function = std::bind(&Store::nextDay, this);
+    timeId_ = time->attach(function);
+}
+
+Store::~Store() {
+    Time* time = Time::getInstance();
+    std::function<void(void)> function = std::bind(&Store::nextDay, this);
+    time->detach(timeId_);
+}
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (!cargo or !player or !amount) {

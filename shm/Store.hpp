@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Player.hpp"
+#include "Time.hpp"
 
 enum class Response { done,
                       lack_of_money,
@@ -12,7 +13,8 @@ using StoreCargoVec = std::vector<std::unique_ptr<Cargo>>;
 
 class Store {
 public:
-    Store() {}
+    Store();
+    ~Store();
 
     //store buy from player
     Response buy(Cargo* cargo, size_t amount, Player* player);
@@ -36,6 +38,7 @@ public:
 
 private:
     StoreCargoVec cargoVec_{};
+    size_t timeId_;
 };
 
 std::ostream& operator<<(std::ostream& out, const Store& store);

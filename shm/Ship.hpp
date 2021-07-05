@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "Cargo.hpp"
+#include "Time.hpp"
 
 class Ship {
     size_t capacity_;
@@ -11,12 +12,14 @@ class Ship {
     size_t speed_;
     std::string name_;
     const size_t id_;
+    size_t timeId_;
     std::vector<std::unique_ptr<Cargo>> cargoVec_;
 
 public:
     Ship();
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec);
     Ship(int maxCrew, int speed, size_t id);
+    ~Ship();
 
     void setName(const std::string& name);
 
