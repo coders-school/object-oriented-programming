@@ -13,7 +13,7 @@ protected:
 
 public:
     Cargo(std::string name, size_t amount, size_t basePrice);
-    ~Cargo();
+    virtual ~Cargo();
 
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);

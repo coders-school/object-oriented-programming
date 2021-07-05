@@ -19,7 +19,7 @@ public:
     Ship();
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec);
     Ship(int maxCrew, int speed, size_t id);
-    ~Ship();
+    virtual ~Ship();
 
     void setName(const std::string& name);
 
