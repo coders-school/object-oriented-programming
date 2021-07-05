@@ -13,20 +13,13 @@ Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t
     , speed_(speed)
     , name_(name)
     , id_(id)
-    , cargoVec_(std::move(cargoVec))
-    {
-        Time* time = Time::getInstance();
-        time->attach(this);
-    }
+    , cargoVec_(std::move(cargoVec)){}
 
 Ship::Ship(int maxCrew, int speed, size_t id)
     : Ship(0, maxCrew, speed, "", id, {})
 {}
 
-Ship::~Ship() {
-    Time* time = Time::getInstance();
-    time->detach(this);
-}
+Ship::~Ship() {}
 
 
 void Ship::setName(const std::string& name) { 

@@ -2,6 +2,7 @@
 
 class Timeable {
 public:
-    virtual ~Timeable() {};
+    Timeable();
+    virtual ~Timeable();
     virtual void nextDay() = 0;
 };

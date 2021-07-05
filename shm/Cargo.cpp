@@ -3,15 +3,9 @@
 #include <iostream>
 
 Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
-    : name_{name}, amount_{amount}, basePrice_{basePrice}
-    {
-        Time* time = Time::getInstance();
-        time->attach(this); 
-    }
+    : name_{name}, amount_{amount}, basePrice_{basePrice}{}
 
 Cargo::~Cargo() {
-        Time* time = Time::getInstance();
-        time->detach(this); 
 }
 
 Cargo& Cargo::operator+=(size_t amount) {
