@@ -1,5 +1,7 @@
 #include "shm/inc/Store.hpp"
 
+#include <random>
+
 #include "shm/inc/Cargo.hpp"
 #include "shm/inc/Player.hpp"
 
@@ -17,5 +19,12 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 }
 
 void Store::nextDay() {
-    // TODO:
+    std::mt19937 generator(std::random_device{}());
+    std::uniform_int_distribution<size_t> distribution{
+        MIN_CARGO, MAX_CARGO
+    };
+
+    for (const auto& cargo : cargo_) {
+        cargo->setAmount(distribution(generator));
+    }
 }
