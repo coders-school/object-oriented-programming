@@ -17,6 +17,7 @@ set(SOURCES
     ${SOURCE_DIR}/Cargo.cpp
     ${SOURCE_DIR}/DryFruit.cpp
     ${SOURCE_DIR}/Fruit.cpp
+    ${SOURCE_DIR}/Game.cpp
     ${SOURCE_DIR}/Island.cpp
     ${SOURCE_DIR}/Item.cpp
     ${SOURCE_DIR}/Map.cpp
