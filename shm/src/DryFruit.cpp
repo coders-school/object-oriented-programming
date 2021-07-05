@@ -16,3 +16,7 @@ DryFruit& DryFruit::operator--() {
 std::size_t DryFruit::getPrice() const {
     return basePrice_ * (rottenTime_ / DAYS_TO_ROTTEN_DRY_FRUIT) * multiplierDryFruit_;
 }
+
+void DryFruit::nextDay() {
+    // TODO:
+}
