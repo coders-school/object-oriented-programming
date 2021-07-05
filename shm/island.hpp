@@ -1,7 +1,6 @@
 #pragma once
 #include "coordinates.hpp"
 
-
 //island will be descibed as x, y possition from coordiates class
 class Island {
 public:

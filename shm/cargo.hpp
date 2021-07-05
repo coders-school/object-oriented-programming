@@ -18,7 +18,7 @@ public:
     bool operator==(Cargo& cargo);
 
     ///simple getters
-    const std::string& getName() const { return name_; }
+    std::string getName() const { return name_; }
     size_t getAmount() const { return amount_; }
     size_t getPrice() const { return basePrice_; }
 };
