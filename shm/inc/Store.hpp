@@ -1,11 +1,14 @@
 #pragma once
 
-#include <cstddef>
+#include <vector>
 
 #include "shm/inc/Subscriber.hpp"
 
 class Cargo;
 class Player;
+
+constexpr size_t MIN_CARGO{ 0 };
+constexpr size_t MAX_CARGO{ 100 };
 
 class Store : public Subscriber {
 public:
@@ -23,5 +26,5 @@ public:
     void nextDay() override;
 
 private:
-
+    std::vector<std::unique_ptr<Cargo>> cargo_;
 };
