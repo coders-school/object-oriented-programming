@@ -1,5 +1,10 @@
 #include "shm/inc/Player.hpp"
 
+#include <numeric>
+
+#include "shm/inc/Cargo.hpp"
+#include "shm/inc/Ship.hpp"
+
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
     : ship_(std::move(ship)), money_(money), availableSpace_(availableSpace) 
 {}
