@@ -14,3 +14,8 @@ Cargo& Alcohol::operator-=(size_t amount) {
     amount_ -= amount;
     return *this;
 }
+
+bool Alcohol::operator==(const Cargo& alcohol) const {
+    // TODO:
+    return true;
+}
