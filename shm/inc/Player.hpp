@@ -1,10 +1,12 @@
 #pragma once
 
-#include "shm/inc/Cargo.hpp"
-#include "shm/inc/Ship.hpp"
+#include <cstddef>
+#include <memory>
+
 #include "shm/inc/Delegate.hpp"
 
-#include <numeric>
+class Ship;
+class Cargo;
 
 class Player : public Delegate {
 public:
