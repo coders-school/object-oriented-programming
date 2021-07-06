@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 
 #include "shm/inc/Subscriber.hpp"
@@ -21,10 +22,11 @@ public:
     };
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
+    Response sell(Cargo* cargo, size_t amount, Player* player);
 
     // override from Subscriber
     void nextDay() override;
-
+    
 private:
     std::vector<std::unique_ptr<Cargo>> cargo_;
 };
