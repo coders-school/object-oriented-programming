@@ -28,6 +28,7 @@ void Store::nextDay() {
         cargo->setAmount(distribution(generator));
     }
 }
+
 Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     if (cargo->getAmount() + amount > MAX_CARGO_IN_STORE) {
         return Response::lack_of_space;

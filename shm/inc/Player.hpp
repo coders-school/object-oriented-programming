@@ -11,6 +11,7 @@ class Cargo;
 class Player : public Delegate {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
+    ~Player() override {};
 
     std::unique_ptr<Ship> getShip() { return std::move(ship_); };
     size_t getMoney() const { return money_; };
@@ -20,6 +21,7 @@ public:
 
     //override from Delegate
     void payCrew(const size_t payCrew) override;
+    void setPlayerPtr();
 
 private:
     std::unique_ptr<Ship> ship_;

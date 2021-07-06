@@ -8,11 +8,12 @@
 
 class Cargo;
 class Delegate;
+class Player;
 
 class Ship : public Subscriber {
 public:
     Ship() = default;
-    Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate);
+    Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate = nullptr);
     Ship(int id, size_t speed, size_t maxCrew, Delegate* delegate);
 
     Ship& operator+=(const size_t amount);
@@ -29,6 +30,7 @@ public:
     void setName(const std::string& name);
     void load(const std::shared_ptr<Cargo>);
     void unload(Cargo* cargo);
+    void changeDelegate(Player* player);
 
     // overload form Subscriber
     void nextDay() override;
