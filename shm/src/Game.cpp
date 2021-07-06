@@ -1,4 +1,6 @@
 #include "shm/inc/Game.hpp"
+#include <iostream>
+#include <memory>
 
 Game::Game(size_t money, size_t game_days, size_t final_goal)
     : money_(money)

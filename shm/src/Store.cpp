@@ -41,3 +41,4 @@ void Store::nextDay() {
         cargo->setAmount(distribution(generator));
     }
 }
+

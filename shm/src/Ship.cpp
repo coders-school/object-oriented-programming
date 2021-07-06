@@ -6,6 +6,7 @@
 
 #include "shm/inc/Cargo.hpp"
 #include "shm/inc/Delegate.hpp"
+#include "shm/inc/Player.hpp"
 
 Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate)
     : id_(id)
@@ -87,4 +88,8 @@ void Ship::unload(Cargo* cargo) {
 
 void Ship::nextDay() {
     delegate_->payCrew(crew_);
+}
+
+void Ship::changeDelegate(Player* player) {
+    delegate_ = player;
 }

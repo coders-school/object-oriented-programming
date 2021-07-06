@@ -1,6 +1,8 @@
 #pragma once
 
 #include <stddef.h>
+#include "shm/inc/Ship.hpp"
+#include "shm/inc/Player.hpp"
 
 class Game {
 public:
