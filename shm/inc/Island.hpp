@@ -4,6 +4,7 @@
 
 class Island {
 public:
+    
     class Coordinates {
     public:
         Coordinates(size_t positionX, size_t positionY);
@@ -14,9 +15,8 @@ public:
         const size_t positionY_ = 0;
     };
 
-    Coordinates getCoordinates() const { return position_; }
-    
-    Island(const Island::Coordinates& position);
+    explicit Island(const Island::Coordinates& position);
+    Coordinates getCoordinates() const { return position_; }  
 
 private:
     const Coordinates position_;

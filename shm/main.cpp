@@ -1,13 +1,12 @@
-#include "inc/Player.hpp"
-#include "inc/Ship.hpp"
-#include "inc/Delegate.hpp"
+#include "shm/inc/Game.hpp"
 
-#include <memory>
+constexpr size_t start_money = 1'000;
+constexpr size_t game_days = 100;
+constexpr size_t final_goal = 2'000;
 
+int main() {
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
 
-int main() { // Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate)
-    // Delegate* delegate;
-    // std::unique_ptr<Ship>ship = std::make_unique<Ship>(1, "TEST", 10, 100, 100, delegate);
-    // Player player(ship, 1000, 100);
     return 0;
 }
