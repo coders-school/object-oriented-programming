@@ -1,6 +1,8 @@
 #include "shm/inc/Ship.hpp"
 
-#include <iostream>
+#include <stdexcept>
+
+#include "shm/inc/Cargo.hpp"
 
 Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity)
     : id_(id)
@@ -14,21 +16,19 @@ Ship::Ship(int id, size_t speed, size_t maxCrew)
     : Ship(id, "Ship", speed, maxCrew, 100)
 {}
 
-Ship& Ship::operator+=(const size_t amount) {
-    if (amount + crew_ <= maxCrew_) {
-        crew_ += amount;
-    } else {
-        std::cerr << "Maximum amount of crew is " << maxCrew_ << '\n';
+Ship& Ship::operator+=(const size_t crew) {
+    if (crew_ + crew > maxCrew_) {
+        throw std::out_of_range("Too many sailors!");
     }
+    crew_ += crew;
     return *this;
 }
 
-Ship& Ship::operator-=(const size_t amount) {
-    if (crew_ <= amount) {
-        crew_ -= amount;
-    } else {
-        std::cerr << "Amount of crew can't be under 0\n";
+Ship& Ship::operator-=(const size_t crew) {
+    if (crew_ < crew) {
+        throw std::out_of_range("Number of sailors lower than zero!");
     }
+    crew_ -= crew;
     return *this;
 }
 
@@ -37,8 +37,12 @@ void Ship::setName(const std::string& name) {
 }
 
 std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
-    if (cargo_.size() <= index) {
-        return nullptr;
+    if (index >= cargos_.size()) {
+        throw std::out_of_range("Invalid cargo!");
     }
-    return cargo_[index];
+    return cargos_[index];
+}
+
+std::vector<std::shared_ptr<Cargo>> Ship::getCargos() const {
+    return cargos_;
 }

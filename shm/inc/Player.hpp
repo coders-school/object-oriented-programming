@@ -1,25 +1,23 @@
 #pragma once
 
-#include "shm/inc/Cargo.hpp"
-#include "shm/inc/Ship.hpp"
+#include "shm/inc/Ship.hpp" // forward declaration not enough
 
-#include <algorithm>
-#include <memory>
-#include <numeric>
+class Cargo;
 
+// class responsible for manage user in game
 class Player {
 public:
-    Player(std::unique_ptr<Ship>, size_t, size_t);
+    Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
 
     std::unique_ptr<Ship> getShip() { return std::move(ship_); };
     size_t getMoney() const { return money_; };
-    size_t getAvailableSpace() const { return availableSpace_; };
+    size_t getAvailableSpace() const { return availableSpace_.second; };
     size_t getSpeed() const;
     std::shared_ptr<Cargo> getCargo(size_t index) const;
 
 private:
     std::unique_ptr<Ship> ship_;
     size_t money_;
-    size_t availableSpace_;
+    std::pair<bool, size_t> availableSpace_;
     size_t countAvailableSpace() const;
 };
