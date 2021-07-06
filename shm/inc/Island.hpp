@@ -2,14 +2,14 @@
 
 #include <cstddef> 
 
-//class responsible for manage landmass in game
+// class responsible for manage landmass in game
 class Island {
 public:
 
-    //class responsible for manage coordinates of islands in game
+    // class responsible for manage coordinates of islands in game
     class Coordinates {
     public:
-        constexpr Coordinates(size_t positionX, size_t positionY);
+        Coordinates(size_t positionX, size_t positionY);
         bool operator==(const Coordinates& position) const;
     
     private:
@@ -19,7 +19,7 @@ public:
 
     explicit Island(const Island::Coordinates& position);
     
-    constexpr Coordinates getCoordinates() const { return position_; }
+    Coordinates getCoordinates() const { return position_; }
     
 private:
     const Coordinates position_;

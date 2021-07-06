@@ -4,7 +4,7 @@
 
 class Cargo;
 
-//class responsible for manage user in game
+// class responsible for manage user in game
 class Player {
 public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);

@@ -1,6 +1,6 @@
 #include "shm/inc/Island.hpp"
 
-constexpr Island::Coordinates::Coordinates(size_t positionX, size_t positionY) 
+Island::Coordinates::Coordinates(size_t positionX, size_t positionY) 
     : positionX_(positionX)
     , positionY_(positionY)
 {}
