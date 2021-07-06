@@ -2,6 +2,8 @@
 
 #include <string>
 
+constexpr size_t MAX_AMOUNT_OF_CARGO{ 1000 };
+
 //class resposible for manage commodity in game
 class Cargo {
 public:

@@ -1,6 +1,8 @@
 #include "shm/inc/Ship.hpp"
 
-#include <iostream>
+#include <stdexcept>
+
+#include "shm/inc/Cargo.hpp"
 
 Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity)
     : id_(id)
@@ -16,8 +18,7 @@ Ship::Ship(int id, size_t speed, size_t maxCrew)
 
 Ship& Ship::operator+=(const size_t crew) {
     if (crew_ + crew > maxCrew_) {
-        std::cerr << "Too many sailors\n";
-        return *this;
+        throw std::out_of_range("Too many sailors!");
     }
     crew_ += crew;
     return *this;
@@ -25,8 +26,7 @@ Ship& Ship::operator+=(const size_t crew) {
 
 Ship& Ship::operator-=(const size_t crew) {
     if (crew_ < crew) {
-        std::cerr << "Number of sailors lower than 0\n";
-        return *this;
+        throw std::out_of_range("Number of sailors lower than zero!");
     }
     crew_ -= crew;
     return *this;
@@ -37,9 +37,8 @@ void Ship::setName(const std::string& name) {
 }
 
 std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
-    if (index>= cargos_.size()) {
-        std::cerr << "Invalid cargo\n";
-        return nullptr;
+    if (index >= cargos_.size()) {
+        throw std::out_of_range("Invalid cargo!");
     }
     return cargos_[index];
 }

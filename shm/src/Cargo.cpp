@@ -1,8 +1,7 @@
 #include "shm/inc/Cargo.hpp"
 #include "shm/inc/Player.hpp"
 
-#include <iostream>
-#include <limits>
+#include <stdexcept>
 
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice) 
     : name_(name)
@@ -11,9 +10,8 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
 {}
 
 Cargo& Cargo::operator+=(const size_t amount) {
-    if (amount_ + amount > std::numeric_limits<size_t>::max()) {
-        std::cerr << "You don't have enough space on the ship\0";
-        return *this;
+    if (amount_ + amount > MAX_AMOUNT_OF_CARGO) {
+        throw std::out_of_range("You don't have enough room on the ship!");
     }
     amount_ += amount;
     return *this;
@@ -21,13 +19,13 @@ Cargo& Cargo::operator+=(const size_t amount) {
 
 Cargo& Cargo::operator-=(const size_t amount) {
     if (amount_ < amount) {
-        std::cerr << "You don't have that much cargo on the ship\0";
-        return *this;
+        throw std::out_of_range("You don't have that much cargo on the ship!");
     }
     amount_ -= amount;
     return *this;
 }
 
 bool Cargo::operator==(const Cargo& cargo) const {
-    return cargo.name_ == name_ && cargo.basePrice_ == basePrice_;
+    return cargo.name_ == name_ &&
+           cargo.basePrice_ == basePrice_;
 }

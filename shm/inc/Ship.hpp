@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "shm/inc/Cargo.hpp"
+class Cargo;
 
 //class responsible for manage ship(s) in game
 class Ship {
@@ -32,10 +32,7 @@ private:
     std::string name_;
     size_t speed_ { 50 };
     const size_t maxCrew_ { 100 };
-    size_t crew_ { };
     const size_t capacity_ { 80 };
+    size_t crew_ { 50 };
     std::vector<std::shared_ptr<Cargo>> cargos_;
 };
-
-
-
