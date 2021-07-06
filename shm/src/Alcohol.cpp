@@ -33,6 +33,11 @@ size_t Alcohol::getPrice() const {
 }
 
 void Alcohol::nextDay() {
+    daysUntilOnePercentEvaporates_--;
+    if (percentage_ > 0 && daysUntilOnePercentEvaporates_ == 0) {
+        percentage_--;
+        daysUntilOnePercentEvaporates_ = 5;
+    } 
 }
 
 size_t Alcohol::getPercentage() const {
