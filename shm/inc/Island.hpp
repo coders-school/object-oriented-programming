@@ -2,9 +2,11 @@
 
 #include <cstddef> 
 
+// class responsible for manage landmass in game
 class Island {
 public:
-    
+
+    // class responsible for manage coordinates of islands in game
     class Coordinates {
     public:
         Coordinates(size_t positionX, size_t positionY);
@@ -19,8 +21,8 @@ public:
     };
 
     explicit Island(const Island::Coordinates& position);
-    Coordinates getCoordinates() const { return position_; }  
-
+    Coordinates getCoordinates() const { return position_; }
+    
 private:
     const Coordinates position_;
 };

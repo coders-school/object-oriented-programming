@@ -8,7 +8,9 @@
 
 class Cargo;
 
+// class responsible for manage user in game
 class Player : public Delegate {
+
 public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
     ~Player() override {};

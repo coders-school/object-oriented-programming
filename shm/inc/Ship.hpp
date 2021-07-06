@@ -10,6 +10,7 @@ class Cargo;
 class Delegate;
 class Player;
 
+// class responsible for manage ship(s) in game
 class Ship : public Subscriber {
 public:
     Ship() = default;
