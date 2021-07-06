@@ -31,6 +31,10 @@ Cargo& Item::operator-=(size_t amount) {
 }
 
 void Item::nextDay() {
+    daysToDestruction_--;
+    if (daysToDestruction_ == 0) {
+        std::cout << "The item has been destroyed\n";
+    }
 }
 
 size_t Item::getPrice() const {

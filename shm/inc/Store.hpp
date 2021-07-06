@@ -10,6 +10,7 @@ class Player;
 
 constexpr size_t MIN_CARGO_IN_STORE{ 0 };
 constexpr size_t MAX_CARGO_IN_STORE{ 100 };
+constexpr size_t STORE_CAPACITY { 1000 };
 
 class Store : public Subscriber {
 public:
@@ -20,6 +21,8 @@ public:
         lack_of_cargo, 
         lack_of_space
     };
+
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
