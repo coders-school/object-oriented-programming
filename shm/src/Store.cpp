@@ -6,6 +6,9 @@
 #include "shm/inc/Player.hpp"
 
 Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+    if (!cargo) {
+        return Response::lack_of_cargo;
+    }
     if (amount * cargo->getPrice() > player->getMoney()){
         return Response::lack_of_money;
     }
@@ -19,7 +22,10 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 }
 
 Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
-    if (cargo->getAmount() + amount > Store::STORE_CAPACITY) {
+    if (!cargo) {
+        return Response::lack_of_cargo;
+    }
+    if (cargo->getAmount() + amount > STORE_CAPACITY) {
         return Response::lack_of_space;
     }
     return Response::done;
@@ -34,10 +40,4 @@ void Store::nextDay() {
     for (const auto& cargo : cargo_) {
         cargo->setAmount(distribution(generator));
     }
-}
-Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
-    if (cargo->getAmount() + amount > MAX_CARGO_IN_STORE) {
-        return Response::lack_of_space;
-    }
-    return Response::done;
 }
