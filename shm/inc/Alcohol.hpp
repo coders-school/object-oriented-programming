@@ -23,4 +23,5 @@ public:
 
 private:
     size_t percentage_;
+    size_t daysUntilOnePercentEvaporates_ { 5 };
 };
