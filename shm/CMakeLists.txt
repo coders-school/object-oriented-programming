@@ -24,6 +24,7 @@ set(SOURCES
     ${SOURCE_DIR}/Player.cpp
     ${SOURCE_DIR}/Ship.cpp        
     ${SOURCE_DIR}/Store.cpp
+    ${SOURCE_DIR}/Time.cpp
 )
 
 add_library(${PROJECT_NAME}-lib STATIC ${SOURCES})
