@@ -11,6 +11,9 @@ public:
     void startGame();
 
 private:
+    void printWelcomeScreen();
+    void printMenu();
+    
     size_t money_ {};
     size_t game_days_ {};
     const size_t final_goal_ {};
