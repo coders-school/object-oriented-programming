@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <memory>
 #include <random>
 
 Map::Map() {
@@ -28,12 +29,12 @@ Map::Map() {
     currentPosition_ = &(islands_[0]);
 }
 
-Island* Map::getIsland(const Island::Coordinates& coordinate) {
-    for (auto & island : islands_) {
-        if (island.getCoordinates() == coordinate) {
-            return &island;
-        }
-    }
-
-    return nullptr;
+Island* Map::getIsland(const Island::Coordinates& coordinates) {
+    auto island_it = std::find_if(islands_.begin(), islands_.end(),
+                                 [&coordinates](auto& island) {
+                                     return island.getCoordinates() == coordinates;
+                                 });
+    return island_it != islands_.end()
+           ? std::addressof(*island_it)
+           : nullptr;
 }
