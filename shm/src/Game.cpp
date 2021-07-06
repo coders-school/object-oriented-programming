@@ -2,7 +2,6 @@
 
 #include "shm/inc/Player.hpp"
 #include "shm/inc/Time.hpp"
-#include <memory>
 
 Game::Game(size_t money, size_t game_days, size_t final_goal)
     : money_(money)
@@ -26,4 +25,9 @@ void Game::startGame() {
 
 bool Game::isGameWon() const {
     return player_->getMoney() >= final_goal_;
+}
+
+bool Game::isGameLost() const {
+    // probably not needed (any suggestions?)
+    return false;
 }
