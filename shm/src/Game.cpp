@@ -23,3 +23,7 @@ void Game::startGame() {
     }
     // YOU LOST!
 }
+
+bool Game::isGameWon() const {
+    return player_->getMoney() >= final_goal_;
+}
