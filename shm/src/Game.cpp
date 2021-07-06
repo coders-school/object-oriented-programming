@@ -1,7 +1,9 @@
 #include "shm/inc/Game.hpp"
+#include "shm/inc/Ship.hpp"
 
 #include <iomanip>
 #include <iostream>
+#include <memory>
 
 Game::Game(size_t money, size_t game_days, size_t final_goal)
     : money_(money)
@@ -10,6 +12,8 @@ Game::Game(size_t money, size_t game_days, size_t final_goal)
     , time_(std::make_unique<Time>())
 {
     current_day_ = time_->getElapsedTime();
+    ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
+    player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
 }
 
 void Game::startGame() {
@@ -20,6 +24,7 @@ void Game::startGame() {
             // YOU WON!
             return;
         }
+        std::cin.get();
         // CONTUNUE GAME
     }
     // YOU LOST!
