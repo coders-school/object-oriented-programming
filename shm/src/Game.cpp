@@ -9,5 +9,8 @@ Game::Game(size_t money, size_t game_days, size_t final_goal)
 {}
 
 void Game::startGame() {
-
+    Ship ship(1, "TEST", 200, 100, 100);
+    Player player(std::make_unique<Ship>(ship), 100, 200);
+    player.setPlayerPtr();
+    std::cout << player.getAvailableSpace() << '\n';
 }

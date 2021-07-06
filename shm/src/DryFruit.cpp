@@ -8,7 +8,7 @@ DryFruit& DryFruit::operator--() {
     rottenDryFruit_--;
     if (rottenTime_ != 0 && rottenDryFruit_ == 0) {
         rottenTime_--;
-        rottenDryFruit_ = 10;
+        rottenDryFruit_ = DAYS_TO_ROTTEN_DRY_FRUIT;
     }
     return *this;
 }
