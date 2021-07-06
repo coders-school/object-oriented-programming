@@ -18,5 +18,5 @@ Ship &Ship::operator+=(size_t num)
 }
 
 void Ship::addCargo(Cargo* item) {
-    shipCargo.push_back(item);
+    shipCargo.emplace_back(item);
 }

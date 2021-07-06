@@ -1,5 +1,5 @@
 #include <numeric>
-
+#include <iostream>
 #include "cargo.hpp"
 #include "player.hpp"
 #include "ship.hpp"
@@ -38,20 +38,19 @@ Cargo* Player::getCargo(size_t index) const {
     return nullptr; // TODO add something better
 }
 
-size_t Player::calculateAvailableSpace() {
-     int cargoAmount = 0;
-     int capacity = ship_->getCapacity();
-     std::vector<Cargo*> shipCargo = ship_->getCargo();
 
-     //cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo c) { return i += c.getAmount(); }); TODO
-    
-    for(int i = 0; i < shipCargo.size(); i++){
-         cargoAmount += getCargo(i)->getAmount();
-    }
-    if(capacity - cargoAmount < 0)
-    {
+size_t Player::calculateAvailableSpace() {
+
+    int cargoAmount = 0;
+    int capacity = ship_->getCapacity();
+    std::vector<Cargo*> shipCargo = ship_->getCargo();
+     
+    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo* c) { return i += c->getAmount(); });
+    std::cout << "Cargo amount(po obliczeniach): "<< capacity - cargoAmount << '\n';
+   
+    if(capacity - cargoAmount < 0){
+        std::cout << "Miałeś za mały statek biedaku teraz masz 0 pojemności bo ci zatonął" << '\n';
         return 0;
     }
-    
-     return capacity - cargoAmount;
+    return capacity - cargoAmount;
 }

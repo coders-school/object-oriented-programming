@@ -10,15 +10,19 @@
 
 int main()
 {
+
+
+
     std::cout << "Test Cargo" << '\n';
 
-    Cargo bananas("banany", 15, 150);
-    Cargo kryptonite("banany", 15, 150);
-    Cargo onion("cebula", 250, 1);
-    std::cout << (onion == bananas) << " " << (bananas == kryptonite) << " " << (onion == kryptonite) << "\n";
-    std::cout << bananas.getAmount() << " " << bananas.getBasePrice() << " " << bananas.getName() << "\n\n";
+    Cargo cotton("banany", 15, 150); // ( name, amount, basePrice) bananas does not work, imagine why?
+    Cargo kryptonite("krypton", 20, 200); // ( name, amount, basePrice)
+    Cargo onion("cebula", 250, 1); // ( name, amount, basePrice)
 
-    bananas -= 100;
+    std::cout << (onion == cotton) << " " << (cotton == kryptonite) << " " << (onion == kryptonite) << "\n";
+    std::cout << cotton.getAmount() << " " << cotton.getBasePrice() << " " << cotton.getName() << "\n\n";
+
+    cotton -= 100;
 
     std::cout << "Test islands" << '\n';
 
@@ -27,21 +31,26 @@ int main()
     Coordinates chicago(125.f, 174.f);
     std::cout << (breslau == miami) << " " << (chicago == breslau) << " " << (miami == chicago) << "\n\n";
 
-    std::cout << "Test ship" << '\n';
+    std::cout << "Test ship Titanic" << '\n';
 
     Ship Titanic(20, 90, 1);
-    Titanic.addCargo(&bananas);
+    Titanic.addCargo(&kryptonite);
     std::cout << "Vector size: " << Titanic.getCargo().size() << '\n';
     std::cout << "Titanic cargo: " << Titanic.getCargo()[0]->getName() << '\n';
-    std::cout << Titanic.getCargo()[0]->getAmount() << std::endl;
+    std::cout << Titanic.getCargo()[0]->getAmount() << "\n\n";
+
+    std::cout << "Test make_unique ptr ship" << '\n';
 
     auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
-    ship->addCargo(&bananas);
+    ship->addCargo(&cotton);
     size_t shipCargoSize = ship->getCargo().size();
     Player player(std::move(ship), 1, 1);
     std::cout << "Vector size: " << shipCargoSize << '\n';
     std::cout << "Player's ship speed: " << player.getShip()->getSpeed() << '\n';
-    std::cout << "Player's ship cargo: " << player.getCargo(0)->getName() << '\n';
+    std::cout << "Player's ship cargo name: " << player.getCargo(0)->getName() << '\n';
+    std::cout << "Player's ship cargo (should be 15): " << player.getCargo(0)->getAmount() << '\n';
+    std::cout << "Player's ship cargo base price: " << player.getCargo(0)->getBasePrice() << '\n';
+
     std::cout << "Available space: " << player.getAvailableSpace() << "\n\n";
 
     std::cout << "Random islands positions: X | Y" << '\n';

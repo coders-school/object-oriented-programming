@@ -20,4 +20,6 @@ public:
 
     size_t getSpeed() const;
     Cargo* getCargo(size_t index) const;
+
+    
 };
