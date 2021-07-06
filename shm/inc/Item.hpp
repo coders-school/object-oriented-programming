@@ -24,4 +24,6 @@ public:
 
 private:
     const Rarity rarity_;
+    size_t daysToDestruction_ { 30 };
+
 };

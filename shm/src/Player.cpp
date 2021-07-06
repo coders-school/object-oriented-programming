@@ -33,3 +33,7 @@ void Player::payCrew(const size_t payCrew) {
         ? money_ = 0 
         : money_ -= payCrew;
 }
+
+void Player::setPlayerPtr() {
+    ship_->changeDelegate(this);
+}
