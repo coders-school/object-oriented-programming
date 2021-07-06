@@ -16,8 +16,10 @@ public:
 
     size_t getPrice() const override;
     bool operator==(const Cargo& other) const override;
-    std::unique_ptr<Cargo> split(size_t amountPart) override;
 
 protected:
     Quality quality_ = Quality::common;
+
+private:
+    std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };

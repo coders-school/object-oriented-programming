@@ -34,7 +34,7 @@ public:
     //find comperable cargo in store
     Cargo* findCargoInStore(const Cargo* const exampleCargo) const;
 
-private:
+//private:
     StoreCargoVec cargoVec_{};
 };
 

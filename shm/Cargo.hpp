@@ -19,12 +19,21 @@ public:
     virtual size_t getAmount() const;
     virtual size_t getBasePrice() const;
 
-    virtual std::unique_ptr<Cargo> split(size_t amountPart) = 0;
+    std::unique_ptr<Cargo> split(size_t amountPart) {
+        if (!amountPart or amountPart > amount_) {
+            return {};
+        }
+        *this -= amountPart;
+        return createAmountOfEqual(amountPart);
+    }
 
 protected:
     std::string name_{};
     size_t amount_{};
     size_t basePrice_{};
+
+private:
+    virtual std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) = 0;
 };
 
 //temporary for same Functionality as old Cargo
@@ -35,5 +44,5 @@ public:
 
     size_t getPrice() const override;
     bool operator==(const Cargo& other) const override;
-    std::unique_ptr<Cargo> split(size_t amountPart) override;
+    std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };

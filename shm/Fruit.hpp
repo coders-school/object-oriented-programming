@@ -10,9 +10,11 @@ public:
     size_t getPrice() const override;
     bool operator==(const Cargo& other) const override;
     Fruit& operator--();
-    std::unique_ptr<Cargo> split(size_t amountPart) override;
 
 protected:
     size_t maxFreshTime_ = 0;
     size_t freshTime_ = 0;
+
+private:
+    std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };

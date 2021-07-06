@@ -1,4 +1,5 @@
 #include "Cargo.hpp"
+#include <assert.h>
 
 Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
     : name_{name}, amount_{amount}, basePrice_{basePrice} {}
@@ -35,10 +36,9 @@ bool CargoDefault::operator==(const Cargo& other) const {
     return name_ == other.getName();
 }
 
-std::unique_ptr<Cargo> CargoDefault::split(size_t amountPart) {
-    if (!amountPart or amountPart > amount_) {
-        return {};
-    }
-    *this -= amountPart;
-    return std::make_unique<CargoDefault>(name_, amountPart, basePrice_);
+std::unique_ptr<Cargo> CargoDefault::createAmountOfEqual(size_t amount) {
+    using OwnType = std::remove_reference_t<decltype(*this)>;
+    auto result = std::make_unique<OwnType>(name_, amount, basePrice_);
+    assert(*result == *this);
+    return result;
 }

@@ -1,4 +1,5 @@
 #include "Alcohol.hpp"
+#include <assert.h>
 
 size_t Alcohol::alcoholBasePriceFor96percent_ = alcoholBasePriceFor96percent;
 
@@ -20,10 +21,9 @@ bool Alcohol::operator==(const Cargo& other) const {
     return false;
 }
 
-std::unique_ptr<Cargo> Alcohol::split(size_t amountPart) {
-    if (!amountPart or amountPart > amount_) {
-        return {};
-    }
-    *this -= amountPart;
-    return std::make_unique<Alcohol>(name_, amountPart, percentage_);
+std::unique_ptr<Cargo> Alcohol::createAmountOfEqual(size_t amount) {
+    using OwnType = std::remove_reference_t<decltype(*this)>;
+    auto result = std::make_unique<OwnType>(name_, amount, percentage_);
+    assert(*result == *this);
+    return result;
 }

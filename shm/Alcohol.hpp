@@ -12,10 +12,11 @@ public:
 
     size_t getPrice() const override;
     bool operator==(const Cargo& other) const override;
-    std::unique_ptr<Cargo> split(size_t amountPart) override;
-
     static size_t alcoholBasePriceFor96percent_;
 
 protected:
     unsigned char percentage_ = 0;
+
+private:
+    std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };

@@ -1,4 +1,5 @@
 #include "Item.hpp"
+#include <assert.h>
 
 Item::Item(std::string name, size_t amount, size_t basePrice, Quality quality)
     : Cargo(name, amount, basePrice), quality_{quality} {}
@@ -14,10 +15,9 @@ bool Item::operator==(const Cargo& other) const {
     return false;
 }
 
-std::unique_ptr<Cargo> Item::split(size_t amountPart) {
-    if (!amountPart or amountPart > amount_) {
-        return {};
-    }
-    *this -= amountPart;
-    return std::make_unique<Item>(name_, amountPart, basePrice_, quality_);
+std::unique_ptr<Cargo> Item::createAmountOfEqual(size_t amount) {
+    using OwnType = std::remove_reference_t<decltype(*this)>;
+    auto result = std::make_unique<OwnType>(name_, amount, basePrice_, quality_);
+    assert(*result == *this);
+    return result;
 }

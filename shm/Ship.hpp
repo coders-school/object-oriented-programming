@@ -5,14 +5,6 @@
 #include "Cargo.hpp"
 
 class Ship {
-    size_t capacity_;
-    size_t maxCrew_;
-    size_t crew_;
-    size_t speed_;
-    std::string name_;
-    const size_t id_;
-    std::vector<std::unique_ptr<Cargo>> cargoVec_;
-
 public:
     Ship();
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec);
@@ -32,4 +24,13 @@ public:
 
     void load(std::unique_ptr<Cargo> cargo);
     void unload(const Cargo* const cargo);
+
+private:
+    size_t capacity_;
+    size_t maxCrew_;
+    size_t crew_;
+    size_t speed_;
+    std::string name_;
+    const size_t id_;
+    std::vector<std::unique_ptr<Cargo>> cargoVec_;
 };

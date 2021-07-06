@@ -1,4 +1,5 @@
 #include "Fruit.hpp"
+#include <assert.h>
 
 Fruit::Fruit(std::string name, size_t amount, size_t basePrice, size_t freshTime, size_t maxFreshTime)
     : Cargo(name, amount, basePrice), freshTime_{freshTime}, maxFreshTime_{maxFreshTime} {
@@ -28,10 +29,9 @@ Fruit& Fruit::operator--() {  //prefix operator
     return *this;
 }
 
-std::unique_ptr<Cargo> Fruit::split(size_t amountPart) {
-    if (!amountPart or amountPart > amount_) {
-        return {};
-    }
-    *this -= amountPart;
-    return std::make_unique<Fruit>(name_, amountPart, basePrice_, freshTime_, maxFreshTime_);
+std::unique_ptr<Cargo> Fruit::createAmountOfEqual(size_t amount) {
+    using OwnType = std::remove_reference_t<decltype(*this)>;
+    auto result = std::make_unique<OwnType>(name_, amount, basePrice_, freshTime_, maxFreshTime_);
+    assert(*result == *this);
+    return result;
 }
