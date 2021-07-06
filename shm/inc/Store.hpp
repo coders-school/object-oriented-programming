@@ -22,6 +22,8 @@ public:
         lack_of_space
     };
 
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
+
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
 
