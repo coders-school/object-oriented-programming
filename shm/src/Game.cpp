@@ -3,13 +3,16 @@
 #include "shm/inc/Player.hpp"
 #include "shm/inc/Time.hpp"
 
+#include <iomanip>
+#include <iostream>
+
 Game::Game(size_t money, size_t game_days, size_t final_goal)
     : money_(money)
     , game_days_(game_days)
     , final_goal_(final_goal)
     , time_(std::make_unique<Time>())
 {
-    current_day_ = time_->getElapsedTime();
+    //current_day_ = time_->getElapsedTime();
 }
 
 void Game::startGame() {

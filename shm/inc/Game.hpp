@@ -5,8 +5,8 @@
 
 #include <memory>
 
-class Player;
-class Time;
+#include "shm/inc/Player.hpp"
+#include "shm/inc/Time.hpp"
 
 class Game {
 public:

@@ -1,5 +1,6 @@
 #include "shm/inc/Item.hpp"
 
+#include <iostream>
 #include <stdexcept>
 
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
