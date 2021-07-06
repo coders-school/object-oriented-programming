@@ -1,13 +1,12 @@
 #pragma once
 
-#include <cstddef>
-#include <stddef.h>
-
 #include <memory>
 
 #include "shm/inc/Player.hpp"
+#include "shm/inc/Ship.hpp"
 #include "shm/inc/Time.hpp"
 
+class Ship;
 class Game {
 public:
     Game(size_t money, size_t game_days, size_t final_goal);
