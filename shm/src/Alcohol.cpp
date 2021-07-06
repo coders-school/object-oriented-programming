@@ -2,10 +2,8 @@
 
 #include <stdexcept>
 
-Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage) 
-    : Cargo(name, amount, basePrice)
-    , percentage_(percentage)
-{}
+Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage)
+    : Cargo(name, amount, basePrice), percentage_(percentage) {}
 
 Cargo& Alcohol::operator+=(size_t amount) {
     if (amount_ + amount > MAX_AMOUNT_OF_CARGO) {
@@ -20,9 +18,13 @@ Cargo& Alcohol::operator-=(size_t amount) {
     return *this;
 }
 
-bool Alcohol::operator==(const Cargo& alcohol) const {
-    // TODO:
-    return alcohol.getAmount() == amount_ ? true : false;
+bool Alcohol::operator==(const Cargo& cargo) const {
+    if (typeid(cargo) == typeid(Alcohol)) {
+        const Alcohol* alcohol = static_cast<const Alcohol*>(&cargo);
+        return name_ == alcohol->getName() && basePrice_ == alcohol->getBasePrice() &&
+               percentage_ == alcohol->getPercentage();
+    }
+    return false;
 }
 
 size_t Alcohol::getPrice() const {
@@ -32,7 +34,6 @@ size_t Alcohol::getPrice() const {
 
 void Alcohol::nextDay() {
 }
-
 
 size_t Alcohol::getPercentage() const {
     return percentage_;
