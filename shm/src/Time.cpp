@@ -19,6 +19,10 @@ Time& Time::operator++() {
     return *this;
 }
 
+size_t Time::getElapsedTime() const {
+    return elapsedTime_;
+}
+
 void Time::notifySubscribers() {
     for (const auto& subscriber : subscribers_) {
         subscriber->nextDay();
