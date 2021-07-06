@@ -10,7 +10,7 @@ public:
     Player(std::unique_ptr<Ship> ship, const size_t& money);
 
     // Returns constant raw pointer to ship in players possesion if one exists, otherwise returns nullptr.
-    const Ship* getShip() const;
+    Ship* getShip() const;
 
     // Returns constant raw pointer to cargo instance of index in cargo vector provided as a parameter.
     // If cargo object doesn't exist - returns nullptr
@@ -20,7 +20,7 @@ public:
     void printCargoManifest() const;
 
     size_t getMoney() const;
-    size_t getAvailableSpace() const;
+    size_t getAvailableSpace();
     size_t getSpeed() const;
 
 private:

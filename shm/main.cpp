@@ -36,7 +36,7 @@ std::unique_ptr<Cargo> generateCargo() {
     };
     auto randomNumber = rand() % goods.size();
     auto anotherRandomNumber = rand() % 99 + 1;
-    auto ptr = std::make_unique<Cargo>(goods.at(randomNumber).first, anotherRandomNumber, goods.at(randomNumber).second);
+    auto ptr = std::make_unique<CargoDefault>(goods.at(randomNumber).first, anotherRandomNumber, goods.at(randomNumber).second);
     // RVO
     return ptr;
 }
