@@ -11,7 +11,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , finalGoal_(finalGoal)
     , time_(std::make_unique<Time>())
 {
-    gameDays_ -= time_->getElapsedTime();
+    size_t currentDay_ = time_->getElapsedTime();
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
     player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
 }
@@ -19,7 +19,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
 void Game::startGame() {
     printWelcomeScreen();
     printIntenface();
-    while (gameDays_ > 0) {
+    while (gameDays_ > currentDay_) {
         printMenu();  
         if (isGameWon()) {
             // YOU WON!
@@ -69,7 +69,7 @@ void Game::printIntenface() {
     std::cout << "#" << std::setfill(' ') << std::setw (97) << "#" << "\n";
     std::cout << "#" << std::setfill(' ') << std::setw (15) << "YOUR MONEY: " << std::setw (8) << std::setfill('0') << money_;
     std::cout << std::setfill(' ') << std::setw (30) << "YOUR GOAL: " << std::setw (8) << std::setfill('0') << finalGoal_;
-    std::cout << std::setfill(' ') << std::setw (30) << "DAYS LEFT: " << std::setw (3) << std::setfill('0') << gameDays_ - time_->getElapsedTime() << std::setfill(' ') << std::setw (4) << "#" "\n";
+    std::cout << std::setfill(' ') << std::setw (30) << "DAYS LEFT: " << std::setw (3) << std::setfill('0') << currentDay_ << std::setfill(' ') << std::setw (4) << "#" "\n";
     std::cout << "#" << std::setfill(' ') << std::setw (97) << "#" << "\n";
     std::cout << std::setw (99) << std::setfill('#') << "\n";
 }

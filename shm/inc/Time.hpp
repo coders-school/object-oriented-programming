@@ -12,7 +12,7 @@ public:
     size_t getElapsedTime() const;
 
 private:
-    size_t elapsedTime_{ 0 };
+    size_t elapsedTime_{};
     std::vector<Subscriber*> subscribers_;
 
     void notifySubscribers();
