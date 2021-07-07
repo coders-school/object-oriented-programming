@@ -45,13 +45,14 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 }
 
 void Store::nextDay() {
-    std::mt19937 generator(std::random_device{}());
-    std::uniform_int_distribution<size_t> distribution{
-        MIN_CARGO_IN_STORE, MAX_CARGO_IN_STORE
-    };
-
     for (const auto& cargo : cargo_) {
-        cargo->setAmount(distribution(generator));
+        cargo->setAmount(randomGenerate(MIN_CARGO_IN_STORE, MAX_CARGO_IN_STORE));
     }
+}
+
+size_t Store::randomGenerate(size_t min, size_t max) {
+    std::mt19937 gen(std::random_device{}()); 
+    std::uniform_int_distribution<size_t> distribution(min, max);
+    return distribution(gen);
 }
 
