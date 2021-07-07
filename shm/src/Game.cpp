@@ -1,6 +1,8 @@
 #include "shm/inc/Game.hpp"
 #include "shm/inc/Ship.hpp"
 
+#include <algorithm>
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -10,6 +12,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , gameDays_(gameDays)
     , finalGoal_(finalGoal)
     , time_(std::make_unique<Time>())
+    , map_(std::make_unique<Map>())
 {
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
     player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
@@ -18,15 +21,16 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
 void Game::startGame() {
     printWelcomeScreen();
     printIntenface();
-    while (gameDays_ > currentDay_) {
-        printMenu();  
-        if (isGameWon()) {
-            // YOU WON!
-            return;
-        }
-        std::cin.get();
-        // CONTUNUE GAME
-    }
+    printMap();
+    // while (game_days_ > current_day_) {
+    //     printMenu();  
+    //     if (isGameWon()) {
+    //         // YOU WON!
+    //         return;
+    //     }
+    //     std::cin.get();
+    //     // CONTUNUE GAME
+    // }
     // YOU LOST!
 }
 
@@ -71,4 +75,55 @@ void Game::printIntenface() {
     std::cout << std::setfill(' ') << std::setw (30) << "DAYS LEFT: " << std::setw (3) << std::setfill('0') << gameDays_ - currentDay_ << std::setfill(' ') << std::setw (4) << "#" "\n";
     std::cout << "#" << std::setfill(' ') << std::setw (97) << "#" << "\n";
     std::cout << std::setw (99) << std::setfill('#') << "\n";
+}
+
+void Game::printMap() {
+    int i{};
+    for (const auto& island : map_->getIslands()) {
+        std::cout << "Island no " << ++i 
+                  << " ---- Coordinates [" << island.getCoordinates().getPositionX() 
+                  << "][" << island.getCoordinates().getPositionY() << "]\n";
+    }
+}
+
+void Game::selectOption() {
+    printWelcomeScreen();
+    printMenu();
+    size_t option {};
+    std::cin >> option;
+    switch(option) {
+    case 1:
+        showMap();
+        break;
+    case 2:
+        travel();
+        break;
+    case 3:
+        checkCargo();
+        break;
+    case 4:
+        buy();
+        break;
+    case 5:
+        sell();
+        break;
+    case 6:
+        exit(0);
+    }
+}
+
+void Game::travel() {
+
+}
+
+void Game::checkCargo() {
+
+}
+
+void Game::buy() {
+
+}
+
+void Game::sell() {
+
 }
