@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <random>
 
+#include "shm/inc/Alcohol.hpp"
 #include "shm/inc/Cargo.hpp"
 #include "shm/inc/Player.hpp"
 
@@ -68,11 +69,21 @@ void Store::createFruits() {
 }
 
 void Store::createAlcohols() {
-
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Light beer", randomGenerate(0, 100), randomGenerate(10, 120), 3)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Beer", randomGenerate(0, 100), randomGenerate(10, 140), 5)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Dark beer", randomGenerate(0, 100), randomGenerate(15, 160), 7)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("White wine", randomGenerate(0, 100), randomGenerate(20, 180), 11)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Red wine", randomGenerate(0, 100), randomGenerate(25, 200), 12)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Martini", randomGenerate(0, 100), randomGenerate(30, 300), 15)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Rum", randomGenerate(0, 100), randomGenerate(35, 400), 35)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Whisky", randomGenerate(0, 100), randomGenerate(40, 500), 39)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Wodka", randomGenerate(0, 100), randomGenerate(45, 600), 42)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Gin", randomGenerate(0, 100), randomGenerate(50, 700), 37)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Pure alcohol", randomGenerate(0, 100), randomGenerate(50, 700), 96)));
 }
 
 void Store::createItems() {
-
+    
 }
 
 void Store::createDryFruits() {
