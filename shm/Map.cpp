@@ -1,6 +1,8 @@
 #include "Map.hpp"
 #include <algorithm>
 
+constexpr auto defaultIslandsNumber = 10u;
+
 Island::coordinateType generatePosition() {
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -39,10 +41,13 @@ Island* Map::getCurrentPosition() const {
 }
 
 Island* Map::getIsland(const Island::Coordinates& coordinate) {
-    for (auto& el : islandVec_) {
-        if (el.getPosition() == coordinate) {
-            return &el;
-        }
+    auto it = std::find_if(islandVec_.begin(), islandVec_.end(),
+                                [&coordinate](const Island& island) {
+                                    return island.getPosition() == coordinate;
+                                });
+    if (it != islandVec_.end()) {
+        return &*it;
+    } else {
+        return nullptr;
     }
-    return nullptr;
 }

@@ -69,6 +69,11 @@ void testIslandMap() {
         for(const auto& island : mapVec) {
             std::cout << num++ << ". ";
             std::cout << island.getPosition();
+            if (map.getIsland(island.getPosition()) != nullptr) {
+                std::cout << "^-Island exists\n";
+            } else  {
+                std::cout << "^-Island does not exist\n";
+            }
         }
     }
 }
@@ -77,5 +82,8 @@ int main() {
     srand(time(0));
     testCargoShipPlayer();
     testIslandMap();
+     
+
+    
     return 0;
 }
