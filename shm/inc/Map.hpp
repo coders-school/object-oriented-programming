@@ -12,6 +12,7 @@ class Map {
 public:
     Map();
     Island* getIsland(const Island::Coordinates&);
+    std::vector<Island> getIslands() { return vectorOfIslands_; }
 
 private:
     std::vector<Island> vectorOfIslands_;
