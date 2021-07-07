@@ -12,9 +12,9 @@ class Map {
 public:
     Map();
     Island* getIsland(const Island::Coordinates&);
-    std::vector<Island> getIslands() { return vectorOfIslands_; }
+    std::vector<Island> getIslands() { return islands_; }
 
 private:
-    std::vector<Island> vectorOfIslands_;
+    std::vector<Island> islands_;
     Island* currentPosition_;
 };
