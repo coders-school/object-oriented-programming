@@ -8,7 +8,6 @@
 #include "shm/inc/Ship.hpp"
 #include "shm/inc/Time.hpp"
 #include "shm/inc/Map.hpp"
-//#include "shm/inc/Island.hpp"
 
 
 class Ship;
