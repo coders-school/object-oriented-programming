@@ -16,10 +16,16 @@ public:
 private:
     void printWelcomeScreen();
     void printMenu();
+    void selectOption();
+    void showMap();     //NOT IMPLEMENTED
+    void travel();      //NOT IMPLEMENTED
+    void checkCargo();  //NOT IMPLEMENTED
+    void buy();         //NOT IMPLEMENTED
+    void sell();        //NOT IMPLEMENTED
     
-    size_t money_ {};
-    size_t game_days_ {};
-    const size_t final_goal_ {};
+    size_t money_;
+    size_t game_days_;
+    const size_t final_goal_;
     size_t current_day_;
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
