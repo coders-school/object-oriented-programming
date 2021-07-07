@@ -1,18 +1,18 @@
-#include "Player.hpp"
-#include "Cargo.hpp"
-#include "Map.hpp"
-#include "Island.hpp"
+#include <time.h>
 #include <iostream>
 #include <memory>
-#include <vector>
 #include <string>
 #include <utility>
-#include <time.h>
+#include <vector>
+#include "Cargo.hpp"
+#include "Island.hpp"
+#include "Map.hpp"
+#include "Player.hpp"
 
 // Return by value to give up ownership
 std::unique_ptr<Cargo> generateCargo() {
     // https://portroyale3.fandom.com/wiki/Goods
-    const std::vector<std::pair<std::string, size_t>> goods {
+    const std::vector<std::pair<std::string, size_t>> goods{
         {"Wood", 33},
         {"Adobe Bricks", 33},
         {"Wheat", 33},
@@ -42,13 +42,13 @@ std::unique_ptr<Cargo> generateCargo() {
 }
 
 void testCargoShipPlayer() {
-    constexpr size_t testCases {10};
-    constexpr size_t testShipCapacity {100};
+    constexpr size_t testCases{10};
+    constexpr size_t testShipCapacity{100};
     std::vector<std::unique_ptr<Cargo>> cargoVec;
     cargoVec.reserve(testShipCapacity);
-    for(size_t i = 0; i < testCases; ++i) {
+    for (size_t i = 0; i < testCases; ++i) {
         size_t cargoAmount = rand() % testShipCapacity;
-        for(size_t i = 0; i < cargoAmount; ++i) {
+        for (size_t i = 0; i < cargoAmount; ++i) {
             cargoVec.push_back(generateCargo());
         }
         auto pirateShip = std::make_unique<Ship>(testShipCapacity, 40, 10, "The Adventure Galley Pirate Ship", 0, std::move(cargoVec));
@@ -60,15 +60,20 @@ void testCargoShipPlayer() {
 }
 
 void testIslandMap() {
-    constexpr size_t testCases {10};
-    for(size_t i = 0; i < testCases; ++i) {
+    constexpr size_t testCases{10};
+    for (size_t i = 0; i < testCases; ++i) {
         Map map;
         auto mapVec = map.getIslandVec();
-        size_t num {1};
+        size_t num{1};
         std::cout << "\n\n--- MAP/ISLAND TEST ---\n";
-        for(const auto& island : mapVec) {
+        for (const auto& island : mapVec) {
             std::cout << num++ << ". ";
             std::cout << island.getPosition();
+            if (map.getIsland(island.getPosition()) != nullptr) {
+                std::cout << "^-Island exists\n";
+            } else {
+                std::cout << "^-Island does not exist\n";
+            }
         }
     }
 }
@@ -77,5 +82,6 @@ int main() {
     srand(time(0));
     testCargoShipPlayer();
     testIslandMap();
+
     return 0;
 }

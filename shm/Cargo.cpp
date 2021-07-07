@@ -1,7 +1,9 @@
+#include <stdexcept>
+
 #include "Cargo.hpp"
 #include <assert.h>
 
-Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
+Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     : name_{name}, amount_{amount}, basePrice_{basePrice} {}
 
 Cargo& Cargo::operator+=(size_t amount) {
@@ -10,11 +12,14 @@ Cargo& Cargo::operator+=(size_t amount) {
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
+    if (amount_ < amount) {
+        throw std::invalid_argument("Not allowed! You will be below zero!");
+    }
     amount_ -= amount;
     return *this;
 }
 
-std::string Cargo::getName() const {
+const std::string& Cargo::getName() const {
     return name_;
 }
 

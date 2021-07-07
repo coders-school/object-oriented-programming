@@ -5,17 +5,18 @@
 
 class Cargo {
 public:
-    Cargo(std::string name, size_t amount, size_t basePrice);
+    Cargo(const std::string& name, size_t amount, size_t basePrice);
 
     virtual ~Cargo() = default;
 
     Cargo& operator+=(size_t amount);
+    //operator-= throws std::invalid_argument. if you will use operator remember about try-catch.
     Cargo& operator-=(size_t amount);
     virtual bool operator==(const Cargo& other) const = 0;
 
     virtual size_t getPrice() const = 0;
 
-    virtual std::string getName() const;
+    virtual const std::string& getName() const;
     virtual size_t getAmount() const;
     virtual size_t getBasePrice() const;
 

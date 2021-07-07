@@ -27,8 +27,8 @@ public:
         }
 
     private:
-        const Island::coordinateType positionX_ = 0;
-        const Island::coordinateType positionY_ = 0;
+        const Island::coordinateType positionX_;
+        const Island::coordinateType positionY_;
     };
 
     constexpr Coordinates getPosition() const {
