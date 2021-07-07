@@ -14,7 +14,8 @@ public:
     Island* getIsland(const Island::Coordinates&);
     std::vector<Island> getIslands() { return islands_; }
     Island* getCurrentPosition() const;
-
+    void setCurrentPosition(Island* island);
+    
 private:
     std::vector<Island> islands_;
     Island* currentPosition_;
