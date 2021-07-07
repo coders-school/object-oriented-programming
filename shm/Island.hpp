@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 #include <cstdint>
 #include <iostream>
 #include <string>
@@ -18,6 +19,12 @@ public:
         }
 
         friend std::ostream& operator<<(std::ostream& out, const Coordinates& coords);
+
+        static size_t distance(const Coordinates& lhs, const Coordinates& rhs) {
+            return static_cast<size_t>(
+                std::sqrt(
+                    std::pow(lhs.positionX_ - rhs.positionX_, 2) + std::pow(lhs.positionY_ - rhs.positionY_, 2)));
+        }
 
     private:
         const Island::coordinateType positionX_ = 0;
