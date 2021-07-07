@@ -93,7 +93,7 @@ void Game::selectOption() {
     std::cin >> option;
     switch(option) {
     case 1:
-        showMap();
+        printMap();
         break;
     case 2:
         travel();
