@@ -10,6 +10,9 @@ public:
         Coordinates(size_t positionX, size_t positionY);
         bool operator==(const Coordinates& position) const;
         static size_t distance(const Coordinates& lhs, const Coordinates& rhs);
+        size_t getPositionX() { return positionX_; }
+        size_t getPositionY() { return positionY_; }
+
     private:
         const size_t positionX_ = 0;
         const size_t positionY_ = 0;
