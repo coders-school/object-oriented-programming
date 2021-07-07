@@ -18,10 +18,10 @@ private:
     void printMenu();
     void printIntenface();
     
-    size_t money_ {};
-    size_t gameDays_ {};
-    const size_t finalGoal_ {};
-    size_t currentDay_ {};
+    size_t money_;
+    size_t gameDays_;
+    const size_t finalGoal_;
+    size_t currentDay_;
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
     std::unique_ptr<Ship> ship_;
