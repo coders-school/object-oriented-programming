@@ -22,7 +22,7 @@ int main()
     std::cout << (onion == cotton) << " " << (cotton == kryptonite) << " " << (onion == kryptonite) << "\n";
     std::cout << cotton.getAmount() << " " << cotton.getBasePrice() << " " << cotton.getName() << "\n\n";
 
-    cotton -= 100;
+    //cotton -= 100;
 
     std::cout << "Test islands" << '\n';
 

@@ -23,18 +23,21 @@ size_t Player::getAvailableSpace () {
 }
 
 size_t Player::getSpeed() const {
-    if(ship_)
+    if(ship_->getSpeed() > 0)
     {
         return ship_->getSpeed(); 
     }
+    
+    std::cout << "Something went wrong, we set your speed at 0" << '\n';
     return 0; // TODO add something better
 }
 
 Cargo* Player::getCargo(size_t index) const {
-    if(ship_)
+    if(ship_->getCargo().at(index) > 0)
     {
         return ship_->getCargo().at(index);
     }
+    std::cout << "Something went wrong and you lost your cargo" << '\n';
     return nullptr; // TODO add something better
 }
 

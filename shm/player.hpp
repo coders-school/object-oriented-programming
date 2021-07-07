@@ -10,6 +10,7 @@ private:
     int money_;
     size_t availableSpace_;
     size_t calculateAvailableSpace(); //calculates space available on the ship based on cargo and ship capacity
+    size_t gettingCargoAmount();
 
 public:
     Player(std::unique_ptr<Ship> ship, int money, int availableSpace);
