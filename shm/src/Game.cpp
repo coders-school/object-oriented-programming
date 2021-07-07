@@ -1,6 +1,8 @@
 #include "shm/inc/Game.hpp"
 #include "shm/inc/Ship.hpp"
 
+#include <algorithm>
+#include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -10,6 +12,7 @@ Game::Game(size_t money, size_t game_days, size_t final_goal)
     , game_days_(game_days)
     , final_goal_(final_goal)
     , time_(std::make_unique<Time>())
+    , map_(std::make_unique<Map>())
 {
     current_day_ = time_->getElapsedTime();
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
@@ -18,15 +21,16 @@ Game::Game(size_t money, size_t game_days, size_t final_goal)
 
 void Game::startGame() {
     printWelcomeScreen();
-    while (game_days_ > current_day_) {
-        printMenu();  
-        if (isGameWon()) {
-            // YOU WON!
-            return;
-        }
-        std::cin.get();
-        // CONTUNUE GAME
-    }
+    printMap();
+    // while (game_days_ > current_day_) {
+    //     printMenu();  
+    //     if (isGameWon()) {
+    //         // YOU WON!
+    //         return;
+    //     }
+    //     std::cin.get();
+    //     // CONTUNUE GAME
+    // }
     // YOU LOST!
 }
 
@@ -61,6 +65,16 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 6. EXIT" << std::setw (11) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (30) << "#\n";
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
+}
+
+
+void Game::printMap() {
+    int i{};
+    for (const auto& island : map_->getIslands()) {
+        std::cout << "Island no " << ++i 
+                  << " ---- Coordinates [" << island.getCoordinates().getPositionX() 
+                  << "][" << island.getCoordinates().getPositionY() << "]\n";
+    }
 }
 
 void Game::selectOption() {
@@ -108,3 +122,4 @@ void Game::buy() {
 void Game::sell() {
 
 }
+
