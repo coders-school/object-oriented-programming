@@ -91,24 +91,25 @@ void Game::selectOption() {
     printMenu();
     size_t option {};
     std::cin >> option;
-    switch(option) {
-    case 1:
-        printMap();
-        break;
-    case 2:
-        travel();
-        break;
-    case 3:
-        checkCargo();
-        break;
-    case 4:
-        buy();
-        break;
-    case 5:
-        sell();
-        break;
-    case 6:
-        exit(0);
+    menuOption_ = static_cast<MenuOption>(option);
+    switch(menuOption_) {
+        case MenuOption::printMap :
+            printMap();
+            break;
+        case MenuOption::Travel :
+            travel();
+            break;
+        case MenuOption::CheckCargo :
+            checkCargo();
+            break;
+        case MenuOption::Buy :
+            buy();
+            break;
+        case MenuOption::Sell :
+            sell();
+            break;
+        case MenuOption::Exit :
+            exit(0);
     }
 }
 
