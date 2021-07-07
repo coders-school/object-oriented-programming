@@ -9,18 +9,19 @@
 class Ship;
 class Game {
 public:
-    Game(size_t money, size_t game_days, size_t final_goal);
+    Game(size_t money, size_t gameDays, size_t finalGoal);
 
     void startGame();
 
 private:
     void printWelcomeScreen();
     void printMenu();
+    void printIntenface();
     
     size_t money_ {};
-    size_t game_days_ {};
-    const size_t final_goal_ {};
-    size_t current_day_;
+    size_t gameDays_ {};
+    const size_t finalGoal_ {};
+    //size_t currentDay_;
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
     std::unique_ptr<Ship> ship_;
