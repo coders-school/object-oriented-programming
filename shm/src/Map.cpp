@@ -41,3 +41,7 @@ Island* Map::getIsland(const Island::Coordinates& coordinate) {
 Island* Map::getCurrentPosition() const {
     return currentPosition_;
 }
+
+void Map::setCurrentPosition(Island* island) {
+    currentPosition_ = island;
+}
