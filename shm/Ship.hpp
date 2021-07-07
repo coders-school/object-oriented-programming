@@ -23,6 +23,10 @@ public:
     size_t getSpeed() const;   
     const std::string& getName() const;  
     size_t getId() const;
+
+    void load(std::unique_ptr<Cargo> cargo);
+    void unload(const Cargo* const cargo);
+
     const CargoVec& getCargoVec() const;
      
 private:
@@ -30,7 +34,7 @@ private:
     size_t maxCrew_ = 0;
     size_t crew_ = 0;
     size_t speed_ = 0;
-    std::string name_ = "";
+    std::string name_;
     size_t id_ = -1;
     CargoVec cargoVec_ = {};
 };
