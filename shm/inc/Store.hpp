@@ -30,6 +30,11 @@ public:
     // override from Subscriber
     void nextDay() override;
     size_t randomGenerate(size_t min, size_t max);
+    void createAllCargo();
+    void createFruits();
+    void createAlcohols();
+    void createItems();
+    void createDryFruits();
     
 private:
     std::vector<std::unique_ptr<Cargo>> cargo_;

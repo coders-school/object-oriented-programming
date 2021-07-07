@@ -56,3 +56,26 @@ size_t Store::randomGenerate(size_t min, size_t max) {
     return distribution(gen);
 }
 
+void Store::createAllCargo() {
+    createFruits();
+    createAlcohols();
+    createItems();
+    createDryFruits();
+}
+
+void Store::createFruits() {
+
+}
+
+void Store::createAlcohols() {
+
+}
+
+void Store::createItems() {
+
+}
+
+void Store::createDryFruits() {
+
+}
+
