@@ -4,10 +4,6 @@
 #include <cstddef>
 #include <random>
 
-constexpr size_t COORDINATE_MIN = 0;
-constexpr size_t COORDINATE_MAX = 99;
-constexpr size_t ISLANDS_COUNT = 10;
-
 Map::Map() {
     std::mt19937 generator(std::random_device{}());
     std::uniform_int_distribution<size_t> distribution{
