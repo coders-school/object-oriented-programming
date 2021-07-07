@@ -110,6 +110,8 @@ void Game::selectOption() {
             break;
         case MenuOption::Exit :
             exit(0);
+        default:
+            std::cout << "Option doesn't exists\n";
     }
 }
 
