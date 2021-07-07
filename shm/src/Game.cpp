@@ -67,6 +67,7 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
 }
 
+
 void Game::printMap() {
     int i{};
     for (const auto& island : map_->getIslands()) {
@@ -75,3 +76,50 @@ void Game::printMap() {
                   << "][" << island.getCoordinates().getPositionY() << "]\n";
     }
 }
+
+void Game::selectOption() {
+    printWelcomeScreen();
+    printMenu();
+    size_t option {};
+    std::cin >> option;
+    switch(option) {
+    case 1:
+        showMap();
+        break;
+    case 2:
+        travel();
+        break;
+    case 3:
+        checkCargo();
+        break;
+    case 4:
+        buy();
+        break;
+    case 5:
+        sell();
+        break;
+    case 6:
+        exit(0);
+    }
+}
+
+void Game::showMap() {
+
+}
+
+void Game::travel() {
+
+}
+
+void Game::checkCargo() {
+
+}
+
+void Game::buy() {
+
+}
+
+void Game::sell() {
+
+}
+
