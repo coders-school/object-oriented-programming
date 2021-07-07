@@ -16,6 +16,12 @@ public:
 private:
     void printWelcomeScreen();
     void printMenu();
+    void selectOption();
+    void showMap();     //NOT IMPLEMENTED
+    void travel();      //NOT IMPLEMENTED
+    void checkCargo();  //NOT IMPLEMENTED
+    void buy();         //NOT IMPLEMENTED
+    void sell();        //NOT IMPLEMENTED
     
     size_t money_ {};
     size_t game_days_ {};

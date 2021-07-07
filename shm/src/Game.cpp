@@ -62,3 +62,49 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill(' ')  << std::setw (30) << "#\n";
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
 }
+
+void Game::selectOption() {
+    printWelcomeScreen();
+    printMenu();
+    size_t option {};
+    std::cin >> option;
+    switch(option) {
+    case 1:
+        showMap();
+        break;
+    case 2:
+        travel();
+        break;
+    case 3:
+        checkCargo();
+        break;
+    case 4:
+        buy();
+        break;
+    case 5:
+        sell();
+        break;
+    case 6:
+        exit(0);
+    }
+}
+
+void Game::showMap() {
+
+}
+
+void Game::travel() {
+
+}
+
+void Game::checkCargo() {
+
+}
+
+void Game::buy() {
+
+}
+
+void Game::sell() {
+
+}
