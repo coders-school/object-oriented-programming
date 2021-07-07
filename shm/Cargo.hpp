@@ -9,24 +9,17 @@ public:
 
     virtual ~Cargo() = default;
 
-    Cargo& operator+=(size_t amount);
     //operator-= throws std::invalid_argument. if you will use operator remember about try-catch.
+    Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
     virtual bool operator==(const Cargo& other) const = 0;
 
     virtual size_t getPrice() const = 0;
-
-    virtual const std::string& getName() const;
+    const std::string_view getName() const;
     virtual size_t getAmount() const;
     virtual size_t getBasePrice() const;
 
-    std::unique_ptr<Cargo> split(size_t amountPart) {
-        if (!amountPart or amountPart > amount_) {
-            return {};
-        }
-        *this -= amountPart;
-        return createAmountOfEqual(amountPart);
-    }
+    std::unique_ptr<Cargo> split(size_t amountPart);
 
 protected:
     std::string name_{};
@@ -35,15 +28,4 @@ protected:
 
 private:
     virtual std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) = 0;
-};
-
-//temporary for same Functionality as old Cargo
-class CargoDefault : public Cargo {
-public:
-    using Cargo::Cargo;
-    ~CargoDefault() override = default;
-
-    size_t getPrice() const override;
-    bool operator==(const Cargo& other) const override;
-    std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };
