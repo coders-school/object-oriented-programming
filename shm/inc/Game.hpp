@@ -2,6 +2,7 @@
 
 #include <map>
 #include <memory>
+#include <utility>
 
 #include "shm/inc/Player.hpp"
 #include "shm/inc/Ship.hpp"

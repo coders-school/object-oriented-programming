@@ -66,12 +66,19 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
 }
 
-void Game::printMap() {
+void Game::mapGenerate() {
+    size_t index = 0;
     for (size_t i = 0; i < COORDINATE_MAX; i++) {
         for (size_t j = 0; j < COORDINATE_MAX; j++) {
             if (map_->getIsland(Island::Coordinates(i, j)) != nullptr) {
-                std::cout << "Island " << i << " -------- " << j << '\n';
+                island.insert({index, std::make_pair(i, j)});
+                //std::cout << "Island " << i << " -------- " << j << '\n';
+                index++;
             }
         }
     }
+}
+
+void Game::printMap() {
+
 }
