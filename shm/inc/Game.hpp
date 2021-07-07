@@ -12,6 +12,16 @@ class Game {
 public:
     Game(size_t money, size_t gameDays, size_t finalGoal);
 
+    enum class MenuOption {
+        NoChoose = 0,
+        printMap,
+        Travel,
+        CheckCargo,
+        Buy,
+        Sell,
+        Exit
+    };
+
     void startGame();
 
 private:
@@ -37,4 +47,6 @@ private:
 
     bool isGameWon() const;
     bool isGameLost() const;
+
+    MenuOption menuOption_ { MenuOption::NoChoose };
 };
