@@ -20,7 +20,6 @@ public:
 private:
     void printWelcomeScreen();
     void printMenu();
-    // void mapGenerate();
     void printMap();
     
     size_t money_ {};
@@ -31,7 +30,6 @@ private:
     std::unique_ptr<Time> time_;
     std::unique_ptr<Ship> ship_;
     std::unique_ptr<Map> map_;
-    // std::map<size_t, std::pair<size_t, size_t>> island;
 
     bool isGameWon() const;
     bool isGameLost() const;

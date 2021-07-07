@@ -17,7 +17,6 @@ Game::Game(size_t money, size_t game_days, size_t final_goal)
     current_day_ = time_->getElapsedTime();
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
     player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
-    // mapGenerate();
 }
 
 void Game::startGame() {
@@ -67,18 +66,6 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill(' ')  << std::setw (30) << "#\n";
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
 }
-
-// void Game::mapGenerate() {
-//     size_t index = 1;
-//     for (size_t i = 0; i <= COORDINATE_MAX; i++) {
-//         for (size_t j = 0; j <= COORDINATE_MAX; j++) {
-//             if (map_->getIsland(Island::Coordinates(i, j)) != nullptr) {
-//                 island.insert({index, std::make_pair(i, j)});
-//                 index++;
-//             }
-//         }
-//     }
-// }
 
 void Game::printMap() {
     int i{};
