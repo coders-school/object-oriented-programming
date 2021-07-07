@@ -9,7 +9,7 @@ public:
     // class responsible for manage coordinates of islands in game
     class Coordinates {
     public:
-        constexpr Coordinates(size_t positionX, size_t positionY);
+        Coordinates(size_t positionX, size_t positionY);
         bool operator==(const Coordinates& position) const;
         static size_t distance(const Coordinates& lhs, const Coordinates& rhs);
         size_t getPositionX() { return positionX_; }
@@ -22,7 +22,7 @@ public:
 
     explicit Island(const Island::Coordinates& position);
     
-    constexpr Coordinates getCoordinates() const { return position_; }
+    Coordinates getCoordinates() const { return position_; }
     
 private:
     const Coordinates position_;
