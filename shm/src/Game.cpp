@@ -11,7 +11,6 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , finalGoal_(finalGoal)
     , time_(std::make_unique<Time>())
 {
-    size_t currentDay_ = time_->getElapsedTime();
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
     player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
 }
