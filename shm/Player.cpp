@@ -12,10 +12,7 @@ Player::Player(std::unique_ptr<Ship> ship, const size_t& money)
     }
 
 const Ship* Player::getShip() const {
-    if(ship_) {
-        return ship_.get();
-    }
-    return nullptr;
+    return ship_.get();
 }
 
 const Cargo* Player::getCargo(size_t index) const {
