@@ -89,16 +89,16 @@ void Store::createAlcohols() {
 }
 
 void Store::createItems() {
-    // cargo_.push_back(std::make_unique<Item>(Item("Knife", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Axe", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Lamp", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Helmet", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Gloves", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Shoes", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Pot", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Pan", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Plate", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    // cargo_.push_back(std::make_unique<Item>(Item("Brush", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    cargo_.push_back(std::make_unique<Item>(Item("Knife", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Axe", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Lamp", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Helmet", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Gloves", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Shoes", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Pot", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Pan", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Plate", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
+    cargo_.push_back(std::make_unique<Item>(Item("Brush", randomGenerate(0, 2), randomGenerate(1000, 2000), rarityCoversion(randomGenerate(0, 3)))));
 }
 
 void Store::createDryFruits() {
