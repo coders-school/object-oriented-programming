@@ -13,11 +13,11 @@ public:
         constexpr Coordinates(Island::coordinateType positionX, Island::coordinateType positionY)
             : positionX_{positionX}, positionY_{positionY} {}
 
-        friend std::ostream& operator<<(std::ostream& out, const Coordinates& coords);
-
-        bool operator==(const Coordinates& other) const {
+        constexpr bool operator==(const Coordinates& other) const {
             return positionX_ == other.positionX_ and positionY_ == other.positionY_;
         }
+
+        friend std::ostream& operator<<(std::ostream& out, const Coordinates& coords);
 
     private:
         const Island::coordinateType positionX_;

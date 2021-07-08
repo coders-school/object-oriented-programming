@@ -1,6 +1,9 @@
-#include "Cargo.hpp"
+#include <stdexcept>
 
-Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
+#include "Cargo.hpp"
+#include <assert.h>
+
+Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     : name_{name}, amount_{amount}, basePrice_{basePrice} {}
 
 Cargo& Cargo::operator+=(size_t amount) {
@@ -9,11 +12,14 @@ Cargo& Cargo::operator+=(size_t amount) {
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
+    if (amount_ < amount) {
+        throw std::invalid_argument("Not allowed! You will be below zero!");
+    }
     amount_ -= amount;
     return *this;
 }
 
-std::string Cargo::getName() const {
+const std::string_view Cargo::getName() const {
     return name_;
 }
 
@@ -25,20 +31,10 @@ size_t Cargo::getBasePrice() const {
     return basePrice_;
 }
 
-////////////////////////////////////
-
-size_t CargoDefault::getPrice() const {
-    return basePrice_;
-}
-
-bool CargoDefault::operator==(const Cargo& other) const {
-    return name_ == other.getName();
-}
-
-std::unique_ptr<Cargo> CargoDefault::split(size_t amountPart) {
+std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
     if (!amountPart or amountPart > amount_) {
         return {};
     }
     *this -= amountPart;
-    return std::make_unique<CargoDefault>(name_, amountPart, basePrice_);
+    return createAmountOfEqual(amountPart);
 }
