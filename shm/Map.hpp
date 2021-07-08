@@ -2,17 +2,19 @@
 
 #include <random>
 #include <vector>
+#include <memory>
 #include "Island.hpp"
 
 constexpr auto defaultIslandsNumber = 10u;
 
 class Map {
-    std::vector<Island> islandVec_;
+    using IslandVec = std::vector<std::unique_ptr<Island>>;
+    IslandVec islandVec_;
     Island* currentPosition_;
 
 public:
     Map();
-    const std::vector<Island>& getIslandVec() const;
+    const IslandVec& getIslandVec() const;
     Island* getCurrentPosition() const;
     Island* getIsland(const Island::Coordinates&);
 

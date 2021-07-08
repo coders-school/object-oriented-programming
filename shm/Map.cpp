@@ -16,11 +16,13 @@ void Map::fillWithRandomIslands() {
         auto posY = generatePosition();
         Island::Coordinates newCoordinate(posX, posY);
         auto check = std::find_if(islandVec_.begin(), islandVec_.end(),
-                                  [&newCoordinate](const Island& island) {
-                                      return island.getPosition() == newCoordinate;
+                                  [&newCoordinate](const std::unique_ptr<Island>& island) {
+                                      return island->getPosition() == newCoordinate;
                                   });
         if (check == islandVec_.end()) {
-            islandVec_.emplace_back(posX, posY);
+            auto newIsland = std::make_unique<Island>(posX, posY);
+            islandVec_.push_back(std::move(newIsland));
+           // islandVec_.emplace_back(std::make_unique<Island>(posX,posY));
         }
     }
 }
@@ -30,7 +32,7 @@ Map::Map() {
     fillWithRandomIslands();
 }
 
-const std::vector<Island>& Map::getIslandVec() const {
+const Map::IslandVec& Map::getIslandVec() const {
     return islandVec_;
 }
 
@@ -39,9 +41,9 @@ Island* Map::getCurrentPosition() const {
 }
 
 Island* Map::getIsland(const Island::Coordinates& coordinate) {
-    for (auto& el : islandVec_) {
-        if (el.getPosition() == coordinate) {
-            return &el;
+    for (const auto& el : islandVec_) {
+        if (el->getPosition() == coordinate) {
+            return el.get();
         }
     }
     return nullptr;
