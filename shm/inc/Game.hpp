@@ -34,7 +34,7 @@ private:
     const size_t finalGoal_;
     size_t currentDay_{};
   
-    void selectOption();
+    MenuOption selectOption();
     void travel();      //NOT IMPLEMENTED
     void checkCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
@@ -47,6 +47,7 @@ private:
 
     bool isGameWon() const;
     bool isGameLost() const;
+    bool validatingMenuChoose(size_t option);
 
     MenuOption menuOption_ { MenuOption::NoChoose };
 };

@@ -22,18 +22,8 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
 
 void Game::startGame() {
     printWelcomeScreen();
-    printIntenface();
-    printMap();    
-    // while (game_days_ > current_day_) {
-    //     printMenu();  
-    //     if (isGameWon()) {
-    //         // YOU WON!
-    //         return;
-    //     }
-    //     std::cin.get();
-    //     // CONTUNUE GAME
-    // }
-    // YOU LOST!
+    while (selectOption() != MenuOption::Exit && isGameWon() == false && isGameLost() == false) {
+    }
 }
 
 bool Game::isGameWon() const {
@@ -88,11 +78,14 @@ void Game::printMap() {
     }
 }
 
-void Game::selectOption() {
-    printWelcomeScreen();
+Game::MenuOption Game::selectOption() {
+    printIntenface();
     printMenu();
     size_t option {};
-    std::cin >> option;
+    do {
+        std::cout << "Please insert you choice: ";
+        std::cin >> option;
+    } while (validatingMenuChoose(option) == false);
     menuOption_ = static_cast<MenuOption>(option);
     switch(menuOption_) {
         case MenuOption::printMap :
@@ -111,10 +104,23 @@ void Game::selectOption() {
             sell();
             break;
         case MenuOption::Exit :
-            exit(0);
+            break;
         default:
             std::cout << "Option doesn't exists\n";
     }
+    return menuOption_;
+}
+
+bool Game::validatingMenuChoose(size_t option) {
+    size_t firstOptionElement { 1 };
+    size_t lastOptionElement { 6 };
+    if (std::cin.fail() || option < firstOptionElement || option > lastOptionElement) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong value please insert number between " << firstOptionElement << " and " << lastOptionElement << ".\n";
+        return false;
+    }
+    return true;
 }
 
 void Game::travel() {
