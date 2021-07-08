@@ -102,6 +102,9 @@ Game::MenuOption Game::selectOption() {
             sell();
             break;
         case MenuOption::Exit :
+            if (exitGame() == false) {
+                menuOption_ = MenuOption::NoChoose;
+            }
             break;
         default:
             std::cout << "Option doesn't exists\n";
@@ -133,6 +136,18 @@ Game::ConfirmOption Game::confirmOption(std::string announcemen) {
     }
     std::cout << "Wrong answer, you must choose Y or N\n";
     return ConfirmOption::Error;   
+}
+
+bool Game::exitGame() {
+    while (true) {
+        ConfirmOption exitAnswer = confirmOption("Are you sure you wanna exit game? Y/N";
+        if (exitAnswer == ConfirmOption::Yes) {
+            return true;
+        }
+        if (exitAnswer == ConfirmOption::No) {
+            return false
+        }
+    }
 }
 
 void Game::travel() {

@@ -45,6 +45,7 @@ private:
     void checkCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
+    bool exitGame();
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
