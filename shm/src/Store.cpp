@@ -5,6 +5,7 @@
 
 #include "shm/inc/Alcohol.hpp"
 #include "shm/inc/Cargo.hpp"
+#include "shm/inc/DryFruit.hpp"
 #include "shm/inc/Fruit.hpp"
 #include "shm/inc/Player.hpp"
 
@@ -112,6 +113,9 @@ void Store::createItems() {
 }
 
 void Store::createDryFruits() {
-
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Dry banana", randomGenerate(0, 300), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Raisins", randomGenerate(0, 300), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Dry apple", randomGenerate(0, 300), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Dry apple", randomGenerate(0, 300), randomGenerate(10, 20))));
 }
 
