@@ -5,7 +5,6 @@
 
 #include "shm/inc/Alcohol.hpp"
 #include "shm/inc/Cargo.hpp"
-#include "shm/inc/Item.hpp"
 #include "shm/inc/Player.hpp"
 
 std::ostream& operator<<(std::ostream& out, const Store& store){
@@ -59,7 +58,9 @@ size_t Store::randomGenerate(size_t min, size_t max) {
 }
 
 Item::Rarity Store::rarityCoversion(size_t numberForConversion) {
-
+    size_t multiplyRarity = 4;
+    size_t addRarity = 1;
+    return static_cast<Item::Rarity>((numberForConversion * multiplyRarity) + addRarity);
 }
 
 void Store::createAllCargo() {
@@ -82,22 +83,22 @@ void Store::createAlcohols() {
     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Martini", randomGenerate(0, 100), randomGenerate(30, 300), 15)));
     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Rum", randomGenerate(0, 100), randomGenerate(35, 400), 35)));
     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Whisky", randomGenerate(0, 100), randomGenerate(40, 500), 39)));
-    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Wodka", randomGenerate(0, 100), randomGenerate(45, 600), 42)));
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Vodka", randomGenerate(0, 100), randomGenerate(45, 600), 42)));
     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Gin", randomGenerate(0, 100), randomGenerate(50, 700), 37)));
     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Pure alcohol", randomGenerate(0, 100), randomGenerate(50, 700), 96)));
 }
 
 void Store::createItems() {
-    cargo_.push_back(std::make_unique<Item>(Item("Knife", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Axe", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Lamp", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Helmet", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Gloves", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Shoes", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Pot", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Pan", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Plate", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
-    cargo_.push_back(std::make_unique<Item>(Item("Brush", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Knife", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Axe", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Lamp", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Helmet", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Gloves", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Shoes", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Pot", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Pan", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Plate", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
+    // cargo_.push_back(std::make_unique<Item>(Item("Brush", randomGenerate(0, 2), randomGenerate(1000, 2000), randomGenerate(1, 4))));
 }
 
 void Store::createDryFruits() {

@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 
+#include "shm/inc/Item.hpp"
 #include "shm/inc/Subscriber.hpp"
 
 class Cargo;
@@ -31,7 +32,7 @@ public:
     void nextDay() override;
     size_t randomGenerate(size_t min, size_t max);
     Item::Rarity rarityCoversion(size_t numberForConversion);
-    
+
     void createAllCargo();
     void createFruits();
     void createAlcohols();
