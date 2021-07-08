@@ -1,11 +1,13 @@
 #include "shm/inc/Game.hpp"
-#include "shm/inc/Ship.hpp"
 
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
 #include <memory>
+
+#include "shm/inc/Ship.hpp"
+#include "shm/inc/Island.hpp"
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
@@ -116,7 +118,39 @@ void Game::selectOption() {
 }
 
 void Game::travel() {
+    /* 1. PRINT MAP AND SHOW POSITION
+       2. PROMPT TO CHOOSE AN ISLAND IN LOOP
+          - by number and return coordinates
+          - or by coordinates
+    */
+    size_t coordX{};
+    size_t coordY{};
 
+    Island* destinationIsland = map_->getIsland(Island::Coordinates(coordX, coordY));
+    if (destinationIsland) {
+        const size_t distance{
+            Island::Coordinates::distance(map_->getCurrentPosition()->getCoordinates(),
+                                          destinationIsland->getCoordinates())
+        };
+        
+        const size_t playerSpeed = player_->getSpeed();
+        const size_t travelTime = (distance * 10) / playerSpeed;    // temporary magic value
+
+
+        // TRAVEL INFO HERE (distance, speed)
+        
+        map_->setCurrentPosition(destinationIsland);
+
+        // DESTINATION REACHED INFO HERE (island number, coordinates, travel time)
+        
+        for (size_t i = 0; i < travelTime; i++) {
+            ++(*time_);
+        }
+        current_day_ = time_->getElapsedTime();
+    } else {
+        // WRONG COORDINATES - LOOP CONTINUES
+    }
+    // LOOP EXITS
 }
 
 void Game::checkCargo() {

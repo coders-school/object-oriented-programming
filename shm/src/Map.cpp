@@ -38,3 +38,11 @@ Island* Map::getIsland(const Island::Coordinates& coordinates) {
            ? std::addressof(*island_it)
            : nullptr;
 }
+
+Island* Map::getCurrentPosition() const {
+    return currentPosition_;
+}
+
+void Map::setCurrentPosition(Island* island) {
+    currentPosition_ = island;
+}
