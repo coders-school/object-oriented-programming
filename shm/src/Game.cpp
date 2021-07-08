@@ -121,6 +121,20 @@ bool Game::validatingMenuChoose(size_t option) {
     return true;
 }
 
+Game::ConfirmOption Game::confirmOption(std::string announcemen) {
+    std::cout << announcemen << '\n';
+    char answer;
+    std::cin >> answer;
+    if (answer == 'Y' || answer == 'y') {
+        return ConfirmOption::Yes;
+    }
+    if (answer == 'N' || answer == 'n') {
+        return ConfirmOption::No;
+    }
+    std::cout << "Wrong answer, you must choose Y or N\n";
+    return ConfirmOption::Error;   
+}
+
 void Game::travel() {
 
 }

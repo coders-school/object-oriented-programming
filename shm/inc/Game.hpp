@@ -22,6 +22,12 @@ public:
         Exit
     };
 
+    enum class ConfirmOption {
+        Yes,
+        No,
+        Error
+    };
+
     void startGame();
 
 private:
@@ -48,6 +54,7 @@ private:
     bool isGameWon() const;
     bool isGameLost() const;
     bool validatingMenuChoose(size_t option);
+    ConfirmOption confirmOption(std::string announcement);
 
     MenuOption menuOption_ { MenuOption::NoChoose };
 };
