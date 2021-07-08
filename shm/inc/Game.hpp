@@ -22,6 +22,12 @@ public:
         Exit
     };
 
+    enum class ConfirmOption {
+        Yes,
+        No,
+        Error
+    };
+
     void startGame();
 
 private:
@@ -39,6 +45,7 @@ private:
     void checkCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
+    bool exitGame();
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
@@ -48,6 +55,7 @@ private:
     bool isGameWon() const;
     bool isGameLost() const;
     bool validatingMenuChoose(size_t option);
+    ConfirmOption confirmOption(std::string announcement);
 
     MenuOption menuOption_ { MenuOption::NoChoose };
 };
