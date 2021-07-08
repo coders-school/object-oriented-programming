@@ -48,7 +48,7 @@ Island* Map::getIsland(const Island::Coordinates& coordinate) {
                                     return island->getPosition() == coordinate;
                                 });
     if (it != islandVec_.end()) {
-        return (*it).get();
+        return it->get();
     } 
         return nullptr;
 }

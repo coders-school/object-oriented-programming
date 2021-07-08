@@ -63,7 +63,7 @@ void testIslandMap() {
     constexpr size_t testCases{10};
     for (size_t i = 0; i < testCases; ++i) {
         Map map;
-        auto mapVec = map.getIslandVec();
+        const auto& mapVec = map.getIslandVec();
         size_t num{1};
         std::cout << "\n\n--- MAP/ISLAND TEST ---\n";
         for (const auto& island : mapVec) {

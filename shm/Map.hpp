@@ -17,7 +17,7 @@ public:
 
 private:
     Island* currentPosition_;
-    IslandVec islandVec_;
+    IslandVec islandVec_ = {};
     void fillWithRandomIslands();
 
 };
