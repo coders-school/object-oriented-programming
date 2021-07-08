@@ -66,6 +66,7 @@ Item::Rarity Store::rarityCoversion(size_t numberForConversion) {
 }
 
 void Store::createAllCargo() {
+    cargo_.reserve(40);
     createFruits();
     createAlcohols();
     createItems();
@@ -116,6 +117,7 @@ void Store::createDryFruits() {
     cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Dry banana", randomGenerate(0, 300), randomGenerate(10, 20))));
     cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Raisins", randomGenerate(0, 300), randomGenerate(10, 20))));
     cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Dry apple", randomGenerate(0, 300), randomGenerate(10, 20))));
-    cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Dry apple", randomGenerate(0, 300), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Hazelnuts", randomGenerate(0, 300), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit("Cranberry", randomGenerate(0, 300), randomGenerate(10, 20))));
 }
 
