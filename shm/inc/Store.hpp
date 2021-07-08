@@ -15,7 +15,7 @@ constexpr size_t STORE_CAPACITY { 1000 };
 
 class Store : public Subscriber {
 public:
-
+    Store();
     enum class Response {
         done, 
         lack_of_money, 
@@ -32,13 +32,13 @@ public:
     void nextDay() override;
     size_t randomGenerate(size_t min, size_t max);
     Item::Rarity rarityCoversion(size_t numberForConversion);
-
+    
+private:
     void createAllCargo();
     void createFruits();
     void createAlcohols();
     void createItems();
     void createDryFruits();
     
-private:
     std::vector<std::unique_ptr<Cargo>> cargo_;
 };

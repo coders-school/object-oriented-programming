@@ -21,7 +21,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
 void Game::startGame() {
     printWelcomeScreen();
     printIntenface();
-    printMap();
+    printMap();    
     // while (game_days_ > current_day_) {
     //     printMenu();  
     //     if (isGameWon()) {

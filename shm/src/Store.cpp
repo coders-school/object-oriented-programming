@@ -9,6 +9,11 @@
 #include "shm/inc/Fruit.hpp"
 #include "shm/inc/Player.hpp"
 
+Store::Store()
+{
+    createAllCargo();
+}
+
 std::ostream& operator<<(std::ostream& out, const Store& store){
     for (size_t i = 0; i < store.cargo_.size(); i++) {
         out << "|" << std::setfill('-') << std::setw (100) << "|\n";
