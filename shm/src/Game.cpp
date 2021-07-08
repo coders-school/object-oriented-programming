@@ -9,20 +9,20 @@
 #include "shm/inc/Ship.hpp"
 #include "shm/inc/Island.hpp"
 
-Game::Game(size_t money, size_t game_days, size_t final_goal)
+Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
-    , game_days_(game_days)
-    , final_goal_(final_goal)
+    , gameDays_(gameDays)
+    , finalGoal_(finalGoal)
     , time_(std::make_unique<Time>())
     , map_(std::make_unique<Map>())
 {
-    current_day_ = time_->getElapsedTime();
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
     player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
 }
 
 void Game::startGame() {
     printWelcomeScreen();
+    printIntenface();
     printMap();
     // while (game_days_ > current_day_) {
     //     printMenu();  
@@ -37,7 +37,7 @@ void Game::startGame() {
 }
 
 bool Game::isGameWon() const {
-    return player_->getMoney() >= final_goal_;
+    return player_->getMoney() >= finalGoal_;
 }
 
 bool Game::isGameLost() const {
@@ -69,6 +69,15 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
 }
 
+void Game::printIntenface() {
+    std::cout << std::setw (99) << std::setfill('#') << "\n";
+    std::cout << "#" << std::setfill(' ') << std::setw (97) << "#" << "\n";
+    std::cout << "#" << std::setfill(' ') << std::setw (15) << "YOUR MONEY: " << std::setw (8) << std::setfill('0') << money_;
+    std::cout << std::setfill(' ') << std::setw (30) << "YOUR GOAL: " << std::setw (8) << std::setfill('0') << finalGoal_;
+    std::cout << std::setfill(' ') << std::setw (30) << "DAYS LEFT: " << std::setw (3) << std::setfill('0') << gameDays_ - currentDay_ << std::setfill(' ') << std::setw (4) << "#" "\n";
+    std::cout << "#" << std::setfill(' ') << std::setw (97) << "#" << "\n";
+    std::cout << std::setw (99) << std::setfill('#') << "\n";
+}
 
 void Game::printMap() {
     int i{};
@@ -84,29 +93,28 @@ void Game::selectOption() {
     printMenu();
     size_t option {};
     std::cin >> option;
-    switch(option) {
-    case 1:
-        showMap();
-        break;
-    case 2:
-        travel();
-        break;
-    case 3:
-        checkCargo();
-        break;
-    case 4:
-        buy();
-        break;
-    case 5:
-        sell();
-        break;
-    case 6:
-        exit(0);
+    menuOption_ = static_cast<MenuOption>(option);
+    switch(menuOption_) {
+        case MenuOption::printMap :
+            printMap();
+            break;
+        case MenuOption::Travel :
+            travel();
+            break;
+        case MenuOption::CheckCargo :
+            checkCargo();
+            break;
+        case MenuOption::Buy :
+            buy();
+            break;
+        case MenuOption::Sell :
+            sell();
+            break;
+        case MenuOption::Exit :
+            exit(0);
+        default:
+            std::cout << "Option doesn't exists\n";
     }
-}
-
-void Game::showMap() {
-
 }
 
 void Game::travel() {

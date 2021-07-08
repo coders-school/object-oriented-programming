@@ -10,6 +10,7 @@ class Cargo;
 class Delegate;
 class Player;
 
+// class responsible for manage ship(s) in game
 class Ship : public Subscriber {
 public:
     Ship() = default;
@@ -25,7 +26,7 @@ public:
     size_t getMaxCrew() const { return maxCrew_; };
     size_t getCapacity() const { return capacity_; };
     std::shared_ptr<Cargo> getCargo(size_t index) const;
-    std::vector<std::shared_ptr<Cargo>> getVectorCargo() const { return cargo_; };
+    std::vector<std::shared_ptr<Cargo>> getCargos() const { return cargos_; };
 
     void setName(const std::string& name);
     void load(const std::shared_ptr<Cargo>);
@@ -42,6 +43,6 @@ private:
     const size_t maxCrew_ { 100 };
     const size_t capacity_ { 80 };
     Delegate* delegate_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargos_;
     size_t crew_ { 50 };
 };
