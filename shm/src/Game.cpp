@@ -140,12 +140,12 @@ Game::ConfirmOption Game::confirmOption(std::string announcemen) {
 
 bool Game::exitGame() {
     while (true) {
-        ConfirmOption exitAnswer = confirmOption("Are you sure you wanna exit game? Y/N";
+        ConfirmOption exitAnswer = confirmOption("Are you sure you wanna exit game? Y/N");
         if (exitAnswer == ConfirmOption::Yes) {
             return true;
         }
         if (exitAnswer == ConfirmOption::No) {
-            return false
+            return false;
         }
     }
 }
