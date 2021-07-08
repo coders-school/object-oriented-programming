@@ -1,11 +1,13 @@
 #pragma once
 
 #include <cstddef> 
+#include <memory>
+
+#include "shm/inc/Store.hpp"
 
 // class responsible for manage landmass in game
 class Island {
 public:
-
     // class responsible for manage coordinates of islands in game
     class Coordinates {
     public:
@@ -23,7 +25,9 @@ public:
     explicit Island(const Island::Coordinates& position);
     
     Coordinates getCoordinates() const { return position_; }
-    
+    std::shared_ptr<Store> getStore() { return store_; }
+
 private:
     const Coordinates position_;
+    std::shared_ptr<Store>store_;
 };
