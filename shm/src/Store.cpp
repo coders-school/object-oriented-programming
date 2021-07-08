@@ -5,6 +5,7 @@
 
 #include "shm/inc/Alcohol.hpp"
 #include "shm/inc/Cargo.hpp"
+#include "shm/inc/Fruit.hpp"
 #include "shm/inc/Player.hpp"
 
 std::ostream& operator<<(std::ostream& out, const Store& store){
@@ -71,7 +72,16 @@ void Store::createAllCargo() {
 }
 
 void Store::createFruits() {
-
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Orange", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Banana", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Apple", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Mango", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Lemon", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Grapes", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Strawberry", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Blueberry", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Raspberry", randomGenerate(0, 100), randomGenerate(10, 20))));
+    cargo_.push_back(std::make_unique<Fruit>(Fruit("Blackberry", randomGenerate(0, 100), randomGenerate(10, 20))));
 }
 
 void Store::createAlcohols() {
