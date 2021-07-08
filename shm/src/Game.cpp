@@ -146,7 +146,7 @@ void Game::travel() {
         for (size_t i = 0; i < travelTime; i++) {
             ++(*time_);
         }
-        current_day_ = time_->getElapsedTime();
+        currentDay_ = time_->getElapsedTime();
     } else {
         // WRONG COORDINATES - LOOP CONTINUES
     }
