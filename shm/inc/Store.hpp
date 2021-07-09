@@ -31,7 +31,7 @@ public:
     // override from Subscriber
     void nextDay() override;
     size_t randomGenerate(size_t min, size_t max);
-    Item::Rarity rarityCoversion(size_t numberForConversion);
+    Item::Rarity rarityConversion(size_t numberForConversion);
     
 private:
     void generateAllCargo();

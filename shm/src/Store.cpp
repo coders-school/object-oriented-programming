@@ -67,7 +67,7 @@ size_t Store::randomGenerate(size_t min, size_t max) {
     return distribution(gen);
 }
 
-Item::Rarity Store::rarityCoversion(size_t numberForConversion) {
+Item::Rarity Store::rarityConversion(size_t numberForConversion) {
     size_t multiplyRarity = 4;
     size_t addRarity = 1;
     return static_cast<Item::Rarity>((numberForConversion * multiplyRarity) + addRarity);
@@ -127,7 +127,7 @@ void Store::generateItem(std::vector<std::string>const & cargo) {
     cargo_.push_back(std::make_unique<Item>(Item(cargo[1], 
                         randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
                         randomGenerate(std::stol(cargo[4]), std::stol(cargo[5])), 
-                        rarityCoversion(randomGenerate(std::stol(cargo[6]), std::stol(cargo[7]))))));
+                        rarityConversion(randomGenerate(std::stol(cargo[6]), std::stol(cargo[7]))))));
 }
 
 void Store::generateDryFruits(std::vector<std::string>const & cargo) {
