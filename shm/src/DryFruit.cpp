@@ -20,3 +20,7 @@ std::size_t DryFruit::getPrice() const {
 void DryFruit::nextDay() {
     operator--();
 }
+
+bool DryFruit::getIsUsable() const {
+    return rottenTime_ == 0;
+}

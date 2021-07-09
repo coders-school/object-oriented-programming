@@ -43,3 +43,7 @@ void Alcohol::nextDay() {
 size_t Alcohol::getPercentage() const {
     return percentage_;
 }
+
+bool Alcohol::getIsUsable() const {
+    return percentage_ == 0;
+}
