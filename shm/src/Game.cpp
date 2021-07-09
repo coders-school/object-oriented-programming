@@ -34,13 +34,38 @@ void Game::startGame() {
     }
 }
 
-bool Game::isGameWon() const {
-    return player_->getMoney() >= finalGoal_;
+bool Game::isGameWon() {
+    if (player_->getMoney() >= finalGoal_) {
+        printWinScreen();
+        return true;
+    }
+    return false;
 }
 
-bool Game::isGameLost() const {
-    // probably not needed (any suggestions?)
+void Game::printWinScreen() {
+    std::cout << "############################################################\n";
+    std::cout << "#                                                          #\n";
+    std::cout << "#                  CONGRATULATION YOU WIN                  #\n";
+    std::cout << "#                                                          #\n";
+    std::cout << "############################################################";
+    std::cin.get();
+}
+
+bool Game::isGameLost() {
+    if (player_->getMoney() == 0 || (gameDays_ - time_->getElapsedTime()) == 0) {
+        printLoseScreen();
+        return true;
+    }
     return false;
+}
+
+void Game::printLoseScreen() {
+    std::cout << "############################################################\n";
+    std::cout << "#                                                          #\n";
+    std::cout << "#                 UNFORTUNATELY YOU LOST                   #\n";
+    std::cout << "#                                                          #\n";
+    std::cout << "############################################################";
+    std::cin.get();
 }
 
 void Game::printWelcomeScreen() {
