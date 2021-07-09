@@ -91,6 +91,10 @@ void Store::loadFromFile() {
     file.close();
 }
 
+void Store::convertDataFromFile(std::string lineFromFile) {
+    
+}
+
 // void Store::createFruits() {
 //     cargo_.push_back(std::make_unique<Fruit>(Fruit("Orange", randomGenerate(0, 100), randomGenerate(10, 20))));
 //     cargo_.push_back(std::make_unique<Fruit>(Fruit("Banana", randomGenerate(0, 100), randomGenerate(10, 20))));
