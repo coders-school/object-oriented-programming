@@ -14,7 +14,7 @@
 Store::Store(const size_t & storeSize)
 {
     cargo_.reserve(storeSize);
-    createAllCargo();
+    generateAllCargo();
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store){
@@ -73,12 +73,7 @@ Item::Rarity Store::rarityCoversion(size_t numberForConversion) {
     return static_cast<Item::Rarity>((numberForConversion * multiplyRarity) + addRarity);
 }
 
-void Store::createAllCargo() {
-
-
-}
-
-void Store::loadFromFile() {
+void Store::generateAllCargo() {
     std::string line;
     std::fstream file;
     file.open("settings/items.txt", std::ios::in);
@@ -100,6 +95,19 @@ void Store::convertDataFromFile(std::string lineFromFile) {
         } else {
             iterator++;
         }
+    }
+    generateSingleCargo(dataToCreateItems);
+}
+
+void Store::generateSingleCargo(std::vector<std::string>const & cargo) {
+    if (cargo[0] == "Fruit"){
+        
+    } else if (cargo[0] == "Alcohol"){
+        
+    } else if (cargo[0] == "Item"){
+        
+    } else if (cargo[0] == "DryFruit"){
+       
     }
 }
 

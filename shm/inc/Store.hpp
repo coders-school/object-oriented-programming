@@ -34,13 +34,8 @@ public:
     Item::Rarity rarityCoversion(size_t numberForConversion);
     
 private:
-    void createAllCargo();
-    // void createFruits();
-    // void createAlcohols();
-    // void createItems();
-    // void createDryFruits();
-    
-    void loadFromFile();
+    void generateAllCargo();
     void convertDataFromFile(std::string lineFromFile);
+    void generateSingleCargo(std::vector<std::string>const & cargo);
     std::vector<std::unique_ptr<Cargo>> cargo_;
 };
