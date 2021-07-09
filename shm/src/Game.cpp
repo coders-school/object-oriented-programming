@@ -248,7 +248,9 @@ void Game::hireCrew() {
             break;
         }
     }
-    
+    if (validCrewMoney(crewAmount) == true) {
+        *ship_+=crewAmount;
+    }
 }
 
 bool Game::crewIsNumber(const size_t & crew) { 
