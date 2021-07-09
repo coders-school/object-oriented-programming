@@ -51,11 +51,21 @@ void Game::printWinScreen() {
     std::cin.get();
 }
 
-bool Game::isGameLost() const {
+bool Game::isGameLost() {
     if (player_->getMoney() == 0 || (gameDays_ - time_->getElapsedTime()) == 0) {
+        printLoseScreen();
         return true;
     }
     return false;
+}
+
+void Game::printLoseScreen() {
+    std::cout << "############################################################\n";
+    std::cout << "#                                                          #\n";
+    std::cout << "#                 UNFORTUNATELY YOU LOST                   #\n";
+    std::cout << "#                                                          #\n";
+    std::cout << "############################################################";
+    std::cin.get();
 }
 
 void Game::printWelcomeScreen() {

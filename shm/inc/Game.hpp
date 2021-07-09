@@ -37,6 +37,7 @@ private:
     void printIntenface();
     void printMap();
     void printWinScreen();
+    void printLoseScreen();
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;
@@ -54,7 +55,7 @@ private:
     std::unique_ptr<Map> map_;
 
     bool isGameWon();
-    bool isGameLost() const;
+    bool isGameLost();
     bool isChoiceValid(const size_t & option);
     CheckAnswer checkAnswer(const std::string & announcemen);
     MenuOption selectOption();
