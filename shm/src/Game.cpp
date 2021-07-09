@@ -18,6 +18,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
 {
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
     player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
+    //std::cout << *map_->getIslands()[0].getStore();
 }
 
 void Game::startGame() {
