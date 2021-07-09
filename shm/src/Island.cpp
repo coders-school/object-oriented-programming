@@ -11,10 +11,10 @@ bool Island::Coordinates::operator==(const Coordinates& position) const {
     return (positionX_ == position.positionX_ && positionY_ == position.positionY_); 
 }
 
-Island::Island(const Island::Coordinates& position)
+Island::Island(const Island::Coordinates& position, const size_t & storeSize)
     : position_(position)
 {
-    store_ = std::make_shared<Store>();
+    store_ = std::make_shared<Store>(Store(storeSize));
 }
 
 size_t Island::Coordinates::distance(const Coordinates& lhs, const Coordinates& rhs) {

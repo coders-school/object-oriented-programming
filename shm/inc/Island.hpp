@@ -22,7 +22,7 @@ public:
         const size_t positionY_ = 0;
     };
 
-    explicit Island(const Island::Coordinates& position);
+    Island(const Island::Coordinates& position, const size_t &storeSize);
     
     Coordinates getCoordinates() const { return position_; }
     std::shared_ptr<Store> getStore() { return store_; }

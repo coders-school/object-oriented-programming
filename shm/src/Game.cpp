@@ -9,6 +9,9 @@
 #include "shm/inc/Ship.hpp"
 #include "shm/inc/Island.hpp"
 
+constexpr size_t FIRST_OPTION_ELEMENT { 1 };
+constexpr size_t LAST_OPTION_ELEMENT { 6 };
+
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
     , gameDays_(gameDays)
@@ -18,6 +21,8 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
 {
     ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
     player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
+    //std::cout << *map_->getIslands()[0].getStore();
+
 }
 
 void Game::startGame() {
@@ -85,7 +90,7 @@ Game::MenuOption Game::selectOption() {
     do {
         std::cout << "Please insert you choice: ";
         std::cin >> option;
-    } while (validatingMenuChoose(option) == false);
+    } while (isChoiceValid(option) == false);
     menuOption_ = static_cast<MenuOption>(option);
     switch(menuOption_) {
         case MenuOption::printMap :
@@ -105,7 +110,7 @@ Game::MenuOption Game::selectOption() {
             break;
         case MenuOption::Exit :
             if (exitGame() == false) {
-                menuOption_ = MenuOption::NoChoose;
+                menuOption_ = MenuOption::NoChoice;
             }
             break;
         default:
@@ -114,39 +119,39 @@ Game::MenuOption Game::selectOption() {
     return menuOption_;
 }
 
-bool Game::validatingMenuChoose(size_t option) {
-    size_t firstOptionElement { 1 };
-    size_t lastOptionElement { 6 };
-    if (std::cin.fail() || option < firstOptionElement || option > lastOptionElement) {
+bool Game::isChoiceValid(const size_t & option) { 
+
+    if (std::cin.fail() || option < FIRST_OPTION_ELEMENT || option > LAST_OPTION_ELEMENT) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Wrong value please insert number between " << firstOptionElement << " and " << lastOptionElement << ".\n";
+        std::cout << "Wrong value please insert number between " 
+                  << FIRST_OPTION_ELEMENT << " and " << LAST_OPTION_ELEMENT << ".\n";
         return false;
     }
     return true;
 }
 
-Game::ConfirmOption Game::confirmOption(std::string announcemen) {
+Game::CheckAnswer Game::checkAnswer(const std::string & announcemen) {
     std::cout << announcemen << '\n';
     char answer;
     std::cin >> answer;
     if (answer == 'Y' || answer == 'y') {
-        return ConfirmOption::Yes;
+        return CheckAnswer::Yes;
     }
     if (answer == 'N' || answer == 'n') {
-        return ConfirmOption::No;
+        return CheckAnswer::No;
     }
     std::cout << "Wrong answer, you must choose Y or N\n";
-    return ConfirmOption::Error;   
+    return CheckAnswer::Error;   
 }
 
 bool Game::exitGame() {
     while (true) {
-        ConfirmOption exitAnswer = confirmOption("Are you sure you wanna exit game? Y/N");
-        if (exitAnswer == ConfirmOption::Yes) {
+        CheckAnswer exitAnswer = checkAnswer("Are you sure you wanna exit game? Y/N");
+        if (exitAnswer == CheckAnswer::Yes) {
             return true;
         }
-        if (exitAnswer == ConfirmOption::No) {
+        if (exitAnswer == CheckAnswer::No) {
             return false;
         }
     }

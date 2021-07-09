@@ -19,4 +19,6 @@ public:
 private:
     std::vector<Island> islands_;
     Island* currentPosition_;
+    void  countRecordsInFile(size_t &counter);
+    size_t storeSize_{};
 };

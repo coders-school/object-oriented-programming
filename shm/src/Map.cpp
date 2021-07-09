@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include <cstddef>
+#include <fstream>
+#include <iostream>
 #include <memory>
 #include <random>
 
@@ -10,6 +12,7 @@ Map::Map() {
     std::uniform_int_distribution<size_t> distribution{
         COORDINATE_MIN, COORDINATE_MAX
     };
+    countRecordsInFile(storeSize_);
     islands_.reserve(ISLANDS_COUNT);
     while (islands_.size() != ISLANDS_COUNT) {
         auto generatedIslandCoords{
@@ -23,7 +26,7 @@ Map::Map() {
                                                generatedIslandCoords;
                                    });
         if (result == islands_.end()) {
-            islands_.push_back(Island(generatedIslandCoords));
+            islands_.push_back(Island(generatedIslandCoords, storeSize_));
         }
     }
     currentPosition_ = &(islands_[0]);
@@ -45,4 +48,17 @@ Island* Map::getCurrentPosition() const {
 
 void Map::setCurrentPosition(Island* island) {
     currentPosition_ = island;
+}
+
+void Map::countRecordsInFile(size_t &counter) {
+    std::string line;
+    std::fstream file;
+    file.open("settings/items.txt", std::ios::in);
+    if (file.good() == false) {
+        std::cout << "File not exist\n";
+    }
+    while (getline(file, line)) {
+        counter++;
+    }
+    file.close();
 }

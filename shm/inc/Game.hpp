@@ -7,13 +7,14 @@
 #include "shm/inc/Time.hpp"
 #include "shm/inc/Map.hpp"
 
+
 class Ship;
 class Game {
 public:
     Game(size_t money, size_t gameDays, size_t finalGoal);
 
     enum class MenuOption {
-        NoChoose = 0,
+        NoChoice = 0,
         printMap,
         Travel,
         CheckCargo,
@@ -22,7 +23,7 @@ public:
         Exit
     };
 
-    enum class ConfirmOption {
+    enum class CheckAnswer {
         Yes,
         No,
         Error
@@ -54,8 +55,9 @@ private:
 
     bool isGameWon() const;
     bool isGameLost() const;
-    bool validatingMenuChoose(size_t option);
-    ConfirmOption confirmOption(std::string announcement);
+    bool isChoiceValid(const size_t & option);
+    CheckAnswer checkAnswer(const std::string & announcemen);
 
-    MenuOption menuOption_ { MenuOption::NoChoose };
+    MenuOption menuOption_ { MenuOption::NoChoice };
+
 };
