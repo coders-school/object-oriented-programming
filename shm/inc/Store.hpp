@@ -40,7 +40,6 @@ private:
     // void createItems();
     // void createDryFruits();
     
-    size_t countRecordsInFile();
     void loadFromFile();
     void convertDataFromFile(std::string lineFromFile);
     std::vector<std::unique_ptr<Cargo>> cargo_;

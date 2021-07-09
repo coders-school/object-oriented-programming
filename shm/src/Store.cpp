@@ -77,10 +77,6 @@ void Store::createAllCargo() {
 
 }
 
-size_t countRecordsInFile() {
-    return 1;
-}
-
 void Store::loadFromFile() {
     //cargo_.reserve(countRecords());
     std::string line;
