@@ -13,6 +13,7 @@
 
 Store::Store(const size_t & storeSize)
 {
+    cargo_.reserve(storeSize);
     createAllCargo();
 }
 
@@ -78,15 +79,14 @@ void Store::createAllCargo() {
 }
 
 void Store::loadFromFile() {
-    //cargo_.reserve(countRecords());
     std::string line;
     std::fstream file;
-    file.open("../Settings/items.txt", std::ios::in);
+    file.open("settings/items.txt", std::ios::in);
     if (file.good() == false) {
         std::cout << "File not exist\n";
     }
     while (getline(file, line)) {
-        //line
+        convertDataFromFile(line);
     }
     file.close();
 }
