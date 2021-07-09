@@ -48,6 +48,7 @@ private:
     void checkCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
+    void hireCrew();
     MenuOption exitGame();
     
     std::unique_ptr<Player> player_;

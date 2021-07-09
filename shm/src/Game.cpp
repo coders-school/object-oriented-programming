@@ -142,7 +142,7 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
             sell();
             break;
         case MenuOption::HireCrew :
-            
+            hireCrew();
             break;
         case MenuOption::Exit :
             menuOption_ = exitGame();
@@ -154,7 +154,6 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
 }
 
 bool Game::isChoiceValid(const size_t & option) { 
-
     if (std::cin.fail() || option < FIRST_OPTION_ELEMENT || option > LAST_OPTION_ELEMENT) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -238,3 +237,12 @@ void Game::buy() {
 void Game::sell() {
 
 }
+
+void Game::hireCrew() {
+    size_t crewAmount{};
+    std::cout << "Cost of crew is 1 coin\n";
+    std::cout << "How many crew you wanna hire? ";
+    std::cin >> crewAmount;
+
+}
+
