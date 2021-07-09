@@ -101,7 +101,7 @@ void Store::convertDataFromFile(std::string lineFromFile) {
 
 void Store::generateSingleCargo(std::vector<std::string>const & cargo) {
     if (cargo[0] == "Fruit"){
-        
+        generateFruit(cargo);
     } else if (cargo[0] == "Alcohol"){
         
     } else if (cargo[0] == "Item"){
@@ -111,8 +111,10 @@ void Store::generateSingleCargo(std::vector<std::string>const & cargo) {
     }
 }
 
-void Store::generateFruit() {
-
+void Store::generateFruit(std::vector<std::string>const & cargo) {
+    cargo_.push_back(std::make_unique<Fruit>(Fruit(cargo[1], 
+                        randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
+                        randomGenerate(std::stol(cargo[4]), std::stol(cargo[4])))));
 }
 
 void Store::generateAlcohol() {
