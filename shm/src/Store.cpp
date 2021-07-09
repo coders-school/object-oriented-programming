@@ -11,7 +11,7 @@
 #include "shm/inc/Fruit.hpp"
 #include "shm/inc/Player.hpp"
 
-Store::Store(size_t storeSize)
+Store::Store(const size_t & storeSize)
 {
     createAllCargo();
 }

@@ -15,7 +15,7 @@ constexpr size_t STORE_CAPACITY { 1000 };
 
 class Store : public Subscriber {
 public:
-    explicit Store(size_t storeSize);
+    explicit Store(const size_t & storeSize);
     enum class Response {
         done, 
         lack_of_money, 
