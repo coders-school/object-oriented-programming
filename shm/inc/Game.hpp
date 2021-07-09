@@ -20,6 +20,7 @@ public:
         CheckCargo,
         Buy,
         Sell,
+        HireCrew,
         Exit
     };
 
