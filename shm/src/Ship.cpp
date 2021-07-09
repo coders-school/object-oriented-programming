@@ -87,6 +87,11 @@ void Ship::unload(Cargo* cargo) {
 
 void Ship::nextDay() {
     delegate_->payCrew(crew_);
+    for (size_t i = 0; i < cargos_.size(); i++) {
+        if (cargos_[i]->getIsUsable() == true) {
+            cargos_.erase(std::remove(cargos_.begin(), cargos_.end(), cargos_[i]), cargos_.end());
+        }
+    }
 }
 
 void Ship::changeDelegate(Player* player) {

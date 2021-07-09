@@ -105,6 +105,7 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
             break;
         case MenuOption::Travel :
             travel();
+            
             break;
         case MenuOption::CheckCargo :
             checkCargo();
