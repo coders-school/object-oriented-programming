@@ -43,3 +43,7 @@ Fruit& Fruit::operator--() {
     }
     return *this;
 }
+
+bool Fruit::getIsUsable() const {
+    return rottenTime_ == 0;
+}

@@ -44,3 +44,7 @@ size_t Item::getPrice() const {
 Item::Rarity Item::getRarity() const {
     return rarity_;
 }
+
+bool Item::getIsUsable() const {
+    return daysToDestruction_ == 0;
+}

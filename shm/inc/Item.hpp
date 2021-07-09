@@ -16,6 +16,7 @@ public:
     bool operator==(const Cargo& item) const override;
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
+    bool getIsUsable() const override;
 
     // override from Subscriber (via Cargo)
     void nextDay() override;
