@@ -15,7 +15,7 @@ constexpr size_t STORE_CAPACITY { 1000 };
 
 class Store : public Subscriber {
 public:
-    Store();
+    explicit Store(size_t storeSize);
     enum class Response {
         done, 
         lack_of_money, 
@@ -40,6 +40,7 @@ private:
     // void createItems();
     // void createDryFruits();
     
+    size_t countRecordsInFile();
     void loadFromFile();
     void convertDataFromFile(std::string lineFromFile);
     std::vector<std::unique_ptr<Cargo>> cargo_;

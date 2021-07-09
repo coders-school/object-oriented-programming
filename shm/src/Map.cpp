@@ -23,7 +23,7 @@ Map::Map() {
                                                generatedIslandCoords;
                                    });
         if (result == islands_.end()) {
-            islands_.push_back(Island(generatedIslandCoords));
+            islands_.push_back(Island(generatedIslandCoords, 20));
         }
     }
     currentPosition_ = &(islands_[0]);

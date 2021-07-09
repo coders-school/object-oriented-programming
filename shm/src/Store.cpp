@@ -11,7 +11,7 @@
 #include "shm/inc/Fruit.hpp"
 #include "shm/inc/Player.hpp"
 
-Store::Store()
+Store::Store(size_t storeSize)
 {
     createAllCargo();
 }
@@ -77,6 +77,10 @@ void Store::createAllCargo() {
 
 }
 
+size_t countRecordsInFile() {
+    return 1;
+}
+
 void Store::loadFromFile() {
     //cargo_.reserve(countRecords());
     std::string line;
@@ -92,7 +96,7 @@ void Store::loadFromFile() {
 }
 
 void Store::convertDataFromFile(std::string lineFromFile) {
-    
+
 }
 
 // void Store::createFruits() {
