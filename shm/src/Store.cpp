@@ -111,6 +111,22 @@ void Store::generateSingleCargo(std::vector<std::string>const & cargo) {
     }
 }
 
+void Store::generateFruit() {
+
+}
+
+void Store::generateAlcohol() {
+
+}
+
+void Store::generateItem() {
+
+}
+
+void Store::generateDryFruits() {
+
+}
+
 // void Store::createFruits() {
 //     cargo_.push_back(std::make_unique<Fruit>(Fruit("Orange", randomGenerate(0, 100), randomGenerate(10, 20))));
 //     cargo_.push_back(std::make_unique<Fruit>(Fruit("Banana", randomGenerate(0, 100), randomGenerate(10, 20))));

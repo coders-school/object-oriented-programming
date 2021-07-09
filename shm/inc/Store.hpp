@@ -37,5 +37,9 @@ private:
     void generateAllCargo();
     void convertDataFromFile(std::string lineFromFile);
     void generateSingleCargo(std::vector<std::string>const & cargo);
+    void generateFruit();
+    void generateAlcohol();
+    void generateItem();
+    void generateDryFruits();
     std::vector<std::unique_ptr<Cargo>> cargo_;
 };
