@@ -243,6 +243,20 @@ void Game::hireCrew() {
     std::cout << "Cost of crew is 1 coin\n";
     std::cout << "How many crew you wanna hire? ";
     std::cin >> crewAmount;
+    while (true) {
+        if (crewIsNumber(crewAmount) == true) {
+            break;
+        }
+    }
 
 }
 
+bool Game::crewIsNumber(const size_t & crew) { 
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong value please insert number.\n";
+        return false;
+    }
+    return true;
+}

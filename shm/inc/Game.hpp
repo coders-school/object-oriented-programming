@@ -62,6 +62,7 @@ private:
     CheckAnswer checkAnswer(const std::string & announcemen);
     MenuOption selectOption();
     MenuOption actionMenu(MenuOption userAnswer);
+    bool crewIsNumber(const size_t & crew);
     
     MenuOption menuOption_ { MenuOption::NoChoice };
 
