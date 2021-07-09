@@ -35,10 +35,11 @@ public:
     
 private:
     void createAllCargo();
-    void createFruits();
-    void createAlcohols();
-    void createItems();
-    void createDryFruits();
+    // void createFruits();
+    // void createAlcohols();
+    // void createItems();
+    // void createDryFruits();
     
+    void loadFromFile();
     std::vector<std::unique_ptr<Cargo>> cargo_;
 };
