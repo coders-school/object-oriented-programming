@@ -248,7 +248,7 @@ void Game::hireCrew() {
             break;
         }
     }
-
+    
 }
 
 bool Game::crewIsNumber(const size_t & crew) { 
@@ -256,6 +256,14 @@ bool Game::crewIsNumber(const size_t & crew) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "Wrong value please insert number.\n";
+        return false;
+    }
+    return true;
+}
+
+bool Game::validCrewMoney(const size_t & crew) {
+    if (crew > player_->getMoney()) {
+        std::cout << "You don't have enough money to hire " << crew << " crew\n";
         return false;
     }
     return true;
