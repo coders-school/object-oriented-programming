@@ -39,7 +39,7 @@ private:
     void generateSingleCargo(std::vector<std::string>const & cargo);
     void generateFruit(std::vector<std::string>const & cargo);
     void generateAlcohol(std::vector<std::string>const & cargo);
-    void generateItem();
+    void generateItem(std::vector<std::string>const & cargo);
     void generateDryFruits();
     std::vector<std::unique_ptr<Cargo>> cargo_;
 };
