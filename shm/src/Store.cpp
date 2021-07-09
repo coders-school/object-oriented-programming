@@ -130,8 +130,10 @@ void Store::generateItem(std::vector<std::string>const & cargo) {
                         rarityCoversion(randomGenerate(std::stol(cargo[6]), std::stol(cargo[7]))))));
 }
 
-void Store::generateDryFruits() {
-
+void Store::generateDryFruits(std::vector<std::string>const & cargo) {
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit(cargo[1], 
+                        randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
+                        randomGenerate(std::stol(cargo[4]), std::stol(cargo[5])))));
 }
 
 // void Store::createFruits() {
@@ -150,7 +152,7 @@ void Store::generateDryFruits() {
 // void Store::createAlcohols() {
 //     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Light beer", randomGenerate(0, 100), randomGenerate(10, 120), 3)));
 //     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Beer", randomGenerate(0, 100), randomGenerate(10, 140), 5)));
-//     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Dark beer", randomGenerate(0, 100), randomGenerate(15, 160), 7)));
+//     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Dark beer", randomGenerate(0std::vector<std::string>const & cargo, 100), randomGenerate(15, 160), 7)));
 //     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("White wine", randomGenerate(0, 100), randomGenerate(20, 180), 11)));
 //     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Red wine", randomGenerate(0, 100), randomGenerate(25, 200), 12)));
 //     cargo_.push_back(std::make_unique<Alcohol>(Alcohol("Martini", randomGenerate(0, 100), randomGenerate(30, 300), 15)));
