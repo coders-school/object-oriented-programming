@@ -27,7 +27,10 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
 
 void Game::startGame() {
     printWelcomeScreen();
-    while (selectOption() != MenuOption::Exit && isGameWon() == false && isGameLost() == false) {
+    while (isGameWon() == false && isGameLost() == false) {
+        if (selectOption() == MenuOption::Exit) {
+            break;
+        }
     }
 }
 
@@ -92,6 +95,10 @@ Game::MenuOption Game::selectOption() {
         std::cin >> option;
     } while (isChoiceValid(option) == false);
     menuOption_ = static_cast<MenuOption>(option);
+    return actionMenu(menuOption_);
+}
+
+Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
     switch(menuOption_) {
         case MenuOption::printMap :
             printMap();
@@ -109,9 +116,7 @@ Game::MenuOption Game::selectOption() {
             sell();
             break;
         case MenuOption::Exit :
-            if (exitGame() == false) {
-                menuOption_ = MenuOption::NoChoice;
-            }
+            menuOption_ = exitGame();
             break;
         default:
             std::cout << "Option doesn't exists\n";
@@ -145,14 +150,14 @@ Game::CheckAnswer Game::checkAnswer(const std::string & announcemen) {
     return CheckAnswer::Error;   
 }
 
-bool Game::exitGame() {
+Game::MenuOption Game::exitGame() {
     while (true) {
         CheckAnswer exitAnswer = checkAnswer("Are you sure you wanna exit game? Y/N");
         if (exitAnswer == CheckAnswer::Yes) {
-            return true;
+            return Game::MenuOption::Exit;
         }
         if (exitAnswer == CheckAnswer::No) {
-            return false;
+            return Game::MenuOption::NoChoice;
         }
     }
 }

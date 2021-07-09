@@ -41,12 +41,11 @@ private:
     const size_t finalGoal_;
     size_t currentDay_{};
   
-    MenuOption selectOption();
     void travel();      //NOT IMPLEMENTED
     void checkCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
-    bool exitGame();
+    MenuOption exitGame();
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
@@ -57,7 +56,9 @@ private:
     bool isGameLost() const;
     bool isChoiceValid(const size_t & option);
     CheckAnswer checkAnswer(const std::string & announcemen);
-
+    MenuOption selectOption();
+    MenuOption actionMenu(MenuOption userAnswer);
+    
     MenuOption menuOption_ { MenuOption::NoChoice };
 
 };
