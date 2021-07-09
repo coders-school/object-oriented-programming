@@ -52,7 +52,9 @@ void Game::printWinScreen() {
 }
 
 bool Game::isGameLost() const {
-    
+    if (player_->getMoney() == 0 || (gameDays_ - time_->getElapsedTime()) == 0) {
+        return true;
+    }
     return false;
 }
 
