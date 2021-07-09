@@ -103,7 +103,7 @@ void Store::generateSingleCargo(std::vector<std::string>const & cargo) {
     if (cargo[0] == "Fruit"){
         generateFruit(cargo);
     } else if (cargo[0] == "Alcohol"){
-        
+        generateAlcohol(cargo);
     } else if (cargo[0] == "Item"){
         
     } else if (cargo[0] == "DryFruit"){
@@ -117,8 +117,10 @@ void Store::generateFruit(std::vector<std::string>const & cargo) {
                         randomGenerate(std::stol(cargo[4]), std::stol(cargo[4])))));
 }
 
-void Store::generateAlcohol() {
-
+void Store::generateAlcohol(std::vector<std::string>const & cargo) {
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol(cargo[1], 
+                        randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
+                        randomGenerate(std::stol(cargo[4]), std::stol(cargo[4])), std::stol(cargo[5]))));
 }
 
 void Store::generateItem() {
