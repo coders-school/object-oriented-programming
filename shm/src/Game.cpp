@@ -131,7 +131,6 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
             break;
         case MenuOption::Travel :
             travel();
-            
             break;
         case MenuOption::CheckCargo :
             checkCargo();
@@ -141,6 +140,9 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
             break;
         case MenuOption::Sell :
             sell();
+            break;
+        case MenuOption::HireCrew :
+            
             break;
         case MenuOption::Exit :
             menuOption_ = exitGame();
