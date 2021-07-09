@@ -87,7 +87,8 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill(' ')  << std::setw (22) << " 3. CHECK CARGO " << std::setw (8) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 4. BUY " << std::setw (11) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 5. SELL" << std::setw (11) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 6. EXIT" << std::setw (11) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (21) << " 6. HIRE CREW" << std::setw (9) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 7. EXIT" << std::setw (11) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (30) << "#\n";
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
 }
@@ -130,7 +131,6 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
             break;
         case MenuOption::Travel :
             travel();
-            
             break;
         case MenuOption::CheckCargo :
             checkCargo();
@@ -140,6 +140,9 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
             break;
         case MenuOption::Sell :
             sell();
+            break;
+        case MenuOption::HireCrew :
+            hireCrew();
             break;
         case MenuOption::Exit :
             menuOption_ = exitGame();
@@ -151,7 +154,6 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
 }
 
 bool Game::isChoiceValid(const size_t & option) { 
-
     if (std::cin.fail() || option < FIRST_OPTION_ELEMENT || option > LAST_OPTION_ELEMENT) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -234,4 +236,37 @@ void Game::buy() {
 
 void Game::sell() {
 
+}
+
+void Game::hireCrew() {
+    size_t crewAmount{};
+    std::cout << "Cost of crew is 1 coin\n";
+    std::cout << "How many crew you wanna hire? ";
+    std::cin >> crewAmount;
+    while (true) {
+        if (crewIsNumber(crewAmount) == true) {
+            break;
+        }
+    }
+    if (validCrewMoney(crewAmount) == true) {
+        *ship_+=crewAmount;
+    }
+}
+
+bool Game::crewIsNumber(const size_t & crew) { 
+    if (std::cin.fail()) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong value please insert number.\n";
+        return false;
+    }
+    return true;
+}
+
+bool Game::validCrewMoney(const size_t & crew) {
+    if (crew > player_->getMoney()) {
+        std::cout << "You don't have enough money to hire " << crew << " crew\n";
+        return false;
+    }
+    return true;
 }

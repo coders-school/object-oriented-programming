@@ -20,6 +20,7 @@ public:
         CheckCargo,
         Buy,
         Sell,
+        HireCrew,
         Exit
     };
 
@@ -47,6 +48,7 @@ private:
     void checkCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
+    void hireCrew();
     MenuOption exitGame();
     
     std::unique_ptr<Player> player_;
@@ -60,6 +62,8 @@ private:
     CheckAnswer checkAnswer(const std::string & announcemen);
     MenuOption selectOption();
     MenuOption actionMenu(MenuOption userAnswer);
+    bool crewIsNumber(const size_t & crew);
+    bool validCrewMoney(const size_t & crew);
     
     MenuOption menuOption_ { MenuOption::NoChoice };
 
