@@ -92,15 +92,22 @@ void Store::loadFromFile() {
 }
 
 void Store::convertDataFromFile(std::string lineFromFile) {
-    std::string name{};
-    size_t amountMin{};
-    size_t amountMax{};
-    size_t basePriceMin{};
-    size_t basePriceMax{};
-    size_t uniqueParameterMin{};
-    size_t uniqueParameterMax{};
-    for (auto const & ele : lineFromFile) {
-        
+    std::vector<std::string>dataToCreateItems(8, "");
+    // std::string itemType{};
+    // std::string name{};
+    // size_t amountMin{};
+    // size_t amountMax{};
+    // size_t basePriceMin{};
+    // size_t basePriceMax{};
+    // size_t uniqueParameterMin{};
+    // size_t uniqueParameterMax{};
+    size_t iterator{};
+    for (size_t i = 0; i < lineFromFile.size(); i++) {
+        if (lineFromFile[i] != ' ') {
+            dataToCreateItems[iterator] += lineFromFile[i];
+        } else {
+            iterator++;
+        }
     }
 }
 
