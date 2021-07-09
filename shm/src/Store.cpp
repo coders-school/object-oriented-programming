@@ -92,7 +92,16 @@ void Store::loadFromFile() {
 }
 
 void Store::convertDataFromFile(std::string lineFromFile) {
-
+    std::string name{};
+    size_t amountMin{};
+    size_t amountMax{};
+    size_t basePriceMin{};
+    size_t basePriceMax{};
+    size_t uniqueParameterMin{};
+    size_t uniqueParameterMax{};
+    for (auto const & ele : lineFromFile) {
+        
+    }
 }
 
 // void Store::createFruits() {
