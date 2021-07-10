@@ -19,11 +19,7 @@ Cargo& Cargo::operator-=(size_t amount) {
     return *this;
 }
 
-<<<<<<< HEAD
-const std::string& Cargo::getName() const {
-=======
 const std::string_view Cargo::getName() const {
->>>>>>> 13c0019d5c8997b33d01dc82cec9d9b0f68f8d4d
     return name_;
 }
 
