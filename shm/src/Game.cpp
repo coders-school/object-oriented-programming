@@ -274,7 +274,48 @@ void Game::buy() {
 }
 
 void Game::sell() {
+    std::cout << "Cargo to sell:\n";
+    // TODO: print ship cargo
+        
+     std::string cargoName;
+     size_t cargoAmount;
+     Store::Response response;
+     auto currentStore{ map_->getCurrentPosition()->getStore() };
 
+     do {
+         std::cout << "Input cargo name: ";
+         std::cin >> cargoName;
+         std::cout << "Input cargo amount: ";
+         std::cin >> cargoAmount;
+
+         if (std::cin.fail()) {
+             std::cout << "Invalid amount!\n";
+             std::cin.clear();
+             continue;
+         }
+
+         Cargo* cargo{ player_->getCargo(cargoName) };
+         if (cargo) {
+             response = currentStore->sell(cargo, cargoAmount, player_.get());
+             break;
+         }
+         std::cout << "No such cargo!" << std::endl;
+     } while (true);
+
+    switch (response) {
+    case Store::Response::done:
+        std::cout << "Sold " << cargoAmount << " of " << cargoName << '\n';
+        break;
+    case Store::Response::lack_of_cargo:
+        std::cout << "There is no enough cargo to sell!\n";
+        break;
+    case Store::Response::lack_of_space:
+        std::cout << "There is no enough space in store!\n";
+        break;
+    case Store::Response::lack_of_money:
+        std::cout << "You do not have enough money!\n";
+        break;
+    }
 }
 
 void Game::hireCrew() {

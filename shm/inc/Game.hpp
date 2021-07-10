@@ -47,7 +47,7 @@ private:
     void travel();      //NOT IMPLEMENTED
     void printCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
-    void sell();        //NOT IMPLEMENTED
+    void sell();
     void hireCrew();
     MenuOption exitGame();
     
