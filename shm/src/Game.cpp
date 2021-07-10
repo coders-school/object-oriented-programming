@@ -10,9 +10,11 @@
 #include "shm/inc/Ship.hpp"
 #include "shm/inc/Island.hpp"
 
-constexpr size_t DISTANCE_MULTIPLIER{ 10 };
-constexpr size_t FIRST_OPTION_ELEMENT{ 1 };
-constexpr size_t LAST_OPTION_ELEMENT{ 6 };
+namespace {
+    constexpr size_t DISTANCE_MULTIPLIER{ 10 };
+    constexpr size_t FIRST_OPTION_ELEMENT{ 1 };
+    constexpr size_t LAST_OPTION_ELEMENT{ 6 };
+}
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
