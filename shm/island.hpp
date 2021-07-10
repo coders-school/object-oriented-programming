@@ -1,12 +1,12 @@
 #pragma once
 #include "coordinates.hpp"
 
+//island will be descibed as x, y possition from coordiates class
 class Island {
 public:
-    Island(const Coordinates& position)
-        : position_(position)
-    {}
+    explicit Island(const Coordinates&);
     Coordinates getPosition() const { return position_; }
+
 private:
     Coordinates position_;
 };
