@@ -27,6 +27,7 @@ public:
 
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
+    Cargo* getCargo(const std::string& name) const;
 
     // override from Subscriber
     void nextDay() override;
