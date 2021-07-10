@@ -14,10 +14,9 @@ public:
     Game(size_t money, size_t gameDays, size_t finalGoal);
 
     enum class MenuOption {
-        NoChoice = 0,
+        NoChoice,
         printMap,
         Travel,
-        CheckCargo,
         Buy,
         Sell,
         HireCrew,
@@ -44,8 +43,7 @@ private:
     const size_t finalGoal_;
     size_t currentDay_{};
   
-    void travel();      //NOT IMPLEMENTED
-    void checkCargo();  //NOT IMPLEMENTED
+    void travel();
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
     void hireCrew();

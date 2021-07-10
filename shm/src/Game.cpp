@@ -137,9 +137,6 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
         case MenuOption::Travel :
             travel();
             break;
-        case MenuOption::CheckCargo :
-            checkCargo();
-            break;
         case MenuOption::Buy :
             buy();
             break;
@@ -232,10 +229,6 @@ void Game::travel() {
             currentDay_ = time_->getElapsedTime();
         }     
     } while (!destinationIsland);
-}
-
-void Game::checkCargo() {
-
 }
 
 void Game::buy() {
