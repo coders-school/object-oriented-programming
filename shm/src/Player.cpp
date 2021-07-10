@@ -22,6 +22,10 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return nullptr;
 }
 
+Cargo* Player::getCargo(const std::string& name) const {
+    return ship_->getCargo(name);
+}
+
 size_t Player::countAvailableSpace() const {
     return availableSpace_.first
            ? availableSpace_.second
