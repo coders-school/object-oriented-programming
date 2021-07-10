@@ -26,6 +26,7 @@ public:
     size_t getMaxCrew() const { return maxCrew_; };
     size_t getCapacity() const { return capacity_; };
     std::shared_ptr<Cargo> getCargo(size_t index) const;
+    Cargo* getCargo(const std::string& name) const;
     std::vector<std::shared_ptr<Cargo>> getCargos() const { return cargos_; };
 
     void setName(const std::string& name);
