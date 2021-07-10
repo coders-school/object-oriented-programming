@@ -195,6 +195,9 @@ Game::MenuOption Game::exitGame() {
 
 void Game::travel() {
     auto islandMax = printMap();
+    std::cout << "You are at island ("
+              << map_->getCurrentPosition()->getCoordinates().getPositionX() << ", "
+              << map_->getCurrentPosition()->getCoordinates().getPositionY() << ")\n";
     Island* destinationIsland{};
     do {   
         std::cout << "Which island are you travelling to?" << std::endl;
@@ -218,11 +221,11 @@ void Game::travel() {
             const size_t travelTime = (distance * DISTANCE_MULTIPLIER) / playerSpeed;
 
             std::cout << "You covered the distance of " << distance 
-                      << " at speed " << playerSpeed << '.' << std::endl;
+                      << " at speed " << playerSpeed << ".\n";
             map_->setCurrentPosition(destinationIsland);
             std::cout << "Island no " << islandNo 
-                      << " at coordinates [" << coordX << ", " << coordY 
-                      << "] reached in " << travelTime << " days." << std::endl;
+                      << " at coordinates (" << coordX << ", " << coordY 
+                      << ") reached in " << travelTime << " days.\n";
             for (size_t i = 0; i < travelTime; i++) {
                 ++(*time_);
             }
