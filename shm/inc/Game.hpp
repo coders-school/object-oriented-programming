@@ -36,7 +36,7 @@ private:
     void printWelcomeScreen();
     void printMenu();
     void printIntenface();
-    void printMap();
+    size_t printMap();
     void printWinScreen();
     void printLoseScreen();
     size_t money_;

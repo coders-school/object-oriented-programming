@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -9,8 +10,9 @@
 #include "shm/inc/Ship.hpp"
 #include "shm/inc/Island.hpp"
 
-constexpr size_t FIRST_OPTION_ELEMENT { 1 };
-constexpr size_t LAST_OPTION_ELEMENT { 6 };
+constexpr size_t DISTANCE_MULTIPLIER{ 10 };
+constexpr size_t FIRST_OPTION_ELEMENT{ 1 };
+constexpr size_t LAST_OPTION_ELEMENT{ 6 };
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
@@ -103,13 +105,14 @@ void Game::printIntenface() {
     std::cout << std::setw (99) << std::setfill('#') << "\n";
 }
 
-void Game::printMap() {
-    int i{};
+size_t Game::printMap() {
+    size_t islandIndex{};
     for (const auto& island : map_->getIslands()) {
-        std::cout << "Island no " << ++i 
+        std::cout << "Island no " << ++islandIndex 
                   << " ---- Coordinates [" << island.getCoordinates().getPositionX() 
                   << "][" << island.getCoordinates().getPositionY() << "]\n";
     }
+    return islandIndex;
 }
 
 Game::MenuOption Game::selectOption() {
@@ -191,39 +194,42 @@ Game::MenuOption Game::exitGame() {
 }
 
 void Game::travel() {
-    /* 1. PRINT MAP AND SHOW POSITION
-       2. PROMPT TO CHOOSE AN ISLAND IN LOOP
-          - by number and return coordinates
-          - or by coordinates
-    */
-    size_t coordX{};
-    size_t coordY{};
-
-    Island* destinationIsland = map_->getIsland(Island::Coordinates(coordX, coordY));
-    if (destinationIsland) {
-        const size_t distance{
-            Island::Coordinates::distance(map_->getCurrentPosition()->getCoordinates(),
-                                          destinationIsland->getCoordinates())
-        };
-        
-        const size_t playerSpeed = player_->getSpeed();
-        const size_t travelTime = (distance * 10) / playerSpeed;    // temporary magic value
-
-
-        // TRAVEL INFO HERE (distance, speed)
-        
-        map_->setCurrentPosition(destinationIsland);
-
-        // DESTINATION REACHED INFO HERE (island number, coordinates, travel time)
-        
-        for (size_t i = 0; i < travelTime; i++) {
-            ++(*time_);
+    // TODO: check max index for vector of islands
+    auto maxIndex = printMap() - 1;
+    Island* destinationIsland{};
+    do {   
+        std::cout << "Which island are you travelling to?" << std::endl;
+        size_t islandIndex;
+        std::cin >> islandIndex;
+        if (std::cin.fail() || islandIndex > maxIndex) {
+            std::cout << "No such island!" << std::endl;
+            std::cin.clear();
+            continue;
         }
-        currentDay_ = time_->getElapsedTime();
-    } else {
-        // WRONG COORDINATES - LOOP CONTINUES
-    }
-    // LOOP EXITS
+        size_t coordX{map_->getIslands()[islandIndex].getCoordinates().getPositionX()};
+        size_t coordY{map_->getIslands()[islandIndex].getCoordinates().getPositionY()};
+        destinationIsland = map_->getIsland(Island::Coordinates(coordX, coordY));
+        if (destinationIsland) {
+            const size_t distance{
+                Island::Coordinates::distance(map_->getCurrentPosition()->getCoordinates(),
+                                              destinationIsland->getCoordinates())
+            };
+            
+            const size_t playerSpeed = player_->getSpeed();
+            const size_t travelTime = (distance * DISTANCE_MULTIPLIER) / playerSpeed;
+
+            std::cout << "You covered the distance of " << distance 
+                      << " at speed " << playerSpeed << '.' << std::endl;
+            map_->setCurrentPosition(destinationIsland);
+            std::cout << "Island no " << islandIndex 
+                      << " at coordinates [" << coordX << ", " << coordY 
+                      << "] reached in " << travelTime << " days." << std::endl;
+            for (size_t i = 0; i < travelTime; i++) {
+                ++(*time_);
+            }
+            currentDay_ = time_->getElapsedTime();
+        }     
+    } while (!destinationIsland);
 }
 
 void Game::checkCargo() {
