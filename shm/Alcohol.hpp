@@ -7,12 +7,14 @@ constexpr size_t alcoholBasePriceFor96percent = 100u;
 
 class Alcohol : public Cargo {
 public:
+    static size_t alcoholBasePriceFor96percent_;
+
     Alcohol(std::string name, size_t amount, unsigned char percentage);
     ~Alcohol() override = default;
 
-    size_t getPrice() const override;
     bool operator==(const Cargo& other) const override;
-    static size_t alcoholBasePriceFor96percent_;
+
+    size_t getPrice() const override;
 
 protected:
     unsigned char percentage_ = 0;

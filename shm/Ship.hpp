@@ -23,6 +23,10 @@ public:
     size_t getSpeed() const;
     const std::string& getName() const;
     size_t getId() const;
+
+    void load(std::unique_ptr<Cargo> cargo);
+    void unload(const Cargo* const cargo);
+
     const CargoVec& getCargoVec() const;
 
     void load(std::unique_ptr<Cargo> cargo);

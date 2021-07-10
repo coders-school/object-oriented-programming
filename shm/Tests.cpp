@@ -7,6 +7,7 @@
 #include "Fruit.hpp"
 #include "Item.hpp"
 #include "Store.hpp"
+#include "DefaultCargo.hpp"
 
 constexpr auto singleCargoCost = 10;
 struct GoodsData {
@@ -23,10 +24,10 @@ constexpr auto noExistingCargoName = "Woda";
 constexpr auto existingCargoName = "Pszenica";
 
 constexpr std::array goods{
-    GoodsData{"Drewno"},  // for fun only
+    GoodsData{"Drewno"},
     GoodsData{"Cegly"},
     GoodsData{existingCargoName},
-    GoodsData{"Kamienie"},
+    GoodsData{"Kamienie"},   // item
     GoodsData{"Ziemniaki"},  //4 - fruit
     GoodsData{"???"},        //5 - alcohol
     GoodsData{"Skrzynia"}    //6 - item
@@ -37,6 +38,7 @@ constexpr auto secondCargoDefaultIndex = 1;
 constexpr auto fruitIndex = 4;
 constexpr auto alcoholIndex = 5;
 constexpr auto itemIndex = 6;
+constexpr auto otherItemIndex = 3;
 constexpr auto defaultGoodsName = "Towar";
 
 constexpr auto cargoTypes = goods.size();
@@ -75,6 +77,8 @@ std::unique_ptr<Cargo> generateCargo(size_t index, const std::string& differentN
         Alcohol::alcoholBasePriceFor96percent_ = singleCargoCost;
         return std::make_unique<Alcohol>(goodsName, fullQuantity, alcoholPercentage);
     case itemIndex:
+        [[fallthrough]];
+    case otherItemIndex:
         return std::make_unique<Item>(goodsName, fullQuantity, goods[index].value, itemQuality);
     default:
         return std::make_unique<CargoDefault>(goodsName, fullQuantity, goods[index].value);
@@ -349,6 +353,13 @@ TEST_CASE("player sell more of single cargo than have to empty store", "[Player]
     }
 }
 
+template <typename T>
+void printCargo(const T& container){
+    for (const auto& cargo : container) {
+        std::cout << std::setw(20) << std::left << cargo->getName() << ":" << std::setw(5) << cargo->getAmount() << '\n';
+    }
+}
+
 TEST_CASE("player sell half of single cargo than have to empty store", "[Player][Ship][Store][buy]") {  //use Player and Ship
     auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
     Player player(std::move(ship), playerMoney);
@@ -363,8 +374,8 @@ TEST_CASE("player sell half of single cargo than have to empty store", "[Player]
     REQUIRE(store.getCargoNum() == 1);
 
     std::cout << "Ship Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
     for (const auto& cargo : player.getShip()->getCargoVec()) {
-        std::cout << std::setw(15) << std::left << cargo->getName() << ":" << std::setw(5) << cargo->getAmount() << '\n';
         if (*cargo == *cargoExample) {
             REQUIRE(cargo->getAmount() == halfQuantity);
             continue;
@@ -387,15 +398,15 @@ TEST_CASE("player sell full of single cargo to empty store", "[Player][Ship][Sto
     REQUIRE(store.getCargoNum() == 1);
 
     std::cout << "Ship Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
     for (const auto& cargo : player.getShip()->getCargoVec()) {
-        std::cout << std::setw(15) << std::left << cargo->getName() << ":" << std::setw(5) << cargo->getAmount() << '\n';
         REQUIRE(cargo->getAmount() == fullQuantity);
         REQUIRE_FALSE(*cargo == *cargoExample);
     }
 
     std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
     for (const auto& cargo : store.cargoVec_) {
-        std::cout << std::setw(15) << std::left << cargo->getName() << ":" << std::setw(5) << cargo->getAmount() << '\n';
         REQUIRE(cargo->getAmount() == fullQuantity);
         REQUIRE(*cargo == *cargoExample);
     }
@@ -420,8 +431,8 @@ TEST_CASE("player sell full of all cargo to empty store", "[Player][Ship][Store]
     REQUIRE(store.getCargoNum() == fullCappacity);
 
     std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
     for (const auto& cargo : store.cargoVec_) {
-        std::cout << std::setw(15) << std::left << cargo->getName() << ":" << std::setw(5) << cargo->getAmount() << '\n';
         REQUIRE(cargo->getAmount() == fullQuantity);
     }
 }
@@ -468,6 +479,11 @@ TEST_CASE("rich player with empty ship buy more of single cargo than store have"
     auto cargoExample = generateCargo(0);
     auto response = store.sell(cargoExample.get(), moreThanFullQuantity, &player);
 
+    std::cout << "\nShip Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
+    std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
+
     REQUIRE(response == Response::lack_of_cargo);
 }
 
@@ -479,6 +495,11 @@ TEST_CASE("rich player with empty ship buy half of single cargo than store have"
 
     auto cargoExample = generateCargo(0);
     auto response = store.sell(cargoExample.get(), halfQuantity, &player);
+
+    std::cout << "\nShip Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
+    std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
 
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == fullCappacity - 1);
@@ -493,6 +514,11 @@ TEST_CASE("rich player with empty ship buy full of single cargo from empty store
 
     auto cargoExample = generateCargo(0);
     auto response = store.sell(cargoExample.get(), fullQuantity, &player);
+
+    std::cout << "\nShip Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
+    std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
 
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == fullCappacity - 1);
@@ -514,6 +540,35 @@ TEST_CASE("rich player with empty ship with enough capacity buy full of all carg
         REQUIRE(response == Response::done);
     }
 
+    std::cout << "\nShip Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
+    std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
+
     REQUIRE(player.getAvailableSpace() == 0);
     REQUIRE(store.getCargoNum() == 0);
+}
+
+TEST_CASE("rich player with empty ship with enough capacity buy hallf of all cargo from store", "[Player][Ship][Store][sell]") {  //use Player and Ship
+    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    Player player(std::move(ship), playerMoney);
+
+    REQUIRE(player.getAvailableSpace() == fullCappacity);
+
+    Store store;
+    fillWithGeneratedData(&store);
+
+    for (int i = 0; i < cargoTypes; ++i) {
+        auto cargoExample = generateCargo(i);
+        auto response = store.sell(cargoExample.get(), halfQuantity, &player);
+        REQUIRE(response == Response::done);
+    }
+
+    std::cout << "\nShip Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
+    std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
+
+    REQUIRE(player.getAvailableSpace() == 0);
+    REQUIRE(store.getCargoNum() == fullCappacity);
 }

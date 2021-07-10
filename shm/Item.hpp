@@ -14,8 +14,9 @@ public:
     Item(std::string name, size_t amount, size_t basePrice, Quality quality);
     ~Item() override = default;
 
-    size_t getPrice() const override;
     bool operator==(const Cargo& other) const override;
+
+    size_t getPrice() const override;
 
 protected:
     Quality quality_ = Quality::common;

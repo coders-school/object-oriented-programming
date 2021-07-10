@@ -19,7 +19,11 @@ Cargo& Cargo::operator-=(size_t amount) {
     return *this;
 }
 
+<<<<<<< HEAD
 const std::string& Cargo::getName() const {
+=======
+const std::string_view Cargo::getName() const {
+>>>>>>> 13c0019d5c8997b33d01dc82cec9d9b0f68f8d4d
     return name_;
 }
 
@@ -31,19 +35,10 @@ size_t Cargo::getBasePrice() const {
     return basePrice_;
 }
 
-////////////////////////////////////
-
-size_t CargoDefault::getPrice() const {
-    return basePrice_;
-}
-
-bool CargoDefault::operator==(const Cargo& other) const {
-    return name_ == other.getName();
-}
-
-std::unique_ptr<Cargo> CargoDefault::createAmountOfEqual(size_t amount) {
-    using OwnType = std::remove_reference_t<decltype(*this)>;
-    auto result = std::make_unique<OwnType>(name_, amount, basePrice_);
-    assert(*result == *this);
-    return result;
+std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
+    if (!amountPart or amountPart > amount_) {
+        return {};
+    }
+    *this -= amountPart;
+    return createAmountOfEqual(amountPart);
 }
