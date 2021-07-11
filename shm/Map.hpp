@@ -4,7 +4,6 @@
 #include <vector>
 #include "Island.hpp"
 
-
 class Map {
 public:
     Map();
@@ -16,5 +15,4 @@ private:
     Island* currentPosition_;
     std::vector<Island> islandVec_;
     void fillWithRandomIslands();
-
 };

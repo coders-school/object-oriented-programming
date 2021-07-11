@@ -42,11 +42,11 @@ Island* Map::getCurrentPosition() const {
 
 Island* Map::getIsland(const Island::Coordinates& coordinate) {
     auto it = std::find_if(islandVec_.begin(), islandVec_.end(),
-                                [&coordinate](const Island& island) {
-                                    return island.getPosition() == coordinate;
-                                });
+                           [&coordinate](const Island& island) {
+                               return island.getPosition() == coordinate;
+                           });
     if (it != islandVec_.end()) {
         return &*it;
-    } 
-        return nullptr;
+    }
+    return nullptr;
 }
