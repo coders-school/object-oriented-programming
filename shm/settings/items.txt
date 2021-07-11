@@ -1,0 +1,14 @@
+Fruit Orange 0 100 10 20
+Fruit Banana 0 100 10 20
+Fruit Apple 0 100 10 20
+Fruit Mango 0 100 10 20
+Fruit Lemon 0 100 10 20
+Fruit Grapes 0 100 10 20
+Fruit Strawberry 0 100 10 20
+Fruit Blueberry 0 100 10 20
+Fruit Raspberry 0 100 10 20
+Fruit Blackberry 0 100 10 20
+Alcohol Light-beer 0 100 10 120 3
+Alcohol Beer 0 100 10 140 5
+Item Sword 0 100 10 140 0 3
+DryFruit Dry-Banana 0 100 10 140
