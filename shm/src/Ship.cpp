@@ -4,6 +4,7 @@
 #include "shm/inc/Player.hpp"
 
 #include <algorithm>
+#include <iomanip>
 #include <iostream>
 #include <stdexcept>
 
@@ -34,6 +35,29 @@ Ship& Ship::operator-=(const size_t crew) {
     }
     crew_ -= crew;
     return *this;
+}
+
+std::ostream& operator<<(std::ostream& out, const Ship& ship) {
+    for (size_t i = 0; i < ship.cargos_.size(); i++) {
+        out << "|" << std::setfill('-') << std::setw (100) << "|\n";
+        out << std::setfill(' ')<< std::setw (10) << "| ID: " << i + 1;
+        out << std::setw (30) << " | CARGO NAME: " << ship.cargos_[i]->getName();
+        out << std::setw (10) << " | AMOUNT: " << ship.cargos_[i]->getAmount();
+        if (typeid(*ship.cargos_[i]) == typeid(Alcohol)) {
+            out << std::setw (10) << " | PERCENTAGE: " << ship.cargos_[i]->getPercentage() << " |\n";
+        }
+        if (typeid(*ship.cargos_[i]) == typeid(Fruit)) {
+            out << std::setw (10) << " | TIME TO ROTTEN: " << ship.cargos_[i]->getRottenTime() << " |\n";
+        }
+        if (typeid(*ship.cargos_[i]) == typeid(DryFruit)) {
+            out << std::setw (10) << " | TIME TO ROTTEN: " << ship.cargos_[i]->getRottenTimeForDryFruit() << " |\n";
+        } 
+        if (typeid(*ship.cargos_[i]) == typeid(Item)) {
+            out << std::setw (10) << " | TIME TO ROTTEN: " << ship.cargos_[i]->getRarity() << " |\n";
+        }   
+    }
+    out << "|" << std::setfill('-') << std::setw (100) << "|\n";
+    return out;
 }
 
 void Ship::setName(const std::string& name) {
