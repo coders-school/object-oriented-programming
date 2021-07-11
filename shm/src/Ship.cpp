@@ -48,7 +48,7 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
 }
 
 void Ship::load(const std::shared_ptr<Cargo>cargo) {
-    if (cargo != nullptr) {
+    if (cargo) {
         bool ifExistCargo = false;
         for (auto const & element : cargos_) {
             if (element == cargo) {
@@ -65,7 +65,7 @@ void Ship::load(const std::shared_ptr<Cargo>cargo) {
 
 // FIXME:
 void Ship::unload(Cargo* cargo) {
-    if (cargo != nullptr) {
+    if (cargo) {
         int it = -1;
         for (int i = 0; i < static_cast<int>(cargos_.size()); i++) {
             if (*(cargos_[i].get()) == *cargo) {
@@ -88,7 +88,7 @@ void Ship::unload(Cargo* cargo) {
 void Ship::nextDay() {
     delegate_->payCrew(crew_);
     for (size_t i = 0; i < cargos_.size(); i++) {
-        if (cargos_[i]->getIsUsable() == true) {
+        if (cargos_[i]->isExpired() == true) {
             std::cout << cargos_[i]->getAmount() << ' ' << cargos_[i]->getName() 
                       << " was completty rotten and the captain threw overboard\n";
             cargos_.erase(std::remove(cargos_.begin(), cargos_.end(), cargos_[i]), cargos_.end());

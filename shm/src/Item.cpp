@@ -45,6 +45,6 @@ Item::Rarity Item::getRarity() const {
     return rarity_;
 }
 
-bool Item::getIsUsable() const {
-    return daysToDestruction_ == 0;
+bool Item::isExpired() const {
+    return daysToDestruction_;
 }

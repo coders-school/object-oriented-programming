@@ -21,6 +21,6 @@ void DryFruit::nextDay() {
     operator--();
 }
 
-bool DryFruit::getIsUsable() const {
-    return rottenTime_ == 0;
+bool DryFruit::isExpired() const {
+    return rottenTime_;
 }
