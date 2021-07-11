@@ -36,10 +36,22 @@ public:
 private:
     void generateAllCargo();
     void convertDataFromFile(std::string lineFromFile);
-    void generateSingleCargo(std::vector<std::string>const & cargo);
+    void valueOneLineAssignment(const size_t & wordNumber, const std::string & singleWordFromFile);
+    void generateSingleCargo();
     void generateFruit(std::vector<std::string>const & cargo);
     void generateAlcohol(std::vector<std::string>const & cargo);
     void generateItem(std::vector<std::string>const & cargo);
     void generateDryFruits(std::vector<std::string>const & cargo);
     std::vector<std::unique_ptr<Cargo>> cargo_;
+
+    struct SplitLineFromFile {
+        std::string className_{};
+        std::string itemName_{};
+        size_t minAmount_{};
+        size_t maxAmount_{};
+        size_t minPrice_{};
+        size_t maxPrice_{};
+        size_t minUniqueStat_{};
+        size_t maxUniqueStat_{};
+    } oneLine_;
 };

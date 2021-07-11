@@ -87,19 +87,51 @@ void Store::generateAllCargo() {
 }
 
 void Store::convertDataFromFile(std::string lineFromFile) {
-    std::vector<std::string>dataToCreateItems(8, "");
-    size_t iterator{};
+    std::string singleWordFromFile;
+    size_t wordNumber{};
     for (size_t i = 0; i < lineFromFile.size(); i++) {
         if (lineFromFile[i] != ' ') {
-            dataToCreateItems[iterator] += lineFromFile[i];
+            singleWordFromFile += lineFromFile[i];
         } else {
-            iterator++;
+            wordNumber++;
+            valueOneLineAssignment(wordNumber, singleWordFromFile)
         }
     }
-    generateSingleCargo(dataToCreateItems);
+    generateSingleCargo;
 }
 
-void Store::generateSingleCargo(std::vector<std::string>const & cargo) {
+void Store::valueOneLineAssignment(const size_t & wordNumber, const std::string & singleWordFromFile) {
+    switch (wordNumber) {
+        case : 1 {
+            oneLine_.className_ = singleWordFromFile;
+        } break;
+        case : 2 {
+            oneLine_.itemName_ = singleWordFromFile;
+        } break
+        case : 3 {
+            oneLine_.minAmount_ = std::stol(singleWordFromFile); 
+        } break
+        case : 4 {
+            oneLine_.maxAmount_ = std::stol(singleWordFromFile);
+        } break
+        case : 5 {
+            oneLine_.minPrice_ = std::stol(singleWordFromFile);
+        } break
+        case : 6 {
+            oneLine_.maxPrice_ = std::stol(singleWordFromFile);
+        } break
+        case : 7 {
+            oneLine_.minUniqueStat_ = std::stol(singleWordFromFile);
+        } break
+        case : 8 {
+            oneLine_.maxUniqueStat_= std::stol(singleWordFromFile);
+        } break
+        default {
+        } break
+    }
+}
+
+void Store::generateSingleCargo() {
     if (cargo[0] == "Fruit"){
         generateFruit(cargo);
     } else if (cargo[0] == "Alcohol"){
