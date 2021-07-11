@@ -38,10 +38,10 @@ private:
     void convertDataFromFile(std::string lineFromFile);
     void valueOneLineAssignment(const size_t & wordNumber, const std::string & singleWordFromFile);
     void generateSingleCargo();
-    void generateFruit(std::vector<std::string>const & cargo);
-    void generateAlcohol(std::vector<std::string>const & cargo);
-    void generateItem(std::vector<std::string>const & cargo);
-    void generateDryFruits(std::vector<std::string>const & cargo);
+    void generateFruit();
+    void generateAlcohol();
+    void generateItem();
+    void generateDryFruits();
     std::vector<std::unique_ptr<Cargo>> cargo_;
 
     struct SplitLineFromFile {

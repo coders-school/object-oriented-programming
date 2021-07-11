@@ -94,76 +94,76 @@ void Store::convertDataFromFile(std::string lineFromFile) {
             singleWordFromFile += lineFromFile[i];
         } else {
             wordNumber++;
-            valueOneLineAssignment(wordNumber, singleWordFromFile)
+            valueOneLineAssignment(wordNumber, singleWordFromFile);
         }
     }
-    generateSingleCargo;
+    generateSingleCargo();
 }
 
 void Store::valueOneLineAssignment(const size_t & wordNumber, const std::string & singleWordFromFile) {
     switch (wordNumber) {
-        case : 1 {
+        case 1 : {
             oneLine_.className_ = singleWordFromFile;
         } break;
-        case : 2 {
+        case 2 : {
             oneLine_.itemName_ = singleWordFromFile;
-        } break
-        case : 3 {
+        } break;
+        case 3 : {
             oneLine_.minAmount_ = std::stol(singleWordFromFile); 
-        } break
-        case : 4 {
+        } break;
+        case 4 : {
             oneLine_.maxAmount_ = std::stol(singleWordFromFile);
-        } break
-        case : 5 {
+        } break;
+        case 5 : {
             oneLine_.minPrice_ = std::stol(singleWordFromFile);
-        } break
-        case : 6 {
+        } break;
+        case 6 : {
             oneLine_.maxPrice_ = std::stol(singleWordFromFile);
-        } break
-        case : 7 {
+        } break;
+        case 7 : {
             oneLine_.minUniqueStat_ = std::stol(singleWordFromFile);
-        } break
-        case : 8 {
+        } break;
+        case 8 : {
             oneLine_.maxUniqueStat_= std::stol(singleWordFromFile);
-        } break
-        default {
-        } break
+        } break;
+        default : {
+        } break;
     }
 }
 
 void Store::generateSingleCargo() {
-    if (cargo[0] == "Fruit"){
-        generateFruit(cargo);
-    } else if (cargo[0] == "Alcohol"){
-        generateAlcohol(cargo);
-    } else if (cargo[0] == "Item"){
-        generateItem(cargo);
+    if (oneLine_.className_ == "Fruit"){
+        generateFruit();
+    } else if (oneLine_.className_ == "Alcohol"){
+        generateAlcohol();
+    } else if (oneLine_.className_ == "Item"){
+        generateItem();
     } else {
-        generateDryFruits(cargo);
+        generateDryFruits();
     }
 }
 
-void Store::generateFruit(std::vector<std::string>const & cargo) {
-    cargo_.push_back(std::make_unique<Fruit>(Fruit(cargo[1], 
-                        randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
-                        randomGenerate(std::stol(cargo[4]), std::stol(cargo[5])))));
+void Store::generateFruit() {
+    cargo_.push_back(std::make_unique<Fruit>(Fruit(oneLine_.itemName_, 
+                        randomGenerate(oneLine_.minAmount_, oneLine_.maxAmount_), 
+                        randomGenerate(oneLine_.minPrice_, oneLine_.maxPrice_))));
 }
 
-void Store::generateAlcohol(std::vector<std::string>const & cargo) {
-    cargo_.push_back(std::make_unique<Alcohol>(Alcohol(cargo[1], 
-                        randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
-                        randomGenerate(std::stol(cargo[4]), std::stol(cargo[5])), std::stol(cargo[6]))));
+void Store::generateAlcohol() {
+    cargo_.push_back(std::make_unique<Alcohol>(Alcohol(oneLine_.itemName_, 
+                        randomGenerate(oneLine_.minAmount_, oneLine_.maxAmount_), 
+                        randomGenerate(oneLine_.minPrice_, oneLine_.maxPrice_), oneLine_.minUniqueStat_)));
 }
 
-void Store::generateItem(std::vector<std::string>const & cargo) {
-    cargo_.push_back(std::make_unique<Item>(Item(cargo[1], 
-                        randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
-                        randomGenerate(std::stol(cargo[4]), std::stol(cargo[5])), 
-                        rarityConversion(randomGenerate(std::stol(cargo[6]), std::stol(cargo[7]))))));
+void Store::generateItem() {
+    cargo_.push_back(std::make_unique<Item>(Item(oneLine_.itemName_, 
+                        randomGenerate(oneLine_.minAmount_, oneLine_.maxAmount_), 
+                        randomGenerate(oneLine_.minPrice_, oneLine_.maxPrice_), 
+                        rarityConversion(randomGenerate(oneLine_.minUniqueStat_, oneLine_.maxUniqueStat_)))));
 }
 
-void Store::generateDryFruits(std::vector<std::string>const & cargo) {
-    cargo_.push_back(std::make_unique<DryFruit>(DryFruit(cargo[1], 
-                        randomGenerate(std::stol(cargo[2]), std::stol(cargo[3])), 
-                        randomGenerate(std::stol(cargo[4]), std::stol(cargo[5])))));
+void Store::generateDryFruits() {
+    cargo_.push_back(std::make_unique<DryFruit>(DryFruit(oneLine_.itemName_, 
+                        randomGenerate(oneLine_.minAmount_, oneLine_.maxAmount_), 
+                        randomGenerate(oneLine_.minPrice_, oneLine_.maxPrice_))));
 }
