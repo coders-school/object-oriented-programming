@@ -44,10 +44,12 @@ std::ostream& operator<<(std::ostream& out, const Ship& ship) {
         out << std::setw (30) << " | CARGO NAME: " << ship.cargos_[i]->getName();
         out << std::setw (10) << " | AMOUNT: " << ship.cargos_[i]->getAmount();
         if (typeid(*ship.cargos_[i]) == typeid(Alcohol)) {
-            out << std::setw (10) << " | PERCENTAGE: " << ship.cargos_[i]->getPercentage() << " |\n";
+            const Alcohol* alcohol = static_cast<const Alcohol*>(ship.cargos_[i].get());
+            out << std::setw (10) << " | PERCENTAGE: " << alcohol->getPercentage() << " |\n";
         }
         if (typeid(*ship.cargos_[i]) == typeid(Fruit)) {
-            out << std::setw (10) << " | TIME TO ROTTEN: " << ship.cargos_[i]->getRottenTime() << " |\n";
+            const Fruit* fruit = static_cast<const Fruit*>(ship.cargos_[i].get());
+            out << std::setw (10) << " | TIME TO ROTTEN: " << fruit->getRottenTime() << " |\n";
         }
         if (typeid(*ship.cargos_[i]) == typeid(DryFruit)) {
             out << std::setw (10) << " | TIME TO ROTTEN: " << ship.cargos_[i]->getRottenTimeForDryFruit() << " |\n";
