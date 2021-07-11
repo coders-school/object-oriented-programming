@@ -15,7 +15,7 @@ public:
     Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
     ~Player() override {};
 
-    std::unique_ptr<Ship> getShip() { return std::move(ship_); };
+    Ship* getShip() { return ship_.get(); };
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_.second; };
     size_t getSpeed() const;

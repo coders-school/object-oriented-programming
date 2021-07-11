@@ -14,10 +14,10 @@ public:
     Game(size_t money, size_t gameDays, size_t finalGoal);
 
     enum class MenuOption {
-        NoChoice = 0,
+        NoChoice,
         printMap,
         Travel,
-        CheckCargo,
+        PrintCargo,
         Buy,
         Sell,
         HireCrew,
@@ -35,7 +35,7 @@ public:
 private:
     void printWelcomeScreen();
     void printMenu();
-    void printIntenface();
+    void printHeader();
     void printMap();
     void printWinScreen();
     void printLoseScreen();
@@ -45,7 +45,7 @@ private:
     size_t currentDay_{};
   
     void travel();      //NOT IMPLEMENTED
-    void checkCargo();  //NOT IMPLEMENTED
+    void printCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
     void hireCrew();
@@ -53,7 +53,6 @@ private:
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
-    std::unique_ptr<Ship> ship_;
     std::unique_ptr<Map> map_;
 
     bool isGameWon();
@@ -62,8 +61,8 @@ private:
     CheckAnswer checkAnswer(const std::string & announcemen);
     MenuOption selectOption();
     MenuOption actionMenu(MenuOption userAnswer);
-    bool crewIsNumber(const size_t & crew);
-    bool validCrewMoney(const size_t & crew);
+    bool isCrewNumber(const size_t & crew);
+    bool hasPlayerEnoughMoney(const size_t & crew);
     
     MenuOption menuOption_ { MenuOption::NoChoice };
 

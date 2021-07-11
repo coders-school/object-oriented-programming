@@ -54,7 +54,7 @@ void Map::countRecordsInFile(size_t &counter) {
     std::string line;
     std::fstream file;
     file.open("settings/items.txt", std::ios::in);
-    if (file.good() == false) {
+    if (file.fail()) {
         std::cout << "File not exist\n";
     }
     while (getline(file, line)) {

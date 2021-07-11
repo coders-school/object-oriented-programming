@@ -10,7 +10,7 @@ public:
     
     // override form Cargo (via Fruit)
     std::size_t getPrice() const override;
-    bool getIsUsable() const override;
+    bool isExpired() const override;
     
     // override from Fruit
     DryFruit& operator--() override;
