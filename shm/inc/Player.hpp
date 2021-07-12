@@ -7,6 +7,8 @@
 #include "shm/inc/Ship.hpp"
 
 class Cargo;
+class Island;
+class Map;
 
 // class responsible for manage user in game
 class Player : public Delegate {
@@ -20,9 +22,11 @@ public:
     size_t getAvailableSpace() const { return availableSpace_.second; };
     size_t getSpeed() const;
     std::shared_ptr<Cargo> getCargo(size_t index) const;
+    Island* getCurrentPosition() const;
+    void setCurrentPosition(Island* island);
     Cargo* getCargo(const std::string& name) const;
-    
-    //override from Delegate
+
+  //override from Delegate
     void payCrew(const size_t payCrew) override;
     void setPlayerPtr();
 
@@ -31,4 +35,6 @@ private:
     size_t money_;
     std::pair<bool, size_t> availableSpace_;
     size_t countAvailableSpace() const;
+    Island* currentPosition_;
+    Map* map_;
 };

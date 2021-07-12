@@ -29,7 +29,6 @@ Map::Map() {
             islands_.push_back(Island(generatedIslandCoords, storeSize_));
         }
     }
-    currentPosition_ = &(islands_[0]);
 }
 
 Island* Map::getIsland(const Island::Coordinates& coordinates) {
@@ -40,14 +39,6 @@ Island* Map::getIsland(const Island::Coordinates& coordinates) {
     return island_it != islands_.end()
            ? std::addressof(*island_it)
            : nullptr;
-}
-
-Island* Map::getCurrentPosition() const {
-    return currentPosition_;
-}
-
-void Map::setCurrentPosition(Island* island) {
-    currentPosition_ = island;
 }
 
 void Map::countRecordsInFile(size_t &counter) {
