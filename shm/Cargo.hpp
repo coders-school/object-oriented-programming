@@ -2,8 +2,10 @@
 
 #include <memory>
 #include <string>
+#include "Time.hpp"
+#include "Timeable.hpp"
 
-class Cargo {
+class Cargo : public Timeable {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
 
@@ -18,6 +20,8 @@ public:
     const std::string_view getName() const;
     virtual size_t getAmount() const;
     virtual size_t getBasePrice() const;
+
+    void nextDay() override;
 
     std::unique_ptr<Cargo> split(size_t amountPart);
 

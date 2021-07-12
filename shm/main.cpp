@@ -8,6 +8,8 @@
 #include "Cargo.hpp"
 #include "Island.hpp"
 #include "Map.hpp"
+#include "Island.hpp"
+#include "Time.hpp"
 #include "Player.hpp"
 #include "DefaultCargo.hpp"
 
@@ -54,8 +56,9 @@ std::unique_ptr<Cargo> generateCargo() {
 }
 
 void testCargoShipPlayer() {
-    constexpr size_t testCases{10};
-    constexpr size_t testShipCapacity{100};
+    Time* time = Time::getInstance();
+    constexpr size_t testCases {10};
+    constexpr size_t testShipCapacity {100};
     std::vector<std::unique_ptr<Cargo>> cargoVec;
     cargoVec.reserve(testShipCapacity);
     for (size_t i = 0; i < testCases; ++i) {
@@ -68,6 +71,7 @@ void testCargoShipPlayer() {
         Player pirate(std::move(pirateShip), 1000);
         std::cout << "\n\n--- CARGO/SHIP/PLAYER TEST ---\n";
         pirate.printCargoManifest();
+        time->nextDay();
     }
 }
 
@@ -90,10 +94,35 @@ void testIslandMap() {
     }
 }
 
+void testTime() {
+    Time* time = Time::getInstance();
+    Cargo cargo1 {"Cargo1", 100, 100};
+    Cargo cargo2 {"Cargo2", 100, 100};
+    Cargo cargo3 {"Cargo2", 100, 100};
+    Ship ship1 {100, 100, 100, "Ship1", 1, {}};
+    Ship ship2 {100, 100, 100, "Ship2", 2, {}};
+    Ship ship3 {100, 100, 100, "Ship3", 3, {}};
+    Store store;
+    time->nextDay();
+}
+
+void timePassTest() {
+    Time* time = Time::getInstance();
+    Cargo cargo1 {"Cargo1", 100, 100};
+    Cargo cargo2 {"Cargo2", 100, 100};
+    Cargo cargo3 {"Cargo2", 100, 100};
+    Ship ship1 {100, 100, 100, "Ship1", 1, {}};
+    Ship ship2 {100, 100, 100, "Ship2", 2, {}};
+    Ship ship3 {100, 100, 100, "Ship3", 3, {}};
+    Store store;
+    time->update();
+}
+
 int main() {
     srand(time(0));
     testCargoShipPlayer();
     testIslandMap();
-
+    testTime();
+    timePassTest();
     return 0;
 }

@@ -1,5 +1,8 @@
 #include "Cargo.hpp"
 #include "Ship.hpp"
+#include "Time.hpp"
+
+#include <iostream>
 #include <stdexcept>
 
 Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec)
@@ -94,4 +97,8 @@ void Ship::unload(const Cargo* const cargo) {  //ver A
         }
     }
     throw std::logic_error("Store: Not my Cargo!");
+}
+
+void Ship::nextDay() {
+    std::cout << "Next Day in Ship " << name_ << '\n';
 }

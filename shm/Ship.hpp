@@ -3,14 +3,18 @@
 #include <string>
 #include <vector>
 
+#include "Time.hpp"
+#include "Timeable.hpp"
+
 class Cargo;
 
-class Ship {
+class Ship : public Timeable {
 public:
     using CargoVec = std::vector<std::unique_ptr<Cargo>>;
     Ship() = default;
     Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec);
     Ship(size_t maxCrew, size_t speed, size_t id);
+    virtual ~Ship() = default;
 
     void setName(const std::string& name);
 
@@ -28,6 +32,7 @@ public:
     void load(std::unique_ptr<Cargo> cargo);
     void unload(const Cargo* const cargo);
 
+    void nextDay() override;
 private:
     size_t capacity_ = 0;
     size_t maxCrew_ = 0;

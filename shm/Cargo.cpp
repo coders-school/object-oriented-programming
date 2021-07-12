@@ -1,6 +1,9 @@
 #include <stdexcept>
 
 #include "Cargo.hpp"
+#include "Time.hpp"
+
+#include <iostream>
 #include <assert.h>
 
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
@@ -37,4 +40,8 @@ std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
     }
     *this -= amountPart;
     return createAmountOfEqual(amountPart);
+}
+
+void Cargo::nextDay() {
+    std::cout << "Next Day in Cargo " << name_ << '\n';
 }
