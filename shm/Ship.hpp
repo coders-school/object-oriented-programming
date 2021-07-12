@@ -2,39 +2,43 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "Cargo.hpp"
+
 #include "Time.hpp"
 #include "Timeable.hpp"
 
-class Ship : public Timeable {
-    size_t capacity_;
-    size_t maxCrew_;
-    size_t crew_;
-    size_t speed_;
-    std::string name_;
-    const size_t id_;
-    std::vector<std::unique_ptr<Cargo>> cargoVec_;
+class Cargo;
 
+class Ship : public Timeable {
 public:
-    Ship();
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::unique_ptr<Cargo>> cargoVec);
-    Ship(int maxCrew, int speed, size_t id);
-    virtual ~Ship();
+    using CargoVec = std::vector<std::unique_ptr<Cargo>>;
+    Ship() = default;
+    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec);
+    Ship(size_t maxCrew, size_t speed, size_t id);
+    virtual ~Ship() = default;
 
     void setName(const std::string& name);
 
-    Ship& operator-=(size_t num);
-    Ship& operator+=(size_t num);
+    //both operators throw std::invalid_argument. if you will use operators remember about try-catch.  
+    Ship& operator-=(size_t numCrew);
+    Ship& operator+=(size_t numCrew);
 
     size_t getCapacity() const;
     size_t getMaxCrew() const;
     size_t getSpeed() const;
-    std::string getName() const;
+    const std::string& getName() const;
     size_t getId() const;
-    const std::vector<std::unique_ptr<Cargo>>& getCargoVec() const;
+    const CargoVec& getCargoVec() const;
 
     void load(std::unique_ptr<Cargo> cargo);
     void unload(const Cargo* const cargo);
 
     void nextDay() override;
+private:
+    size_t capacity_ = 0;
+    size_t maxCrew_ = 0;
+    size_t crew_ = 0;
+    size_t speed_ = 0;
+    std::string name_;
+    size_t id_ = -1;
+    CargoVec cargoVec_ = {};
 };

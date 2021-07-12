@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 #include <cstdint>
 #include <iostream>
 #include <string>
@@ -10,14 +11,21 @@ public:
 
     class Coordinates {
     public:
+        static constexpr size_t distance(const Coordinates& lhs, const Coordinates& rhs) {
+            auto pairX = std::minmax(lhs.positionX_, rhs.positionX_);
+            auto pairY = std::minmax(lhs.positionY_, rhs.positionY_);
+            auto result = std::sqrt(std::pow(pairX.second - pairX.first, 2) + std::pow(pairY.second - pairY.first, 2));
+            return result;
+        }
+
         constexpr Coordinates(Island::coordinateType positionX, Island::coordinateType positionY)
             : positionX_{positionX}, positionY_{positionY} {}
 
-        friend std::ostream& operator<<(std::ostream& out, const Coordinates& coords);
-
-        bool operator==(const Coordinates& other) const {
+        constexpr bool operator==(const Coordinates& other) const {
             return positionX_ == other.positionX_ and positionY_ == other.positionY_;
         }
+
+        friend std::ostream& operator<<(std::ostream& out, const Island::Coordinates& coords);
 
     private:
         const Island::coordinateType positionX_;

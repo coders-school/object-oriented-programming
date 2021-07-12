@@ -1,12 +1,13 @@
+#include <stdexcept>
+
 #include "Cargo.hpp"
 #include "Time.hpp"
+
 #include <iostream>
+#include <assert.h>
 
-Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
-    : name_{name}, amount_{amount}, basePrice_{basePrice}{}
-
-Cargo::~Cargo() {
-}
+Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
+    : name_{name}, amount_{amount}, basePrice_{basePrice} {}
 
 Cargo& Cargo::operator+=(size_t amount) {
     amount_ += amount;
@@ -14,18 +15,14 @@ Cargo& Cargo::operator+=(size_t amount) {
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
+    if (amount_ < amount) {
+        throw std::invalid_argument("Not allowed! You will be below zero!");
+    }
     amount_ -= amount;
     return *this;
 }
 
-bool Cargo::operator==(const Cargo& other) const {
-    return (name_ == other.name_
-            //and amount_ == other.amount_
-            //and basePrice_ == other.basePrice_
-    );
-}
-
-std::string Cargo::getName() const {
+const std::string_view Cargo::getName() const {
     return name_;
 }
 
@@ -41,9 +38,8 @@ std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
     if (!amountPart or amountPart > amount_) {
         return {};
     }
-
     *this -= amountPart;
-    return std::make_unique<Cargo>(name_, amountPart, basePrice_);
+    return createAmountOfEqual(amountPart);
 }
 
 void Cargo::nextDay() {

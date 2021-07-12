@@ -4,12 +4,7 @@
 #include <vector>
 #include "Island.hpp"
 
-constexpr auto defaultIslandsNumber = 10u;
-
 class Map {
-    std::vector<Island> islandVec_;
-    Island* currentPosition_;
-
 public:
     Map();
     const std::vector<Island>& getIslandVec() const;
@@ -17,5 +12,7 @@ public:
     Island* getIsland(const Island::Coordinates&);
 
 private:
+    Island* currentPosition_;
+    std::vector<Island> islandVec_;
     void fillWithRandomIslands();
 };
