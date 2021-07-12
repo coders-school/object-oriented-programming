@@ -41,7 +41,7 @@ private:
     void printLoseScreen();
     void printResponse(const Store::Response& response,
                        const std::string& message);
-    void getUserInput(std::string& cargoName, size_t& cargoAmount);
+    void setUserCargo(std::string& cargoName, size_t& cargoAmount);
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;

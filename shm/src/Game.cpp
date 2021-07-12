@@ -236,7 +236,7 @@ void Game::buy() {
     Store::Response response;
     auto currentStore{ map_->getCurrentPosition()->getStore() };
     do {
-        getUserInput(cargoName, cargoAmount);
+        setUserCargo(cargoName, cargoAmount);
         Cargo* cargo{ currentStore->getCargo(cargoName) };
         if (cargo) {
             response = currentStore->buy(cargo, cargoAmount, player_.get());
@@ -256,7 +256,7 @@ void Game::sell() {
     Store::Response response;
     auto currentStore{ map_->getCurrentPosition()->getStore() };
     do {
-        getUserInput(cargoName, cargoAmount);
+        setUserCargo(cargoName, cargoAmount);
         Cargo* cargo{ player_->getCargo(cargoName) };
         if (cargo) {
             response = currentStore->sell(cargo, cargoAmount, player_.get());
@@ -268,7 +268,7 @@ void Game::sell() {
                   "Sold " + std::to_string(cargoAmount) + " of " + cargoName);
 }
 
-void Game::getUserInput(std::string& cargoName, size_t& cargoAmount) {
+void Game::setUserCargo(std::string& cargoName, size_t& cargoAmount) {
     do {
         std::cin.clear();
         std::cout << "Input cargo name: ";
