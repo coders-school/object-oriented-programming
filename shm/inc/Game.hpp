@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <memory>
 
 #include "shm/inc/Player.hpp"
@@ -36,15 +37,17 @@ private:
     void printWelcomeScreen();
     void printMenu();
     void printHeader();
-    void printMap();
+    size_t printMap();
+
     void printWinScreen();
     void printLoseScreen();
+    void setUserDestination(size_t& islandNo, size_t islandMax);
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;
     size_t currentDay_{};
   
-    void travel();      //NOT IMPLEMENTED
+    void travel();
     void printCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
@@ -65,5 +68,4 @@ private:
     bool hasPlayerEnoughMoney(const size_t & crew);
     
     MenuOption menuOption_ { MenuOption::NoChoice };
-
 };
