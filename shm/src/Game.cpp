@@ -231,24 +231,12 @@ void Game::printCargo() {
 void Game::buy() {
     std::cout << "Cargo to buy in store:\n";
     // TODO: print store cargo
-    
     std::string cargoName;
     size_t cargoAmount;
     Store::Response response;
     auto currentStore{ map_->getCurrentPosition()->getStore() };
-    
     do {
-        std::cout << "Input cargo name: ";
-        std::cin >> cargoName;
-        std::cout << "Input cargo amount: ";
-        std::cin >> cargoAmount;
-
-        if (std::cin.fail()) {
-            std::cout << "Invalid amount!\n";
-            std::cin.clear();
-            continue;
-        }
-
+        getUserInput(cargoName, cargoAmount);
         Cargo* cargo{ currentStore->getCargo(cargoName) };
         if (cargo) {
             response = currentStore->buy(cargo, cargoAmount, player_.get());
@@ -256,61 +244,55 @@ void Game::buy() {
         }
         std::cout << "No such cargo!" << std::endl;
     } while (true);
-
-    switch (response) {
-    case Store::Response::done:
-        std::cout << "Bought " << cargoAmount << " of " << cargoName << '\n';
-        break;
-    case Store::Response::lack_of_cargo:
-        std::cout << "There is no enough cargo to buy!\n";
-        break;
-    case Store::Response::lack_of_space:
-        std::cout << "You do not have enough space on your ship!\n";
-        break;
-    case Store::Response::lack_of_money:
-        std::cout << "You do not have enough money!\n";
-        break;
-    }
+    printResponse(response,
+                  "Bought " + std::to_string(cargoAmount) + " of " + cargoName);
 }
 
 void Game::sell() {
     std::cout << "Cargo to sell:\n";
     // TODO: print ship cargo
-        
-     std::string cargoName;
-     size_t cargoAmount;
-     Store::Response response;
-     auto currentStore{ map_->getCurrentPosition()->getStore() };
+    std::string cargoName;
+    size_t cargoAmount;
+    Store::Response response;
+    auto currentStore{ map_->getCurrentPosition()->getStore() };
+    do {
+        getUserInput(cargoName, cargoAmount);
+        Cargo* cargo{ player_->getCargo(cargoName) };
+        if (cargo) {
+            response = currentStore->sell(cargo, cargoAmount, player_.get());
+            break;
+        }
+        std::cout << "No such cargo!" << std::endl;
+    } while (true);
+    printResponse(response,
+                  "Sold " + std::to_string(cargoAmount) + " of " + cargoName);
+}
 
-     do {
-         std::cout << "Input cargo name: ";
-         std::cin >> cargoName;
-         std::cout << "Input cargo amount: ";
-         std::cin >> cargoAmount;
+void Game::getUserInput(std::string& cargoName, size_t& cargoAmount) {
+    do {
+        std::cin.clear();
+        std::cout << "Input cargo name: ";
+        std::cin >> cargoName;
+        std::cout << "Input cargo amount: ";
+        std::cin >> cargoAmount;
+        if (std::cin.fail()) {
+            std::cout << "Invalid amount!\n";
+        }
+    } while (std::cin.fail());
+}
 
-         if (std::cin.fail()) {
-             std::cout << "Invalid amount!\n";
-             std::cin.clear();
-             continue;
-         }
-
-         Cargo* cargo{ player_->getCargo(cargoName) };
-         if (cargo) {
-             response = currentStore->sell(cargo, cargoAmount, player_.get());
-             break;
-         }
-         std::cout << "No such cargo!" << std::endl;
-     } while (true);
-
+void Game::printResponse(const Store::Response& response,
+                         const std::string& message)
+{
     switch (response) {
     case Store::Response::done:
-        std::cout << "Sold " << cargoAmount << " of " << cargoName << '\n';
+        std::cout << message << '\n';
         break;
     case Store::Response::lack_of_cargo:
-        std::cout << "There is no enough cargo to sell!\n";
+        std::cout << "There is not enough cargo!\n";
         break;
     case Store::Response::lack_of_space:
-        std::cout << "There is no enough space in store!\n";
+        std::cout << "There is not enough space!\n";
         break;
     case Store::Response::lack_of_money:
         std::cout << "You do not have enough money!\n";
