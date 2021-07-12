@@ -8,7 +8,7 @@
 class Player {
 public:
     Player(std::unique_ptr<Ship> ship, const size_t& money);
-    const Ship* getShip() const;
+    Ship* getShip() const;
     const Cargo* getCargo(size_t index) const;
 
     // If player is in a possesion of a ship this method prints out all the cargo from the ship to a screen.

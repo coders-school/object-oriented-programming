@@ -14,6 +14,7 @@ using StoreCargoVec = std::vector<std::unique_ptr<Cargo>>;
 
 class Store : public Timeable {
 public:
+    Store():Timeable(){}
     virtual ~Store();
 
     //store buy from player
