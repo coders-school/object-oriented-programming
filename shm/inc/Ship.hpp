@@ -8,7 +8,7 @@
 #include "shm/inc/Alcohol.hpp"
 #include "shm/inc/DryFruit.hpp"
 #include "shm/inc/Fruit.hpp"
-//#include "shm/inc/Item.hpp"
+#include "shm/inc/Item.hpp"
 
 class Cargo;
 class Delegate;

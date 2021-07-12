@@ -52,10 +52,12 @@ std::ostream& operator<<(std::ostream& out, const Ship& ship) {
             out << std::setw (10) << " | TIME TO ROTTEN: " << fruit->getRottenTime() << " |\n";
         }
         if (typeid(*ship.cargos_[i]) == typeid(DryFruit)) {
-            out << std::setw (10) << " | TIME TO ROTTEN: " << ship.cargos_[i]->getRottenTimeForDryFruit() << " |\n";
+            const DryFruit* dryFruit = static_cast<const DryFruit*>(ship.cargos_[i].get());
+            out << std::setw (10) << " | TIME TO ROTTEN: " << dryFruit->getRottenTimeForDryFruit() << " |\n";
         } 
         if (typeid(*ship.cargos_[i]) == typeid(Item)) {
-            out << std::setw (10) << " | TIME TO ROTTEN: " << ship.cargos_[i]->getRarity() << " |\n";
+            const Item* item = static_cast<const Item*>(ship.cargos_[i].get());
+            out << std::setw (10) << " | RARITY: " << item->getRarity() << " |\n";
         }   
     }
     out << "|" << std::setfill('-') << std::setw (100) << "|\n";
