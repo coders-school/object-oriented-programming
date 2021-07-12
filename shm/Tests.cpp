@@ -312,7 +312,7 @@ TEST_CASE("findCargoInStore by exemplar Cargo no meter of quantity to search", "
     REQUIRE(existing4);
 }
 
-TEST_CASE("findCargoInStore will ignore own Cargo ptr", "[Store]") {
+/*TEST_CASE("findCargoInStore will ignore own Cargo ptr", "[Store]") {
     Store store;
     fillWithGeneratedData(&store);
 
@@ -320,7 +320,7 @@ TEST_CASE("findCargoInStore will ignore own Cargo ptr", "[Store]") {
     auto selfCargo = store.findCargoInStore(existing);
 
     REQUIRE(!selfCargo);
-}
+}*/
 
 //Store::unload tests
 

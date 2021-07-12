@@ -163,9 +163,9 @@ Cargo* Store::findCargoInStore(const Cargo* const exampleCargo) const {
     for (const auto& el : cargoVec_) {
         Cargo* targetCargo = el.get();
         if (targetCargo) {
-            if (targetCargo == exampleCargo) {  //we dont want to compare same Cargo pointers
+            /*if (targetCargo == exampleCargo) {  //we dont want to compare same Cargo pointers
                 return nullptr;
-            }
+            }*/
 
             if (*targetCargo == *exampleCargo) {  //depend this means equality or comperable
                 return targetCargo;
