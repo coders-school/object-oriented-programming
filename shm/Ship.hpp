@@ -45,5 +45,5 @@ private:
     size_t speed_ = 0;
     std::string name_="";
     const size_t id_ = -1; 
-    CargoVec cargoVec_ = {};
+    // CargoVec cargoVec_ = {};
 };
