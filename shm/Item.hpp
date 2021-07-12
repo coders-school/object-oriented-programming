@@ -18,6 +18,7 @@ public:
 
     size_t getPrice() const override;
 
+    static constexpr std::string_view suffix = " (Item)";
 protected:
     Quality quality_ = Quality::common;
 

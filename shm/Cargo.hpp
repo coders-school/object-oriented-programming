@@ -1,7 +1,10 @@
 #pragma once
 
 #include <memory>
+#include <optional>
 #include <string>
+
+#include <assert.h>
 
 class Cargo {
 public:
@@ -18,6 +21,10 @@ public:
     const std::string_view getName() const;
     virtual size_t getAmount() const;
     virtual size_t getBasePrice() const;
+
+    std::optional<size_t> haveSuffix(const std::string_view suffix) const;
+    void removeSuffix(const std::string_view suffix);
+    void addSuffix(const std::string_view suffix);
 
     std::unique_ptr<Cargo> split(size_t amountPart);
 
