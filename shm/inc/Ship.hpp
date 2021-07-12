@@ -5,6 +5,10 @@
 #include <vector>
 
 #include "shm/inc/Subscriber.hpp"
+#include "shm/inc/Alcohol.hpp"
+#include "shm/inc/DryFruit.hpp"
+#include "shm/inc/Fruit.hpp"
+#include "shm/inc/Item.hpp"
 
 class Cargo;
 class Delegate;
@@ -19,6 +23,7 @@ public:
 
     Ship& operator+=(const size_t amount);
     Ship& operator-=(const size_t amount);
+    friend std::ostream& operator<<(std::ostream& out, const Ship& ship);
 
     int getId() const { return id_; };
     std::string getName() const { return name_; };

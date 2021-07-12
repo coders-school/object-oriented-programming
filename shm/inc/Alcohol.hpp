@@ -22,7 +22,7 @@ public:
 
     size_t getPercentage() const;
 
-private:
+protected:
     size_t percentage_;
     size_t daysUntilOnePercentEvaporates_ { 5 };
 };
