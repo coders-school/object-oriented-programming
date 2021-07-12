@@ -43,21 +43,22 @@ std::ostream& operator<<(std::ostream& out, const Ship& ship) {
         out << std::setfill(' ')<< std::setw (10) << "| ID: " << i + 1;
         out << std::setw (30) << " | CARGO NAME: " << ship.cargos_[i]->getName();
         out << std::setw (10) << " | AMOUNT: " << ship.cargos_[i]->getAmount();
-        if (typeid(*ship.cargos_[i]) == typeid(Alcohol)) {
+        Cargo* cargo = ship.cargos_[i].get();
+        if (typeid(cargo) == typeid(Alcohol)) {
             const Alcohol* alcohol = static_cast<const Alcohol*>(ship.cargos_[i].get());
             out << std::setw (10) << " | PERCENTAGE: " << alcohol->getPercentage() << " |\n";
         }
-        if (typeid(*ship.cargos_[i]) == typeid(Fruit)) {
+        if (typeid(cargo) == typeid(Fruit)) {
             const Fruit* fruit = static_cast<const Fruit*>(ship.cargos_[i].get());
             out << std::setw (10) << " | TIME TO ROTTEN: " << fruit->getRottenTime() << " |\n";
         }
-        if (typeid(*ship.cargos_[i]) == typeid(DryFruit)) {
+        if (typeid(cargo) == typeid(DryFruit)) {
             const DryFruit* dryFruit = static_cast<const DryFruit*>(ship.cargos_[i].get());
             out << std::setw (10) << " | TIME TO ROTTEN: " << dryFruit->getRottenTimeForDryFruit() << " |\n";
         } 
-        if (typeid(*ship.cargos_[i]) == typeid(Item)) {
+        if (typeid(cargo) == typeid(Item)) {
             const Item* item = static_cast<const Item*>(ship.cargos_[i].get());
-            out << std::setw (10) << " | RARITY: " << item->getRarity() << " |\n";
+            // out << std::setw (10) << " | RARITY: " << item->getRarity() << " |\n";
         }   
     }
     out << "|" << std::setfill('-') << std::setw (100) << "|\n";
