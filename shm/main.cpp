@@ -12,6 +12,7 @@
 #include "Player.hpp"
 #include "Store.hpp"
 #include "Time.hpp"
+#include "Warehouse.hpp"
 
 struct GoodsData {
     constexpr GoodsData(const char* name)
