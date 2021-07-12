@@ -38,6 +38,7 @@ private:
     size_t printMap();
     void printWinScreen();
     void printLoseScreen();
+    void setUserDestination(size_t& islandNo, size_t islandMax);
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;
