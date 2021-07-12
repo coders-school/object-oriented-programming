@@ -13,12 +13,9 @@ public:
     Map();
     Island* getIsland(const Island::Coordinates&);
     std::vector<Island> getIslands() { return islands_; }
-    Island* getCurrentPosition() const;
-    void setCurrentPosition(Island* island);
-    
+   
 private:
     std::vector<Island> islands_;
-    Island* currentPosition_;
     void  countRecordsInFile(size_t &counter);
     size_t storeSize_{};
 };

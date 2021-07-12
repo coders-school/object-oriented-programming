@@ -1,14 +1,16 @@
 #include "shm/inc/Player.hpp"
-#include "shm/inc/Cargo.hpp"
-#include "shm/inc/Ship.hpp"
 
 #include <numeric>
+
+#include "shm/inc/Cargo.hpp"
+#include "shm/inc/Map.hpp"
 
 Player::Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace)
     : ship_(std::move(ship)), money_(money)
 {
     availableSpace_.first = true;
     availableSpace_.second = availableSpace;
+    currentPosition_ = &map_->getIslands()[0];
 }
 
 size_t Player::getSpeed() const {
@@ -20,6 +22,14 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
         return ship_->getCargo(index);
     }
     return nullptr;
+}
+
+Island* Player::getCurrentPosition() const {
+    return currentPosition_;
+}
+
+void Player::setCurrentPosition(Island* island) {
+    currentPosition_ = island;
 }
 
 Cargo* Player::getCargo(const std::string& name) const {
