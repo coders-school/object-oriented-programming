@@ -104,14 +104,13 @@ void Game::printHeader() {
     std::cout << std::setw (99) << std::setfill('#') << "\n";
 }
 
-size_t Game::printMap() {
-    size_t islandMax{};
+void Game::printMap() {
+    size_t islandNo{};
     for (const auto& island : map_->getIslands()) {
-        std::cout << "Island no " << ++islandMax 
+        std::cout << "Island no " << ++islandNo 
                   << " ---- Coordinates [" << island.getCoordinates().getPositionX() 
                   << "][" << island.getCoordinates().getPositionY() << "]\n";
     }
-    return islandMax;
 }
 
 Game::MenuOption Game::selectOption() {
@@ -192,7 +191,8 @@ Game::MenuOption Game::exitGame() {
 }
 
 void Game::travel() {
-    auto islandMax = printMap();
+    printMap();
+    auto islandMax = map_->getIslands().size();
     std::cout << "You are at island ("
               << map_->getCurrentPosition()->getCoordinates().getPositionX() << ", "
               << map_->getCurrentPosition()->getCoordinates().getPositionY() << ")\n";

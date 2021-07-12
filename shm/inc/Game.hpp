@@ -37,7 +37,7 @@ private:
     void printWelcomeScreen();
     void printMenu();
     void printHeader();
-    size_t printMap();
+    void printMap();
 
     void printWinScreen();
     void printLoseScreen();
