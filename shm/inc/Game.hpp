@@ -15,7 +15,7 @@ public:
 
     enum class MenuOption {
         NoChoice,
-        printMap,
+        PrintMap,
         Travel,
         PrintCargo,
         Buy,
@@ -49,7 +49,7 @@ private:
   
     void travel();      //NOT IMPLEMENTED
     void printCargo();  //NOT IMPLEMENTED
-    void buy();         //NOT IMPLEMENTED
+    void buy();
     void sell();
     void hireCrew();
     MenuOption exitGame();
@@ -61,7 +61,7 @@ private:
     bool isGameWon();
     bool isGameLost();
     bool isChoiceValid(const size_t & option);
-    CheckAnswer checkAnswer(const std::string & announcemen);
+    CheckAnswer checkAnswer(const std::string & announcement);
     MenuOption selectOption();
     MenuOption actionMenu(MenuOption userAnswer);
     bool isCrewNumber(const size_t & crew);
