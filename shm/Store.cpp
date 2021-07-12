@@ -2,8 +2,6 @@
 #include "Time.hpp"
 #include <iostream>
 
-Store::~Store() {}
-
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (!cargo or !player or !amount) {
         return Response::lack_of_cargo;
