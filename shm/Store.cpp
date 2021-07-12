@@ -1,6 +1,6 @@
 #include "Store.hpp"
-#include "Time.hpp"
 #include <iostream>
+#include "Time.hpp"
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (!cargo or !player or !amount) {
@@ -68,14 +68,14 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 
     //check if player can take cargo on ship
     bool playerHaveComperableCargo = false;
-    const auto& playerCargo = playerShip->getCargoVec(); // player/ship should have findCargo
-    for(const auto& el : playerCargo){
-        if(cargo == el.get()){
+    const auto& playerCargo = playerShip->getCargoVec();  // player/ship should have findCargo
+    for (const auto& el : playerCargo) {
+        if (cargo == el.get()) {
             playerHaveComperableCargo = true;
             break;
         }
     }
-    if(!playerHaveComperableCargo and !player->getAvailableSpace()){
+    if (!playerHaveComperableCargo and !player->getAvailableSpace()) {
         return Response::lack_of_space;
     }
 

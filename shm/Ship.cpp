@@ -1,20 +1,18 @@
-#include "Cargo.hpp"
 #include "Ship.hpp"
+#include "Cargo.hpp"
 #include "Time.hpp"
 
 #include <iostream>
 #include <stdexcept>
 
 Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), cargoVec_(std::move(cargoVec))
-{}
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), cargoVec_(std::move(cargoVec)) {}
 
-Ship::Ship(size_t maxCrew, size_t speed,const size_t id)
-    : Ship(0, maxCrew, speed, "", id, {})
-{}
+Ship::Ship(size_t maxCrew, size_t speed, const size_t id)
+    : Ship(0, maxCrew, speed, "", id, {}) {}
 
-void Ship::setName(const std::string& name) { 
-    name_ = name; 
+void Ship::setName(const std::string& name) {
+    name_ = name;
 }
 
 Ship& Ship::operator-=(size_t numCrew) {
@@ -33,28 +31,28 @@ Ship& Ship::operator+=(size_t numCrew) {
     return *this;
 }
 
-size_t Ship::getCapacity() const { 
-    return capacity_; 
+size_t Ship::getCapacity() const {
+    return capacity_;
 }
 
-size_t Ship::getMaxCrew() const { 
-    return maxCrew_; 
+size_t Ship::getMaxCrew() const {
+    return maxCrew_;
 }
 
-size_t Ship::getSpeed() const { 
-    return speed_; 
+size_t Ship::getSpeed() const {
+    return speed_;
 }
 
-const std::string& Ship::getName() const { 
-    return name_; 
+const std::string& Ship::getName() const {
+    return name_;
 }
 
-size_t Ship::getId() const { 
-    return id_; 
+size_t Ship::getId() const {
+    return id_;
 }
 
-const Ship::CargoVec& Ship::getCargoVec() const { 
-    return cargoVec_; 
+const Ship::CargoVec& Ship::getCargoVec() const {
+    return cargoVec_;
 }
 
 void Ship::load(std::unique_ptr<Cargo> cargo) {
@@ -63,8 +61,8 @@ void Ship::load(std::unique_ptr<Cargo> cargo) {
     }
 
     Cargo* storedCargo = nullptr;
-    for(const auto& el : cargoVec_){
-        if(*cargo == *el){
+    for (const auto& el : cargoVec_) {
+        if (*cargo == *el) {
             storedCargo = el.get();
             break;
         }

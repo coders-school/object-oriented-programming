@@ -1,9 +1,9 @@
 #pragma once
 
-#include <functional>
-#include <utility>
-#include <list>
 #include <chrono>
+#include <functional>
+#include <list>
+#include <utility>
 
 class Timeable;
 
@@ -36,5 +36,5 @@ private:
     static Time* instance_;
     std::list<Timeable*> list_;
 
-    static constexpr std::chrono::milliseconds dayDuration {5000};
+    static constexpr std::chrono::milliseconds dayDuration{5000};
 };
