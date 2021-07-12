@@ -24,6 +24,7 @@ public:
     //override from Delegate
     void payCrew(const size_t payCrew) override;
     void setPlayerPtr();
+    void buy(const size_t & amount, const size_t & price, const size_t & cargoNumber);
 
 private:
     std::unique_ptr<Ship> ship_;

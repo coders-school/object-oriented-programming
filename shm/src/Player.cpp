@@ -43,3 +43,8 @@ void Player::payCrew(const size_t payCrew) {
 void Player::setPlayerPtr() {
     ship_->changeDelegate(this);
 }
+
+void Player::buy(const size_t & amount, const size_t & price, const size_t & cargoNumber) {
+    money_ = amount * price;
+    ship_->load(getCargo(cargoNumber));
+}
