@@ -4,10 +4,11 @@
 #include <catch/catch.hpp>
 
 #include "Alcohol.hpp"
+#include "DefaultCargo.hpp"
 #include "Fruit.hpp"
+#include "Island.hpp"
 #include "Item.hpp"
 #include "Store.hpp"
-#include "DefaultCargo.hpp"
 
 constexpr auto singleCargoCost = 10;
 struct GoodsData {
@@ -83,6 +84,61 @@ std::unique_ptr<Cargo> generateCargo(size_t index, const std::string& differentN
     default:
         return std::make_unique<CargoDefault>(goodsName, fullQuantity, goods[index].value);
     }
+}
+
+//Island::Coordinates tests
+
+constexpr std::array coords{
+    Island::Coordinates{0, 0},
+    Island::Coordinates{10, 0},
+    Island::Coordinates{0, 10},
+    Island::Coordinates{10, 10},
+    Island::Coordinates{5, 0},
+    Island::Coordinates{5, 5},
+    Island::Coordinates{3, 4}};
+
+constexpr std::array coords2{
+    Island::Coordinates{0, 0},
+    Island::Coordinates{10, 0},
+    Island::Coordinates{0, 10},
+    Island::Coordinates{10, 10},
+    Island::Coordinates{5, 0},
+    Island::Coordinates{5, 5},
+    Island::Coordinates{3, 4}};
+
+TEST_CASE("Compare equal coordinates", "[Coordinates]") {
+    for (int i = 0; i < coords.size(); ++i) {
+        REQUIRE((coords[i] == coords2[i]));
+    }
+}
+
+TEST_CASE("Compare diffrent coordinates", "[Coordinates]") {
+    for (int i = 0; i < coords.size(); ++i) {
+        for (int j = 0; j < coords2.size(); ++j) {
+            if (i == j) {
+                continue;
+            }
+            REQUIRE(!(coords[i] == coords2[j]));
+        }
+    }
+}
+
+TEST_CASE("equal coordinates distance", "[Coordinates]") {
+    for (int i = 0; i < coords.size(); ++i) {
+        REQUIRE(Island::Coordinates::distance(coords[i], coords2[i]) == 0);
+    }
+}
+
+TEST_CASE("diffrent coordinates distance", "[Coordinates]") {
+    //horizontal
+    REQUIRE(Island::Coordinates::distance(coords[0], coords2[2]) == 10);
+    REQUIRE(Island::Coordinates::distance(coords[1], coords2[3]) == 10);
+    REQUIRE(Island::Coordinates::distance(coords[4], coords2[5]) == 5);
+    //vertical
+    REQUIRE(Island::Coordinates::distance(coords[0], coords2[1]) == 10);
+    REQUIRE(Island::Coordinates::distance(coords[2], coords2[3]) == 10);
+    //acros
+    REQUIRE(Island::Coordinates::distance(coords[0], coords2[6]) == 5);
 }
 
 //Fruit::operator-- test
@@ -354,7 +410,7 @@ TEST_CASE("player sell more of single cargo than have to empty store", "[Player]
 }
 
 template <typename T>
-void printCargo(const T& container){
+void printCargo(const T& container) {
     for (const auto& cargo : container) {
         std::cout << std::setw(20) << std::left << cargo->getName() << ":" << std::setw(5) << cargo->getAmount() << '\n';
     }
