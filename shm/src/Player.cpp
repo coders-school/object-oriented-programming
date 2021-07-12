@@ -30,6 +30,7 @@ Island* Player::getCurrentPosition() const {
 
 void Player::setCurrentPosition(Island* island) {
     currentPosition_ = island;
+}
 
 Cargo* Player::getCargo(const std::string& name) const {
     return ship_->getCargo(name);
@@ -55,4 +56,14 @@ void Player::payCrew(const size_t payCrew) {
 
 void Player::setPlayerPtr() {
     ship_->changeDelegate(this);
+}
+
+void Player::buy(const size_t & amount, const size_t & price, const size_t & cargoNumber) {
+    money_ -= (amount * price);
+    ship_->load(getCargo(cargoNumber));
+}
+
+void Player::sell(const size_t & amount, const size_t & price, const size_t & cargoNumber) {
+    money_ += (amount * price);
+    ship_->unload(getCargo(cargoNumber).get());
 }

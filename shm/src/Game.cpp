@@ -236,7 +236,7 @@ void Game::buy() {
     std::string cargoName;
     size_t cargoAmount;
     Store::Response response;
-    auto currentStore{ map_->getCurrentPosition()->getStore() };
+    auto currentStore{ player_->getCurrentPosition()->getStore() };
     do {
         setUserCargo(cargoName, cargoAmount);
         Cargo* cargo{ currentStore->getCargo(cargoName) };
@@ -256,7 +256,7 @@ void Game::sell() {
     std::string cargoName;
     size_t cargoAmount;
     Store::Response response;
-    auto currentStore{ map_->getCurrentPosition()->getStore() };
+    auto currentStore{ player_->getCurrentPosition()->getStore() };
     do {
         setUserCargo(cargoName, cargoAmount);
         Cargo* cargo{ player_->getCargo(cargoName) };
