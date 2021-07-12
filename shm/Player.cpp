@@ -11,7 +11,7 @@ Player::Player(std::unique_ptr<Ship> ship, const size_t& money)
         calculateAvailableSpace();
     }
 
-const Ship* Player::getShip() const {
+Ship* Player::getShip() const {
     return ship_.get();
 }
 
