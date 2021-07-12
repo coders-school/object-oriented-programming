@@ -17,6 +17,7 @@ public:
         NoChoice,
         printMap,
         Travel,
+        PrintCargo,
         Buy,
         Sell,
         HireCrew,
@@ -34,8 +35,9 @@ public:
 private:
     void printWelcomeScreen();
     void printMenu();
-    void printIntenface();
-    size_t printMap();
+    void printHeader();
+    void printMap();
+
     void printWinScreen();
     void printLoseScreen();
     void setUserDestination(size_t& islandNo, size_t islandMax);
@@ -45,6 +47,7 @@ private:
     size_t currentDay_{};
   
     void travel();
+    void printCargo();  //NOT IMPLEMENTED
     void buy();         //NOT IMPLEMENTED
     void sell();        //NOT IMPLEMENTED
     void hireCrew();
@@ -52,7 +55,6 @@ private:
     
     std::unique_ptr<Player> player_;
     std::unique_ptr<Time> time_;
-    std::unique_ptr<Ship> ship_;
     std::unique_ptr<Map> map_;
 
     bool isGameWon();
@@ -61,9 +63,8 @@ private:
     CheckAnswer checkAnswer(const std::string & announcemen);
     MenuOption selectOption();
     MenuOption actionMenu(MenuOption userAnswer);
-    bool crewIsNumber(const size_t & crew);
-    bool validCrewMoney(const size_t & crew);
+    bool isCrewNumber(const size_t & crew);
+    bool hasPlayerEnoughMoney(const size_t & crew);
     
     MenuOption menuOption_ { MenuOption::NoChoice };
-
 };

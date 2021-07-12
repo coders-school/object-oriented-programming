@@ -7,7 +7,6 @@
 #include <iostream>
 #include <memory>
 
-#include "shm/inc/Ship.hpp"
 #include "shm/inc/Island.hpp"
 
 namespace {
@@ -19,14 +18,11 @@ namespace {
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
     , gameDays_(gameDays)
-    , finalGoal_(finalGoal)
-    , time_(std::make_unique<Time>())
-    , map_(std::make_unique<Map>())
+    , finalGoal_(finalGoal)  
 {
-    ship_ = std::make_unique<Ship>(1, 25, 100, nullptr);
-    player_ = std::make_unique<Player>(std::move(ship_), 100, 10000);
-    //std::cout << *map_->getIslands()[0].getStore();
-
+    time_ = std::make_unique<Time>();
+    map_ = std::make_unique<Map>();
+    player_ = std::make_unique<Player>((std::make_unique<Ship>(1, 25, 100, nullptr)), 100, 10000);
 }
 
 void Game::startGame() {
@@ -88,7 +84,7 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill(' ')  << std::setw (30) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (21) << " 1. SHOW MAP " << std::setw (9) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (20) << " 2. TRAVEL " << std::setw (10) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (22) << " 3. CHECK CARGO " << std::setw (8) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (22) << " 3. PRINT CARGO " << std::setw (8) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 4. BUY " << std::setw (11) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 5. SELL" << std::setw (11) << "#\n";
     std::cout << "#" << std::setfill(' ')  << std::setw (21) << " 6. HIRE CREW" << std::setw (9) << "#\n";
@@ -97,7 +93,7 @@ void Game::printMenu() {
     std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
 }
 
-void Game::printIntenface() {
+void Game::printHeader() {
     std::cout << std::setw (99) << std::setfill('#') << "\n";
     std::cout << "#" << std::setfill(' ') << std::setw (97) << "#" << "\n";
     std::cout << "#" << std::setfill(' ') << std::setw (15) << "YOUR MONEY: " << std::setw (8) << std::setfill('0') << money_;
@@ -119,13 +115,13 @@ size_t Game::printMap() {
 }
 
 Game::MenuOption Game::selectOption() {
-    printIntenface();
+    printHeader();
     printMenu();
     size_t option {};
     do {
         std::cout << "Please insert you choice: ";
         std::cin >> option;
-    } while (isChoiceValid(option) == false);
+    } while (!isChoiceValid(option));
     menuOption_ = static_cast<MenuOption>(option);
     return actionMenu(menuOption_);
 }
@@ -137,6 +133,9 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
             break;
         case MenuOption::Travel :
             travel();
+            break;
+        case MenuOption::PrintCargo :
+            printCargo();
             break;
         case MenuOption::Buy :
             buy();
@@ -169,8 +168,7 @@ bool Game::isChoiceValid(const size_t & option) {
 
 Game::CheckAnswer Game::checkAnswer(const std::string & announcemen) {
     std::cout << announcemen << '\n';
-    char answer;
-    std::cin >> answer;
+    char answer = getchar();
     if (answer == 'Y' || answer == 'y') {
         return CheckAnswer::Yes;
     }
@@ -233,6 +231,9 @@ void Game::setUserDestination(size_t& islandNo, size_t islandMax) {
             continue;
         }
     } while (std::cin.fail());
+
+void Game::printCargo() {
+
 }
 
 void Game::buy() {
@@ -246,19 +247,20 @@ void Game::sell() {
 void Game::hireCrew() {
     size_t crewAmount{};
     std::cout << "Cost of crew is 1 coin\n";
-    std::cout << "How many crew you wanna hire? ";
-    std::cin >> crewAmount;
-    while (true) {
-        if (crewIsNumber(crewAmount) == true) {
-            break;
-        }
-    }
-    if (validCrewMoney(crewAmount) == true) {
-        *ship_+=crewAmount;
+    do {
+        std::cout << "How many crew you wanna hire? ";
+        std::cin >> crewAmount;
+    } while (isCrewNumber(crewAmount));
+
+    if (hasPlayerEnoughMoney(crewAmount)) {
+        *(player_->getShip()) += crewAmount;
+        std::cout << "You have employed " << crewAmount << " sailors\n";
+    } else {
+        std::cout << "You don't have enough money\n";
     }
 }
 
-bool Game::crewIsNumber(const size_t & crew) { 
+bool Game::isCrewNumber(const size_t & crew) { 
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -268,9 +270,8 @@ bool Game::crewIsNumber(const size_t & crew) {
     return true;
 }
 
-bool Game::validCrewMoney(const size_t & crew) {
+bool Game::hasPlayerEnoughMoney(const size_t & crew) {
     if (crew > player_->getMoney()) {
-        std::cout << "You don't have enough money to hire " << crew << " crew\n";
         return false;
     }
     return true;

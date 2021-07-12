@@ -44,6 +44,6 @@ size_t Alcohol::getPercentage() const {
     return percentage_;
 }
 
-bool Alcohol::getIsUsable() const {
-    return percentage_ == 0;
+bool Alcohol::isExpired() const {
+    return percentage_;
 }
