@@ -24,8 +24,9 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const;
     Island* getCurrentPosition() const;
     void setCurrentPosition(Island* island);
+    Cargo* getCargo(const std::string& name) const;
 
-    //override from Delegate
+  //override from Delegate
     void payCrew(const size_t payCrew) override;
     void setPlayerPtr();
 

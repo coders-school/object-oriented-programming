@@ -127,34 +127,27 @@ Game::MenuOption Game::selectOption() {
 
 Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
     switch(menuOption_) {
-        case MenuOption::printMap :
-            printMap();
-            break;
-        case MenuOption::Travel :
-            travel();
-            break;
-        case MenuOption::PrintCargo :
-            printCargo();
-            break;
-        case MenuOption::Buy :
-            buy();
-            break;
-        case MenuOption::Sell :
-            sell();
-            break;
-        case MenuOption::HireCrew :
-            hireCrew();
-            break;
-        case MenuOption::Exit :
-            menuOption_ = exitGame();
-            break;
-        default:
-            std::cout << "Option doesn't exists\n";
+    case MenuOption::PrintMap :
+        printMap(); break;
+    case MenuOption::Travel :
+        travel(); break;
+    case MenuOption::PrintCargo :
+        printCargo(); break;
+    case MenuOption::Buy :
+        buy(); break;
+    case MenuOption::Sell :
+        sell(); break;
+    case MenuOption::HireCrew :
+        hireCrew(); break;
+    case MenuOption::Exit :
+        menuOption_ = exitGame(); break;
+    default:
+        std::cout << "Option doesn't exists\n";
     }
     return menuOption_;
 }
 
-bool Game::isChoiceValid(const size_t & option) { 
+bool Game::isChoiceValid(const size_t& option) { 
     if (std::cin.fail() || option < FIRST_OPTION_ELEMENT || option > LAST_OPTION_ELEMENT) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -165,8 +158,8 @@ bool Game::isChoiceValid(const size_t & option) {
     return true;
 }
 
-Game::CheckAnswer Game::checkAnswer(const std::string & announcemen) {
-    std::cout << announcemen << '\n';
+Game::CheckAnswer Game::checkAnswer(const std::string& announcement) {
+    std::cout << announcement << '\n';
     char answer = getchar();
     if (answer == 'Y' || answer == 'y') {
         return CheckAnswer::Yes;
@@ -238,11 +231,71 @@ void Game::printCargo() {
 }
 
 void Game::buy() {
-
+    std::cout << "Cargo to buy in store:\n";
+    // TODO: print store cargo
+    std::string cargoName;
+    size_t cargoAmount;
+    Store::Response response;
+    auto currentStore{ map_->getCurrentPosition()->getStore() };
+    do {
+        setUserCargo(cargoName, cargoAmount);
+        Cargo* cargo{ currentStore->getCargo(cargoName) };
+        if (cargo) {
+            response = currentStore->buy(cargo, cargoAmount, player_.get());
+            break;
+        }
+        std::cout << "No such cargo!" << std::endl;
+    } while (true);
+    printResponse(response,
+                  "Bought " + std::to_string(cargoAmount) + " of " + cargoName);
 }
 
 void Game::sell() {
+    std::cout << "Cargo to sell:\n";
+    // TODO: print ship cargo
+    std::string cargoName;
+    size_t cargoAmount;
+    Store::Response response;
+    auto currentStore{ map_->getCurrentPosition()->getStore() };
+    do {
+        setUserCargo(cargoName, cargoAmount);
+        Cargo* cargo{ player_->getCargo(cargoName) };
+        if (cargo) {
+            response = currentStore->sell(cargo, cargoAmount, player_.get());
+            break;
+        }
+        std::cout << "No such cargo!" << std::endl;
+    } while (true);
+    printResponse(response,
+                  "Sold " + std::to_string(cargoAmount) + " of " + cargoName);
+}
 
+void Game::setUserCargo(std::string& cargoName, size_t& cargoAmount) {
+    do {
+        std::cin.clear();
+        std::cout << "Input cargo name: ";
+        std::cin >> cargoName;
+        std::cout << "Input cargo amount: ";
+        std::cin >> cargoAmount;
+        if (std::cin.fail()) {
+            std::cout << "Invalid amount!\n";
+        }
+    } while (std::cin.fail());
+}
+
+void Game::printResponse(const Store::Response& response,
+                         const std::string& message)
+{
+    switch (response) {
+    case Store::Response::done:
+        std::cout << message << '\n'; break;
+    case Store::Response::lack_of_cargo:
+        std::cout << "There is not enough cargo!\n"; break;
+    case Store::Response::lack_of_space:
+        std::cout << "There is not enough space!\n"; break;
+    case Store::Response::lack_of_money:
+        std::cout << "You do not have enough money!\n"; break;
+    }
 }
 
 void Game::hireCrew() {
@@ -261,7 +314,7 @@ void Game::hireCrew() {
     }
 }
 
-bool Game::isCrewNumber(const size_t & crew) { 
+bool Game::isCrewNumber(const size_t& crew) { 
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -271,7 +324,7 @@ bool Game::isCrewNumber(const size_t & crew) {
     return true;
 }
 
-bool Game::hasPlayerEnoughMoney(const size_t & crew) {
+bool Game::hasPlayerEnoughMoney(const size_t& crew) {
     if (crew > player_->getMoney()) {
         return false;
     }

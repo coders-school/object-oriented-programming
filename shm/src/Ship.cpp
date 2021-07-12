@@ -47,6 +47,16 @@ std::shared_ptr<Cargo> Ship::getCargo(size_t index) const {
     return cargos_[index];
 }
 
+Cargo* Ship::getCargo(const std::string& name) const {
+    auto result{ std::find_if(cargos_.begin(), cargos_.end(),
+                             [&name](const auto& cargo) {
+                                return cargo->getName() == name ;
+                             })
+    };
+    
+    return result != cargos_.end() ? result->get() : nullptr;
+}
+
 void Ship::load(const std::shared_ptr<Cargo>cargo) {
     if (cargo) {
         bool ifExistCargo = false;
