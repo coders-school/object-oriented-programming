@@ -58,41 +58,11 @@ Cargo* Ship::getCargo(const std::string& name) const {
 }
 
 void Ship::load(const std::shared_ptr<Cargo>cargo) {
-    if (cargo) {
-        bool ifExistCargo = false;
-        for (auto const & element : cargos_) {
-            if (element == cargo) {
-                *element+=cargo->getAmount();
-                ifExistCargo = true;
-                break;
-            }
-        }
-        if (ifExistCargo == false) {
-            cargos_.push_back(cargo);
-        }
-    }
+ // WRITE ME
 }
-
 // FIXME:
-void Ship::unload(Cargo* cargo) {
-    if (cargo) {
-        int it = -1;
-        for (int i = 0; i < static_cast<int>(cargos_.size()); i++) {
-            if (*(cargos_[i].get()) == *cargo) {
-                it = i;
-                break;
-            }
-        }
-        if (it == -1) {
-            std::cerr << "Cargo not exist in ship\n";
-        } else if (cargo->getAmount() > cargo[it].getAmount()) {
-            std::cerr << "Wrong value, you wanna unload more then exist in ship\n";
-        } else if (cargo->getAmount() == cargo[it].getAmount()) {
-            cargos_.erase(std::remove(cargos_.begin(), cargos_.end(), cargos_[it]), cargos_.end());
-        } else {
-            *cargos_[it]-= cargo->getAmount();
-        }
-    }
+void Ship::unload(const std::shared_ptr<Cargo> cargo) {
+ // WRITE ME
 }
 
 void Ship::nextDay() {

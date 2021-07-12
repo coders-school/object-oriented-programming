@@ -31,7 +31,7 @@ public:
 
     void setName(const std::string& name);
     void load(const std::shared_ptr<Cargo>);
-    void unload(Cargo* cargo);
+    void unload(const std::shared_ptr<Cargo>);
     void changeDelegate(Player* player);
 
     // overload form Subscriber
