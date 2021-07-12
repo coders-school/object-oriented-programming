@@ -6,49 +6,33 @@
 #include <vector>
 #include <iostream>
 
-void Player::calculateAvailableSpace() {
-    const auto& cargoVec = ship_->getCargoVec();
-    if(ship_->getCapacity() <= cargoVec.size()) {
-        availableSpace_ = 0;
-    }
-    availableSpace_ = ship_->getCapacity() - cargoVec.size();
-}
-
 Player::Player(std::unique_ptr<Ship> ship, const size_t& money)
     : ship_{std::move(ship)}, money_{money} {
         calculateAvailableSpace();
     }
 
-const std::unique_ptr<Ship>& Player::getShip() const {
-    return ship_;
+Ship* Player::getShip() const {
+    return ship_.get();
 }
 
-size_t Player::getMoney() const {
-    return money_;
-}
-
-size_t Player::getAvailableSpace() const {
-    return availableSpace_;
-}
-
-size_t Player::getSpeed() const {
-    return ship_->getSpeed();
-}
-
-Cargo* Player::getCargo(size_t index) const {
-    Cargo* ptr;
-    try {
-        ptr = ship_->getCargoVec().at(index).get();
-    } catch (...) {
+const Cargo* Player::getCargo(size_t index) const {
+    if(!ship_) {
         return nullptr;
     }
-    return ptr;
+    const auto& cargoVec = ship_->getCargoVec();
+    if(cargoVec.size() <= index) {
+        return nullptr;
+    }
+    return cargoVec[index].get();
 }
 
 void Player::printCargoManifest() const {
+    if(!ship_) {
+        return;
+    }
     const auto& cargoVec = ship_->getCargoVec();
     std::cout << "Ship capacity: " << ship_->getCapacity() << '\n'
-              << "Cargo on board: " << ship_->getCargoVec().size() << '\n'
+              << "Cargo on board: " << cargoVec.size() << '\n'
               << "Available space: " << availableSpace_ << '\n';
     size_t i {1};
     for(const auto& cargoUnit : cargoVec) {
@@ -58,4 +42,33 @@ void Player::printCargoManifest() const {
                   << '\n';
     }
 
+}
+
+size_t Player::getMoney() const {
+    return money_;
+}
+
+size_t Player::getAvailableSpace() {
+    calculateAvailableSpace();
+    return availableSpace_;
+}
+
+size_t Player::getSpeed() const {
+    if(ship_) {
+        return ship_->getSpeed();
+    }
+    return 0;
+}
+
+void Player::calculateAvailableSpace() {
+    if(!ship_) {
+        availableSpace_ = 0;
+        return;
+    }
+    const auto& shipCapacity = ship_->getCapacity();
+    const auto& currentCargoSize = ship_->getCargoVec().size();
+    if(shipCapacity <= currentCargoSize) {
+        availableSpace_ = 0;
+    }
+    availableSpace_ = shipCapacity - currentCargoSize;
 }
