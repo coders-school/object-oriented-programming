@@ -39,6 +39,7 @@ private:
     void printMap();
     void printWinScreen();
     void printLoseScreen();
+    void announcementGenerate(const std::string & announcenent);
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;
