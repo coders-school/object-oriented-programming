@@ -20,7 +20,8 @@ public:
     size_t getAvailableSpace() const { return availableSpace_.second; };
     size_t getSpeed() const;
     std::shared_ptr<Cargo> getCargo(size_t index) const;
-
+    Cargo* getCargo(const std::string& name) const;
+    
     //override from Delegate
     void payCrew(const size_t payCrew) override;
     void setPlayerPtr();
