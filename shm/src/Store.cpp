@@ -107,6 +107,7 @@ void Store::convertDataFromFile(std::string lineFromFile) {
         } else {
             wordNumber++;
             valueOneLineAssignment(wordNumber, singleWordFromFile);
+            singleWordFromFile = "";
         }
     }
     generateSingleCargo();
@@ -144,6 +145,7 @@ void Store::valueOneLineAssignment(const size_t & wordNumber, const std::string 
 }
 
 void Store::generateSingleCargo() {
+    
     if (oneLine_.className_ == "Fruit"){
         generateFruit();
     } else if (oneLine_.className_ == "Alcohol"){
