@@ -41,6 +41,7 @@ private:
 
     void printWinScreen();
     void printLoseScreen();
+    void announcementGenerate(const std::string & announcenent);
     void printResponse(const Store::Response& response,
                        const std::string& message);
     void setUserCargo(std::string& cargoName, size_t& cargoAmount);

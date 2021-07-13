@@ -43,11 +43,27 @@ bool Game::isGameWon() {
 }
 
 void Game::printWinScreen() {
-    std::cout << "############################################################\n";
-    std::cout << "#                                                          #\n";
-    std::cout << "#                  CONGRATULATION YOU WIN                  #\n";
-    std::cout << "#                                                          #\n";
-    std::cout << "############################################################";
+    announcementGenerate("CONGRATULATION YOU WIN");
+}
+
+void Game::printLoseScreen() {
+    announcementGenerate("UNFORTUNATELY YOU LOST");
+}
+
+void Game::printWelcomeScreen() {
+    announcementGenerate("WELCOME TO TRADE SHIP SIMULATOR 1.0.0.0 ");
+}
+
+void Game::announcementGenerate(const std::string & announcenent) {
+    size_t frameSize { 100 };
+    size_t frameLine { 1 };
+    size_t announcementEndPosition = frameSize / 2 - announcenent.size() / 2 + announcenent.size();
+    std::cout << std::setfill('#') << std::setw (frameSize ) << "\n"
+          << '#' << std::setfill(' ') << std::setw (frameSize - frameLine) << "#\n"
+          << '#' << std::setw (announcementEndPosition) << announcenent 
+          << std::setw (frameSize - announcementEndPosition - frameLine) << "#\n"
+          << '#' << std::setw (frameSize - frameLine) << "#\n"
+          << std::setfill('#') << std::setw (frameSize) << "\n";
     std::cin.get();
 }
 
@@ -57,24 +73,6 @@ bool Game::isGameLost() {
         return true;
     }
     return false;
-}
-
-void Game::printLoseScreen() {
-    std::cout << "############################################################\n";
-    std::cout << "#                                                          #\n";
-    std::cout << "#                 UNFORTUNATELY YOU LOST                   #\n";
-    std::cout << "#                                                          #\n";
-    std::cout << "############################################################";
-    std::cin.get();
-}
-
-void Game::printWelcomeScreen() {
-    std::cout << "############################################################\n";
-    std::cout << "#                                                          #\n";
-    std::cout << "#         WELCOME TO TRADE SHIP SIMULATOR 1.0.0.0          #\n";
-    std::cout << "#                                                          #\n";
-    std::cout << "############################################################\n";
-    std::cin.get();
 }
 
 void Game::printMenu() {
