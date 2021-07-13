@@ -13,6 +13,7 @@ public:
 
     // override from Cargo class
     virtual size_t getPrice() const override;
+    size_t getRottenTime() const { return rottenTime_; }
     Cargo& operator+=(const size_t amount) override;
     Cargo& operator-=(const size_t amount) override;
     bool operator==(const Cargo& cargo) const override;

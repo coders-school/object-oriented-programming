@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <memory>
@@ -9,8 +10,9 @@
 #include "shm/inc/Island.hpp"
 
 namespace {
-    constexpr size_t FIRST_OPTION_ELEMENT { 1 };
-    constexpr size_t LAST_OPTION_ELEMENT { 7 };
+    constexpr size_t DISTANCE_MULTIPLIER{ 10 };
+    constexpr size_t FIRST_OPTION_ELEMENT{ 1 };
+    constexpr size_t LAST_OPTION_ELEMENT{ 6 };
 }
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
@@ -101,9 +103,9 @@ void Game::printHeader() {
 }
 
 void Game::printMap() {
-    int i{};
+    size_t islandNo{};
     for (const auto& island : map_->getIslands()) {
-        std::cout << "Island no " << ++i 
+        std::cout << "Island no " << ++islandNo 
                   << " ---- Coordinates [" << island.getCoordinates().getPositionX() 
                   << "][" << island.getCoordinates().getPositionY() << "]\n";
     }
@@ -123,34 +125,27 @@ Game::MenuOption Game::selectOption() {
 
 Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
     switch(menuOption_) {
-        case MenuOption::printMap :
-            printMap();
-            break;
-        case MenuOption::Travel :
-            travel();
-            break;
-        case MenuOption::PrintCargo :
-            printCargo();
-            break;
-        case MenuOption::Buy :
-            buy();
-            break;
-        case MenuOption::Sell :
-            sell();
-            break;
-        case MenuOption::HireCrew :
-            hireCrew();
-            break;
-        case MenuOption::Exit :
-            menuOption_ = exitGame();
-            break;
-        default:
-            std::cout << "Option doesn't exists\n";
+    case MenuOption::PrintMap :
+        printMap(); break;
+    case MenuOption::Travel :
+        travel(); break;
+    case MenuOption::PrintCargo :
+        printCargo(); break;
+    case MenuOption::Buy :
+        buy(); break;
+    case MenuOption::Sell :
+        sell(); break;
+    case MenuOption::HireCrew :
+        hireCrew(); break;
+    case MenuOption::Exit :
+        menuOption_ = exitGame(); break;
+    default:
+        std::cout << "Option doesn't exists\n";
     }
     return menuOption_;
 }
 
-bool Game::isChoiceValid(const size_t & option) { 
+bool Game::isChoiceValid(const size_t& option) { 
     if (std::cin.fail() || option < FIRST_OPTION_ELEMENT || option > LAST_OPTION_ELEMENT) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -161,8 +156,8 @@ bool Game::isChoiceValid(const size_t & option) {
     return true;
 }
 
-Game::CheckAnswer Game::checkAnswer(const std::string & announcemen) {
-    std::cout << announcemen << '\n';
+Game::CheckAnswer Game::checkAnswer(const std::string& announcement) {
+    std::cout << announcement << '\n';
     char answer = getchar();
     if (answer == 'Y' || answer == 'y') {
         return CheckAnswer::Yes;
@@ -187,39 +182,46 @@ Game::MenuOption Game::exitGame() {
 }
 
 void Game::travel() {
-    /* 1. PRINT MAP AND SHOW POSITION
-       2. PROMPT TO CHOOSE AN ISLAND IN LOOP
-          - by number and return coordinates
-          - or by coordinates
-    */
-    size_t coordX{};
-    size_t coordY{};
-
-    Island* destinationIsland = map_->getIsland(Island::Coordinates(coordX, coordY));
+    printMap();
+    auto islandMax = map_->getIslands().size();
+    std::cout << "You are at island ("
+              << player_->getCurrentPosition()->getCoordinates().getPositionX() << ", "
+              << player_->getCurrentPosition()->getCoordinates().getPositionY() << ")\n";
+    size_t islandNo;
+    setUserDestination(islandNo, islandMax);
+    size_t coordX{map_->getIslands()[islandNo - 1].getCoordinates().getPositionX()};
+    size_t coordY{map_->getIslands()[islandNo - 1].getCoordinates().getPositionY()};
+    Island* destinationIsland{ map_->getIsland(Island::Coordinates(coordX, coordY)) };
     if (destinationIsland) {
         const size_t distance{
-            Island::Coordinates::distance(map_->getCurrentPosition()->getCoordinates(),
+            Island::Coordinates::distance(player_->getCurrentPosition()->getCoordinates(),
                                           destinationIsland->getCoordinates())
         };
-        
         const size_t playerSpeed = player_->getSpeed();
-        const size_t travelTime = (distance * 10) / playerSpeed;    // temporary magic value
-
-
-        // TRAVEL INFO HERE (distance, speed)
-        
-        map_->setCurrentPosition(destinationIsland);
-
-        // DESTINATION REACHED INFO HERE (island number, coordinates, travel time)
-        
+        const size_t travelTime = (distance * DISTANCE_MULTIPLIER) / playerSpeed;
+        std::cout << "You covered the distance of " << distance 
+                  << " at speed " << playerSpeed << ".\n";
+        player_->setCurrentPosition(destinationIsland);
+        std::cout << "Island no " << islandNo 
+                  << " at coordinates (" << coordX << ", " << coordY 
+                  << ") reached in " << travelTime << " days.\n";
         for (size_t i = 0; i < travelTime; i++) {
             ++(*time_);
         }
         currentDay_ = time_->getElapsedTime();
-    } else {
-        // WRONG COORDINATES - LOOP CONTINUES
     }
-    // LOOP EXITS
+}
+
+void Game::setUserDestination(size_t& islandNo, size_t islandMax) {
+    do {   
+        std::cin.clear();
+        std::cout << "Which island are you travelling to?" << std::endl;
+        std::cin >> islandNo;
+        if (islandNo > islandMax || islandNo < 1) {
+            std::cout << "No such island!" << std::endl;
+            continue;
+        }
+    } while (std::cin.fail());
 }
 
 void Game::printCargo() {
@@ -227,11 +229,71 @@ void Game::printCargo() {
 }
 
 void Game::buy() {
-
+    std::cout << "Cargo to buy in store:\n";
+    // TODO: print store cargo
+    std::string cargoName;
+    size_t cargoAmount;
+    Store::Response response;
+    auto currentStore{ player_->getCurrentPosition()->getStore() };
+    do {
+        setUserCargo(cargoName, cargoAmount);
+        Cargo* cargo{ currentStore->getCargo(cargoName) };
+        if (cargo) {
+            response = currentStore->buy(cargo, cargoAmount, player_.get());
+            break;
+        }
+        std::cout << "No such cargo!" << std::endl;
+    } while (true);
+    printResponse(response,
+                  "Bought " + std::to_string(cargoAmount) + " of " + cargoName);
 }
 
 void Game::sell() {
+    std::cout << "Cargo to sell:\n";
+    // TODO: print ship cargo
+    std::string cargoName;
+    size_t cargoAmount;
+    Store::Response response;
+    auto currentStore{ player_->getCurrentPosition()->getStore() };
+    do {
+        setUserCargo(cargoName, cargoAmount);
+        Cargo* cargo{ player_->getCargo(cargoName) };
+        if (cargo) {
+            response = currentStore->sell(cargo, cargoAmount, player_.get());
+            break;
+        }
+        std::cout << "No such cargo!" << std::endl;
+    } while (true);
+    printResponse(response,
+                  "Sold " + std::to_string(cargoAmount) + " of " + cargoName);
+}
 
+void Game::setUserCargo(std::string& cargoName, size_t& cargoAmount) {
+    do {
+        std::cin.clear();
+        std::cout << "Input cargo name: ";
+        std::cin >> cargoName;
+        std::cout << "Input cargo amount: ";
+        std::cin >> cargoAmount;
+        if (std::cin.fail()) {
+            std::cout << "Invalid amount!\n";
+        }
+    } while (std::cin.fail());
+}
+
+void Game::printResponse(const Store::Response& response,
+                         const std::string& message)
+{
+    switch (response) {
+    case Store::Response::done:
+        std::cout << message << '\n'; break;
+    case Store::Response::lack_of_cargo:
+        std::cout << "There is not enough cargo!\n"; break;
+    case Store::Response::lack_of_space:
+        std::cout << "There is not enough space!\n"; break;
+    case Store::Response::lack_of_money:
+        std::cout << "You do not have enough money!\n"; break;
+    }
 }
 
 void Game::hireCrew() {
@@ -250,7 +312,7 @@ void Game::hireCrew() {
     }
 }
 
-bool Game::isCrewNumber(const size_t & crew) { 
+bool Game::isCrewNumber(const size_t& crew) { 
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -260,7 +322,7 @@ bool Game::isCrewNumber(const size_t & crew) {
     return true;
 }
 
-bool Game::hasPlayerEnoughMoney(const size_t & crew) {
+bool Game::hasPlayerEnoughMoney(const size_t& crew) {
     if (crew > player_->getMoney()) {
         return false;
     }

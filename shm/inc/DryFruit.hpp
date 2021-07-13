@@ -14,6 +14,7 @@ public:
     
     // override from Fruit
     DryFruit& operator--() override;
+    size_t getRottenTimeForDryFruit() const { return rottenDryFruit_; }
     size_t getTimeElapsed() const override { return timeElapsed_; }
 
     // override from Subscriber (via Fruit & Cargo)

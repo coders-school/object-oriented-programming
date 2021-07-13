@@ -1,8 +1,10 @@
+#pragma once
+
 #include "shm/inc/Cargo.hpp"
 
 class Item : public Cargo {
 public:
-   enum class Rarity {
+    enum class Rarity {
         common = 1,
         rare = 5,
         epic = 9,

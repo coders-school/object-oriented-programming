@@ -5,6 +5,10 @@
 #include <vector>
 
 #include "shm/inc/Subscriber.hpp"
+#include "shm/inc/Alcohol.hpp"
+#include "shm/inc/DryFruit.hpp"
+#include "shm/inc/Fruit.hpp"
+#include "shm/inc/Item.hpp"
 
 class Cargo;
 class Delegate;
@@ -19,6 +23,7 @@ public:
 
     Ship& operator+=(const size_t amount);
     Ship& operator-=(const size_t amount);
+    friend std::ostream& operator<<(std::ostream& out, const Ship& ship);
 
     int getId() const { return id_; };
     std::string getName() const { return name_; };
@@ -26,11 +31,12 @@ public:
     size_t getMaxCrew() const { return maxCrew_; };
     size_t getCapacity() const { return capacity_; };
     std::shared_ptr<Cargo> getCargo(size_t index) const;
+    Cargo* getCargo(const std::string& name) const;
     std::vector<std::shared_ptr<Cargo>> getCargos() const { return cargos_; };
 
     void setName(const std::string& name);
     void load(const std::shared_ptr<Cargo>);
-    void unload(Cargo* cargo);
+    void unload(const std::shared_ptr<Cargo>);
     void changeDelegate(Player* player);
 
     // overload form Subscriber

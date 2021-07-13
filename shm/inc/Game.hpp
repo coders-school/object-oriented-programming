@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <memory>
 
 #include "shm/inc/Player.hpp"
@@ -15,7 +16,7 @@ public:
 
     enum class MenuOption {
         NoChoice,
-        printMap,
+        PrintMap,
         Travel,
         PrintCargo,
         Buy,
@@ -37,18 +38,23 @@ private:
     void printMenu();
     void printHeader();
     void printMap();
+
     void printWinScreen();
     void printLoseScreen();
     void announcementGenerate(const std::string & announcenent);
+    void printResponse(const Store::Response& response,
+                       const std::string& message);
+    void setUserCargo(std::string& cargoName, size_t& cargoAmount);
+    void setUserDestination(size_t& islandNo, size_t islandMax);
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;
     size_t currentDay_{};
   
-    void travel();      //NOT IMPLEMENTED
+    void travel();
     void printCargo();  //NOT IMPLEMENTED
-    void buy();         //NOT IMPLEMENTED
-    void sell();        //NOT IMPLEMENTED
+    void buy();
+    void sell();
     void hireCrew();
     MenuOption exitGame();
     
@@ -59,12 +65,11 @@ private:
     bool isGameWon();
     bool isGameLost();
     bool isChoiceValid(const size_t & option);
-    CheckAnswer checkAnswer(const std::string & announcemen);
+    CheckAnswer checkAnswer(const std::string & announcement);
     MenuOption selectOption();
     MenuOption actionMenu(MenuOption userAnswer);
     bool isCrewNumber(const size_t & crew);
     bool hasPlayerEnoughMoney(const size_t & crew);
     
     MenuOption menuOption_ { MenuOption::NoChoice };
-
 };
