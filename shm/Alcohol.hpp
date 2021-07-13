@@ -3,7 +3,7 @@
 #include "Cargo.hpp"
 
 constexpr auto maxPercentage = 96;
-constexpr size_t alcoholBasePriceFor96percent = 100u;
+constexpr size_t alcoholPriceFor96percent = 100u;
 
 class Alcohol : public Cargo {
 public:
@@ -15,6 +15,8 @@ public:
     bool operator==(const Cargo& other) const override;
 
     size_t getPrice() const override;
+
+    static constexpr std::string_view suffix = " (Alcohol)";
 
 protected:
     unsigned char percentage_ = 0;
