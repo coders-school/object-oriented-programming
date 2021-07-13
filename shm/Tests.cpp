@@ -10,7 +10,11 @@
 #include "Item.hpp"
 #include "Store.hpp"
 
+using DryFruit = Fruit;
+
 constexpr auto singleCargoCost = 10;
+constexpr auto minimalCargoCost = 1;
+
 struct GoodsData {
     constexpr GoodsData(const char* name)
         : name(name) {}
@@ -28,18 +32,18 @@ constexpr std::array goods{
     GoodsData{"Drewno"},
     GoodsData{"Cegly"},
     GoodsData{existingCargoName},
-    GoodsData{"Kamienie"},   // item
-    GoodsData{"Ziemniaki"},  //4 - fruit
-    GoodsData{"???"},        //5 - alcohol
-    GoodsData{"Skrzynia"}    //6 - item
+    GoodsData{"Daktyle"},    // 3 - DryFruit
+    GoodsData{"Ziemniaki"},  //4 - Fruit
+    GoodsData{"???"},        //5 - Alcohol
+    GoodsData{"Skrzynia"}    //6 - Item
 };
 
 constexpr auto cargoDefaultIndex = 0;
 constexpr auto secondCargoDefaultIndex = 1;
+constexpr auto dryFruitIndex = 3;
 constexpr auto fruitIndex = 4;
 constexpr auto alcoholIndex = 5;
 constexpr auto itemIndex = 6;
-constexpr auto otherItemIndex = 3;
 constexpr auto defaultGoodsName = "Towar";
 
 constexpr auto cargoTypes = goods.size();
@@ -72,14 +76,14 @@ std::unique_ptr<Cargo> generateCargo(size_t index, const std::string& differentN
     }
 
     switch (index) {
+    case dryFruitIndex:
+        return std::make_unique<DryFruit>(goodsName, fullQuantity, goods[index].value, fruitBestBefore);
     case fruitIndex:
         return std::make_unique<Fruit>(goodsName, fullQuantity, goods[index].value, fruitBestBefore);
     case alcoholIndex:
         Alcohol::alcoholBasePriceFor96percent_ = singleCargoCost;
         return std::make_unique<Alcohol>(goodsName, fullQuantity, alcoholPercentage);
     case itemIndex:
-        [[fallthrough]];
-    case otherItemIndex:
         return std::make_unique<Item>(goodsName, fullQuantity, goods[index].value, itemQuality);
     default:
         return std::make_unique<CargoDefault>(goodsName, fullQuantity, goods[index].value);
@@ -148,13 +152,17 @@ TEST_CASE("Fruit decrement price over time", "[Fruit]") {
     auto& fruitTypeRef = dynamic_cast<Fruit&>(*fruit);
 
     auto fruitValueFunct = [](auto daysPassed) -> size_t {
-        return singleCargoCost * (fruitBestBefore - daysPassed) / static_cast<double>(fruitBestBefore);
+        size_t price = singleCargoCost * (fruitBestBefore - daysPassed) / static_cast<double>(fruitBestBefore);
+        if (daysPassed <= fruitBestBefore) {
+            price = std::max(price, 1ul);  //minimal value for not rotten fruit
+        }
+        return price;
     };
 
     std::cout << "Fresh fruit value: " << fruit->getPrice() << '\n';
     REQUIRE(fruit->getPrice() == singleCargoCost);
 
-    for (int daysPassed = 1; daysPassed <= fruitBestBefore; ++daysPassed) {
+    for (int daysPassed = 1; daysPassed < fruitBestBefore; ++daysPassed) {
         --fruitTypeRef;
         std::cout << "Fruit value: " << fruit->getPrice() << '\n';
         REQUIRE(fruit->getPrice() == fruitValueFunct(daysPassed));
@@ -165,15 +173,78 @@ TEST_CASE("Fruit decrement below max time", "[Fruit]") {
     auto fruit = generateCargo(fruitIndex);
     auto& fruitTypeRef = dynamic_cast<Fruit&>(*fruit);
 
-    for (int daysPassed = 1; daysPassed <= fruitBestBefore; ++daysPassed) {
+    for (int daysPassed = 1; daysPassed < fruitBestBefore; ++daysPassed) {
         --fruitTypeRef;
     }
     constexpr auto rottingDays = 4;
     for (int daysPassed = 0; daysPassed < rottingDays; ++daysPassed) {
         --fruitTypeRef;
         std::cout << "Fruit value after rotting: " << fruit->getPrice() << '\n';
+        REQUIRE(fruit->getPrice() == 0);
     }
-    REQUIRE(fruit->getPrice() == 0);
+}
+
+//DryFruit::operator-- test
+
+constexpr auto dryFruitValueMultipler = 3;
+constexpr auto dryFruitRottingDivider = 10;
+
+TEST_CASE("DryFruit decrement price over time", "[DryFruit]") {
+    auto dryFruit = generateCargo(dryFruitIndex);
+    auto& dryFruitTypeRef = dynamic_cast<DryFruit&>(*dryFruit);
+
+    auto fruitValueFunct = [](auto daysPassed) -> size_t {
+        size_t price = singleCargoCost * dryFruitValueMultipler                   //value of dry fruit
+                       * (fruitBestBefore - daysPassed / dryFruitRottingDivider)  //days left
+                       / static_cast<double>(fruitBestBefore);                    //max days
+        if (daysPassed / dryFruitRottingDivider <= fruitBestBefore) {
+            price = std::max(price, 1ul);  //minimal value for not rotten fruit
+        }
+        return price;
+    };
+
+    std::cout << "Dry fruit value: " << dryFruit->getPrice() << '\n';
+    REQUIRE(dryFruit->getPrice() == singleCargoCost * dryFruitValueMultipler);
+
+    for (int daysPassed = 1; daysPassed < fruitBestBefore * dryFruitRottingDivider; ++daysPassed) {
+        --dryFruitTypeRef;
+        std::cout << "Dry fruit value: " << dryFruit->getPrice() << '\n';
+        REQUIRE(dryFruit->getPrice() == fruitValueFunct(daysPassed));
+    }
+}
+
+TEST_CASE("DryFruit decrement below max time", "[DryFruit]") {
+    auto dryFruit = generateCargo(dryFruitIndex);
+    auto& dryFruitTypeRef = dynamic_cast<DryFruit&>(*dryFruit);
+
+    for (int daysPassed = 1; daysPassed < fruitBestBefore * dryFruitRottingDivider; ++daysPassed) {
+        --dryFruitTypeRef;
+        REQUIRE(dryFruit->getPrice() > 0);
+    }
+    constexpr auto rottingDays = 4;
+    for (int daysPassed = 0; daysPassed < rottingDays; ++daysPassed) {
+        --dryFruitTypeRef;
+        std::cout << "Dry fruit value after rotting: " << dryFruit->getPrice() << '\n';
+        REQUIRE(dryFruit->getPrice() == 0);
+    }
+}
+
+TEST_CASE("DryFruit with minimal value decrement below max time", "[DryFruit]") {
+    auto dryFruit = std::make_unique<DryFruit>(goods[dryFruitIndex].name, fullQuantity, minimalCargoCost, fruitBestBefore);
+    auto& dryFruitTypeRef = dynamic_cast<DryFruit&>(*dryFruit);
+
+    std::cout << "Dry fruit value: " << dryFruit->getPrice() << '\n';
+    for (int daysPassed = 1; daysPassed < fruitBestBefore * dryFruitRottingDivider; ++daysPassed) {
+        --dryFruitTypeRef;
+        std::cout << "Dry fruit value: " << dryFruit->getPrice() << '\n';
+        REQUIRE(dryFruit->getPrice() > 0);
+    }
+    constexpr auto rottingDays = 4;
+    for (int daysPassed = 0; daysPassed < rottingDays; ++daysPassed) {
+        --dryFruitTypeRef;
+        std::cout << "Dry fruit value after rotting: " << dryFruit->getPrice() << '\n';
+        REQUIRE(dryFruit->getPrice() == 0);
+    }
 }
 
 //Cargo types operator== tests
@@ -206,11 +277,25 @@ TEST_CASE("Compare Alcohol to CargoDefault with same name", "[Alcohol][Cargo]") 
     REQUIRE(!(*alcohol == *cargoDefault));
 }
 
+TEST_CASE("Compare Fruit to DryFruit with same name", "[Alcohol][Cargo]") {
+    auto fruit = generateCargo(fruitIndex, defaultGoodsName);
+    auto dryFruit = generateCargo(dryFruitIndex, defaultGoodsName);
+
+    REQUIRE(!(*fruit == *dryFruit));
+}
+
+TEST_CASE("Compare DryFruit to Fruit with same name", "[Alcohol][Cargo]") {
+    auto fruit = generateCargo(fruitIndex, defaultGoodsName);
+    auto dryFruit = generateCargo(dryFruitIndex, defaultGoodsName);
+
+    REQUIRE(!(*dryFruit == *fruit));
+}
+
 /*TEST_CASE("Compare CargoDefault to Alcohol with same name", "[Alcohol][Cargo]") {
     auto alcohol = generateCargo(alcoholIndex, defaultGoodsName);
     auto cargoDefault = generateCargo(cargoDefaultIndex, defaultGoodsName);
 
-    CHECK(!(*cargoDefault == *alcohol));  // Unimportant because CargoDefault is temporary
+    CHECK(!(*cargoDefault == *alcohol));  // Unimportant because CargoDefault is to replace
 }*/
 
 TEST_CASE("Compare Fruit to Alcohol with same name", "[Alcohol][Fruit][Cargo]") {
@@ -253,12 +338,12 @@ TEST_CASE("load will insert cargo", "[Store]") {
 TEST_CASE("load will increase amount of same cargo", "[Store]") {
     Store store;
 
-    auto cargo = generateCargo(0);
+    auto cargo = generateCargo(cargoDefaultIndex);
     store.load(std::move(cargo));
-    cargo = generateCargo(0);
+    cargo = generateCargo(cargoDefaultIndex);
     store.load(std::move(cargo));
 
-    cargo = generateCargo(0);
+    cargo = generateCargo(cargoDefaultIndex);
     Cargo* cargoIn = store.findCargoInStore(cargo.get());
     REQUIRE(cargoIn->getAmount() == (2 * fullQuantity));
 }
@@ -363,7 +448,7 @@ TEST_CASE("unload will remove cargo", "[Store]") {
 TEST_CASE("no player to sell to empty store", "[Store][buy]") {
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.buy(cargoExample.get(), fullQuantity, nullptr);
 
     REQUIRE(response == Response::lack_of_cargo);
@@ -374,7 +459,7 @@ TEST_CASE("player sell without ship to empty store", "[Player][Store][buy]") {  
     Player player(std::move(ship), playerMoney);
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.buy(cargoExample.get(), fullQuantity, &player);
 
     REQUIRE(response == Response::lack_of_cargo);
@@ -385,7 +470,7 @@ TEST_CASE("player sell noexisting cargo to empty store", "[Player][Ship][Store][
     Player player(std::move(ship), playerMoney);
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.buy(cargoExample.get(), fullQuantity, &player);
 
     REQUIRE(response == Response::lack_of_cargo);
@@ -397,7 +482,7 @@ TEST_CASE("player sell more of single cargo than have to empty store", "[Player]
     fillWithGeneratedData(player.getShip());
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.buy(cargoExample.get(), moreThanFullQuantity, &player);
 
     REQUIRE(response == Response::lack_of_cargo);
@@ -412,7 +497,9 @@ TEST_CASE("player sell more of single cargo than have to empty store", "[Player]
 template <typename T>
 void printCargo(const T& container) {
     for (const auto& cargo : container) {
-        std::cout << std::setw(20) << std::left << cargo->getName() << ":" << std::setw(5) << cargo->getAmount() << '\n';
+        std::cout << std::setw(20) << std::left << cargo->getName()
+                  << ":" << std::setw(5) << cargo->getAmount()
+                  << ":" << std::setw(5) << cargo->getPrice() << '\n';
     }
 }
 
@@ -422,7 +509,7 @@ TEST_CASE("player sell half of single cargo than have to empty store", "[Player]
     fillWithGeneratedData(player.getShip());
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.buy(cargoExample.get(), halfQuantity, &player);
 
     REQUIRE(response == Response::done);
@@ -498,7 +585,7 @@ TEST_CASE("player sell full of all cargo to empty store", "[Player][Ship][Store]
 TEST_CASE("no player to buy from empty store", "[Store][sell]") {  //use Player and Ship
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.sell(cargoExample.get(), fullQuantity, nullptr);
 
     REQUIRE(response == Response::lack_of_space);
@@ -509,7 +596,7 @@ TEST_CASE("rich player buy without ship from empty store", "[Player][Store][sell
     Player player(std::move(ship), playerMoney);
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.sell(cargoExample.get(), fullQuantity, &player);
 
     REQUIRE(response == Response::lack_of_space);
@@ -520,7 +607,7 @@ TEST_CASE("rich player with empty ship buy noexisting cargo from empty store", "
     Player player(std::move(ship), playerMoney);
     Store store;
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.sell(cargoExample.get(), fullQuantity, &player);
 
     REQUIRE(response == Response::lack_of_cargo);
@@ -532,7 +619,7 @@ TEST_CASE("rich player with empty ship buy more of single cargo than store have"
     Store store;
     fillWithGeneratedData(&store);
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.sell(cargoExample.get(), moreThanFullQuantity, &player);
 
     std::cout << "\nShip Cargo: \n";
@@ -549,7 +636,7 @@ TEST_CASE("rich player with empty ship buy half of single cargo than store have"
     Store store;
     fillWithGeneratedData(&store);
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.sell(cargoExample.get(), halfQuantity, &player);
 
     std::cout << "\nShip Cargo: \n";
@@ -568,7 +655,7 @@ TEST_CASE("rich player with empty ship buy full of single cargo from empty store
     Store store;
     fillWithGeneratedData(&store);
 
-    auto cargoExample = generateCargo(0);
+    auto cargoExample = generateCargo(cargoDefaultIndex);
     auto response = store.sell(cargoExample.get(), fullQuantity, &player);
 
     std::cout << "\nShip Cargo: \n";
@@ -605,7 +692,7 @@ TEST_CASE("rich player with empty ship with enough capacity buy full of all carg
     REQUIRE(store.getCargoNum() == 0);
 }
 
-TEST_CASE("rich player with empty ship with enough capacity buy hallf of all cargo from store", "[Player][Ship][Store][sell]") {  //use Player and Ship
+TEST_CASE("rich player with empty ship with enough capacity buy half of all cargo from store", "[Player][Ship][Store][sell]") {  //use Player and Ship
     auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
     Player player(std::move(ship), playerMoney);
 
@@ -624,6 +711,41 @@ TEST_CASE("rich player with empty ship with enough capacity buy hallf of all car
     printCargo(player.getShip()->getCargoVec());
     std::cout << "Store Cargo: \n";
     printCargo(store.cargoVec_);
+
+    REQUIRE(player.getAvailableSpace() == 0);
+    REQUIRE(store.getCargoNum() == fullCappacity);
+}
+
+TEST_CASE("rich player with empty ship with enough capacity buy random of all cargo from store", "[Player][Ship][Store][sell]") {  //use Player and Ship
+    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    Player player(std::move(ship), playerMoney);
+
+    REQUIRE(player.getAvailableSpace() == fullCappacity);
+
+    Store store;
+    fillWithGeneratedData(&store);
+
+    std::array<size_t, cargoTypes> randomQuantity;
+
+    for (int i = 0; i < cargoTypes; ++i) {
+        randomQuantity[i] = rand() % 100;
+        auto cargoExample = generateCargo(i);
+        auto response = store.sell(cargoExample.get(), randomQuantity[i], &player);
+        REQUIRE(response == Response::done);
+    }
+
+    std::cout << "\nShip Cargo: \n";
+    printCargo(player.getShip()->getCargoVec());
+    std::cout << "Store Cargo: \n";
+    printCargo(store.cargoVec_);
+
+    const auto& shipCargo = player.getShip()->getCargoVec();
+    const auto& storeCargo = store.cargoVec_;
+    REQUIRE(shipCargo.size() == storeCargo.size());
+    for (int i = 0; i < cargoTypes; ++i) {
+        REQUIRE(storeCargo[i]->getAmount() == fullQuantity - randomQuantity[i]);
+        REQUIRE(shipCargo[i]->getAmount() == randomQuantity[i]);
+    }
 
     REQUIRE(player.getAvailableSpace() == 0);
     REQUIRE(store.getCargoNum() == fullCappacity);
