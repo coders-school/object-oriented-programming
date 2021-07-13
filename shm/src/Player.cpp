@@ -17,7 +17,7 @@ size_t Player::getSpeed() const {
     return ship_->getSpeed();
 }
   
-std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
+Cargo* Player::getCargo(size_t index) const {
     if (ship_) {
         return ship_->getCargo(index);
     }
@@ -40,8 +40,8 @@ size_t Player::countAvailableSpace() const {
     return availableSpace_.first
            ? availableSpace_.second
            : ship_->getCapacity() - 
-             std::accumulate(ship_->getCargos().cbegin(),
-                             ship_->getCargos().cend(),
+             std::accumulate(ship_->getCargos()->cbegin(),
+                             ship_->getCargos()->cend(),
                              static_cast<size_t>(0),
                              [](size_t sum, const auto& cargo) {
                                  return sum += cargo->getAmount();
@@ -58,12 +58,12 @@ void Player::setPlayerPtr() {
     ship_->changeDelegate(this);
 }
 
-void Player::buy(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
-    money_ -= amount * price;
+void Player::buy(Cargo* cargo, size_t amount) {
+    money_ -= amount * cargo->getPrice();
     ship_->load(cargo);
  }
 
-void Player::sell(std::shared_ptr<Cargo> cargo, size_t amount, size_t price) {
-    money_ += (amount * price);
+void Player::sell(Cargo* cargo, size_t amount) {
+    money_ += amount * cargo->getPrice();
     ship_->unload(cargo);
 }
