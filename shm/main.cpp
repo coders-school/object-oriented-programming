@@ -1,47 +1,63 @@
 #include <time.h>
+#include <array>
 #include <iostream>
 #include <memory>
 #include <string>
 #include <utility>
 #include <vector>
 #include "Cargo.hpp"
+#include "DefaultCargo.hpp"
 #include "Island.hpp"
 #include "Map.hpp"
 #include "Player.hpp"
+#include "Store.hpp"
+#include "Time.hpp"
+#include "Warehouse.hpp"
+
+struct GoodsData {
+    constexpr GoodsData(const char* name)
+        : name(name) {}
+    constexpr GoodsData(const char* name, size_t value)
+        : name(name), value(value) {}
+
+    const char* name;
+    size_t value = 0;
+};
 
 // Return by value to give up ownership
 std::unique_ptr<Cargo> generateCargo() {
     // https://portroyale3.fandom.com/wiki/Goods
-    const std::vector<std::pair<std::string, size_t>> goods{
-        {"Wood", 33},
-        {"Adobe Bricks", 33},
-        {"Wheat", 33},
-        {"Fruits", 50},
-        {"Corn", 50},
-        {"Sugar", 50},
-        {"Hemp", 50},
-        {"Textiles", 150},
-        {"Metal", 83},
-        {"Cotton", 50},
-        {"Metal Goods", 200},
-        {"Dyes", 100},
-        {"Coffee", 140},
-        {"Cocao", 140},
-        {"Tobacco", 100},
-        {"Meat", 300},
-        {"Clothing", 450},
-        {"Ropes", 150},
-        {"Rum", 267},
-        {"Bread", 142},
+    constexpr std::array goods{
+        GoodsData{"Wood", 33},
+        GoodsData{"Adobe Bricks", 33},
+        GoodsData{"Wheat", 33},
+        GoodsData{"Fruits", 50},
+        GoodsData{"Corn", 50},
+        GoodsData{"Sugar", 50},
+        GoodsData{"Hemp", 50},
+        GoodsData{"Textiles", 150},
+        GoodsData{"Metal", 83},
+        GoodsData{"Cotton", 50},
+        GoodsData{"Metal Goods", 200},
+        GoodsData{"Dyes", 100},
+        GoodsData{"Coffee", 140},
+        GoodsData{"Cocao", 140},
+        GoodsData{"Tobacco", 100},
+        GoodsData{"Meat", 300},
+        GoodsData{"Clothing", 450},
+        GoodsData{"Ropes", 150},
+        GoodsData{"Rum", 267},
+        GoodsData{"Bread", 142},
     };
-    auto randomNumber = rand() % goods.size();
-    auto anotherRandomNumber = rand() % 99 + 1;
-    auto ptr = std::make_unique<Cargo>(goods.at(randomNumber).first, anotherRandomNumber, goods.at(randomNumber).second);
-    // RVO
-    return ptr;
+    auto randomCargo = rand() % goods.size();
+    auto randomAmount = rand() % 99 + 1;
+    auto good = goods[randomCargo];
+    auto ptr = std::make_unique<CargoDefault>(good.name, randomAmount, good.value);
+    return ptr;  // RVO
 }
 
 void testCargoShipPlayer() {
+    Time* time = Time::getInstance();
     constexpr size_t testCases{10};
     constexpr size_t testShipCapacity{100};
     std::vector<std::unique_ptr<Cargo>> cargoVec;
@@ -56,6 +72,7 @@ void testCargoShipPlayer() {
         Player pirate(std::move(pirateShip), 1000);
         std::cout << "\n\n--- CARGO/SHIP/PLAYER TEST ---\n";
         pirate.printCargoManifest();
+        time->nextDay();
     }
 }
 
@@ -77,11 +94,53 @@ void testIslandMap() {
         }
     }
 }
+void testGetIsland(){
+    Map map;
+    Island::Coordinates FakeIsland(generatePosition(), generatePosition());
+    std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
+    if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
+        std::cout << "^-First Island exists\n";
+    } else {
+        std::cout << "^-First Island does not exist\n";
+    }
+    std::cout << "FakeIsland:" << FakeIsland;
+    if (map.getIsland(FakeIsland) != nullptr) {
+        std::cout << "^-Fake Island exists\n";
+    } else {
+        std::cout << "^-Fake Island does not exist\n";
+    }
+}
+
+void testTime() {
+    Time* time = Time::getInstance();
+    CargoDefault cargo1{"Cargo1", 100, 100};
+    CargoDefault cargo2{"Cargo2", 100, 100};
+    CargoDefault cargo3{"Cargo2", 100, 100};
+    Ship ship1{100, 100, 100, "Ship1", 1, {}};
+    Ship ship2{100, 100, 100, "Ship2", 2, {}};
+    Ship ship3{100, 100, 100, "Ship3", 3, {}};
+    Store store;
+    time->nextDay();
+}
+
+void timePassTest() {
+    Time* time = Time::getInstance();
+    CargoDefault cargo1{"Cargo1", 100, 100};
+    CargoDefault cargo2{"Cargo2", 100, 100};
+    CargoDefault cargo3{"Cargo2", 100, 100};
+    Ship ship1{100, 100, 100, "Ship1", 1, {}};
+    Ship ship2{100, 100, 100, "Ship2", 2, {}};
+    Ship ship3{100, 100, 100, "Ship3", 3, {}};
+    Store store;
+    time->update();
+}
 
 int main() {
     srand(time(0));
     testCargoShipPlayer();
     testIslandMap();
-
+    testGetIsland(),
+    testTime();
+    timePassTest();
     return 0;
 }

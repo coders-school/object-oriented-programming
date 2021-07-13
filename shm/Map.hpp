@@ -5,6 +5,7 @@
 #include <memory>
 #include "Island.hpp"
 
+Island::coordinateType generatePosition();
 
 class Map {
     using IslandVec = std::vector<std::unique_ptr<Island>>;
@@ -19,5 +20,4 @@ private:
     Island* currentPosition_;
     IslandVec islandVec_ = {};
     void fillWithRandomIslands();
-
 };

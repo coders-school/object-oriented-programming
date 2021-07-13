@@ -1,17 +1,21 @@
 #include "Cargo.hpp"
 #include "Ship.hpp"
-#include <stdexcept>
+#include "Time.hpp"
+#include "Warehouse.hpp"
 
+#include <iostream>
+#include <stdexcept>
 Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), cargoVec_(std::move(cargoVec))
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), Warehouse(std::move(cargoVec))
 {}
 
 Ship::Ship(size_t maxCrew, size_t speed,const size_t id)
-    : Ship(0, maxCrew, speed, "", id, {})
+   : Warehouse::Warehouse(), capacity_(0), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(""), id_(id)
 {}
 
+
 void Ship::setName(const std::string& name) { 
-    name_ = name; 
+    name_ = name;
 }
 
 Ship& Ship::operator-=(size_t numCrew) {
@@ -52,4 +56,8 @@ size_t Ship::getId() const {
 
 const Ship::CargoVec& Ship::getCargoVec() const { 
     return cargoVec_; 
+}
+
+void Ship::nextDay() {
+    std::cout << "Next Day in Ship " << name_ << '\n';
 }

@@ -44,9 +44,9 @@ Island* Map::getCurrentPosition() const {
 
 Island* Map::getIsland(const Island::Coordinates& coordinate) {
     auto it = std::find_if(islandVec_.begin(), islandVec_.end(),
-                                [&coordinate](const std::unique_ptr<Island>& island) {
-                                    return island->getPosition() == coordinate;
-                                });
+                        [&coordinate](const std::unique_ptr<Island>& island) {
+                            return island->getPosition() == coordinate;
+                        });
     if (it != islandVec_.end()) {
         return it->get();
     } 
