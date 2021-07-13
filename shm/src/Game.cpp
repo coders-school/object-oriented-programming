@@ -41,27 +41,26 @@ bool Game::isGameWon() {
 }
 
 void Game::printWinScreen() {
-    generateAnnouncement("CONGRATULATION YOU WIN");
+    announcementGenerate("CONGRATULATION YOU WIN");
 }
 
 void Game::printLoseScreen() {
-    generateAnnouncement("UNFORTUNATELY YOU LOST");
+    announcementGenerate("UNFORTUNATELY YOU LOST");
 }
 
 void Game::printWelcomeScreen() {
-    generateAnnouncement("WELCOME TO TRADE SHIP SIMULATOR 1.0.0.0 ");
+    announcementGenerate("WELCOME TO TRADE SHIP SIMULATOR 1.0.0.0 ");
 }
 
-void Game::generateAnnouncement(const std::string & announcenent) {
+void Game::announcementGenerate(const std::string & announcenent) {
     size_t frameSize { 100 };
     size_t frameLine { 1 };
     size_t announcementEndPosition = frameSize / 2 - announcenent.size() / 2 + announcenent.size();
-    std::cout << std::setfill('#') << std::setw (frameSize ) << "\n"
-          << '#' << std::setfill(' ') << std::setw (frameSize - frameLine) << "#\n"
-          << '#' << std::setw (announcementEndPosition) << announcenent 
-          << std::setw (frameSize - announcementEndPosition - frameLine) << "#\n"
-          << '#' << std::setw (frameSize - frameLine) << "#\n"
-          << std::setfill('#') << std::setw (frameSize) << "\n";
+    std::cout << std::setfill('#') << std::setw (frameSize ) << "\n";
+    std::cout << '#' << std::setfill(' ') << std::setw (frameSize - frameLine) << "#\n";
+    std::cout << '#' << std::setw (announcementEndPosition) << announcenent << std::setw (frameSize - announcementEndPosition - frameLine) << "#\n";
+    std::cout << '#' << std::setfill(' ') << std::setw (frameSize - frameLine) << "#\n";
+    std::cout << std::setfill('#') << std::setw (frameSize) << "\n";
     std::cin.get();
 }
 
