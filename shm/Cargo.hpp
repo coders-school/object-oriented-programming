@@ -1,11 +1,15 @@
 #pragma once
 
 #include <memory>
+#include <optional>
 #include <string>
+
 #include "Time.hpp"
 #include "Timeable.hpp"
 
-class Cargo : public Timeable {
+#include <assert.h>
+
+class Cargo {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
 
@@ -21,7 +25,9 @@ public:
     virtual size_t getAmount() const;
     virtual size_t getBasePrice() const;
 
-    void nextDay() override;
+    std::optional<size_t> haveSuffix(const std::string_view suffix) const;
+    void removeSuffix(const std::string_view suffix);
+    void addSuffix(const std::string_view suffix);
 
     std::unique_ptr<Cargo> split(size_t amountPart);
 

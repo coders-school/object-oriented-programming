@@ -1,24 +1,15 @@
 #include "Item.hpp"
 #include <assert.h>
 
-void addItemNaming(std::string& name) {
-    constexpr std::string_view suffix = " (Item)";
-    std::string_view sv(name);
-    auto trim_pos = sv.find(suffix, sv.npos - suffix.npos);//should sheck only suffix
-    if (trim_pos != sv.npos) {
-        return;
-    }
-    name += suffix;
-}
-
 Item::Item(std::string name, size_t amount, size_t basePrice, Quality quality)
     : Cargo(name, amount, basePrice), quality_{quality} 
 {
-    addItemNaming(name_);
+    removeSuffix(suffix);
+    addSuffix(suffix);
 }
 
 bool Item::operator==(const Cargo& other) const {
-    if (auto otherItem = dynamic_cast<const Item*>(&other)) {
+    if(const auto* otherItem = dynamic_cast<const Item*>(&other)){
         return name_ == otherItem->getName() and quality_ == otherItem->quality_;
     }
     return false;
