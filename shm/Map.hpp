@@ -4,6 +4,8 @@
 #include <vector>
 #include "Island.hpp"
 
+Island::coordinateType generatePosition();
+
 class Map {
 public:
     Map();
