@@ -12,6 +12,7 @@
 #include "Player.hpp"
 #include "Store.hpp"
 #include "Time.hpp"
+#include "Warehouse.hpp"
 
 struct GoodsData {
     constexpr GoodsData(const char* name)
@@ -93,6 +94,22 @@ void testIslandMap() {
         }
     }
 }
+void testGetIsland(){
+    Map map;
+    Island::Coordinates FakeIsland(generatePosition(), generatePosition());
+    std::cout << "Island [0]:" << map.getIslandVec()[0].getPosition();
+    if (map.getIsland(map.getIslandVec()[0].getPosition()) != nullptr) {
+        std::cout << "^-First Island exists\n";
+    } else {
+        std::cout << "^-First Island does not exist\n";
+    }
+    std::cout << "FakeIsland:" << FakeIsland;
+    if (map.getIsland(FakeIsland) != nullptr) {
+        std::cout << "^-Fake Island exists\n";
+    } else {
+        std::cout << "^-Fake Island does not exist\n";
+    }
+}
 
 void testTime() {
     Time* time = Time::getInstance();
@@ -122,6 +139,7 @@ int main() {
     srand(time(0));
     testCargoShipPlayer();
     testIslandMap();
+    testGetIsland(),
     testTime();
     timePassTest();
     return 0;
