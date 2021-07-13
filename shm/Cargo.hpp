@@ -4,6 +4,9 @@
 #include <optional>
 #include <string>
 
+#include "Time.hpp"
+#include "Timeable.hpp"
+
 #include <assert.h>
 
 class Cargo {

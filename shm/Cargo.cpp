@@ -1,6 +1,9 @@
 #include <stdexcept>
 
 #include "Cargo.hpp"
+#include "Time.hpp"
+
+#include <iostream>
 #include <assert.h>
 
 std::optional<size_t> Cargo::haveSuffix(const std::string_view suffix) const{
@@ -65,4 +68,8 @@ std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
     }
     *this -= amountPart;
     return createAmountOfEqual(amountPart);
+}
+
+void Cargo::nextDay() {
+    std::cout << "Next Day in Cargo " << name_ << '\n';
 }
