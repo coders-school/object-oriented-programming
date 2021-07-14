@@ -22,7 +22,7 @@ bool Alcohol::operator==(const Cargo& other) const {
 }
 
 size_t Alcohol::getPrice() const {
-    auto result = static_cast<size_t>(basePrice_ * static_cast<size_t>(percentage_) / static_cast<double>(maxPercentage));
+    auto result = static_cast<size_t>(static_cast<double>(basePrice_ * static_cast<size_t>(percentage_)) / static_cast<double>(maxPercentage));
     return result;
 }
 

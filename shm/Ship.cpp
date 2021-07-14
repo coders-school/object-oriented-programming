@@ -6,7 +6,7 @@
 #include <iostream>
 #include <stdexcept>
 Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec)
-    : capacity_(capacity), maxCrew_(maxCrew), speed_(speed), name_(name), id_(id), Warehouse(std::move(cargoVec)) {}
+    : Warehouse(std::move(cargoVec)), capacity_(capacity), maxCrew_(maxCrew), speed_(speed), name_(name), id_(id){}
 
 Ship::Ship(size_t maxCrew, size_t speed, const size_t id)
     : Warehouse::Warehouse(), maxCrew_(maxCrew), speed_(speed), id_(id) {}

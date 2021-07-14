@@ -36,7 +36,6 @@ public:
 
 private:
     size_t capacity_ = 0;
-
     size_t maxCrew_ = 0;
     size_t crew_ = 0;
     size_t speed_ = 0;

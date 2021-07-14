@@ -20,6 +20,6 @@ public:
     virtual Cargo& operator--() = 0;
 
 protected:
-    size_t maxFreshTime_;
     size_t freshTime_;
+    size_t maxFreshTime_;
 };
