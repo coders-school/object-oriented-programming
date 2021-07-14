@@ -84,6 +84,32 @@ void Store::removeCargo(Cargo* cargo) {
     }
 }
 
+void Store::addCargo(Cargo* cargo, size_t amount) {
+    if (typeid(cargo) == typeid(Alcohol)) {
+        Alcohol* alcohol = static_cast<Alcohol*>(cargo);
+        cargo_.push_back(std::make_unique<Alcohol>(alcohol->getName(),
+                                                   amount,
+                                                   alcohol->getBasePrice(),
+                                                   alcohol->getPercentage()));
+    } else if (typeid(cargo) == typeid(Fruit)) {
+        Fruit* fruit = static_cast<Fruit*>(cargo);
+        cargo_.push_back(std::make_unique<Fruit>(fruit->getName(),
+                                                 amount,
+                                                 fruit->getBasePrice()));
+    } else if (typeid(cargo) == typeid(DryFruit)) {
+        DryFruit* fruit = static_cast<DryFruit*>(cargo);
+        cargo_.push_back(std::make_unique<DryFruit>(fruit->getName(),
+                                                    amount,
+                                                    fruit->getBasePrice()));
+    } else if (typeid(cargo) == typeid(Item)) {
+        Item* item = static_cast<Item*>(cargo);
+        cargo_.push_back(std::make_unique<Item>(item->getName(),
+                                                amount,
+                                                item->getBasePrice(),
+                                                item->getRarity()));
+    }
+}
+
 void Store::nextDay() {
     for (const auto& cargo : cargo_) {
         cargo->setAmount(randomGenerate(MIN_CARGO_IN_STORE, MAX_CARGO_IN_STORE));
