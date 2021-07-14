@@ -1,5 +1,7 @@
 #pragma once
+#include <memory>
 class Ship;
+class Cargo;
 
 class Player {
 private:
@@ -19,9 +21,9 @@ public:
     }
     ~Player();
 
-    std::shared_ptr<Ship> getShip() const;
     size_t getMoney() const;
     size_t getAvailableSpace();
     size_t getSpeed() const;
     std::shared_ptr<Cargo> getCargo(size_t index) const;
+    std::shared_ptr<Ship> getShip() const { return ship_;};
 };
