@@ -17,6 +17,7 @@ jobs:
     - name: Compile
       working-directory: ${{ env.path }}
       run: |
+        sudo apt install -y catch
         cmake ..
         make
     - name: Run tests
