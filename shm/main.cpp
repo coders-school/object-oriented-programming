@@ -13,7 +13,6 @@
 #include "Store.hpp"
 #include "Time.hpp"
 #include "Warehouse.hpp"
-#include "Rottingable.hpp"
 #include "Fruit.hpp"
 #include "DryFruit.hpp"
 

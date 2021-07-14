@@ -13,8 +13,7 @@ public:
     virtual ~Perishable() = default;
 
     bool operator==(const Perishable& other) const {
-        return this->maxFreshTime_ == other.maxFreshTime_
-            and this->freshTime_ == other.freshTime_;
+        return this->maxFreshTime_ == other.maxFreshTime_ and this->freshTime_ == other.freshTime_;
     }
 
     virtual Cargo& operator--() = 0;

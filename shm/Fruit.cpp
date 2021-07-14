@@ -2,7 +2,7 @@
 #include <assert.h>
 
 Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t freshTime, size_t maxFreshTime)
-    : Cargo(name, amount, basePrice), Rottingable{freshTime, maxFreshTime} {
+    : Cargo(name, amount, basePrice), Perishable{freshTime, maxFreshTime} {
     if (!maxFreshTime) {
         maxFreshTime_ = freshTime_;
     }
