@@ -1,8 +1,5 @@
 cmake_minimum_required(VERSION 3.0.0)
-
 set(CMAKE_CXX_STANDARD 20)
-#set(CMAKE_CXX_FLAGS -fno-rtti)
-
 project(shmProject)
 
 set(FILES 
@@ -21,13 +18,18 @@ set(FILES
     DryFruit.cpp 
     Warehouse.cpp)
 
+set(FLAGS -Wall -Wextra -Werror -pedantic -Wconversion)
+
 add_library(${PROJECT_NAME}-lib STATIC ${FILES})
 add_executable(${PROJECT_NAME} main.cpp)
 add_executable(${PROJECT_NAME}-ut Tests.cpp)
 
-target_compile_options(${PROJECT_NAME}-lib PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion)
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion -O3)
-target_compile_options(${PROJECT_NAME}-ut PRIVATE -Wall -Wextra -Werror -pedantic -Wconversion)
+target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
+target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS} -O3)
+target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib)
+
+enable_testing()
+add_test(NAME Tests COMMAND ${PROJECT_NAME}-ut)
