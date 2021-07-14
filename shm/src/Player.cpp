@@ -60,10 +60,10 @@ void Player::setPlayerPtr() {
 
 void Player::buy(Cargo* cargo, size_t amount) {
     money_ -= amount * cargo->getPrice();
-    ship_->load(cargo);
+    ship_->load(cargo, amount);
  }
 
 void Player::sell(Cargo* cargo, size_t amount) {
     money_ += amount * cargo->getPrice();
-    ship_->unload(cargo);
+    ship_->unload(cargo, amount);
 }
