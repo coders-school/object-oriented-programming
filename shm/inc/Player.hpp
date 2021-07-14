@@ -14,7 +14,8 @@ class Map;
 class Player : public Delegate {
 
 public:
-    Player(std::unique_ptr<Ship> ship, size_t money, size_t availableSpace);
+    Player(std::unique_ptr<Ship> ship,
+           std::shared_ptr<Map> map, size_t money, size_t availableSpace);
     ~Player() override {};
 
     Ship* getShip() { return ship_.get(); };
@@ -38,5 +39,5 @@ private:
     std::pair<bool, size_t> availableSpace_;
     size_t countAvailableSpace() const;
     Island* currentPosition_;
-    Map* map_;
+    std::shared_ptr<Map> map_;
 };
