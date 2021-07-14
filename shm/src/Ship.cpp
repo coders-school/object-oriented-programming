@@ -107,6 +107,29 @@ auto Ship::findCargoOnShip(Cargo* cargo) {
                         });
 }
 
+void Ship::load(Cargo* cargo, size_t amount) {
+    auto cargo_ship{ findCargoOnShip(cargo) };
+    auto cargo_store{ store_->findCargoInStore(cargo) };
+
+    if (cargo_store != store_->getCargoStorage().end()) {                           // cargo present in store?
+        if (amount >= (*cargo_store)->getAmount()) {                                // buy all cargo from store
+            if (cargo_ship != cargo_.end()) {                                       // cargo present on ship?
+                **cargo_ship += (*cargo_store)->getAmount();                        // increase amount on ship
+            } else {                                                                // no such cargo on ship
+                cargo_.push_back(std::move(*cargo_store));                          // transfer all cargo to ship
+            }
+            store_->removeCargo(cargo);                                             // delete cargo from store
+        } else {                                                                    // buy a few cargo from store
+            if (cargo_ship != cargo_.end()) {                                       // cargo present on ship?
+                **cargo_ship += amount;                                             // increase amount on ship
+            } else {                                                                // no such cargo on ship
+                addCargo(cargo, amount);                                            // create new cargo on ship
+            }
+            **cargo_store -= amount;                                                // decrease amount in store
+        }
+    }
+}
+
 void Ship::nextDay() {
     delegate_->payCrew(crew_);
     for (size_t i = 0; i < cargo_.size(); i++) {
