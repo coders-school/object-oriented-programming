@@ -329,3 +329,11 @@ bool Game::hasPlayerEnoughMoney(const size_t& crew) {
     }
     return true;
 }
+
+void Game::printCargoFromStore() {
+    
+}
+
+void Game::printCargoFromShip() {
+
+}

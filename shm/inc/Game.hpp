@@ -52,7 +52,8 @@ private:
     size_t currentDay_{};
   
     void travel();
-    void printCargo();  //NOT IMPLEMENTED
+    void printCargoFromStore();
+    void printCargoFromShip();
     void buy();
     void sell();
     void hireCrew();
