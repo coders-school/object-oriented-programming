@@ -21,8 +21,9 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , finalGoal_(finalGoal)  
 {
     time_ = std::make_unique<Time>();
-    map_ = std::make_unique<Map>();
-    player_ = std::make_unique<Player>((std::make_unique<Ship>(1, 25, 100, nullptr)), 100, 10000);
+    map_ = std::make_shared<Map>();
+    player_ = std::make_unique<Player>(std::make_unique<Ship>(1, 25, 100, nullptr),
+                                       map_, 100, 10000);
 }
 
 void Game::startGame() {
