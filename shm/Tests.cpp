@@ -9,8 +9,9 @@
 #include "Island.hpp"
 #include "Item.hpp"
 #include "Store.hpp"
+#include "DryFruit.hpp"
 
-using DryFruit = Fruit;
+//using DryFruit = Fruit;
 
 constexpr auto singleCargoCost = 10;
 constexpr auto minimalCargoCost = 1;

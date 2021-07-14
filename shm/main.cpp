@@ -13,6 +13,9 @@
 #include "Store.hpp"
 #include "Time.hpp"
 #include "Warehouse.hpp"
+#include "Rottingable.hpp"
+#include "Fruit.hpp"
+#include "DryFruit.hpp"
 
 struct GoodsData {
     constexpr GoodsData(const char* name)
@@ -111,6 +114,11 @@ void testGetIsland(){
     }
 }
 
+void testDryFruit() {
+    DryFruit dryMango("mango", 10, 10, 10, 10);
+    std::cout << dryMango.getName() << '\n';
+}
+
 void testTime() {
     Time* time = Time::getInstance();
     CargoDefault cargo1{"Cargo1", 100, 100};
@@ -127,7 +135,7 @@ void timePassTest() {
     Time* time = Time::getInstance();
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
-    CargoDefault cargo3{"Cargo2", 100, 100};
+    DryFruit cargo3{"Mango", 100, 100, 3};
     Ship ship1{100, 100, 100, "Ship1", 1, {}};
     Ship ship2{100, 100, 100, "Ship2", 2, {}};
     Ship ship3{100, 100, 100, "Ship3", 3, {}};
@@ -140,6 +148,7 @@ int main() {
     testCargoShipPlayer();
     testIslandMap();
     testGetIsland(),
+    testDryFruit();
     testTime();
     timePassTest();
     return 0;

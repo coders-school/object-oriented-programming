@@ -7,6 +7,9 @@
 #include <assert.h>
 
 std::optional<size_t> Cargo::haveSuffix(const std::string_view suffix) const{
+    if (name_.empty() and name_.size() < suffix.size()) {
+           return {};
+    }
     std::string_view sv(name_);
     auto trim_pos = sv.find(suffix, sv.size() - suffix.size());
     if (trim_pos != sv.npos) {

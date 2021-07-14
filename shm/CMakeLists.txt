@@ -17,7 +17,8 @@ set(FILES
     Ship.cpp 
     Time.cpp 
     Timeable.cpp 
-    DefaultCargo.cpp 
+    DefaultCargo.cpp
+    DryFruit.cpp 
     Warehouse.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC ${FILES})
