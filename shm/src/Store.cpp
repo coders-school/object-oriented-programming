@@ -67,6 +67,13 @@ Cargo* Store::getCargo(const std::string& name) const {
     return result != cargo_.end() ? result->get() : nullptr;
 }
 
+CargoStorage::iterator Store::findCargoInStore(Cargo* cargo) {
+    return std::find_if(begin(cargo_), end(cargo_),
+                        [&cargo](const auto& unique) {
+                            return unique.get() == cargo;
+                        });
+}
+
 void Store::nextDay() {
     for (const auto& cargo : cargo_) {
         cargo->setAmount(randomGenerate(MIN_CARGO_IN_STORE, MAX_CARGO_IN_STORE));
