@@ -130,6 +130,29 @@ void Ship::load(Cargo* cargo, size_t amount) {
     }
 }
 
+void Ship::unload(Cargo* cargo, size_t amount) {
+    auto cargo_ship{ findCargoOnShip(cargo) };
+    auto cargo_store{ store_->findCargoInStore(cargo) };
+
+    if (cargo_ship != cargo_.end()) {                                               // cargo present on ship?
+        if (amount >= (*cargo_ship)->getAmount()) {                                 // sell all cargo from ship
+            if (cargo_store != store_->getCargoStorage().end()) {                   // cargo present in store?
+                **cargo_store += (*cargo_ship)->getAmount();                        // increase amount in store
+            } else {                                                                // no such cargo in store
+                store_->getCargoStorage().push_back(std::move(*cargo_ship));        // transfer all cargo to store
+            }
+            cargo_.erase(cargo_ship);                                               // delete cargo from ship
+        } else {                                                                    // sell a few cargo from ship
+            if (cargo_store != store_->getCargoStorage().end()) {                   // cargo present in store?
+                **cargo_store += amount;                                            // increase amount in store
+            } else {                                                                // no such cargo in store
+                store_->addCargo(cargo, amount);                                    // create new cargo in store
+            }
+            **cargo_ship -= amount;                                                 // decrease amount on ship
+        }
+    }
+}
+
 void Ship::nextDay() {
     delegate_->payCrew(crew_);
     for (size_t i = 0; i < cargo_.size(); i++) {
