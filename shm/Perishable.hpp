@@ -2,17 +2,17 @@
 
 #include <string>
 
-class Rottingable {
+class Perishable {
 public:
-    Rottingable(size_t freshTime, size_t maxFreshTime = 0)
+    Perishable(size_t freshTime, size_t maxFreshTime = 0)
         : freshTime_(freshTime), maxFreshTime_(maxFreshTime) {
         if (!maxFreshTime) {
             maxFreshTime_ = freshTime_;
         }
     }
-    virtual ~Rottingable() = default;
+    virtual ~Perishable() = default;
 
-    bool operator==(const Rottingable& other) const {
+    bool operator==(const Perishable& other) const {
         return this->maxFreshTime_ == other.maxFreshTime_
             and this->freshTime_ == other.freshTime_;
     }
