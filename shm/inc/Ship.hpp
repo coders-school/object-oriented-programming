@@ -4,15 +4,18 @@
 #include <string>
 #include <vector>
 
-#include "shm/inc/Subscriber.hpp"
 #include "shm/inc/Alcohol.hpp"
 #include "shm/inc/DryFruit.hpp"
 #include "shm/inc/Fruit.hpp"
 #include "shm/inc/Item.hpp"
+#include "shm/inc/Subscriber.hpp"
 
 class Cargo;
 class Delegate;
 class Player;
+class Store;
+
+using CargoStorage = std::vector<std::unique_ptr<Cargo>>;
 
 // class responsible for manage ship(s) in game
 class Ship : public Subscriber {
@@ -32,11 +35,13 @@ public:
     size_t getCapacity() const { return capacity_; };
     Cargo* getCargo(size_t index) const;
     Cargo* getCargo(const std::string& name) const;
-    auto getCargos() const { return &cargo_; };
+    CargoStorage* getCargos() { return &cargo_; };
+    void addCargo(Cargo* cargo, size_t amount);
 
     void setName(const std::string& name);
-    void load(Cargo* cargo);
-    void unload(Cargo* cargo);
+    auto findCargoOnShip(Cargo* cargo);
+    void load(Cargo* cargo, size_t amount);
+    void unload(Cargo* cargo, size_t amount);
     void changeDelegate(Player* player);
 
     // overload form Subscriber
@@ -49,6 +54,8 @@ private:
     const size_t maxCrew_ { 100 };
     const size_t capacity_ { 80 };
     Delegate* delegate_;
-    std::vector<std::unique_ptr<Cargo>> cargo_;
+    CargoStorage cargo_;
     size_t crew_ { 50 };
+    Store* store_;
+
 };
