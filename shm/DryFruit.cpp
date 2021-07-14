@@ -5,7 +5,7 @@ DryFruit::DryFruit(const std::string& name, size_t amount, size_t basePrice, siz
         removeSuffix(Fruit::suffix);
         removeSuffix(suffix);
         addSuffix(suffix);
-    }
+}
 
 DryFruit& DryFruit::operator--(){
     ++counter_;

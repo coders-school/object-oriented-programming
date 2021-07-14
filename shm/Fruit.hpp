@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Cargo.hpp"
-#include "Rottingable.hpp"
+#include "Perishable.hpp"
 
-class Fruit : public Cargo, public Rottingable {
+class Fruit : public Cargo, public Perishable {
 public:
     Fruit(const std::string& name, size_t amount, size_t basePrice, size_t freshTime, size_t maxFreshTime = 0);
     virtual ~Fruit() = default;
