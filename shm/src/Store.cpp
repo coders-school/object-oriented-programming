@@ -74,6 +74,16 @@ CargoStorage::iterator Store::findCargoInStore(Cargo* cargo) {
                         });
 }
 
+void Store::removeCargo(Cargo* cargo) {
+    auto unique = std::find_if(begin(cargo_), end(cargo_),
+                              [&cargo](const auto& unique) {
+                                  return unique.get() == cargo;
+                              });
+    if (unique != cargo_.end()) {
+        cargo_.erase(unique);
+    }
+}
+
 void Store::nextDay() {
     for (const auto& cargo : cargo_) {
         cargo->setAmount(randomGenerate(MIN_CARGO_IN_STORE, MAX_CARGO_IN_STORE));
