@@ -83,13 +83,13 @@ void testIslandMap() {
     constexpr size_t testCases{10};
     for (size_t i = 0; i < testCases; ++i) {
         Map map;
-        auto mapVec = map.getIslandVec();
+        const auto& mapVec = map.getIslandVec();
         size_t num{1};
         std::cout << "\n\n--- MAP/ISLAND TEST ---\n";
         for (const auto& island : mapVec) {
             std::cout << num++ << ". ";
-            std::cout << island.getPosition();
-            if (map.getIsland(island.getPosition()) != nullptr) {
+            std::cout << island->getPosition();
+            if (map.getIsland(island->getPosition()) != nullptr) {
                 std::cout << "^-Island exists\n";
             } else {
                 std::cout << "^-Island does not exist\n";
@@ -100,8 +100,8 @@ void testIslandMap() {
 void testGetIsland(){
     Map map;
     Island::Coordinates FakeIsland(generatePosition(), generatePosition());
-    std::cout << "Island [0]:" << map.getIslandVec()[0].getPosition();
-    if (map.getIsland(map.getIslandVec()[0].getPosition()) != nullptr) {
+    std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
+    if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
         std::cout << "^-First Island exists\n";
     } else {
         std::cout << "^-First Island does not exist\n";

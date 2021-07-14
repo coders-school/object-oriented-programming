@@ -8,17 +8,17 @@ public:
     ~DryFruit() override = default;
  
     //bool operator==(const Cargo& other) const override;
- 
     DryFruit& operator--() override;
  
     size_t getPrice() const override;
  
     static constexpr std::string_view suffix = " (DryFruit)";
-    
+
+private:
     static constexpr size_t freshMultiplier = 10;
     static constexpr size_t priceMultiplier = 3;
-    private:
     size_t counter_ = 0;
+  
 protected:
     std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };
