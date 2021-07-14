@@ -25,9 +25,9 @@ public:
     Island(const Island::Coordinates& position, const size_t &storeSize);
     
     Coordinates getCoordinates() const { return position_; }
-    std::shared_ptr<Store> getStore() { return store_; }
+    Store* getStore() { return store_.get(); }
 
 private:
     const Coordinates position_;
-    std::shared_ptr<Store>store_;
+    std::shared_ptr<Store> store_;
 };
