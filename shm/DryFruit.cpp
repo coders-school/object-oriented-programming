@@ -9,7 +9,7 @@ DryFruit::DryFruit(const std::string& name, size_t amount, size_t basePrice, siz
 
 DryFruit& DryFruit::operator--(){
     ++counter_;
-    if (freshTime_ && counter_ >= 10) {
+    if (freshTime_ && counter_ >= freshMultiplier) {
         --freshTime_;
         counter_ = 0;
     }
@@ -20,7 +20,7 @@ size_t DryFruit::getPrice() const {
     if (!maxFreshTime_ or !freshTime_) {
         return 0u;
     }
-    const size_t price = std::max(3*static_cast<size_t>(basePrice_ * freshTime_ / static_cast<double>(maxFreshTime_)),1ul);
+    const size_t price = std::max(priceMultiplier * static_cast<size_t>(basePrice_ * freshTime_ / static_cast<double>(maxFreshTime_)),1ul);
     return price;
 }
 
