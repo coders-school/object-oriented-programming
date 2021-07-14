@@ -21,16 +21,16 @@ public:
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_.second; };
     size_t getSpeed() const;
-    std::shared_ptr<Cargo> getCargo(size_t index) const;
+    Cargo* getCargo(size_t index) const;
     Island* getCurrentPosition() const;
     void setCurrentPosition(Island* island);
     Cargo* getCargo(const std::string& name) const;
 
-  //override from Delegate
+    //override from Delegate
     void payCrew(const size_t payCrew) override;
     void setPlayerPtr();
-    void buy(std::shared_ptr<Cargo> cargo, size_t amount, size_t price);
-    void sell(std::shared_ptr<Cargo> cargo, size_t amount, size_t price);
+    void buy(Cargo* cargo, size_t amount);
+    void sell(Cargo* cargo, size_t amount);
 
 private:
     std::unique_ptr<Ship> ship_;

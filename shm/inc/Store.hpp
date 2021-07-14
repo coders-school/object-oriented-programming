@@ -9,6 +9,8 @@
 class Cargo;
 class Player;
 
+using CargoStorage = std::vector<std::unique_ptr<Cargo>>;
+
 constexpr size_t MIN_CARGO_IN_STORE{ 0 };
 constexpr size_t MAX_CARGO_IN_STORE{ 100 };
 constexpr size_t STORE_CAPACITY { 1000 };
@@ -28,6 +30,10 @@ public:
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
     Cargo* getCargo(const std::string& name) const;
+    CargoStorage::iterator findCargoInStore(Cargo* cargo);
+    CargoStorage& getCargoStorage() { return cargo_; };
+    void removeCargo(Cargo* cargo);
+    void addCargo(Cargo* cargo, size_t amount);
 
     // override from Subscriber
     void nextDay() override;
@@ -43,7 +49,7 @@ private:
     void generateAlcohol();
     void generateItem();
     void generateDryFruits();
-    std::vector<std::unique_ptr<Cargo>> cargo_;
+    CargoStorage cargo_;
 
     struct SplitLineFromFile {
         std::string className_{};

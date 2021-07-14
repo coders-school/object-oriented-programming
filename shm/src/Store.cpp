@@ -1,7 +1,6 @@
 #include "shm/inc/Store.hpp"
 
 #include <algorithm>
-#include <cstddef>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -44,6 +43,7 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (player->getAvailableSpace() < amount) {
         return Response::lack_of_space;
     }
+    player->buy(cargo, amount);
     return Response::done;   
 }
 
@@ -54,17 +54,60 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     if (cargo->getAmount() + amount > STORE_CAPACITY) {
         return Response::lack_of_space;
     }
+    player->sell(cargo, amount);
     return Response::done;
 }
 
 Cargo* Store::getCargo(const std::string& name) const {
-    auto result{ std::find_if(cargo_.begin(), cargo_.end(),
+    auto result = std::find_if(cargo_.begin(), cargo_.end(),
                              [&name](const auto& cargo) {
                                 return cargo->getName() == name ;
-                             })
-    };
+                             });
     
     return result != cargo_.end() ? result->get() : nullptr;
+}
+
+CargoStorage::iterator Store::findCargoInStore(Cargo* cargo) {
+    return std::find_if(begin(cargo_), end(cargo_),
+                        [&cargo](const auto& unique) {
+                            return unique.get() == cargo;
+                        });
+}
+
+void Store::removeCargo(Cargo* cargo) {
+    auto unique = std::find_if(begin(cargo_), end(cargo_),
+                              [&cargo](const auto& unique) {
+                                  return unique.get() == cargo;
+                              });
+    if (unique != cargo_.end()) {
+        cargo_.erase(unique);
+    }
+}
+
+void Store::addCargo(Cargo* cargo, size_t amount) {
+    if (typeid(cargo) == typeid(Alcohol)) {
+        Alcohol* alcohol = static_cast<Alcohol*>(cargo);
+        cargo_.push_back(std::make_unique<Alcohol>(alcohol->getName(),
+                                                   amount,
+                                                   alcohol->getBasePrice(),
+                                                   alcohol->getPercentage()));
+    } else if (typeid(cargo) == typeid(Fruit)) {
+        Fruit* fruit = static_cast<Fruit*>(cargo);
+        cargo_.push_back(std::make_unique<Fruit>(fruit->getName(),
+                                                 amount,
+                                                 fruit->getBasePrice()));
+    } else if (typeid(cargo) == typeid(DryFruit)) {
+        DryFruit* fruit = static_cast<DryFruit*>(cargo);
+        cargo_.push_back(std::make_unique<DryFruit>(fruit->getName(),
+                                                    amount,
+                                                    fruit->getBasePrice()));
+    } else if (typeid(cargo) == typeid(Item)) {
+        Item* item = static_cast<Item*>(cargo);
+        cargo_.push_back(std::make_unique<Item>(item->getName(),
+                                                amount,
+                                                item->getBasePrice(),
+                                                item->getRarity()));
+    }
 }
 
 void Store::nextDay() {
