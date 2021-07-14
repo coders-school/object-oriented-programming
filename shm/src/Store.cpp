@@ -1,7 +1,6 @@
 #include "shm/inc/Store.hpp"
 
 #include <algorithm>
-#include <cstddef>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -44,6 +43,7 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (player->getAvailableSpace() < amount) {
         return Response::lack_of_space;
     }
+    player->buy(cargo, amount);
     return Response::done;   
 }
 
@@ -54,15 +54,15 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     if (cargo->getAmount() + amount > STORE_CAPACITY) {
         return Response::lack_of_space;
     }
+    player->sell(cargo, amount);
     return Response::done;
 }
 
 Cargo* Store::getCargo(const std::string& name) const {
-    auto result{ std::find_if(cargo_.begin(), cargo_.end(),
+    auto result = std::find_if(cargo_.begin(), cargo_.end(),
                              [&name](const auto& cargo) {
                                 return cargo->getName() == name ;
-                             })
-    };
+                             });
     
     return result != cargo_.end() ? result->get() : nullptr;
 }
