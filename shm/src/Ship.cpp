@@ -1,12 +1,15 @@
 #include "shm/inc/Ship.hpp"
-#include "shm/inc/Cargo.hpp"
-#include "shm/inc/Delegate.hpp"
-#include "shm/inc/Player.hpp"
 
 #include <algorithm>
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
+
+#include "shm/inc/Cargo.hpp"
+#include "shm/inc/Delegate.hpp"
+#include "shm/inc/Player.hpp"
+#include "shm/inc/Store.hpp"
 
 Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate)
     : id_(id)
@@ -97,13 +100,11 @@ Cargo* Ship::getCargo(const std::string& name) const {
     return result != cargo_.end() ? result->get() : nullptr;
 }
 
-void Ship::load(Cargo* cargo) {
- // WRITE ME
-}
-
-// FIXME:
-void Ship::unload(Cargo* cargo) {
- // WRITE ME
+auto Ship::findCargoOnShip(Cargo* cargo) {
+    return std::find_if(begin(cargo_), end(cargo_),
+                        [&cargo](const auto& unique){
+                            return unique.get() == cargo;
+                        });
 }
 
 void Ship::nextDay() {
