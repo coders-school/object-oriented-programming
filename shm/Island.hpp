@@ -16,7 +16,7 @@ public:
             auto pairX = std::minmax(lhs.positionX_, rhs.positionX_);
             auto pairY = std::minmax(lhs.positionY_, rhs.positionY_);
             auto result = std::sqrt(std::pow(pairX.second - pairX.first, 2) + std::pow(pairY.second - pairY.first, 2));
-            return result;
+            return static_cast<size_t>(result);
         }
 
         constexpr Coordinates(Island::coordinateType positionX, Island::coordinateType positionY)

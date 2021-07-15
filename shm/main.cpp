@@ -13,7 +13,6 @@
 #include "Store.hpp"
 #include "Time.hpp"
 #include "Warehouse.hpp"
-#include "Rottingable.hpp"
 #include "Fruit.hpp"
 #include "DryFruit.hpp"
 
@@ -144,7 +143,7 @@ void timePassTest() {
 }
 
 int main() {
-    srand(time(0));
+    srand(static_cast<unsigned int>(time(0)));
     testCargoShipPlayer();
     testIslandMap();
     testGetIsland(),

@@ -20,7 +20,7 @@ size_t DryFruit::getPrice() const {
     if (!maxFreshTime_ or !freshTime_) {
         return 0u;
     }
-    const size_t price = std::max(priceMultiplier * static_cast<size_t>(basePrice_ * freshTime_ / static_cast<double>(maxFreshTime_)),1ul);
+    const size_t price = std::max(static_cast<size_t>(static_cast<double>(priceMultiplier * static_cast<size_t>(basePrice_ * freshTime_)) / static_cast<double>(maxFreshTime_)),1ul);
     return price;
 }
 

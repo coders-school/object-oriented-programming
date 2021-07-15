@@ -16,7 +16,7 @@ bool Item::operator==(const Cargo& other) const {
 }
 
 size_t Item::getPrice() const {
-    return static_cast<size_t>(basePrice_ * static_cast<size_t>(quality_) / 100.0);
+    return static_cast<size_t>(static_cast<double>(basePrice_ * static_cast<size_t>(quality_)) / 100.0);
 }
 
 std::unique_ptr<Cargo> Item::createAmountOfEqual(size_t amount) {

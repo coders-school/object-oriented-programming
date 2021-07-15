@@ -1,8 +1,6 @@
 #include "Store.hpp"
-#include "Time.hpp"
 #include <iostream>
-
-Store::~Store() {}
+#include "Time.hpp"
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (!cargo or !player or !amount) {
@@ -35,7 +33,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (soldPlayerCargo->getAmount() == amount) {
         auto ownedCargo = soldPlayerCargo->split(amount);
         playerShip->unload(soldPlayerCargo);
-        auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
+        //auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
         //player->giveMoney(moneyToPay);
 
         load(std::move(ownedCargo));
@@ -43,7 +41,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     }
 
     //player sell less than all
-    auto moneyToPay = soldPlayerCargo->getPrice() * amount;
+    //auto moneyToPay = soldPlayerCargo->getPrice() * amount;
     auto buyedCargoPart = soldPlayerCargo->split(amount);
 
     if (!buyedCargoPart) {
@@ -70,14 +68,14 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 
     //check if player can take cargo on ship
     bool playerHaveComperableCargo = false;
-    const auto& playerCargo = playerShip->getCargoVec(); // player/ship should have findCargo
-    for(const auto& el : playerCargo){
-        if(cargo == el.get()){
+    const auto& playerCargo = playerShip->getCargoVec();  // player/ship should have findCargo
+    for (const auto& el : playerCargo) {
+        if (cargo == el.get()) {
             playerHaveComperableCargo = true;
             break;
         }
     }
-    if(!playerHaveComperableCargo and !player->getAvailableSpace()){
+    if (!playerHaveComperableCargo and !player->getAvailableSpace()) {
         return Response::lack_of_space;
     }
 
