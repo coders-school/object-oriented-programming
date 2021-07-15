@@ -16,7 +16,7 @@ size_t Player::getAvailableSpace() const {
 }
 std::shared_ptr<Ship> Player::getShip() const {
     return ship_;
-};
+}
 
 size_t Player::getSpeed() const {
     return ship_->getSpeed();
@@ -29,11 +29,12 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
 size_t Player::countAvailableSpace() const {
     auto sumOfAmounts = std::accumulate(ship_->getCargos().begin(), ship_->getCargos().end(), 0
         , [](size_t amountAll, const auto& cargo) {return amountAll += cargo.get()->getAmount();});
-   
-    if(ship_->getCapacity() - sumOfAmounts < 0)
-    {
-        return 0;
-    }
+    
+    //size_t is unsigned so this is always false
+    //if(ship_->getCapacity() - sumOfAmounts < 0)
+    //{
+    //    return 0;
+    //}
 
    return ship_->getCapacity() - sumOfAmounts;
 }

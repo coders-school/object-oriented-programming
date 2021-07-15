@@ -1,7 +1,8 @@
-#include <iostream>
 #include "cargo.hpp"
 #include "ship.hpp"
 #include "player.hpp"
+#include "island.hpp"
+#include <iostream>
 
 int main() {
 
@@ -11,7 +12,6 @@ int main() {
     Player Wojtek(testShip, 10, 20000);
     
     std::cout << Wojtek.getAvailableSpace();
-    
    
     return 0;
 }

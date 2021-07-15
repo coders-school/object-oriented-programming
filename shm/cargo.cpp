@@ -1,5 +1,11 @@
 #include "cargo.hpp"
 
+Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
+    : name_(name)
+    , amount_(amount)
+    , basePrice_(basePrice)
+    {}
+
 Cargo& Cargo::operator+=(size_t amount) {
     amount_ += amount;
     return *this;
@@ -10,11 +16,11 @@ Cargo& Cargo::operator-=(size_t amount) {
     return *this;
 }
 
-bool Cargo::operator == (const Cargo& cargo) const {
+bool Cargo::operator== (const Cargo& cargo) const {
     return cargo.getName() == name_;
 } 
 
-std::string Cargo::getName() const {
+const std::string& Cargo::getName() const {
     return name_;
 }
 size_t Cargo::getAmount() const {
