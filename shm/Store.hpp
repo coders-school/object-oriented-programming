@@ -12,7 +12,8 @@ enum class Response { done,
 
 using StoreCargoVec = std::vector<std::unique_ptr<Cargo>>;
 
-class Store : public Timeable {
+class Store : public Warehouse,
+              public Timeable {
 public:
     Store() = default;
     virtual ~Store() = default;
@@ -27,17 +28,16 @@ public:
     size_t getCargoNum() {
         return cargoVec_.size();
     }
-//private:
+    //private:
 
-    void load(std::unique_ptr<Cargo> cargo);
-
-    void unload(const Cargo* const cargo);
+    void load(std::unique_ptr<Cargo> cargo) override;
+    void unload(const Cargo* const cargo) override;
 
     friend std::ostream& operator<<(std::ostream&, const Store&);
     //find comperable cargo in store
     Cargo* findCargoInStore(const Cargo* const exampleCargo) const;
 
-//private:
+    //private:
     StoreCargoVec cargoVec_{};
 };
 
