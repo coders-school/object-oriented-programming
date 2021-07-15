@@ -33,7 +33,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (soldPlayerCargo->getAmount() == amount) {
         auto ownedCargo = soldPlayerCargo->split(amount);
         playerShip->unload(soldPlayerCargo);
-        auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
+        //auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
         //player->giveMoney(moneyToPay);
 
         load(std::move(ownedCargo));
@@ -41,7 +41,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     }
 
     //player sell less than all
-    auto moneyToPay = soldPlayerCargo->getPrice() * amount;
+    //auto moneyToPay = soldPlayerCargo->getPrice() * amount;
     auto buyedCargoPart = soldPlayerCargo->split(amount);
 
     if (!buyedCargoPart) {

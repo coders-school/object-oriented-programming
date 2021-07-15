@@ -181,7 +181,7 @@ void Game::printMenu() const {
 void Game::printStoreCargoList() const {
     printf("\033[31m");
     std::cout << "STORE LIST -------\n";
-    for (int i = 0; i < store.cargoVec_.size(); ++i) {
+    for (size_t i = 0; i < store.cargoVec_.size(); ++i) {
         std::cout << i << "\t"                                              //
                   << "Name: " << store.cargoVec_[i]->getName() << "\t\t"    //
                   << "Amount: " << store.cargoVec_[i]->getAmount() << "\t"  //
@@ -193,7 +193,7 @@ void Game::printStoreCargoList() const {
 void Game::printShipCargoList() const {
     printf("\033[33;44m");
     std::cout << "SHIP LIST -------\n";
-    for (int i = 0; i < player.getShip()->getCargoVec().size(); ++i) {
+    for (size_t i = 0; i < player.getShip()->getCargoVec().size(); ++i) {
         std::cout << i << "\t"                                                              //
                   << "Name: " << player.getShip()->getCargoVec()[i]->getName() << "\t\t"    //
                   << "Amount: " << player.getShip()->getCargoVec()[i]->getAmount() << "\t"  //

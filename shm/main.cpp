@@ -13,6 +13,8 @@
 #include "Store.hpp"
 #include "Time.hpp"
 #include "Warehouse.hpp"
+#include "Fruit.hpp"
+#include "DryFruit.hpp"
 
 #include "Game.hpp"
 
@@ -40,13 +42,13 @@ void testIslandMap() {
     constexpr size_t testCases{10};
     for (size_t i = 0; i < testCases; ++i) {
         Map map;
-        auto mapVec = map.getIslandVec();
+        const auto& mapVec = map.getIslandVec();
         size_t num{1};
         std::cout << "\n\n--- MAP/ISLAND TEST ---\n";
         for (const auto& island : mapVec) {
             std::cout << num++ << ". ";
-            std::cout << island.getPosition();
-            if (map.getIsland(island.getPosition()) != nullptr) {
+            std::cout << island->getPosition();
+            if (map.getIsland(island->getPosition()) != nullptr) {
                 std::cout << "^-Island exists\n";
             } else {
                 std::cout << "^-Island does not exist\n";
@@ -57,8 +59,8 @@ void testIslandMap() {
 void testGetIsland(){
     Map map;
     Island::Coordinates FakeIsland(generatePosition(), generatePosition());
-    std::cout << "Island [0]:" << map.getIslandVec()[0].getPosition();
-    if (map.getIsland(map.getIslandVec()[0].getPosition()) != nullptr) {
+    std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
+    if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
         std::cout << "^-First Island exists\n";
     } else {
         std::cout << "^-First Island does not exist\n";
@@ -69,6 +71,11 @@ void testGetIsland(){
     } else {
         std::cout << "^-Fake Island does not exist\n";
     }
+}
+
+void testDryFruit() {
+    DryFruit dryMango("mango", 10, 10, 10, 10);
+    std::cout << dryMango.getName() << '\n';
 }
 
 void testTime() {
@@ -87,7 +94,7 @@ void timePassTest() {
     Time* time = Time::getInstance();
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
-    CargoDefault cargo3{"Cargo2", 100, 100};
+    DryFruit cargo3{"Mango", 100, 100, 3};
     Ship ship1{100, 100, 100, "Ship1", 1, {}};
     Ship ship2{100, 100, 100, "Ship2", 2, {}};
     Ship ship3{100, 100, 100, "Ship3", 3, {}};
@@ -96,10 +103,11 @@ void timePassTest() {
 }
 
 int main() {
-    std::srand(std::time(0));
+    srand(static_cast<unsigned int>(time(0)));
     /*testCargoShipPlayer();
     testIslandMap();
     testGetIsland(),
+    testDryFruit();
     testTime();
     timePassTest();*/
 
