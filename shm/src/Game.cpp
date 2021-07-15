@@ -231,7 +231,7 @@ void Game::printCargo() {
 
 void Game::buy() {
     std::cout << "Cargo to buy in store:\n";
-    // TODO: print store cargo
+    printCargoFromStore();
     std::string cargoName;
     size_t cargoAmount;
     Store::Response response;
@@ -251,7 +251,7 @@ void Game::buy() {
 
 void Game::sell() {
     std::cout << "Cargo to sell:\n";
-    // TODO: print ship cargo
+    printCargoFromShip();
     std::string cargoName;
     size_t cargoAmount;
     Store::Response response;
@@ -328,4 +328,12 @@ bool Game::hasPlayerEnoughMoney(const size_t& crew) {
         return false;
     }
     return true;
+}
+
+void Game::printCargoFromStore() {
+    std::cout << *player_->getCurrentPosition()->getStore();
+}
+
+void Game::printCargoFromShip() {
+    std::cout << *player_->getShip();
 }
