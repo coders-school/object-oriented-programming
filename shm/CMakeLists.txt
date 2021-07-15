@@ -22,7 +22,7 @@ set(FLAGS -Wall -Wextra -Werror -pedantic -Wconversion)
 
 add_library(${PROJECT_NAME}-lib STATIC ${FILES})
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut Tests.cpp)
+add_executable(${PROJECT_NAME}-ut Tests/Tests.cpp)
 
 target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS} -O3)

@@ -1,15 +1,15 @@
-#include <vector>
 #include <algorithm>
 #include <stdexcept>
+#include <vector>
 
-#include "Warehouse.hpp"
 #include "Cargo.hpp"
+#include "Warehouse.hpp"
 
-Warehouse::Warehouse(CargoVec cargoVec) : cargoVec_(std::move(cargoVec))
-{}
+Warehouse::Warehouse(CargoVec cargoVec)
+    : cargoVec_(std::move(cargoVec)) {}
 
 const Warehouse::CargoVec& Warehouse::getCargoVec() const {
-       return cargoVec_;
+    return cargoVec_;
 }
 
 void Warehouse::load(std::unique_ptr<Cargo> cargo) {
@@ -18,8 +18,8 @@ void Warehouse::load(std::unique_ptr<Cargo> cargo) {
     }
 
     Cargo* storedCargo = nullptr;
-    for(const auto& el : cargoVec_){
-        if(*cargo == *el){
+    for (const auto& el : cargoVec_) {
+        if (*cargo == *el) {
             storedCargo = el.get();
             break;
         }
@@ -53,4 +53,3 @@ void Warehouse::unload(const Cargo* const cargo) {  //ver A
     }
     throw std::logic_error("Store: Not my Cargo!");
 }
-
