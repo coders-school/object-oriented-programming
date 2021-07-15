@@ -1,5 +1,7 @@
 #include "island.hpp"
 #include "map.hpp"
+#include <iostream>
+#include <algorithm>
 
 
 /*Map::Map() {
@@ -16,7 +18,7 @@
     }
 }*/
 
-Island* Map::getIsland(const Coordinates& coordinate) {
+Island* const Map::getIsland(const Coordinates& coordinate) {
     for (auto& island : islands_) {
         if (island.getPosition() == coordinate) {
             return &island;

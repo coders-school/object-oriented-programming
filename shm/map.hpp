@@ -1,15 +1,13 @@
 #pragma once
-#include <random>
 #include <vector>
-#include <memory>
 #include <functional>
-#include <algorithm>
-#include <iostream>
+#include <random>
+#include <memory>
 
 class Map {
 public:
     Map();
-    Island* getIsland(const Coordinates& coordinate);
+    Island* const getIsland(const Coordinates& coordinate);
 
 private:
     const int maxWidth_ = 99;

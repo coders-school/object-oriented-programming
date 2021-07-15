@@ -30,11 +30,10 @@ size_t Player::countAvailableSpace() const {
     auto sumOfAmounts = std::accumulate(ship_->getCargos().begin(), ship_->getCargos().end(), 0
         , [](size_t amountAll, const auto& cargo) {return amountAll += cargo.get()->getAmount();});
     
-    //size_t is unsigned so this is always false
-    //if(ship_->getCapacity() - sumOfAmounts < 0)
-    //{
-    //    return 0;
-    //}
+    if(ship_->getCapacity() - sumOfAmounts < 0)
+    {
+        return 0;
+    }
 
    return ship_->getCapacity() - sumOfAmounts;
 }
