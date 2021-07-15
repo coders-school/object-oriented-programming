@@ -131,6 +131,7 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
     case MenuOption::Travel :
         travel(); break;
     case MenuOption::PrintCargo :
+        printCargoFromStore();
         printCargo(); break;
     case MenuOption::Buy :
         buy(); break;
@@ -231,7 +232,7 @@ void Game::printCargo() {
 
 void Game::buy() {
     std::cout << "Cargo to buy in store:\n";
-    // TODO: print store cargo
+    printCargoFromStore();
     std::string cargoName;
     size_t cargoAmount;
     Store::Response response;
@@ -331,7 +332,7 @@ bool Game::hasPlayerEnoughMoney(const size_t& crew) {
 }
 
 void Game::printCargoFromStore() {
-    
+    std::cout << *player_->getCurrentPosition()->getStore();
 }
 
 void Game::printCargoFromShip() {

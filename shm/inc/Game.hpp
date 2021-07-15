@@ -52,6 +52,7 @@ private:
     size_t currentDay_{};
   
     void travel();
+    void printCargo();
     void printCargoFromStore();
     void printCargoFromShip();
     void buy();
