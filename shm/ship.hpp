@@ -24,7 +24,8 @@ public:
     size_t getId() const { return id_; }
     size_t getAmountOfCargosCapacity() const;
     std::vector<std::shared_ptr<Cargo>> getCargo() const { return cargo_; }
-
+    void addAmounntToShipCargo( std::shared_ptr<Cargo>, size_t );
+    
 private:
     size_t capacity_;
     size_t maxCrew_;
