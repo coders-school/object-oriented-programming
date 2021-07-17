@@ -1,6 +1,6 @@
 #include "Store.hpp"
-#include "Player.hpp"
-#include "Cargo.hpp"
+#include "player.hpp"
+#include "cargo.hpp"
 
 //enum class Response {done, lack_of_money, lack_of_cargo, lack_of_space};
 Store::Store(int money, size_t availableSpace) : Storable(money, availableSpace) {}

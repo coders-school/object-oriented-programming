@@ -13,7 +13,7 @@ private:
 
 public:
     Player(std::unique_ptr<Ship> ship, int money, int availableSpace);
-
+    //~Player();//{std::cout << "ten działa?(Player)";}
     const std::unique_ptr<Ship>& getShip();
     size_t getSpeed() const;
     

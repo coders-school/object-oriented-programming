@@ -28,3 +28,10 @@ Cargo* Ship::findMatchCargo(Cargo* cargo) {
     }
     return nullptr;
 }
+void Ship::load(std::shared_ptr<Cargo> cargo_ptr) {
+    if(Cargo * ptr = findMatchCargo(cargo_ptr.get())) {
+        *ptr += cargo_ptr ->getAmount();
+        return;
+    }
+    shipCargo.push_back(cargo_ptr);
+}

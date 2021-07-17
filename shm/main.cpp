@@ -7,9 +7,12 @@
 #include "Map.hpp"
 #include "player.hpp"
 #include "ship.hpp"
+#include <memory>
+
 
 int main()
 {
+    
     std::cout << "Test Cargo" << '\n';
 
     Cargo cotton("banany", 15, 150); // ( name, amount, basePrice) bananas does not work, imagine why?
@@ -20,7 +23,7 @@ int main()
     std::cout << cotton.getAmount() << " " << cotton.getBasePrice() << " " << cotton.getName() << "\n\n";
 
     //cotton -= 100;
-
+   
     std::cout << "Test islands" << '\n';
 
     Coordinates miami(125.f, 174.f);
@@ -29,17 +32,19 @@ int main()
     std::cout << (breslau == miami) << " " << (chicago == breslau) << " " << (miami == chicago) << "\n\n";
 
     std::cout << "Test ship Titanic" << '\n';
-
+     
     Ship Titanic(20, 90, 1);
-    Titanic.addCargo(&kryptonite);
+    //Titanic.addCargo(std::shared_ptr<Cargo>(kryptonite));
+    Titanic.load(std::make_shared<Cargo>(kryptonite));
+
     std::cout << "Vector size: " << Titanic.getCargo().size() << '\n';
     std::cout << "Titanic cargo: " << Titanic.getCargo()[0]->getName() << '\n';
     std::cout << Titanic.getCargo()[0]->getAmount() << "\n\n";
-
+    
     std::cout << "Test make_unique ptr ship" << '\n';
-
     auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
-    ship->addCargo(&cotton);
+    //ship->addCargo(&cotton);
+    ship->load(std::make_shared<Cargo>(cotton));
     size_t shipCargoSize = ship->getCargo().size();
     Player player(std::move(ship), 1, 1);
     std::cout << "Vector size: " << shipCargoSize << '\n';
@@ -47,7 +52,7 @@ int main()
     std::cout << "Player's ship cargo name: " << player.getCargo(0)->getName() << '\n';
     std::cout << "Player's ship cargo (should be 15): " << player.getCargo(0)->getAmount() << '\n';
     std::cout << "Player's ship cargo base price: " << player.getCargo(0)->getBasePrice() << '\n';
-
+    
     std::cout << "Available space: " << player.getAvailableSpace() << "\n\n";
 
     std::cout << "Random islands positions: X | Y" << '\n';
