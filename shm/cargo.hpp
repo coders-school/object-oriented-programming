@@ -14,6 +14,7 @@ public:
     size_t getBasePrice() {return basePrice_;}
 
     Cargo(std::string name, size_t amount, size_t basePrice);
+    void printCargo() const;
 
 protected:
     std::string name_;

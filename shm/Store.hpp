@@ -1,9 +1,10 @@
 #include <vector>
 #include <iostream>
 #include "Storable.hpp"
+#include "cargo.hpp"
 
 class Player;
-class Cargo;
+//class Cargo;
 
 enum class Response {done, lack_of_money, lack_of_cargo, lack_of_space};
 
@@ -17,4 +18,10 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
     Cargo* findMatchCargo(Cargo* cargo);
     std::vector<std::shared_ptr<Cargo>> cargo_;
+    
+    void printStoreCargo() {
+        for(auto el : cargo_) {
+            el -> printCargo();
+        }
+    }
 };
