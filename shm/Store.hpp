@@ -15,4 +15,6 @@ public:
     Response sell(Cargo* cargo, size_t amount, Player* player);
 
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
+    Cargo* findMatchCargo(Cargo* cargo);
+    std::vector<std::shared_ptr<Cargo>> cargo_;
 };

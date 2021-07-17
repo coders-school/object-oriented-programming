@@ -7,6 +7,7 @@
 #include "Map.hpp"
 #include "player.hpp"
 #include "ship.hpp"
+#include "Store.hpp"
 #include <memory>
 
 
@@ -43,7 +44,6 @@ int main()
     
     std::cout << "Test make_unique ptr ship" << '\n';
     auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
-    //ship->addCargo(&cotton);
     ship->load(std::make_shared<Cargo>(cotton));
     size_t shipCargoSize = ship->getCargo().size();
     Player player(std::move(ship), 1, 1);
@@ -63,4 +63,11 @@ int main()
     map.addIsland(miami);
     Island *is = map.getIsland(miami);
     std::cout << is->getPosition().GetPositionX() << " " << is->getPosition().GetPositionY() << '\n';
+
+    std::cout << "Test Store" << '\n';
+    Store store(100, 500); //(Money, Avalivable space)
+    store.cargo_.push_back(std::make_shared<Cargo>(cotton));
+    store.cargo_.push_back(std::make_shared<Cargo>(kryptonite));
+    store.cargo_.push_back(std::make_shared<Cargo>(onion));
+    std::cout << store.findMatchCargo(&cotton) << " adres cotton: " << store.cargo_[0].get() <<'\n';
 }
