@@ -69,6 +69,8 @@ int main()
     store.cargo_.push_back(std::make_shared<Cargo>(cotton));
     store.cargo_.push_back(std::make_shared<Cargo>(kryptonite));
     std::cout << store.findMatchCargo(&cotton) << " adres cotton: " << store.cargo_[0].get() <<'\n';
+    store.sell(&onion, 5, &player);
+    store.sell(&onion, 55, &player);
     std::cout << "Prit store cargo" << '\n';
     store.printStoreCargo();
 }

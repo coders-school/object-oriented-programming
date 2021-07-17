@@ -50,10 +50,12 @@ Response Store::sell(Cargo *cargo, size_t amount, Player *player) // Selling car
     //TO DO BUY - add cargo to store, remove cargo from player
     
     if(Cargo * ptr = findMatchCargo(cargo)) {
-        *ptr += cargo ->getAmount();
+        *ptr += amount;
     }
     else {
-        cargo_.push_back(static_cast<std::shared_ptr<Cargo>> (cargo));    
+        
+        //cargo_.push_back(static_cast<std::shared_ptr<Cargo>> (cargo));    
+        cargo_.push_back(std::make_shared<Cargo>(cargo -> getName(), amount, cargo->getBasePrice())); 
     }
     
 
