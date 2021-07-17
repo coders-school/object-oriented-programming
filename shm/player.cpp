@@ -4,22 +4,12 @@
 #include "player.hpp"
 #include "ship.hpp"
 
-Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace)
-    : ship_(std::move(ship))
-    , money_(money)
-    , availableSpace_(calculateAvailableSpace())
-    {}
+Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace) : Storable(money, availableSpace) {
+    ship_ = std::move(ship);
+}
 
 const std::unique_ptr<Ship>& Player::getShip() { 
     return ship_; 
-}
-
-int Player::getMoney() { 
-    return money_; 
-}
-
-size_t Player::getAvailableSpace () { 
-    return availableSpace_; 
 }
 
 size_t Player::getSpeed() const {
@@ -32,7 +22,7 @@ size_t Player::getSpeed() const {
     return 0; // TODO add something better
 }
 
-Cargo* Player::getCargo(size_t index) const {
+std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     if(ship_->getCargo().at(index) > 0)
     {
         return ship_->getCargo().at(index);
@@ -46,9 +36,9 @@ size_t Player::calculateAvailableSpace() {
 
     int cargoAmount = 0;
     int capacity = ship_->getCapacity();
-    std::vector<Cargo*> shipCargo = ship_->getCargo();
+    std::vector<std::shared_ptr<Cargo>> shipCargo = ship_->getCargo();
      
-    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo* c) { return i += c->getAmount(); });
+    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, std::shared_ptr<Cargo> c) { return i += c->getAmount(); });
     std::cout << "Cargo amount(po obliczeniach): "<< capacity - cargoAmount << '\n';
    
     if(capacity - cargoAmount < 0){

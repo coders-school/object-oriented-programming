@@ -10,9 +10,6 @@
 
 int main()
 {
-
-
-
     std::cout << "Test Cargo" << '\n';
 
     Cargo cotton("banany", 15, 150); // ( name, amount, basePrice) bananas does not work, imagine why?

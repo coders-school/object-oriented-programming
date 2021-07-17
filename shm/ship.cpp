@@ -20,3 +20,11 @@ Ship &Ship::operator+=(size_t num)
 void Ship::addCargo(Cargo* item) {
     shipCargo.emplace_back(item);
 }
+Cargo* Ship::findMatchCargo(Cargo* cargo) {
+    for (auto& el : shipCargo) {
+        if(*el == *cargo) {
+            return el.get();
+        }
+    }
+    return nullptr;
+}
