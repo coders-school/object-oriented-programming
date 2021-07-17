@@ -6,7 +6,7 @@ Ship::Ship()
 
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
     : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
-    
+
 Ship::Ship(int maxCrew, int speed, size_t id)
     : Ship(0, maxCrew, speed, "", id) {}
 

@@ -1,7 +1,11 @@
 #ifndef SHIP_HPP
 #define SHIP_HPP
+#include <memory>
 #include <string>
+#include <vector>
+#include "Cargo.hpp"
 
+// Class used to represent merchant ship in the game
 class Ship {
 private:
     const size_t id_;
@@ -10,6 +14,7 @@ private:
     size_t maxCrew_;
     size_t capacity_;
     size_t crew_;
+    std::vector<std::shared_ptr<Cargo>> cargo_;
 
 public:
     Ship();
@@ -21,6 +26,8 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
+    std::shared_ptr<Cargo> getCargo(size_t index) const { return cargo_[index]; };
+    std::vector<std::shared_ptr<Cargo>> getCargoList() const { return cargo_; };
 
     void setName(const std::string& name);
 

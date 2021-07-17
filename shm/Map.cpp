@@ -1,7 +1,17 @@
 #include "Map.hpp"
+#include <random>
+#include <utility>
+#include <algorithm>
+
+constexpr size_t NUMBER_OF_ISLANDS = 10;
+constexpr size_t MAP_SIZE = 100;
 
 Map::Map() {
     islands_.reserve(NUMBER_OF_ISLANDS);
+    fillMapWithIslands();
+}
+
+void Map::fillMapWithIslands(){
     std::random_device randomDevice;
     std::mt19937 gen(randomDevice());
     std::uniform_real_distribution<> distrib(0, MAP_SIZE);
@@ -9,7 +19,7 @@ Map::Map() {
     for (int i = 0; i < NUMBER_OF_ISLANDS; i++) {
         Coordinates coordinates(0, 0);
 
-        while (getIsland(coordinates)!= nullptr) {
+        while (getIsland(coordinates) != nullptr) {
             coordinates.setPositionX(distrib(gen));
             coordinates.setPositionY(distrib(gen));
         }
@@ -17,13 +27,12 @@ Map::Map() {
     }
 }
 
-
 Island* Map::getIsland(const Coordinates& coordinates) {
     auto itr = islands_.begin();
-    itr = std::find(islands_.begin(), islands_.end(), coordinates); 
-    if (itr != islands_.end()){
+    itr = std::find(islands_.begin(), islands_.end(), coordinates);
+    if (itr != islands_.end()) {
         return &(*itr);
-    }            
+    }
     return nullptr;
 }
 

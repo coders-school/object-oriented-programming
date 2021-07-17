@@ -1,29 +1,24 @@
 #ifndef SHIP_HPP
 #define SHIP_HPP
+
+
+
 #include <vector>
-#include "Island.hpp"
-#include <random>
-#include <algorithm>
-#include <utility>
-#include <iostream>
 #include "Coordinates.hpp"
+#include "Island.hpp"
 
-constexpr size_t NUMBER_OF_ISLANDS = 10;
-constexpr size_t MAP_SIZE = 100;
-
-
-class Map
-{
-
+// Class used to represent game map
+class Map {
 private:
     Island* current_pos_;
     std::vector<Island> islands_;
     bool contains(std::vector<Coordinates>, Coordinates);
+    void fillMapWithIslands();
 
 public:
     Map();
     void DebugPrintIsland();
-    Island *getIsland(const Coordinates &coordinate);
-    void addIsland(Coordinates &coordinate);
+    Island* getIsland(const Coordinates& coordinate);
+    void addIsland(Coordinates& coordinate);
 };
 #endif
