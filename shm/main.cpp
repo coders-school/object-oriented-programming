@@ -4,6 +4,7 @@
 #include "player.hpp"
 #include "ship.hpp"
 #include "island.hpp"
+#include "map.hpp"
 
 int main() {
     auto cargo1 = std::make_shared<Cargo>("cebula", 30, 2);
