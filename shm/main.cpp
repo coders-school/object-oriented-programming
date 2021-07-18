@@ -21,12 +21,12 @@ int main()
     
     std::cout << "Test Cargo" << '\n';
 
-    Cargo cotton("banany", 15, 150); // ( name, amount, basePrice) bananas does not work, imagine why?
-    Cargo kryptonite("krypton", 20, 200); // ( name, amount, basePrice)
-    Cargo onion("cebula", 250, 1); // ( name, amount, basePrice)
+    Fruit banana(150, "banany", 3, 150, 1); // Fruit(size_t amount, const std::string& name, size_t base_price, size_t expiry_date, size_t time_elapsed);
+    Alcohol kryptonite(200, "krypton", 20, 69); //  Alcohol(size_t amount, const std::string& name, size_t base_price, size_t percentage);
+    Fruit onion(200, "cebula", 1, 100, 1); // Fruit(size_t amount, const std::string& name, size_t base_price, size_t expiry_date, size_t time_elapsed);
 
-    std::cout << (onion == cotton) << " " << (cotton == kryptonite) << " " << (onion == kryptonite) << "\n";
-    std::cout << cotton.getAmount() << " " << cotton.getBasePrice() << " " << cotton.getName() << "\n\n";
+    std::cout << (onion == banana) << " " << (banana == kryptonite) << " " << (onion == kryptonite) << "\n";
+    std::cout << banana.getAmount() << " " << banana.getBasePrice() << " " << banana.getName() << "\n\n";
 
     //cotton -= 100;
    
@@ -49,7 +49,7 @@ int main()
     
     std::cout << "Test make_unique ptr ship" << '\n';
     auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
-    ship->load(std::make_shared<Cargo>(cotton));
+    ship->load(std::make_shared<Cargo>(banana));
     size_t shipCargoSize = ship->getCargo().size();
     Player player(std::move(ship), 100, 1);
     std::cout << "Vector size: " << shipCargoSize << '\n';
@@ -71,9 +71,9 @@ int main()
 
     std::cout << "Test Store" << '\n';
     Store store(100, 500); //(Money, Avalivable space)
-    store.cargo_.push_back(std::make_shared<Cargo>(cotton));
+    store.cargo_.push_back(std::make_shared<Cargo>(banana));
     store.cargo_.push_back(std::make_shared<Cargo>(kryptonite));
-    std::cout << store.findMatchCargo(&cotton) << " adres cotton: " << store.cargo_[0].get() <<'\n';
+    std::cout << store.findMatchCargo(&banana) << " adres cotton: " << store.cargo_[0].get() <<'\n';
     store.sell(&onion, 5, &player);
     store.sell(&onion, 55, &player);
     std::cout << "Prit store cargo" << '\n';
