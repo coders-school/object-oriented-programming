@@ -1,25 +1,21 @@
 #include "cargo.hpp"
 
+#include <iostream>
+
 Cargo& Cargo::operator+=(size_t amount) {
     amount_ += amount;
     return *this;
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
-    amount_ -= amount;
+    if (amount <= amount_) {
+        amount_ -= amount;
+    } else {
+        std::cerr << "Amount of cargo can not be under 0!!!\n";
+    }
     return *this;
 }
 
-bool Cargo::operator == (const Cargo& cargo) const {
-    return cargo.getName() == name_;
-} 
-
-std::string Cargo::getName() const {
-    return name_;
-}
-size_t Cargo::getAmount() const {
-    return amount_;
-}
-size_t Cargo::getBasePrice() const {
-    return basePrice_;
+bool Cargo::operator==(const Cargo& cargo) const {
+    return cargo.name_ == name_;
 }
