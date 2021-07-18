@@ -1,14 +1,18 @@
 #pragma once
 #include "cargo.hpp"
 
-class Item : public Cargo {
+class Item : public Cargo
+{
 public:
-    enum class Rarity { common = 1,
-                        rare = 3,
-                        epic = 6,
-                        legendary = 10 };
+    enum class Rarity
+    {
+        common = 1,
+        rare = 3,
+        epic = 6,
+        legendary = 10
+    };
 
-    Item(size_t amount, const std::string& name, size_t base_price, Rarity rarity);
+    Item(size_t amount, const std::string &name, size_t base_price, Rarity rarity);
     ~Item() override = default;
 
     // override from Cargo
@@ -16,8 +20,11 @@ public:
     const std::string &getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
-
     Rarity getRarity() const { return rarity_; }
+
+    Cargo &operator+=(size_t amount) override;
+    Cargo &operator-=(size_t amount) override;
+    bool operator==(const Cargo &cargo) const override;
 
 private:
     Rarity rarity_;

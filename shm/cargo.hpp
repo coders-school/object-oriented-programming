@@ -5,9 +5,9 @@
 class Cargo
 {
 public:
-    Cargo &operator+=(size_t amount);
-    Cargo &operator-=(size_t amount);
-    bool operator==(const Cargo &cargo) const;
+    virtual Cargo &operator+=(size_t amount);
+    virtual Cargo &operator-=(size_t amount);
+    virtual bool operator==(const Cargo &cargo) const = 0;
 
     virtual size_t getPrice() const = 0;
     virtual const std::string &getName() const = 0; // TO DO: test deleting Cargo object
@@ -15,7 +15,7 @@ public:
     virtual size_t getBasePrice() const = 0;
 
     void printCargo() const;
-    
+
     Cargo() = default;
     Cargo(std::string name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;

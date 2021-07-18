@@ -23,3 +23,23 @@ Cargo &Fruit::operator--()
     }
     return *this;
 }
+
+Cargo &Fruit::operator+=(size_t amount)
+{
+    amount_ += amount;
+    return *this;
+}
+
+Cargo &Fruit::operator-=(size_t amount)
+{
+
+    if (amount_ < amount)
+    {
+        amount_ = 0;
+    }
+    else
+    {
+        amount_ -= amount;
+    }
+    return *this;
+}
