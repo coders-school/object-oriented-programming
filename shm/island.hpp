@@ -10,7 +10,7 @@ public:
     {}
 
     Coordinates getPosition() const;
-    void setPosition(Coordinates );
+    void setPosition(Coordinates);
     
 
 private:

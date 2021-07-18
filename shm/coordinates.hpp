@@ -23,9 +23,7 @@ public:
 
     size_t distance(const Coordinates& , const Coordinates& );
 
-
 private:
     size_t positionX_;
     size_t positionY_;
 };
-
