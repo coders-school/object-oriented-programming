@@ -1,12 +1,17 @@
 
 #include <iostream>
 
+#include "alcohol.hpp"
 #include "cargo.hpp"
 #include "coordinates.hpp"
+#include "dryfruit.hpp"
+#include "fruit.hpp"
 #include "island.hpp"
+#include "item.hpp"
 #include "Map.hpp"
 #include "player.hpp"
 #include "ship.hpp"
+#include "Storable.hpp"
 #include "Store.hpp"
 #include <memory>
 
