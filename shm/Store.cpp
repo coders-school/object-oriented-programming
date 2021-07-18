@@ -66,3 +66,9 @@ std::shared_ptr<Cargo> Store::getCargo(size_t index) const
 {
     return nullptr;
 }
+
+void Store::nextDay(){
+    for (auto el : cargo_) {
+        el.get()->reduceAmount();
+    }
+}

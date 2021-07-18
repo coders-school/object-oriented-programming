@@ -51,7 +51,7 @@ int main()
     auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
     ship->load(std::make_shared<Cargo>(cotton));
     size_t shipCargoSize = ship->getCargo().size();
-    Player player(std::move(ship), 1, 1);
+    Player player(std::move(ship), 100, 1);
     std::cout << "Vector size: " << shipCargoSize << '\n';
     std::cout << "Player's ship speed: " << player.getShip()->getSpeed() << '\n';
     std::cout << "Player's ship cargo name: " << player.getCargo(0)->getName() << '\n';
@@ -76,6 +76,21 @@ int main()
     std::cout << store.findMatchCargo(&cotton) << " adres cotton: " << store.cargo_[0].get() <<'\n';
     store.sell(&onion, 5, &player);
     store.sell(&onion, 55, &player);
+    std::cout << "Prit store cargo" << '\n';
+    store.printStoreCargo();
+
+
+    //ZAD3 NEXT_DAY
+    std::cout << "\n\nZAD3 NEXT_DAY"<< '\n';
+    Ship* ownedShip = new Ship(5, 10, 2, "Special owned ship", 88);
+    ownedShip->setOwner(&player);
+    ownedShip->setCrew(5);
+    std::cout << "Player's money: " << player.getMoney() << '\n';
+    ownedShip->nextDay();
+    std::cout << "Player's money: " << player.getMoney() << '\n';
+    std::cout << "Prit store cargo" << '\n';
+    store.printStoreCargo();
+    store.nextDay();
     std::cout << "Prit store cargo" << '\n';
     store.printStoreCargo();
 }
