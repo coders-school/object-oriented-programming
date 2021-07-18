@@ -12,7 +12,8 @@ public:
         legendary = 10
     };
 
-    Item(size_t amount, const std::string &name, size_t base_price, Rarity rarity);
+    Item(size_t amount, const std::string &name, size_t base_price, Rarity rarity) :
+        Cargo(name, amount, base_price), rarity_{rarity} {}
     ~Item() override = default;
 
     // override from Cargo

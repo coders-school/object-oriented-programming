@@ -1,5 +1,8 @@
 #include "alcohol.hpp"
 
+Alcohol::~Alcohol() {
+    std::cout << "Alcohol " << name_ << " destructor" << '\n';
+}
 size_t Alcohol::getPrice() const
 {
     return basePrice_ * percentage_ / 96;

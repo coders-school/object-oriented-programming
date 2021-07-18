@@ -27,7 +27,6 @@ public:
     Ship(int maxCrew, int speed, size_t id)
         : Ship(0, maxCrew, speed, "", id)
     {}
-
     
     void setName(const std::string& name) { name_ = name; }
 
