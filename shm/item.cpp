@@ -24,3 +24,13 @@ Cargo &Item::operator-=(size_t amount)
     }
     return *this;
 }
+
+bool Item::operator==(const Cargo& other) const {
+ 
+    try {
+        const Item& other_item = dynamic_cast<const Item&>(other);
+        return Cargo::operator==(other) && rarity_ == other_item.rarity_;
+    } catch (std::bad_cast&) {
+            return false;
+    }
+}

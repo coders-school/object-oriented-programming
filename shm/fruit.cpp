@@ -43,3 +43,13 @@ Cargo &Fruit::operator-=(size_t amount)
     }
     return *this;
 }
+
+bool Fruit::operator==(const Cargo& other) const {
+ 
+    try {
+        const Fruit& other_fruit = dynamic_cast<const Fruit&>(other);
+        return Cargo::operator==(other) && expiry_date_ == other_fruit.expiry_date_;
+    } catch (std::bad_cast&) {
+            return false;
+    }
+}
