@@ -1,8 +1,6 @@
-
 #include <iostream>
 #include <numeric>
 #include <utility>
-
 #include "cargo.hpp"
 #include "player.hpp"
 #include "ship.hpp"
