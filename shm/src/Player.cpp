@@ -11,7 +11,7 @@ Player::Player(std::unique_ptr<Ship> ship,
 {
     availableSpace_.first = true;
     availableSpace_.second = availableSpace;
-    currentPosition_ = &map_->getIslands()[0];
+    currentPosition_ = &map_->getIslands()[1];
 }
 
 size_t Player::getSpeed() const {
