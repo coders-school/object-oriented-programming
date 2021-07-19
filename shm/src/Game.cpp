@@ -12,7 +12,7 @@
 namespace {
     constexpr size_t DISTANCE_MULTIPLIER{ 10 };
     constexpr size_t FIRST_OPTION_ELEMENT{ 1 };
-    constexpr size_t LAST_OPTION_ELEMENT{ 6 };
+    constexpr size_t LAST_OPTION_ELEMENT{ 7 };
 }
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
@@ -159,6 +159,8 @@ bool Game::isChoiceValid(const size_t& option) {
 
 Game::CheckAnswer Game::checkAnswer(const std::string& announcement) {
     std::cout << announcement << '\n';
+    std::cin.clear();
+    std::cin.ignore(100,'\n');
     char answer = getchar();
     if (answer == 'Y' || answer == 'y') {
         return CheckAnswer::Yes;
