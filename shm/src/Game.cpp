@@ -298,22 +298,26 @@ void Game::printResponse(const Store::Response& response,
 }
 
 void Game::hireCrew() {
-    size_t crewAmount{};
+    int crewAmount {};
     std::cout << "Cost of crew is 1 coin\n";
     do {
         std::cout << "How many crew you wanna hire? ";
         std::cin >> crewAmount;
-    } while (isCrewNumber(crewAmount));
+    } while (!isCrewNumber(crewAmount));
 
-    if (hasPlayerEnoughMoney(crewAmount)) {
+    if (isNumberLowerThanZero(crewAmount)) {
+        std::cout << "The number must be greater than 0\n";
+    }
+    else if (!hasPlayerEnoughMoney(crewAmount)) {
+        std::cout << "You don't have enough money\n";
+    } 
+    else {
         *(player_->getShip()) += crewAmount;
         std::cout << "You have employed " << crewAmount << " sailors\n";
-    } else {
-        std::cout << "You don't have enough money\n";
-    }
+    } 
 }
 
-bool Game::isCrewNumber(const size_t& crew) { 
+bool Game::isCrewNumber(const int crew) { 
     if (std::cin.fail()) {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -323,11 +327,15 @@ bool Game::isCrewNumber(const size_t& crew) {
     return true;
 }
 
-bool Game::hasPlayerEnoughMoney(const size_t& crew) {
+bool Game::hasPlayerEnoughMoney(const int crew) {
     if (crew > player_->getMoney()) {
         return false;
     }
     return true;
+}
+
+bool Game::isNumberLowerThanZero(const int crew) {
+    return crew < 0;
 }
 
 void Game::printCargoFromStore() {
