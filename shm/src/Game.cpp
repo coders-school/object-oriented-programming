@@ -56,7 +56,7 @@ void Game::printWelcomeScreen() {
 }
 
 void Game::announcementGenerate(const std::string & announcenent) {
-    size_t frameSize { 100 };
+    size_t frameSize { 99 };
     size_t frameLine { 1 };
     size_t announcementEndPosition = frameSize / 2 - announcenent.size() / 2 + announcenent.size();
     std::cout << std::setfill('#') << std::setw (frameSize ) << "\n"
@@ -77,19 +77,19 @@ bool Game::isGameLost() {
 }
 
 void Game::printMenu() {
-    std::cout << "#" << std::setfill('-')  << std::setw (30) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (22) << " CHOOSE ACTION: " << std::setw (8) << "#\n";
-    std::cout << "#" << std::setfill('-')  << std::setw (30) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (30) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (21) << " 1. SHOW MAP " << std::setw (9) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (20) << " 2. TRAVEL " << std::setw (10) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (22) << " 3. PRINT CARGO " << std::setw (8) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 4. BUY " << std::setw (11) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 5. SELL" << std::setw (11) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (21) << " 6. HIRE CREW" << std::setw (9) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (19) << " 7. EXIT" << std::setw (11) << "#\n";
-    std::cout << "#" << std::setfill(' ')  << std::setw (30) << "#\n";
-    std::cout << "#" << std::setfill('-')  << std::setw (31) << "#\n\n";
+    std::cout << "#" << std::setfill('-')  << std::setw (98) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (56) << " CHOOSE ACTION: " << std::setw (42) << "#\n";
+    std::cout << "#" << std::setfill('-')  << std::setw (98) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (98) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (53) << " 1. SHOW MAP " << std::setw (45) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (51) << " 2. TRAVEL " << std::setw (47) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (56) << " 3. PRINT CARGO " << std::setw (42) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (48) << " 4. BUY " << std::setw (50) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (48) << " 5. SELL" << std::setw (50) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (53) << " 6. HIRE CREW" << std::setw (45) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (48) << " 7. EXIT" << std::setw (50) << "#\n";
+    std::cout << "#" << std::setfill(' ')  << std::setw (98) << "#\n";
+    std::cout << "#" << std::setfill('-')  << std::setw (99) << "#\n\n";
 }
 
 void Game::printHeader() {
