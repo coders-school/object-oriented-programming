@@ -110,6 +110,10 @@ void Game::printMap() {
                   << " ---- Coordinates [" << island.getCoordinates().getPositionX() 
                   << "][" << island.getCoordinates().getPositionY() << "]\n";
     }
+    std::cout << "\nPress the button to continue\n";
+    std::cin.clear();
+    std::cin.ignore(100, '\n');
+    std::getchar();
 }
 
 Game::MenuOption Game::selectOption() {
