@@ -131,8 +131,8 @@ Item::Rarity Store::rarityConversion(size_t numberForConversion) {
 void Store::generateAllCargo() {
     std::string line;
     std::fstream file;
-    file.open("settings/items.txt", std::ios::in);
-    if (file.good() == false) {
+    file.open("../settings/items.txt", std::ios::in);
+    if (file.fail()) {
         std::cout << "File not exist\n";
     }
     while (getline(file, line)) {
