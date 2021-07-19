@@ -22,7 +22,6 @@ Island* const Map::getIsland(const Coordinates& coordinate) {
             return &island;
         }
     }
-    std::cout << "Island not exist";
     return nullptr;
 }
 
