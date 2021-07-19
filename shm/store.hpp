@@ -20,11 +20,11 @@ public:
     Response buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
     Response sell(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
 
-    std::string getResponse(const Response);
+    std::string getResponse(const Response& response);
     std::shared_ptr<Cargo> getCargo(const  size_t ) const;
 
 private:
-    std::vector<std::shared_ptr<Cargo>> cargos_;
+    std::vector<std::shared_ptr<Cargo>> stock_;
     void generateCargo();
     void randomizeCargo();
     void load( std::shared_ptr<Cargo> cargo, size_t amount);
