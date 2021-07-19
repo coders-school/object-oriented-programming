@@ -27,13 +27,14 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
 }
 
-size_t Player::countAvailableSpace() const {
-    auto sumOfAmounts = std::accumulate(ship_->getCargos().begin(), ship_->getCargos().end(), 0
-        , [](size_t amountAll, const auto& cargo) {return amountAll += cargo.get()->getAmount();});
-    
-    if(ship_->getCapacity() - sumOfAmounts < 0)
-    {
-        return 0;
+void Player::countAvailableSpace() {
+    if(!ship_) {
+        return;
+    }
+    const auto& cargoVector = ship_->getCapacity();
+    size_t sum = 0;
+    for (int i = 0; i < ship_->getCargosVector().size(); i++) {
+        sum += ship_->getCargo(i)->getAmount();
     }
     availableSpace_ = cargoVector - sum;
 }
