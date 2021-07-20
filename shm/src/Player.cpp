@@ -1,6 +1,7 @@
 #include "shm/inc/Player.hpp"
 
 #include <numeric>
+#include <iostream>
 
 #include "shm/inc/Cargo.hpp"
 #include "shm/inc/Map.hpp"
@@ -11,7 +12,7 @@ Player::Player(std::unique_ptr<Ship> ship,
 {
     availableSpace_.first = true;
     availableSpace_.second = availableSpace;
-    currentPosition_ = &map_->getIslands()[0];
+    currentPosition_ = map_->getIsland(map_->getIslands()[0].getCoordinates());
 }
 
 size_t Player::getSpeed() const {

@@ -72,6 +72,5 @@ private:
     MenuOption actionMenu(MenuOption userAnswer);
     bool isCrewNumber(const size_t & crew);
     bool hasPlayerEnoughMoney(const size_t & crew);
-    
     MenuOption menuOption_ { MenuOption::NoChoice };
 };
