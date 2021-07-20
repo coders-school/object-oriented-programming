@@ -16,6 +16,8 @@ public:
 
     void printCargo() const;
 
+    void setMoney(size_t money) {money_ = money;};
+
 private:
     std::shared_ptr<Ship> ship_;
     size_t money_;

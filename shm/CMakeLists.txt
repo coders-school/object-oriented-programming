@@ -8,7 +8,15 @@ set(FILES
     player.cpp
     ship.cpp
     coordinates.cpp
-    cargo.cpp)
+    cargo.cpp
+    store.cpp)
+
+set(FLAGS 
+    -Wall 
+    #-Wextra 
+    -Wpedantic 
+    -Wconversion 
+    -O0)
 
 add_executable(${PROJECT_NAME} main.cpp ${FILES})
-target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic -Wconversion -O0)
+target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
