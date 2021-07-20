@@ -70,9 +70,10 @@ private:
     CheckAnswer checkAnswer(const std::string & announcement);
     MenuOption selectOption();
     MenuOption actionMenu(MenuOption userAnswer);
+  
     bool isCrewNumber(const int crew);
     bool hasPlayerEnoughMoney(const int crew);
     bool isNumberLowerThanZero(const int crew);
-    
+  
     MenuOption menuOption_ { MenuOption::NoChoice };
 };
