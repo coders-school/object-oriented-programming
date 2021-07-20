@@ -39,3 +39,12 @@ bool Cargo::operator==(const Cargo &cargo) const
 void Cargo::printCargo() const {
     std::cout << "Cargo Name: " << name_ << ", amount: " << amount_ << '\n';
 }
+
+void Cargo::reduceAmount(){
+    if(amount_ -1 < 0){
+        amount_ = 0;
+    }
+    else{
+        amount_ -= 1;
+    }
+}

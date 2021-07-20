@@ -76,6 +76,6 @@ int main()
     // std::cout << store.findMatchCargo(&cotton) << " adres cotton: " << store.cargo_[0].get() <<'\n';
     // store.sell(&onion, 5, &player);
     // store.sell(&onion, 55, &player);
-    // std::cout << "Prit store cargo" << '\n';
+    // std::cout << "Print store cargo" << '\n';
     // store.printStoreCargo();
 }
