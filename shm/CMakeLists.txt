@@ -9,7 +9,11 @@ set(FILES
     ship.cpp
     coordinates.cpp
     cargo.cpp
-    store.cpp)
+    store.cpp
+    alcohol.cpp
+    item.cpp 
+    fruit.cpp 
+    )
 
 set(FLAGS 
     -Wall 
