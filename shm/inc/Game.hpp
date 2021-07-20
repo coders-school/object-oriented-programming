@@ -45,7 +45,11 @@ private:
     void printResponse(const Store::Response& response,
                        const std::string& message);
     void setUserCargo(std::string& cargoName, size_t& cargoAmount);
-    void setUserDestination(size_t& islandNo, size_t islandMax);
+    Island* generateDestinationIsland();
+    void setUserDestination();
+    void countingCurrentDay(size_t travelTime);
+    size_t getTravelDistance(Island* destinationIsland);
+    void generatingTravelInfo();
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;
@@ -76,4 +80,11 @@ private:
     bool isNumberLowerThanZero(const int crew);
   
     MenuOption menuOption_ { MenuOption::NoChoice };
+    Island* destinationIsland { nullptr };
+    size_t travelCoordX_ {};
+    size_t travelCoordY_ {};
+    size_t islandMax_ {};
+    size_t islandNo_ {};
+    size_t playerSpeed{};
+    size_t travelTime{};
 };
