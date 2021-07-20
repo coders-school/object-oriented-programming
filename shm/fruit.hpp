@@ -3,9 +3,11 @@
 
 // Class responsible for fruit representing in game
 
-class Fruit : public Cargo {
+class Fruit : public Cargo
+{
 public:
-    Fruit(size_t amount, const std::string& name, size_t base_price, size_t expiry_date, size_t time_elapsed);
+    Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed)
+        : Cargo(name, amount, basePrice), expiry_date_(expiry_date), time_elapsed_(time_elapsed) {}
     ~Fruit() override;
 
     // override from Cargo
@@ -14,9 +16,9 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
 
-    virtual Cargo& operator--();
-    Cargo& operator+=(size_t amount) override;
-    Cargo& operator-=(size_t amount) override;
+    virtual Cargo &operator--();
+    Cargo &operator+=(size_t amount) override;
+    Cargo &operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;
 
     size_t getTimeElapsed() const { return time_elapsed_; }

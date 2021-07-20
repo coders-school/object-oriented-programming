@@ -7,12 +7,12 @@ class Cargo
 public:
     virtual Cargo &operator+=(size_t amount);
     virtual Cargo &operator-=(size_t amount);
-    virtual bool operator==(const Cargo &cargo) const = 0;
+    virtual bool operator==(const Cargo &cargo) const;
 
     virtual size_t getPrice() const = 0;
-    virtual const std::string &getName() const = 0; // TO DO: test deleting Cargo object
-    virtual size_t getAmount() const = 0;
-    virtual size_t getBasePrice() const = 0;
+    virtual const std::string &getName() const { return name_; } // TO DO: test deleting Cargo object
+    virtual size_t getAmount() const { return amount_; }
+    virtual size_t getBasePrice() const { return basePrice_; }
 
     void printCargo() const;
 
