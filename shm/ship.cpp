@@ -35,7 +35,7 @@ void Ship::load(std::shared_ptr<Cargo> cargo_ptr) {
 }
 
 void Ship::setOwner(Player* newOwner) {
-    owner_ = newOwner;
+        owner_ = newOwner;
 }
 
 void Ship::setCrew(size_t newCrew) {
@@ -43,6 +43,7 @@ void Ship::setCrew(size_t newCrew) {
 }
 
 void Ship::nextDay() {
+    std::cout << "PAYDAY" << '\n';
     size_t moneyForCrew = crew_;
     if (owner_) {
         owner_->SpendMoney(moneyForCrew);
