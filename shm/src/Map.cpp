@@ -44,9 +44,9 @@ Island* Map::getIsland(const Island::Coordinates& coordinates) {
 void Map::countRecordsInFile(size_t &counter) {
     std::string line;
     std::fstream file;
-    file.open("../settings/items.txt", std::ios::in);
+    file.open("settings/items.txt", std::ios::in);
     if (file.fail()) {
-        std::cout << "File not exist\n";
+        std::cout << "File not exist map\n";
     }
     while (getline(file, line)) {
         counter++;
