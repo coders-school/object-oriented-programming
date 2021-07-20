@@ -131,9 +131,9 @@ Item::Rarity Store::rarityConversion(size_t numberForConversion) {
 void Store::generateAllCargo() {
     std::string line;
     std::fstream file;
-    file.open("../settings/items.txt", std::ios::in);
+    file.open("settings/items.txt", std::ios::in);
     if (file.fail()) {
-        std::cout << "File not exist\n";
+        std::cout << "File not exist store\n";
     }
     while (getline(file, line)) {
         convertDataFromFile(line);
@@ -142,15 +142,16 @@ void Store::generateAllCargo() {
 }
 
 void Store::convertDataFromFile(std::string lineFromFile) {
-    std::string singleWordFromFile;
+    std::string singleWordFromFile{};
     size_t wordNumber{};
-    for (size_t i = 0; i < lineFromFile.size(); i++) {
-        if (lineFromFile[i] != ' ') {
+    for (size_t i = 0; i <= lineFromFile.size(); i++) {
+        if (lineFromFile[i] != ' ' && i < lineFromFile.size()) {
             singleWordFromFile += lineFromFile[i];
         } else {
             wordNumber++;
             valueOneLineAssignment(wordNumber, singleWordFromFile);
-            singleWordFromFile = "";
+            singleWordFromFile = {};
+            std::cout << "\n";
         }
     }
     generateSingleCargo();
