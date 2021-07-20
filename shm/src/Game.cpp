@@ -24,6 +24,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     map_ = std::make_shared<Map>();
     player_ = std::make_unique<Player>(std::make_unique<Ship>(1, 25, 100, nullptr),
                                        map_, 100, 10000);
+    islandMax_  = map_->getIslands().size();
 }
 
 void Game::startGame() {
@@ -104,9 +105,9 @@ void Game::printHeader() {
 }
 
 void Game::printMap() {
-    size_t islandNo{};
+    size_t islandNo_ {};
     for (const auto& island : map_->getIslands()) {
-        std::cout << "Island no " << ++islandNo 
+        std::cout << "Island no " << ++islandNo_  
                   << " ---- Coordinates [" << island.getCoordinates().getPositionX() 
                   << "][" << island.getCoordinates().getPositionY() << "]\n";
     }
@@ -189,42 +190,55 @@ Game::MenuOption Game::exitGame() {
 }
 
 void Game::travel() {
-    printMap();
-    auto islandMax = map_->getIslands().size();
-    std::cout << "You are at island ("
-              << player_->getCurrentPosition()->getCoordinates().getPositionX() << ", "
-              << player_->getCurrentPosition()->getCoordinates().getPositionY() << ")\n";
-    size_t islandNo;
-    setUserDestination(islandNo, islandMax);
-    size_t coordX{map_->getIslands()[islandNo - 1].getCoordinates().getPositionX()};
-    size_t coordY{map_->getIslands()[islandNo - 1].getCoordinates().getPositionY()};
-    Island* destinationIsland{ map_->getIsland(Island::Coordinates(coordX, coordY)) };
-    if (destinationIsland) {
-        const size_t distance{
-            Island::Coordinates::distance(player_->getCurrentPosition()->getCoordinates(),
-                                          destinationIsland->getCoordinates())
-        };
-        const size_t playerSpeed = player_->getSpeed();
-        const size_t travelTime = (distance * DISTANCE_MULTIPLIER) / playerSpeed;
-        std::cout << "You covered the distance of " << distance 
-                  << " at speed " << playerSpeed << ".\n";
-        player_->setCurrentPosition(destinationIsland);
-        std::cout << "Island no " << islandNo 
-                  << " at coordinates (" << coordX << ", " << coordY 
-                  << ") reached in " << travelTime << " days.\n";
+    do {
+        printMap();
+        std::cout << "You are at island ("
+                << player_->getCurrentPosition()->getCoordinates().getPositionX() << ", "
+                << player_->getCurrentPosition()->getCoordinates().getPositionY() << ")\n";
+        setUserDestination();
+        destinationIsland = generateDestinationIsland();
+        if (destinationIsland) {
+            playerSpeed = player_->getSpeed();
+            travelTime = (getTravelDistance(destinationIsland)* DISTANCE_MULTIPLIER) / playerSpeed;
+            generatingTravelInfo();
+        }
+    } while (checkAnswer("Do you accept this journey") != CheckAnswer::Yes);
+    player_->setCurrentPosition(destinationIsland);
+    countingCurrentDay(travelTime);
+}
+
+void Game::generatingTravelInfo() {
+    std::cout << "You covered the distance of " << getTravelDistance(destinationIsland)
+                << " at speed " << playerSpeed << ".\n";
+    std::cout << "Island no " << islandNo_  
+                << " at coordinates (" << travelCoordX_ << ", " << travelCoordY_ 
+                << ") reached in " << travelTime << " days.\n";
+}
+
+size_t Game::getTravelDistance(Island* destinationIsland) {
+    return Island::Coordinates::distance(player_->getCurrentPosition()->getCoordinates(),
+                                          destinationIsland->getCoordinates());
+}
+
+void Game::countingCurrentDay(size_t travelTime) {
         for (size_t i = 0; i < travelTime; i++) {
             ++(*time_);
         }
         currentDay_ = time_->getElapsedTime();
-    }
 }
 
-void Game::setUserDestination(size_t& islandNo, size_t islandMax) {
+Island* Game::generateDestinationIsland() {
+    travelCoordX_ = map_->getIslands()[islandNo_  - 1].getCoordinates().getPositionX();
+    travelCoordY_ = map_->getIslands()[islandNo_  - 1].getCoordinates().getPositionY();
+    return map_->getIsland(Island::Coordinates(travelCoordX_, travelCoordY_));
+}
+
+void Game::setUserDestination() {
     do {   
         std::cin.clear();
         std::cout << "Which island are you travelling to?" << std::endl;
-        std::cin >> islandNo;
-        if (islandNo > islandMax || islandNo < 1) {
+        std::cin >> islandNo_ ;
+        if (islandNo_  > islandMax_ || islandNo_  < 1) {
             std::cout << "No such island!" << std::endl;
             continue;
         }
