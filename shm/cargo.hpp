@@ -22,4 +22,5 @@ public:
     size_t getAmount() const { return amount_; }
     size_t getPrice() const { return basePrice_; }
     size_t addAmount(size_t);
+    size_t dellAmount(size_t);
 };

@@ -1,9 +1,8 @@
-#include <memory>
 #include <algorithm>
 #include <iterator>
+#include <memory>
 #include "ship.hpp"
 #include "cargo.hpp"
-
 
 Ship::Ship()
     : id_(-1), crew_(0), capacity_(0), maxCrew_(0), speed_(0), name_(""), cargo_({}) {}
@@ -41,12 +40,21 @@ Ship& Ship::operator+=(size_t num) {
     return *this;
 }
 
-void Ship::addAmounntToShipCargo( std::shared_ptr<Cargo> cargo, size_t amount) {
+void Ship::addAmounntToShipCargo(std::shared_ptr<Cargo> cargo, size_t amount) {
     auto VecOfcargos = getCargo();
-    for(auto it = VecOfcargos.begin(); it < VecOfcargos.end(); ++it) {
+    for (auto it = VecOfcargos.begin(); it < VecOfcargos.end(); ++it) {
         if ((*it)->getName() == cargo->getName()) {
-            (*it)->addAmount(amount);
+            if (capacity_ >= (getAmountOfCargosCapacity() + amount)) {
+                (*it)->addAmount(amount);
+            }
         }
     }
 }
-
+void Ship::dellAmounntFromShipCargo( std::shared_ptr<Cargo> cargo, size_t amount ) {
+    auto VecOfcargos = getCargo();
+    for (auto it = VecOfcargos.begin(); it < VecOfcargos.end(); ++it) {
+        if ((*it)->getName() == cargo->getName()) {
+            (*it)->dellAmount(amount);
+        }
+    }
+}

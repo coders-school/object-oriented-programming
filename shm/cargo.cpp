@@ -27,3 +27,12 @@ bool Cargo::operator==(Cargo& cargo) {
 size_t Cargo::addAmount(size_t addedAmount) {
      amount_ += addedAmount;
  }
+ size_t Cargo::dellAmount(size_t deletedAmount) {
+    if(amount_ <= deletedAmount) {
+        amount_ = 0;
+    }
+    else {
+        amount_ -= deletedAmount;
+    }
+    
+ }
