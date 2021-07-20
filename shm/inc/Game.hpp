@@ -47,6 +47,7 @@ private:
     void setUserCargo(std::string& cargoName, size_t& cargoAmount);
     Island* generateDestinationIsland();
     void setUserDestination();
+    void countingCurrentDay(size_t travelTime);
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;

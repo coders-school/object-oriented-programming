@@ -203,11 +203,15 @@ void Game::travel() {
         std::cout << "Island no " << islandNo 
                   << " at coordinates (" << travelCoordX_ << ", " << travelCoordY_ 
                   << ") reached in " << travelTime << " days.\n";
+        countingCurrentDay(travelTime);
+    }
+}
+
+void Game::countingCurrentDay(size_t travelTime) {
         for (size_t i = 0; i < travelTime; i++) {
             ++(*time_);
         }
         currentDay_ = time_->getElapsedTime();
-    }
 }
 
 Island* Game::generateDestinationIsland() {
