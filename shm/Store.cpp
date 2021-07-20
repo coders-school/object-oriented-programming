@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Time.hpp"
 
-Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+Response Store::buy(const Cargo* const cargo, size_t amount, Player* player) {
     if (!cargo or !player or !amount) {
         return Response::lack_of_cargo;
     }
@@ -53,7 +53,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     return Response::done;
 }
 
-Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
+Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
     if (!cargo or !amount) {
         return Response::lack_of_cargo;
     }

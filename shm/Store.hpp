@@ -19,9 +19,9 @@ public:
     virtual ~Store() = default;
 
     //store buy from player
-    Response buy(Cargo* cargo, size_t amount, Player* player);
+    Response buy(const Cargo* const cargo, size_t amount, Player* player);
     //store sell to player
-    Response sell(Cargo* cargo, size_t amount, Player* player);
+    Response sell(const Cargo* const cargo, size_t amount, Player* player);
 
     void nextDay() override;
 

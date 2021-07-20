@@ -41,104 +41,221 @@ std::unique_ptr<Cargo> generateCargo() {
     return ptr;  // RVO
 }
 
+void printResponse(Response response) {
+    std::array text{
+        std::string("done"),
+        std::string("lack_of_money"),
+        std::string("lack_of_cargo"),
+        std::string("lack_of_space")};
+    std::cout << "Response: " << text[static_cast<size_t>(response)] << "\n";
+}
+
+void printPlayerStatus(const Player& player) {
+    std::cout << "Player money: " << player.getMoney() << "\t\tTarget money: " << final_goal << '\n';
+}
+
+void printMenu(std::vector<std::unique_ptr<Command>>& commands) {
+    std::cout << "\n\nMENU -------\n";
+    int index = 0;
+    for (const auto& command : commands) {
+        std::cout << index << " - " << command->getName() << '\n';
+        ++index;
+    }
+    std::cout << index << " - Exit\n";
+}
+
+void printStoreCargoList(const Store& store) {
+    printf("\033[31m");
+    std::cout << "STORE LIST -------\n";
+    for (size_t i = 0; i < store.cargoVec_.size(); ++i) {
+        std::cout << i << "\t"                                              //
+                  << "Name: " << store.cargoVec_[i]->getName() << "\t\t"    //
+                  << "Amount: " << store.cargoVec_[i]->getAmount() << "\t"  //
+                  << "Price: " << store.cargoVec_[i]->getPrice() << "\n";   //
+    }
+    printf("\033[0m\n");
+}
+
+void printShipCargoList(const Player& player) {
+    printf("\033[33;44m");
+    std::cout << "SHIP LIST -------\n";
+    for (size_t i = 0; i < player.getShip()->getCargoVec().size(); ++i) {
+        std::cout << i << "\t"                                                              //
+                  << "Name: " << player.getShip()->getCargoVec()[i]->getName() << "\t\t"    //
+                  << "Amount: " << player.getShip()->getCargoVec()[i]->getAmount() << "\t"  //
+                  << "Price: " << player.getShip()->getCargoVec()[i]->getPrice() << "\n";   //
+    }
+    printf("\033[0m\n");
+}
+
+//universal function to get value in range from user
+size_t ChoseOption(size_t limit) {
+    size_t result = 0;
+    std::string input;
+    std::cout << "Chose between [0," << (limit - 1) << "], or " << limit << " to abort:\n";
+
+    do {
+        std::cin >> input;
+        result = atoi(input.c_str());
+    } while (result > limit);
+
+    return static_cast<size_t>(result);
+}
+
+const Cargo* ChoseCargoFromStore(size_t chose, Store& store) {
+    auto limit = store.cargoVec_.size();
+    if (chose == limit) {
+        return nullptr;
+    }
+    return store.cargoVec_[chose].get();
+}
+
+const Cargo* ChoseCargoFromShip(size_t chose, Player& player) {
+    auto limit = player.getShip()->getCargoVec().size();
+    if (chose == limit) {
+        return nullptr;
+    }
+    return player.getShip()->getCargoVec()[chose].get();
+}
+
+class Menu : public Command {
+public:
+    Menu() = default;
+    void operator()(Player& player, Store& store) override {
+        printStoreCargoList(store);
+        printShipCargoList(player);
+    }
+
+    std::string getName() const override { return "Show menu"; }
+};
+
+class Trade : public Command {
+public:
+    Trade() = default;
+    void operator()([[maybe_unused]]Player& player, [[maybe_unused]]Store& store) override {
+    }
+
+    std::string getName() const override { return "Go to store"; }
+};
+
+class TradeBuy : public Command {
+public:
+    TradeBuy() = default;
+    void operator()(Player& player, Store& store) override {
+        while (true) {
+            size_t limit = 0;
+
+            printStoreCargoList(store);
+            printPlayerStatus(player);
+
+            std::cout << "Which Cargo want to Buy from store?\n";
+            limit = store.cargoVec_.size();
+            auto chose = ChoseOption(limit);
+            if (chose >= limit) {
+                return;
+            }
+            const Cargo* const cargo = ChoseCargoFromStore(chose, store);
+
+            std::cout << "Amount:\n";
+            limit = player.getMoney() / cargo->getPrice();
+            limit = std::min(limit, cargo->getAmount()) + 1;
+            size_t amount = ChoseOption(limit);
+            if (amount >= limit) {
+                return;
+            }
+            
+            Response response = store.sell(cargo, amount, &player);
+            printResponse(response);
+        }
+    }
+
+    std::string getName() const override { return "Buy"; }
+};
+
+class TradeSell : public Command {
+public:
+    TradeSell() = default;
+    void operator()(Player& player, Store& store) override {
+        while (true) {
+            size_t limit = 0;
+            printShipCargoList(player);
+            printPlayerStatus(player);
+
+            std::cout << "Which Cargo want to sell to store?\n";
+            limit = player.getShip()->getCargoVec().size();
+            auto chose = ChoseOption(limit);
+            if (chose >= limit) {
+                break;
+            }
+            const Cargo* const cargo = ChoseCargoFromShip(chose, player);
+
+            std::cout << "Amount:\n";
+            limit = player.getMoney() / cargo->getPrice();
+            limit = std::min(limit, cargo->getAmount()) + 1;
+            size_t amount = ChoseOption(limit);
+            if (amount >= limit) {
+                break;
+            }
+
+            Response response = store.buy(cargo, amount, &player);
+            printResponse(response);
+        }
+    }
+
+    std::string getName() const override { return "Sell"; }
+};
+
+class NextDay : public Command {
+public:
+    NextDay() = default;
+    void operator()([[maybe_unused]] Player& player, [[maybe_unused]] Store& store) override {
+        Time::getInstance()->nextDay();
+    }
+
+    std::string getName() const override { return "Next day"; }
+};
+
+class Travel : public Command {
+public:
+    Travel() = default;
+    void operator()([[maybe_unused]] Player& player, [[maybe_unused]] Store& store) override {
+        for (size_t day = 1; day <= distance; ++day) {
+            nextDay(player, store);
+            std::cout << "Day " << day << " on travel\n";
+        }
+    }
+
+    std::string getName() const override { return "Travel"; }
+
+private:
+    NextDay nextDay;
+    size_t distance = 5;//for show concept
+};
+
 void Game::startGame() {
     init();
-    auto time = Time::getInstance();
+    //auto time = Time::getInstance();
 
-    char letter;
+    unsigned char letter;
     while (!endGame and !playerWin) {
-        printPlayerStatus();
-        printMenu();
+        printStoreCargoList(store);
+        printShipCargoList(player);
+
+        printPlayerStatus(player);
+
+        printMenu(commands);
         std::cin >> letter;
-        std::cin.clear();
+        //std::cin.clear();
 
-        switch (letter) {
-        case '0':
-            ShowOption();
-            break;
-        case '1':  //buy
-            BuyOption();
-            break;
-        case '2':  //sell
-            SellOption();
-            break;
-        case '3':  //next day
-            time->update();
-            break;
-        case '4':  //end game
+        size_t optionId = static_cast<size_t>(letter - '0');
+        if (optionId < commands.size()) {
+            Command& command = *commands[optionId];
+            command(player, store);
+        } else if (optionId == commands.size()) {
             endGame = true;
-            break;
-        default:
-            break;
         }
 
-        playerWin = player.getMoney() == goal_;
-    }
-}
-
-void Game::ShowOption() {
-    printStoreCargoList();
-    printShipCargoList();
-}
-
-void Game::BuyOption() {
-    Cargo* cargo = nullptr;
-    size_t amount = 0;
-    size_t limit = 0;
-    Response response;
-
-    while (true) {
-        cargo = nullptr;
-        amount = 0;
-        limit = 0;
-
-        printStoreCargoList();
-        printPlayerStatus();
-
-        std::cout << "Which Cargo want to Buy from store?\n";
-        limit = store.cargoVec_.size();
-        auto chose = ChoseOption(limit);
-        if (amount >= limit) {
-            break;
-        }
-        cargo = ChoseCargoFromStore(chose);
-        std::cout << "Amount:\n";
-        limit = player.getMoney() / cargo->getPrice();
-        limit = std::min(limit, cargo->getAmount()) + 1;
-        amount = ChoseOption(limit);
-        if (amount >= limit) {
-            break;
-        }
-        response = store.sell(cargo, amount, &player);
-        printResponse(response);
-    }
-}
-
-void Game::SellOption() {
-    Cargo* cargo = nullptr;
-    size_t amount = 0;
-    size_t limit = 0;
-    Response response;
-
-    while (true) {
-        printShipCargoList();
-        printPlayerStatus();
-        std::cout << "Which Cargo want to sell to store?\n";
-        limit = player.getShip()->getCargoVec().size();
-        auto chose = ChoseOption(limit);
-        if (chose >= limit) {
-            break;
-        }
-        cargo = ChoseCargoFromShip(chose);
-        std::cout << "Amount:\n";
-        limit = player.getMoney() / cargo->getPrice();
-        limit = std::min(limit, cargo->getAmount()) + 1;
-        amount = ChoseOption(limit);
-        if (amount >= limit) {
-            break;
-        }
-        response = store.buy(cargo, amount, &player);
-        printResponse(response);
+        playerWin = player.getMoney() >= goal_;
     }
 }
 
@@ -154,79 +271,9 @@ void Game::init() {
         std::cout << cargo->getName() << '\n';
         store.load(std::move(cargo));
     }
-}
 
-void Game::printResponse(Response response) const {
-    std::array text{
-        std::string("done"),
-        std::string("lack_of_money"),
-        std::string("lack_of_cargo"),
-        std::string("lack_of_space")};
-    std::cout << "Response: " << text[static_cast<size_t>(response)] << "\n";
-}
-
-void Game::printPlayerStatus() const {
-    std::cout << "Player money: " << player.getMoney() << "\t\tTarget money: " << goal_ << '\n';
-}
-
-void Game::printMenu() const {
-    std::cout << "\n\nSTORE LIST -------\n";
-    std::cout << "0 - show store and ship cargo\n";
-    std::cout << "1 - buy\n";
-    std::cout << "2 - sell\n";
-    std::cout << "3 - next day\n";
-    std::cout << "4 - end game\n";
-}
-
-void Game::printStoreCargoList() const {
-    printf("\033[31m");
-    std::cout << "STORE LIST -------\n";
-    for (size_t i = 0; i < store.cargoVec_.size(); ++i) {
-        std::cout << i << "\t"                                              //
-                  << "Name: " << store.cargoVec_[i]->getName() << "\t\t"    //
-                  << "Amount: " << store.cargoVec_[i]->getAmount() << "\t"  //
-                  << "Price: " << store.cargoVec_[i]->getPrice() << "\n";   //
-    }
-    printf("\033[0m\n");
-}
-
-void Game::printShipCargoList() const {
-    printf("\033[33;44m");
-    std::cout << "SHIP LIST -------\n";
-    for (size_t i = 0; i < player.getShip()->getCargoVec().size(); ++i) {
-        std::cout << i << "\t"                                                              //
-                  << "Name: " << player.getShip()->getCargoVec()[i]->getName() << "\t\t"    //
-                  << "Amount: " << player.getShip()->getCargoVec()[i]->getAmount() << "\t"  //
-                  << "Price: " << player.getShip()->getCargoVec()[i]->getPrice() << "\n";   //
-    }
-    printf("\033[0m\n");
-}
-
-size_t Game::ChoseOption(size_t limit) const {
-    size_t result = 0;
-    std::string input;
-    std::cout << "Chose between [0," << (limit - 1) << "], or " << limit << " to abort:\n";
-
-    do {
-        std::cin >> input;
-        result = atoi(input.c_str());
-    } while (result > limit);
-
-    return static_cast<size_t>(result);
-}
-
-Cargo* Game::ChoseCargoFromStore(size_t chose) {
-    auto limit = store.cargoVec_.size();
-    if (chose == limit) {
-        return nullptr;
-    }
-    return store.cargoVec_[chose].get();
-}
-
-Cargo* Game::ChoseCargoFromShip(size_t chose) {
-    auto limit = player.getShip()->getCargoVec().size();
-    if (chose == limit) {
-        return nullptr;
-    }
-    return player.getShip()->getCargoVec()[chose].get();
+    commands.push_back(std::make_unique<Menu>());
+    commands.push_back(std::make_unique<TradeBuy>());
+    commands.push_back(std::make_unique<TradeSell>());
+    commands.push_back(std::make_unique<NextDay>());
 }

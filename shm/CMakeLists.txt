@@ -26,7 +26,7 @@ add_executable(${PROJECT_NAME} main.cpp)
 add_executable(${PROJECT_NAME}-ut Tests/Tests.cpp)
 
 target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
-target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS} -O3)
+target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME}-ut PRIVATE ${FLAGS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
