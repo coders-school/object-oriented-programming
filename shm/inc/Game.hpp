@@ -45,9 +45,7 @@ private:
     void printResponse(const Store::Response& response,
                        const std::string& message);
     void setUserCargo(std::string& cargoName, size_t& cargoAmount);
-    Island* generateDestinationIsland();
-    void setUserDestination();
-    void countingCurrentDay(size_t travelTime);
+    void setUserDestination(size_t& islandNo, size_t islandMax);
     size_t money_;
     size_t gameDays_;
     const size_t finalGoal_;
@@ -75,8 +73,4 @@ private:
     bool isCrewNumber(const size_t & crew);
     bool hasPlayerEnoughMoney(const size_t & crew);
     MenuOption menuOption_ { MenuOption::NoChoice };
-    size_t travelCoordX_ {};
-    size_t travelCoordY_ {};
-    size_t islandMax {};
-    size_t islandNo {};
 };
