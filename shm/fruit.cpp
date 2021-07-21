@@ -1,6 +1,10 @@
 #include <iostream>
 #include "fruit.hpp"
 
+ Fruit::Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed)
+        : Cargo(name, amount, basePrice), expiry_date_(expiry_date), time_elapsed_(time_elapsed) {}
+Fruit::~Fruit(){}
+
 size_t Fruit::getPrice() const
 {
     if (time_elapsed_ >= expiry_date_)

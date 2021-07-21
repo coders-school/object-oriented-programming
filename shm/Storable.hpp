@@ -10,7 +10,8 @@ public:
         : money_(money)
         , availableSpace_(availableSpace)
         {}
-    ~Storable(){}
+    virtual ~Storable(){}
+
     int getMoney() {return money_; }
     size_t getAvailableSpace() {return availableSpace_; }
     virtual std::shared_ptr<Cargo> getCargo(size_t index) const = 0;
