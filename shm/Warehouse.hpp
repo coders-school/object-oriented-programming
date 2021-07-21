@@ -14,6 +14,10 @@ public:
 
     const CargoVec& getCargoVec() const;
 
+    virtual void clear(){
+        cargoVec_.clear();
+    }
+
     virtual void load(std::unique_ptr<Cargo>);
     virtual void unload(const Cargo*);
 

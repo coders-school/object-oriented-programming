@@ -57,4 +57,15 @@ const Ship::CargoVec& Ship::getCargoVec() const {
 
 void Ship::nextDay() {
     std::cout << "Next Day in Ship " << name_ << '\n';
+    std::cout << "Crew income: " << crew_ << '\n';
+    if(debt){
+        auto result = debt(crew_);
+        if(!result){
+            std::cout << "Ship strike again.\n";
+        }
+    }
+}
+
+void Ship::setDebt(std::function<bool(size_t)> payFunction){
+    debt = payFunction;//PLAYER::pay
 }

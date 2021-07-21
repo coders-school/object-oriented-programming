@@ -33,12 +33,15 @@ public:
     const CargoVec& getCargoVec() const;
 
     void nextDay() override;
+    void setDebt(std::function<bool(size_t)> payFunction);
 
 private:
     size_t capacity_ = 0;
-    size_t maxCrew_ = 0;
-    size_t crew_ = 0;
+    size_t maxCrew_ = 10;
+    size_t crew_ = 10;
     size_t speed_ = 0;
     std::string name_;
     const size_t id_ = -1;
+
+    std::function<bool(size_t)> debt{};
 };

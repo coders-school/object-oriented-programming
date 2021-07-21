@@ -14,6 +14,8 @@ public:
 
     size_t getPrice() const override;
 
+    void nextDay() override;
+
     static constexpr std::string_view suffix = " (Fruit)";
 
 protected:

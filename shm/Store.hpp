@@ -33,12 +33,14 @@ public:
     void load(std::unique_ptr<Cargo> cargo) override;
     void unload(const Cargo* const cargo) override;
 
+    std::function<void()> changeAssortment;
+
     friend std::ostream& operator<<(std::ostream&, const Store&);
     //find comperable cargo in store
     Cargo* findCargoInStore(const Cargo* const exampleCargo) const;
 
     //private:
-    StoreCargoVec cargoVec_{};
+    //StoreCargoVec cargoVec_{};
 };
 
 std::ostream& operator<<(std::ostream& out, const Store& store);

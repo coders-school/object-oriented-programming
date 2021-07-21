@@ -73,6 +73,4 @@ std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
     return createAmountOfEqual(amountPart);
 }
 
-void Cargo::nextDay() {
-    std::cout << "Next Day in Cargo " << name_ << '\n';
-}
+void Cargo::nextDay() {}

@@ -245,8 +245,8 @@ TEST_CASE("player sell full of single cargo to empty store", "[Player][Ship][Sto
     }
 
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
-    for (const auto& cargo : store.cargoVec_) {
+    printCargo(store.getCargoVec());
+    for (const auto& cargo : store.getCargoVec()) {
         REQUIRE(cargo->getAmount() == fullQuantity);
         REQUIRE(*cargo == *cargoExample);
     }
@@ -271,8 +271,8 @@ TEST_CASE("player sell full of all cargo to empty store", "[Player][Ship][Store]
     REQUIRE(store.getCargoNum() == fullCappacity);
 
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
-    for (const auto& cargo : store.cargoVec_) {
+    printCargo(store.getCargoVec());
+    for (const auto& cargo : store.getCargoVec()) {
         REQUIRE(cargo->getAmount() == fullQuantity);
     }
 }
@@ -322,7 +322,7 @@ TEST_CASE("rich player with empty ship buy more of single cargo than store have"
     std::cout << "\nShip Cargo: \n";
     printCargo(player.getShip()->getCargoVec());
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
+    printCargo(store.getCargoVec());
 
     REQUIRE(response == Response::lack_of_cargo);
 }
@@ -339,7 +339,7 @@ TEST_CASE("rich player with empty ship buy half of single cargo than store have"
     std::cout << "\nShip Cargo: \n";
     printCargo(player.getShip()->getCargoVec());
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
+    printCargo(store.getCargoVec());
 
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == fullCappacity - 1);
@@ -358,7 +358,7 @@ TEST_CASE("rich player with empty ship buy full of single cargo from empty store
     std::cout << "\nShip Cargo: \n";
     printCargo(player.getShip()->getCargoVec());
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
+    printCargo(store.getCargoVec());
 
     REQUIRE(response == Response::done);
     REQUIRE(player.getAvailableSpace() == fullCappacity - 1);
@@ -383,7 +383,7 @@ TEST_CASE("rich player with empty ship with enough capacity buy full of all carg
     std::cout << "\nShip Cargo: \n";
     printCargo(player.getShip()->getCargoVec());
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
+    printCargo(store.getCargoVec());
 
     REQUIRE(player.getAvailableSpace() == 0);
     REQUIRE(store.getCargoNum() == 0);
@@ -407,7 +407,7 @@ TEST_CASE("rich player with empty ship with enough capacity buy half of all carg
     std::cout << "\nShip Cargo: \n";
     printCargo(player.getShip()->getCargoVec());
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
+    printCargo(store.getCargoVec());
 
     REQUIRE(player.getAvailableSpace() == 0);
     REQUIRE(store.getCargoNum() == fullCappacity);
@@ -434,10 +434,10 @@ TEST_CASE("rich player with empty ship with enough capacity buy random of all ca
     std::cout << "\nShip Cargo: \n";
     printCargo(player.getShip()->getCargoVec());
     std::cout << "Store Cargo: \n";
-    printCargo(store.cargoVec_);
+    printCargo(store.getCargoVec());
 
     const auto& shipCargo = player.getShip()->getCargoVec();
-    const auto& storeCargo = store.cargoVec_;
+    const auto& storeCargo = store.getCargoVec();
     REQUIRE(shipCargo.size() == storeCargo.size());
     for (size_t i = 0; i < cargoTypes; ++i) {
         REQUIRE(storeCargo[i]->getAmount() == fullQuantity - randomQuantity[i]);

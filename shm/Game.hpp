@@ -4,6 +4,8 @@
 #include "Map.hpp"
 #include "Player.hpp"
 #include "Store.hpp"
+#include "Fruit.hpp"
+#include "DryFruit.hpp"
 
 #include <array>
 #include <cmath>
@@ -25,6 +27,18 @@ public:
 
     void startGame();
     void init();
+
+    constexpr static size_t startingPlayerCargoNumber = 5;
+    constexpr static size_t storeCargoNumber = 5;
+
+    void fillCargo(Warehouse &holder, size_t number){
+        holder.clear();
+        for (size_t i = 0; i < number; ++i) {
+            auto cargo = generateCargo();
+            std::cout << cargo->getName() << '\n';
+            holder.load(std::move(cargo));
+        }
+    }
 
 private:
     size_t startMoney_;

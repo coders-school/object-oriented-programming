@@ -111,7 +111,8 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
 }
 
 void Store::nextDay() {
-    std::cout << "Next Day in Store\n";
+    changeAssortment();
+    std::cout << "Store change asortment.";
 }
 
 //load will take ownership of cargo
