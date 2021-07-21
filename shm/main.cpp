@@ -100,10 +100,10 @@ int main()
     // std::cout << "Prit store cargo" << '\n';
     // store.printStoreCargo();
     */
-   
-   Player Tester();
+   auto StatekTester = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
+   Player Tester(std::move(StatekTester),20,100);
    Store sklep(20, 100);
-   std::cout << sklep.getAvailableSpace();
-   sklep.buy();
+   std::cout << sklep.getAvailableSpace() << '\n';
+   sklep.printStoreCargo();
 
 }
