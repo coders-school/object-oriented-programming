@@ -39,7 +39,6 @@ public:
     void addCargo(Cargo* cargo, size_t amount);
 
     void setName(const std::string& name);
-    auto findCargoOnShip(Cargo* cargo);
     void load(Cargo* cargo, size_t amount);
     void unload(Cargo* cargo, size_t amount);
     void changeDelegate(Player* player);

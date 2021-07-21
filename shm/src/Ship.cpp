@@ -100,55 +100,27 @@ Cargo* Ship::getCargo(const std::string& name) const {
     return result != cargo_.end() ? result->get() : nullptr;
 }
 
-auto Ship::findCargoOnShip(Cargo* cargo) {
-    return std::find_if(begin(cargo_), end(cargo_),
-                        [&cargo](const auto& unique){
-                            return unique.get() == cargo;
-                        });
-}
-
 void Ship::load(Cargo* cargo, size_t amount) {
-    auto cargo_ship{ findCargoOnShip(cargo) };
-    auto cargo_store{ store_->findCargoInStore(cargo) };
-
-    if (cargo_store != store_->getCargoStorage().end()) {                           // cargo present in store?
-        if (amount >= (*cargo_store)->getAmount()) {                                // buy all cargo from store
-            if (cargo_ship != cargo_.end()) {                                       // cargo present on ship?
-                **cargo_ship += (*cargo_store)->getAmount();                        // increase amount on ship
-            } else {                                                                // no such cargo on ship
-                cargo_.push_back(std::move(*cargo_store));                          // transfer all cargo to ship
+    if (cargo) {
+        bool ifFindCargo = false;
+        for (auto & searchCargo : cargo_) {
+            if (searchCargo->getName() == cargo->getName()) {
+                searchCargo->setAmount(searchCargo->getAmount() + amount);
+                ifFindCargo = true;
             }
-            store_->removeCargo(cargo);                                             // delete cargo from store
-        } else {                                                                    // buy a few cargo from store
-            if (cargo_ship != cargo_.end()) {                                       // cargo present on ship?
-                **cargo_ship += amount;                                             // increase amount on ship
-            } else {                                                                // no such cargo on ship
-                addCargo(cargo, amount);                                            // create new cargo on ship
-            }
-            **cargo_store -= amount;                                                // decrease amount in store
+        }
+        if (ifFindCargo == false) {
+            addCargo(cargo, amount);
         }
     }
 }
 
 void Ship::unload(Cargo* cargo, size_t amount) {
-    auto cargo_ship{ findCargoOnShip(cargo) };
-    auto cargo_store{ store_->findCargoInStore(cargo) };
-
-    if (cargo_ship != cargo_.end()) {                                               // cargo present on ship?
-        if (amount >= (*cargo_ship)->getAmount()) {                                 // sell all cargo from ship
-            if (cargo_store != store_->getCargoStorage().end()) {                   // cargo present in store?
-                **cargo_store += (*cargo_ship)->getAmount();                        // increase amount in store
-            } else {                                                                // no such cargo in store
-                store_->getCargoStorage().push_back(std::move(*cargo_ship));        // transfer all cargo to store
+    if (cargo) {
+        for (auto & searchCargo : cargo_) {
+            if (searchCargo->getName() == cargo->getName()) {
+                searchCargo->setAmount(searchCargo->getAmount() - amount);
             }
-            cargo_.erase(cargo_ship);                                               // delete cargo from ship
-        } else {                                                                    // sell a few cargo from ship
-            if (cargo_store != store_->getCargoStorage().end()) {                   // cargo present in store?
-                **cargo_store += amount;                                            // increase amount in store
-            } else {                                                                // no such cargo in store
-                store_->addCargo(cargo, amount);                                    // create new cargo in store
-            }
-            **cargo_ship -= amount;                                                 // decrease amount on ship
         }
     }
 }
@@ -169,7 +141,7 @@ void Ship::changeDelegate(Player* player) {
 }
 
 void Ship::addCargo(Cargo* cargo, size_t amount) {
-    if (typeid(cargo) == typeid(Alcohol)) {
+    if (typeid(*cargo) == typeid(Alcohol)) {
         Alcohol* alcohol = static_cast<Alcohol*>(cargo);
         cargo_.push_back(std::make_unique<Alcohol>(alcohol->getName(),
                                                    amount,

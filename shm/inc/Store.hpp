@@ -32,6 +32,8 @@ public:
     Cargo* getCargo(const std::string& name) const;
     CargoStorage::iterator findCargoInStore(Cargo* cargo);
     CargoStorage& getCargoStorage() { return cargo_; };
+    void cargoFromShip(Cargo* cargo, size_t amount);
+    void cargoToShip(Cargo* cargo, size_t amount);
     void removeCargo(Cargo* cargo);
     void addCargo(Cargo* cargo, size_t amount);
 

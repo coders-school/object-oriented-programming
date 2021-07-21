@@ -32,15 +32,19 @@ std::ostream& operator<<(std::ostream& out, const Store& store){
 
 Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     if (!cargo) {
+        std::cout << "-----------------------  ERROR CARGO-------------------------------" << std::endl;
         return Response::lack_of_cargo;
     }
     if (amount * cargo->getPrice() > player->getMoney()){
+        std::cout << "-----------------------  ERROR money -------------------------------" << std::endl;
         return Response::lack_of_money;
     }
     if (cargo->getAmount() < amount) {
+        std::cout << "-----------------------  ERROR cargo 2 -------------------------------" << std::endl;
         return Response::lack_of_cargo;
     }
     if (player->getAvailableSpace() < amount) {
+        std::cout << "-----------------------  ERROR space-------------------------------" << std::endl;
         return Response::lack_of_space;
     }
     player->buy(cargo, amount);
@@ -56,6 +60,22 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     }
     player->sell(cargo, amount);
     return Response::done;
+}
+
+void Store::cargoFromShip(Cargo* cargo, size_t amount) {
+    for (auto & searchCargo : cargo_) {
+        if (searchCargo->getName() == cargo->getName()) {
+            searchCargo->setAmount(searchCargo->getAmount() + amount);
+        }
+    }
+}
+
+void Store::cargoToShip(Cargo* cargo, size_t amount) {
+    for (auto & searchCargo : cargo_) {
+        if (searchCargo->getName() == cargo->getName()) {
+            searchCargo->setAmount(searchCargo->getAmount() - amount);
+        }
+    }
 }
 
 Cargo* Store::getCargo(const std::string& name) const {
