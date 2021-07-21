@@ -1,15 +1,12 @@
-#include "player.hpp"
 #include <iostream>
 #include <memory>
+#include "player.hpp"
 #include "cargo.hpp"
 #include "ship.hpp"
 
 Player::Player(std::shared_ptr<Ship> ship, size_t money)
     : ship_(ship), money_(money) {}
 
-std::shared_ptr<Ship> Player::getShip() const {
-    return ship_;
-}
 
 size_t Player::getMoney() const {
     return money_;
@@ -17,8 +14,11 @@ size_t Player::getMoney() const {
 
 size_t Player::calculateAvSpace() {
     auto capacity = ship_->getCapacity();
-    auto cargo = ship_->getAmountOfCargosCapacity();
-    return capacity - cargo;
+    auto cargoAmount = ship_->getAmountOfCargosCapacity();
+    if (capacity <= cargoAmount) { 
+        return capacity; 
+    }
+    return capacity - cargoAmount;
 }
 
 size_t Player::getAvailableSpace() {
@@ -29,6 +29,8 @@ size_t Player::getSpeed() const {
     return ship_->getSpeed();
 }
 
+
+//don't get it what index should be returned 
 std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     std::shared_ptr<Cargo> cargoPtr;
     cargoPtr = ship_->getCargo().at(index);
