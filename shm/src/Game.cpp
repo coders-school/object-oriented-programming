@@ -258,9 +258,14 @@ void Game::buy() {
     auto currentStore{ player_->getCurrentPosition()->getStore() };
     do {
         setUserCargo(cargoName, cargoAmount);
-        Cargo* cargo{ currentStore->getCargo(cargoName) };
-        if (cargo) {
-            response = currentStore->buy(cargo, cargoAmount, player_.get());
+        
+        Cargo* cargo = currentStore->getCargo(cargoName);
+        
+        response = currentStore->buy(cargo, cargoAmount, player_.get());
+        if (response == Store::Response::done) {
+            
+            currentStore->cargoToShip(cargo, cargoAmount);
+            
             break;
         }
         std::cout << "No such cargo!" << std::endl;
@@ -275,12 +280,16 @@ void Game::sell() {
     std::string cargoName;
     size_t cargoAmount;
     Store::Response response;
-    auto currentStore{ player_->getCurrentPosition()->getStore() };
+    auto currentStore = player_->getCurrentPosition()->getStore();
     do {
         setUserCargo(cargoName, cargoAmount);
-        Cargo* cargo{ player_->getCargo(cargoName) };
-        if (cargo) {
-            response = currentStore->sell(cargo, cargoAmount, player_.get());
+        std::cout << "-----------------------  ERROR -------------------------------" << std::endl;
+        Cargo* cargo = player_->getCargo(cargoName);
+        response = currentStore->sell(cargo, cargoAmount, player_.get());
+        if (response == Store::Response::done) {
+            
+            currentStore->cargoFromShip(cargo, cargoAmount);
+            
             break;
         }
         std::cout << "No such cargo!" << std::endl;
