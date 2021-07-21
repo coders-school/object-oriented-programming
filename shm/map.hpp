@@ -1,8 +1,5 @@
 #pragma once
 #include <vector>
-#include <functional>
-#include <random>
-#include <memory>
 
 class Map {
 public:

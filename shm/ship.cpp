@@ -1,13 +1,10 @@
-
 #include <algorithm>
 #include <iostream>
 #include <memory>
-
 #include "cargo.hpp"
 #include "ship.hpp"
 
 // Class responsible for managing Ships in the game.
-
 Ship& Ship::operator-=(size_t num) {
     if (crew_ - num <= crew_) {
         crew_ -= num;
@@ -23,7 +20,6 @@ Ship& Ship::operator+=(size_t num) {
     } else {
         std::cerr << " The maximum amount of members of the crew is " << maxCrew_ << " !!!! \n";
     }
-
     return *this;
 }
 

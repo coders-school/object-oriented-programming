@@ -4,7 +4,6 @@
 #include <vector>
 #include "cargo.hpp"
 
-
 // Class responsible for managing Ship in the game.
 class Ship 
 {
