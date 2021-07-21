@@ -64,6 +64,12 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr
     return Response::done;
 }
 
+Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player) {
+
+    player ->setMoney(player->getMoney() + cargo->getPrice());
+    player->
+}
+
 
 
 constexpr int minAmount = 0;
