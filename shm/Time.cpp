@@ -35,7 +35,7 @@ bool Time::detach(Timeable* subscriber) {
 
 void Time::update() {
     // Walkaround for lack of proper game main loop
-    std::chrono::steady_clock::time_point start(std::chrono::steady_clock::now());
+    /*std::chrono::steady_clock::time_point start(std::chrono::steady_clock::now());
     size_t days{10};
     while (days > 0) {
         std::chrono::milliseconds sleepFor(1000);
@@ -48,7 +48,8 @@ void Time::update() {
             nextDay();
             --days;
         }
-    }
+    }*/
+    nextDay();
 }
 
 void Time::nextDay() {

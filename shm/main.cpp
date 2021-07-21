@@ -16,47 +16,7 @@
 #include "Fruit.hpp"
 #include "DryFruit.hpp"
 
-struct GoodsData {
-    constexpr GoodsData(const char* name)
-        : name(name) {}
-    constexpr GoodsData(const char* name, size_t value)
-        : name(name), value(value) {}
-
-    const char* name;
-    size_t value = 0;
-};
-
-// Return by value to give up ownership
-std::unique_ptr<Cargo> generateCargo() {
-    // https://portroyale3.fandom.com/wiki/Goods
-    constexpr std::array goods{
-        GoodsData{"Wood", 33},
-        GoodsData{"Adobe Bricks", 33},
-        GoodsData{"Wheat", 33},
-        GoodsData{"Fruits", 50},
-        GoodsData{"Corn", 50},
-        GoodsData{"Sugar", 50},
-        GoodsData{"Hemp", 50},
-        GoodsData{"Textiles", 150},
-        GoodsData{"Metal", 83},
-        GoodsData{"Cotton", 50},
-        GoodsData{"Metal Goods", 200},
-        GoodsData{"Dyes", 100},
-        GoodsData{"Coffee", 140},
-        GoodsData{"Cocao", 140},
-        GoodsData{"Tobacco", 100},
-        GoodsData{"Meat", 300},
-        GoodsData{"Clothing", 450},
-        GoodsData{"Ropes", 150},
-        GoodsData{"Rum", 267},
-        GoodsData{"Bread", 142},
-    };
-    auto randomCargo = rand() % goods.size();
-    auto randomAmount = rand() % 99 + 1;
-    auto good = goods[randomCargo];
-    auto ptr = std::make_unique<CargoDefault>(good.name, randomAmount, good.value);
-    return ptr;  // RVO
-}
+#include "Game.hpp"
 
 void testCargoShipPlayer() {
     Time* time = Time::getInstance();
@@ -144,11 +104,15 @@ void timePassTest() {
 
 int main() {
     srand(static_cast<unsigned int>(time(0)));
-    testCargoShipPlayer();
+    /*testCargoShipPlayer();
     testIslandMap();
     testGetIsland(),
     testDryFruit();
     testTime();
-    timePassTest();
+    timePassTest();*/
+
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
+
     return 0;
 }

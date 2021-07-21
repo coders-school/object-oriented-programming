@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Time.hpp"
 
-Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
+Response Store::buy(const Cargo* const cargo, size_t amount, Player* player) {
     if (!cargo or !player or !amount) {
         return Response::lack_of_cargo;
     }
@@ -53,7 +53,7 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     return Response::done;
 }
 
-Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
+Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
     if (!cargo or !amount) {
         return Response::lack_of_cargo;
     }
@@ -163,9 +163,9 @@ Cargo* Store::findCargoInStore(const Cargo* const exampleCargo) const {
     for (const auto& el : cargoVec_) {
         Cargo* targetCargo = el.get();
         if (targetCargo) {
-            if (targetCargo == exampleCargo) {  //we dont want to compare same Cargo pointers
+            /*if (targetCargo == exampleCargo) {  //we dont want to compare same Cargo pointers
                 return nullptr;
-            }
+            }*/
 
             if (*targetCargo == *exampleCargo) {  //depend this means equality or comperable
                 return targetCargo;
