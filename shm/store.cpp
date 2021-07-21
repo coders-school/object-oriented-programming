@@ -64,6 +64,8 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr
     return Response::done;
 }
 
+
+
 constexpr int minAmount = 0;
 constexpr int maxAmount = 20;
 void Store::randomizeCargo(std::vector<std::shared_ptr<Cargo>> storeCargos) {
@@ -89,13 +91,13 @@ void Store::generateCargo() {
         std::make_shared<Item>(Item("Gold neckle", 0, 200, Rarity::rare)),
         std::make_shared<Item>(Item("Souron's ring", 0, 200, Rarity::legendary)),
         std::make_shared<Item>(Item("Philosopher's stone", 0, 200, Rarity::legendary)),
-        std::make_shared<Item>(Item("Knife and fork", 0, 200, Rarity::common),        
+        std::make_shared<Item>(Item("Knife and fork", 0, 200, Rarity::common)),        
         std::make_shared<Alcohol>(Alcohol("Johny Daniels", 0, 10, 50)),
         std::make_shared<Alcohol>(Alcohol("Jack Walker", 0, 10, 50)),
         std::make_shared<Alcohol>(Alcohol("Vodka", 0, 10, 40)),
         std::make_shared<Alcohol>(Alcohol("Beer", 0, 10, 8)),
         std::make_shared<Alcohol>(Alcohol("Gin", 0, 10, 20)),
-        std::make_shared<Alcohol>(Alcohol("Pina Colada", 0, 10, 15)))
+        std::make_shared<Alcohol>(Alcohol("Pina Colada", 0, 10, 15))};
 
-    };
+    randomizeCargo(posibleStoreCargos);
 }

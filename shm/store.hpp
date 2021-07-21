@@ -31,8 +31,11 @@ public:
     void load( std::shared_ptr<Cargo> cargo, size_t amount);
     void unload( std::shared_ptr<Cargo> cargo, size_t amount);
     std::vector<std::shared_ptr<Cargo>>::iterator findCargo(const std::shared_ptr<Cargo>& cargo);
+    
     size_t getSpace() const { return availableSpace_;};
     size_t getMoney() const { return money_;};
+
+    friend std::ostream& operator<<(std::ostream& os, const Store& store);
 private:
     std::vector<std::shared_ptr<Cargo>> stock_;
     size_t availableSpace_;
