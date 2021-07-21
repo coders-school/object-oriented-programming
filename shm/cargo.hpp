@@ -6,9 +6,9 @@
 class Cargo : public TimeEffectable
 {
 public:
-    virtual Cargo &operator+=(size_t amount);
-    virtual Cargo &operator-=(size_t amount);
-    virtual bool operator==(const Cargo &cargo) const = 0;
+    virtual Cargo &operator+=(size_t amount) = 0;
+    virtual Cargo &operator-=(size_t amount) = 0;
+    virtual bool operator==(const Cargo &cargo) const;
 
     virtual size_t getPrice() const = 0;
     virtual const std::string &getName() const = 0; // TO DO: test deleting Cargo object
@@ -19,7 +19,8 @@ public:
     void reduceAmount();
 
     Cargo() = default;
-    Cargo(std::string name, size_t amount, size_t basePrice);
+    Cargo(std::string name, size_t amount, size_t basePrice)
+    :name_(name), amount_(amount), basePrice_(basePrice){};
     virtual ~Cargo() = default;
 
 protected:

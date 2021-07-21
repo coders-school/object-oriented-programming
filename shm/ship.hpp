@@ -41,7 +41,7 @@ public:
     size_t getCrew() const     { return crew_; }
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
-    std::vector<std::shared_ptr<Cargo>> getCargo() { return shipCargo;}
+    std::vector<std::shared_ptr<Cargo>> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
     Cargo* findMatchCargo(Cargo* cargo);
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo_ptr);

@@ -6,3 +6,4 @@ void Storable::SpendMoney(int moneyToSpend) {
     }
     money_ -= moneyToSpend;
 }
+Storable::~Storable(){}

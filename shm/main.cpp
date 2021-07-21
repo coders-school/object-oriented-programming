@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <memory>
 
 #include "alcohol.hpp"
 #include "cargo.hpp"
@@ -13,12 +14,17 @@
 #include "ship.hpp"
 #include "Storable.hpp"
 #include "Store.hpp"
-#include <memory>
+
+//Klasy użytkujące cargo:
+//1.Store
+//2.Storable
+//3.Ship
+//4.player
 
 
 int main()
 {
-    
+    /*
     std::cout << "Test Cargo" << '\n';
 
     Fruit banana(150, "banany", 3, 150, 1); // Fruit(size_t amount, const std::string& name, size_t base_price, size_t expiry_date, size_t time_elapsed);
@@ -38,27 +44,27 @@ int main()
 
     std::cout << "Test ship Titanic" << '\n';
      
-    Ship Titanic(20, 90, 1);// Ship(int maxCrew, int speed, size_t id)
-    std::shared_ptr<Cargo> ptr = static_cast<std::shared_ptr<Cargo>>(&kryptonite);
+    //Ship Titanic(20, 90, 1);// Ship(int maxCrew, int speed, size_t id)
+    //std::shared_ptr<Cargo> ptr = static_cast<std::shared_ptr<Cargo>>(&kryptonite);
     //std::shared_ptr<Cargo> ptr = std::make_shared<Alcohol>(100, "Whiskey", 50, 40);
-    Titanic.load(static_cast<std::shared_ptr<Cargo>>(&kryptonite));
+    //Titanic.load(static_cast<std::shared_ptr<Cargo>>(&kryptonite));
 
     // std::cout << "Vector size: " << Titanic.getCargo().size() << '\n';
     // std::cout << "Titanic cargo: " << Titanic.getCargo()[0]->getName() << '\n';
     // std::cout << Titanic.getCargo()[0]->getAmount() << "\n\n";
     
-    // std::cout << "Test make_unique ptr ship" << '\n';
-    // auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
-    // ship->load(std::make_shared<Cargo>(banana));
-    // size_t shipCargoSize = ship->getCargo().size();
-    // Player player(std::move(ship), 100, 1);
-    // std::cout << "Vector size: " << shipCargoSize << '\n';
-    // std::cout << "Player's ship speed: " << player.getShip()->getSpeed() << '\n';
-    // std::cout << "Player's ship cargo name: " << player.getCargo(0)->getName() << '\n';
-    // std::cout << "Player's ship cargo (should be 15): " << player.getCargo(0)->getAmount() << '\n';
-    // std::cout << "Player's ship cargo base price: " << player.getCargo(0)->getBasePrice() << '\n';
+    std::cout << "Test make_unique ptr ship" << '\n';
+    auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
+    ship->load(std::make_shared<Cargo>(banana));
+    size_t shipCargoSize = ship->getCargo().size();
+    Player player(std::move(ship), 100, 1);
+    std::cout << "Vector size: " << shipCargoSize << '\n';
+    std::cout << "Player's ship speed: " << player.getShip()->getSpeed() << '\n';
+    std::cout << "Player's ship cargo name: " << player.getCargo(0)->getName() << '\n';
+    std::cout << "Player's ship cargo (should be 15): " << player.getCargo(0)->getAmount() << '\n';
+    std::cout << "Player's ship cargo base price: " << player.getCargo(0)->getBasePrice() << '\n';
     
-    // std::cout << "Available space: " << player.getAvailableSpace() << "\n\n";
+    std::cout << "Available space: " << player.getAvailableSpace() << "\n\n";
 
     // std::cout << "Random islands positions: X | Y" << '\n';
     // Map map;
@@ -93,4 +99,11 @@ int main()
     // store.nextDay();
     // std::cout << "Prit store cargo" << '\n';
     // store.printStoreCargo();
+    */
+   
+   Player Tester();
+   Store sklep(20, 100);
+   std::cout << sklep.getAvailableSpace();
+   sklep.buy();
+
 }

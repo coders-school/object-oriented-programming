@@ -4,7 +4,7 @@
 class DryFruit : public Fruit {
 public:
     // override from Cargo
-    const std::string& getName() const override { return name_; }
+    const std::string& getName() const override { return name_; } // "Dry fruit"
     size_t getPrice() const override;
 
     // override from Fruit
