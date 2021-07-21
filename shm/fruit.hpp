@@ -6,9 +6,8 @@
 class Fruit : public Cargo
 {
 public:
-    Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed)
-        : Cargo(name, amount, basePrice), expiry_date_(expiry_date), time_elapsed_(time_elapsed) {}
-    ~Fruit() override;
+    Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed);
+    virtual ~Fruit() override;
 
     // override from Cargo
     size_t getPrice() const override;

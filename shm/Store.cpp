@@ -4,6 +4,8 @@
 
 //enum class Response {done, lack_of_money, lack_of_cargo, lack_of_space};
 Store::Store(int money, size_t availableSpace) : Storable(money, availableSpace) {}
+Store::~Store(){}
+
 Cargo* Store::findMatchCargo(Cargo* cargo) {
     for (auto& el : cargo_) {
         if(*el == *cargo) {
@@ -12,6 +14,8 @@ Cargo* Store::findMatchCargo(Cargo* cargo) {
     }
     return nullptr;
 }
+
+
 
 Response Store::buy(Cargo *cargo, size_t amount, Player *player)//Buying cargo from store to player
 {
@@ -52,11 +56,11 @@ Response Store::sell(Cargo *cargo, size_t amount, Player *player) // Selling car
     if(Cargo * ptr = findMatchCargo(cargo)) {
         *ptr += amount;
     }
-    else {
+    //else {
         
         //cargo_.push_back(static_cast<std::shared_ptr<Cargo>> (cargo));    
-        cargo_.push_back(std::make_shared<Cargo>(cargo -> getName(), amount, cargo->getBasePrice())); 
-    }
+       // cargo_.push_back(std::make_shared<Cargo>(cargo -> getName(), amount, cargo->getBasePrice())); 
+   // }
     
 
     return Response::done;
@@ -72,3 +76,4 @@ void Store::nextDay(){
         el.get()->reduceAmount();
     }
 }
+
