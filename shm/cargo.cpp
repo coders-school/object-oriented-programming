@@ -1,8 +1,6 @@
 #include <limits>
+#include <iostream>
 #include "cargo.hpp"
-#include "player.hpp"
-#include "ship.hpp"
-
 
 // Cargo &Cargo::operator+=(size_t amount)
 // {

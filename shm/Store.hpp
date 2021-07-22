@@ -27,7 +27,7 @@ public:
     
     void printStoreCargo() {
         for(auto el : cargo_) {
-            std::cout << "hej printStoreCargo działa" << '\n';
+            std::cout << '\n';
             el -> printCargo();
         }
     }
