@@ -142,7 +142,7 @@ Game::MenuOption Game::actionMenu(Game::MenuOption userAnswer) {
     case MenuOption::Sell :
         sell(); break;
     case MenuOption::HireCrew :
-        hireCrew(); break;
+        manageCrew(); break;
     case MenuOption::Exit :
         menuOption_ = exitGame(); break;
     default:
@@ -326,6 +326,29 @@ void Game::printResponse(const Store::Response& response,
     }
 }
 
+void Game::manageCrew() {
+    int choice {};
+    do {
+        do {
+        std::cout << "1. Hire crew.\n2. Dismiss Crew.\n3. Back to main menu\n";
+        std::cin >> choice;
+    } while (!isCrewNumber(choice));
+    switch (choice) {
+    case 1 : 
+        hireCrew();
+        break;
+    case 2 : 
+        dismissCrew();
+        break;
+    case 3 : 
+        selectOption();
+        break;
+    default : 
+        break;
+    }
+    } while (choice != 1 || choice != 2 || choice != 3);
+}
+
 void Game::hireCrew() {
     int crewAmount {};
     std::cout << "Cost of crew is 1 coin\n";
@@ -346,6 +369,15 @@ void Game::hireCrew() {
     } 
 }
 
+void Game::dismissCrew() {
+    std::cout << "Crew: " << player_->getShip()->getCrew() << " / " << player_->getShip()->getMaxCrew()<< '\n';
+    std::cout << "How many sailors you want to dismiss? ";
+    size_t amountCrew {};
+    std::cin >> amountCrew;
+    isCrewNumber(amountCrew);
+    player_->getShip()->operator-=(amountCrew);
+    std::cout << "Crew: " << player_->getShip()->getCrew() << " / " << player_->getShip()->getMaxCrew() << '\n';
+}
 bool Game::isCrewNumber(const int crew) { 
     if (std::cin.fail()) {
         std::cin.clear();

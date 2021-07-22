@@ -61,7 +61,9 @@ private:
     void printCargoFromShip();
     void buy();
     void sell();
+    void manageCrew();
     void hireCrew();
+    void dismissCrew();
     MenuOption exitGame();
     
     std::unique_ptr<Player> player_;
