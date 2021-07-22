@@ -7,6 +7,7 @@ class TimeEffectable;
 class Time {
 public:
     Time();
+    ~Time();
 
     void attach(TimeEffectable* observer);
     void detach(TimeEffectable* observer);

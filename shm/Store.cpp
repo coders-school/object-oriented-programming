@@ -1,9 +1,13 @@
-#include "Store.hpp"
-#include "player.hpp"
 #include "cargo.hpp"
+#include "player.hpp"
+#include "Time.hpp"
+#include "Store.hpp"
 
 //enum class Response {done, lack_of_money, lack_of_cargo, lack_of_space};
-Store::Store(int money, size_t availableSpace) : Storable(money, availableSpace) {}
+Store::Store(int money, size_t availableSpace, Time* time) 
+    : Storable(money, availableSpace, time) 
+    {}
+
 Store::~Store(){}
 
 Cargo* Store::findMatchCargo(Cargo* cargo) {
@@ -14,8 +18,6 @@ Cargo* Store::findMatchCargo(Cargo* cargo) {
     }
     return nullptr;
 }
-
-
 
 Response Store::buy(Cargo *cargo, size_t amount, Player *player)//Buying cargo from store to player
 {

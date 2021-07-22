@@ -2,5 +2,5 @@
 
 class TimeEffectable {
 public:
-    virtual void nextDay() = 0;
+    virtual void nextDay(){}
 };

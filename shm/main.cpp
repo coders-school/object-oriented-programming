@@ -1,6 +1,6 @@
 
 #include <iostream>
-
+#include <memory>
 #include "alcohol.hpp"
 #include "cargo.hpp"
 #include "coordinates.hpp"
@@ -13,17 +13,18 @@
 #include "ship.hpp"
 #include "Storable.hpp"
 #include "Store.hpp"
-#include <memory>
-
 
 int main()
 {
-    
-    // std::cout << "Test Cargo" << '\n';
+    Time time;
 
-    // Cargo cotton("banany", 15, 150); // ( name, amount, basePrice) bananas does not work, imagine why?
-    // Cargo kryptonite("krypton", 20, 200); // ( name, amount, basePrice)
-    // Cargo onion("cebula", 250, 1); // ( name, amount, basePrice)
+    Time* ptr_time = &time;
+
+    std::cout << "Test Cargo" << '\n';
+
+    Fruit cotton("banany", 15, 150, 20, 0, ptr_time); // ( name, amount, basePrice) bananas does not work, imagine why?
+    Item kryptonite("krypton", 20, 200, Item::Rarity::common, ptr_time); // ( name, amount, basePrice)
+    Item onion("cebula", 250, 1, Item::Rarity::rare, ptr_time); // ( name, amount, basePrice)
 
     // std::cout << (onion == cotton) << " " << (cotton == kryptonite) << " " << (onion == kryptonite) << "\n";
     // std::cout << cotton.getAmount() << " " << cotton.getBasePrice() << " " << cotton.getName() << "\n\n";
@@ -39,19 +40,19 @@ int main()
 
     // std::cout << "Test ship Titanic" << '\n';
      
-    // Ship Titanic(20, 90, 1);
+    // Ship Titanic(20, 90, 1, time);
     // //Titanic.addCargo(std::shared_ptr<Cargo>(kryptonite));
-    // Titanic.load(std::make_shared<Cargo>(kryptonite));
+    // Titanic.load(std::make_shared<Item>(kryptonite));
 
     // std::cout << "Vector size: " << Titanic.getCargo().size() << '\n';
     // std::cout << "Titanic cargo: " << Titanic.getCargo()[0]->getName() << '\n';
     // std::cout << Titanic.getCargo()[0]->getAmount() << "\n\n";
     
     // std::cout << "Test make_unique ptr ship" << '\n';
-    // auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
-    // ship->load(std::make_shared<Cargo>(cotton));
+    auto ship = std::make_unique<Ship>(20, 1, 2, "titanic", 3, ptr_time);
+    // ship->load(std::make_shared<Fruit>(cotton));
     // size_t shipCargoSize = ship->getCargo().size();
-    // Player player(std::move(ship), 1, 1);
+    Player player(std::move(ship), 1, 1);
     // std::cout << "Vector size: " << shipCargoSize << '\n';
     // std::cout << "Player's ship speed: " << player.getShip()->getSpeed() << '\n';
     // std::cout << "Player's ship cargo name: " << player.getCargo(0)->getName() << '\n';
@@ -69,13 +70,28 @@ int main()
     // Island *is = map.getIsland(miami);
     // std::cout << is->getPosition().GetPositionX() << " " << is->getPosition().GetPositionY() << '\n';
 
-    // std::cout << "Test Store" << '\n';
-    // Store store(100, 500); //(Money, Avalivable space)
-    // store.cargo_.push_back(std::make_shared<Cargo>(cotton));
-    // store.cargo_.push_back(std::make_shared<Cargo>(kryptonite));
-    // std::cout << store.findMatchCargo(&cotton) << " adres cotton: " << store.cargo_[0].get() <<'\n';
-    // store.sell(&onion, 5, &player);
-    // store.sell(&onion, 55, &player);
-    // std::cout << "Print store cargo" << '\n';
-    // store.printStoreCargo();
+    std::cout << "Test Store" << '\n';
+    Store store(100, 500, ptr_time); //(Money, Avalivable space)
+    
+    store.cargo_.push_back(std::make_shared<Fruit>(cotton));
+    store.cargo_.push_back(std::make_shared<Item>(kryptonite));
+    store.printStoreCargo();
+    time.changeTime();
+    std::cout << store.findMatchCargo(&cotton) << " adres cotton: " << store.cargo_[0].get() <<'\n';
+    store.sell(&onion, 5, &player);
+    store.sell(&onion, 55, &player);
+    std::cout << "Print store cargo" << '\n';
+    store.printStoreCargo();
+
+    auto ship1 = std::make_unique<Ship>(20, 1, 2, "Uboot", 3, ptr_time);
+    // ship1->setCrew(50);
+    // Player player11 (ship, 1000, 1000);
+    // Player* player1 = player11;
+    // ship->setOwner(player1);
+    // time.HowManyObserver();
+    // std::cout << player1->getMoney() << '\n';
+    // time.changeTime();
+    // std::cout << player1->getMoney() << '\n';
+    time.HowManyObserver();
+    time.changeTime();
 }

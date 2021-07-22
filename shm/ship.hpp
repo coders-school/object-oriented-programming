@@ -13,30 +13,10 @@ class Player;
 //Class responsible for representing ship in game
 class Ship : public TimeEffectable {
 public:
-    Ship(Time &time)
-        : id_(-1)
-        , time_(time)
-    {
-        time_.attach(this);
-    }
-
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time &time)
-        : capacity_(capacity)
-        , maxCrew_(maxCrew)
-        , crew_(0)
-        , speed_(speed)
-        , name_(name)
-        , id_(id)
-        , time_(time)
-    {
-        time_.attach(this);
-    }
-
-    Ship(int maxCrew, int speed, size_t id, Time &time)
-        : Ship(0, maxCrew, speed, "", id, time)
-    {}
-    
-    ~Ship(){ time_.detach(this); }
+    Ship(Time* time);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time);
+    Ship(int maxCrew, int speed, size_t id, Time* time);
+    ~Ship();
     
     void setName(const std::string& name) { name_ = name; }
 
@@ -59,7 +39,6 @@ public:
     void nextDay() override;
     void setOwner(Player* newOwner);
     void setCrew(size_t newCrew);
-    Time &time_;
 
 private:
     size_t capacity_;
@@ -70,5 +49,5 @@ private:
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> shipCargo;
     Player* owner_ = nullptr;
-    
+    Time* time_;
 };

@@ -8,6 +8,8 @@ Time::Time()
     currentTime_ = 0;
 }
 
+Time::~Time(){}
+
 void Time::attach(TimeEffectable* observer)
 {   
     list_observer_.push_back(observer);

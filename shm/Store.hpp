@@ -2,16 +2,18 @@
 #include <iostream>
 #include "Storable.hpp"
 #include "cargo.hpp"
-#include "TimeEffectable.hpp"
+
+
+class Time;
 
 class Player;
 //class Cargo;
 
 enum class Response {done, lack_of_money, lack_of_cargo, lack_of_space};
 
-class Store: public Storable, public TimeEffectable {
+class Store: public Storable {
 public:
-    Store(int money, size_t availableSpace);
+    Store(int money, size_t availableSpace, Time* time);
     virtual ~Store();
     Response buy(Cargo* cargo, size_t amount, Player* player);
     Response sell(Cargo* cargo, size_t amount, Player* player);
