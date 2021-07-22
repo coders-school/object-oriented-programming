@@ -365,17 +365,17 @@ void Game::hireCrew() {
         std::cout << "You don't have enough money\n";
     } 
     else {
-        *(player_->getShip()) += crewAmount;
-        std::cout << "You have employed " << crewAmount << " sailors\n";
+        player_->getShip()->operator+=(crewAmount);
     } 
 }
 
 void Game::dismissCrew() {
-    std::cout << "How many sailors you want to dismiss? ";
-    size_t amountCrew {};
-    std::cin >> amountCrew;
-    isCrewNumber(amountCrew);
-    player_->getShip()->operator-=(amountCrew);
+    size_t crewAmount {};
+    do {
+        std::cout << "How many sailors you want to dismiss? ";
+        std::cin >> crewAmount;
+    } while (!isCrewNumber(crewAmount));
+    player_->getShip()->operator-=(crewAmount);
 }
 bool Game::isCrewNumber(const int crew) { 
     if (std::cin.fail()) {

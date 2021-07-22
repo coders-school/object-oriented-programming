@@ -26,7 +26,9 @@ Ship::Ship(int id, size_t speed, size_t maxCrew, Delegate* delegate)
 
 Ship& Ship::operator+=(const size_t crew) {
     if (crew_ + crew > maxCrew_) {
-        throw std::out_of_range("Too many sailors!");
+        //throw std::out_of_range("Too many sailors!\n");
+        std::cout << "Too many sailors!\n";
+        return *this;
     }
     crew_ += crew;
     return *this;
@@ -34,7 +36,9 @@ Ship& Ship::operator+=(const size_t crew) {
 
 Ship& Ship::operator-=(const size_t crew) {
     if (crew_ < crew) {
-        throw std::out_of_range("Number of sailors lower than zero!");
+        // throw std::out_of_range("Number of sailors lower than zero!");
+        std::cout << "Number of sailors can't be lower than zero! You can dismiss " << crew_ << '\n';
+        return *this;
     }
     crew_ -= crew;
     return *this;
