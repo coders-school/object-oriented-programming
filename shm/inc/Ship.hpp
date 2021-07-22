@@ -32,6 +32,7 @@ public:
     std::string getName() const { return name_; };
     size_t getSpeed() const { return speed_; };
     size_t getMaxCrew() const { return maxCrew_; };
+    size_t getCrew() const { return crew_; };
     size_t getCapacity() const { return capacity_; };
     Cargo* getCargo(size_t index) const;
     Cargo* getCargo(const std::string& name) const;
