@@ -1,4 +1,6 @@
 #include <iostream>
+#include <random>
+#include <algorithm>
 
 class Player;
 class Cargo;
@@ -16,6 +18,7 @@ public:
     void addToVecOfCargos(std::shared_ptr<Cargo>);
     void dellFromVecOfCargos(std::shared_ptr<Cargo>);
     bool checkAvaiablityCargoInStore(std::shared_ptr<Cargo>);
+    size_t nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore);
 
 private:
     std::vector<std::shared_ptr<Cargo>> cargosInStore{};

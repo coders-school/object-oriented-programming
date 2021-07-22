@@ -7,11 +7,11 @@
 Ship::Ship()
     : id_(-1), crew_(0), capacity_(0), maxCrew_(0), speed_(0), name_(""), cargo_({}) {}
 
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargo)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), cargo_(cargo) {}
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargo, size_t coins)
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), cargo_(cargo), coins_(coins) {}
 
 Ship::Ship(int maxCrew, int speed, size_t id, std::vector<std::shared_ptr<Cargo>> cargo)
-    : Ship(0, maxCrew, speed, "", id, cargo) {}
+    : Ship(0, maxCrew, speed, "", id, cargo, 100) {}    //initialization of default capacity = 0, lack of ship name and default amount of coins = 100
 
 size_t Ship::getAmountOfCargosCapacity() const {
     auto Cargos = getCargo();
@@ -56,5 +56,12 @@ void Ship::dellAmounntFromShipCargo( std::shared_ptr<Cargo> cargo, size_t amount
         if ((*it)->getName() == cargo->getName()) {
             (*it)->dellAmount(amount);
         }
+    }
+}
+
+// crew wages for 1 work day
+size_t nextDay(size_t crew, size_t coins) {
+    for(int i = 0; i < crew; i++) {
+        coins -= 1;
     }
 }

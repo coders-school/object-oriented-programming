@@ -44,3 +44,20 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
 
     return Response::done;  
 }
+
+size_t Store::nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore) {
+    std::shared_ptr<Cargo> ptrCargo;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> distr(-10, 10);
+    std::uniform_int_distribution<> distr1(0, 1);
+    if(distr1(gen) == 0) {
+        for(int i = 0; i < distr(gen); i++) {
+            cargosInStore.push_back(ptrCargo);
+        }
+    } else {
+        for(int i = 0; i < distr(gen); i++) {
+            cargosInStore.pop_back();
+        }
+    }
+}
