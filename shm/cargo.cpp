@@ -20,19 +20,18 @@ Cargo& Cargo::operator-=(size_t amount) {
     return *this;
 }
 
-bool Cargo::operator==(Cargo& cargo) {
+bool Cargo::operator==(Cargo& cargo) const {
     return cargo.getName() == name_ && cargo.getAmount() == amount_;
 }
- 
+
 size_t Cargo::addAmount(size_t addedAmount) {
      amount_ += addedAmount;
- }
- size_t Cargo::dellAmount(size_t deletedAmount) {
+}
+size_t Cargo::dellAmount(size_t deletedAmount) {
     if(amount_ <= deletedAmount) {
         amount_ = 0;
     }
     else {
         amount_ -= deletedAmount;
     }
-    
- }
+}
