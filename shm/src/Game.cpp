@@ -350,6 +350,7 @@ void Game::manageCrew() {
 }
 
 void Game::hireCrew() {
+    printCrew();
     int crewAmount {};
     std::cout << "Cost of crew is 1 coin\n";
     do {
@@ -370,13 +371,12 @@ void Game::hireCrew() {
 }
 
 void Game::dismissCrew() {
-    std::cout << "Crew: " << player_->getShip()->getCrew() << " / " << player_->getShip()->getMaxCrew()<< '\n';
+    printCrew();
     std::cout << "How many sailors you want to dismiss? ";
     size_t amountCrew {};
     std::cin >> amountCrew;
     isCrewNumber(amountCrew);
     player_->getShip()->operator-=(amountCrew);
-    std::cout << "Crew: " << player_->getShip()->getCrew() << " / " << player_->getShip()->getMaxCrew() << '\n';
 }
 bool Game::isCrewNumber(const int crew) { 
     if (std::cin.fail()) {
@@ -387,7 +387,9 @@ bool Game::isCrewNumber(const int crew) {
     }
     return true;
 }
-
+void Game::printCrew() {
+    std::cout << "Crew: " << player_->getShip()->getCrew() << " / " << player_->getShip()->getMaxCrew()<< '\n';
+}
 bool Game::hasPlayerEnoughMoney(const int crew) {
     if (crew > player_->getMoney()) {
         return false;

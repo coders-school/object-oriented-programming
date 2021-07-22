@@ -64,6 +64,7 @@ private:
     void manageCrew();
     void hireCrew();
     void dismissCrew();
+    void printCrew();
     MenuOption exitGame();
     
     std::unique_ptr<Player> player_;
