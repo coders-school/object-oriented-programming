@@ -330,6 +330,7 @@ void Game::manageCrew() {
     int choice {};
     do {
         do {
+        printCrew();
         std::cout << "1. Hire crew.\n2. Dismiss Crew.\n3. Back to main menu\n";
         std::cin >> choice;
     } while (!isCrewNumber(choice));
@@ -350,7 +351,6 @@ void Game::manageCrew() {
 }
 
 void Game::hireCrew() {
-    printCrew();
     int crewAmount {};
     std::cout << "Cost of crew is 1 coin\n";
     do {
@@ -371,7 +371,6 @@ void Game::hireCrew() {
 }
 
 void Game::dismissCrew() {
-    printCrew();
     std::cout << "How many sailors you want to dismiss? ";
     size_t amountCrew {};
     std::cin >> amountCrew;
