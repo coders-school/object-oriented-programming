@@ -9,6 +9,7 @@
 #include "shm/inc/Fruit.hpp"
 #include "shm/inc/Item.hpp"
 #include "shm/inc/Subscriber.hpp"
+#include "shm/inc/Time.hpp"
 
 class Cargo;
 class Delegate;
@@ -21,8 +22,8 @@ using CargoStorage = std::vector<std::unique_ptr<Cargo>>;
 class Ship : public Subscriber {
 public:
     Ship() = default;
-    Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate = nullptr);
-    Ship(int id, size_t speed, size_t maxCrew, Delegate* delegate);
+    Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Time* time, Delegate* delegate = nullptr);
+    Ship(int id, size_t speed, size_t maxCrew, Time* time, Delegate* delegate);
 
     Ship& operator+=(const size_t amount);
     Ship& operator-=(const size_t amount);
@@ -57,5 +58,5 @@ private:
     CargoStorage cargo_;
     size_t crew_ { 50 };
     Store* store_;
-
+    Time* time_;
 };

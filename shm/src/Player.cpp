@@ -7,7 +7,7 @@
 #include "shm/inc/Map.hpp"
 
 Player::Player(std::unique_ptr<Ship> ship,
-               std::shared_ptr<Map> map, size_t money, size_t availableSpace)
+               std::shared_ptr<Map> map, size_t money, size_t availableSpace, Time* time)
     : ship_(std::move(ship)), map_(map), money_(money)
 {
     availableSpace_.first = true;
