@@ -37,7 +37,11 @@ bool Cargo::operator==(const Cargo &cargo) const
 }
 
 void Cargo::printCargo() const {
-    std::cout << "Cargo Name: " << name_ << ", amount: " << amount_ << '\n';
+    std::cout << "Cargo Name: " << name_ << ", amount: " << amount_ << ", price: " << getPrice() <<'\n';
+}
+
+std::string Cargo::getCargoInfo(){
+    return "Cargo Name: " + name_ + ", amount: " + std::to_string(amount_) + ", price: " + std::to_string(getPrice()) +'\n';
 }
 
 void Cargo::reduceAmount(){

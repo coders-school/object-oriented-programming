@@ -18,6 +18,7 @@ public:
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;
+    void nextDay() override;
 
 
 private:

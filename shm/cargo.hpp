@@ -16,6 +16,7 @@ public:
     virtual size_t getBasePrice() const { return basePrice_; }
 
     void printCargo() const;
+    std::string getCargoInfo();
     void reduceAmount();
 
     Cargo() = default;

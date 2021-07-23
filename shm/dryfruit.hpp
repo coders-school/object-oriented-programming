@@ -10,6 +10,8 @@ public:
     // override from Fruit
     Cargo& operator--() override;
 
+    void nextDay() override;
+
 private:
     size_t counter_{0};
 };

@@ -78,4 +78,32 @@ int main()
     // store.sell(&onion, 55, &player);
     // std::cout << "Print store cargo" << '\n';
     // store.printStoreCargo();
+
+/*
+    Alcohol a("A", 1, 1, 96);
+    Fruit f("F", 1, 1, 5000, 1);
+    //DryFruit* df = new Fruit("DF", 1, 1, 12, 1);
+    Item i("I", 1, 1, Rarity::common);
+
+    std::cout << "Alcohol: " << a.getPrice() << "\n";
+    std::cout << "Fruit: " << f.getPrice() << "\n";
+    std::cout << "Item: " << i.getPrice() << "\n";
+
+    a.nextDay();
+    f.nextDay();
+    i.nextDay();
+
+    std::cout << "Alcohol: " << a.getPrice() << "\n";
+    std::cout << "Fruit: " << f.getPrice() << "\n";
+    std::cout << "Item: " << i.getPrice() << "\n";
+
+    Store store(100, 500); //(Money, Avalivable space)
+    Fruit cotton("banany", 15, 150,1,1); // ( name, amount, basePrice) bananas does not work, imagine why?
+    Fruit kryptonite("krypton", 20, 200,1,1); // ( name, amount, basePrice)
+
+    store.cargo_.push_back(std::make_shared<Fruit>(cotton));
+    store.cargo_.push_back(std::make_shared<Fruit>(kryptonite));
+
+    std::cout << store;*/
+
 }

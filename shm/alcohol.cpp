@@ -34,3 +34,7 @@ bool Alcohol::operator==(const Cargo& other) const {
             return false;
     }
 }
+
+void Alcohol::nextDay(){
+    basePrice_ += 2;
+}

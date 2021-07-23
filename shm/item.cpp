@@ -34,3 +34,7 @@ bool Item::operator==(const Cargo& other) const {
             return false;
     }
 }
+
+void Item::nextDay() {
+    basePrice_ += 1;    
+}
