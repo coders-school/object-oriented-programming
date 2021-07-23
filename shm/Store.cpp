@@ -24,11 +24,51 @@ Cargo* Store::findMatchCargo(Cargo* cargo) {
     return nullptr;
 }
 
-Response Store::buy(Cargo *cargo, size_t amount, Player *player)//Buying cargo from store to player
+Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)//Buying cargo from store to player
 {
-    if(findMatchCargo(cargo))
+    if(findMatchCargo(cargo.get()))
     {
-        std::cout << "Jest cargo" << '\n';
+        auto price = amount * cargo->getBasePrice();
+
+        std::cout << "There is cargo" << '\n';
+
+        if (player->getAvailableSpace() < amount)
+        {
+            std::cout << "getAvailbleSpace" << '\n';
+            return Response::lack_of_space;
+        }
+        if  (cargo->getAmount() < amount)
+        {
+            std::cout << "getAmount" << '\n';
+            return Response::lack_of_cargo;
+        }
+        if  (player->getMoney() < price)
+        {
+            std::cout << "getMoney" << '\n';
+            return Response::lack_of_money;
+        }
+
+        player->SpendMoney(price);
+        player->load(cargo, amount);
+
+
+        return Response::done;
+    }
+    else
+    {
+        std::cout << "there isn`t cargo" << '\n';
+        return Response::lack_of_cargo;
+    }
+    
+}
+
+
+Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) // Selling cargo from Player to Store
+{
+    if(findMatchCargo(cargo.get()))
+    {
+        std::cout << "There is cargo" << '\n';
+        auto price = amount * cargo->getBasePrice();
 
         if (player->getAvailableSpace() < amount)
         {
@@ -45,8 +85,9 @@ Response Store::buy(Cargo *cargo, size_t amount, Player *player)//Buying cargo f
             std::cout << "getMoney" << '\n';
             return Response::lack_of_money;
         }
-        //player->load(cargo);
-        player->getMoney() - amount * cargo->getBasePrice();
+
+        player->unload(cargo);
+        player->EarnMoney(price);
 
         return Response::done;
     }
@@ -55,34 +96,8 @@ Response Store::buy(Cargo *cargo, size_t amount, Player *player)//Buying cargo f
         std::cout << "ni ma cargo" << '\n';
         return Response::lack_of_cargo;
     }
-    
-}
-
-
-Response Store::sell(Cargo *cargo, size_t amount, Player *player) // Selling cargo from Player to Store
-{
-    if (player->getAvailableSpace() < amount)
-    {
-        return Response::lack_of_space;
-    }
-    if (cargo->getAmount() < amount)
-    {
-        return Response::lack_of_cargo;
-    }
-    if (player->getMoney() < amount * cargo->getBasePrice())
-    {
-        return Response::lack_of_money;
-    }
     //TO DO BUY - add cargo to store, remove cargo from player
     
-    if(Cargo * ptr = findMatchCargo(cargo)) {
-        *ptr += amount;
-    }
-    // else {
-        
-    //     //cargo_.push_back(static_cast<std::shared_ptr<Cargo>> (cargo));    
-    //     cargo_.push_back(std::make_shared<Cargo>(cargo -> getName(), amount, cargo->getBasePrice())); 
-    // }
     
     return Response::done;
 }
@@ -95,5 +110,12 @@ std::shared_ptr<Cargo> Store::getCargo(size_t index) const
 void Store::nextDay(){
     for (auto el : cargo_) {
         el.get()->reduceAmount();
+    }
+}
+
+void Store::printStoreCargo(){
+    for(auto el : cargo_) {
+        std::cout << '\n';
+        el -> printCargo();
     }
 }

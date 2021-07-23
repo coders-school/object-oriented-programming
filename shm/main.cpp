@@ -103,26 +103,30 @@ int main()
    Fruit Banana(10, "Banana", 10, 100, 0);
    Fruit Kwikens(9, "kwik", 10, 100, 0);
    auto StatekTester = std::make_unique<Ship>(20, 1, 2, "titanic", 3);
-   Player Tester(std::move(StatekTester),20,100);
+   Player Tester(std::move(StatekTester),1000,100);
    Store sklep(20, 100);
    std::cout << sklep.getAvailableSpace() << '\n';
    sklep.printStoreCargo();
+   //StatekTester->printShipCargo();
    if(sklep.findMatchCargo(&Banana))
    {
-       std::cout << "Są banany!" << '\n';
+       std::cout << "bananas!" << '\n';
    }
    if(sklep.findMatchCargo(&Kwikens))
    {
-       std::cout << "som ma banana!" << '\n';
+       std::cout << "Banananas!" << '\n';
    }
    else
    {
-       std::cout << "ni ma banana!" << '\n';
+       std::cout << "No banana!" << '\n';
    }
-   //sklep.buy(&Banana, 10, &Tester);
+   
+   std::cout <<  "tester money: " << Tester.getMoney() << '\n';
+   //sklep.buy(Banana, 10, &Tester);
    auto testCargoSklepu = sklep.cargo_.at(0);
-   sklep.buy(testCargoSklepu.get(), Kwikens.getAmount(), &Tester);
-//    std::cout << Kwikens.getAmount() << '\n';
-//    Kwikens.operator-=(5);
-//    std::cout << Kwikens.getAmount() << '\n';
+   sklep.buy(testCargoSklepu, 5, &Tester);
+   //StatekTester->cargo_.push_back(testCargoSklepu);
+   std::cout <<  "tester money: " << Tester.getMoney() << '\n';
+   std::cout << "sklep money: " << sklep.getMoney() << '\n';
+   
 }

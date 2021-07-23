@@ -6,4 +6,11 @@ void Storable::SpendMoney(int moneyToSpend) {
     }
     money_ -= moneyToSpend;
 }
+void Storable::EarnMoney(int moneyToEarn)
+{
+    if(moneyToEarn > 0)
+    {
+        money_ += moneyToEarn;
+    }
+}
 Storable::~Storable(){}

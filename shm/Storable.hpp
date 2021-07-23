@@ -15,6 +15,7 @@ public:
     size_t getAvailableSpace() {return availableSpace_; }
     virtual std::shared_ptr<Cargo> getCargo(size_t index) const = 0;
     void SpendMoney(int moneyToSpend);
+    void EarnMoney(int moneyToEarn);
 
 protected:
     int money_;

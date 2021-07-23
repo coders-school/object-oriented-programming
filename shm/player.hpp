@@ -9,7 +9,6 @@ class Player : public Storable{
 private:
     std::unique_ptr<Ship> ship_;
     size_t calculateAvailableSpace(); //calculates space available on the ship based on cargo and ship capacity
-    size_t gettingCargoAmount();
 
 public:
     Player(std::unique_ptr<Ship> ship, int money, int availableSpace);
@@ -18,4 +17,6 @@ public:
     size_t getSpeed() const;
     
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
+    void load(std::shared_ptr<Cargo>, size_t);
+    void unload(std::shared_ptr<Cargo>, size_t);
 };

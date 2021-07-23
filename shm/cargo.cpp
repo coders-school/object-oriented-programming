@@ -36,3 +36,8 @@ void Cargo::reduceAmount(){
         amount_ -= 1;
     }
 }
+
+// void Cargo::increaseAmount()
+// {
+
+// }

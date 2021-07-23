@@ -42,8 +42,17 @@ size_t Player::calculateAvailableSpace() {
     std::cout << "Cargo amount(po obliczeniach): "<< capacity - cargoAmount << '\n';
    
     if(capacity - cargoAmount < 0){
-        std::cout << "Miałeś za mały statek biedaku teraz masz 0 pojemności bo ci zatonął" << '\n';
+        std::cout << "something went wrong and you have lost your cargo" << '\n';
         return 0;
     }
     return capacity - cargoAmount;
+}
+
+void Player::load(std::shared_ptr<Cargo> loadCargo, size_t amount)
+{
+    std::cout << "wywołuje sie? " << '\n';
+}
+void Player::unload(std::shared_ptr<Cargo> unloadCargo, size_t amount)
+{
+
 }
