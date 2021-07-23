@@ -28,7 +28,7 @@ Map::Map(Time* time) {
                                                generatedIslandCoords;
                                    });
         if (result == islands_.end()) {
-            islands_.push_back(Island(generatedIslandCoords, storeSize_));
+            islands_.push_back(Island(generatedIslandCoords, storeSize_, time));
         }
     }
 }

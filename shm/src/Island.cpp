@@ -14,7 +14,7 @@ bool Island::Coordinates::operator==(const Coordinates& position) const {
 Island::Island(const Island::Coordinates& position, const size_t & storeSize, Time* time)
     : position_(position)
 {
-    store_ = std::make_shared<Store>(storeSize);
+    store_ = std::make_shared<Store>(storeSize, time);
 }
 
 size_t Island::Coordinates::distance(const Coordinates& lhs, const Coordinates& rhs) {

@@ -4,11 +4,9 @@
 #include <memory>
 
 #include "shm/inc/Player.hpp"
-#include "shm/inc/Ship.hpp"
 #include "shm/inc/Time.hpp"
 #include "shm/inc/Map.hpp"
 
-class Ship;
 
 class Game {
 public:

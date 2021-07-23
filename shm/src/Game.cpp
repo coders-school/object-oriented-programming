@@ -23,7 +23,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , map_(std::make_shared<Map>(time_.get()))
     , player_(std::make_unique<Player>(std::make_unique<Ship>(1, 25, 100, time_.get(), nullptr),
                                        map_, 100, 10000, time_.get()))
-{
+{                                       
     islandMax_  = map_->getIslands().size();
 }
 

@@ -64,4 +64,5 @@ private:
         size_t minUniqueStat_{};
         size_t maxUniqueStat_{};
     } oneLine_;
+    Time* time_;
 };
