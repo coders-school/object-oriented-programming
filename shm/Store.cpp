@@ -110,51 +110,6 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
     return Response::done;
 }
 
-void Store::nextDay() {
-    std::cout << "Next Day in Store\n";
-}
-
-//load will take ownership of cargo
-//1 - need not aleredy be its own
-//2 - not nullptr
-//3 - if have equal type of cargo only add amount
-void Store::load(std::unique_ptr<Cargo> cargo) {
-    if (!cargo) {
-        return;
-    }
-    Cargo* storedCargo = findCargoInStore(cargo.get());
-    if (!storedCargo) {
-        for (auto& el : cargoVec_) {
-            if (!el) {
-                el = std::move(cargo);  //move cargo into empty cargo space
-                return;
-            }
-        }
-        cargoVec_.push_back(std::move(cargo));  //move cargo into vector
-        return;
-    }
-    *storedCargo += cargo->getAmount();  //transfer amount into comperable cargo
-    //here cargo will be destroyed
-}
-
-//ver A - unload will remove cargo
-//1 - cargo pointer must exist in cargoVec_
-//2 - will throw logic_error otherwise
-void Store::unload(const Cargo* const cargo) {  //ver A
-    if (!cargo) {
-        return;
-    }
-    for (auto& el : cargoVec_) {
-        if (el.get() == cargo) {  //equal pointers -> equal amount
-            el.reset();
-            //we leave empty cargo space in store here
-            cargoVec_.erase(std::remove(begin(cargoVec_), end(cargoVec_), nullptr), end(cargoVec_));
-            return;
-        }
-    }
-    throw std::logic_error("Store: Not my Cargo!");
-}
-
 Cargo* Store::findCargoInStore(const Cargo* const exampleCargo) const {
     if (!exampleCargo) {
         return nullptr;
@@ -173,6 +128,15 @@ Cargo* Store::findCargoInStore(const Cargo* const exampleCargo) const {
         }
     }
     return nullptr;
+}
+
+size_t Store::getCargoNum() const {
+    return cargoVec_.size();
+}
+
+void Store::nextDay() {
+    changeAssortment();
+    std::cout << "Store change asortment.";
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {

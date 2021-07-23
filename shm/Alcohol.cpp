@@ -1,6 +1,5 @@
 #include "Alcohol.hpp"
-#include <assert.h>
-//#include <string_view>
+#include <cassert>
 
 size_t Alcohol::alcoholBasePriceFor96percent_ = alcoholPriceFor96percent;
 

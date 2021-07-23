@@ -11,6 +11,8 @@ enum class Quality : size_t {
 
 class Item : public Cargo {
 public:
+    static constexpr std::string_view suffix = " (Item)";
+
     Item(std::string name, size_t amount, size_t basePrice, Quality quality);
     ~Item() override = default;
 
@@ -18,7 +20,6 @@ public:
 
     size_t getPrice() const override;
 
-    static constexpr std::string_view suffix = " (Item)";
 protected:
     Quality quality_ = Quality::common;
 

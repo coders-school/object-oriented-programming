@@ -1,24 +1,21 @@
 #pragma once
 
-#include <string>
+#include <string>//for size_t
 
 class Perishable {
 public:
-    Perishable(size_t freshTime, size_t maxFreshTime = 0)
-        : freshTime_(freshTime), maxFreshTime_(maxFreshTime) {
-        if (!maxFreshTime) {
-            maxFreshTime_ = freshTime_;
-        }
-    }
+    Perishable(size_t freshTime, size_t maxFreshTime = 0);
     virtual ~Perishable() = default;
 
-    bool operator==(const Perishable& other) const {
-        return this->maxFreshTime_ == other.maxFreshTime_ and this->freshTime_ == other.freshTime_;
-    }
+    bool operator==(const Perishable& other) const;
+    Perishable& operator--();
 
-    virtual Cargo& operator--() = 0;
+    const Perishable& getPerishable() const;
+    Perishable& getPerishable();
+    size_t getFreshTime() const;
+    size_t getMaxFreshTime() const;
 
-protected:
+private:
     size_t freshTime_;
     size_t maxFreshTime_;
 };

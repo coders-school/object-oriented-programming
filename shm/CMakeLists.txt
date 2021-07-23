@@ -17,7 +17,8 @@ set(FILES
     DefaultCargo.cpp
     DryFruit.cpp 
     Warehouse.cpp
-    Game.cpp)
+    Game.cpp
+    Perishable.cpp)
 
 set(FLAGS -Wall -Wextra -Werror -pedantic -Wconversion)
 

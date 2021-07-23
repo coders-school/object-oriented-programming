@@ -37,7 +37,7 @@ std::unique_ptr<Cargo> generateCargo() {
     auto randomCargo = std::rand() % goods.size();
     auto randomAmount = std::rand() % 99 + 1;
     auto good = goods[randomCargo];
-    auto ptr = std::make_unique<CargoDefault>(good.name, randomAmount, good.value);
+    auto ptr = std::make_unique<Fruit>(good.name, randomAmount, good.value, 10);
     return ptr;  // RVO
 }
 
@@ -67,11 +67,11 @@ void printMenu(std::vector<std::unique_ptr<Command>>& commands) {
 void printStoreCargoList(const Store& store) {
     printf("\033[31m");
     std::cout << "STORE LIST -------\n";
-    for (size_t i = 0; i < store.cargoVec_.size(); ++i) {
+    for (size_t i = 0; i < store.getCargoVec().size(); ++i) {
         std::cout << i << "\t"                                              //
-                  << "Name: " << store.cargoVec_[i]->getName() << "\t\t"    //
-                  << "Amount: " << store.cargoVec_[i]->getAmount() << "\t"  //
-                  << "Price: " << store.cargoVec_[i]->getPrice() << "\n";   //
+                  << "Name: " << store.getCargoVec()[i]->getName() << "\t\t"    //
+                  << "Amount: " << store.getCargoVec()[i]->getAmount() << "\t"  //
+                  << "Price: " << store.getCargoVec()[i]->getPrice() << "\n";   //
     }
     printf("\033[0m\n");
 }
@@ -103,11 +103,11 @@ size_t ChoseOption(size_t limit) {
 }
 
 const Cargo* ChoseCargoFromStore(size_t chose, Store& store) {
-    auto limit = store.cargoVec_.size();
+    auto limit = store.getCargoVec().size();
     if (chose == limit) {
         return nullptr;
     }
-    return store.cargoVec_[chose].get();
+    return store.getCargoVec()[chose].get();
 }
 
 const Cargo* ChoseCargoFromShip(size_t chose, Player& player) {
@@ -149,7 +149,7 @@ public:
             printPlayerStatus(player);
 
             std::cout << "Which Cargo want to Buy from store?\n";
-            limit = store.cargoVec_.size();
+            limit = store.getCargoVec().size();
             auto chose = ChoseOption(limit);
             if (chose >= limit) {
                 return;
@@ -260,17 +260,17 @@ void Game::startGame() {
 }
 
 void Game::init() {
-    for (int i = 0; i < 3; ++i) {
-        auto cargo = generateCargo();
-        std::cout << cargo->getName() << '\n';
-        player.getShip()->load(std::move(cargo));
-    }
+    auto payMethod = [this](size_t cost){return this->player.pay(cost);};
+    player.getShip()->setDebt(payMethod);
+
+    auto changeAssortment = [this](){fillCargo(this->store, Game::storeCargoNumber);};
+    store.changeAssortment = changeAssortment;
+
+    fillCargo(*player.getShip(), startingPlayerCargoNumber);
+
     std::cout << '\n';
-    for (int i = 0; i < 3; ++i) {
-        auto cargo = generateCargo();
-        std::cout << cargo->getName() << '\n';
-        store.load(std::move(cargo));
-    }
+
+    fillCargo(store, storeCargoNumber);
 
     commands.push_back(std::make_unique<Menu>());
     commands.push_back(std::make_unique<TradeBuy>());

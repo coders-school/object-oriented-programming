@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Ship.hpp"
-#include "Cargo.hpp"
 #include <memory>
+#include "Cargo.hpp"
+#include "Ship.hpp"
 
 // Class responsible for managing player in the game world. Should be only one instance (for now).
 class Player {
@@ -17,6 +17,9 @@ public:
     size_t getMoney() const;
     size_t getAvailableSpace();
     size_t getSpeed() const;
+
+    bool pay(size_t money);
+    void income(size_t money);
 
 private:
     std::unique_ptr<Ship> ship_;

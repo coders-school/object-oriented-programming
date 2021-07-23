@@ -1,35 +1,39 @@
-#include <time.h>
-#include <array>
-#include <iostream>
-#include <memory>
-#include <string>
-#include <utility>
-#include <vector>
-#include "Cargo.hpp"
-#include "DefaultCargo.hpp"
-#include "Island.hpp"
-#include "Map.hpp"
-#include "Player.hpp"
-#include "Store.hpp"
-#include "Time.hpp"
-#include "Warehouse.hpp"
-#include "Fruit.hpp"
-#include "DryFruit.hpp"
-
 #include "Game.hpp"
+
+void testCargoShipPlayer();
+void testIslandMap();
+void testGetIsland();
+void testDryFruit();
+void testTime();
+void timePassTest();
+
+int main() {
+    srand(static_cast<unsigned int>(time(0)));
+    /*testCargoShipPlayer();
+    testIslandMap();
+    testGetIsland(),
+    testDryFruit();
+    testTime();
+    timePassTest();*/
+
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
+
+    return 0;
+}
 
 void testCargoShipPlayer() {
     Time* time = Time::getInstance();
     constexpr size_t testCases{10};
-    constexpr size_t testShipCapacity{100};
+    constexpr Capacity testShipCapacity{100};
     std::vector<std::unique_ptr<Cargo>> cargoVec;
-    cargoVec.reserve(testShipCapacity);
+    cargoVec.reserve(testShipCapacity.value);
     for (size_t i = 0; i < testCases; ++i) {
-        size_t cargoAmount = rand() % testShipCapacity;
+        size_t cargoAmount = rand() % testShipCapacity.value;
         for (size_t i = 0; i < cargoAmount; ++i) {
             cargoVec.push_back(generateCargo());
         }
-        auto pirateShip = std::make_unique<Ship>(testShipCapacity, 40, 10, "The Adventure Galley Pirate Ship", 0, std::move(cargoVec));
+        auto pirateShip = std::make_unique<Ship>(std::move(cargoVec), testShipCapacity, Crew{40}, Speed{10}, "The Adventure Galley Pirate Ship");
         cargoVec.clear();
         Player pirate(std::move(pirateShip), 1000);
         std::cout << "\n\n--- CARGO/SHIP/PLAYER TEST ---\n";
@@ -56,9 +60,10 @@ void testIslandMap() {
         }
     }
 }
-void testGetIsland(){
+
+void testGetIsland() {
     Map map;
-    Island::Coordinates FakeIsland(generatePosition(), generatePosition());
+    Island::Coordinates FakeIsland = generatePosition();
     std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
     if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
         std::cout << "^-First Island exists\n";
@@ -83,9 +88,9 @@ void testTime() {
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
     CargoDefault cargo3{"Cargo2", 100, 100};
-    Ship ship1{100, 100, 100, "Ship1", 1, {}};
-    Ship ship2{100, 100, 100, "Ship2", 2, {}};
-    Ship ship3{100, 100, 100, "Ship3", 3, {}};
+    Ship ship1{Capacity{100}, Crew{100}, Speed{100}, "Ship1"};
+    Ship ship2{Capacity{100}, Crew{100}, Speed{100}, "Ship2"};
+    Ship ship3{Capacity{100}, Crew{100}, Speed{100}, "Ship3"};
     Store store;
     time->nextDay();
 }
@@ -95,24 +100,9 @@ void timePassTest() {
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
     DryFruit cargo3{"Mango", 100, 100, 3};
-    Ship ship1{100, 100, 100, "Ship1", 1, {}};
-    Ship ship2{100, 100, 100, "Ship2", 2, {}};
-    Ship ship3{100, 100, 100, "Ship3", 3, {}};
+    Ship ship1{Capacity{100}, Crew{100}, Speed{100}, "Ship1"};
+    Ship ship2{Capacity{100}, Crew{100}, Speed{100}, "Ship2"};
+    Ship ship3{Capacity{100}, Crew{100}, Speed{100}, "Ship3"};
     Store store;
     time->update();
-}
-
-int main() {
-    srand(static_cast<unsigned int>(time(0)));
-    /*testCargoShipPlayer();
-    testIslandMap();
-    testGetIsland(),
-    testDryFruit();
-    testTime();
-    timePassTest();*/
-
-    Game game(start_money, game_days, final_goal);
-    game.startGame();
-
-    return 0;
 }

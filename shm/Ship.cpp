@@ -5,41 +5,51 @@
 
 #include <iostream>
 #include <stdexcept>
-Ship::Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec)
-    : Warehouse(std::move(cargoVec)), capacity_(capacity), maxCrew_(maxCrew), speed_(speed), name_(name), id_(id){}
 
-Ship::Ship(size_t maxCrew, size_t speed, const size_t id)
-    : Warehouse::Warehouse(), maxCrew_(maxCrew), speed_(speed), id_(id) {}
+size_t Ship::nextId = 0;
+
+Ship::Ship()
+    : Warehouse::Warehouse(), id_{nextId++} {}
+
+Ship::Ship(Crew maxCrew, Speed speed)
+    : Warehouse::Warehouse(), maxCrew_(maxCrew), speed_(speed), id_{nextId++} {}
+
+Ship::Ship(Capacity capacity, Crew maxCrew, Speed speed, const std::string& name)
+    : Warehouse(), capacity_(capacity), maxCrew_(maxCrew), speed_(speed), name_(name), id_{nextId++} {}
+
+
+Ship::Ship(CargoVec cargoVec, Capacity capacity, Crew maxCrew, Speed speed, const std::string& name)
+    : Warehouse(std::move(cargoVec)), capacity_(capacity), maxCrew_(maxCrew), speed_(speed), name_(name), id_{nextId++} {}
 
 void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
-Ship& Ship::operator-=(size_t numCrew) {
+Ship& Ship::operator-=(Crew numCrew) {
     if (crew_ < numCrew) {
         throw std::invalid_argument("Not allowed! You will be below zero!");
     }
-    crew_ -= numCrew;
+    crew_.value -= numCrew.value;
     return *this;
 }
 
-Ship& Ship::operator+=(size_t numCrew) {
+Ship& Ship::operator+=(Crew numCrew) {
     if (maxCrew_ - crew_ < numCrew) {
         throw std::invalid_argument("Not allowed! There will be too many people on the board!");
     }
-    crew_ += numCrew;
+    crew_.value += numCrew.value;
     return *this;
 }
 
-size_t Ship::getCapacity() const {
+Capacity Ship::getCapacity() const {
     return capacity_;
 }
 
-size_t Ship::getMaxCrew() const {
+Crew Ship::getMaxCrew() const {
     return maxCrew_;
 }
 
-size_t Ship::getSpeed() const {
+Speed Ship::getSpeed() const {
     return speed_;
 }
 
@@ -57,4 +67,15 @@ const Ship::CargoVec& Ship::getCargoVec() const {
 
 void Ship::nextDay() {
     std::cout << "Next Day in Ship " << name_ << '\n';
+    std::cout << "Crew income: " << crew_ << '\n';
+    if (debt) {
+        auto result = debt(crew_);
+        if (!result) {
+            std::cout << "Ship strike again.\n";
+        }
+    }
+}
+
+void Ship::setDebt(std::function<bool(size_t)> payFunction) {
+    debt = payFunction;  //PLAYER::pay
 }
