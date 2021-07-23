@@ -10,6 +10,7 @@ project(SHM)
 
 # set executables
 set(THIS_PROJECT_SRC_DIRECTORIES
+    source/Map.cpp
 )
 set(THIS_PROJECT_TESTS_DIRECTORIES
 )
@@ -18,7 +19,7 @@ set(THIS_PROJECT_TESTS_DIRECTORIES
 set(THIS_PROJECT_FLAGS
     -Wall
     -Werror 
-    -Weffc++
+    #-Weffc++
     -Wextra
     -pedantic
     -Wconversion 
