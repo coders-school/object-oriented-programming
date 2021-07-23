@@ -9,39 +9,69 @@
 
 class Cargo;
 
+struct Crew{
+    size_t value;
+    operator size_t(){
+        return value;
+    }
+};
+
+struct Capacity{
+    size_t value;
+    operator size_t(){
+        return value;
+    }
+};
+
+struct Speed{
+    size_t value;
+    operator size_t(){
+        return value;
+    }
+};
+
 class Ship : public Warehouse,
              public Timeable {
 public:
-    using CargoVec = std::vector<std::unique_ptr<Cargo>>;
-    Ship() = default;
-    Ship(CargoVec cargoVec, size_t capacity, size_t maxCrew, size_t speed, const std::string& name, const size_t id);
-    Ship(size_t maxCrew, size_t speed, const size_t id);
-    Ship(size_t capacity, size_t maxCrew, size_t speed, const std::string& name, size_t id, CargoVec cargoVec);
+    static constexpr size_t defaultCapacity = 5;
+    static constexpr size_t defaultMaxCrew_ = 10;
+    static constexpr size_t defaultCrew = 10;
+    static constexpr size_t defaultSpeed = 3;
+    using Warehouse::CargoVec;
+
+    Ship();
+    Ship(Crew maxCrew, Speed speed);
+    Ship(Capacity capacity, Crew maxCrew, Speed speed, const std::string& name);
+    Ship(CargoVec cargoVec, Capacity capacity, Crew maxCrew, Speed speed, const std::string& name);
+
     ~Ship() override = default;
 
-    void setName(const std::string& name);
-
     //both operators throw std::invalid_argument. if you will use operators remember about try-catch.
-    Ship& operator-=(size_t numCrew);
-    Ship& operator+=(size_t numCrew);
+    Ship& operator-=(Crew numCrew);
+    Ship& operator+=(Crew numCrew);
 
-    size_t getCapacity() const;
-    size_t getMaxCrew() const;
-    size_t getSpeed() const;
+    Capacity getCapacity() const;
+    Crew getMaxCrew() const;
+    Speed getSpeed() const;
     const std::string& getName() const;
     size_t getId() const;
     const CargoVec& getCargoVec() const;
 
-    void nextDay() override;
+    void setName(const std::string& name);
     void setDebt(std::function<bool(size_t)> payFunction);
 
+    //override Timeable
+    void nextDay() override;
+    //
+
 private:
-    size_t capacity_ = 0;
-    size_t maxCrew_ = 10;
-    size_t crew_ = 10;
-    size_t speed_ = 0;
+    static size_t nextId;
+    Capacity capacity_ = {defaultCapacity};
+    Crew maxCrew_ = {defaultMaxCrew_};
+    Crew crew_ = {defaultCrew};
+    Speed speed_ = {defaultSpeed};
     std::string name_;
-    const size_t id_ = -1;
+    const size_t id_;
 
     std::function<bool(size_t)> debt{};
 };

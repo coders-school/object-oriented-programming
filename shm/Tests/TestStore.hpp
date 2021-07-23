@@ -163,7 +163,7 @@ TEST_CASE("player sell without ship to empty store", "[Player][Store][buy]") {  
 }
 
 TEST_CASE("player sell noexisting cargo to empty store", "[Player][Ship][Store][buy]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     Store store;
 
@@ -174,7 +174,7 @@ TEST_CASE("player sell noexisting cargo to empty store", "[Player][Ship][Store][
 }
 
 TEST_CASE("player sell more of single cargo than have to empty store", "[Player][Ship][Store][buy]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     fillWithGeneratedData(player.getShip());
     Store store;
@@ -201,7 +201,7 @@ void printCargo(const T& container) {
 }
 
 TEST_CASE("player sell half of single cargo than have to empty store", "[Player][Ship][Store][buy]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     fillWithGeneratedData(player.getShip());
     Store store;
@@ -225,7 +225,7 @@ TEST_CASE("player sell half of single cargo than have to empty store", "[Player]
 }
 
 TEST_CASE("player sell full of single cargo to empty store", "[Player][Ship][Store][buy]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     fillWithGeneratedData(player.getShip());
     Store store;
@@ -253,7 +253,7 @@ TEST_CASE("player sell full of single cargo to empty store", "[Player][Ship][Sto
 }
 
 TEST_CASE("player sell full of all cargo to empty store", "[Player][Ship][Store][buy]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     fillWithGeneratedData(player.getShip());
 
@@ -300,7 +300,7 @@ TEST_CASE("rich player buy without ship from empty store", "[Player][Store][sell
 }
 
 TEST_CASE("rich player with empty ship buy noexisting cargo from empty store", "[Player][Ship][Store][sell]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     Store store;
 
@@ -311,7 +311,7 @@ TEST_CASE("rich player with empty ship buy noexisting cargo from empty store", "
 }
 
 TEST_CASE("rich player with empty ship buy more of single cargo than store have", "[Player][Ship][Store][sell]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     Store store;
     fillWithGeneratedData(&store);
@@ -328,7 +328,7 @@ TEST_CASE("rich player with empty ship buy more of single cargo than store have"
 }
 
 TEST_CASE("rich player with empty ship buy half of single cargo than store have", "[Player][Ship][Store][sell]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     Store store;
     fillWithGeneratedData(&store);
@@ -347,7 +347,7 @@ TEST_CASE("rich player with empty ship buy half of single cargo than store have"
 }
 
 TEST_CASE("rich player with empty ship buy full of single cargo from empty store", "[Player][Ship][Store][buy]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
     Store store;
     fillWithGeneratedData(&store);
@@ -366,7 +366,7 @@ TEST_CASE("rich player with empty ship buy full of single cargo from empty store
 }
 
 TEST_CASE("rich player with empty ship with enough capacity buy full of all cargo from store", "[Player][Ship][Store][sell]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
 
     REQUIRE(player.getAvailableSpace() == fullCappacity);
@@ -390,7 +390,7 @@ TEST_CASE("rich player with empty ship with enough capacity buy full of all carg
 }
 
 TEST_CASE("rich player with empty ship with enough capacity buy half of all cargo from store", "[Player][Ship][Store][sell]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
 
     REQUIRE(player.getAvailableSpace() == fullCappacity);
@@ -414,7 +414,7 @@ TEST_CASE("rich player with empty ship with enough capacity buy half of all carg
 }
 
 TEST_CASE("rich player with empty ship with enough capacity buy random of all cargo from store", "[Player][Ship][Store][sell]") {  //use Player and Ship
-    auto ship = std::make_unique<Ship>(fullCappacity, 0, 0, "Ship", 0, std::vector<std::unique_ptr<Cargo>>{});
+    auto ship = std::make_unique<Ship>(shipCapacity, shipMaxCrew, shipSpeed, "Ship");
     Player player(std::move(ship), playerMoney);
 
     REQUIRE(player.getAvailableSpace() == fullCappacity);

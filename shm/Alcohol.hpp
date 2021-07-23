@@ -8,6 +8,7 @@ constexpr size_t alcoholPriceFor96percent = 100u;
 class Alcohol : public Cargo {
 public:
     static size_t alcoholBasePriceFor96percent_;
+    static constexpr std::string_view suffix = " (Alcohol)";
 
     Alcohol(std::string name, size_t amount, unsigned char percentage);
     ~Alcohol() override = default;
@@ -15,8 +16,6 @@ public:
     bool operator==(const Cargo& other) const override;
 
     size_t getPrice() const override;
-
-    static constexpr std::string_view suffix = " (Alcohol)";
 
 protected:
     unsigned char percentage_ = 0;

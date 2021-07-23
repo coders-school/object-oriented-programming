@@ -18,29 +18,19 @@ public:
     Store() = default;
     virtual ~Store() = default;
 
-    //store buy from player
     Response buy(const Cargo* const cargo, size_t amount, Player* player);
-    //store sell to player
     Response sell(const Cargo* const cargo, size_t amount, Player* player);
 
+    Cargo* findCargoInStore(const Cargo* const exampleCargo) const;
+    size_t getCargoNum() const;
+
+    //Timeable override
     void nextDay() override;
-
-    size_t getCargoNum() {
-        return cargoVec_.size();
-    }
-    //private:
-
-    void load(std::unique_ptr<Cargo> cargo) override;
-    void unload(const Cargo* const cargo) override;
-
-    std::function<void()> changeAssortment;
+    //
 
     friend std::ostream& operator<<(std::ostream&, const Store&);
-    //find comperable cargo in store
-    Cargo* findCargoInStore(const Cargo* const exampleCargo) const;
 
-    //private:
-    //StoreCargoVec cargoVec_{};
+    std::function<void()> changeAssortment;
 };
 
 std::ostream& operator<<(std::ostream& out, const Store& store);

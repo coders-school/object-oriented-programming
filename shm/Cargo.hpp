@@ -7,12 +7,9 @@
 #include "Time.hpp"
 #include "Timeable.hpp"
 
-#include <assert.h>
-
 class Cargo : public Timeable {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
-
     virtual ~Cargo() = default;
 
     //operator-= throws std::invalid_argument. if you will use operator remember about try-catch.
@@ -29,9 +26,11 @@ public:
     void removeSuffix(const std::string_view suffix);
     void addSuffix(const std::string_view suffix);
 
-    void nextDay()override;
+    virtual std::unique_ptr<Cargo> split(size_t amountPart) final;
 
-    std::unique_ptr<Cargo> split(size_t amountPart);
+    //override Timeable
+    void nextDay()override;
+    //
 
 protected:
     std::string name_{};

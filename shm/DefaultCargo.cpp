@@ -1,9 +1,7 @@
 
 #include "DefaultCargo.hpp"
 
-#include <assert.h>
-#include <stdexcept>
-#include "Cargo.hpp"
+#include <cassert>
 
 size_t CargoDefault::getPrice() const {
     return basePrice_;

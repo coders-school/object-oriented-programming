@@ -59,6 +59,18 @@ size_t Player::getSpeed() const {
     return 0;
 }
 
+bool Player::pay(size_t money) {
+    if (money > money_) {
+        return false;
+    }
+    money_ -= money;
+    return true;
+}
+
+void Player::income(size_t money) {
+    money_ += money;
+}
+
 void Player::calculateAvailableSpace() {
     if (!ship_) {
         availableSpace_ = 0;
@@ -66,8 +78,8 @@ void Player::calculateAvailableSpace() {
     }
     const auto& shipCapacity = ship_->getCapacity();
     const auto& currentCargoSize = ship_->getCargoVec().size();
-    if (shipCapacity <= currentCargoSize) {
+    if (shipCapacity.value <= currentCargoSize) {
         availableSpace_ = 0;
     }
-    availableSpace_ = shipCapacity - currentCargoSize;
+    availableSpace_ = shipCapacity.value - currentCargoSize;
 }

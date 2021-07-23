@@ -1,5 +1,5 @@
 #include "Item.hpp"
-#include <assert.h>
+#include <cassert>
 
 Item::Item(std::string name, size_t amount, size_t basePrice, Quality quality)
     : Cargo(name, amount, basePrice), quality_{quality} 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <string>
 #include "Cargo.hpp"
 
-//temporary for same Functionality as old Cargo
+#include <memory>
+#include <string>
+
 class CargoDefault : public Cargo {
 public:
     using Cargo::Cargo;
@@ -14,5 +14,6 @@ public:
 
     size_t getPrice() const override;
 
+private:
     std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };

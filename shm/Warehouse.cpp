@@ -12,6 +12,10 @@ const Warehouse::CargoVec& Warehouse::getCargoVec() const {
     return cargoVec_;
 }
 
+void Warehouse::clear(){
+    cargoVec_.clear();
+}
+
 void Warehouse::load(std::unique_ptr<Cargo> cargo) {
     if (!cargo) {
         return;

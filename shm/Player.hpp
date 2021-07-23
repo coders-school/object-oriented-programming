@@ -18,17 +18,8 @@ public:
     size_t getAvailableSpace();
     size_t getSpeed() const;
 
-    bool pay(size_t money) {
-        if (money > money_) {
-            return false;
-        }
-        money_ -= money;
-        return true;
-    }
-
-    void income(size_t money) {
-        money_ += money;
-    }
+    bool pay(size_t money);
+    void income(size_t money);
 
 private:
     std::unique_ptr<Ship> ship_;

@@ -3,39 +3,8 @@
 #include "Cargo.hpp"
 #include "Time.hpp"
 
+#include <cassert>
 #include <iostream>
-#include <assert.h>
-
-std::optional<size_t> Cargo::haveSuffix(const std::string_view suffix) const{
-    if (name_.empty() and name_.size() < suffix.size()) {
-           return {};
-    }
-    std::string_view sv(name_);
-    auto trim_pos = sv.find(suffix, sv.size() - suffix.size());
-    if (trim_pos != sv.npos) {
-        return trim_pos;
-    }
-    return {};
-}
-
-void Cargo::removeSuffix(const std::string_view suffix){
-    if (auto trim_pos = haveSuffix(suffix)) {
-        auto trim_suffix = trim_pos.value();
-        name_.shrink_to_fit();
-        auto size = name_.size();
-        size_t suffix_lenght = suffix.size();
-        auto restOfSuffixLenght = size - trim_suffix - suffix_lenght;
-        name_ = name_.substr(0, trim_pos.value())
-        + name_.substr(trim_suffix + suffix_lenght, restOfSuffixLenght);//save rest of suffixes
-    }
-}
-
-void Cargo::addSuffix(const std::string_view suffix) {
-    if (haveSuffix(suffix)) {
-        return;
-    }
-    name_ += suffix;
-}
 
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     : name_{name}, amount_{amount}, basePrice_{basePrice} {}
@@ -63,6 +32,36 @@ size_t Cargo::getAmount() const {
 
 size_t Cargo::getBasePrice() const {
     return basePrice_;
+}
+
+std::optional<size_t> Cargo::haveSuffix(const std::string_view suffix) const {
+    if (name_.empty() and name_.size() < suffix.size()) {
+        return {};
+    }
+    std::string_view sv(name_);
+    auto trim_pos = sv.find(suffix, sv.size() - suffix.size());
+    if (trim_pos != sv.npos) {
+        return trim_pos;
+    }
+    return {};
+}
+
+void Cargo::removeSuffix(const std::string_view suffix) {
+    if (auto trim_pos = haveSuffix(suffix)) {
+        auto trim_suffix = trim_pos.value();
+        name_.shrink_to_fit();
+        auto size = name_.size();
+        size_t suffix_lenght = suffix.size();
+        auto restOfSuffixLenght = size - trim_suffix - suffix_lenght;
+        name_ = name_.substr(0, trim_pos.value()) + name_.substr(trim_suffix + suffix_lenght, restOfSuffixLenght);  //save rest of suffixes
+    }
+}
+
+void Cargo::addSuffix(const std::string_view suffix) {
+    if (haveSuffix(suffix)) {
+        return;
+    }
+    name_ += suffix;
 }
 
 std::unique_ptr<Cargo> Cargo::split(size_t amountPart) {
