@@ -20,7 +20,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , gameDays_(gameDays)
     , finalGoal_(finalGoal)  
     , time_(std::make_shared<Time>())
-    , map_(std::make_shared<Map>())
+    , map_(std::make_shared<Map>(time_.get()))
     , player_(std::make_unique<Player>(std::make_unique<Ship>(1, 25, 100, time_.get(), nullptr),
                                        map_, 100, 10000, time_.get()))
 {

@@ -7,7 +7,9 @@
 #include <memory>
 #include <random>
 
-Map::Map() {
+#include "shm/inc/Time.hpp"
+
+Map::Map(Time* time) {
     std::mt19937 generator(std::random_device{}());
     std::uniform_int_distribution<size_t> distribution{
         COORDINATE_MIN, COORDINATE_MAX
