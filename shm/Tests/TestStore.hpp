@@ -120,7 +120,7 @@ TEST_CASE("unload will throw on wrong ptr", "[Store]") {
     CargoDefault exemplar{noExistingCargoName, fullQuantity, singleCargoCost};
 
     REQUIRE_THROWS(store.unload(&exemplar));
-    REQUIRE_THROWS_AS(store.unload(&exemplar), const std::logic_error&);
+    REQUIRE_THROWS_AS(store.unload(&exemplar), std::logic_error);
     REQUIRE_THROWS_WITH(store.unload(&exemplar), "Store: Not my Cargo!");
 }
 

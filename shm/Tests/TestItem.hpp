@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../DefaultCargo.hpp"
-#include "../Item.hpp"
+#include "../Cargos/DefaultCargo.hpp"
+#include "../Cargos/Item.hpp"
 
 constexpr auto commonQualityValue = 80;
 constexpr auto rareQualityValue = 100;

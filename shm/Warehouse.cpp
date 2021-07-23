@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <vector>
 
-#include "Cargo.hpp"
+#include "Cargos/Cargo.hpp"
 #include "Warehouse.hpp"
 
 Warehouse::Warehouse(CargoVec cargoVec)

@@ -4,21 +4,22 @@ project(shmProject)
 
 set(FILES 
     Store.cpp 
-    Cargo.cpp 
-    Item.cpp 
-    Fruit.cpp 
-    Alcohol.cpp 
+    Cargos/Cargo.cpp 
+    Cargos/Item.cpp 
+    Cargos/Fruit.cpp 
+    Cargos/Alcohol.cpp 
+    Cargos/DefaultCargo.cpp
+    Cargos/DryFruit.cpp 
     Island.cpp 
     Map.cpp 
     Player.cpp 
     Ship.cpp 
     Time.cpp 
     Timeable.cpp 
-    DefaultCargo.cpp
-    DryFruit.cpp 
     Warehouse.cpp
     Game.cpp
-    Perishable.cpp)
+    Perishable.cpp
+    GeneralPrint.cpp)
 
 set(FLAGS -Wall -Wextra -Werror -pedantic -Wconversion)
 

@@ -7,6 +7,10 @@ void testDryFruit();
 void testTime();
 void timePassTest();
 
+constexpr size_t start_money = 1'000;
+constexpr size_t game_days = 100;
+constexpr size_t final_goal = 2'000;
+
 int main() {
     srand(static_cast<unsigned int>(time(0)));
     /*testCargoShipPlayer();
@@ -21,6 +25,8 @@ int main() {
 
     return 0;
 }
+
+#include "Cargos/Cargos.hpp"
 
 void testCargoShipPlayer() {
     Time* time = Time::getInstance();

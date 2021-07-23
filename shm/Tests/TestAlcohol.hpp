@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Alcohol.hpp"
-#include "../DefaultCargo.hpp"
+#include "../Cargos/Alcohol.hpp"
+#include "../Cargos/DefaultCargo.hpp"
 
 TEST_CASE("Value of Alcohol with 0 percentage", "[Item]") {
     const auto percentage = 0;

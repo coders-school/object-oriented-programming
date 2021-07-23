@@ -4,10 +4,10 @@
 #include <array>
 #include <catch/catch.hpp>
 
-#include "../Alcohol.hpp"
-#include "../DefaultCargo.hpp"
-#include "../Item.hpp"
-#include "../DryFruit.hpp"
+#include "../Cargos/Alcohol.hpp"
+#include "../Cargos/DefaultCargo.hpp"
+#include "../Cargos/Item.hpp"
+#include "../Cargos/DryFruit.hpp"
 
 #include "TestCoordinates.hpp"
 

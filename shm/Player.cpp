@@ -3,7 +3,7 @@
 #include <memory>
 #include <utility>
 #include <vector>
-#include "Cargo.hpp"
+#include "Cargos/Cargo.hpp"
 #include "Ship.hpp"
 
 Player::Player(std::unique_ptr<Ship> ship, const size_t& money)
