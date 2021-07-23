@@ -19,6 +19,8 @@ public:
     void dellFromVecOfCargos(std::shared_ptr<Cargo>);
     bool checkAvaiablityCargoInStore(std::shared_ptr<Cargo>);
     size_t nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore);
+    friend std::ostream& operator<<(std::ostream& out, const Store& store);
+    std::vector<std::shared_ptr<Cargo>> returnCargosVector() const { return cargosInStore; }
 
 private:
     std::vector<std::shared_ptr<Cargo>> cargosInStore{};

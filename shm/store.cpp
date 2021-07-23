@@ -39,10 +39,10 @@ Store::Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
 Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     std::shared_ptr<Cargo> ptrCargo(cargo);
     auto ship = player->getShip();
-    ship->dellAmounntFromShipCargo(ptrCargo,amount);
+    ship->dellAmounntFromShipCargo(ptrCargo, amount);
     player->getMoney() + (cargo->getPrice() * amount);
 
-    return Response::done;  
+    return Response::done;
 }
 
 size_t Store::nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore) {
@@ -51,13 +51,21 @@ size_t Store::nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore) {
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(-10, 10);
     std::uniform_int_distribution<> distr1(0, 1);
-    if(distr1(gen) == 0) {
-        for(int i = 0; i < distr(gen); i++) {
+    if (distr1(gen) == 0) {
+        for (int i = 0; i < distr(gen); i++) {
             cargosInStore.push_back(ptrCargo);
         }
     } else {
-        for(int i = 0; i < distr(gen); i++) {
+        for (int i = 0; i < distr(gen); i++) {
             cargosInStore.pop_back();
         }
     }
+}
+
+std::ostream& operator<<(std::ostream& out, const Store& store) {
+    auto presetCargoInStore = store.returnCargosVector();
+    for (int i = 0; i < presetCargoInStore.size(); ++i) {
+        out << presetCargoInStore[i]->getName() << ' ' << presetCargoInStore[i]->getBasePrice() << presetCargoInStore[i]->getAmount() << '\n';
+    }
+    return out;
 }
