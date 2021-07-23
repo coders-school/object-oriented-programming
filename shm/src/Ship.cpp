@@ -19,7 +19,9 @@ Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t
     , capacity_(capacity)
     , time_(time)
     , delegate_(delegate)
-{}
+{
+    time_->addSubscriber(this);
+}
 
 Ship::Ship(int id, size_t speed, size_t maxCrew, Time* time, Delegate* delegate) 
     : Ship(id, "Ship", speed, maxCrew, 100, time, delegate)
