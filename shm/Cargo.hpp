@@ -9,7 +9,6 @@ protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
-    friend size_t operator+(size_t sum, const Cargo& cargo);
 
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
@@ -22,8 +21,11 @@ public:
     virtual const std::string& getName() const = 0;
     virtual size_t getAmount() const = 0;
     virtual size_t getBasePrice() const = 0;
-    friend size_t operator+(size_t sum, const Cargo& cargo);
+    //friend size_t operator+(size_t sum, const Cargo& cargo);
 };
 
+/* size_t operator+(size_t sum, const std::shared_ptr<Cargo> & cargo){
+    return sum + cargo->getAmount();
+} */
 
 #endif

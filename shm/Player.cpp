@@ -1,4 +1,5 @@
 #include "Player.hpp"
+#include <iostream>
 #include <numeric>
 
 Player::Player(std::unique_ptr<Ship>& ship, int money, int availableSpace)
@@ -9,15 +10,34 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
 }
 
 size_t Player::calculateAvailableSpace() {
-    int cargoAmount = 0;
-    int capacity = ship_->getCapacity();
+    size_t cargoAmount = 0;
+    size_t capacity = ship_->getCapacity();
     std::vector<std::shared_ptr<Cargo>> cargoList = ship_->getCargoList();
 
-    std::accumulate(cargoList.begin(), cargoList.end(),0);
+    cargoAmount = std::accumulate(cargoList.begin(),
+                                  cargoList.end(),
+                                  0,
+                                  [](int amount, std::shared_ptr<Cargo> cargo) { return amount += cargo->getAmount(); });
 
     if (capacity - cargoAmount < 0) {
         return 0;
     }
 
     return capacity - cargoAmount;
+}
+
+void Player::printCargo() const {
+    if (!ship_) {
+        return;
+    }
+
+    std::cout << "Ship capacity: " << ship_->getCapacity() << '\n'
+              << "Available space: " << availableSpace_ << '\n';
+    size_t i{1};
+    for (const auto& cargo : ship_->getCargoList()) {
+        std::cout << i++ << ". Name: " << cargo->getName()
+                  << ", Amount: " << cargo->getAmount()
+                  << ", Base price: " << cargo->getBasePrice()
+                  << '\n';
+    }
 }

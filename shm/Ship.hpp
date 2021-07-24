@@ -14,7 +14,11 @@ private:
     size_t maxCrew_;
     size_t capacity_;
     size_t crew_;
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::shared_ptr<Cargo>> cargoList_;
+
+    Cargo* findMatchCargo(Cargo* cargo);
+    void removeFromStorage(Cargo* cargo);
+
 
 public:
     Ship();
@@ -26,10 +30,13 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
-    std::shared_ptr<Cargo> getCargo(size_t index) const { return cargo_[index]; };
-    std::vector<std::shared_ptr<Cargo>> getCargoList() const { return cargo_; };
+    std::shared_ptr<Cargo> getCargo(size_t index) const { return cargoList_[index]; };
+    std::vector<std::shared_ptr<Cargo>> getCargoList() const { return cargoList_; };
+    void printCargolist();
 
     void setName(const std::string& name);
+    void load(std::shared_ptr<Cargo> cargo);
+    void unload(Cargo* cargo);  
 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);

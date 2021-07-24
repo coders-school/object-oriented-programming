@@ -14,6 +14,7 @@ private:
     size_t money_;
     size_t availableSpace_;
     size_t calculateAvailableSpace();
+    
 
 public:
     Player(std::unique_ptr<Ship>& ship, int money, int availableSpace);
@@ -21,6 +22,8 @@ public:
     std::unique_ptr<Ship> getShip() { return std::move(ship_); };
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
+    
+    void printCargo() const;
 
     size_t getSpeed() const { return ship_->getSpeed(); };
     std::shared_ptr<Cargo> getCargo(size_t index) const;
