@@ -14,10 +14,6 @@ Fruit::~Fruit()
 
 size_t Fruit::getPrice() const
 {
-    if (time_elapsed_ >= expiry_date_)
-    {
-        return 0;
-    }
     return static_cast<size_t>(basePrice_ * ((float)(expiry_date_ - time_elapsed_)) / expiry_date_);
 }
 
@@ -64,7 +60,12 @@ bool Fruit::operator==(const Cargo& other) const
     }
 }
 
-void Fruit::nextDay()
+
+void Fruit::nextDay() 
 {
+    if (time_elapsed_ >= expiry_date_)
+    {
+        basePrice_ = 0;
+    }
     std::cout << "Next day\n";
 }

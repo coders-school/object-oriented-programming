@@ -24,6 +24,8 @@ public:
     size_t getTimeElapsed() const { return time_elapsed_; }
     size_t getExpiryDate() const { return expiry_date_; }
 
+    void nextDay() override;
+
 protected:
     size_t time_elapsed_{0};
     size_t expiry_date_;
