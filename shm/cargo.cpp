@@ -19,6 +19,7 @@
 //     return *this;
 // }
 
+
 bool Cargo::operator==(const Cargo &cargo) const
 {
     return name_ == cargo.name_ && amount_ == cargo.amount_ && basePrice_ == cargo.basePrice_;
@@ -37,7 +38,7 @@ void Cargo::reduceAmount(){
     }
 }
 
-// void Cargo::increaseAmount()
-// {
-
-// }
+void Cargo::increaseAmount()
+{
+    amount_ += 1;
+}

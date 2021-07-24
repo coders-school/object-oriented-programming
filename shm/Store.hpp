@@ -17,12 +17,12 @@ public:
     Store(int money, size_t availableSpace);
     
     virtual ~Store();   
-    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
-    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
+    Response buy(Cargo* cargo, size_t amount, Player* player);
+    Response sell(Cargo* cargo, size_t amount, Player* player);
 
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
     Cargo* findMatchCargo(Cargo* cargo);
-    std::vector<std::shared_ptr<Cargo>> cargo_;
+    std::vector<std::shared_ptr<Cargo>> storeCargo;
     void nextDay() override;
     
     void printStoreCargo();

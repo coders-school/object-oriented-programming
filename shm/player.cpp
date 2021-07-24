@@ -8,6 +8,8 @@ Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace) : Stor
     ship_ = std::move(ship);
 }
 
+Player::~Player() {}
+
 const std::unique_ptr<Ship>& Player::getShip() { 
     return ship_; 
 }
@@ -48,11 +50,18 @@ size_t Player::calculateAvailableSpace() {
     return capacity - cargoAmount;
 }
 
-void Player::load(std::shared_ptr<Cargo> loadCargo, size_t amount)
+void Player::load(Cargo* loadCargo, size_t amount)
 {
-    std::cout << "wywołuje sie? " << '\n';
+    loadCargo->printCargo();
+    for(auto i = 0; i < amount; i++)
+    {
+        loadCargo->reduceAmount();
+    }
+    std::cout << "get amount: " << loadCargo->getAmount();
+    ship_->addCargo(loadCargo); //<------------------------- Core dumped !!
+    
 }
-void Player::unload(std::shared_ptr<Cargo> unloadCargo, size_t amount)
+void Player::unload(Cargo* unloadCargo, size_t amount)
 {
 
 }

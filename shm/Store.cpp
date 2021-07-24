@@ -7,16 +7,16 @@
 
 Store::Store(int money, size_t availableSpace) : Storable(money, availableSpace) 
     {
-        cargo_.push_back(std::make_shared<Fruit>(10, "Banana", 10, 100, 0));// Fruit(size_t amount, const std::string& name, size_t base_price, size_t expiry_date, size_t time_elapsed)
-        cargo_.push_back(std::make_shared<Fruit>(10, "Apple", 10, 100, 0));
-        cargo_.push_back(std::make_shared<Alcohol>(10, "Wodka", 30, 70));// Alcohol(size_t amount, const std::string& name, size_t base_price, size_t percentage);
-        cargo_.push_back(std::make_shared<Item>(1, "Hook", 50, Item::Rarity::common));//Item(size_t amount, const std::string &name, size_t base_price, Rarity rarity);
+        storeCargo.push_back(std::make_shared<Fruit>(10, "Banana", 10, 100, 0));// Fruit(size_t amount, const std::string& name, size_t base_price, size_t expiry_date, size_t time_elapsed)
+        storeCargo.push_back(std::make_shared<Fruit>(10, "Apple", 10, 100, 0));
+        storeCargo.push_back(std::make_shared<Alcohol>(10, "Wodka", 30, 70));// Alcohol(size_t amount, const std::string& name, size_t base_price, size_t percentage);
+        storeCargo.push_back(std::make_shared<Item>(1, "Hook", 50, Item::Rarity::common));//Item(size_t amount, const std::string &name, size_t base_price, Rarity rarity);
 
     }
  Store::~Store(){}
 
 Cargo* Store::findMatchCargo(Cargo* cargo) {
-    for (auto& el : cargo_) {
+    for (auto& el : storeCargo) {
         if(*el == *cargo) {
             return el.get();
         }
@@ -24,9 +24,9 @@ Cargo* Store::findMatchCargo(Cargo* cargo) {
     return nullptr;
 }
 
-Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)//Buying cargo from store to player
+Response Store::buy(Cargo* cargo, size_t amount, Player *player)//Buying cargo from store to player
 {
-    if(findMatchCargo(cargo.get()))
+    if(findMatchCargo(cargo))
     {
         auto price = amount * cargo->getBasePrice();
 
@@ -47,7 +47,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
             std::cout << "getMoney" << '\n';
             return Response::lack_of_money;
         }
-
+        
         player->SpendMoney(price);
         player->load(cargo, amount);
 
@@ -63,9 +63,9 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
 }
 
 
-Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) // Selling cargo from Player to Store
+Response Store::sell(Cargo* cargo, size_t amount, Player *player) // Selling cargo from Player to Store
 {
-    if(findMatchCargo(cargo.get()))
+    if(findMatchCargo(cargo))
     {
         std::cout << "There is cargo" << '\n';
         auto price = amount * cargo->getBasePrice();
@@ -86,7 +86,7 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player
             return Response::lack_of_money;
         }
 
-        player->unload(cargo);
+        player->unload(cargo, amount);
         player->EarnMoney(price);
 
         return Response::done;
@@ -108,13 +108,13 @@ std::shared_ptr<Cargo> Store::getCargo(size_t index) const
 }
 
 void Store::nextDay(){
-    for (auto el : cargo_) {
-        el.get()->reduceAmount();
+    for (auto el : storeCargo) {
+        //el.get()->reduceAmount();
     }
 }
 
 void Store::printStoreCargo(){
-    for(auto el : cargo_) {
+    for(auto el : storeCargo) {
         std::cout << '\n';
         el -> printCargo();
     }

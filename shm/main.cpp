@@ -107,7 +107,7 @@ int main()
    Store sklep(20, 100);
    std::cout << sklep.getAvailableSpace() << '\n';
    sklep.printStoreCargo();
-   //StatekTester->printShipCargo();
+   Tester.getShip()->printShipCargo();
    if(sklep.findMatchCargo(&Banana))
    {
        std::cout << "bananas!" << '\n';
@@ -122,11 +122,14 @@ int main()
    }
    
    std::cout <<  "tester money: " << Tester.getMoney() << '\n';
-   //sklep.buy(Banana, 10, &Tester);
-   auto testCargoSklepu = sklep.cargo_.at(0);
-   sklep.buy(testCargoSklepu, 5, &Tester);
+   //sklep.buy(Banana, 5, &Tester);
+   auto testCargoSklepu = sklep.storeCargo.at(0);
+   sklep.buy(testCargoSklepu.get(), 5, &Tester);
    //StatekTester->cargo_.push_back(testCargoSklepu);
    std::cout <<  "tester money: " << Tester.getMoney() << '\n';
    std::cout << "sklep money: " << sklep.getMoney() << '\n';
+   std::cout << "ship capacity: " << Tester.getShip()->getCapacity() << '\n';
+   Tester.getShip()->printShipCargo();
+
    
 }

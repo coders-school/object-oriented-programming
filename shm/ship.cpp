@@ -1,6 +1,22 @@
 #include "ship.hpp"
 #include "player.hpp"
 
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
+        : capacity_(capacity)
+        , maxCrew_(maxCrew)
+        , crew_(0)
+        , speed_(speed)
+        , name_(name)
+        , id_(id)
+    { 
+        shipCargo.reserve(3);
+        shipCargo.push_back(std::make_shared<Fruit>(10, "Apple", 10, 100, 0));
+        shipCargo.push_back(std::make_shared<Fruit>(10, "ejple", 10, 100, 0));
+        shipCargo.push_back(std::make_shared<Fruit>(10, "wejple", 10, 100, 0));
+    }
+
+Ship::~Ship(){}
+
 Ship& Ship::operator-=(size_t num) {
     if (crew_ < num) {
         crew_ = 0;
@@ -16,6 +32,7 @@ Ship& Ship::operator+=(size_t num) {
 }
 
 void Ship::addCargo(Cargo* item) {
+    printShipCargo();
     shipCargo.emplace_back(item);
 }
 Cargo* Ship::findMatchCargo(Cargo* cargo) {
@@ -50,7 +67,7 @@ void Ship::nextDay() {
 }
 void Ship::printShipCargo()
 {
-    for(auto & el : CargoOnShip)
+    for(auto & el : shipCargo)
     {
         std::cout << '\n';
         el -> printCargo();
