@@ -1,4 +1,5 @@
 #include "alcohol.hpp"
+#include <iostream>
 
 size_t Alcohol::getPrice() const
 {
@@ -35,6 +36,8 @@ bool Alcohol::operator==(const Cargo& other) const {
     }
 }
 
-void Alcohol::nextDay(){
+void Alcohol::nextDay()
+{
     basePrice_ += 2;
+    std::cout << "Next day\n";
 }

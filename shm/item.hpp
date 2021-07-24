@@ -1,5 +1,8 @@
 #pragma once
 #include "cargo.hpp"
+#include <iostream>
+
+class Time;
 
 enum class Rarity
     {
@@ -13,8 +16,7 @@ class Item : public Cargo
 {
 public:
 
-    Item(const std::string &name, size_t amount, size_t basePrice, Rarity rarity)
-        : Cargo(name, amount, basePrice), rarity_{rarity} {}
+    Item(const std::string &name, size_t amount, size_t basePrice, Rarity rarity, Time *time);
     ~Item() override = default;
 
     // override from Cargo
@@ -27,6 +29,7 @@ public:
     Cargo &operator+=(size_t amount) override;
     Cargo &operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;
+    void nextDay() override;
 
     void nextDay() override;
 

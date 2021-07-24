@@ -4,8 +4,11 @@
 //Class responsible for representing alcohol in the game
 class Alcohol : public Cargo {
 public:
-    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage)
-        :Cargo(name, amount, basePrice), percentage_ {percentage} {}
+    Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage, Time *time)
+        : Cargo(name, amount, basePrice, time)
+        , percentage_ {percentage}
+        {}
+
     ~Alcohol() override = default;
 
     // override from Cargo
@@ -19,7 +22,6 @@ public:
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;
     void nextDay() override;
-
 
 private:
     size_t percentage_;

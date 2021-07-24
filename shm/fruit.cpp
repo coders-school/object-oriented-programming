@@ -1,9 +1,16 @@
 #include <iostream>
 #include "fruit.hpp"
 
- Fruit::Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed)
-        : Cargo(name, amount, basePrice), expiry_date_(expiry_date), time_elapsed_(time_elapsed) {}
-Fruit::~Fruit(){}
+ Fruit::Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed, Time *time)
+        : Cargo(name, amount, basePrice, time)
+        , expiry_date_(expiry_date)
+        , time_elapsed_(time_elapsed)
+        {}
+
+Fruit::~Fruit()
+{
+    // this->time_.detach(this);
+}
 
 size_t Fruit::getPrice() const
 {
@@ -32,7 +39,6 @@ Cargo &Fruit::operator+=(size_t amount)
 
 Cargo &Fruit::operator-=(size_t amount)
 {
-
     if (amount_ < amount)
     {
         amount_ = 0;
@@ -44,8 +50,8 @@ Cargo &Fruit::operator-=(size_t amount)
     return *this;
 }
 
-bool Fruit::operator==(const Cargo& other) const {
- 
+bool Fruit::operator==(const Cargo& other) const 
+{
     try {
         const Fruit& other_fruit = dynamic_cast<const Fruit&>(other);
         return Cargo::operator==(other) && expiry_date_ == other_fruit.expiry_date_;
@@ -54,9 +60,12 @@ bool Fruit::operator==(const Cargo& other) const {
     }
 }
 
-void Fruit::nextDay() {
+
+void Fruit::nextDay() 
+{
     if (time_elapsed_ >= expiry_date_)
     {
         basePrice_ = 0;
     }
+    std::cout << "Next day\n";
 }

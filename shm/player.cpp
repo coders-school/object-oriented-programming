@@ -4,11 +4,13 @@
 #include "player.hpp"
 #include "ship.hpp"
 
-Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace) : Storable(money, availableSpace) {
+Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace) : Storable(money, availableSpace) 
+{
     ship_ = std::move(ship);
 }
 
-const std::unique_ptr<Ship>& Player::getShip() { 
+const std::unique_ptr<Ship>& Player::getShip() 
+{
     return ship_; 
 }
 

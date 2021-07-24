@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Time.hpp"
 #include "TimeEffectable.hpp"
 
 //Class responsible for representing cargo in game
@@ -20,11 +21,11 @@ public:
     void reduceAmount();
 
     Cargo() = default;
-    Cargo(std::string name, size_t amount, size_t basePrice);
+    Cargo(std::string name, size_t amount, size_t basePrice, Time *time);
     virtual ~Cargo() = default;
-
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
+    Time* time_;
 };
