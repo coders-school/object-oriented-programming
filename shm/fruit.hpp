@@ -6,7 +6,7 @@
 class Fruit : public Cargo
 {
 public:
-    Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed, Time *time);
+    Fruit(const std::string &name, size_t amount, size_t basePrice, Time *time, size_t expiry_date, size_t time_elapsed);
     virtual ~Fruit() override;
 
     // override from Cargo
@@ -15,7 +15,6 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
 
-    virtual Cargo &operator--();
     Cargo &operator+=(size_t amount) override;
     Cargo &operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;

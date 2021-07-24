@@ -16,7 +16,7 @@ class Item : public Cargo
 {
 public:
 
-    Item(const std::string &name, size_t amount, size_t basePrice, Rarity rarity, Time *time);
+    Item(const std::string &name, size_t amount, size_t basePrice, Time *time, Rarity rarity);
     ~Item() override = default;
 
     // override from Cargo

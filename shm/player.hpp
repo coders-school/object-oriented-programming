@@ -1,8 +1,8 @@
 #pragma once
 #include "Storable.hpp"
 #include <memory>
+#include "ship.hpp"
 
-class Ship;
 class Cargo;
 //Class responsible for handling Player object
 class Player : public Storable{
@@ -19,4 +19,5 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
     void load(Cargo*, size_t);
     void unload(Cargo*, size_t);
+    void setCrew(size_t newCrewSize);
 };

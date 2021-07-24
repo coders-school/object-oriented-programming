@@ -17,7 +17,7 @@ public:
         , availableSpace_(availableSpace)
         {}
 
-    //Constructod for objects subscribed to Time class (i.e. Store)
+    //Constructor for objects subscribed to Time class (i.e. Store)
     Storable(int money, size_t availableSpace, Time* time)
         : money_(money)
         , availableSpace_(availableSpace)
@@ -26,7 +26,7 @@ public:
             time_->attach(this);
         }
 
-    virtual ~Storable(){}
+    virtual ~Storable();
 
     int getMoney() {return money_; }
     size_t getAvailableSpace() {return availableSpace_; }

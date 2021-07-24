@@ -23,8 +23,7 @@ public:
     void increaseAmount();
 
     Cargo() = default;
-    Cargo(std::string name, size_t amount, size_t basePrice)
-    :name_(name), amount_(amount), basePrice_(basePrice){};
+    Cargo(std::string name, size_t amount, size_t basePrice, Time* time);
     virtual ~Cargo() = default;
 protected:
     std::string name_;

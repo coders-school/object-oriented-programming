@@ -19,7 +19,7 @@ enum class Response { done,
                       lack_of_cargo,
                       lack_of_space };
 
-class Store: public Storable, public TimeEffectable {
+class Store: public Storable {
 public:
     Store(int money, size_t availableSpace, Time* time);
     
@@ -32,15 +32,11 @@ public:
     std::vector<std::shared_ptr<Cargo>> storeCargo;
     void nextDay() override;
 
-    void printStoreCargo() {
-        for (auto el : cargo_) {
-            el->printCargo();
-        }
-    }
+    void printStoreCargo();
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store) {
         out << "Store: \n";
-        for (auto& el : store.cargo_) {
+        for (auto& el : store.storeCargo) {
             out << el.get()->getCargoInfo();
         }
 

@@ -4,7 +4,7 @@
 #include <string>
 #include <memory>    
 #include "cargo.hpp"
-#include "time.hpp"
+#include "Time.hpp"
 #include "TimeEffectable.hpp"
 #include "fruit.hpp"
 class Player;
@@ -15,8 +15,6 @@ public:
     Ship(Time* time);
     Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time);
     Ship(int maxCrew, int speed, size_t id, Time* time);
-    ~Ship();
-    
     ~Ship();
     void setName(const std::string& name) { name_ = name; }
 
