@@ -5,6 +5,7 @@
 #include "Rarity.hpp"
 #include "Ship.hpp"
 #include "Player.hpp"
+#include "Coordinates.hpp"
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -23,9 +24,16 @@ int main(){
 
     ship->load(cargo_ptr);
     ship->load(cargo_ptr2);
-    ship->printCargolist();
+    //ship->printCargolist();
     //player.printCargo();
     ship->unload(cargo_ptr.get());
-    ship->printCargolist();
+    //ship->printCargolist();
+/*     constexpr size_t posx1 = 1; 
+    constexpr size_t posy1 = 1;
+    constexpr size_t posx2 = 5; 
+    constexpr size_t posy2 = 5;   */
+    constexpr Coordinates point1(1,1);
+    constexpr Coordinates point2(5,5);
+    std::cout<<Coordinates::distance(point1,point2);
     return 0;
 }
