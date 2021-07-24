@@ -1,7 +1,6 @@
 #include <limits>
+#include <iostream>
 #include "cargo.hpp"
-#include "player.hpp"
-#include "ship.hpp"
 
 Cargo::Cargo(std::string name, size_t amount, size_t basePrice, Time *time) 
     : name_(name)
@@ -49,4 +48,9 @@ void Cargo::reduceAmount(){
     else{
         amount_ -= 1;
     }
+}
+
+void Cargo::increaseAmount()
+{
+    amount_ += 1;
 }

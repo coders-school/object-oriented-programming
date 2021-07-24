@@ -1,5 +1,8 @@
 #pragma once
+#include <iostream>
 #include "cargo.hpp"
+
+
 
 //Class responsible for representing alcohol in the game
 class Alcohol : public Cargo {

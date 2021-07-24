@@ -9,8 +9,9 @@ Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace) : Stor
     ship_ = std::move(ship);
 }
 
-const std::unique_ptr<Ship>& Player::getShip() 
-{
+Player::~Player() {}
+
+const std::unique_ptr<Ship>& Player::getShip() { 
     return ship_; 
 }
 
@@ -44,8 +45,24 @@ size_t Player::calculateAvailableSpace() {
     std::cout << "Cargo amount(po obliczeniach): "<< capacity - cargoAmount << '\n';
    
     if(capacity - cargoAmount < 0){
-        std::cout << "Miałeś za mały statek biedaku teraz masz 0 pojemności bo ci zatonął" << '\n';
+        std::cout << "something went wrong and you have lost your cargo" << '\n';
         return 0;
     }
     return capacity - cargoAmount;
+}
+
+void Player::load(Cargo* loadCargo, size_t amount)
+{
+    loadCargo->printCargo();
+    for(auto i = 0; i < amount; i++)
+    {
+        loadCargo->reduceAmount();
+    }
+    std::cout << "get amount: " << loadCargo->getAmount();
+    ship_->addCargo(loadCargo); //<------------------------- Core dumped !!
+    
+}
+void Player::unload(Cargo* unloadCargo, size_t amount)
+{
+
 }

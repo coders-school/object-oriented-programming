@@ -6,8 +6,7 @@
 #include "cargo.hpp"
 #include "time.hpp"
 #include "TimeEffectable.hpp"
-
-
+#include "fruit.hpp"
 class Player;
 
 //Class responsible for representing ship in game
@@ -18,6 +17,7 @@ public:
     Ship(int maxCrew, int speed, size_t id, Time* time);
     ~Ship();
     
+    ~Ship();
     void setName(const std::string& name) { name_ = name; }
 
     Ship& operator-=(size_t num);
@@ -31,16 +31,20 @@ public:
     size_t getCrew() const     { return crew_; }
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
-    std::vector<std::shared_ptr<Cargo>> getCargo() { return shipCargo;}
+    std::vector<std::shared_ptr<Cargo>> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
+
+    // std::vector<std::shared_ptr<Cargo>> CargoOnShip;
+
     Cargo* findMatchCargo(Cargo* cargo);
     void load(std::shared_ptr<Cargo> cargo);
     void unload(Cargo* cargo_ptr);
+    void printShipCargo();
 
     void nextDay() override;
     void setOwner(Player* newOwner);
     void setCrew(size_t newCrew);
 
-private:
+protected:
     size_t capacity_;
     size_t maxCrew_;
     size_t crew_;
