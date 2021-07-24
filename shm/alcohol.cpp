@@ -39,5 +39,4 @@ bool Alcohol::operator==(const Cargo& other) const {
 void Alcohol::nextDay()
 {
     basePrice_ += 2;
-    std::cout << "Next day\n";
 }

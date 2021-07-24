@@ -45,5 +45,4 @@ bool Item::operator==(const Cargo& other) const {
 void Item::nextDay() 
 {
     basePrice_ += 1;    
-    std::cout << "next day" << '\n';
 }
