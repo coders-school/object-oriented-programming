@@ -1,4 +1,5 @@
 #include "alcohol.hpp"
+#include <iostream>
 
 size_t Alcohol::getPrice() const
 {
@@ -33,4 +34,9 @@ bool Alcohol::operator==(const Cargo& other) const {
     } catch (std::bad_cast&) {
             return false;
     }
+}
+
+void Alcohol::nextDay()
+{
+    std::cout << "Next day\n";
 }

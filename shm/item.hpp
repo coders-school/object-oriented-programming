@@ -1,5 +1,8 @@
 #pragma once
 #include "cargo.hpp"
+#include <iostream>
+
+class Time;
 
 class Item : public Cargo
 {
@@ -12,8 +15,7 @@ public:
         legendary = 10
     };
 
-    Item(const std::string &name, size_t amount, size_t basePrice, Rarity rarity)
-        : Cargo(name, amount, basePrice), rarity_{rarity} {}
+    Item(const std::string &name, size_t amount, size_t basePrice, Rarity rarity, Time *time);
     ~Item() override = default;
 
     // override from Cargo
@@ -26,6 +28,7 @@ public:
     Cargo &operator+=(size_t amount) override;
     Cargo &operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;
+    void nextDay() override;
 
 private:
     Rarity rarity_;
