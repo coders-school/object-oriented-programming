@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "shm/inc/Store.hpp"
+#include "shm/inc/Time.hpp"
 
 // class responsible for manage landmass in game
 class Island {
@@ -22,7 +23,7 @@ public:
         const size_t positionY_ = 0;
     };
 
-    Island(const Island::Coordinates& position, const size_t &storeSize);
+    Island(const Island::Coordinates& position, const size_t &storeSize, Time* time);
     
     Coordinates getCoordinates() const { return position_; }
     Store* getStore() { return store_.get(); }

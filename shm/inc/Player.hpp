@@ -5,6 +5,7 @@
 
 #include "shm/inc/Delegate.hpp"
 #include "shm/inc/Ship.hpp"
+#include "shm/inc/Time.hpp"
 
 class Cargo;
 class Island;
@@ -15,7 +16,7 @@ class Player : public Delegate {
 
 public:
     Player(std::unique_ptr<Ship> ship,
-           std::shared_ptr<Map> map, size_t money, size_t availableSpace);
+           std::shared_ptr<Map> map, size_t money, size_t availableSpace, Time* time);
     ~Player() override {};
 
     Ship* getShip() { return ship_.get(); };

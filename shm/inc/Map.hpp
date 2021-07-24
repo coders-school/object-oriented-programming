@@ -10,7 +10,7 @@ constexpr size_t ISLANDS_COUNT = 10;
 
 class Map {
 public:
-    Map();
+    Map(Time* time);
     Island* getIsland(const Island::Coordinates&);
     std::vector<Island> getIslands() { return islands_; }
    

@@ -7,7 +7,9 @@
 #include <memory>
 #include <random>
 
-Map::Map() {
+#include "shm/inc/Time.hpp"
+
+Map::Map(Time* time) {
     std::mt19937 generator(std::random_device{}());
     std::uniform_int_distribution<size_t> distribution{
         COORDINATE_MIN, COORDINATE_MAX
@@ -26,7 +28,7 @@ Map::Map() {
                                                generatedIslandCoords;
                                    });
         if (result == islands_.end()) {
-            islands_.push_back(Island(generatedIslandCoords, storeSize_));
+            islands_.push_back(Island(generatedIslandCoords, storeSize_, time));
         }
     }
 }

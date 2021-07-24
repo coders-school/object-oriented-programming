@@ -12,8 +12,9 @@
 #include "shm/inc/Fruit.hpp"
 #include "shm/inc/Player.hpp"
 
-Store::Store(const size_t & storeSize)
+Store::Store(const size_t & storeSize, Time* time) : time_(time)
 {
+    time_->addSubscriber(this);
     cargo_.reserve(storeSize);
     generateAllCargo();
 }

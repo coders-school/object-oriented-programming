@@ -11,17 +11,20 @@
 #include "shm/inc/Player.hpp"
 #include "shm/inc/Store.hpp"
 
-Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Delegate* delegate)
+Ship::Ship(int id, const std::string& name, size_t speed, size_t maxCrew, size_t capacity, Time* time, Delegate* delegate)
     : id_(id)
     , name_(name)
     , speed_(speed)
     , maxCrew_(maxCrew)
     , capacity_(capacity)
+    , time_(time)
     , delegate_(delegate)
-{}
+{
+    time_->addSubscriber(this);
+}
 
-Ship::Ship(int id, size_t speed, size_t maxCrew, Delegate* delegate) 
-    : Ship(id, "Ship", speed, maxCrew, 100, delegate)
+Ship::Ship(int id, size_t speed, size_t maxCrew, Time* time, Delegate* delegate) 
+    : Ship(id, "Ship", speed, maxCrew, 100, time, delegate)
 {}
 
 Ship& Ship::operator+=(const size_t crew) {

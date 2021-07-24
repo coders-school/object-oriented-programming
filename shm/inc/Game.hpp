@@ -4,11 +4,9 @@
 #include <memory>
 
 #include "shm/inc/Player.hpp"
-#include "shm/inc/Ship.hpp"
 #include "shm/inc/Time.hpp"
 #include "shm/inc/Map.hpp"
 
-class Ship;
 
 class Game {
 public:
@@ -68,7 +66,7 @@ private:
     MenuOption exitGame();
     
     std::unique_ptr<Player> player_;
-    std::unique_ptr<Time> time_;
+    std::shared_ptr<Time> time_;
     std::shared_ptr<Map> map_;
 
     bool isGameWon();

@@ -5,6 +5,7 @@
 
 #include "shm/inc/Item.hpp"
 #include "shm/inc/Subscriber.hpp"
+#include "shm/inc/Time.hpp"
 
 class Cargo;
 class Player;
@@ -17,7 +18,7 @@ constexpr size_t STORE_CAPACITY { 1000 };
 
 class Store : public Subscriber {
 public:
-    explicit Store(const size_t & storeSize);
+    explicit Store(const size_t & storeSize, Time* time);
     enum class Response {
         done, 
         lack_of_money, 
@@ -63,4 +64,5 @@ private:
         size_t minUniqueStat_{};
         size_t maxUniqueStat_{};
     } oneLine_;
+    Time* time_;
 };
