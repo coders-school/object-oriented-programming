@@ -6,7 +6,7 @@ class Alcohol : public Cargo {
 public:
     Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage, Time *time)
         : Cargo(name, amount, basePrice, time)
-        , percentage_ {percentage}
+        , percentage_ (percentage)
         {}
 
     ~Alcohol() override = default;

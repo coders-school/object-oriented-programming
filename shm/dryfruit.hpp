@@ -4,6 +4,8 @@
 class DryFruit : public Fruit {
 public:
     // override from Cargo
+    DryFruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed, Time *time);
+
     const std::string &getName() const override { return name_; }
     size_t getPrice() const override;
 

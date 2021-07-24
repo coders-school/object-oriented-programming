@@ -19,8 +19,7 @@ public:
     Cargo &operator+=(size_t amount) override;
     Cargo &operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;
-    void nextDay() override;
-
+    
     size_t getTimeElapsed() const { return time_elapsed_; }
     size_t getExpiryDate() const { return expiry_date_; }
 

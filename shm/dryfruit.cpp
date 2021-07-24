@@ -1,5 +1,9 @@
 #include "dryfruit.hpp"
 
+DryFruit::DryFruit(const std::string &name, size_t amount, size_t basePrice, size_t expiry_date, size_t time_elapsed, Time *time)
+    : Fruit(name, amount, basePrice, expiry_date, time_elapsed, time)
+    {}
+
 size_t DryFruit::getPrice() const {
     if (time_elapsed_ >= expiry_date_)
         return 0;

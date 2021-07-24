@@ -60,12 +60,10 @@ bool Fruit::operator==(const Cargo& other) const
     }
 }
 
-
 void Fruit::nextDay() 
 {
     if (time_elapsed_ >= expiry_date_)
     {
         basePrice_ = 0;
     }
-    std::cout << "Next day\n";
 }

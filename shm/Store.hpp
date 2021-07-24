@@ -15,7 +15,7 @@ enum class Response { done,
                       lack_of_cargo,
                       lack_of_space };
 
-class Store : public Storable, public TimeEffectable {
+class Store : public Storable {
 
 public:
     Store(int money, size_t availableSpace, Time* time);
