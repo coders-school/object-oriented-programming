@@ -46,7 +46,7 @@ Response Store::buy(Cargo *cargo, size_t amount, Player *player) //Buying cargo 
         
         money_ += price;
         player->SpendMoney(price);
-        player->load(cargo, amount);
+        player->getShip()->load(cargo, amount);
 
         return Response::done;
     }
@@ -74,8 +74,8 @@ Response Store::sell(Cargo *cargo, size_t amount, Player *player)
         {
             return Response::lack_of_money;
         }
-        money_ -= price;
-        player->unload(cargo, amount);
+        money_ += price;
+        player->getShip()->unload(cargo, amount);
         player->EarnMoney(price);
 
         return Response::done;
@@ -102,7 +102,7 @@ void Store::nextDay()
 {
     for (auto el : storeCargo)
     {
-        el.get()->reduceAmount();
+        el.get()->reduceAmount(1);
     }
 }
 

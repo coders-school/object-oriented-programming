@@ -1,6 +1,9 @@
+#include <algorithm>
+#include <iostream>
+#include <numeric>
+
 #include "ship.hpp"
 #include "player.hpp"
-#include <iostream>
 
 Ship::Ship(Time *time)
     : id_(-1), time_(time)
@@ -46,10 +49,18 @@ Ship &Ship::operator+=(size_t num)
 
 void Ship::addCargo(Cargo *item)
 {
-
-    printShipCargo();
-        
-    shipCargo.emplace_back(item);
+    if(findMatchCargo(item) == item)
+    {
+        findMatchCargo(item)->increaseAmount(item->getAmount());
+    }
+    else
+    {
+        shipCargo.emplace_back(item);
+    }
+}
+void Ship::removeCargo(Cargo * item)
+{
+    
 }
 
 Cargo *Ship::findMatchCargo(Cargo *cargo)
@@ -65,15 +76,21 @@ Cargo *Ship::findMatchCargo(Cargo *cargo)
 }
 void Ship::load(Cargo *loadCargo, size_t amount)
 {
-    loadCargo->reduceAmount(amount);
-    addCargo(loadCargo);
+    if (amount + calculateAvailableSpace() <= capacity_)
+    {
+        loadCargo->reduceAmount(amount);
+        addCargo(loadCargo);
+    }
 }
 
 void Ship::unload(Cargo *unloadCargo, size_t amount)
 {
-    for(auto i = 0; i < amount; i++)
+    if (calculateAvailableSpace() - amount >= 0)
     {
-        
+        if(unloadCargo == findMatchCargo(unloadCargo))
+        {
+            //removeCargo();
+        }
     }
 }
 
@@ -105,4 +122,17 @@ void Ship::printShipCargo()
         std::cout << '\n';
         el->printCargo();
     }
+}
+
+size_t Ship::calculateAvailableSpace()
+{
+    int cargoAmount = 0;
+    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, std::shared_ptr<Cargo> c)
+                                  { return i += c->getAmount(); });
+
+    if (capacity_ - cargoAmount < 0)
+    {
+        return 0;
+    }
+    return capacity_ - cargoAmount;
 }

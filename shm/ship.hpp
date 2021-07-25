@@ -22,6 +22,7 @@ public:
     Ship& operator+=(size_t num);
     
     void addCargo(Cargo* item);
+    void removeCargo(Cargo* );
 
     size_t getCapacity() const  { return capacity_; }
     size_t getMaxCrew() const   { return maxCrew_; }
@@ -42,6 +43,11 @@ public:
     void setOwner(Player* newOwner);
     void setCrew(size_t newCrew);
 
+    bool isCargoOnShip(Cargo *item);
+
+
+    size_t calculateAvailableSpace();
+
 protected:
     size_t capacity_;
     size_t maxCrew_;
@@ -49,7 +55,7 @@ protected:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> shipCargo;
+    std::vector<std::shared_ptr<Cargo>> shipCargo; // TODO reserve vector
     Player* owner_ = nullptr;
     Time* time_;
 };
