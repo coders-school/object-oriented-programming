@@ -1,3 +1,7 @@
+#pragma once
+#include "cargo.hpp"
+#include "player.hpp"
+#include "ship.hpp"
 #include <iostream>
 #include <random>
 #include <algorithm>
@@ -17,8 +21,8 @@ public:
 
     void addToVecOfCargos(std::shared_ptr<Cargo>);
     void dellFromVecOfCargos(std::shared_ptr<Cargo>);
-    bool checkAvaiablityCargoInStore(std::shared_ptr<Cargo>);
-    size_t nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore);
+    bool checkAvaiablityCargoInStore(std::shared_ptr<Cargo> searchCargo);
+    std::vector<std::shared_ptr<Cargo>> nextDay(Cargo* cargo, std::vector<std::shared_ptr<Cargo>> cargosInStore);
     friend std::ostream& operator<<(std::ostream& out, const Store& store);
     std::vector<std::shared_ptr<Cargo>> returnCargosVector() const { return cargosInStore; }
 
