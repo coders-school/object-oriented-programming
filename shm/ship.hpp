@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "cargo.hpp"
 
 class Cargo;
 
