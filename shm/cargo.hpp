@@ -18,7 +18,7 @@ public:
   // have
   Cargo &operator+=(size_t amount);
   Cargo &operator-=(size_t amount);
-  virtual bool operator==(Cargo &cargo) const;
+ virtual bool operator==(Cargo &cargo) const;
 
 
   /// simple getters

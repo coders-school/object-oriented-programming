@@ -9,15 +9,19 @@ enum class Rarity {
 };
 
 class Item : public Cargo {
+Rarity rarity_{Rarity::common};
 
-size_t getPrice() const override;
-std::string getName() const override;
-size_t getAmount() const override;
-size_t getBasePrice() const override;
-Cargo& operator+=(size_t amount) override;
-Cargo& operator-=(size_t amount) override
-bool operator==(Cargo& cargo) const override;
+public:
+  Item(std::string &name, size_t amount, size_t basePrice, Rarity rarity);
 
-// Metoda getPrice() powinna być adekwatnie wyliczana od poziomu rzadkości przedmiotu.
+  size_t getPrice() const override;
+  std::string getName() const override;
+  size_t getAmount() const override;
+ size_t getBasePrice() const override;
+  //Cargo &operator+=(size_t amount);
+ //Cargo &operator-=(size_t amount);
+//bool operator==(Cargo &cargo) const override;
 
+  // Metoda getPrice() powinna być adekwatnie wyliczana od poziomu rzadkości
+  // przedmiotu.
 };
