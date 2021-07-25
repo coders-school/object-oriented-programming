@@ -13,19 +13,19 @@ Store::Store(int money, size_t availableSpace, Time *time)
 }
 Store::~Store() {}
 
-Cargo *Store::findMatchCargo(Cargo *cargo)
+std::shared_ptr<Cargo> Store::findMatchCargo(std::shared_ptr<Cargo> cargo)
 {
     for (auto &el : storeCargo)
     {
         if (*el == *cargo)
         {
-            return el.get();
+            return el;
         }
     }
     return nullptr;
 }
 
-Response Store::buy(Cargo *cargo, size_t amount, Player *player) //Buying cargo from store to player
+Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) //Buying cargo from store to player
 {
     if (findMatchCargo(cargo))
     {
@@ -56,26 +56,27 @@ Response Store::buy(Cargo *cargo, size_t amount, Player *player) //Buying cargo 
     }
 }
 
-Response Store::sell(Cargo *cargo, size_t amount, Player *player) 
+Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) 
 {
+    // Ship -> 
     if (findMatchCargo(cargo))
     {
         auto price = amount * cargo->getBasePrice();
-
-        if (player->getAvailableSpace() < amount)
+        if (getAvailableSpace() < amount)// miejsce sklepu
         {
             return Response::lack_of_space;
         }
-        if (cargo->getAmount() < amount)
+        if (player->getShip()->findMatchCargo(cargo)->getAmount() < amount)//cargo gracza
         {
             return Response::lack_of_cargo;
         }
-        if (player->getMoney() < amount * cargo->getBasePrice())
+        if (money_ < amount * cargo->getBasePrice())// pieniądze sklepu
         {
             return Response::lack_of_money;
         }
         money_ += price;
         player->getShip()->unload(cargo, amount);
+        storeCargo.push_back(cargo);
         player->EarnMoney(price);
 
         return Response::done;
@@ -85,10 +86,10 @@ Response Store::sell(Cargo *cargo, size_t amount, Player *player)
         return Response::lack_of_cargo;
     }
 
-    if (Cargo *ptr = findMatchCargo(cargo))
-    {
-        *ptr += amount;
-    }
+    // if (Cargo *ptr = findMatchCargo(cargo))
+    // {
+    //     *ptr += amount;
+    // }
 
     return Response::done;
 }

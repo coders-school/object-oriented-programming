@@ -46,7 +46,7 @@ Ship &Ship::operator+=(size_t num)
     return *this;
 }
 
-void Ship::addCargo(Cargo *item)
+void Ship::addCargo(std::shared_ptr<Cargo> item)
 {
     if(findMatchCargo(item) == item)
     {
@@ -58,35 +58,36 @@ void Ship::addCargo(Cargo *item)
     }
 }
 
-void Ship::removeCargo(Cargo * item, size_t amount)
+void Ship::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
 {
-    if(findMatchCargo(item)->getAmount() == amount)
+    auto shipCargoAmount = findMatchCargo(item)->getAmount();
+    if(shipCargoAmount == amount)
     {
-    //    auto i = std::find(begin(shipCargo), end(shipCargo), item);
-        for (auto  it = shipCargo.begin(); it < shipCargo.end(); it++) 
-        {
-
-        }
-        shipCargo.erase(shipCargo.begin());
+        auto i = std::find(begin(shipCargo), end(shipCargo), item);
+        shipCargo.erase(i);
+    }
+    else if(shipCargoAmount < amount)// 5 < 6
+    {
+        //TODO something
     }
     else
     {
-        
+        findMatchCargo(item)->reduceAmount(amount);
     }
 }
 
-Cargo *Ship::findMatchCargo(Cargo *cargo)
+std::shared_ptr<Cargo> Ship::findMatchCargo(std::shared_ptr<Cargo> cargo)
 {
     for (auto &el : shipCargo)
     {
         if (*el == *cargo)
         {
-            return el.get();
+            return el;
         }
     }
     return nullptr;
 }
-void Ship::load(Cargo *loadCargo, size_t amount)
+void Ship::load(std::shared_ptr<Cargo> loadCargo, size_t amount)
 {
     if (amount + calculateAvailableSpace() <= capacity_)
     {
@@ -95,7 +96,7 @@ void Ship::load(Cargo *loadCargo, size_t amount)
     }
 }
 
-void Ship::unload(Cargo *unloadCargo, size_t amount)
+void Ship::unload(std::shared_ptr<Cargo> unloadCargo, size_t amount)
 {
     if (calculateAvailableSpace() - amount >= 0)
     {

@@ -24,25 +24,25 @@ int main()
     Player *captain = new Player(std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_ptr), 1000, 1000);
     Player *human = new Player(std::make_unique<Ship>(20, 1, 2, "Titanic", 1, time_ptr), 0, 500);
     Player *human1 = new Player(std::make_unique<Ship>(20, 10, 2, "Tweety", 2, time_ptr), 500, 0);
-
+    
     // buy zad 1
     //No cargo
-    Cargo *cargo = new Fruit("Kiwi", 5, 5, time_ptr, 15, 0);
+    std::shared_ptr<Cargo> cargo = std::make_shared<Fruit>("Kiwi", 5, 5, time_ptr, 15, 0);
     Response response = store.buy(cargo, 5, captain);
     std::cout << std::to_string(response == Response::lack_of_cargo) << "\n";
     //No available space
-    response = store.buy(store.storeCargo.at(0).get(), 1, human1);
+    response = store.buy(store.storeCargo.at(0), 1, human1);
     std::cout << std::to_string(response == Response::lack_of_space) << "\n";
     //lack of cargo
-    response = store.buy(store.storeCargo.at(0).get(), 1000, captain);
+    response = store.buy(store.storeCargo.at(0), 1000, captain);
     std::cout << std::to_string(response == Response::lack_of_cargo) << "\n";
     //no money
-    response = store.buy(store.storeCargo.at(0).get(), 1, human);
+    response = store.buy(store.storeCargo.at(0), 1, human);
     std::cout << std::to_string(response == Response::lack_of_money) << "\n";
     //correct buy
     std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
-    response = store.buy(store.storeCargo.at(0).get(), 1, captain);
-    response = store.buy(store.storeCargo.at(0).get(), 1, captain);
+    response = store.buy(store.storeCargo.at(0), 1, captain);
+    response = store.buy(store.storeCargo.at(0), 1, captain);
     std::cout << std::to_string(response == Response::done) << "\n";
     std::cout << store;
     std::cout << "pieniążki store po: " << store.getMoney() << '\n';

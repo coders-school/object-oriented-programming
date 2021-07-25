@@ -24,11 +24,11 @@ public:
     Store(int money, size_t availableSpace, Time* time);
     
     virtual ~Store();   
-    Response buy(Cargo* cargo, size_t amount, Player* player);
-    Response sell(Cargo* cargo, size_t amount, Player* player);
+    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
+    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
 
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
-    Cargo* findMatchCargo(Cargo* cargo);
+    std::shared_ptr<Cargo> findMatchCargo(std::shared_ptr<Cargo> cargo);
     std::vector<std::shared_ptr<Cargo>> storeCargo;
 
     
