@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <iostream>
 #include <numeric>
-
 #include "ship.hpp"
 #include "player.hpp"
 
@@ -58,9 +57,22 @@ void Ship::addCargo(Cargo *item)
         shipCargo.emplace_back(item);
     }
 }
-void Ship::removeCargo(Cargo * item)
+
+void Ship::removeCargo(Cargo * item, size_t amount)
 {
-    
+    if(findMatchCargo(item)->getAmount() == amount)
+    {
+    //    auto i = std::find(begin(shipCargo), end(shipCargo), item);
+        for (auto  it = shipCargo.begin(); it < shipCargo.end(); it++) 
+        {
+
+        }
+        shipCargo.erase(shipCargo.begin());
+    }
+    else
+    {
+        
+    }
 }
 
 Cargo *Ship::findMatchCargo(Cargo *cargo)

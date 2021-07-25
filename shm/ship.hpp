@@ -22,7 +22,7 @@ public:
     Ship& operator+=(size_t num);
     
     void addCargo(Cargo* item);
-    void removeCargo(Cargo* );
+    void removeCargo(Cargo *, size_t);
 
     size_t getCapacity() const  { return capacity_; }
     size_t getMaxCrew() const   { return maxCrew_; }
