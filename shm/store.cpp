@@ -1,7 +1,4 @@
 #include "store.hpp"
-#include "cargo.hpp"
-#include "player.hpp"
-#include "ship.hpp"
 
 //check if present in store
 bool Store::checkAvaiablityCargoInStore(std::shared_ptr<Cargo> searchCargo) {
@@ -45,8 +42,9 @@ Store::Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     return Response::done;
 }
 
-size_t Store::nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore) {
-    std::shared_ptr<Cargo> ptrCargo;
+// in game.hpp make this function work when "currentDay.endCurrentDay()" in time.hpp happens
+std::vector<std::shared_ptr<Cargo>> Store::nextDay(Cargo* cargo, std::vector<std::shared_ptr<Cargo>> cargosInStore) {
+    std::shared_ptr<Cargo> ptrCargo(cargo);
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> distr(-10, 10);
@@ -60,6 +58,7 @@ size_t Store::nextDay(std::vector<std::shared_ptr<Cargo>> cargosInStore) {
             cargosInStore.pop_back();
         }
     }
+    return cargosInStore;
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {

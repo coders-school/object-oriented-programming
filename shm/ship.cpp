@@ -1,6 +1,3 @@
-#include <algorithm>
-#include <iterator>
-#include <memory>
 #include "ship.hpp"
 
 Ship::Ship()

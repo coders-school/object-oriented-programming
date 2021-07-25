@@ -4,7 +4,7 @@
 
 class Fruit : public Cargo {
 
-  size_t daysToExpiry_{};
+  size_t daysToExpiry_;
 
 public:
   Fruit(std::string& name, size_t amount, size_t basePrice, size_t daysToExpiry);
@@ -17,4 +17,6 @@ public:
   std::string getName() const override;
   size_t getAmount() const override;
   size_t getBasePrice() const override;
+
+  size_t nextDay() override;
 };

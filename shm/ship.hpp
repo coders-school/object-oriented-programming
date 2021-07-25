@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
+#include <algorithm>
+#include <iterator>
+#include <memory>
 #include "cargo.hpp"
-
-class Cargo;
 
 /*
     Create Ship class to store Cargos,
@@ -11,7 +12,7 @@ class Cargo;
 class Ship {
 public:
     Ship();
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargo);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargo, size_t coins);
     Ship(int maxCrew, int speed, size_t id, std::vector<std::shared_ptr<Cargo>> cargo);
 
     void setName(const std::string& name) { name_ = name; }
@@ -35,4 +36,5 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargo_;
+    size_t coins_;
 };
