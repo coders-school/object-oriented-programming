@@ -9,11 +9,11 @@
 #include "alcohol.hpp"
 #include "item.hpp"
 #include "cargo.hpp"
+#include "ship.hpp"
 
 int main()
 {
     Time *time_ptr = new Time();
-
     //time->changeTime();
 
     //Show created store via friend method (zad5)
@@ -40,39 +40,37 @@ int main()
     response = store.buy(store.storeCargo.at(0), 1, human);
     std::cout << std::to_string(response == Response::lack_of_money) << "\n";
     //correct buy
-    std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
+    std::cout << "Store money: " << store.getMoney() << '\n';
     response = store.buy(store.storeCargo.at(0), 1, captain);
-    response = store.buy(store.storeCargo.at(0), 1, captain);
+    response = store.buy(store.storeCargo.at(0), 2, captain);
     std::cout << std::to_string(response == Response::done) << "\n";
     std::cout << store;
-    std::cout << "pieniążki store po: " << store.getMoney() << '\n';
-    
+    std::cout << "Store money: " << store.getMoney() << '\n';
+    std::cout <<  "size:" <<captain->getShip()->shipCargo.size() << '\n';
     captain->getShip()->printShipCargo();
-
+    // sell zad 1
     Response response1 = store.sell(cargo, 2, captain);
-    std::cout << std::to_string(response1 == Response::lack_of_cargo) << "\n";
+    std::cout << std::to_string(response1 == Response::lack_of_cargo) << "lack of cargo" <<"\n";
     //No available space
-    response1 = store.sell(store.storeCargo.at(0), 1, human1);
-    std::cout << std::to_string(response1 == Response::lack_of_space) << "\n";
+    response1 = store.sell(captain->getShip()->shipCargo.at(1), 1, human1);
+    std::cout << std::to_string(response1 == Response::lack_of_space) << "lack of space" << "\n";
     //lack of cargo
-    response1 = store.sell(store.storeCargo.at(0), 1000, captain);
-    std::cout << std::to_string(response1 == Response::lack_of_cargo) << "\n";
+    response1 = store.sell(captain->getShip()->shipCargo.at(1), 1000, captain);
+    std::cout << std::to_string(response1 == Response::lack_of_cargo) << "lack of cargo" << "\n";
     //no money
-    response1 = store.sell(store.storeCargo.at(0), 1, human);
-    std::cout << std::to_string(response1 == Response::lack_of_money) << "\n";
+    response1 = store.sell(captain->getShip()->shipCargo.at(1), 1, human);
+    std::cout << std::to_string(response1 == Response::lack_of_money) << "lack of money" << "\n";
     //correct buy
     std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
-    response1 = store.sell(store.storeCargo.at(0), 1, captain);
-    response1 = store.sell(store.storeCargo.at(0), 1, captain);
-    std::cout << std::to_string(response1 == Response::done) << "\n";
-    std::cout << store;
+    std::cout << "store przed sprzedaży \n" << store;
+    response1 = store.sell(captain->getShip()->shipCargo.at(0), 1, captain);
+    response1 = store.sell(captain->getShip()->shipCargo.at(0), 2, captain);
+    std::cout << std::to_string(response1 == Response::done) << "done?" <<"\n";
+    std::cout << "store po sprzedaży \n" << store;
     std::cout << "pieniążki store po: " << store.getMoney() << '\n';
-
-    captain->getShip()->printShipCargo();
     
-    // sell zad 1
-
-    //TO DO:: poprawic Sell i zrobić unload
+    captain->getShip()->printShipCargo();
+    std::cout << '\n';
 
     //zad 2
     Alcohol wine = Alcohol("wino", 10, 20, time_ptr, 80);

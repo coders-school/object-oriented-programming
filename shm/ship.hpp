@@ -31,6 +31,7 @@ public:
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
     std::vector<std::shared_ptr<Cargo>> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
+    std::vector<std::shared_ptr<Cargo>> shipCargo; // TODO reserve vector
 
     // std::vector<std::shared_ptr<Cargo>> CargoOnShip;
 
@@ -43,8 +44,6 @@ public:
     void setOwner(Player* newOwner);
     void setCrew(size_t newCrew);
 
-    bool isCargoOnShip(Cargo *item);
-
 
     size_t calculateAvailableSpace();
 
@@ -55,7 +54,7 @@ protected:
     size_t speed_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> shipCargo; // TODO reserve vector
+    
     Player* owner_ = nullptr;
     Time* time_;
 };

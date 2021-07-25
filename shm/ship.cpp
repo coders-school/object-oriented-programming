@@ -14,7 +14,7 @@ Ship::Ship(int capacity, int maxCrew, int speed, const std::string &name, size_t
     : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time)
 {
     time_->attach(this);
-    shipCargo.reserve(1);
+    shipCargo.reserve(10);
 }
 
 Ship::Ship(int maxCrew, int speed, size_t id, Time *time)
@@ -97,10 +97,8 @@ void Ship::unload(std::shared_ptr<Cargo> unloadCargo, size_t amount)
 {
     if (calculateAvailableSpace() - amount >= 0)
     {
-        if(unloadCargo == findMatchCargo(unloadCargo))
-        {
-            removeCargo(unloadCargo, amount);
-        }
+       
+        removeCargo(unloadCargo, amount);
     }
 }
 
@@ -127,6 +125,7 @@ void Ship::nextDay()
 }
 void Ship::printShipCargo()
 {
+    std::cout << "Ship Cargo:" << '\n';
     for (auto &el : shipCargo)
     {
         std::cout << '\n';

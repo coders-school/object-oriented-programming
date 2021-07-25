@@ -1,7 +1,9 @@
+#include <algorithm>
 #include "cargo.hpp"
 #include "player.hpp"
 #include "Time.hpp"
 #include "Store.hpp"
+
 
 Store::Store(int money, size_t availableSpace, Time *time)
     : Storable(money, availableSpace, time)
@@ -47,7 +49,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
         money_ += price;
         player->SpendMoney(price);
         player->getShip()->load(cargo, amount);
-        //storeCargo.removeCargo();
+        removeCargo(cargo, amount);
         return Response::done;
     }
     else
@@ -58,7 +60,6 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
 
 Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) 
 {
-    // Ship -> 
     if (player->getShip()->findMatchCargo(cargo))
     {
         auto price = amount * cargo->getBasePrice();
@@ -74,9 +75,9 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player
         {
             return Response::lack_of_money;
         }
-        money_ += price;
+        money_ -= price;
+        addStoreCargo(cargo, amount);
         player->getShip()->unload(cargo, amount);
-        storeCargo.push_back(cargo);
         player->EarnMoney(price);
 
         return Response::done;
@@ -111,16 +112,27 @@ void Store::printStoreCargo()
     }
 }
 
-// void Store::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
-// {
-//     auto storeCargoAmount = findMatchCargo(item)->getAmount();
-//     if(storeCargoAmount == amount)
-//     {
-//         auto i = std::find(begin(storeCargo), end(storeCargo), item);
-//         storeCargo.erase(i);
-//     }
-//     else
-//     {
-//         findMatchCargo(item)->reduceAmount(amount);
-//     }
-// }
+void Store::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
+{
+    auto storeCargoAmount = findMatchCargo(item)->getAmount();
+    if(storeCargoAmount == amount)
+    {
+        auto i = std::find(begin(storeCargo), end(storeCargo), item);
+        storeCargo.erase(i);
+    }
+    else
+    {
+        findMatchCargo(item)->reduceAmount(amount);
+    }
+}
+void Store::addStoreCargo(std::shared_ptr<Cargo> item, size_t amount)
+{
+    if(findMatchCargo(item) == item)
+    {
+        findMatchCargo(item)->increaseAmount(item->getAmount());
+    }
+    else
+    {
+        storeCargo.emplace_back(item);
+    }
+}

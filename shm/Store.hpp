@@ -34,6 +34,7 @@ public:
     std::shared_ptr<Cargo> findMatchCargo(std::shared_ptr<Cargo> cargo);
     std::vector<std::shared_ptr<Cargo>> storeCargo;
 
+    void addStoreCargo(std::shared_ptr<Cargo>, size_t);
     void removeCargo(std::shared_ptr<Cargo>, size_t);    
     void nextDay() override;
     void printStoreCargo();
