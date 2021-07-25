@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 project(SHM)
 
-set(CPP_FILES cargo.cpp coordinates.cpp island.cpp player.cpp ship.hpp)
+set(CPP_FILES cargo.cpp coordinates.cpp island.cpp player.cpp ship.hpp alcohol.cpp fruit.cpp item.cpp)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(FLAGS -Wall -Wextra -Wpedantic -Wconversion )

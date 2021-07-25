@@ -1,7 +1,8 @@
 #include "alcohol.hpp"
 
-Alcohol::Alcohol(std::string name, size_t amount, size_t alcoholByVolume)
-    : Cargo(name, amount, alcoholByVolume_){};
+Alcohol::Alcohol(std::string &name, size_t amount, size_t basePrice,
+                 size_t alcoholByVolume)
+    : Cargo{name, amount, basePrice}, alcoholByVolume_{alcoholByVolume} {}
 
 bool Alcohol::operator==(Cargo &cargo) const {}
 
@@ -11,7 +12,6 @@ size_t Alcohol::getPrice() const {
   }
   return basePrice_;
 }
-
 std::string Alcohol::getName() const { return name_; }
 size_t Alcohol::getAmount() const { return amount_; }
 size_t Alcohol::getBasePrice() const { return basePrice_; }
