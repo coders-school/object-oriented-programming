@@ -246,7 +246,7 @@ void Game::setUserDestination() {
 }
 
 void Game::printCargo() {
-
+// TO DO
 }
 
 void Game::buy() {
@@ -290,7 +290,7 @@ void Game::sell() {
             
             currentStore->cargoFromShip(cargo, cargoAmount);
             
-            break;
+            break; 
         }
         std::cout << "No such cargo!" << std::endl;
     } while (true);
