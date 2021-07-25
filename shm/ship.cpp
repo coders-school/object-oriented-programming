@@ -2,7 +2,6 @@
 #include <iterator>
 #include <memory>
 #include "ship.hpp"
-#include "cargo.hpp"
 
 Ship::Ship()
     : id_(-1), crew_(0), capacity_(0), maxCrew_(0), speed_(0), name_(""), cargo_({}) {}
@@ -50,6 +49,7 @@ void Ship::addAmounntToShipCargo(std::shared_ptr<Cargo> cargo, size_t amount) {
         }
     }
 }
+
 void Ship::dellAmounntFromShipCargo( std::shared_ptr<Cargo> cargo, size_t amount ) {
     auto VecOfcargos = getCargo();
     for (auto it = VecOfcargos.begin(); it < VecOfcargos.end(); ++it) {
@@ -60,8 +60,10 @@ void Ship::dellAmounntFromShipCargo( std::shared_ptr<Cargo> cargo, size_t amount
 }
 
 // crew wages for 1 work day
+// in game.hpp make this function work when "dayNr.endCurrentDay()" in time.hpp happens
 size_t nextDay(size_t crew, size_t coins) {
     for(int i = 0; i < crew; i++) {
         coins -= 1;
     }
+    return coins;
 }
