@@ -48,6 +48,27 @@ int main()
     std::cout << "pieniążki store po: " << store.getMoney() << '\n';
     
     captain->getShip()->printShipCargo();
+
+    Response response1 = store.sell(cargo, 2, captain);
+    std::cout << std::to_string(response1 == Response::lack_of_cargo) << "\n";
+    //No available space
+    response1 = store.sell(store.storeCargo.at(0), 1, human1);
+    std::cout << std::to_string(response1 == Response::lack_of_space) << "\n";
+    //lack of cargo
+    response1 = store.sell(store.storeCargo.at(0), 1000, captain);
+    std::cout << std::to_string(response1 == Response::lack_of_cargo) << "\n";
+    //no money
+    response1 = store.sell(store.storeCargo.at(0), 1, human);
+    std::cout << std::to_string(response1 == Response::lack_of_money) << "\n";
+    //correct buy
+    std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
+    response1 = store.sell(store.storeCargo.at(0), 1, captain);
+    response1 = store.sell(store.storeCargo.at(0), 1, captain);
+    std::cout << std::to_string(response1 == Response::done) << "\n";
+    std::cout << store;
+    std::cout << "pieniążki store po: " << store.getMoney() << '\n';
+
+    captain->getShip()->printShipCargo();
     
     // sell zad 1
 

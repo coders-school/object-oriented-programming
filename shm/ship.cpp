@@ -14,6 +14,7 @@ Ship::Ship(int capacity, int maxCrew, int speed, const std::string &name, size_t
     : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time)
 {
     time_->attach(this);
+    shipCargo.reserve(1);
 }
 
 Ship::Ship(int maxCrew, int speed, size_t id, Time *time)
@@ -66,10 +67,6 @@ void Ship::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
         auto i = std::find(begin(shipCargo), end(shipCargo), item);
         shipCargo.erase(i);
     }
-    else if(shipCargoAmount < amount)// 5 < 6
-    {
-        //TODO something
-    }
     else
     {
         findMatchCargo(item)->reduceAmount(amount);
@@ -102,7 +99,7 @@ void Ship::unload(std::shared_ptr<Cargo> unloadCargo, size_t amount)
     {
         if(unloadCargo == findMatchCargo(unloadCargo))
         {
-            //removeCargo();
+            removeCargo(unloadCargo, amount);
         }
     }
 }
@@ -140,8 +137,7 @@ void Ship::printShipCargo()
 size_t Ship::calculateAvailableSpace()
 {
     int cargoAmount = 0;
-    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, std::shared_ptr<Cargo> c)
-                                  { return i += c->getAmount(); });
+    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, std::shared_ptr<Cargo> c) { return i += c->getAmount(); });
 
     if (capacity_ - cargoAmount < 0)
     {

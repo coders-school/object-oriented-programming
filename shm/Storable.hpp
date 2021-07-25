@@ -33,6 +33,7 @@ public:
     virtual std::shared_ptr<Cargo> getCargo(size_t index) const = 0;
     void SpendMoney(int moneyToSpend);
     void EarnMoney(int moneyToEarn);
+    void removeCargo(std::shared_ptr<Cargo>, size_t);
 
 protected:
     int money_;

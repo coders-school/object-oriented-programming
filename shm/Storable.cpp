@@ -15,4 +15,8 @@ void Storable::EarnMoney(int moneyToEarn)
         money_ += moneyToEarn;
     }
 }
+void Storable::removeCargo(std::shared_ptr<Cargo>, size_t)
+{
+    
+}
 Storable::~Storable(){}

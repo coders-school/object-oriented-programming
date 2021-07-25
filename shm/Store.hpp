@@ -14,10 +14,13 @@ class Time;
 class Player;
 //class Cargo;
 
-enum class Response { done,
-                      lack_of_money,
-                      lack_of_cargo,
-                      lack_of_space };
+enum class Response 
+{
+    done,
+    lack_of_money,
+    lack_of_cargo,
+    lack_of_space 
+};
 
 class Store: public Storable {
 public:
@@ -31,7 +34,7 @@ public:
     std::shared_ptr<Cargo> findMatchCargo(std::shared_ptr<Cargo> cargo);
     std::vector<std::shared_ptr<Cargo>> storeCargo;
 
-    
+    void removeCargo(std::shared_ptr<Cargo>, size_t);    
     void nextDay() override;
     void printStoreCargo();
 

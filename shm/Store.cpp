@@ -47,7 +47,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
         money_ += price;
         player->SpendMoney(price);
         player->getShip()->load(cargo, amount);
-
+        //storeCargo.removeCargo();
         return Response::done;
     }
     else
@@ -59,14 +59,14 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
 Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) 
 {
     // Ship -> 
-    if (findMatchCargo(cargo))
+    if (player->getShip()->findMatchCargo(cargo))
     {
         auto price = amount * cargo->getBasePrice();
         if (getAvailableSpace() < amount)// miejsce sklepu
         {
             return Response::lack_of_space;
         }
-        if (player->getShip()->findMatchCargo(cargo)->getAmount() < amount)//cargo gracza
+        if (player->getShip()->findMatchCargo(cargo)->getAmount() < amount)//cargo gracza player->getShip()->findMatchCargo(cargo)->getAmount() < amount
         {
             return Response::lack_of_cargo;
         }
@@ -85,11 +85,6 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player
     {
         return Response::lack_of_cargo;
     }
-
-    // if (Cargo *ptr = findMatchCargo(cargo))
-    // {
-    //     *ptr += amount;
-    // }
 
     return Response::done;
 }
@@ -115,3 +110,17 @@ void Store::printStoreCargo()
         el->printCargo();
     }
 }
+
+// void Store::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
+// {
+//     auto storeCargoAmount = findMatchCargo(item)->getAmount();
+//     if(storeCargoAmount == amount)
+//     {
+//         auto i = std::find(begin(storeCargo), end(storeCargo), item);
+//         storeCargo.erase(i);
+//     }
+//     else
+//     {
+//         findMatchCargo(item)->reduceAmount(amount);
+//     }
+// }
