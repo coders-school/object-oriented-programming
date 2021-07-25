@@ -37,7 +37,6 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const
 
 size_t Player::calculateAvailableSpace()
 {
-
     int cargoAmount = 0;
     int capacity = ship_->getCapacity();
     std::vector<std::shared_ptr<Cargo>> shipCargo = ship_->getCargo();
@@ -50,19 +49,6 @@ size_t Player::calculateAvailableSpace()
         return 0;
     }
     return capacity - cargoAmount;
-}
-
-void Player::load(Cargo *loadCargo, size_t amount)
-{
-    for (auto i = 0; i < amount; i++)
-    {
-        loadCargo->reduceAmount();
-    }
-    ship_->addCargo(loadCargo);
-}
-
-void Player::unload(Cargo *unloadCargo, size_t amount)
-{
 }
 
 void Player::setCrew(size_t newCrewSize)

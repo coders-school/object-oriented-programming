@@ -7,8 +7,8 @@
 class Cargo : public TimeEffectable
 {
 public:
-    virtual Cargo &operator+=(size_t amount);
-    virtual Cargo &operator-=(size_t amount);
+    virtual Cargo &operator+=(size_t );
+    virtual Cargo &operator-=(size_t );
     virtual bool operator==(const Cargo &cargo) const;
 
     virtual size_t getPrice() const = 0;
@@ -18,9 +18,9 @@ public:
 
     void printCargo() const;
     std::string getCargoInfo();
-    void reduceAmount();
+    void reduceAmount(size_t);
     void loadCargo();
-    void increaseAmount();
+    void increaseAmount(size_t);
 
     Cargo() = default;
     Cargo(std::string name, size_t amount, size_t basePrice, Time* time);

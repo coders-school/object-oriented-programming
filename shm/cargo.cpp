@@ -30,7 +30,7 @@ Cargo &Cargo::operator-=(size_t amount)
 
 bool Cargo::operator==(const Cargo &cargo) const
 {
-    return name_ == cargo.name_ && amount_ == cargo.amount_ && basePrice_ == cargo.basePrice_;
+    return name_ == cargo.name_ && basePrice_ == cargo.basePrice_;
 }
 
 void Cargo::printCargo() const {
@@ -41,16 +41,16 @@ std::string Cargo::getCargoInfo(){
     return "Cargo Name: " + name_ + ", amount: " + std::to_string(amount_) + ", price: " + std::to_string(getPrice()) +'\n';
 }
 
-void Cargo::reduceAmount(){
-    if(amount_ -1 < 0){
+void Cargo::reduceAmount(size_t amount) {
+    if(amount_ < 0){
         amount_ = 0;
     }
     else{
-        amount_ -= 1;
+        amount_ -= amount;
     }
 }
 
-void Cargo::increaseAmount()
+void Cargo::increaseAmount(size_t amount)
 {
-    amount_ += 1;
+    amount_ += amount;
 }

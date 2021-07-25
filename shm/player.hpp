@@ -17,7 +17,5 @@ public:
     size_t getSpeed() const;
     
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
-    void load(Cargo*, size_t);
-    void unload(Cargo*, size_t);
     void setCrew(size_t newCrewSize);
 };

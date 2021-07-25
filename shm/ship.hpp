@@ -34,8 +34,8 @@ public:
     // std::vector<std::shared_ptr<Cargo>> CargoOnShip;
 
     Cargo* findMatchCargo(Cargo* cargo);
-    void load(std::shared_ptr<Cargo> cargo);
-    void unload(Cargo* cargo_ptr);
+    void load(Cargo *loadCargo, size_t amount);
+    void unload(Cargo *unloadCargo, size_t amount);
     void printShipCargo();
 
     void nextDay() override;

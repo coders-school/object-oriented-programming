@@ -46,7 +46,9 @@ Ship &Ship::operator+=(size_t num)
 
 void Ship::addCargo(Cargo *item)
 {
+
     printShipCargo();
+        
     shipCargo.emplace_back(item);
 }
 
@@ -61,14 +63,18 @@ Cargo *Ship::findMatchCargo(Cargo *cargo)
     }
     return nullptr;
 }
-void Ship::load(std::shared_ptr<Cargo> cargo_ptr)
+void Ship::load(Cargo *loadCargo, size_t amount)
 {
-    if (Cargo *ptr = findMatchCargo(cargo_ptr.get()))
+    loadCargo->reduceAmount(amount);
+    addCargo(loadCargo);
+}
+
+void Ship::unload(Cargo *unloadCargo, size_t amount)
+{
+    for(auto i = 0; i < amount; i++)
     {
-        *ptr += cargo_ptr->getAmount();
-        return;
+        
     }
-    shipCargo.push_back(cargo_ptr);
 }
 
 void Ship::setOwner(Player *newOwner)

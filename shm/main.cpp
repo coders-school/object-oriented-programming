@@ -13,6 +13,7 @@
 int main()
 {
     Time *time_ptr = new Time();
+
     //time->changeTime();
 
     //Show created store via friend method (zad5)
@@ -39,11 +40,15 @@ int main()
     response = store.buy(store.storeCargo.at(0).get(), 1, human);
     std::cout << std::to_string(response == Response::lack_of_money) << "\n";
     //correct buy
+    std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
+    response = store.buy(store.storeCargo.at(0).get(), 1, captain);
     response = store.buy(store.storeCargo.at(0).get(), 1, captain);
     std::cout << std::to_string(response == Response::done) << "\n";
-
     std::cout << store;
-
+    std::cout << "pieniążki store po: " << store.getMoney() << '\n';
+    
+    captain->getShip()->printShipCargo();
+    
     // sell zad 1
 
     //TO DO:: poprawic Sell i zrobić unload
@@ -52,6 +57,8 @@ int main()
     Alcohol wine = Alcohol("wino", 10, 20, time_ptr, 80);
     Fruit kiwi = Fruit("Kiwi", 15, 14, time_ptr, 20, 0);
     Item hook = Item("Special Hook", 5, 100, time_ptr, Rarity::rare);
+    Fruit banan("Banany", 5, 20, time_ptr, 15, 0);
+    Fruit banany("Banany", 6, 20, time_ptr, 15, 0);
 
     std::cout << wine.getName() << " " << wine.getBasePrice() << " " << wine.getPrice() << " " << wine.getAmount() << "\n";
     std::cout << kiwi.getName() << " " << kiwi.getBasePrice() << " " << kiwi.getPrice() << " " << kiwi.getAmount() << "\n";
@@ -77,6 +84,7 @@ int main()
     std::cout << std::to_string(kiwi == hook) << "\n";
     std::cout << std::to_string(hook == wine) << "\n";
     std::cout << std::to_string(kiwi == kiwi) << "\n";
+    std::cout << std::to_string(banan == banany) << '\n';
 
     //Zad3
 
@@ -98,4 +106,5 @@ int main()
     std::cout << orange.getName() << " " << orange.getBasePrice() << " " << orange.getPrice() << " " << orange.getAmount() << "\n";
     std::cout << hook.getName() << " " << hook.getBasePrice() << " " << hook.getPrice() << " " << hook.getAmount() << "\n";
     std::cout << store;
+    
 }

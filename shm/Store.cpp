@@ -43,7 +43,8 @@ Response Store::buy(Cargo *cargo, size_t amount, Player *player) //Buying cargo 
         {
             return Response::lack_of_money;
         }
-
+        
+        money_ += price;
         player->SpendMoney(price);
         player->load(cargo, amount);
 
@@ -73,7 +74,7 @@ Response Store::sell(Cargo *cargo, size_t amount, Player *player)
         {
             return Response::lack_of_money;
         }
-
+        money_ -= price;
         player->unload(cargo, amount);
         player->EarnMoney(price);
 

@@ -30,8 +30,9 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const override;
     Cargo* findMatchCargo(Cargo* cargo);
     std::vector<std::shared_ptr<Cargo>> storeCargo;
-    void nextDay() override;
 
+    
+    void nextDay() override;
     void printStoreCargo();
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store) {
