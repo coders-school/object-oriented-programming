@@ -15,4 +15,8 @@ size_t Alcohol::getPrice() const {
 std::string Alcohol::getName() const { return name_; }
 size_t Alcohol::getAmount() const { return amount_; }
 size_t Alcohol::getBasePrice() const { return basePrice_; }
-size_t Alcohol::nextDay() { basePrice_--; }
+
+// in game.hpp make this function work when "currentDay.endCurrentDay()" in time.hpp happens 5 times
+size_t Alcohol::nextDay() {
+  return --alcoholByVolume_;
+}
