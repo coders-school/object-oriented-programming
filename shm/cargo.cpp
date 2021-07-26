@@ -54,3 +54,8 @@ void Cargo::increaseAmount(size_t amount)
 {
     amount_ += amount;
 }
+
+void Cargo::setAmount(size_t amount)
+{
+    amount_ = amount;
+}

@@ -48,8 +48,8 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
         
         money_ += price;
         player->SpendMoney(price);
+        std::cout << "Line -1 - Value of is :" << cargo.get()->getPrice() << " " << cargo.get()->getName() << std::endl;
         player->getShip()->load(cargo, amount);
-        removeCargo(cargo, amount);
         return Response::done;
     }
     else
