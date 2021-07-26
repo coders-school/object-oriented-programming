@@ -1,10 +1,11 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
-
 #include "Map.hpp"
 #include "Player.hpp"
+#include "Time.hpp"
+
+#include <iostream>
+#include <memory>
 
 class Game {
 	size_t money_;
@@ -13,6 +14,7 @@ class Game {
 
 	size_t current_day_;
 	std::unique_ptr<Map> map_;
+	std::unique_ptr<Time> time_;
 	std::unique_ptr<Player> player_;
 
 	enum class Action {

@@ -6,22 +6,21 @@
 #include <algorithm>
 
 Ship::Ship()
-    : Ship(0, 0, 0, "", -1)
+    : Ship(0, 0, 0, "", -1, nullptr)
 {}
 
 Ship::Ship(int maxCrew, int speed, size_t id)
-    : Ship(0, maxCrew, speed, "", id)
+    : Ship(0, maxCrew, speed, "", id, nullptr)
 {}
 
-//  Ship::Ship(int capacity, int crew, int speed, std::string name, size_t id, Time* time);
-
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time)
     : name_(name)
     , capacity_(capacity)
     , maxCrew_(maxCrew)
     , id_(id)
     , crew_(0)
     , speed_(speed)
+    , time_(time)
     , cargo_()
 {}
 
@@ -91,4 +90,6 @@ Cargo* Ship::getCargo(const size_t index) const {
 
 // void Ship::RemoveFromStorage(Cargo* cargo);
 
-// void Ship::NextDay() override;
+void Ship::nextDay() {
+
+}

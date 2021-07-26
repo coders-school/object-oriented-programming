@@ -19,6 +19,8 @@ set(THIS_PROJECT_SRC_DIRECTORIES
     source/Fruit.cpp
     source/Alcohol.cpp
     source/Item.cpp
+    source/Store.cpp
+    source/Time.cpp
 )
 set(THIS_PROJECT_TESTS_DIRECTORIES
 )

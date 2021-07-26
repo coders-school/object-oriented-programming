@@ -26,3 +26,7 @@ size_t Fruit::getAmount() const {
 size_t Fruit::getBasePrice() const { 
     return basePrice_; 
 }
+
+void Fruit::nextDay() {
+    operator--();
+}

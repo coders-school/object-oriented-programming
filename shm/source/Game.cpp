@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Observer.hpp"
 
 Game::Game(const size_t startMoney, 
 	const size_t gameDays, 
@@ -8,6 +9,7 @@ Game::Game(const size_t startMoney,
 		final_goal_(finalGoal),
 		current_day_(1),
 		map_(std::make_unique<Map>()),
+		time_(std::make_unique<Time>()),
 		player_(std::make_unique<Player>())
 {}
 

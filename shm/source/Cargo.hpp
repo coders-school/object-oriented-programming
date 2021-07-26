@@ -1,14 +1,20 @@
 #pragma once
 
+#include "Observer.hpp"
+
 #include <string>
 
-class Cargo {
+class Cargo : Observer {
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
 
 public:
+    // Observer:
+    virtual void nextDay() override = 0;
+
+    // Cargo Interface:
     Cargo(const std::string& name, const size_t amount, const size_t basePrice);
 
     virtual size_t getPrice() const = 0;

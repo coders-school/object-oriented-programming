@@ -19,5 +19,7 @@ public:
 
     size_t getAmount() const override;
 
-    size_t getBasePrice() const override;    
+    size_t getBasePrice() const override;   
+
+    void nextDay() override;  
 };

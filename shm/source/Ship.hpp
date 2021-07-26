@@ -1,22 +1,23 @@
 #pragma once
 
+#include "Observer.hpp"
+#include "Time.hpp"
+//#include "Delegate.hpp"
+
 #include <memory>
 #include <string>
 #include <vector>
 
-//#include "Delegate.hpp"
-//#include "Tieme.hpp"
-
 class Cargo;
 
-class Ship {
+class Ship : Observer {
     std::string name_;
     const size_t capacity_;
     const size_t maxCrew_;
     const size_t id_;
     size_t crew_;
     size_t speed_;
-    //Time* time_;
+    Time* time_;
     //Delegate* delegate_;
     std::vector<std::unique_ptr<Cargo>> cargo_;
 
@@ -25,9 +26,7 @@ public:
 
     Ship(int maxCrew, int speed, size_t id);
 
-    // Ship(int capacity, int crew, int speed, std::string name, size_t id, Time* time);
-    
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time);
 
     // ~Ship() override;
     
@@ -61,5 +60,5 @@ public:
     
     // void removeFromStorage(Cargo* cargo);
     
-    // void nextDay() override;
+    void nextDay() override;
 };
