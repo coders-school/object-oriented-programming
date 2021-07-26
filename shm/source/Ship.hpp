@@ -2,7 +2,7 @@
 
 #include "Observer.hpp"
 #include "Time.hpp"
-//#include "Delegate.hpp"
+#include "Delegate.hpp"
 
 #include <memory>
 #include <string>
@@ -18,7 +18,7 @@ class Ship : Observer {
     size_t crew_;
     size_t speed_;
     Time* time_;
-    //Delegate* delegate_;
+    Delegate* delegate_;
     std::vector<std::unique_ptr<Cargo>> cargo_;
 
 public:
@@ -26,7 +26,7 @@ public:
 
     Ship(int maxCrew, int speed, size_t id);
 
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time);
+    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time, Delegate* delegate);
 
     // ~Ship() override;
     

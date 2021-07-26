@@ -2,10 +2,12 @@
 
 #include <memory>
 
+#include "Delegate.hpp"
+
 class Ship;
 class Cargo;
 
-class Player {
+class Player : Delegate {
 	Ship* ship_;
 	size_t money_;
 	std::pair<size_t, bool> availableSpace_;
@@ -21,13 +23,13 @@ public:
 
 	Cargo* getCargo(size_t index) const;
 
-	// void PayCrew(size_t money) override;
+	void payCrew(size_t price) override;
 
-	//void PurchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
+	// void PurchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
 
-	//void SellCargo(Cargo* cargo, size_t price);
+	// void SellCargo(Cargo* cargo, size_t price);
 
-	//void PrintCargo() const;
+	// void PrintCargo() const;
 
 private:
 	void calculateAvailableSpace();

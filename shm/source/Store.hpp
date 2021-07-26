@@ -16,8 +16,8 @@ class Store : Observer {
 		Lack_of_space
 	};
 
-	// Time* time_;
-	// std::vector<std::unique_ptr<Cargo>> cargo_;
+	Time* time_;
+	std::vector<std::unique_ptr<Cargo>> cargo_;
 
 public:
 	// Store(Time* time);

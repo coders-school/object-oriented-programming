@@ -4,8 +4,10 @@
 
 // ~Store() override;
 
-void nextDay() {
-
+void Store::nextDay() {
+	for (auto& good : cargo_) {
+		good->nextDay();
+	}
 }
 
 // Cargo* GetCargo(const size_t pos);

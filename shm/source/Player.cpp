@@ -36,13 +36,15 @@ Cargo* Player::getCargo(size_t index) const {
 	return nullptr;
 }
 
-//void Player::PayCrew(size_t money) override;
+void Player::payCrew(size_t price) {
+	money_ = (money_ > price)? money_ - price : 0;
+}
 
-//void Player::PurchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
+// void Player::PurchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
 
-//void Player::SellCargo(Cargo* cargo, size_t price);
+// void Player::SellCargo(Cargo* cargo, size_t price);
 
-//void Player::PrintCargo() const;
+// void Player::PrintCargo() const;
 
 void Player::calculateAvailableSpace() {
 	if (!ship_) {

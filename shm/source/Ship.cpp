@@ -6,14 +6,14 @@
 #include <algorithm>
 
 Ship::Ship()
-    : Ship(0, 0, 0, "", -1, nullptr)
+    : Ship(0, 0, 0, "", -1, nullptr, nullptr)
 {}
 
 Ship::Ship(int maxCrew, int speed, size_t id)
-    : Ship(0, maxCrew, speed, "", id, nullptr)
+    : Ship(0, maxCrew, speed, "", id, nullptr, nullptr)
 {}
 
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time)
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time, Delegate* delegate)
     : name_(name)
     , capacity_(capacity)
     , maxCrew_(maxCrew)
@@ -21,6 +21,7 @@ Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t
     , crew_(0)
     , speed_(speed)
     , time_(time)
+    , delegate_(delegate)
     , cargo_()
 {}
 
@@ -91,5 +92,5 @@ Cargo* Ship::getCargo(const size_t index) const {
 // void Ship::RemoveFromStorage(Cargo* cargo);
 
 void Ship::nextDay() {
-
+    delegate_->payCrew(crew_);
 }
