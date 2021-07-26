@@ -1,20 +1,12 @@
-#include <iostream>
+#include "source/Game.hpp"
 
-#include "source/Cargo.hpp"
-#include "source/Map.hpp"
-#include "source/Player.hpp"
+constexpr size_t start_money = 1'000;
+constexpr size_t game_days = 100;
+constexpr size_t final_goal = 2'000;
 
 int main() {
-    Map();
-    Player a;
-    Player b;
-    Player c;
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
 
-    c.giveAwayShip();
-
-    std::cout << "\n" << a.takeOverShip(b.giveAwayShip())
-        << "\n" << b.takeOverShip(a.giveAwayShip());
-
-    std::cout << "\n\n\n";
     return 0;
 }
