@@ -1,0 +1,83 @@
+#include "Ship.hpp"
+#include "Cargo.hpp"
+//#include "Delegate.hpp"
+//#include "Tieme.hpp"
+
+#include <algorithm>
+
+Ship::Ship()
+    : Ship(0, 0, 0, "", -1)
+{}
+
+Ship::Ship(int maxCrew, int speed, size_t id)
+    : Ship(0, maxCrew, speed, "", id)
+{}
+
+//  Ship::Ship(int capacity, int crew, int speed, std::string name, size_t id, Time* time);
+
+Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
+    : name_(name)
+    , capacity_(capacity)
+    , maxCrew_(maxCrew)
+    , id_(id)
+    , crew_(0)
+    , speed_(speed)
+    , cargo_()
+{}
+
+// ~ Ship::Ship() override;
+
+void Ship::setName(const std::string& name) { name_ = name; }
+
+Ship& Ship::operator-=(size_t num) {
+    crew_ = (crew_ > num)? crew_ - num : 0;
+    return *this;
+}
+
+Ship& Ship::operator+=(size_t num) {
+    crew_ = (crew_ + num < maxCrew_)? crew_ + num : maxCrew_;
+    return *this;
+}
+
+size_t Ship::getCapacity() const { 
+    return capacity_; 
+}
+
+size_t Ship::getMaxCrew() const { 
+    return maxCrew_;
+}
+
+size_t Ship::getSpeed() const { 
+    return speed_; 
+}
+
+std::string Ship::getName() const { 
+    return name_; 
+}
+
+size_t Ship::getId() const { 
+    return id_; 
+}
+
+std::vector<std::unique_ptr<Cargo>>& Ship::getCargo() {
+    return cargo_;
+}
+
+// void Ship::printCargo() const;
+
+// void Ship::load(std::unique_ptr<Cargo> cargo);
+
+// void Ship::unload(Cargo* cargo);
+
+Cargo* Ship::getCargo(const size_t index) const { 
+    if (index < cargo_.size()) {            
+        return cargo_[index].get();
+    }
+    return nullptr; 
+}
+
+// Cargo* Ship::FindMatchCargo(Cargo* cargo);
+
+// void Ship::RemoveFromStorage(Cargo* cargo);
+
+// void Ship::NextDay() override;
