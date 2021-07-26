@@ -1,61 +1,35 @@
 #pragma once
+
 #include <memory>
 
-#include "Ship.hpp"
+class Ship;
+class Cargo;
 
 class Player {
-	std::unique_ptr<Ship> ship_;
-	int money_;
-	size_t availableSpace_;
+	Ship* ship_;
+	size_t money_;
+	size_t maxAvailableSpace_;
+	std::pair<size_t, bool> availableSpace_;
 
 public:
-	Player():
-		ship_(std::make_unique<Ship>()),
-		money_(0),
-		availableSpace_()
-	{}
+	Player();
 
-	int getMoney() const { return money_; }
+	size_t getMoney() const;
 
-	size_t getAvailableSpace() const { return availableSpace_; }
+	size_t getAvailableSpace();
 
-	size_t getSpeed() const { 
-		if (ship_) {
-			return ship_->getSpeed();
-		}
-		return 0;
-	}
+	size_t getSpeed() const;
 
-	Cargo* getCargo(size_t index) const {
-		if (ship_) {
-			return ship_->getCargo(index);
-		}
-		return nullptr;
-	}
+	Cargo* getCargo(size_t index) const;
 
-	std::string takeOverShip(std::unique_ptr<Ship> someoneElsesShip) { 
-		if (!someoneElsesShip) {
-			return "there is no ship";
-		}
-		if (ship_) {
-			return "already have one";
-		}
-		ship_ = std::move(someoneElsesShip);
-		return "yarr";
-	}
+	// void PayCrew(size_t money) override;
 
-	std::unique_ptr<Ship> giveAwayShip() { 
-		return std::move(ship_); 
-	}
+	//void PurchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
 
-	int calculateAvailableSpace() const {
-		size_t index = 0;
-		size_t count = 0;
-		auto cargo = getCargo(index);		
-		while (cargo) {
-			count += cargo->getAmount();
-			cargo = getCargo(++index);
-		}
-		return static_cast<int>(getAvailableSpace() - count);
-	}
+	//void SellCargo(Cargo* cargo, size_t price);
+
+	//void PrintCargo() const;
+
+private:
+	void calculateAvailableSpace();
 };
