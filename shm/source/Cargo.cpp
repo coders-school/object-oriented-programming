@@ -21,9 +21,3 @@ Cargo& Cargo::operator-=(size_t amount) {
     amount_ = (amount_ > amount)? amount_ - amount : 0;
     return *this;
 }
-
-std::string Cargo::getName() const { return name_; }
-
-size_t Cargo::getAmount() const { return amount_; }
-
-size_t Cargo::getBasePrice() const { return basePrice_; }

@@ -51,15 +51,15 @@ public:
 
     // void printCargo() const;
 
-    // void load(std::unique_ptr<Cargo> cargo);
+    void load(std::unique_ptr<Cargo> cargo);
 
-    // void unload(Cargo* cargo);
+    void unload(Cargo* cargo);
 
     Cargo* getCargo(const size_t index) const;
 
-    // Cargo* FindMatchCargo(Cargo* cargo);
+    // Cargo* findMatchCargo(Cargo* cargo);
     
-    // void RemoveFromStorage(Cargo* cargo);
+    // void removeFromStorage(Cargo* cargo);
     
-    // void NextDay() override;
+    // void nextDay() override;
 };

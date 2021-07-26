@@ -65,9 +65,20 @@ std::vector<std::unique_ptr<Cargo>>& Ship::getCargo() {
 
 // void Ship::printCargo() const;
 
-// void Ship::load(std::unique_ptr<Cargo> cargo);
+void Ship::load(std::unique_ptr<Cargo> cargo) {
+    cargo_.push_back(std::move(cargo));
+}
 
-// void Ship::unload(Cargo* cargo);
+void Ship::unload(Cargo* cargo) {
+    if (!cargo) {
+        return;
+    }
+    auto result = std::find_if(cargo_.begin(), cargo_.end(), [cargo](const auto& el) { return el.get() == cargo; } );
+    if (result != cargo_.end()) {
+        std::iter_swap(result, (cargo_.end() - 1));
+        cargo_.pop_back();
+    }
+}
 
 Cargo* Ship::getCargo(const size_t index) const { 
     if (index < cargo_.size()) {            
@@ -76,7 +87,7 @@ Cargo* Ship::getCargo(const size_t index) const {
     return nullptr; 
 }
 
-// Cargo* Ship::FindMatchCargo(Cargo* cargo);
+// Cargo* Ship::findMatchCargo(Cargo* cargo);
 
 // void Ship::RemoveFromStorage(Cargo* cargo);
 
