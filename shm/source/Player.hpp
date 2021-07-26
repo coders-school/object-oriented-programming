@@ -8,7 +8,6 @@ class Cargo;
 class Player {
 	Ship* ship_;
 	size_t money_;
-	size_t maxAvailableSpace_;
 	std::pair<size_t, bool> availableSpace_;
 
 public:

@@ -8,7 +8,6 @@
 Player::Player():
 	ship_(nullptr),
 	money_(0),
-	maxAvailableSpace_(100),
 	availableSpace_({0, false})
 {}
 
@@ -51,6 +50,6 @@ void Player::calculateAvailableSpace() {
 	} 
 	const auto& allCargo = ship_->getCargo();
 	size_t count = std::accumulate(allCargo.begin(), allCargo.end(), 0, [](int sum, const auto& cargo) { return sum + cargo->getAmount(); }); 
-	availableSpace_.first = maxAvailableSpace_ - count;
+	availableSpace_.first = ship_->getCapacity() - count;
 	availableSpace_.second = true;
 }
