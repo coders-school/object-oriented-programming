@@ -12,6 +12,7 @@ project(SHM)
 set(THIS_PROJECT_SRC_DIRECTORIES
     source/Fortune.cpp
     source/Map.cpp
+    source/Cargo.cpp
 )
 set(THIS_PROJECT_TESTS_DIRECTORIES
 )
