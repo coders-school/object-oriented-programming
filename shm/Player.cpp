@@ -2,14 +2,16 @@
 #include <iostream>
 #include <numeric>
 
-Player::Player(std::unique_ptr<Ship>& ship, int money, int availableSpace)
-    : ship_(std::move(ship)), money_(money), availableSpace_(calculateAvailableSpace()) {}
+Player::Player(std::unique_ptr<Ship>& ship, int money)
+    : ship_(std::move(ship)), money_(money) {
+        calculateAvailableSpace();
+    }
 
 std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
     return ship_->getCargo(index);
 }
 
-size_t Player::calculateAvailableSpace() {
+void Player::calculateAvailableSpace() {
     size_t cargoAmount = 0;
     size_t capacity = ship_->getCapacity();
     std::vector<std::shared_ptr<Cargo>> cargoList = ship_->getCargoList();
@@ -18,13 +20,14 @@ size_t Player::calculateAvailableSpace() {
                                   cargoList.end(),
                                   0,
                                   [](int amount, std::shared_ptr<Cargo> cargo) { return amount += cargo->getAmount(); });
-
+    
+    
     if (capacity - cargoAmount < 0) {
-        return 0;
+        availableSpace_= 0;
     }
 
-    return capacity - cargoAmount;
-}
+   availableSpace_ = capacity - cargoAmount;
+} 
 
 void Player::printCargo() const {
     if (!ship_) {
@@ -41,3 +44,15 @@ void Player::printCargo() const {
                   << '\n';
     }
 }
+
+void Player::PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price){
+    ship_->load(cargo); 
+    money_-= price;
+    calculateAvailableSpace();
+}
+
+void Player::SellCargo(Cargo* cargo, size_t price){
+    ship_->unload(cargo);
+    money_+= price;
+    calculateAvailableSpace();
+};
