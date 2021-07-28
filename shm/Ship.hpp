@@ -16,8 +16,8 @@ private:
     size_t crew_;
     std::vector<std::shared_ptr<Cargo>> cargoList_;
 
-    Cargo* findMatchCargo(Cargo* cargo);
-    void removeFromStorage(Cargo* cargo);
+    std::shared_ptr<Cargo> findCargo(std::shared_ptr<Cargo> cargo);
+    void removeFromStorage(std::shared_ptr<Cargo> cargo);
 
 
 public:
@@ -36,7 +36,7 @@ public:
 
     void setName(const std::string& name);
     void load(std::shared_ptr<Cargo> cargo);
-    void unload(Cargo* cargo);  
+    void unload(std::shared_ptr<Cargo> cargo);  
 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);

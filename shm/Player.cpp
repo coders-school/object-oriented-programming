@@ -52,7 +52,7 @@ void Player::PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price){
     calculateAvailableSpace();
 }
 
-void Player::SellCargo(Cargo* cargo, size_t price){
+void Player::SellCargo(std::shared_ptr<Cargo> cargo, size_t price){
     ship_->unload(cargo);
     money_+= price;
     calculateAvailableSpace();

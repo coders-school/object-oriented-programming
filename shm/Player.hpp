@@ -24,7 +24,7 @@ public:
     size_t getAvailableSpace() const { return availableSpace_; };
 
     void PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price);
-    void SellCargo(Cargo* cargo, size_t price);
+    void SellCargo(std::shared_ptr<Cargo> cargo, size_t price);
     void printCargo() const;
 
     size_t getSpeed() const { return ship_->getSpeed(); };

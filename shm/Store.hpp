@@ -12,17 +12,17 @@ class Store {
 private: 
     std::vector<std::shared_ptr<Cargo>> goodsList_;
 
-    std::shared_ptr<Cargo> findProduct(Cargo* cargo);
-    void removeProduct(Cargo* cargo);
+    std::shared_ptr<Cargo> findProduct(std::shared_ptr<Cargo> cargo);
+    void removeProduct(std::shared_ptr<Cargo> cargo);
     void GenerateGoodsList();
 
 public:
     Store();
     ~Store() {};
-    Response buy(Cargo* cargo, size_t amount, Player* player);
-    Response sell(Cargo* cargo, size_t amount, Player* player);
-    void printGoodsList() const;
-    //friend std::ostream& operator<<(std::ostream&, const Store&);
+    Response buy(std::shared_ptr<Cargo>cargo, size_t amount, Player* player);
+    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
+    //void printGoodsList() const;
+    friend std::ostream& operator<<(std::ostream&, const Store&);
 
 
 };
