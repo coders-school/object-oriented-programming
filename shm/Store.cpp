@@ -47,7 +47,7 @@ Response Store::buy(const Cargo* const cargo, size_t amount, Player* player) {
     if (!buyedCargoPart) {
         return Response::lack_of_cargo;
     }
-    player->pay(moneyToPay);
+    player->income(moneyToPay);
 
     load(std::move(buyedCargoPart));
     return Response::done;
@@ -99,6 +99,7 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
             auto soldCargo = storeCargo->split(amount);
             unload(storeCargo);
             playerShip->load(std::move(soldCargo));
+            player->pay(moneyToPay);
         } catch (std::logic_error& err) {
             //rest of cargo disapear in store?
         }
@@ -107,6 +108,7 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
 
     auto soldCargo = storeCargo->split(amount);
     playerShip->load(std::move(soldCargo));
+    player->pay(moneyToPay);
     return Response::done;
 }
 
