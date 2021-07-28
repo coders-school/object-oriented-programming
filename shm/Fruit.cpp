@@ -1,5 +1,4 @@
 #include "Fruit.hpp"
-#include <cassert>
 #include <iostream>
 
 Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t freshTime, size_t maxFreshTime)
@@ -36,7 +35,5 @@ void Fruit::nextDay() {
 }
 
 std::unique_ptr<Cargo> Fruit::createAmountOfEqual(size_t amount) {
-    auto result = std::make_unique<Fruit>(name_, amount, basePrice_, getFreshTime(), getMaxFreshTime());
-    assert(*result == *this);
-    return result;
+    return std::make_unique<Fruit>(name_, amount, basePrice_, getFreshTime(), getMaxFreshTime());
 }

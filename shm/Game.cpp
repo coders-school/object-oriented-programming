@@ -37,16 +37,24 @@ std::unique_ptr<Cargo> generateCargo() {
     auto randomCargo = std::rand() % goods.size();
     auto randomAmount = std::rand() % 99 + 1;
     auto good = goods[randomCargo];
-    auto ptr = std::make_unique<Fruit>(good.name, randomAmount, good.value, 10);
-    return ptr;  // RVO
+    return std::make_unique<Fruit>(good.name, randomAmount, good.value, 10);
+}
+
+void Game::fillCargo(Warehouse& holder, size_t number) {
+    holder.clear();
+    for (size_t i = 0; i < number; ++i) {
+        auto cargo = generateCargo();
+        std::cout << cargo->getName() << '\n';
+        holder.load(std::move(cargo));
+    }
 }
 
 void printResponse(Response response) {
-    std::array text{
-        std::string("done"),
-        std::string("lack_of_money"),
-        std::string("lack_of_cargo"),
-        std::string("lack_of_space")};
+    constexpr std::array text{
+        ("done"),
+        ("lack_of_money"),
+        ("lack_of_cargo"),
+        ("lack_of_space")};
     std::cout << "Response: " << text[static_cast<size_t>(response)] << "\n";
 }
 
@@ -54,21 +62,18 @@ void printPlayerStatus(const Player& player) {
     std::cout << "Player money: " << player.getMoney() << "\t\tTarget money: " << final_goal << '\n';
 }
 
-void printMenu(std::vector<std::unique_ptr<Command>>& commands) {
+void printMenu(std::map<std::string, std::unique_ptr<Command>>& commands) {
     std::cout << "\n\nMENU -------\n";
-    int index = 0;
-    for (const auto& command : commands) {
-        std::cout << index << " - " << command->getName() << '\n';
-        ++index;
+    for (const auto& [key, command] : commands) {
+        std::cout << key << " - " << command->getName() << '\n';
     }
-    std::cout << index << " - Exit\n";
 }
 
 void printStoreCargoList(const Store& store) {
     printf("\033[31m");
     std::cout << "STORE LIST -------\n";
     for (size_t i = 0; i < store.getCargoVec().size(); ++i) {
-        std::cout << i << "\t"                                              //
+        std::cout << i << "\t"                                                  //
                   << "Name: " << store.getCargoVec()[i]->getName() << "\t\t"    //
                   << "Amount: " << store.getCargoVec()[i]->getAmount() << "\t"  //
                   << "Price: " << store.getCargoVec()[i]->getPrice() << "\n";   //
@@ -132,7 +137,7 @@ public:
 class Trade : public Command {
 public:
     Trade() = default;
-    void operator()([[maybe_unused]]Player& player, [[maybe_unused]]Store& store) override {
+    void operator()([[maybe_unused]] Player& player, [[maybe_unused]] Store& store) override {
     }
 
     std::string getName() const override { return "Go to store"; }
@@ -163,7 +168,7 @@ public:
             if (amount >= limit) {
                 return;
             }
-            
+
             Response response = store.sell(cargo, amount, &player);
             printResponse(response);
         }
@@ -229,14 +234,28 @@ public:
 
 private:
     NextDay nextDay;
-    size_t distance = 5;//for show concept
+    size_t distance = 5;
+};
+
+class Exit : public Command {
+public:
+    Exit(bool& endgame)
+        : endgame_(endgame) {}
+
+    void operator()([[maybe_unused]] Player& player, [[maybe_unused]] Store& store) override {
+        endgame_ = true;
+    }
+
+    std::string getName() const override { return "Exit"; }
+
+private:
+    bool& endgame_;
 };
 
 void Game::startGame() {
     init();
-    //auto time = Time::getInstance();
 
-    unsigned char letter;
+    std::string menuOptionName;
     while (!endGame and !playerWin) {
         printStoreCargoList(store);
         printShipCargoList(player);
@@ -244,26 +263,21 @@ void Game::startGame() {
         printPlayerStatus(player);
 
         printMenu(commands);
-        std::cin >> letter;
-        //std::cin.clear();
-
-        size_t optionId = static_cast<size_t>(letter - '0');
-        if (optionId < commands.size()) {
-            Command& command = *commands[optionId];
+        std::cin >> menuOptionName;
+        try {
+            Command& command = *commands.at(menuOptionName);
             command(player, store);
-        } else if (optionId == commands.size()) {
-            endGame = true;
+        } catch (...) {
         }
-
         playerWin = player.getMoney() >= goal_;
     }
 }
 
 void Game::init() {
-    auto payMethod = [this](size_t cost){return this->player.pay(cost);};
+    auto payMethod = [this](size_t cost) { return this->player.pay(cost); };
     player.getShip()->setDebt(payMethod);
 
-    auto changeAssortment = [this](){fillCargo(this->store, Game::storeCargoNumber);};
+    auto changeAssortment = [this]() { fillCargo(this->store, Game::storeCargoNumber); };
     store.changeAssortment = changeAssortment;
 
     fillCargo(*player.getShip(), startingPlayerCargoNumber);
@@ -272,8 +286,9 @@ void Game::init() {
 
     fillCargo(store, storeCargoNumber);
 
-    commands.push_back(std::make_unique<Menu>());
-    commands.push_back(std::make_unique<TradeBuy>());
-    commands.push_back(std::make_unique<TradeSell>());
-    commands.push_back(std::make_unique<NextDay>());
+    commands["1"] = (std::make_unique<Menu>());
+    commands["2"] = (std::make_unique<TradeBuy>());
+    commands["3"] = (std::make_unique<TradeSell>());
+    commands["4"] = (std::make_unique<NextDay>());
+    commands["5"] = (std::make_unique<Exit>(endGame));
 }

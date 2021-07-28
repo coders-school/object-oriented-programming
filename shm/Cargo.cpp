@@ -34,6 +34,7 @@ size_t Cargo::getBasePrice() const {
     return basePrice_;
 }
 
+//Return position where suffix begin in name_ if exist.
 std::optional<size_t> Cargo::haveSuffix(const std::string_view suffix) const {
     if (name_.empty() and name_.size() < suffix.size()) {
         return {};
@@ -45,7 +46,7 @@ std::optional<size_t> Cargo::haveSuffix(const std::string_view suffix) const {
     }
     return {};
 }
-
+//Remove suffix from name_
 void Cargo::removeSuffix(const std::string_view suffix) {
     if (auto trim_pos = haveSuffix(suffix)) {
         auto trim_suffix = trim_pos.value();
@@ -56,7 +57,7 @@ void Cargo::removeSuffix(const std::string_view suffix) {
         name_ = name_.substr(0, trim_pos.value()) + name_.substr(trim_suffix + suffix_lenght, restOfSuffixLenght);  //save rest of suffixes
     }
 }
-
+//Add suffix to the name_
 void Cargo::addSuffix(const std::string_view suffix) {
     if (haveSuffix(suffix)) {
         return;
