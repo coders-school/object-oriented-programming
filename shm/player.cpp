@@ -26,7 +26,7 @@ size_t Player::getSpeed() const
     return 0;
 }
 
-std::shared_ptr<Cargo> Player::getCargo(size_t index) const
+Cargo * Player::getCargo(size_t index) const
 {
     if (ship_->getCargo().at(index) > 0)
     {
@@ -39,9 +39,9 @@ size_t Player::calculateAvailableSpace()
 {
     int cargoAmount = 0;
     int capacity = ship_->getCapacity();
-    std::vector<std::shared_ptr<Cargo>> shipCargo = ship_->getCargo();
+    std::vector<Cargo*>  shipCargo = ship_->getCargo();
 
-    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, std::shared_ptr<Cargo> c)
+    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo * c)
                                   { return i += c->getAmount(); });
 
     if (capacity - cargoAmount < 0)

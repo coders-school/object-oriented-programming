@@ -16,6 +16,6 @@ public:
     const std::unique_ptr<Ship>& getShip();
     size_t getSpeed() const;
     
-    std::shared_ptr<Cargo> getCargo(size_t index) const override;
+    Cargo * getCargo(size_t index) const override;
     void setCrew(size_t newCrewSize);
 };

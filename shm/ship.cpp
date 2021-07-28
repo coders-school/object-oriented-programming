@@ -50,7 +50,7 @@ Ship &Ship::operator+=(size_t num)
     return *this;
 }
 
-void Ship::addCargo(std::shared_ptr<Cargo> item)
+void Ship::addCargo(Cargo * item)
 {
     if(findMatchCargo(item) == item)
     {
@@ -62,7 +62,7 @@ void Ship::addCargo(std::shared_ptr<Cargo> item)
     }
 }
 
-void Ship::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
+void Ship::removeCargo(Cargo * item, size_t amount)
 {
     auto shipCargoAmount = findMatchCargo(item)->getAmount();
     if(shipCargoAmount == amount)
@@ -76,7 +76,7 @@ void Ship::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
     }
 }
 
-std::shared_ptr<Cargo> Ship::findMatchCargo(std::shared_ptr<Cargo> cargo)
+Cargo * Ship::findMatchCargo(Cargo * cargo)
 {
     for (auto &el : shipCargo)
     {
@@ -87,37 +87,31 @@ std::shared_ptr<Cargo> Ship::findMatchCargo(std::shared_ptr<Cargo> cargo)
     }
     return nullptr;
 }
-void Ship::load(std::shared_ptr<Cargo> loadCargo, size_t amount)
+void Ship::load(Cargo * loadCargo, size_t amount)
 {
     if (amount <= calculateAvailableSpace())
-    {
+    {        
         loadCargo->reduceAmount(amount);
-        std::cout << "Line 0 - Value of is :" << loadCargo.get()->getPrice() << " " << loadCargo.get()->getName() << std::endl ;
-      /*  if(Fruit* f = dynamic_cast<Fruit*>(loadCargo.get())){
-            std::shared_ptr<Cargo> toAdd = std::shared_ptr<Fruit>(f);
-            std::cout << "Line 1 - Value of (Fruit)toAdd is :" << toAdd.get()->getPrice() << std::endl ;
-            toAdd->setAmount(amount);
-            addCargo(toAdd);
+        Cargo* toAdd;
+        //lol no
+        //dont look, bleh
+        //Something is not yes
+        if(Fruit* f = dynamic_cast<Fruit*>(loadCargo)){
+            toAdd = new Fruit(*f);
         }
-       if(Item* i = dynamic_cast<Item*>(loadCargo.get())){
-            std::shared_ptr<Cargo> toAdd = std::shared_ptr<Item>(i);
-            std::cout << "Line 1 - Value of (Item)toAdd is :" << toAdd.get()->getPrice() << std::endl ;
-            toAdd->setAmount(amount);
-            addCargo(toAdd);
+        if(Item* i = dynamic_cast<Item*>(loadCargo)){
+          toAdd = new Item(*i);
         }
-        if(Alcohol* a = dynamic_cast<Alcohol*>(loadCargo.get())){
-            std::shared_ptr<Cargo> toAdd = std::shared_ptr<Alcohol>(a);
-            std::cout << "Line 1 - Value of (Alcohol)toAdd is :" << toAdd.get()->getPrice() << std::endl ;
-            toAdd->setAmount(amount);
-            addCargo(toAdd);
-        }*/
-            auto toAdd = loadCargo;
-            toAdd->setAmount(amount);
-            addCargo(toAdd);
+        if(Alcohol* a = dynamic_cast<Alcohol*>(loadCargo)){
+            toAdd = new Alcohol(*a);
+        }        
+
+        toAdd->setAmount(amount);
+        addCargo(toAdd);
     }
 }
 
-void Ship::unload(std::shared_ptr<Cargo> unloadCargo, size_t amount)
+void Ship::unload(Cargo * unloadCargo, size_t amount)
 {
     if (calculateAvailableSpace() - amount >= 0)
     {
@@ -159,7 +153,7 @@ void Ship::printShipCargo()
 size_t Ship::calculateAvailableSpace()
 {
     int cargoAmount = 0;
-    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, std::shared_ptr<Cargo> c) { return i += c->getAmount(); });
+    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo * c) { return i += c->getAmount(); });
 
     if (capacity_ - cargoAmount < 0)
     {

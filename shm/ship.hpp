@@ -21,8 +21,8 @@ public:
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
     
-    void addCargo(std::shared_ptr<Cargo> item);
-    void removeCargo(std::shared_ptr<Cargo>, size_t);
+    void addCargo(Cargo * item);
+    void removeCargo(Cargo *, size_t);
 
     size_t getCapacity() const  { return capacity_; }
     size_t getMaxCrew() const   { return maxCrew_; }
@@ -30,14 +30,14 @@ public:
     size_t getCrew() const     { return crew_; }
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
-    std::vector<std::shared_ptr<Cargo>> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
-    std::vector<std::shared_ptr<Cargo>> shipCargo; // TODO reserve vector
+    std::vector<Cargo *> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
+    std::vector<Cargo *> shipCargo; // TODO reserve vector
 
-    // std::vector<std::shared_ptr<Cargo>> CargoOnShip;
+    // std::vector<Cargo *> CargoOnShip;
 
-    std::shared_ptr<Cargo> findMatchCargo(std::shared_ptr<Cargo> cargo);
-    void load(std::shared_ptr<Cargo>loadCargo, size_t amount);
-    void unload(std::shared_ptr<Cargo> unloadCargo, size_t amount);
+    Cargo * findMatchCargo(Cargo * cargo);
+    void load(Cargo *loadCargo, size_t amount);
+    void unload(Cargo * unloadCargo, size_t amount);
     void printShipCargo();
 
     void nextDay() override;

@@ -30,7 +30,7 @@ public:
 
     int getMoney() {return money_; }
     size_t getAvailableSpace() {return availableSpace_; }
-    virtual std::shared_ptr<Cargo> getCargo(size_t index) const = 0;
+    virtual Cargo * getCargo(size_t index) const = 0;
     void SpendMoney(int moneyToSpend);
     void EarnMoney(int moneyToEarn);
     void removeCargo(std::shared_ptr<Cargo>, size_t);

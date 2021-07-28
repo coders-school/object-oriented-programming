@@ -8,14 +8,14 @@
 Store::Store(int money, size_t availableSpace, Time *time)
     : Storable(money, availableSpace, time)
 {
-    storeCargo.push_back(std::make_shared<Fruit>("Banany", 10, 20, time, 15, 0)); 
-    storeCargo.push_back(std::make_shared<Fruit>("Apple", 15, 14, time, 20, 0));
-    storeCargo.push_back(std::make_shared<Alcohol>("Vodka", 33, 60, time, 70));        
-    storeCargo.push_back(std::make_shared<Item>("Hook", 5, 100, time, Rarity::common)); 
+    storeCargo.push_back(new Fruit("Banany", 10, 20, time, 15, 0)); 
+    storeCargo.push_back(new Fruit("Apple", 15, 14, time, 20, 0));
+    storeCargo.push_back(new Alcohol("Vodka", 33, 60, time, 70));        
+    storeCargo.push_back(new Item("Hook", 5, 100, time, Rarity::common)); 
 }
 Store::~Store() {}
 
-std::shared_ptr<Cargo> Store::findMatchCargo(std::shared_ptr<Cargo> cargo)
+Cargo * Store::findMatchCargo(Cargo * cargo)
 {
     for (auto &el : storeCargo)
     {
@@ -27,7 +27,7 @@ std::shared_ptr<Cargo> Store::findMatchCargo(std::shared_ptr<Cargo> cargo)
     return nullptr;
 }
 
-Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) //Buying cargo from store to player
+Response Store::buy(Cargo * cargo, size_t amount, Player *player) //Buying cargo from store to player
 {
     if (findMatchCargo(cargo))
     {
@@ -48,7 +48,6 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
         
         money_ += price;
         player->SpendMoney(price);
-        std::cout << "Line -1 - Value of is :" << cargo.get()->getPrice() << " " << cargo.get()->getName() << std::endl;
         player->getShip()->load(cargo, amount);
         return Response::done;
     }
@@ -58,7 +57,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player)
     }
 }
 
-Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player) 
+Response Store::sell(Cargo * cargo, size_t amount, Player *player) 
 {
     if (player->getShip()->findMatchCargo(cargo))
     {
@@ -90,7 +89,7 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player
     return Response::done;
 }
 
-std::shared_ptr<Cargo> Store::getCargo(size_t index) const
+Cargo * Store::getCargo(size_t index) const
 {
     return nullptr;
 }
@@ -99,7 +98,7 @@ void Store::nextDay()
 {
     for (auto el : storeCargo)
     {
-        el.get()->reduceAmount(1);
+        el->reduceAmount(1);
     }
 }
 
@@ -112,7 +111,7 @@ void Store::printStoreCargo()
     }
 }
 
-void Store::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
+void Store::removeCargo(Cargo * item, size_t amount)
 {
     auto storeCargoAmount = findMatchCargo(item)->getAmount();
     if(storeCargoAmount == amount)
@@ -125,11 +124,12 @@ void Store::removeCargo(std::shared_ptr<Cargo> item, size_t amount)
         findMatchCargo(item)->reduceAmount(amount);
     }
 }
-void Store::addStoreCargo(std::shared_ptr<Cargo> item, size_t amount)
+void Store::addStoreCargo(Cargo * item, size_t amount)
 {
-    if(findMatchCargo(item) == item)
+    auto cargoPtr = findMatchCargo(item);
+    if(*cargoPtr == *item)
     {
-        findMatchCargo(item)->increaseAmount(item->getAmount());
+        cargoPtr->increaseAmount(item->getAmount());
     }
     else
     {
