@@ -9,5 +9,5 @@ private:
 public:
     explicit Island(Coordinates position);
     Coordinates getPosition() { return position_; }
-    void SetPosition(const Coordinates& position) { position_ = position; }
+    void SetPosition(const Coordinates &position) { position_ = position; }
 };

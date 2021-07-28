@@ -65,6 +65,9 @@ int main()
     Response response1 = store.sell(cargo, 2, captain);
     std::cout << std::to_string(response1 == Response::lack_of_cargo) << "lack of cargo" <<"\n";
      //No available space
+    std::cout << "Player: human1: ship cargo: \n";
+    //human1->
+    human1->getShip()->printShipCargo();
     response1 = store.sell(captain->getShip()->shipCargo.at(1), 1, human1);
     std::cout << std::to_string(response1 == Response::lack_of_space) << "lack of space" << "\n";
     //lack of cargo

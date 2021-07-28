@@ -20,6 +20,5 @@ public:
     void SetPositionX(const int& positionX) { positionX_ = positionX; }
     void SetPositionY(const int& positionY) { positionY_ = positionY; }
 
-    bool operator==(const Coordinates& c1) const;
-    
+    bool operator==(const Coordinates &c1) const;
 };

@@ -58,6 +58,7 @@ Island* Map::getIsland(const Coordinates& coordinate){
     return nullptr;
 }
 
-void Map::addIsland(Coordinates& coordinate){
-    islands_.push_back(Island (coordinate));
+void Map::addIsland(Coordinates &coordinate)
+{
+    islands_.push_back(Island(coordinate));
 }
