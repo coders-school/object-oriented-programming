@@ -43,6 +43,7 @@ void Player::printCargo() const {
                   << ", Base price: " << cargo->getBasePrice()
                   << '\n';
     }
+    std::cout << "\n";
 }
 
 void Player::PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price){

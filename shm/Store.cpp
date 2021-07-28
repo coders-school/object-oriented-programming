@@ -52,6 +52,24 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
     }
 }
 
+Response Store::sell(Cargo* cargo, size_t amount, Player* player){
+    auto price = amount * cargo->getPrice();
+    auto product = findProduct(cargo);
+    if (product) {
+
+        *product += amount;
+        player->SellCargo(cargo, price);
+        std::cout << "done!";
+        return Response::done;
+        
+
+    } else {
+        //auto product_ptr = std::make_shared<Cargo>(*cargo);
+        //goodsList_.push_back(product_ptr);
+        return Response::done;
+    }
+}
+
 void Store::GenerateGoodsList() {
     goodsList_.push_back(std::make_shared<Fruit>("Bananas", 200, 40, 30));
     goodsList_.push_back(std::make_shared<Fruit>("Apples", 100, 20, 30));
@@ -74,6 +92,7 @@ void Store::printGoodsList() const {
                   << ", Base price: " << product->getBasePrice()
                   << '\n';
     }
+    std::cout << "\n";
 }
 
 /* std::ostream& operator<<(std::ostream& out, const Store& store) {

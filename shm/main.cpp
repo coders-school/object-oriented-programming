@@ -32,10 +32,13 @@ int main(){
     //ship->load(cargo_ptr2);
     //ship->printCargolist();
     player.printCargo();
-    //std::cout<<player.getMoney();
+    std::cout<<player.getMoney();
+    store.printGoodsList();
+    store.sell(cargo_ptr.get(),100,player_ptr);
+    player.printCargo();
     store.printGoodsList();
 
-    //std::cout<<player.getMoney();
+    std::cout<<player.getMoney();
     //ship->unload(cargo_ptr.get());
     //ship->printCargolist();
 /*     constexpr size_t posx1 = 1; 

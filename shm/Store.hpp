@@ -20,7 +20,7 @@ public:
     Store();
     ~Store() {};
     Response buy(Cargo* cargo, size_t amount, Player* player);
-    //Response sell(Cargo* cargo, size_t amount, Player* player);
+    Response sell(Cargo* cargo, size_t amount, Player* player);
     void printGoodsList() const;
     //friend std::ostream& operator<<(std::ostream&, const Store&);
 
