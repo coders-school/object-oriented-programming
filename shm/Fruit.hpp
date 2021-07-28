@@ -15,10 +15,8 @@ public:
 
     size_t getPrice() const override;
 
-    //override Timeable
     void nextDay() override;
-    //
-
+   
 private:
     std::unique_ptr<Cargo> createAmountOfEqual(size_t amount) override;
 };

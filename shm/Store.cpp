@@ -33,21 +33,21 @@ Response Store::buy(const Cargo* const cargo, size_t amount, Player* player) {
     if (soldPlayerCargo->getAmount() == amount) {
         auto ownedCargo = soldPlayerCargo->split(amount);
         playerShip->unload(soldPlayerCargo);
-        //auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
-        //player->giveMoney(moneyToPay);
+        auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
+        player->income(moneyToPay);
 
         load(std::move(ownedCargo));
         return Response::done;
     }
 
     //player sell less than all
-    //auto moneyToPay = soldPlayerCargo->getPrice() * amount;
+    auto moneyToPay = soldPlayerCargo->getPrice() * amount;
     auto buyedCargoPart = soldPlayerCargo->split(amount);
 
     if (!buyedCargoPart) {
         return Response::lack_of_cargo;
     }
-    //player->giveMoney(moneyToPay);
+    player->pay(moneyToPay);
 
     load(std::move(buyedCargoPart));
     return Response::done;
