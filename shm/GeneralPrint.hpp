@@ -3,11 +3,12 @@
 #include "Player.hpp"
 #include "Store.hpp"
 #include "Commands/Command.hpp"
+#include <map>
 
 void printResponse(Response response);
 void printPlayerStatus(const Player &player);
 void printPlayerGoal(size_t goal);
-void printMenu(std::vector<std::unique_ptr<Command>> &commands);
+void printMenu(std::map<std::string, std::unique_ptr<Command>> &commands);
 void printStoreCargoList(const Store &store);
 void printShipCargoList(const Player &player);
 

@@ -24,10 +24,8 @@ public:
     Cargo* findCargoInStore(const Cargo* const exampleCargo) const;
     size_t getCargoNum() const;
 
-    //Timeable override
     void nextDay() override;
-    //
-
+    
     friend std::ostream& operator<<(std::ostream&, const Store&);
 
     std::function<void()> changeAssortment;

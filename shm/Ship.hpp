@@ -33,7 +33,7 @@ struct Speed{
 class Ship : public Warehouse,
              public Timeable {
 public:
-    static constexpr size_t defaultCapacity = 5;
+    static constexpr size_t defaultCapacity = 15;
     static constexpr size_t defaultMaxCrew_ = 10;
     static constexpr size_t defaultCrew = 10;
     static constexpr size_t defaultSpeed = 3;
@@ -59,11 +59,9 @@ public:
 
     void setName(const std::string& name);
     void setDebt(std::function<bool(size_t)> payFunction);
-
-    //override Timeable
+    
     void nextDay() override;
-    //
-
+  
 private:
     static size_t nextId;
     Capacity capacity_ = {defaultCapacity};

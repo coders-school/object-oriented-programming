@@ -4,3 +4,4 @@
 #include "TradeBuyCommand.hpp"
 #include "TradeSellCommand.hpp"
 #include "TradeCommand.hpp"
+#include "ExitCommand.hpp"

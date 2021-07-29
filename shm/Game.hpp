@@ -6,6 +6,7 @@
 #include <array>
 #include <cmath>
 #include <iostream>
+#include <map>
 
 std::unique_ptr<Cargo> generateCargo();
 
@@ -21,15 +22,17 @@ public:
     constexpr static size_t startingPlayerCargoNumber = 5;
     constexpr static size_t storeCargoNumber = 5;
 
+    void fillCargo(Warehouse &holder, size_t number);
+   
 private:
     size_t startMoney_;
     size_t daysLimit_;
     size_t goal_;
-    bool endGame = false;
-    bool playerWin = false;
+    bool endGame{false};
+    bool playerWin{false};
 
-    std::vector<std::unique_ptr<Command>> commands{};
+    std::map<std::string, std::unique_ptr<Command>> commands{};
     Map map{};
-    Player player = Player{std::make_unique<Ship>(), startMoney_};
+    Player player{std::make_unique<Ship>(), startMoney_};
     Store store{};
 };

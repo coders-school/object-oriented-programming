@@ -3,6 +3,9 @@
 #include "../Cargos/Alcohol.hpp"
 #include "../Cargos/DefaultCargo.hpp"
 
+constexpr auto maxPercentage = 96;
+constexpr size_t alcoholPriceFor96percent = 100u;
+
 TEST_CASE("Value of Alcohol with 0 percentage", "[Item]") {
     const auto percentage = 0;
     auto alcohol = std::make_unique<Alcohol>(defaultGoodsName, fullQuantity, percentage);

@@ -39,14 +39,22 @@ std::unique_ptr<Cargo> generateCargo() {
     auto randomCargo = std::rand() % goods.size();
     auto randomAmount = std::rand() % 99 + 1;
     auto good = goods[randomCargo];
-    auto ptr = std::make_unique<Fruit>(good.name, randomAmount, good.value, 10);
-    return ptr;  // RVO
+    return std::make_unique<Fruit>(good.name, randomAmount, good.value, 10);
+}
+
+void Game::fillCargo(Warehouse& holder, size_t number) {
+    holder.clear();
+    for (size_t i = 0; i < number; ++i) {
+        auto cargo = generateCargo();
+        std::cout << cargo->getName() << '\n';
+        holder.load(std::move(cargo));
+    }
 }
 
 void Game::startGame() {
     init();
 
-    unsigned char letter;
+    std::string menuOptionName;
     while (!endGame and !playerWin) {
         printStoreCargoList(store);
         printShipCargoList(player);
@@ -55,17 +63,12 @@ void Game::startGame() {
         printPlayerGoal(goal_);
 
         printMenu(commands);
-        std::cin >> letter;
-        //std::cin.clear();
-
-        size_t optionId = static_cast<size_t>(letter - '0');
-        if (optionId < commands.size()) {
-            Command& command = *commands[optionId];
+        std::cin >> menuOptionName;
+        try {
+            Command& command = *commands.at(menuOptionName);
             command(player, store);
-        } else if (optionId == commands.size()) {
-            endGame = true;
+        } catch (...) {
         }
-
         playerWin = player.getMoney() >= goal_;
     }
 }
@@ -80,10 +83,10 @@ void fillCargo(Warehouse &holder, size_t number) {
 }
 
 void Game::init() {
-    auto payMethod = [this](size_t cost){return this->player.pay(cost);};
+    auto payMethod = [this](size_t cost) { return this->player.pay(cost); };
     player.getShip()->setDebt(payMethod);
 
-    auto changeAssortment = [this](){fillCargo(this->store, Game::storeCargoNumber);};
+    auto changeAssortment = [this]() { fillCargo(this->store, Game::storeCargoNumber); };
     store.changeAssortment = changeAssortment;
 
     fillCargo(*player.getShip(), startingPlayerCargoNumber);
@@ -92,8 +95,9 @@ void Game::init() {
 
     fillCargo(store, storeCargoNumber);
 
-    commands.push_back(std::make_unique<Menu>());
-    commands.push_back(std::make_unique<TradeBuy>());
-    commands.push_back(std::make_unique<TradeSell>());
-    commands.push_back(std::make_unique<NextDay>());
+    commands["1"] = (std::make_unique<Menu>());
+    commands["2"] = (std::make_unique<TradeBuy>());
+    commands["3"] = (std::make_unique<TradeSell>());
+    commands["4"] = (std::make_unique<NextDay>());
+    commands["5"] = (std::make_unique<Exit>(endGame));
 }
