@@ -3,7 +3,8 @@
 #include <functional>
 #include <random>
 #include <memory>
-
+#include "coordinates.hpp"
+#include "island.hpp"
 class Map {
 public:
     Map();

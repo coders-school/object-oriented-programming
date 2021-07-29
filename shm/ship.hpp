@@ -2,9 +2,9 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "cargo.hpp"
+#include "player.hpp"
 
-
+class Cargo;
 // Class responsible for managing Ship in the game.
 class Ship 
 {
@@ -36,6 +36,8 @@ public:
     std::vector<std::shared_ptr<Cargo>> getCargosVector() const;
     
     void setName(const std::string& name);
+
+    void nextDay(Player& player);
    
 private:
     size_t capacity_;

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <memory>
 
-#include "cargo.hpp"
 #include "ship.hpp"
 
 // Class responsible for managing Ships in the game.
@@ -59,4 +58,8 @@ std::vector<std::shared_ptr<Cargo>> Ship::getCargosVector() const {
 
 void Ship::setName(const std::string& name) {
     name_ = name;
+}
+
+void Ship::nextDay(Player& player) {
+    player.setMoney(player.getMoney() - ((*player.getShip()).getCrew()));
 }

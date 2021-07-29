@@ -1,8 +1,8 @@
 #include <iostream>
 #include <numeric>
 #include <utility>
-#include "cargo.hpp"
 #include "player.hpp"
+#include "cargo.hpp"
 #include "ship.hpp"
 
 Player::Player(std::shared_ptr<Ship> ship, const size_t& money)
@@ -10,7 +10,7 @@ Player::Player(std::shared_ptr<Ship> ship, const size_t& money)
     countAvailableSpace();
 }
 
-size_t Player::getMoney() const {
+size_t Player::getMoney() const{
     return money_;
 }
 size_t Player::getAvailableSpace() const {
@@ -52,6 +52,10 @@ void Player::printCargo() const {
     int i = 0;
     std::cout << "Current ship's cargo\n";
     for (const auto& el : ship_->getCargosVector()) {
-        std::cout << i++ << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base proce: " << el->getBasePrice() << '\n';
+        std::cout << i++ << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base price: " << el->getBasePrice() << '\n';
     }
+}
+
+void Player::setMoney(size_t money) {
+    money_ = money;
 }

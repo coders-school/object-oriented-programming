@@ -34,3 +34,9 @@ size_t Cargo::getAmount() const {
 size_t Cargo::getBasePrice() const {
     return basePrice_;
 }
+
+void Cargo::nextDay() {
+    if (lifespan_ >= 0.01) {
+        lifespan_ -= 0.01;
+    }
+}
