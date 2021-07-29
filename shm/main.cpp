@@ -8,6 +8,8 @@ int main()
 {
     Game game(start_money, game_days, final_goal);
     game.startGame();
+
+    return 0;
     /*
     Time *time_ptr = new Time();
     //time->changeTime();
