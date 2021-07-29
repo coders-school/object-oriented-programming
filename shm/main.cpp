@@ -1,20 +1,14 @@
+#include "Game.hpp"
 
-#include <iostream>
-#include <memory>
-#include <vector>
-
-#include "Time.hpp"
-#include "Store.hpp"
-#include "player.hpp"
-#include "fruit.hpp"
-#include "alcohol.hpp"
-#include "item.hpp"
-#include "cargo.hpp"
-#include "ship.hpp"
-
+constexpr size_t start_money = 1000;
+constexpr size_t game_days = 100;
+constexpr size_t final_goal = 2000;
 
 int main()
 {
+    Game game(start_money, game_days, final_goal);
+    game.startGame();
+    /*
     Time *time_ptr = new Time();
     //time->changeTime();
 
@@ -144,5 +138,5 @@ int main()
     // std::cout << orange.getName() << " " << orange.getBasePrice() << " " << orange.getPrice() << " " << orange.getAmount() << "\n";
     // std::cout << hook.getName() << " " << hook.getBasePrice() << " " << hook.getPrice() << " " << hook.getAmount() << "\n";
     // std::cout << store;
-    
+    */
 }
