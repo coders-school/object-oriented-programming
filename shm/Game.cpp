@@ -3,7 +3,9 @@
 class Map;
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
-    : money_(money), gameDays_(gameDays), finalGoal_(finalGoal)
+    : money_(money)
+    , gameDays_(gameDays)
+    , finalGoal_(finalGoal)
     {
 
     }
@@ -28,6 +30,7 @@ void Game::setPlayer()
     std::cin >> playerName;
     std::cout << "Welcome on board captain " << playerName << '\n';
     Player playerOne (std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_ptr), 1000, 1000);
+    std::cout << "Your's ship Uboot is waiting! Good Luck!" << '\n';
 }
 
 void Game::menu()
@@ -37,6 +40,7 @@ void Game::menu()
 }
 
 void Game::printMap()
-{
-    //tu wypisac kordy
+{   
+    //TODO:: Make friend with map!
+    //DebugPrintIsland();
 }

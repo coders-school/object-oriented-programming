@@ -21,6 +21,7 @@ public:
     void menu();
     void printTitle();
     void printMap();
+    friend void Map::DebugPrintIsland();
 
 private:
     size_t money_;
