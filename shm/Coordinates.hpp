@@ -3,7 +3,8 @@
 
 #include <cstddef>
 
-class Coordinates {
+class Coordinates
+{
 private:
     const size_t positionX_;
     const size_t positionY_;
@@ -15,9 +16,9 @@ public:
     //void setPositionY(size_t positionY) { positionY_ = positionY; };
     constexpr size_t getPositionX() const { return positionX_; };
     constexpr size_t getPositionY() const { return positionY_; };
-    bool operator==(const Coordinates&);
+    bool operator==(const Coordinates &);
 
-    static size_t distance(const Coordinates& lhs, const Coordinates& rhs);
+    static size_t distance(const Coordinates &lhs, const Coordinates &rhs);
 };
 
 #endif

@@ -3,7 +3,8 @@
 #include "Coordinates.hpp";
 
 // Class used to represent island on the game map
-class Island {
+class Island
+{
 private:
     Coordinates position_;
 

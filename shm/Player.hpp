@@ -7,17 +7,17 @@
 #include "Cargo.hpp"
 #include "Ship.hpp"
 
-// Class used to represent player 
-class Player {
+// Class used to represent player
+class Player
+{
 private:
     std::unique_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
     void calculateAvailableSpace();
-    
 
 public:
-    Player(std::unique_ptr<Ship>& ship, int money);
+    Player(std::unique_ptr<Ship> &ship, int money);
 
     std::unique_ptr<Ship> getShip() { return std::move(ship_); };
     size_t getMoney() const { return money_; };

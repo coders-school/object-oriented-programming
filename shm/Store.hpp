@@ -7,9 +7,10 @@
 #include <memory>
 
 // Class used to represent store located on an island
-class Store {
+class Store
+{
 
-private: 
+private:
     std::vector<std::shared_ptr<Cargo>> goodsList_;
 
     std::shared_ptr<Cargo> findProduct(std::shared_ptr<Cargo> cargo);
@@ -18,13 +19,11 @@ private:
 
 public:
     Store();
-    ~Store() {};
-    Response buy(std::shared_ptr<Cargo>cargo, size_t amount, Player* player);
-    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
+    ~Store(){};
+    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player *player);
+    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player *player);
     //void printGoodsList() const;
-    friend std::ostream& operator<<(std::ostream&, const Store&);
-
-
+    friend std::ostream &operator<<(std::ostream &, const Store &);
 };
 
 #endif

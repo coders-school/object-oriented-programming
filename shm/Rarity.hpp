@@ -1,7 +1,8 @@
 #ifndef RARITY_HPP
 #define RARITY_HPP
 
-enum class Rarity {
+enum class Rarity
+{
     common = 1,
     rare = 2,
     epic = 3,
