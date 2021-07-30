@@ -1,6 +1,5 @@
 #include "Time.hpp"
 #include <algorithm>
-#include <iostream>
 #include <memory>
 #include "Timeable.hpp"
 
@@ -11,11 +10,6 @@ Time* Time::getInstance() {
         instance_ = std::unique_ptr<Time>(new Time);
     }
     return instance_.get();
-}
-
-Time::~Time() {
-    // dupaprint to prove that this solution is working
-    // std::cout << "Time destructor called\n";
 }
 
 void Time::attach(Timeable* subscriber) {

@@ -1,9 +1,7 @@
 #pragma once
 
-#include <chrono>
 #include <functional>
 #include <list>
-#include <utility>
 #include <memory>
 
 class Timeable;
@@ -15,7 +13,7 @@ public:
     // Static method which calls private constructor if instance of Time does not exist
     // otherwise returns the instance pointer
     static Time* getInstance();
-    ~Time();
+    ~Time() = default;
 
     // Singletons are not clonable
     Time(Time&) = delete;
