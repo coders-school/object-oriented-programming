@@ -4,13 +4,13 @@
 #include <memory>
 #include "Timeable.hpp"
 
-std::shared_ptr<Time> Time::instance_{nullptr};
+std::unique_ptr<Time> Time::instance_{nullptr};
 
-std::shared_ptr<Time> Time::getInstance() {
+Time* Time::getInstance() {
     if (!instance_) {
-        instance_ = std::shared_ptr<Time>(new Time);
+        instance_ = std::unique_ptr<Time>(new Time);
     }
-    return instance_;
+    return instance_.get();
 }
 
 Time::~Time() {

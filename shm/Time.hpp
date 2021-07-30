@@ -14,7 +14,7 @@ class Time {
 public:
     // Static method which calls private constructor if instance of Time does not exist
     // otherwise returns the instance pointer
-    static std::shared_ptr<Time> getInstance();
+    static Time* getInstance();
     ~Time();
 
     // Singletons are not clonable
@@ -33,6 +33,6 @@ public:
 
 private:
     Time() = default;
-    static std::shared_ptr<Time> instance_;
+    static std::unique_ptr<Time> instance_;
     std::list<Timeable*> list_;
 };
