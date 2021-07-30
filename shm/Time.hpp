@@ -1,9 +1,8 @@
 #pragma once
 
-#include <chrono>
 #include <functional>
 #include <list>
-#include <utility>
+#include <memory>
 
 class Timeable;
 
@@ -14,7 +13,7 @@ public:
     // Static method which calls private constructor if instance of Time does not exist
     // otherwise returns the instance pointer
     static Time* getInstance();
-    ~Time();
+    ~Time() = default;
 
     // Singletons are not clonable
     Time(Time&) = delete;
@@ -28,13 +27,10 @@ public:
     // Cancels subscription
     bool detach(Timeable* subscriber);
 
-    void update();
     void nextDay();
 
 private:
     Time() = default;
-    static Time* instance_;
+    static std::unique_ptr<Time> instance_;
     std::list<Timeable*> list_;
-
-    static constexpr std::chrono::milliseconds dayDuration{5000};
 };

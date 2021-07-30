@@ -1,23 +1,15 @@
 #include "Time.hpp"
 #include <algorithm>
-#include <chrono>
-#include <iostream>
-#include <limits>
-#include <stdexcept>
-#include <thread>  // for sleep only
+#include <memory>
 #include "Timeable.hpp"
 
-Time* Time::instance_{nullptr};
+std::unique_ptr<Time> Time::instance_{nullptr};
 
 Time* Time::getInstance() {
     if (!instance_) {
-        instance_ = new Time;
+        instance_ = std::unique_ptr<Time>(new Time);
     }
-    return instance_;
-}
-
-Time::~Time() {
-    delete instance_;
+    return instance_.get();
 }
 
 void Time::attach(Timeable* subscriber) {
@@ -31,25 +23,6 @@ bool Time::detach(Timeable* subscriber) {
         return true;
     }
     return false;
-}
-
-void Time::update() {
-    // Walkaround for lack of proper game main loop
-    /*std::chrono::steady_clock::time_point start(std::chrono::steady_clock::now());
-    size_t days{10};
-    while (days > 0) {
-        std::chrono::milliseconds sleepFor(1000);
-        std::this_thread::sleep_for(sleepFor);
-        std::chrono::steady_clock::time_point timeNow(std::chrono::steady_clock::now());
-        std::chrono::duration<double, std::milli> elapsedTime = timeNow - start;
-        if (elapsedTime > dayDuration) {
-            start = std::chrono::steady_clock::now();
-            std::cout << " --- Day: " << 10 - days << " ---" << '\n';
-            nextDay();
-            --days;
-        }
-    }*/
-    nextDay();
 }
 
 void Time::nextDay() {
