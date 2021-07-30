@@ -23,7 +23,7 @@ int main() {
 }
 
 void testCargoShipPlayer() {
-    std::shared_ptr<Time> time = Time::getInstance();
+    auto time = Time::getInstance();
     constexpr size_t testCases{10};
     constexpr Capacity testShipCapacity{100};
     std::vector<std::unique_ptr<Cargo>> cargoVec;
@@ -84,7 +84,7 @@ void testDryFruit() {
 }
 
 void testTime() {
-    std::shared_ptr<Time> time = Time::getInstance();
+    auto time = Time::getInstance();
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
     CargoDefault cargo3{"Cargo2", 100, 100};
@@ -96,7 +96,7 @@ void testTime() {
 }
 
 void timePassTest() {
-    std::shared_ptr<Time> time = Time::getInstance();
+    auto time = Time::getInstance();
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
     DryFruit cargo3{"Mango", 100, 100, 3};
