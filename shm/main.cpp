@@ -26,7 +26,9 @@ int main()
     Player *captain = new Player(std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_ptr), 1000, 1000); 
     Player *human = new Player(std::make_unique<Ship>(20, 1, 2, "Titanic", 1, time_ptr), 0, 500); // no money
     Player *human1 = new Player(std::make_unique<Ship>(20, 10, 2, "Tweety", 2, time_ptr), 500, 0); // no capacity
-    
+    human->getShip()->addCargo(new Fruit("Gruszka", 5, 5, time_ptr, 15, 0));
+    human1->getShip()->addCargo(new Fruit("Gruszka", 5, 5, time_ptr, 15, 0));
+
     // buy zad 1
     //No cargo
     std::cout << "-------------- ZAD 1 BUY -----------------------------------------------------------------\n";
@@ -72,11 +74,13 @@ int main()
     response1 = store.sell(captain->getShip()->shipCargo.at(1), 1, human1);
     std::cout << std::to_string(response1 == Response::lack_of_space) << "lack of space" << "\n";
     //lack of cargo
-    response1 = store.sell(captain->getShip()->shipCargo.at(1), 1000, captain);
-    std::cout << std::to_string(response1 == Response::lack_of_cargo) << "lack of cargo" << "\n";
+    Store store4(10000, 10000, time_ptr);
+    response1 = store4.sell(captain->getShip()->shipCargo.at(1), 1000, captain);
+    std::cout << std::to_string(response1 == Response::lack_of_cargo) << " lack of cargo" << "\n";
     //no money
-    response1 = store.sell(captain->getShip()->shipCargo.at(1), 1, human);
-    std::cout << std::to_string(response1 == Response::lack_of_money) << "lack of money" << "\n";
+    Store store3(0, 100, time_ptr);
+    response1 = store3.sell(captain->getShip()->shipCargo.at(1), 1, captain);
+    std::cout << std::to_string(response1 == Response::lack_of_money) << " lack of money" << "\n";
     //correct buy
     std::cout << "pieniążki capitan: " << captain->getMoney() << '\n';
     std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
