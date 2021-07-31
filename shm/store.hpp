@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iomanip>
 #include <iostream>
 #include <memory>
 #include <vector>
@@ -16,33 +17,25 @@ enum class Response {
 
 class Store {
 public:
-    Store() = default;
-    Store(size_t availableSpace, size_t money)
-        : availableSpace_(availableSpace), money_(money){};
+    Store();
 
-    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
-    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, std::shared_ptr<Player> player);
+    Response buy(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
+    Response sell(std::shared_ptr<Cargo> cargo, size_t amount, Player* player);
 
-    std::string getResponse(const Response& response);
-    // std::shared_ptr<Cargo> getCargo(const  size_t ) const;
+    std::vector<std::shared_ptr<Cargo>>::iterator  findCargoInStore(const std::shared_ptr<Cargo>& wantedCargo);
+    // function loading cargos to store
+    void load(const std::shared_ptr<Cargo>& cargo);
+    // function ulnoading cargos from store
+    void unload(const std::shared_ptr<Cargo>& cargo);
+    void addCargosOfStore(std::shared_ptr<Cargo>);
+    // void ereasFromCargosOfStore(std::shared_ptr<Cargo>);
 
-    void generateCargo();
-    void randomizeCargo(std::vector<std::shared_ptr<Cargo>> storeCargos);
-
-    void load(std::shared_ptr<Cargo> cargo, size_t amount);
-    void unload(std::shared_ptr<Cargo> cargo, size_t amount);
-    std::vector<std::shared_ptr<Cargo>>::iterator findCargo(const std::shared_ptr<Cargo>& cargo);
-
-    size_t getSpace() const { return availableSpace_; };
-    size_t getMoney() const { return money_; };
-
-    void setSpace(size_t availableSpace) { availableSpace_ = availableSpace; };
-    void setMoney(size_t money) { money_ = money; };
+    
 
     friend std::ostream& operator<<(std::ostream& os, const Store& store);
+    std::vector<std::shared_ptr<Cargo>> getCargoOfStore() const { return stock_; };
 
 private:
-    std::vector<std::shared_ptr<Cargo>> stock_;
-    size_t availableSpace_;
-    size_t money_;
+    std::vector<std::shared_ptr<Cargo>> stock_{};
+    void generateDefaultCargo();
 };
