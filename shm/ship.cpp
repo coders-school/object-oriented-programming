@@ -68,6 +68,7 @@ void Ship::removeCargo(Cargo * item, size_t amount)
     if(shipCargoAmount == amount)
     {
         auto i = std::find(begin(shipCargo), end(shipCargo), item);
+        // tutaj it nie może być równy 0
         shipCargo.erase(i);
     }
     else
