@@ -14,6 +14,9 @@ namespace constVariables{
 }
 
 Map::Map() {
+    islands_.reserve(11);
+    Coordinates zero(0,0);
+    addIsland(zero);
     SetUpRandomIsland();
 }
 
@@ -49,7 +52,7 @@ bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
     return std::find(vec.begin(), vec.end(), c) != vec.end();
 }
 
-Island* Map::getIsland(const Coordinates& coordinate){
+Island* Map::getIsland(const Coordinates coordinate){
     auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return i.getPosition() == coordinate; });
     if(selectedIsland != islands_.end())
     {
@@ -58,7 +61,7 @@ Island* Map::getIsland(const Coordinates& coordinate){
     return nullptr;
 }
 
-void Map::addIsland(Coordinates &coordinate)
+void Map::addIsland(Coordinates coordinate)
 {
     islands_.push_back(Island(coordinate));
 }

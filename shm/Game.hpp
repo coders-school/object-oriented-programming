@@ -3,6 +3,7 @@
 #include "Map.hpp"
 #include "player.hpp"
 #include "Time.hpp"
+#include "coordinates.hpp"
 class Game
 {
 public:
@@ -20,8 +21,8 @@ public:
     void startGame();
     void menu();
     void printTitle();
-    void printMap();
-    friend void Map::DebugPrintIsland();
+    void addMap(Map &);
+
 
 private:
     size_t money_;
