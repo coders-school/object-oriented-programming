@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include <utility>
+#include <iterator>
 
 #include "coordinates.hpp"
 #include "island.hpp"
@@ -14,7 +15,11 @@ namespace constVariables{
 }
 
 Map::Map() {
+    islands_.reserve(11);
+    Coordinates zero(0,0);
+    addIsland(zero);
     SetUpRandomIsland();
+    std::cout << islands_.size() << '\n';
 }
 
 void Map::SetUpRandomIsland(){
@@ -40,8 +45,10 @@ void Map::SetUpRandomIsland(){
 }
 
 void Map::DebugPrintIsland () {
+    int j = 0;
     for (auto &el : islands_) {
-        std::cout << std::to_string(el.getPosition().GetPositionX()) << " | " << std::to_string(el.getPosition().GetPositionY()) << '\n';
+        j++;
+        std::cout << j << " | "<< std::to_string(el.getPosition().GetPositionX()) << " | " << std::to_string(el.getPosition().GetPositionY()) << '\n';
     }
 }
 
@@ -49,7 +56,7 @@ bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
     return std::find(vec.begin(), vec.end(), c) != vec.end();
 }
 
-Island* Map::getIsland(const Coordinates& coordinate){
+Island* Map::getIsland(const Coordinates coordinate){
     auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return i.getPosition() == coordinate; });
     if(selectedIsland != islands_.end())
     {
@@ -58,7 +65,7 @@ Island* Map::getIsland(const Coordinates& coordinate){
     return nullptr;
 }
 
-void Map::addIsland(Coordinates &coordinate)
+void Map::addIsland(Coordinates coordinate)
 {
     islands_.push_back(Island(coordinate));
 }
