@@ -8,7 +8,7 @@ message("GTEST_INCLUDE_DIRS = ${GTEST_INCLUDE_DIRS}")
 message("GTEST_LIBRARIES = ${GTEST_LIBRARIES}")
 
 add_library(${PROJECT_NAME}-lib Cargo.cpp Fruit.cpp Alcohol.cpp Item.cpp Rarity.hpp Ship.cpp 
-                            Player.cpp DryFruit.cpp Coordinates.cpp Response.hpp Store.cpp TimeObserver.hpp Time.cpp)
+                            Player.cpp DryFruit.cpp Coordinates.cpp Response.hpp Store.cpp TimeObserver.hpp Time.cpp Game.cpp)
 
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)

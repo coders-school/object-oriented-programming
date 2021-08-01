@@ -1,5 +1,5 @@
-#ifndef SHIP_HPP
-#define SHIP_HPP
+#ifndef MAP_HPP
+#define MAP_HPP
 
 #include <vector>
 #include "Coordinates.hpp"

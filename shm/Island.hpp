@@ -1,6 +1,6 @@
 #ifndef ISLAND_HPP
 #define ISLAND_HPP
-#include "Coordinates.hpp";
+#include "Coordinates.hpp"
 
 // Class used to represent island on the game map
 class Island

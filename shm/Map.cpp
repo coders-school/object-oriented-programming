@@ -10,6 +10,7 @@ Map::Map()
 {
     islands_.reserve(NUMBER_OF_ISLANDS);
     fillMapWithIslands();
+    
 }
 
 void Map::fillMapWithIslands()
@@ -20,7 +21,7 @@ void Map::fillMapWithIslands()
 
     for (int i = 0; i < NUMBER_OF_ISLANDS; i++)
     {
-        Coordinates coordinates(0, 0);
+        Coordinates coordinates(distrib(gen), 0);
 
         while (getIsland(coordinates) != nullptr)
         {
