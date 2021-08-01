@@ -3,7 +3,7 @@
 #include "Fruit.hpp"
 
 // Class used to represent cargo of subtype dry fruit type carried by merchant ship
-class DryFruit : public Fruit
+class DryFruit : public Fruit 
 {
 private:
     size_t counter_{0};

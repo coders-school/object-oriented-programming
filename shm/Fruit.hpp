@@ -7,7 +7,7 @@ class Fruit : public Cargo
 {
 protected:
     size_t shelfLife_;
-    size_t timeInCargoRoom_{0};
+    size_t timeInCargoRoom_;
 
 public:
     Fruit(const std::string &name, size_t amount, size_t basePrice, size_t shelfLife);

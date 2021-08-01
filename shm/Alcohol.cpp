@@ -5,7 +5,6 @@ Alcohol::Alcohol(const std::string &name, size_t amount, size_t basePrice, size_
 
 void Alcohol::nextDay()
 {
-
         if (++counter_ == 5)
         {
                 --strength_;
