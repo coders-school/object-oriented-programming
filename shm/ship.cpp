@@ -67,7 +67,8 @@ void Ship::removeCargo(Cargo * item, size_t amount)
     auto shipCargoAmount = findMatchCargo(item)->getAmount();
     if(shipCargoAmount == amount)
     {
-        auto i = std::find(begin(shipCargo), end(shipCargo), item);
+        //auto i = std::find(begin(shipCargo), end(shipCargo), *item);
+        auto i = std::find(begin(shipCargo), end(shipCargo), [](const auto* el){ *el == *item});
         // tutaj it nie może być równy 0
         shipCargo.erase(i);
     }
@@ -114,10 +115,24 @@ void Ship::load(Cargo * loadCargo, size_t amount)
 
 void Ship::unload(Cargo * unloadCargo, size_t amount)
 {
-    if (calculateAvailableSpace() - amount >= 0)
-    {
-        removeCargo(unloadCargo, amount);
+    // Checking if we have enough cargo to unload
+    if(auto* shipCargo = findMatchCargo(unloadCargo)) {
+        if(shipCargo->getAmount() >= amount) {
+            removeCargo(unloadCargo, amount);
+        }
+        else {
+            std::cout << "Ship: " << this->getName() << "doesn't have enough cargo: " << unloadCargo->getName() << '\n';
+        }
+        
     }
+    else {
+        std::cout << "Ship: " << this->getName() << "doesn't have cargo: " << unloadCargo->getName() << '\n';
+    }
+    // TO jest bez sensu 
+    // if (calculateAvailableSpace() - amount >= 0)
+    // {
+    //     removeCargo(unloadCargo, amount);
+    // }
 }
 
 void Ship::setOwner(Player *newOwner)

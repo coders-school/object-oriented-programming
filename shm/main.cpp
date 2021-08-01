@@ -15,6 +15,7 @@
 
 int main()
 {
+
     Time *time_ptr = new Time();
     //time->changeTime();
 
@@ -31,7 +32,7 @@ int main()
 
     // buy zad 1
     //No cargo
-    std::cout << "-------------- ZAD 1 BUY -----------------------------------------------------------------\n";
+    // std::cout << "-------------- ZAD 1 BUY -----------------------------------------------------------------\n";
     
     Cargo * cargo = new Fruit("Kiwi", 5, 5, time_ptr, 15, 0);
     Response response = store.buy(cargo, 5, captain);
@@ -66,32 +67,38 @@ int main()
     // sell zad 1
     Response response1 = store.sell(cargo, 2, captain);
     std::cout << std::to_string(response1 == Response::lack_of_cargo) << "lack of cargo" <<"\n";
-     //No available space
+    
+    //No available space
     std::cout << "Player: human1: ship cargo: \n";
     cargo = new Fruit("Kiwi", 5, 5, time_ptr, 15, 0);
     human1->getShip()->load(captain->getShip()->shipCargo.at(1), 1);
     human1->getShip()->printShipCargo();
-    response1 = store.sell(captain->getShip()->shipCargo.at(1), 1, human1);
-    std::cout << std::to_string(response1 == Response::lack_of_space) << "lack of space" << "\n";
+    human1->getShip()->unload(captain->getShip()->shipCargo.at(1), 1);
+    //response1 = store.sell(captain->getShip()->shipCargo.at(1), 1, human1);
+    //std::cout << std::to_string(response1 == Response::lack_of_space) << "lack of space" << "\n";
+    // Store store2(2000, 0, time_ptr);
+    // response1 = store2.sell(captain->getShip()->shipCargo.at(0), 1, captain);
+    // std::cout << std::to_string(response1 == Response::lack_of_space) << " lack of space" << "\n";
+    
     //lack of cargo
-    Store store4(10000, 10000, time_ptr);
-    response1 = store4.sell(captain->getShip()->shipCargo.at(1), 1000, captain);
-    std::cout << std::to_string(response1 == Response::lack_of_cargo) << " lack of cargo" << "\n";
-    //no money
-    Store store3(0, 100, time_ptr);
-    response1 = store3.sell(captain->getShip()->shipCargo.at(1), 1, captain);
-    std::cout << std::to_string(response1 == Response::lack_of_money) << " lack of money" << "\n";
-    //correct buy
-    std::cout << "pieniążki capitan: " << captain->getMoney() << '\n';
-    std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
-    std::cout << "store przed sprzedaży \n" << store;
-    response1 = store.sell(captain->getShip()->shipCargo.at(0), 1, captain);
-    std::cout << std::to_string(response1 == Response::done) << "done?" <<"\n";
-    std::cout << "store po sprzedaży \n" << store;
-    std::cout << "pieniążki store po: " << store.getMoney() << '\n';
-    std::cout << "pieniążki capitan: " << captain->getMoney() << '\n';
-    captain->getShip()->printShipCargo();
-    std::cout << '\n';
+    // Store store4(10000, 10000, time_ptr);
+    // response1 = store4.sell(captain->getShip()->shipCargo.at(1), 1000, captain);
+    // std::cout << std::to_string(response1 == Response::lack_of_cargo) << " lack of cargo" << "\n";
+    // //no money
+    // Store store3(0, 100, time_ptr);
+    // response1 = store3.sell(captain->getShip()->shipCargo.at(1), 1, captain);
+    // std::cout << std::to_string(response1 == Response::lack_of_money) << " lack of money" << "\n";
+    // //correct buy
+    // std::cout << "pieniążki capitan: " << captain->getMoney() << '\n';
+    // std::cout << "pieniążki store przed: " << store.getMoney() << '\n';
+    // std::cout << "store przed sprzedaży \n" << store;
+    // response1 = store.sell(captain->getShip()->shipCargo.at(0), 1, captain);
+    // std::cout << std::to_string(response1 == Response::done) << "done?" <<"\n";
+    // std::cout << "store po sprzedaży \n" << store;
+    // std::cout << "pieniążki store po: " << store.getMoney() << '\n';
+    // std::cout << "pieniążki capitan: " << captain->getMoney() << '\n';
+    // captain->getShip()->printShipCargo();
+    // std::cout << '\n';
 
     //zad 2
     // std::cout << "-------------- ZAD 2 -----------------------------------------------------------------\n";
