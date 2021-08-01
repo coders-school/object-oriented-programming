@@ -6,7 +6,7 @@ Menu::~Menu(){}
 
 int Menu::playerChoice()
 {
-    
+    return 1;
 }
 
 void Menu::menuHandler(MenuItem item) 
