@@ -1,11 +1,11 @@
+#include "player.hpp"
 #include <iostream>
 #include <numeric>
 #include <utility>
 #include "cargo.hpp"
-#include "player.hpp"
 #include "ship.hpp"
 
-Player::Player(std::shared_ptr<Ship> ship, const size_t& money)
+Player::Player(std::shared_ptr<Ship> ship, const size_t& money, size_t getAvailableSpace)
     : ship_(std::move(ship)), money_(money) {
     countAvailableSpace();
 }
@@ -28,17 +28,20 @@ std::shared_ptr<Cargo> Player::getCargo(size_t index) const {
 }
 
 void Player::countAvailableSpace() {
-    if(!ship_) {
+    if (!ship_) {
         return;
-    }
+    };
+    std::cout << " jestem w sumowaniu miejsca\n";
+    auto sum = std::accumulate(ship_->getCargosVector().begin(),
+                                  ship_->getCargosVector().end(),
+                                  0,
+                                  [](size_t amount, const auto& cargo)
+                                  { return amount += cargo->getAmount();}
+                                 );
     const auto& cargoVector = ship_->getCapacity();
-    size_t sum = 0;
-    for (int i = 0; i < ship_->getCargosVector().size(); i++) {
-        sum += ship_->getCargo(i)->getAmount();
-    }
+    
     availableSpace_ = cargoVector - sum;
 }
-
 
 void Player::printCargo() const {
     if (!ship_) {
@@ -54,4 +57,26 @@ void Player::printCargo() const {
     for (const auto& el : ship_->getCargosVector()) {
         std::cout << i++ << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base proce: " << el->getBasePrice() << '\n';
     }
+}
+
+void Player::sell(std::shared_ptr<Cargo>& cargo, const size_t& amount) {
+    if (!cargo) {
+        return;
+    }
+    std::cout << "wchodze w sprzedaż\n";
+    ship_->unload(cargo, amount);
+    std::cout << "Stan pieniążków: " << getMoney() << '\n';
+    money_ += cargo->getPrice() * amount;
+
+    std::cout << "Stan pieniążków: " << getMoney() << '\n';
+}
+
+void Player::buy(std::shared_ptr<Cargo>& cargo,const size_t& amount) {
+    if (!cargo) {
+        return;
+    }
+    std::cout << "Dupa:\n";
+    getShip()->load(cargo, amount);
+    
+    money_ -= cargo->getPrice() * amount;
 }

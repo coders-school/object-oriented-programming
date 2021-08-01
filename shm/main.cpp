@@ -24,36 +24,51 @@ int main() {
     std::vector<std::shared_ptr<Cargo>> LOAD{cargo1, cargo2, cargo3};
 
     auto s1 = std::make_shared<Ship>(500, 20, 14, 5, "Black Widow", 1, LOAD);
-    Player pla1(s1, 5000);
+    Player pla1(s1, 5000, 0);
     std::cout << '\n';
 
-    pla1.printCargo();
-
-    // s1->removeFromShip(cargo1, 45);
-    s1->addAmountToShip(cargo1, 50);
-    
-
-    pla1.printCargo();
-
-    
-
+    // pla1.printCargo();
+    // std::cout << s1;
     Store s;
+
+    auto car1 = s.getCargoOfStore()[1];
+//     std::cout << '\n';
+
+    // std::cout << "\nile miejsca na statku :" << pla1.getAvailableSpace() << '\n';
+    std::cout << car1->getName() << " " << car1->getAmount() << " : " << car1->getBasePrice() << '\n';
+    std::cout << '\n';
+    std::cout << '\n';
     std::cout << s;
 
-    // // std::cout << "Pieniadze Store: " << stor1.getMoney() << '\n';
+    // pla1.getShip()->load(car1, 20);
+    // pla1.getShip()->load(car1, 20);
+    // pla1.getShip()->load(car1, 20);
+    // pla1.getShip()->unload(car1, 0);
+    
+    // std::cout << "Ile miejsca na statku " << pla1.getAvailableSpace() << '\n';
 
-    // // std::cout << stor1;
-    // auto cargo4 = std::make_shared<Alcohol>(Alcohol("Pina Colada", 0, 10, 15));
-    // auto cargo5 = std::make_shared<Fruit>(Fruit("Peach", 0, 50, 10));
+    // pla1.printCargo();    
 
-    // std::cout << "Przed załdunkeim: \n\n\n";
-    // std::cout << stor1;
 
-    //  auto cargo6 = std::make_shared<Item>(Item("Noz", 0, 50, Rarity::common));
-    // //  stor1.addCargo(cargo4, 20);
-    // // stor1.addCargo(cargo4, 20);
-    // // stor1.addCargo(cargo4, 20);
-    // stor1.addCargo(cargo5, 1);
-    // std::cout << "po załądunku'\n\n\n" << stor1;
+//     std::cout << "Kasa gracza: " << pla1.getMoney() << '\n';
+//     s.sell(car1, 80, &pla1);
+//     std::cout << "Kasa gracza: " << pla1.getMoney() << '\n';
+    
+//     std::cout << '\n';
+//     std::cout << '\n';
+//     pla1.printCargo();
+//     std::cout << '\n';
+//     std::cout << '\n';
+//     std::cout << s;
+//     // s.buy(car1, 20, &pla1);
+// std::cout << '\n';
+//     std::cout << '\n';
+//     pla1.printCargo();
+//     // s.sell(car1, 50, &pla1);
+//     std::cout << s;
+//     std::cout << '\n';
+//     std::cout << "\nile miejsca na statku :" << pla1.getAvailableSpace() << '\n';
+//     // s.buy(car1, 20, &pla1);
+    
     return 0;
 }

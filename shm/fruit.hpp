@@ -21,6 +21,7 @@ public:
 
     size_t getExpirationDate() const { return expirationDate_; };
     size_t getPurchaseData() const { return purchaseDate_; };
+    void setAmount(const size_t& amount) override { amount_ = amount;};
 
 protected:
     size_t expirationDate_;

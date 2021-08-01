@@ -45,7 +45,10 @@ CMakeFiles/SHM_2077.dir/player.cpp.o: ../player.cpp
 CMakeFiles/SHM_2077.dir/player.cpp.o: ../player.hpp
 CMakeFiles/SHM_2077.dir/player.cpp.o: ../ship.hpp
 
+CMakeFiles/SHM_2077.dir/ship.cpp.o: ../alcohol.hpp
 CMakeFiles/SHM_2077.dir/ship.cpp.o: ../cargo.hpp
+CMakeFiles/SHM_2077.dir/ship.cpp.o: ../fruit.hpp
+CMakeFiles/SHM_2077.dir/ship.cpp.o: ../item.hpp
 CMakeFiles/SHM_2077.dir/ship.cpp.o: ../ship.cpp
 CMakeFiles/SHM_2077.dir/ship.cpp.o: ../ship.hpp
 
