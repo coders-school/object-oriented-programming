@@ -22,6 +22,7 @@ public:
     void menu();
     void printTitle();
     void addMap(Map &);
+    void travel();
 
 
 private:

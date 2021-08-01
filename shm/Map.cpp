@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include <utility>
+#include <iterator>
 
 #include "coordinates.hpp"
 #include "island.hpp"
@@ -18,6 +19,7 @@ Map::Map() {
     Coordinates zero(0,0);
     addIsland(zero);
     SetUpRandomIsland();
+    std::cout << islands_.size() << '\n';
 }
 
 void Map::SetUpRandomIsland(){
@@ -43,8 +45,10 @@ void Map::SetUpRandomIsland(){
 }
 
 void Map::DebugPrintIsland () {
+    int j = 0;
     for (auto &el : islands_) {
-        std::cout << std::to_string(el.getPosition().GetPositionX()) << " | " << std::to_string(el.getPosition().GetPositionY()) << '\n';
+        j++;
+        std::cout << j << " | "<< std::to_string(el.getPosition().GetPositionX()) << " | " << std::to_string(el.getPosition().GetPositionY()) << '\n';
     }
 }
 

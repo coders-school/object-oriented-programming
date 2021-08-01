@@ -44,8 +44,13 @@ void Game::menu()
 
 void Game::addMap(Map &map)
 {   
-    map.SetUpRandomIsland();
     map.DebugPrintIsland();
+}
+
+void Game::travel()
+{
+
+
 }
 
 // void Map::addIsland(Coordinates coordinate)
