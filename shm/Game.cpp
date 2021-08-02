@@ -26,7 +26,7 @@ void Game::setPlayer()
 {
     Time *time_ptr = new Time();
     Map mapa;
-    addMap(mapa);
+    
 
     std::cout << "Set your name captain!:" << '\n';
     std::string playerName;
@@ -35,12 +35,16 @@ void Game::setPlayer()
     Player playerOne (std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_ptr), 1000, 1000);
     std::cout << "Your's ship Uboot is waiting! Good Luck!" << '\n';
     std::cout << "You are in start point. Current coordinates: (0,0). Choose Your next move!" << '\n';
+
+    addMap(mapa);
 }
 
-void Game::menu()
-{
-
-}
+// void Game::menu()
+// {
+//     auto i=0;
+//     std::cin << i;
+//     islands_[i];
+// }
 
 void Game::addMap(Map &map)
 {   

@@ -47,8 +47,8 @@ void Map::SetUpRandomIsland(){
 void Map::DebugPrintIsland () {
     int j = 0;
     for (auto &el : islands_) {
-        j++;
         std::cout << j << " | "<< std::to_string(el.getPosition().GetPositionX()) << " | " << std::to_string(el.getPosition().GetPositionY()) << '\n';
+        j++;
     }
 }
 
