@@ -52,6 +52,11 @@ void Map::DebugPrintIsland () {
     }
 }
 
+void Map::PrintCurrentPosition()
+{
+     std::cout <<  std::to_string(current_pos_->getPosition().GetPositionX()) << " | " << std::to_string(current_pos_->getPosition().GetPositionY())<<'\n';
+}
+
 bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
     return std::find(vec.begin(), vec.end(), c) != vec.end();
 }
@@ -69,3 +74,4 @@ void Map::addIsland(Coordinates coordinate)
 {
     islands_.push_back(Island(coordinate));
 }
+

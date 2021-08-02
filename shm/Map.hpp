@@ -10,9 +10,12 @@ class Map {
 public:
     Map();
     void DebugPrintIsland();
+    void PrintCurrentPosition();
     Island *getIsland(const Coordinates);
     void addIsland(Coordinates);
     friend class Game;
+    Island* getCurrentPos() {return current_pos_;}
+    void changeCurrentPos(Island* position) {current_pos_ = position;}
 
 private:
     Island *current_pos_;
