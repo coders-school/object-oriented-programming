@@ -33,7 +33,7 @@ void PrintCargo();
 public:
 
 Game(size_t money, size_t days, size_t final_goal);
-void StartGame();
+void startGame();
 
 };
 

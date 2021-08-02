@@ -4,20 +4,20 @@
 #include <vector>
 #include "Coordinates.hpp"
 #include "Island.hpp"
+#include <memory>
 
 // Class used to represent game map
 class Map
 {
 private:
     Island *current_pos_;
-    std::vector<Island> islands_;
-    bool contains(std::vector<Coordinates>, Coordinates);
+    std::vector<std::unique_ptr<Island>> islands_;
     void fillMapWithIslands();
+    
 
 public:
     Map();
-    void DebugPrintIsland();
     Island *getIsland(const Coordinates &coordinate);
-    void addIsland(Coordinates &coordinate);
+    Coordinates generateCoordinates();
 };
 #endif

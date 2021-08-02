@@ -10,7 +10,7 @@ private:
 
 public:
     explicit Island(Coordinates coordinates);
-    Coordinates getPosition_() const { return position_; };
+    Coordinates getPosition() const { return position_; };
 };
 
 #endif

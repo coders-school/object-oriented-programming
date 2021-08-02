@@ -2,6 +2,7 @@
 #include <random>
 #include <utility>
 #include <algorithm>
+#include <iostream>
 
 constexpr size_t NUMBER_OF_ISLANDS = 10;
 constexpr size_t MAP_SIZE = 100;
@@ -10,40 +11,40 @@ Map::Map()
 {
     islands_.reserve(NUMBER_OF_ISLANDS);
     fillMapWithIslands();
-    
 }
 
-void Map::fillMapWithIslands()
-{
+Coordinates Map::generateCoordinates(){
     std::random_device randomDevice;
     std::mt19937 gen(randomDevice());
     std::uniform_real_distribution<> distrib(0, MAP_SIZE);
-
-    for (int i = 0; i < NUMBER_OF_ISLANDS; i++)
-    {
-        Coordinates coordinates(distrib(gen), 0);
-
-        while (getIsland(coordinates) != nullptr)
-        {
-            coordinates.setPositionX(distrib(gen));
-            coordinates.setPositionY(distrib(gen));
-        }
-        islands_.push_back(Island(coordinates));
-    }
+    Coordinates coordinates(distrib(gen), distrib(gen));
+    return coordinates;
 }
+
+ void Map::fillMapWithIslands()
+{
+    
+    for (int i = 0; i < NUMBER_OF_ISLANDS; i++)
+    {   
+        Coordinates coordinates = generateCoordinates();
+        while(getIsland(coordinates)){
+            Coordinates coordinates = generateCoordinates();
+        }
+        auto island = std::make_unique<Island>(coordinates);
+        islands_.push_back(std::move(island));
+        std::cout << "done" <<"\n";
+    }
+} 
 
 Island *Map::getIsland(const Coordinates &coordinates)
 {
-    auto itr = islands_.begin();
-    itr = std::find(islands_.begin(), islands_.end(), coordinates);
+    auto itr = std::find_if(islands_.begin(), islands_.end(),
+                           [&coordinates](const std::unique_ptr<Island>& island) {
+                               return island->getPosition() == coordinates;
+                           });
     if (itr != islands_.end())
     {
-        return &(*itr);
+        return(*itr).get();
     }
     return nullptr;
-}
-
-void Map::addIsland(Coordinates &coordinate)
-{
-    islands_.push_back(Island(coordinate));
 }
