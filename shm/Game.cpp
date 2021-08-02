@@ -195,8 +195,7 @@ public:
             const Cargo* const cargo = ChoseCargoFromShip(chose, player);
 
             std::cout << "Amount:\n";
-            limit = player.getMoney() / cargo->getPrice();
-            limit = std::min(limit, cargo->getAmount()) + 1;
+            limit = cargo->getAmount() + 1;
             size_t amount = ChoseOption(limit);
             if (amount >= limit) {
                 break;
@@ -270,6 +269,13 @@ void Game::startGame() {
         } catch (...) {
         }
         playerWin = player.getMoney() >= goal_;
+    }
+    if(playerWin){
+        std::cout << " Congratulation !!!\n"
+                     "You won the game !!!\n";
+    }else{
+        std::cout << "    GAME\n"
+                     "    OVER\n";
     }
 }
 
