@@ -3,6 +3,7 @@
 #include <random>
 #include <utility>
 #include <iterator>
+#include <math.h>
 
 #include "coordinates.hpp"
 #include "island.hpp"
@@ -83,3 +84,12 @@ void Map::addIsland(Coordinates coordinate)
     islands_.push_back(Island(coordinate));
 }
 
+int Map::calculateTravel(Island* island_pos_)
+{
+    auto distanceX = current_pos_->getPosition().GetPositionX();
+    auto distanceY = current_pos_->getPosition().GetPositionY();
+    auto disX = island_pos_->getPosition().GetPositionX();
+    auto disY = island_pos_->getPosition().GetPositionY();
+
+    auto pierwiastek = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
+}

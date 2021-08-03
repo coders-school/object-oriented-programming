@@ -56,7 +56,10 @@ void Game::travel()
     std::cout << "Choose Your destination captain!" << '\n';
     std::cin >> i;
     mapa.getIsland(&mapa.islands_.at(i));
-    //TODO add travel to menu
+    std::cout << "You have choosen Island: " << i << '\n';
+    
+
+    //std::cout << "Your travel will take " << travel << " days." << '\n';
     //TODO add travel time by using pitagoras trójkąt
 
 }

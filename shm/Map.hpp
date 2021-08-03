@@ -16,6 +16,7 @@ public:
     friend class Game;
     Island* getCurrentPos() {return current_pos_;}
     void changeCurrentPos(Island* position) {current_pos_ = position;}
+    int calculateTravel(Island *);
 
 private:
     Island *current_pos_;

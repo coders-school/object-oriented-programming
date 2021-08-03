@@ -9,9 +9,8 @@ enum MenuItem
     buyCargo,
     sellCargo,
     travel,
-    Exit,
+    Exit
 };
-
 class Menu 
 {
 public:
