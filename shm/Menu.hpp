@@ -1,5 +1,8 @@
 #pragma once
 #include <iostream>
+#include <memory>
+
+class Game;
 
 enum MenuItem
 {
@@ -20,5 +23,5 @@ public:
     int playerChoice();
 
 private:
-
+std::unique_ptr<Game> game_;
 };

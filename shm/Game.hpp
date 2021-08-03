@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 #include "Map.hpp"
 #include "Menu.hpp"
 #include "player.hpp"
@@ -9,15 +10,14 @@ class Game
 {
 public:
     Game(size_t money, size_t gameDays, size_t finalGoal);
+    Game();
 
     void setPlayer();
     void startGame();
-    void menu();
     void printTitle();
     void printMap(Map &);
     void travel();
-
-
+    
 private:
     size_t money_;
     size_t gameDays_;

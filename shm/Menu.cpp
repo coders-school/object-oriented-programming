@@ -1,8 +1,12 @@
 #include "Menu.hpp"
+#include "Map.hpp"
+#include "Game.hpp"
 
-Menu::Menu(){}
+
+Menu::Menu()
+:game_(std::make_unique<Game>())
+{}
 Menu::~Menu(){}
-
 
 int Menu::playerChoice()
 {
@@ -11,6 +15,7 @@ int Menu::playerChoice()
 
 void Menu::menuHandler(MenuItem item) 
 {
+    
     switch(item)
     {
         case MenuItem::buyCargo:
@@ -24,6 +29,7 @@ void Menu::menuHandler(MenuItem item)
         case MenuItem::travel:
                 std::cout << "Where should we travel now?\n";
                 std::cout << "Set sails!" << '\n';
+                game_->travel();
                 break;
         case MenuItem::Exit:
                 std::cout << "Get me out of this game, I'm done\n";
@@ -61,3 +67,4 @@ void Menu::printMenu() {
     std::cout << "3 - Travel\n";
     std::cout << "4 - Exit\n";
 }
+

@@ -19,7 +19,6 @@ Map::Map() {
     Coordinates zero(0,0);
     addIsland(zero);
     SetUpRandomIsland();
-    std::cout << islands_.size() << '\n';
 }
 
 void Map::SetUpRandomIsland(){
@@ -54,15 +53,24 @@ void Map::DebugPrintIsland () {
 
 void Map::PrintCurrentPosition()
 {
-     std::cout <<  std::to_string(current_pos_->getPosition().GetPositionX()) << " | " << std::to_string(current_pos_->getPosition().GetPositionY())<<'\n';
+     std::cout <<  std::to_string(current_pos_->getPosition().GetPositionX()) << " | " << std::to_string(current_pos_->getPosition().GetPositionY())<<" <------ " <<'\n';
 }
 
 bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
     return std::find(vec.begin(), vec.end(), c) != vec.end();
 }
 
-Island* Map::getIsland(const Coordinates coordinate){
-    auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return i.getPosition() == coordinate; });
+// Island* Map::getIsland(const Coordinates* coordinate){
+//     auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return &i.getPosition() == coordinate; });
+//     if(selectedIsland != islands_.end())
+//     {
+//         return &(*selectedIsland);
+//     }
+//     return nullptr;
+// }
+
+Island* Map::getIsland(const Island* coordinate){
+    auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return coordinate; });
     if(selectedIsland != islands_.end())
     {
         return &(*selectedIsland);
