@@ -20,7 +20,6 @@ public:
     void setCurrentPosition(const Island::Coordinates& coordinates);
 
 private:
-    Island::coordinateType generateAxisPosition(size_t);
     void fillWithRandomIslands();
 
     Island* currentPosition_;

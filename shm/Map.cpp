@@ -1,25 +1,22 @@
 #include "Map.hpp"
 #include <algorithm>
+#include "RandomNumberGenerator.hpp"
 
 constexpr auto defaultIslandsNumber = 10u;
 constexpr auto mapWidth = 10u;
 constexpr auto mapHeight = 10u;
 
-Island::coordinateType Map::generateAxisPosition(size_t limit) {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<size_t> distrib(0, limit);
-    return distrib(gen);
-}
-
 Island::Coordinates Map::generatePosition() {
-    auto posX = Map::generateAxisPosition(mapWidth);
-    auto posY = Map::generateAxisPosition(mapHeight);
+    RandomNumberGenerator generatorX;
+    auto posX = generatorX.nextRandomNumber();
+    RandomNumberGenerator generatorY;
+    auto posY = generatorY.nextRandomNumber();
     Island::Coordinates newCoordinate(posX, posY);
     return newCoordinate;
 }
 
 void Map::fillWithRandomIslands() {
+    islandVec_.reserve(defaultIslandsNumber);
     const size_t capacity = islandVec_.capacity();
     while (islandVec_.size() <= capacity) {
         Island::Coordinates newCoordinate = generatePosition();
@@ -35,7 +32,6 @@ void Map::fillWithRandomIslands() {
 }
 
 Map::Map() {
-    islandVec_.reserve(defaultIslandsNumber);
     fillWithRandomIslands();
 }
 
