@@ -19,5 +19,6 @@ public:
     Map();
     Island *getIsland(const Coordinates &coordinate);
     Coordinates generateCoordinates();
+    friend std::ostream &operator<<(std::ostream &, const Map &map);
 };
 #endif

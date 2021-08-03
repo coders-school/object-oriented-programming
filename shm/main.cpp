@@ -10,6 +10,5 @@ int main() {
 
     Game game(start_money, game_days, final_goal);
     game.startGame();
-    Map map;
     return 0;
 }

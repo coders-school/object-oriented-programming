@@ -2,6 +2,7 @@
 #define COORDINATES_HPP
 
 #include <cstddef>
+#include <iostream>
 
 class Coordinates
 {
@@ -19,6 +20,8 @@ public:
     bool operator==(const Coordinates &coordinates);
 
     static size_t distance(const Coordinates &lhs, const Coordinates &rhs);
+
+    friend std::ostream &operator<<(std::ostream &, const Coordinates &coordinates);
 };
 
 #endif
