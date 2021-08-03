@@ -9,7 +9,7 @@ class Map {
 public:
     using IslandVec = std::vector<std::unique_ptr<Island>>;
 
-    Island::Coordinates generatePosition();
+    Island::Coordinates generatePosition(Island::coordinateType, Island::coordinateType);
 
     Map();
 

@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "RandomNumberGenerator.hpp"
 
 void testCargoShipPlayer();
 void testIslandMap();
@@ -63,7 +64,11 @@ void testIslandMap() {
 
 void testGetIsland() {
     Map map;
-    Island::Coordinates FakeIsland = map.generatePosition();
+    RandomNumberGenerator generatorX;
+    RandomNumberGenerator generatorY;
+    auto posX = generatorX.nextRandomNumber();
+    auto posY = generatorY.nextRandomNumber();
+    Island::Coordinates FakeIsland = map.generatePosition(posX, posY);
     std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
     if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
         std::cout << "^-First Island exists\n";

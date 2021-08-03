@@ -6,20 +6,20 @@ constexpr auto defaultIslandsNumber = 10u;
 constexpr auto mapWidth = 10u;
 constexpr auto mapHeight = 10u;
 
-Island::Coordinates Map::generatePosition() {
-    RandomNumberGenerator generatorX;
-    auto posX = generatorX.nextRandomNumber();
-    RandomNumberGenerator generatorY;
-    auto posY = generatorY.nextRandomNumber();
-    Island::Coordinates newCoordinate(posX, posY);
+Island::Coordinates Map::generatePosition(Island::coordinateType coordinateX, Island::coordinateType coordinateY) {
+    Island::Coordinates newCoordinate(coordinateX, coordinateY);
     return newCoordinate;
 }
 
 void Map::fillWithRandomIslands() {
     islandVec_.reserve(defaultIslandsNumber);
     const size_t capacity = islandVec_.capacity();
+    RandomNumberGenerator generatorX;
+    RandomNumberGenerator generatorY;
     while (islandVec_.size() <= capacity) {
-        Island::Coordinates newCoordinate = generatePosition();
+        auto posX = generatorX.nextRandomNumber();
+        auto posY = generatorY.nextRandomNumber();
+        Island::Coordinates newCoordinate = generatePosition(posX, posY);
         auto check = std::find_if(islandVec_.begin(), islandVec_.end(),
                                   [&newCoordinate](const std::unique_ptr<Island>& island) {
                                       return island->getPosition() == newCoordinate;
