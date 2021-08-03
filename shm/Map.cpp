@@ -6,9 +6,9 @@ constexpr auto defaultIslandsNumber = 10u;
 constexpr auto mapWidth = 10u;
 constexpr auto mapHeight = 10u;
 
-Island::Coordinates Map::generatePosition(Island::coordinateType coordinateX, Island::coordinateType coordinateY) {
-    Island::Coordinates newCoordinate(coordinateX, coordinateY);
-    return newCoordinate;
+Island::Position Map::generatePosition(Island::CoordinateType coordinateX, Island::CoordinateType coordinateY) {
+    Island::Position newPosition(coordinateX, coordinateY);
+    return newPosition;
 }
 
 void Map::fillWithRandomIslands() {
@@ -17,15 +17,15 @@ void Map::fillWithRandomIslands() {
     RandomNumberGenerator generatorX;
     RandomNumberGenerator generatorY;
     while (islandVec_.size() <= capacity) {
-        auto posX = generatorX.nextRandomNumber();
-        auto posY = generatorY.nextRandomNumber();
-        Island::Coordinates newCoordinate = generatePosition(posX, posY);
+        auto coordinateX = generatorX.nextRandomNumber();
+        auto coordinateY = generatorY.nextRandomNumber();
+        Island::Position newPosition = generatePosition(coordinateX, coordinateY);
         auto check = std::find_if(islandVec_.begin(), islandVec_.end(),
-                                  [&newCoordinate](const std::unique_ptr<Island>& island) {
-                                      return island->getPosition() == newCoordinate;
+                                  [&newPosition](const std::unique_ptr<Island>& island) {
+                                      return island->getPosition() == newPosition;
                                   });
         if (check == islandVec_.end()) {
-            auto newIsland = std::make_unique<Island>(newCoordinate);
+            auto newIsland = std::make_unique<Island>(newPosition);
             islandVec_.push_back(std::move(newIsland));
         }
     }
@@ -43,10 +43,10 @@ Island* Map::getCurrentPosition() const {
     return currentPosition_;
 }
 
-Island* Map::getIsland(const Island::Coordinates& coordinate) const {
+Island* Map::getIsland(const Island::Position& position) const {
     auto it = std::find_if(islandVec_.begin(), islandVec_.end(),
-                           [&coordinate](const std::unique_ptr<Island>& island) {
-                               return island->getPosition() == coordinate;
+                           [&position](const std::unique_ptr<Island>& island) {
+                               return island->getPosition() == position;
                            });
     if (it != islandVec_.end()) {
         return it->get();
@@ -54,6 +54,6 @@ Island* Map::getIsland(const Island::Coordinates& coordinate) const {
     return nullptr;
 }
 
-void Map::setCurrentPosition(const Island::Coordinates& coordinates) {
-    currentPosition_ = getIsland(coordinates);
+void Map::setCurrentPosition(const Island::Position& position) {
+    currentPosition_ = getIsland(position);
 }

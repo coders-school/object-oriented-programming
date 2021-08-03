@@ -9,15 +9,15 @@ class Map {
 public:
     using IslandVec = std::vector<std::unique_ptr<Island>>;
 
-    Island::Coordinates generatePosition(Island::coordinateType, Island::coordinateType);
+    Island::Position generatePosition(Island::CoordinateType, Island::CoordinateType);
 
     Map();
 
     const IslandVec& getIslandVec() const;
     Island* getCurrentPosition() const;
-    Island* getIsland(const Island::Coordinates&) const;
+    Island* getIsland(const Island::Position&) const;
 
-    void setCurrentPosition(const Island::Coordinates& coordinates);
+    void setCurrentPosition(const Island::Position&);
 
 private:
     void fillWithRandomIslands();

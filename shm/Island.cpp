@@ -1,13 +1,13 @@
 #include "Island.hpp"
 #include <string>
 
-Island::Island(Island::coordinateType positionX, Island::coordinateType positionY)
-    : position_{positionX, positionY} {}
+Island::Island(Island::CoordinateType coordinateX, Island::CoordinateType coordinateY)
+    : position_{coordinateX, coordinateY} {}
 
-Island::Island(Island::Coordinates position)
+Island::Island(Island::Position position)
     : position_{position} {}
 
-std::ostream& operator<<(std::ostream& out, const Island::Coordinates& coords){
-    out << "x: " << coords.positionX_ << ", y: " << coords.positionY_ << '\n';//new line to remove
+std::ostream& operator<<(std::ostream& out, const Island::Position& position) {
+    out << "x: " << position.coordinateX_ << ", y: " << position.coordinateY_ << '\n';  //new line to remove
     return out;
 }

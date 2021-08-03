@@ -66,9 +66,9 @@ void testGetIsland() {
     Map map;
     RandomNumberGenerator generatorX;
     RandomNumberGenerator generatorY;
-    auto posX = generatorX.nextRandomNumber();
-    auto posY = generatorY.nextRandomNumber();
-    Island::Coordinates FakeIsland = map.generatePosition(posX, posY);
+    auto coordinateX = generatorX.nextRandomNumber();
+    auto coordinateY = generatorY.nextRandomNumber();
+    Island::Position FakeIsland = map.generatePosition(coordinateX, coordinateY);
     std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
     if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
         std::cout << "^-First Island exists\n";

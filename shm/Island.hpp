@@ -5,41 +5,41 @@
 #include <iostream>
 class Island {
 public:
-    using coordinateType = std::size_t;
-    class Coordinates;
+    using CoordinateType = std::size_t;
+    class Position;
 
-    Island(coordinateType positionX, coordinateType positionY);
-    Island(Coordinates position);
+    Island(CoordinateType coordinateX, CoordinateType coordinateY);
+    Island(Position position);
 
-    class Coordinates {
+    class Position {
     public:
-        constexpr Coordinates(Island::coordinateType positionX, Island::coordinateType positionY)
-            : positionX_{positionX}, positionY_{positionY} {}
+        constexpr Position(Island::CoordinateType coordinateX, Island::CoordinateType coordinateY)
+            : coordinateX_{coordinateX}, coordinateY_{coordinateY} {}
 
-        constexpr bool operator==(const Coordinates& other) const {
-            return positionX_ == other.positionX_ and positionY_ == other.positionY_;
+        constexpr bool operator==(const Position& other) const {
+            return coordinateX_ == other.coordinateX_ and coordinateY_ == other.coordinateY_;
         }
 
-        friend std::ostream& operator<<(std::ostream& out, const Island::Coordinates& coords);
+        friend std::ostream& operator<<(std::ostream& out, const Island::Position& position);
 
-        static constexpr size_t distance(const Coordinates& lhs, const Coordinates& rhs) {
-            auto pairX = std::minmax(lhs.positionX_, rhs.positionX_);
-            auto pairY = std::minmax(lhs.positionY_, rhs.positionY_);
+        static constexpr size_t distance(const Position& lhs, const Position& rhs) {
+            auto pairX = std::minmax(lhs.coordinateX_, rhs.coordinateX_);
+            auto pairY = std::minmax(lhs.coordinateY_, rhs.coordinateY_);
             auto result = std::sqrt(std::pow(pairX.second - pairX.first, 2) + std::pow(pairY.second - pairY.first, 2));
             return static_cast<size_t>(result);
         }
 
     private:
-        const Island::coordinateType positionX_;
-        const Island::coordinateType positionY_;
+        const Island::CoordinateType coordinateX_;
+        const Island::CoordinateType coordinateY_;
     };
 
-    constexpr Coordinates getPosition() const {
+    constexpr Position getPosition() const {
         return position_;
     }
 
 private:
-    const Coordinates position_;
+    const Position position_;
 };
 
-std::ostream& operator<<(std::ostream& out, const Island::Coordinates& coords);
+std::ostream& operator<<(std::ostream& out, const Island::Position& position);
