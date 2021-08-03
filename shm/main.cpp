@@ -63,7 +63,7 @@ void testIslandMap() {
 
 void testGetIsland() {
     Map map;
-    Island::Coordinates FakeIsland = generatePosition();
+    Island::Coordinates FakeIsland = map.generatePosition();
     std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
     if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
         std::cout << "^-First Island exists\n";

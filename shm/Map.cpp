@@ -5,17 +5,16 @@ constexpr auto defaultIslandsNumber = 10u;
 constexpr auto mapWidth = 10u;
 constexpr auto mapHeight = 10u;
 
-Island::coordinateType generateAxisPosition(size_t limit) {
+Island::coordinateType Map::generateAxisPosition(size_t limit) {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<size_t> distrib(0, limit);
-
     return distrib(gen);
 }
 
-Island::Coordinates generatePosition() {
-    auto posX = generateAxisPosition(mapWidth);
-    auto posY = generateAxisPosition(mapHeight);
+Island::Coordinates Map::generatePosition() {
+    auto posX = Map::generateAxisPosition(mapWidth);
+    auto posY = Map::generateAxisPosition(mapHeight);
     Island::Coordinates newCoordinate(posX, posY);
     return newCoordinate;
 }

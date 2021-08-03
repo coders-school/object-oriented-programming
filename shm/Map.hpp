@@ -5,11 +5,11 @@
 #include <vector>
 #include "Island.hpp"
 
-Island::Coordinates generatePosition();
-
 class Map {
 public:
     using IslandVec = std::vector<std::unique_ptr<Island>>;
+
+    Island::Coordinates generatePosition();
 
     Map();
 
@@ -20,6 +20,7 @@ public:
     void setCurrentPosition(const Island::Coordinates& coordinates);
 
 private:
+    Island::coordinateType generateAxisPosition(size_t);
     void fillWithRandomIslands();
 
     Island* currentPosition_;
