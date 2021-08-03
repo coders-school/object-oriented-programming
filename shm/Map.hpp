@@ -5,6 +5,10 @@
 #include <vector>
 #include "Island.hpp"
 
+constexpr auto defaultIslandsNumber = 10u;
+constexpr auto mapWidth = 10u;
+constexpr auto mapHeight = 10u;
+
 class Map {
 public:
     using IslandVec = std::vector<std::unique_ptr<Island>>;

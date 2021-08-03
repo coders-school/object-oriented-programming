@@ -64,8 +64,8 @@ void testIslandMap() {
 
 void testGetIsland() {
     Map map;
-    RandomNumberGenerator generatorX;
-    RandomNumberGenerator generatorY;
+    RandomNumberGenerator generatorX(1, mapWidth);
+    RandomNumberGenerator generatorY(1, mapHeight);
     auto coordinateX = generatorX.nextRandomNumber();
     auto coordinateY = generatorY.nextRandomNumber();
     Island::Position FakeIsland = map.generatePosition(coordinateX, coordinateY);

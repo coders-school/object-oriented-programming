@@ -2,10 +2,6 @@
 #include <algorithm>
 #include "RandomNumberGenerator.hpp"
 
-constexpr auto defaultIslandsNumber = 10u;
-constexpr auto mapWidth = 10u;
-constexpr auto mapHeight = 10u;
-
 Island::Position Map::generatePosition(Island::CoordinateType coordinateX, Island::CoordinateType coordinateY) {
     Island::Position newPosition(coordinateX, coordinateY);
     return newPosition;
@@ -14,8 +10,8 @@ Island::Position Map::generatePosition(Island::CoordinateType coordinateX, Islan
 void Map::fillWithRandomIslands() {
     islandVec_.reserve(defaultIslandsNumber);
     const size_t capacity = islandVec_.capacity();
-    RandomNumberGenerator generatorX;
-    RandomNumberGenerator generatorY;
+    RandomNumberGenerator generatorX(1, mapWidth);
+    RandomNumberGenerator generatorY(1, mapHeight);
     while (islandVec_.size() <= capacity) {
         auto coordinateX = generatorX.nextRandomNumber();
         auto coordinateY = generatorY.nextRandomNumber();

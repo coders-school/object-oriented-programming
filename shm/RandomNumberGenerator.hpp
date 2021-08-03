@@ -4,8 +4,8 @@
 
 class RandomNumberGenerator {
 public:
-    RandomNumberGenerator()
-        : generator_{std::random_device{}()}, distribution_(0, 10) {}
+    RandomNumberGenerator(size_t distributionMin, size_t distributionMax)
+        : generator_{std::random_device{}()}, distribution_(distributionMin, distributionMax) {}
     size_t nextRandomNumber() {
         return distribution_(generator_);
     }
