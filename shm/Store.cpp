@@ -12,44 +12,46 @@ Response Store::buy(const Cargo* const cargo, size_t amount, Player* player) {
         return Response::lack_of_cargo;
     }
 
-    Cargo* soldPlayerCargo = nullptr;
-    for (const auto& el : playerShip->getCargoVec()) {
-        Cargo* currentCargo = el.get();
+    Cargo* playerCargoToSell = nullptr;
+    for (const auto& playerCargo : playerShip->getCargoVec()) {
+        playerCargoToSell = playerCargo.get();
 
-        if (*currentCargo == *cargo) {
-            if (currentCargo->getAmount() < amount) {
+        if(!playerCargoToSell){
+            continue;
+        }
+
+        if (*playerCargoToSell == *cargo) {
+            if (playerCargoToSell->getAmount() < amount) {
                 return Response::lack_of_cargo;
             }
-            soldPlayerCargo = currentCargo;
+            break;
         }
     }
 
-    if (!soldPlayerCargo) {
+    if (!playerCargoToSell) {
         return Response::lack_of_cargo;
     }
     //Store have unlimited space and money
 
     //player sell all
-    if (soldPlayerCargo->getAmount() == amount) {
-        auto ownedCargo = soldPlayerCargo->split(amount);
-        playerShip->unload(soldPlayerCargo);
-        auto moneyToPay = ownedCargo->getPrice() * ownedCargo->getAmount();
+    if (playerCargoToSell->getAmount() == amount) {
+        auto takenCargo = playerCargoToSell->split(amount);
+        playerShip->unload(playerCargoToSell);
+        auto moneyToPay = takenCargo->getPrice() * takenCargo->getAmount();
         player->income(moneyToPay);
-
-        load(std::move(ownedCargo));
+        load(std::move(takenCargo));
         return Response::done;
     }
 
     //player sell less than all
-    auto moneyToPay = soldPlayerCargo->getPrice() * amount;
-    auto buyedCargoPart = soldPlayerCargo->split(amount);
+    auto takenCargoPart = playerCargoToSell->split(amount);
+    auto moneyToPay = takenCargoPart->getPrice() * takenCargoPart->getAmount();
 
-    if (!buyedCargoPart) {
+    if (!takenCargoPart) {
         return Response::lack_of_cargo;
     }
-    player->pay(moneyToPay);
-
-    load(std::move(buyedCargoPart));
+    player->income(moneyToPay);
+    load(std::move(takenCargoPart));
     return Response::done;
 }
 
@@ -68,9 +70,8 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
 
     //check if player can take cargo on ship
     bool playerHaveComperableCargo = false;
-    const auto& playerCargo = playerShip->getCargoVec();  // player/ship should have findCargo
-    for (const auto& el : playerCargo) {
-        if (cargo == el.get()) {
+    for (const auto& playerCargo : playerShip->getCargoVec()) {
+        if (cargo == playerCargo.get()) {
             playerHaveComperableCargo = true;
             break;
         }
@@ -94,19 +95,21 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
         return Response::lack_of_money;
     }
 
-    if (amount == storeCargo->getAmount()) {  //we sall all cargo - remove it from
+    if (amount == storeCargo->getAmount()) {
         try {
             auto soldCargo = storeCargo->split(amount);
             unload(storeCargo);
             playerShip->load(std::move(soldCargo));
+            player->pay(moneyToPay);
         } catch (std::logic_error& err) {
             //rest of cargo disapear in store?
         }
         return Response::done;
     }
 
-    auto soldCargo = storeCargo->split(amount);
-    playerShip->load(std::move(soldCargo));
+    auto soldCargoPart = storeCargo->split(amount);
+    playerShip->load(std::move(soldCargoPart));
+    player->pay(moneyToPay);
     return Response::done;
 }
 
@@ -118,10 +121,6 @@ Cargo* Store::findCargoInStore(const Cargo* const exampleCargo) const {
     for (const auto& el : cargoVec_) {
         Cargo* targetCargo = el.get();
         if (targetCargo) {
-            /*if (targetCargo == exampleCargo) {  //we dont want to compare same Cargo pointers
-                return nullptr;
-            }*/
-
             if (*targetCargo == *exampleCargo) {  //depend this means equality or comperable
                 return targetCargo;
             }
@@ -140,11 +139,11 @@ void Store::nextDay() {
 }
 
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    for (const auto& el : store.cargoVec_) {
-        if (el) {
-            out << el->getName() << " || "
-                << el->getAmount() << " || "
-                << el->getPrice() << '\n';
+    for (const auto& cargo : store.cargoVec_) {
+        if (cargo) {
+            out << cargo->getName() << " || "
+                << cargo->getAmount() << " || "
+                << cargo->getPrice() << '\n';
         }
     }
     return out;

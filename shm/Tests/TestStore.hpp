@@ -378,6 +378,7 @@ TEST_CASE("rich player with empty ship with enough capacity buy full of all carg
         auto cargoExample = generateCargo(i);
         auto response = store.sell(cargoExample.get(), fullQuantity, &player);
         REQUIRE(response == Response::done);
+        player.income(fullQuantity * cargoExample->getPrice());//give back money that player pay for cargo
     }
 
     std::cout << "\nShip Cargo: \n";

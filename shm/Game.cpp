@@ -71,6 +71,13 @@ void Game::startGame() {
         }
         playerWin = player.getMoney() >= goal_;
     }
+    if(playerWin){
+        std::cout << " Congratulation !!!\n"
+                     "You won the game !!!\n";
+    }else{
+        std::cout << "    GAME\n"
+                     "    OVER\n";
+    }
 }
 
 void fillCargo(Warehouse &holder, size_t number) {

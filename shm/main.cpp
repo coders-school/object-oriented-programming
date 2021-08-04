@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "RandomNumberGenerator.hpp"
 
 void testCargoShipPlayer();
 void testIslandMap();
@@ -29,7 +30,7 @@ int main() {
 #include "Cargos/Cargos.hpp"
 
 void testCargoShipPlayer() {
-    Time* time = Time::getInstance();
+    auto time = Time::getInstance();
     constexpr size_t testCases{10};
     constexpr Capacity testShipCapacity{100};
     std::vector<std::unique_ptr<Cargo>> cargoVec;
@@ -69,7 +70,11 @@ void testIslandMap() {
 
 void testGetIsland() {
     Map map;
-    Island::Coordinates FakeIsland = generatePosition();
+    RandomNumberGenerator generatorX(1, mapWidth);
+    RandomNumberGenerator generatorY(1, mapHeight);
+    auto coordinateX = generatorX.nextRandomNumber();
+    auto coordinateY = generatorY.nextRandomNumber();
+    Island::Position FakeIsland = map.generatePosition(coordinateX, coordinateY);
     std::cout << "Island [0]:" << map.getIslandVec()[0]->getPosition();
     if (map.getIsland(map.getIslandVec()[0]->getPosition()) != nullptr) {
         std::cout << "^-First Island exists\n";
@@ -90,7 +95,7 @@ void testDryFruit() {
 }
 
 void testTime() {
-    Time* time = Time::getInstance();
+    auto time = Time::getInstance();
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
     CargoDefault cargo3{"Cargo2", 100, 100};
@@ -102,7 +107,7 @@ void testTime() {
 }
 
 void timePassTest() {
-    Time* time = Time::getInstance();
+    auto time = Time::getInstance();
     CargoDefault cargo1{"Cargo1", 100, 100};
     CargoDefault cargo2{"Cargo2", 100, 100};
     DryFruit cargo3{"Mango", 100, 100, 3};
@@ -110,5 +115,5 @@ void timePassTest() {
     Ship ship2{Capacity{100}, Crew{100}, Speed{100}, "Ship2"};
     Ship ship3{Capacity{100}, Crew{100}, Speed{100}, "Ship3"};
     Store store;
-    time->update();
+    time->nextDay();
 }
