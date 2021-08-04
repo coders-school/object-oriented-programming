@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Command.hpp"
-#include "../GeneralPrint.hpp"
 
 class Trade : public Command {
 public:

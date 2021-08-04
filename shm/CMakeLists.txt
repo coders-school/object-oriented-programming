@@ -2,14 +2,27 @@ cmake_minimum_required(VERSION 3.0.0)
 set(CMAKE_CXX_STANDARD 20)
 project(shmProject)
 
-set(FILES 
-    Store.cpp 
+set(COMMAND_FILES
+    Commands/ExitCommand.cpp
+    Commands/MainMenuCommand.cpp
+    Commands/NextDayCommand.cpp
+    Commands/TradeBuyCommand.cpp
+    Commands/TradeCommand.cpp
+    Commands/TradeSellCommand.cpp
+    Commands/TravelCommand.cpp)
+
+set(CARGO_FILES
     Cargos/Cargo.cpp 
     Cargos/Item.cpp 
     Cargos/Fruit.cpp 
     Cargos/Alcohol.cpp 
     Cargos/DefaultCargo.cpp
-    Cargos/DryFruit.cpp 
+    Cargos/DryFruit.cpp)
+
+set(FILES 
+    ${COMMAND_FILES}
+    ${CARGO_FILES}
+    Store.cpp 
     Island.cpp 
     Map.cpp 
     Player.cpp 

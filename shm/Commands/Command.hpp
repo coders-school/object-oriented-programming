@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../Player.hpp"
+#include "../Store.hpp"
+
 class Command {
 public:
     Command() = default;
