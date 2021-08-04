@@ -84,12 +84,18 @@ void Map::addIsland(Coordinates coordinate)
     islands_.push_back(Island(coordinate));
 }
 
-int Map::calculateTravel(Island* island_pos_)
+int Map::calculateDistance(Island island_pos_)
 {
     auto distanceX = current_pos_->getPosition().GetPositionX();
     auto distanceY = current_pos_->getPosition().GetPositionY();
-    auto disX = island_pos_->getPosition().GetPositionX();
-    auto disY = island_pos_->getPosition().GetPositionY();
-
-    auto pierwiastek = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
+    auto disX = island_pos_.getPosition().GetPositionX();
+    auto disY = island_pos_.getPosition().GetPositionY();
+    std::cout << "dystansX korwa: " << distanceX <<'\n';
+    std::cout << "dystansY korwa: " << distanceY <<'\n';
+    std::cout << "dystX korwa: " << disX <<'\n';
+    std::cout << "dystY korwa: " << disY <<'\n';
+    auto distance = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
+    std::cout << "dystans korwa: " << distance <<'\n';
+    return distance;
 }
+

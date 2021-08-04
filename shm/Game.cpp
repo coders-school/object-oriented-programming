@@ -2,8 +2,9 @@
 
 
 class Map;
-
-Map mapa;
+Time *time_ptr = new Time();
+Player playerOne (std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_ptr), 1000, 1000);
+Map map1;
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
@@ -29,17 +30,16 @@ void Game::printTitle()
 
 void Game::setPlayer()
 {
-    Time *time_ptr = new Time();
+   
     
     std::cout << "Set your name captain!:" << '\n';
     std::string playerName;
     std::cin >> playerName;
     std::cout << "Welcome on board captain " << playerName << '\n';
-    Player playerOne (std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_ptr), 1000, 1000);
-    mapa.changeCurrentPos(&mapa.islands_.at(0));
+    map1.changeCurrentPosition(&map1.islands_.at(0));
     std::cout << "Your's ship Uboot is waiting! Good Luck!" << '\n';
     std::cout << "Yeou are in start point. Current coordinates: ";
-    mapa.PrintCurrentPosition();
+    map1.PrintCurrentPosition();
     std::cout << "Choose Your next move!" << '\n';
 }
 
@@ -52,15 +52,17 @@ void Game::printMap(Map &map)
 void Game::travel()
 {
     auto i = 0;
-    printMap(mapa);
+    printMap(map1);
     std::cout << "Choose Your destination captain!" << '\n';
     std::cin >> i;
-    mapa.getIsland(&mapa.islands_.at(i));
-    std::cout << "You have choosen Island: " << i << '\n';
-    
-
-    //std::cout << "Your travel will take " << travel << " days." << '\n';
-    //TODO add travel time by using pitagoras trójkąt
+    auto j = map1.getIsland(&map1.islands_.at(i));
+    std::cout << "You have choosen Island: " << j << '\n';
+    auto travelTime = map1.calculateDistance(*j)/playerOne.getSpeed();
+    std::cout << "szypkosc kurla" << playerOne.getSpeed() << '\n';
+    std::cout << "spolzedne kurla" << j << '\n';
+    std::cout << "Your travel will take " << travelTime << " days." << '\n';
+    map1.changeCurrentPosition(j);
+    map1.PrintCurrentPosition();
 
 }
 
