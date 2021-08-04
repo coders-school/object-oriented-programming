@@ -80,7 +80,7 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
         return Response::lack_of_space;
     }
 
-    auto storeCargo = findCargoInStore(cargo);
+    auto storeCargo = findCargo(cargo);
 
     if (!storeCargo) {  //can't find cargo in store
         return Response::lack_of_cargo;
@@ -113,37 +113,40 @@ Response Store::sell(const Cargo* const cargo, size_t amount, Player* player) {
     return Response::done;
 }
 
-Cargo* Store::findCargoInStore(const Cargo* const exampleCargo) const {
+Cargo* Store::findCargo(const Cargo* const exampleCargo) const {
     if (!exampleCargo) {
         return nullptr;
     }
 
-    for (const auto& el : cargoVec_) {
-        Cargo* targetCargo = el.get();
-        if (targetCargo) {
-            if (*targetCargo == *exampleCargo) {  //depend this means equality or comperable
-                return targetCargo;
+    for (const auto& cargo : cargoVec_) {
+        if (cargo) {
+            if (*cargo.get() == *exampleCargo) {
+                return cargo.get();
             }
         }
     }
     return nullptr;
 }
 
-size_t Store::getCargoNum() const {
-    return cargoVec_.size();
-}
-
 void Store::nextDay() {
-    changeAssortment();
+    changeAssortment_();
     std::cout << "Store change asortment.";
 }
 
+void Store::setChangeAssortmentCallback(std::function<void()> callback){
+    changeAssortment_ = callback;
+}
+
+size_t Store::getAssortmentSize(){
+    return cargoVec_.size();
+}
+
 std::ostream& operator<<(std::ostream& out, const Store& store) {
-    for (const auto& cargo : store.cargoVec_) {
-        if (cargo) {
-            out << cargo->getName() << " || "
-                << cargo->getAmount() << " || "
-                << cargo->getPrice() << '\n';
+    for (const auto& cargoPointer : store.cargoVec_) {
+        if (cargoPointer) {
+            out << cargoPointer->getName() << " || "
+                << cargoPointer->getAmount() << " || "
+                << cargoPointer->getPrice() << '\n';
         }
     }
     return out;

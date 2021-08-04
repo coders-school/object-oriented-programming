@@ -18,17 +18,19 @@ public:
     Store() = default;
     virtual ~Store() = default;
 
+    void nextDay() override;
+
     Response buy(const Cargo* const cargo, size_t amount, Player* player);
     Response sell(const Cargo* const cargo, size_t amount, Player* player);
 
-    Cargo* findCargoInStore(const Cargo* const exampleCargo) const;
-    size_t getCargoNum() const;
-
-    void nextDay() override;
+    Cargo* findCargo(const Cargo* const exampleCargo) const;
+    void setChangeAssortmentCallback(std::function<void()> callback);
+    size_t getAssortmentSize();
     
     friend std::ostream& operator<<(std::ostream&, const Store&);
 
-    std::function<void()> changeAssortment;
+private:
+    std::function<void()> changeAssortment_;
 };
 
 std::ostream& operator<<(std::ostream& out, const Store& store);

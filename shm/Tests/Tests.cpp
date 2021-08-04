@@ -1,9 +1,6 @@
 #define CATCH_CONFIG_MAIN
-#include <catch/catch.hpp>
-
+#include "catch_amalgamated.hpp"
 #include <array>
-#include <catch/catch.hpp>
-
 #include "Alcohol.hpp"
 #include "DefaultCargo.hpp"
 #include "Item.hpp"

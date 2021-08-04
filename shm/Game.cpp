@@ -93,8 +93,9 @@ void Game::init() {
     auto payMethod = [this](size_t cost) { return this->player.pay(cost); };
     player.getShip()->setDebt(payMethod);
 
-    auto changeAssortment = [this]() { fillCargo(this->store, Game::storeCargoNumber); };
-    store.changeAssortment = changeAssortment;
+    store.setChangeAssortmentCallback([this]() { 
+        fillCargo(this->store, Game::storeCargoNumber); 
+    });
 
     fillCargo(*player.getShip(), startingPlayerCargoNumber);
 
