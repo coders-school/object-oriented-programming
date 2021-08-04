@@ -27,7 +27,7 @@ int main() {
     return 0;
 }
 
-#include "Cargos/Cargos.hpp"
+#include "Cargos.hpp"
 
 void testCargoShipPlayer() {
     auto time = Time::getInstance();

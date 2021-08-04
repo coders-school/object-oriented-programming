@@ -2,7 +2,7 @@
 
 #include "Player.hpp"
 #include "Store.hpp"
-#include "Commands/Command.hpp"
+#include "Command.hpp"
 #include <map>
 
 void printResponse(Response response);

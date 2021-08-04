@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "Cargos/Cargo.hpp"
+#include "Cargo.hpp"
 #include "Ship.hpp"
 
 // Class responsible for managing player in the game world. Should be only one instance (for now).

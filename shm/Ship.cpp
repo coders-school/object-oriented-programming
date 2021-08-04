@@ -1,5 +1,5 @@
 #include "Ship.hpp"
-#include "Cargos/Cargo.hpp"
+#include "Cargo.hpp"
 #include "Time.hpp"
 #include "Warehouse.hpp"
 

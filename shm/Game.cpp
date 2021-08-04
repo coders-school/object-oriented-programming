@@ -1,6 +1,6 @@
 #include "Game.hpp"
-#include "Cargos/Cargos.hpp"
-#include "Commands/Commands.hpp"
+#include "Cargos.hpp"
+#include "Commands.hpp"
 
 struct GoodsData {
     constexpr GoodsData(const char* name)
