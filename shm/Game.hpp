@@ -2,7 +2,7 @@
 
 #include "Map.hpp"
 #include "GeneralPrint.hpp"
-#include "Commands/Command.hpp"
+#include "Command.hpp"
 #include <array>
 #include <cmath>
 #include <iostream>

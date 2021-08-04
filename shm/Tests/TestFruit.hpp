@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Cargos/Fruit.hpp"
-#include "../Cargos/DefaultCargo.hpp"
+#include "Fruit.hpp"
+#include "DefaultCargo.hpp"
 
 TEST_CASE("Compare Fruit to CargoDefault with same name", "[Fruit][CargoDefault]") {
     auto fruit = generateCargo(fruitIndex, defaultGoodsName);

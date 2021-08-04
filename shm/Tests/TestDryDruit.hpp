@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Cargos/DryFruit.hpp"
+#include "DryFruit.hpp"
 
 TEST_CASE("Compare DryFruit to CargoDefault with same name", "[DryFruit][CargoDefault]") {
     auto dryFruit = generateCargo(dryFruitIndex, defaultGoodsName);

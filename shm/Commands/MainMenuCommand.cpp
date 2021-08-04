@@ -1,5 +1,5 @@
 #include "MainMenuCommand.hpp"
-#include "../GeneralPrint.hpp"
+#include "GeneralPrint.hpp"
 
 void Menu::operator()(Player &player, Store &store) {
     printStoreCargoList(store);

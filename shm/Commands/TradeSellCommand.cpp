@@ -1,5 +1,5 @@
 #include "TradeSellCommand.hpp"
-#include "../GeneralPrint.hpp"
+#include "GeneralPrint.hpp"
 
 void TradeSell::operator()(Player& player, Store& store) {
         while (true) {

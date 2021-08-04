@@ -1,5 +1,5 @@
 #include "ExitCommand.hpp"
-#include "../GeneralPrint.hpp"
+#include "GeneralPrint.hpp"
 
 void Exit::operator()([[maybe_unused]] Player& player, [[maybe_unused]] Store& store) {
     endGame_ = true;

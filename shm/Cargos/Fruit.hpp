@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Cargo.hpp"
-#include "../Perishable.hpp"
+#include "Perishable.hpp"
 
 class Fruit : public Cargo, public Perishable {
 public:

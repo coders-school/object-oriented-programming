@@ -4,7 +4,7 @@
 #include <optional>
 #include <string>
 
-#include "../Timeable.hpp"
+#include "Timeable.hpp"
 
 class Cargo : public Timeable {
 public:

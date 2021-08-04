@@ -4,10 +4,10 @@
 #include <array>
 #include <catch/catch.hpp>
 
-#include "../Cargos/Alcohol.hpp"
-#include "../Cargos/DefaultCargo.hpp"
-#include "../Cargos/Item.hpp"
-#include "../Cargos/DryFruit.hpp"
+#include "Alcohol.hpp"
+#include "DefaultCargo.hpp"
+#include "Item.hpp"
+#include "DryFruit.hpp"
 
 #include "TestCoordinates.hpp"
 
@@ -110,7 +110,7 @@ constexpr auto halfQuantity = 50;
 constexpr auto playerMoney = singleCargoCost * fullQuantity * cargoTypes;    //money to buy all Cargo types
 constexpr auto playerMoneyForHalfQuantity = singleCargoCost * halfQuantity;  //money to buy half of single cargo
 
-#include "../Ship.hpp"
+#include "Ship.hpp"
 
 constexpr Capacity shipCapacity = {fullCappacity};
 constexpr Crew shipMaxCrew = {20};

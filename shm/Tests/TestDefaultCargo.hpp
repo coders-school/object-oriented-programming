@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Cargos/DefaultCargo.hpp"
+#include "DefaultCargo.hpp"
 
 //Cargo types operator== tests
 
