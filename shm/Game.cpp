@@ -6,17 +6,27 @@ Player playerOne(std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_ptr), 1000,
 Map map1;
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
-    : money_(money), gameDays_(gameDays), finalGoal_(finalGoal), menu_(std::make_unique<Menu>())
-{}
+    : money_(money)
+    , gameDays_(gameDays)
+    , finalGoal_(finalGoal)
+    , menu_(std::make_unique<Menu>())
+    , time_(new Time())
+    , map_(new Map())
+    {}
 
 Game::Game() {}
 
 void Game::startGame()
 {
     printTitle();
-    setPlayer();
-    menu_->printMenu();
-    menu_->menuChoice();
+    setPlayer(); 
+    Store* store = new Store(1000, 1000, time_);
+    do {
+        menu_->printMenu();
+
+        menu_->menuHandler(menu_->menuChoice(), store, map_, playerOne_);
+        
+    } while(menu_->menuChoice() == 4);
 }
 
 void Game::printTitle()
@@ -31,11 +41,15 @@ void Game::setPlayer()
     std::string playerName;
     std::cin >> playerName;
     std::cout << "Welcome on board captain " << playerName << '\n';
-    map1.changeCurrentPosition(&map1.islands_.at(7));
+    Player playerOne (std::make_unique<Ship>(20, 300, 2, "Uboot", 3, time_), 1000, 1000);
+    mapa.changeCurrentPos(&map_->islands_.at(0));
     std::cout << "Your's ship Uboot is waiting! Good Luck!" << '\n';
     std::cout << "Yeou are in start point. Current coordinates: ";
     map1.PrintCurrentPosition();
     std::cout << "Choose Your next move!" << '\n';
+
+    printMap(*map_);
+    playerOne_= &playerOne;
 }
 
 void Game::printMap(Map &map)

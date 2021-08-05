@@ -3,6 +3,10 @@
 #include "Game.hpp"
 
 
+
+Menu::Menu(){}
+Menu::~Menu(){}
+
 Menu::Menu()
 :game_(std::make_unique<Game>())
 {}
@@ -13,7 +17,7 @@ int Menu::playerChoice()
     return 1;
 }
 
-void Menu::menuHandler(MenuItem item) 
+void Menu::menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player) 
 {
     
     switch(item)
@@ -21,43 +25,51 @@ void Menu::menuHandler(MenuItem item)
         case MenuItem::buyCargo:
                 std::cout << "Welcome captain, what business brings you here?\n";
                 std::cout << "Choose a cargo to buy: " << '\n';
-                break;
+                currentStore->printStoreCargo();
+                currentStore->buy(currentStore->storeCargo.at(1), 1, player);
+                printMenu();
+
         case MenuItem::sellCargo:
                 std::cout << "Welcome captain, what business brings you here?\n";
                 std::cout << "Choose a cargo to sell: " << '\n';
-                break;
+                currentStore->printStoreCargo();
+                currentStore->sell(currentStore->storeCargo.at(0), 1, player);
+                printMenu();
+
         case MenuItem::travel:
                 std::cout << "Where should we travel now?\n";
                 std::cout << "Set sails!" << '\n';
-                game_->travel();
-                break;
+                map->DebugPrintIsland();
+                printMenu();
+
         case MenuItem::Exit:
                 std::cout << "Get me out of this game, I'm done\n";
                 break;
     }
 }
 
-void Menu::menuChoice(){
+
+MenuItem Menu::menuChoice(){
     int input;
     std:: cin >> input;
 
     switch(input)
     {
         case 1:
-            menuHandler(buyCargo);
+            return MenuItem::buyCargo;
             break;
         case 2:
-            menuHandler(sellCargo);
+            return MenuItem::sellCargo;
             break;
         case 3:
-            menuHandler(travel);
+            return MenuItem::travel;
             break;
         case 4:
-            menuHandler(Exit);
+            return MenuItem::Exit;
             break;
         default:
             std::cout << "Please use 1 - 4" << '\n';
-            printMenu();
+            // printMenu();
     }
 }
 

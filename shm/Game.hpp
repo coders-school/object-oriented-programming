@@ -23,4 +23,8 @@ private:
     size_t gameDays_;
     size_t finalGoal_;
     std::unique_ptr<Menu> menu_;
+    Map* map_;
+    Store* store_;
+    Time* time_;
+    Player* playerOne_;
 };

@@ -17,8 +17,8 @@ public:
     Menu();
     ~Menu();
     void printMenu();
-    void menuChoice();
-    void menuHandler(MenuItem item);
+    MenuItem menuChoice();
+    void menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player);
     int playerChoice();
 
 private:
