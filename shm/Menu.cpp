@@ -1,19 +1,18 @@
 #include "Menu.hpp"
 #include "Game.hpp"
 
-Menu::Menu(std::unique_ptr<Game> game)
-    : game_(std::move(game))
+Menu::Menu(Game* game)
+    : game_(game)
 {}
 Menu::~Menu(){}
 
-int Menu::playerChoice()
-{
-    return 1;
-}
+// int Menu::playerChoice()
+// {
+//     return 1;
+// }
 
 void Menu::menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player) 
 {
-    
     switch(item)
     {
         case MenuItem::buyCargo:
@@ -22,6 +21,7 @@ void Menu::menuHandler(MenuItem item, Store* currentStore, Map* map, Player* pla
                 currentStore->printStoreCargo();
                 currentStore->buy(currentStore->storeCargo.at(1), 1, player);
                 printMenu();
+                break;
 
         case MenuItem::sellCargo:
                 std::cout << "Welcome captain, what business brings you here?\n";
@@ -29,41 +29,39 @@ void Menu::menuHandler(MenuItem item, Store* currentStore, Map* map, Player* pla
                 currentStore->printStoreCargo();
                 currentStore->sell(currentStore->storeCargo.at(0), 1, player);
                 printMenu();
-
+                break;
         case MenuItem::travel:
                 std::cout << "Where should we travel now?\n";
                 std::cout << "Set sails!" << '\n';
-                map->DebugPrintIsland();
+                game_->travel();
+                std::cout << "Choose Your next move Captain!" << '\n';
                 printMenu();
-
-        case MenuItem::Exit:
-                std::cout << "Get me out of this game, I'm done\n";
+                break;
+        case MenuItem::wrongChoice:
+                std::cout << "Wrong choice, please use 1 - 4" << '\n';
+                printMenu();
                 break;
     }
 }
 
-
 MenuItem Menu::menuChoice(){
     int input;
-    std:: cin >> input;
+    printMenu();
+    std::cin >> input;
 
     switch(input)
     {
         case 1:
             return MenuItem::buyCargo;
-            break;
         case 2:
             return MenuItem::sellCargo;
-            break;
         case 3:
             return MenuItem::travel;
-            break;
         case 4:
+            std::cout << "Get me out of this game, I'm done\n";
             return MenuItem::Exit;
-            break;
         default:
-            std::cout << "Please use 1 - 4" << '\n';
-            // printMenu();
+            return MenuItem::wrongChoice;
     }
 }
 

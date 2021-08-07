@@ -11,18 +11,19 @@ enum MenuItem
     buyCargo,
     sellCargo,
     travel,
-    Exit
+    Exit,
+    wrongChoice
 };
 class Menu 
 {
 public:
-    Menu(std::unique_ptr<Game>);
+    Menu(Game*);
     ~Menu();
     void printMenu();
     MenuItem menuChoice();
     void menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player);
-    int playerChoice();
+    // int playerChoice();
 
 private:
-    std::unique_ptr<Game> game_;
+    Game* game_;
 };

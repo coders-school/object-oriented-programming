@@ -17,6 +17,8 @@ public:
     void printTitle();
     void printMap(Map &);
     void travel();
+    void buyAllCargo();
+    void sellAllCargo();
     
 private:
     size_t money_;
