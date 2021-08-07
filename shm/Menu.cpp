@@ -1,14 +1,8 @@
 #include "Menu.hpp"
-#include "Map.hpp"
 #include "Game.hpp"
 
-
-
-Menu::Menu(){}
-Menu::~Menu(){}
-
-Menu::Menu()
-:game_(std::make_unique<Game>())
+Menu::Menu(std::unique_ptr<Game> game)
+    : game_(std::move(game))
 {}
 Menu::~Menu(){}
 

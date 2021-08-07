@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include "Map.hpp"
+#include "Store.hpp"
 
 class Game;
 
@@ -14,7 +16,7 @@ enum MenuItem
 class Menu 
 {
 public:
-    Menu();
+    Menu(std::unique_ptr<Game>);
     ~Menu();
     void printMenu();
     MenuItem menuChoice();
@@ -22,5 +24,5 @@ public:
     int playerChoice();
 
 private:
-std::unique_ptr<Game> game_;
+    std::unique_ptr<Game> game_;
 };
