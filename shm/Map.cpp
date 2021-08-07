@@ -13,11 +13,11 @@ namespace constVariables{
     constexpr size_t ISLANDS_COUNT = 10;
 }
 
-Map::Map() {
-    SetUpRandomIsland();
+Map::Map(Time * time) {
+    SetUpRandomIsland(time);
 }
 
-void Map::SetUpRandomIsland(){
+void Map::SetUpRandomIsland(Time * time){
     islands_.reserve(constVariables::ISLANDS_COUNT);
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -34,7 +34,7 @@ void Map::SetUpRandomIsland(){
             c.SetPositionX(distrib(gen));
             c.SetPositionY(distrib(gen));
         }
-        islands_.push_back(Island (c));
+        islands_.push_back(Island (c, time));
         cords.push_back(c);
     } 
 }
@@ -58,7 +58,7 @@ Island* Map::getIsland(const Coordinates& coordinate){
     return nullptr;
 }
 
-void Map::addIsland(Coordinates &coordinate)
+void Map::addIsland(Coordinates &coordinate, Time * time)
 {
-    islands_.push_back(Island(coordinate));
+    islands_.push_back(Island(coordinate, time));
 }

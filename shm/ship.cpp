@@ -67,10 +67,10 @@ void Ship::removeCargo(Cargo * item, size_t amount)
     auto shipCargoAmount = findMatchCargo(item)->getAmount();
     if(shipCargoAmount == amount)
     {
-        //auto i = std::find(begin(shipCargo), end(shipCargo), *item);
-        auto i = std::find(begin(shipCargo), end(shipCargo), [](const auto* el){ *el == *item});
-        // tutaj it nie może być równy 0
-        shipCargo.erase(i);
+        auto it = std::find_if(begin(shipCargo), end(shipCargo), [item](const auto* el){ return *el == *item; });
+        if(it != end(shipCargo)) {
+            shipCargo.erase(it);
+        }
     }
     else
     {
@@ -121,7 +121,7 @@ void Ship::unload(Cargo * unloadCargo, size_t amount)
             removeCargo(unloadCargo, amount);
         }
         else {
-            std::cout << "Ship: " << this->getName() << "doesn't have enough cargo: " << unloadCargo->getName() << '\n';
+            std::cout << "Ship: " << this->getName() << " doesn't have enough cargo: " << unloadCargo->getName() << '\n';
         }
         
     }

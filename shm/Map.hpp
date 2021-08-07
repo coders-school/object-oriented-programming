@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "Time.hpp"
 
 class Island;
 class Coordinates;
@@ -7,14 +8,14 @@ class Coordinates;
 //Class responsible for representing map in game
 class Map {
 public:
-    Map();
+    Map(Time * time);
     void DebugPrintIsland();
     Island *getIsland(const Coordinates &coordinate);
-    void addIsland(Coordinates &coordinate);
+    void addIsland(Coordinates &coordinate, Time * time);
 
 private:
     Island *current_pos_;
     std::vector<Island> islands_;
     bool contains(const std::vector<Coordinates>& vec, const Coordinates& c);
-    void SetUpRandomIsland();
+    void SetUpRandomIsland(Time *);
 };
