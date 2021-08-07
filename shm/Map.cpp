@@ -17,8 +17,8 @@ namespace constVariables{
 
 Map::Map() {
     islands_.reserve(11);
-    Coordinates zero(0,0);
-    addIsland(zero);
+    // Coordinates zero(0,0);
+    // addIsland(zero);
     SetUpRandomIsland();
 }
 
@@ -61,23 +61,26 @@ bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
     return std::find(vec.begin(), vec.end(), c) != vec.end();
 }
 
-// Island* Map::getIsland(const Coordinates* coordinate){
-//     auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return &i.getPosition() == coordinate; });
-//     if(selectedIsland != islands_.end())
+//Island* Map::getIsland(const Coordinates* coordinate){
+    // auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return &i.getPosition == coordinate; });
+    // if(selectedIsland != islands_.end())
+    // {
+    //     return &(*selectedIsland);
+    // }
+   // return nullptr;
+//}
+
+// Island* Map::getIsland(const Island* coordinate){
+//     //auto selectedIsland = std::find(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return coordinate.ge == i.getPosition().GetPositionX(); });
+//     for( auto el : islands_)
 //     {
-//         return &(*selectedIsland);
+//         if(coordinate == &el)
+//         {
+//             return zz
+//         }
 //     }
 //     return nullptr;
 // }
-
-Island* Map::getIsland(const Island* coordinate){
-    auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return coordinate; });
-    if(selectedIsland != islands_.end())
-    {
-        return &(*selectedIsland);
-    }
-    return nullptr;
-}
 
 void Map::addIsland(Coordinates coordinate)
 {
@@ -90,12 +93,8 @@ int Map::calculateDistance(Island island_pos_)
     auto distanceY = current_pos_->getPosition().GetPositionY();
     auto disX = island_pos_.getPosition().GetPositionX();
     auto disY = island_pos_.getPosition().GetPositionY();
-    std::cout << "dystansX korwa: " << distanceX <<'\n';
-    std::cout << "dystansY korwa: " << distanceY <<'\n';
-    std::cout << "dystX korwa: " << disX <<'\n';
-    std::cout << "dystY korwa: " << disY <<'\n';
     auto distance = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
-    std::cout << "dystans korwa: " << distance <<'\n';
+    std::cout << "dystans: " << distance <<'\n';
     return distance;
 }
 

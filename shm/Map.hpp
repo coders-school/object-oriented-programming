@@ -11,7 +11,7 @@ public:
     Map();
     void DebugPrintIsland();
     void PrintCurrentPosition();
-    Island *getIsland(const Island*);
+    Island *getIsland(const Coordinates* );
     void addIsland(Coordinates);
     friend class Game;
     Island* getCurrentPos() {return current_pos_;}
