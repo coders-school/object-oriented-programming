@@ -93,9 +93,6 @@ void Ship::load(Cargo * loadCargo, size_t amount)
     {        
         loadCargo->reduceAmount(amount);
         Cargo* toAdd;
-        //lol no
-        //dont look, bleh
-        //Something is not yes
         if(Fruit* f = dynamic_cast<Fruit*>(loadCargo)){
             toAdd = new Fruit(*f);
         }

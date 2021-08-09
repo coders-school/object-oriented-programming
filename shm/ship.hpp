@@ -31,10 +31,8 @@ public:
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
     std::vector<Cargo *> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
+    std::vector<Cargo *> shipCargo; 
     void printCargo();
-    std::vector<Cargo *> shipCargo; // TODO reserve vector
-
-    // std::vector<Cargo *> CargoOnShip;
 
     Cargo * findMatchCargo(Cargo * cargo);
     void load(Cargo *loadCargo, size_t amount);
@@ -44,7 +42,6 @@ public:
     void nextDay() override;
     void setOwner(Player* newOwner);
     void setCrew(size_t newCrew);
-
 
     size_t calculateAvailableSpace();
 

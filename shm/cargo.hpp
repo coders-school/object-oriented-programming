@@ -12,7 +12,7 @@ public:
     virtual bool operator==(const Cargo &cargo) const;
 
     virtual size_t getPrice() const {return 0;};
-    virtual const std::string &getName() const { return name_; } // TO DO: test deleting Cargo object
+    virtual const std::string &getName() const { return name_; }
     virtual size_t getAmount() const { return amount_; }
     virtual size_t getBasePrice() const { return basePrice_; }
 
@@ -25,6 +25,7 @@ public:
     Cargo() = default;
     Cargo(std::string name, size_t amount, size_t basePrice, Time* time);
     virtual ~Cargo() = default;
+
 protected:
     std::string name_;
     size_t amount_;

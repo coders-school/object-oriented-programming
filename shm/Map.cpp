@@ -16,9 +16,7 @@ namespace constVariables{
 }
 
 Map::Map() {
-    islands_.reserve(11);
-    // Coordinates zero(0,0);
-    // addIsland(zero);
+    islands_.reserve(10);
     SetUpRandomIsland();
 }
 
@@ -61,27 +59,6 @@ bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
     return std::find(vec.begin(), vec.end(), c) != vec.end();
 }
 
-//Island* Map::getIsland(const Coordinates* coordinate){
-    // auto selectedIsland = std::find_if(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return &i.getPosition == coordinate; });
-    // if(selectedIsland != islands_.end())
-    // {
-    //     return &(*selectedIsland);
-    // }
-   // return nullptr;
-//}
-
-// Island* Map::getIsland(const Island* coordinate){
-//     //auto selectedIsland = std::find(islands_.begin(), islands_.end(), [&coordinate](Island& i) { return coordinate.ge == i.getPosition().GetPositionX(); });
-//     for( auto el : islands_)
-//     {
-//         if(coordinate == &el)
-//         {
-//             return zz
-//         }
-//     }
-//     return nullptr;
-// }
-
 void Map::addIsland(Coordinates coordinate)
 {
     islands_.push_back(Island(coordinate));
@@ -94,7 +71,7 @@ size_t Map::calculateDistance(Island island_pos_)
     auto disX = island_pos_.getPosition().GetPositionX();
     auto disY = island_pos_.getPosition().GetPositionY();
     auto distance = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
-    std::cout << "dystans: " << distance <<'\n';
+    std::cout << "Distance: " << distance <<'\n';
     return distance;
 }
 

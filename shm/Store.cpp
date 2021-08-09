@@ -27,7 +27,7 @@ Cargo * Store::findMatchCargo(Cargo * cargo)
     return nullptr;
 }
 
-Response Store::buy(Cargo * cargo, size_t amount, Player *player) //Buying cargo from store to player
+Response Store::buy(Cargo * cargo, size_t amount, Player *player)
 {
     if (findMatchCargo(cargo))
     {
