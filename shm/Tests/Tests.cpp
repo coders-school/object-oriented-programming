@@ -5,7 +5,6 @@
 #include "DefaultCargo.hpp"
 #include "Item.hpp"
 #include "DryFruit.hpp"
-
 #include "TestCoordinates.hpp"
 
 constexpr auto singleCargoCost = 10;
