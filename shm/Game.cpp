@@ -21,6 +21,7 @@ void Game::startGame()
     currentStore_ = new Store(1000, 1000, time_);   
     do{
         menu_->printMenu();
+        displayPlayerStats();
         menu_->playerChoice();   
     }while(!quitRequest);
 }
@@ -106,4 +107,12 @@ void Game::setStartingCargo()
 void Game::quitRequested()
 {
     quitRequest = true;
+}
+
+void Game::displayPlayerStats()
+{
+    std::cout << "Available gold: " << playerOne_->getMoney() << '\n';
+    std::cout << "You are at position:\n";
+    map_->PrintCurrentPosition();
+    std::cout << "==========================\n";
 }

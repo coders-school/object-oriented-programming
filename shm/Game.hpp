@@ -12,6 +12,7 @@ public:
     Game(size_t money, size_t gameDays, size_t finalGoal);
     Game();
 
+    void displayPlayerStats();
     void setPlayer();
     void startGame();
     void printTitle();
