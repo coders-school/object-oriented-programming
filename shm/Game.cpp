@@ -17,6 +17,7 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
 
 void Game::startGame() {
     while (true) {
+
         checkWinCondition();
         checkLooseCodition();
         printStats();
@@ -34,7 +35,15 @@ void Game::printStats() {
     std::cout << std::setfill(' ') << std::setw (30) << "DAYS LEFT: " << std::setw (3) << std::setfill('0') 
               << days_ - currentDay_ << std::setfill(' ') << std::setw (4) << "|" "\n";
     std::cout << "|" << std::setfill(' ') << std::setw (97) << "|" << "\n";
-    std::cout << std::setw (99) << std::setfill('-') << "\n";
+    std::cout << std::setw (99) << std::setfill('-') << "\n" << "\n";
+
+    auto island = map_-> GetCurrentPosition();
+    std::cout <<"Island coordinates"<< island->getPosition() << "\n";
+    auto store = map_-> GetCurrentPosition()->getStore();
+    std::cout << (*store);
+
+    player_-> printCargo();
+
 }
 
 void Game::printMenu() {
@@ -62,15 +71,25 @@ void Game::makeAction(const Action& action) {
     case Action::travel:
         travel();
         break;
+    case Action::options:
+        //printOptions();
+        break;
+    case Action::exit:
+        exit(0);
+        break;
     }
 }
 
 void Game::buy() {
-    std::cout << "Buying.." << "\n";
+    Store* store = map_-> GetCurrentPosition()->getStore();
+    Cargo* product = store->GetCargo(1);
+    std::cout<<product->getName();
+    store->buy(product, 10, player_.get());
     getchar();
 }
 
 void Game::sell() {
+
     std::cout << "Selling.." << "\n";
     getchar();
 }

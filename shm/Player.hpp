@@ -19,7 +19,7 @@ private:
 public:
     Player(std::unique_ptr<Ship> &ship, int money);
 
-    std::unique_ptr<Ship> getShip() { return std::move(ship_); };
+    Ship * getShip() { return ship_.get(); };
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
 

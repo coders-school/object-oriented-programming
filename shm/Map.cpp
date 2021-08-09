@@ -10,6 +10,7 @@ constexpr size_t MAP_SIZE = 100;
 Map::Map() {
     islands_.reserve(NUMBER_OF_ISLANDS);
     fillMapWithIslands();
+    currentPos_ = islands_[0].get();
 }
 
 Coordinates Map::generateCoordinates() {

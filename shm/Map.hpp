@@ -10,7 +10,7 @@
 class Map
 {
 private:
-    Island *current_pos_;
+    Island *currentPos_;
     std::vector<std::unique_ptr<Island>> islands_;
     void fillMapWithIslands();
     
@@ -19,6 +19,8 @@ public:
     Map();
     Island *getIsland(const Coordinates &coordinate);
     Coordinates generateCoordinates();
+    Island* GetCurrentPosition() { return currentPos_; }
     friend std::ostream &operator<<(std::ostream &, const Map &map);
+
 };
 #endif
