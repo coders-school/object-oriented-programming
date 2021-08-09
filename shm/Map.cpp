@@ -87,7 +87,7 @@ void Map::addIsland(Coordinates coordinate)
     islands_.push_back(Island(coordinate));
 }
 
-int Map::calculateDistance(Island island_pos_)
+size_t Map::calculateDistance(Island island_pos_)
 {
     auto distanceX = current_pos_->getPosition().GetPositionX();
     auto distanceY = current_pos_->getPosition().GetPositionY();
