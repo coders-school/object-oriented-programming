@@ -12,7 +12,6 @@ void Menu::playerChoice()
 {
     size_t option{};
     do {
-        std::cout << "What is your choice capt'n? ";
         std::cin >> option;
     } while (!isPlayerChoiceValid(option));
     item_ = static_cast<MenuItem>(option);
@@ -21,11 +20,11 @@ void Menu::playerChoice()
 
 bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
 {
-    if(std::cin.fail() || playerAnswer < 0 || playerAnswer > 5)
+    if(std::cin.fail() || playerAnswer < 0 || playerAnswer > 6)
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Wrong answer, please use numbers 1 - 5" << '\n';
+        std::cout << "Wrong answer, please use numbers 1 - 6" << '\n';
         return false;
     }
     return true;
@@ -33,9 +32,11 @@ bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
 
 void Menu::menuChoice(MenuItem item)
 {
-    game_->printMoney();
     switch(item)
     {
+        case MenuItem::printPlayerCargo:
+            game_->printPlayerCargo();
+            break;
         case MenuItem::buyCargo:
             game_->buyAllCargo();
             break;
@@ -48,8 +49,8 @@ void Menu::menuChoice(MenuItem item)
         case MenuItem::Exit:
             game_->quitRequested();
             break;
-        case MenuItem::printPlayerCargo:
-            game_->printPlayerCargo();
+        case MenuItem::printStoreCargo:
+            game_->printStoreCargo();
             break;
         default:
             std::cout << "Undefined choice" << '\n';
@@ -59,12 +60,16 @@ void Menu::menuChoice(MenuItem item)
 
 void Menu::printMenu()
 {
+    std::cout << "What is your choice capt'n? " << '\n';
     std::cout << "==========================\n";
     std::cout << "1 - Print Cargo\n";
     std::cout << "2 - Buy Cargo\n";
     std::cout << "3 - Sell Cargo\n";
     std::cout << "4 - Travel\n";
     std::cout << "5 - Exit\n";
+    std::cout << "6 - Print Store Cargo\n";
     std::cout << "==========================\n";
+
+    game_->displayPlayerStats();
 }
 

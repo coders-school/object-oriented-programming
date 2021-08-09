@@ -54,7 +54,7 @@ void Map::DebugPrintIsland () {
 
 void Map::PrintCurrentPosition()
 {
-     std::cout <<  std::to_string(current_pos_->getPosition().GetPositionX()) << " | " << std::to_string(current_pos_->getPosition().GetPositionY())<<" <------ " <<'\n';
+     std::cout <<"Current coordinates: " << std::to_string(current_pos_->getPosition().GetPositionX()) << " | " << std::to_string(current_pos_->getPosition().GetPositionY()) << '\n';
 }
 
 bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {

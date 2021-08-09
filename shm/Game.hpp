@@ -23,7 +23,7 @@ public:
     void setStartingCargo();
     void printPlayerCargo();
     void quitRequested();
-    void printMoney();
+    void printStoreCargo();
     
 private:
     size_t money_;

@@ -18,6 +18,7 @@ public:
         sellCargo,
         travel,
         Exit,
+        printStoreCargo,
     };
 
     Menu(Game*);

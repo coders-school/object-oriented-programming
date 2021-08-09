@@ -21,7 +21,6 @@ void Game::startGame()
     currentStore_ = new Store(1000, 1000, time_);   
     do{
         menu_->printMenu();
-        displayPlayerStats();
         menu_->playerChoice();   
     }while(!quitRequest);
 }
@@ -41,7 +40,7 @@ void Game::setPlayer()
     std::cout << "Welcome on board captain " << playerOne_->getName() << '\n';
     map_->changeCurrentPosition(&map_->islands_.at(0));
     std::cout << "Your's ship " << playerOne_->getShip()->getName() <<  " is waiting! Good Luck!" << '\n';
-    std::cout << "You are in start point. Current coordinates: ";
+    std::cout << "You are in start point. ";
     map_->PrintCurrentPosition();
     std::cout << "You have " << playerOne_->getMoney() << " gold in Your treasure chest!" << '\n';
     std::cout << "Choose Your next move!" << '\n';
@@ -114,16 +113,17 @@ void Game::quitRequested()
     quitRequest = true;
 }
 
-<<<<<<< HEAD
-void Game::printMoney()
-{
-    std::cout << playerOne_->getMoney() << '\n';
-=======
 void Game::displayPlayerStats()
 {
+    std::cout << "(Little reminder)" << '\n';
     std::cout << "Available gold: " << playerOne_->getMoney() << '\n';
-    std::cout << "You are at position:\n";
+    std::cout << "Your position on the map:\n";
     map_->PrintCurrentPosition();
     std::cout << "==========================\n";
->>>>>>> 848f53242ef0ad996568273b5a71cf6be1206532
+}
+
+void Game::printStoreCargo()
+{
+    std::cout << "This store contains: " << '\n';
+    currentStore_->printStoreCargo();
 }
