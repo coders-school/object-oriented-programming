@@ -32,7 +32,6 @@ public:
     size_t getId() const        { return id_; }
     std::vector<Cargo *> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
     std::vector<Cargo *> shipCargo; 
-    void printCargo();
 
     Cargo * findMatchCargo(Cargo * cargo);
     void load(Cargo *loadCargo, size_t amount);
