@@ -42,6 +42,9 @@ std::unique_ptr<Cargo> generateCargo() {
     return std::make_unique<Fruit>(good.name, randomAmount, good.value, 10);
 }
 
+Game::Game(size_t startMoney, size_t daysLimit, size_t goal)
+        : startMoney_(startMoney), daysLimit_(daysLimit), goal_(goal) {}
+
 void Game::fillCargo(Warehouse& holder, size_t number) {
     holder.clear();
     for (size_t i = 0; i < number; ++i) {
