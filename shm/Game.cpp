@@ -64,7 +64,7 @@ void Game::travel()
         std::cout << "Your travel will take " << travelTime << " days." << '\n';
         map_->changeCurrentPosition(&map_->islands_.at(i));
         map_->PrintCurrentPosition();
-        time_->changeTime();
+        time_->changeTime(travelTime);
     }
     else
     {
@@ -119,6 +119,7 @@ void Game::displayPlayerStats()
     std::cout << "Available gold: " << playerOne_->getMoney() << '\n';
     std::cout << "Your position on the map:\n";
     map_->PrintCurrentPosition();
+    std::cout << "Day " << time_->getCurrentTime() << "/" << gameDays_ << '\n';
     std::cout << "==========================\n";
 }
 

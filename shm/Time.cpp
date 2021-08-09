@@ -28,9 +28,9 @@ void Time::notify()
     }
 }
 
-void Time::changeTime()
+void Time::changeTime(size_t elapsedDays)
 {
-    currentTime_++;
+    currentTime_ += elapsedDays;
     notify();
 }
 
