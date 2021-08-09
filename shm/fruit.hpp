@@ -8,9 +8,9 @@ public:
     Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate);
     ~Fruit() override {};
 
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
-    bool operator==(const Cargo&) const;
+    Cargo& operator+=(size_t amount) override;
+    Cargo& operator-=(size_t amount) override;
+    bool operator==(const Cargo&) const override;
     virtual Fruit& operator--();
     virtual Fruit operator--(int);
 

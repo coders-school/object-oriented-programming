@@ -7,9 +7,9 @@ public:
     Cargo(std::string name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;
 
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
-    bool operator==(const Cargo&) const;
+    virtual Cargo& operator+=(size_t amount);
+    virtual Cargo& operator-=(size_t amount);
+    virtual bool operator==(const Cargo&) const;
 
     // const std::string& getName() const;
     // size_t getAmount() const;

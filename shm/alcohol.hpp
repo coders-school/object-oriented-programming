@@ -8,9 +8,9 @@ public:
     Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage);
     ~Alcohol() override{};
 
-    Cargo& operator+=(size_t amount);
-    Cargo& operator-=(size_t amount);
-    bool operator==(const Cargo&) const;
+    Cargo& operator+=(size_t amount) override;
+    Cargo& operator-=(size_t amount) override;
+    bool operator==(const Cargo&) const override;
 
     size_t getPercentage() const { return percentage_; };
     void setPercentage(size_t percentage) { percentage_ = percentage; };

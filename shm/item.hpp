@@ -15,9 +15,9 @@ public:
     Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity);
     ~Item() override{};
 
-    Cargo& operator+=(const size_t amount);
-    Cargo& operator-=(const size_t amount);
-    bool operator==(const Cargo&) const;
+    Cargo& operator+=(const size_t amount) override;
+    Cargo& operator-=(const size_t amount) override;
+    bool operator==(const Cargo&) const override;
 
     //Methods override from Cargo class.
     size_t getPrice() const override { return basePrice_ * static_cast<size_t>(rarity_); };
