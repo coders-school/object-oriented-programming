@@ -51,7 +51,7 @@ void Menu::menuChoice(MenuItem item)
             game_->printPlayerCargo();
             break;
         default:
-            std::cout << "Wrong choice, please use numbers 1-5" << '\n';
+            std::cout << "Undefined choice" << '\n';
             break;
     }
 }
