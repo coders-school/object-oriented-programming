@@ -28,12 +28,7 @@ public:
     void playerChoice();
     bool isPlayerChoiceValid(const size_t &playerAnswer);
 
-
-
 private:
     MenuItem item_;
     Game* game_;
-    Player* player_;
-    Map* map_;
-    Store* currentStore_;
 };
