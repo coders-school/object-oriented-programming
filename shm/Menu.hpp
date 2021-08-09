@@ -25,7 +25,6 @@ public:
 
     bool isPlayerChoiceValid(const size_t &playerAnswer);
     void menuChoice(MenuItem);
-    void menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player);
     void printMenu();
     void playerChoice();
 
