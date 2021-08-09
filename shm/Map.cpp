@@ -28,13 +28,12 @@ void Map::fillMapWithIslands() {
         }
         auto island = std::make_unique<Island>(coordinates);
         islands_.push_back(std::move(island));
-        std::cout << "done"
-                  << "\n";
     }
 }
 
 Island* Map::getIsland(const Coordinates& coordinates) {
-    auto itr = std::find_if(islands_.begin(), islands_.end(),
+    auto itr = std::find_if(islands_.begin(), 
+                            islands_.end(),
                             [&coordinates](const std::unique_ptr<Island>& island) {
                                 return island->getPosition() == coordinates;
                             });

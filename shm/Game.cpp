@@ -1,9 +1,11 @@
 #include "Game.hpp"
 #include <iostream>
+#include <iomanip>
+#include <cstdio>
 #include "Map.hpp"
 
 Game::Game(size_t money, size_t days, size_t finalGoal)
-    : money_(money), days_(days), finalGoal_(finalGoal) {
+    : money_(money), days_(days), finalGoal_(finalGoal), currentDay_(1) {
     std::unique_ptr<Map> map(new Map());
     map_ = std::move(map);
     std::unique_ptr<Ship> ship(new Ship(1000, 50, 10, "HMS Terror", 1));
@@ -15,75 +17,84 @@ Game::Game(size_t money, size_t days, size_t finalGoal)
 
 void Game::startGame() {
     while (true) {
-        makeAction(printMenu());
         checkWinCondition();
         checkLooseCodition();
+        printStats();
+        printMenu();
+        makeAction(readCharacter());
         ++(*time_);
     }
 };
 
-Action Game::printMenu() {
-    system("cls");
-    std::cout << "    >>> MAIN  MENU <<<"
-              << "\n";
-    std::cout << "---------------------------"
-              << "\n";
-    std::cout << "1. Buy"
-              << "\n";
-    std::cout << "2. Sell"
-              << "\n";
-    std::cout << "3. Travel"
-              << "\n";
-    std::cout << "9. Options"
-              << "\n";
-    std::cout << "---------------------------"
-              << "\n";
-    std::cout << "Please choose action: ";
-    auto action = readCharacter();
+void Game::printStats() {
+    std::cout << std::setw (99) << std::setfill('-') << "\n";
+    std::cout << "|" << std::setfill(' ') << std::setw (97) << "|" << "\n";
+    std::cout << "|" << std::setfill(' ') << std::setw (15) << "YOUR MONEY: " << std::setw (8) << std::setfill('0') << money_;
+    std::cout << std::setfill(' ') << std::setw (30) << "YOUR GOAL: " << std::setw (8) << std::setfill('0') << finalGoal_;
+    std::cout << std::setfill(' ') << std::setw (30) << "DAYS LEFT: " << std::setw (3) << std::setfill('0') 
+              << days_ - currentDay_ << std::setfill(' ') << std::setw (4) << "|" "\n";
+    std::cout << "|" << std::setfill(' ') << std::setw (97) << "|" << "\n";
+    std::cout << std::setw (99) << std::setfill('-') << "\n";
+}
 
-    return action;
+void Game::printMenu() {
+    std::cout << std::setw (99) << std::setfill('-') << "\n";
+    std::cout << "|" << std::setfill(' ') << std::setw (56)  << "MAIN  MENU" << std::setfill(' ') << std::setw (41) << "|" << "\n";
+    std::cout << std::setw (99) << std::setfill('-') << "\n";
+    std::cout << "1. Buy" << "\n";
+    std::cout << "2. Sell" << "\n";
+    std::cout << "3. Travel" << "\n" << "\n";
+    std::cout << "9. Options" << "\n";
+    std::cout << "10. Exit Game" << "\n";
+    std::cout << std::setw (99) << std::setfill('-') << "\n";
+
+    return;
 }
 
 void Game::makeAction(const Action& action) {
     switch (action) {
     case Action::buy:
-        //buy();
-        std::cout << "Buy";
+        buy();  
         break;
     case Action::sell:
-        //sell();
-        std::cout << "Sell";
+        sell();
         break;
     case Action::travel:
-        //travel();
-        std::cout << "Travel";
+        travel();
         break;
     }
 }
 
 void Game::buy() {
+    std::cout << "Buying.." << "\n";
+    getchar();
 }
 
 void Game::sell() {
+    std::cout << "Selling.." << "\n";
+    getchar();
 }
 
 void Game::travel() {
+    std::cout << "Traveling.." << "\n";
+    getchar();
 }
 
 Action Game::readCharacter() {
-    Action action;
-    std::cin >> action;
-    return action;
-    /* while (true)
-    {
-        std::cin >> action;
+    
+    int userInput = 0;
+    std::cout << "Please choose your action: ";
+    
+    std::cin >> userInput;
+    //std::cin.clear(); std::cin.sync();
 
-        if (action == ( Action::buy or Action::sell or Action::travel )
-        {
-            return action;
-        }
-        cout << "Invalid number. Please enter again." << endl;
-    } */
+    while (!(((userInput >= 1) && (userInput <= 3)) || ((userInput >= 9) && (userInput <= 10))) ){
+        std::cout << "Invalid character. Please choose again: ";
+        std::cin.ignore(1000,'\n');
+        std::cin >> userInput;
+    }
+    Action action = static_cast<Action>(userInput);
+    return action;
 }
 
 void Game::checkWinCondition() {
@@ -103,7 +114,7 @@ bool Game::checkLooseCodition()  {
     
 
 void Game::printWinScreen(){
-    system("cls");
+
     std::cout << "---------------------------" 
               << "\n";
     std::cout << "    >>> YOU WON! <<<"
@@ -112,7 +123,7 @@ void Game::printWinScreen(){
 }
 
 void Game::printLooseScreen(){
-    system("cls");
+
     std::cout << "---------------------------" 
               << "\n";
     std::cout << "    >>> YOU LOST! <<<"

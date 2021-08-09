@@ -3,14 +3,16 @@
 #include <iostream>
 
 enum class Action {
-    buy,
-    sell,
-    travel
+    buy = 1,
+    sell = 2,
+    travel = 3,
+    options = 9,
+    exit = 10
 };
 
-void operator>>(std::istream& is, Action& action){
+/* void operator>>(std::istream& is, Action& action){
             int tmp;
             if (is >> tmp)
                 action = static_cast<Action>(tmp);
-            return;}
+            return;} */
 #endif
