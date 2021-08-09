@@ -4,9 +4,9 @@
 
 Menu::Menu(Game* game)
     : game_(game)
-{}
+    {}
 
-Menu::~Menu(){}
+Menu::~Menu() {}
 
 void Menu::playerChoice()
 {
@@ -31,7 +31,8 @@ bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
     return true;
 }
 
-void Menu::menuChoice(MenuItem item){
+void Menu::menuChoice(MenuItem item)
+{
     switch(item)
     {
         case MenuItem::buyCargo:
@@ -55,7 +56,8 @@ void Menu::menuChoice(MenuItem item){
     }
 }
 
-void Menu::printMenu() {
+void Menu::printMenu()
+{
     std::cout << "==========================\n";
     std::cout << "1 - Print Cargo\n";
     std::cout << "2 - Buy Cargo\n";

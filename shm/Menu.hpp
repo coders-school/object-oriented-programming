@@ -20,13 +20,14 @@ public:
         Exit,
     };
 
-    Menu(Game* game);
+    Menu(Game*);
     ~Menu();
-    void printMenu();
+
+    bool isPlayerChoiceValid(const size_t &playerAnswer);
     void menuChoice(MenuItem);
     void menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player);
+    void printMenu();
     void playerChoice();
-    bool isPlayerChoiceValid(const size_t &playerAnswer);
 
 private:
     MenuItem item_;
