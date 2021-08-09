@@ -6,10 +6,10 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     : money_(money)
     , gameDays_(gameDays)
     , finalGoal_(finalGoal)
-    , menu_(std::make_unique<Menu>(this))
     , time_(new Time())
     , map_(new Map())
     , playerOne_(new Player(std::make_unique<Ship>(20, 300, 10, "Dar Pomorza", 3, time_), 1000, 1000))
+    , menu_(std::make_unique<Menu>(this))
     {}
 
 Game::Game() {}
@@ -18,19 +18,11 @@ void Game::startGame()
 {
     printTitle();
     setPlayer(); 
-    Store* store = new Store(1000, 1000, time_);
-    
-    while(menu_->menuChoice() != MenuItem::Exit)
-    {
-        // menu_->printMenu();
-        menu_->menuHandler(menu_->menuChoice(), store, map_, playerOne_);
-    }
-    // do {
-    //     menu_->printMenu();
-
-    //     menu_->menuHandler(menu_->menuChoice(), store, map_, playerOne_);
-
-    // } while(menu_->menuChoice() != MenuItem::Exit);
+    currentStore_ = new Store(1000, 1000, time_);   
+    do{
+        menu_->printMenu();
+        menu_->playerChoice();   
+    }while(!quitRequest);
 }
 
 void Game::printTitle()
@@ -44,6 +36,7 @@ void Game::setPlayer()
     std::string playerName;
     std::cin >> playerName;
     playerOne_->setName(playerName);
+    setStartingCargo();
     std::cout << "Welcome on board captain " << playerOne_->getName() << '\n';
     map_->changeCurrentPosition(&map_->islands_.at(0));
     std::cout << "Your's ship " << playerOne_->getShip()->getName() <<  " is waiting! Good Luck!" << '\n';
@@ -70,6 +63,7 @@ void Game::travel()
         std::cout << "Your travel will take " << travelTime << " days." << '\n';
         map_->changeCurrentPosition(&map_->islands_.at(i));
         map_->PrintCurrentPosition();
+        time_->changeTime();
     }
     else
     {
@@ -80,14 +74,36 @@ void Game::travel()
 
 void Game::buyAllCargo()
 {
-
+    auto storeCargo = currentStore_->storeCargo;
+    for(const auto &el : storeCargo)
+    {
+        currentStore_->buy(el, el->getAmount(), playerOne_);
+    }
 }
 
 void Game::sellAllCargo()
 {
-
+    auto playerCargo = playerOne_->getShip()->shipCargo;
+    for(const auto &el : playerCargo)
+    {
+        currentStore_->sell(el, el->getAmount(), playerOne_);
+    }
 }
-// void Map::addIsland(Coordinates coordinate)
-// {
-//     addIsland(coordinate);
-// }
+
+void Game::printPlayerCargo()
+{
+    playerOne_->getShip()->printShipCargo();
+}
+
+void Game::setStartingCargo()
+{
+    playerOne_->getShip()->shipCargo.push_back(new Fruit("Banany", 1, 20, time_, 15, 0)); 
+    playerOne_->getShip()->shipCargo.push_back(new Fruit("Apple", 1, 14, time_, 20, 0));
+    playerOne_->getShip()->shipCargo.push_back(new Alcohol("Rum", 1, 60, time_, 70));        
+    playerOne_->getShip()->shipCargo.push_back(new Item("Hook", 1, 100, time_, Rarity::common)); 
+}
+
+void Game::quitRequested()
+{
+    quitRequest = true;
+}

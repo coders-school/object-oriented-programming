@@ -161,3 +161,11 @@ size_t Ship::calculateAvailableSpace()
     }
     return capacity_ - cargoAmount;
 }
+
+void Ship::printCargo() 
+{ 
+    for(const auto &el : shipCargo)
+    { 
+        std::cout << el->getName() << " | " << el->getAmount() << " | " << el->getBasePrice() << '\n'; 
+    }
+} 

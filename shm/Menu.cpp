@@ -1,74 +1,67 @@
+#include<limits>
 #include "Menu.hpp"
 #include "Game.hpp"
 
 Menu::Menu(Game* game)
     : game_(game)
 {}
+
 Menu::~Menu(){}
 
-// int Menu::playerChoice()
-// {
-//     return 1;
-// }
-
-void Menu::menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player) 
+void Menu::playerChoice()
 {
+    size_t option{};
+    do {
+        std::cout << "What is your choice capt'n? ";
+        std::cin >> option;
+    } while (!isPlayerChoiceValid(option));
+    item_ = static_cast<MenuItem>(option);
+    menuChoice(item_);
+}
+
+bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
+{
+    if(std::cin.fail() || playerAnswer < 0 || playerAnswer > 5)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Wrong answer, please use numbers 1 - 5" << '\n';
+        return false;
+    }
+    return true;
+}
+
+void Menu::menuChoice(MenuItem item){
     switch(item)
     {
         case MenuItem::buyCargo:
-                std::cout << "Welcome captain, what business brings you here?\n";
-                std::cout << "Choose a cargo to buy: " << '\n';
-                currentStore->printStoreCargo();
-                currentStore->buy(currentStore->storeCargo.at(1), 1, player);
-                printMenu();
-                break;
-
+            game_->buyAllCargo();
+            break;
         case MenuItem::sellCargo:
-                std::cout << "Welcome captain, what business brings you here?\n";
-                std::cout << "Choose a cargo to sell: " << '\n';
-                currentStore->printStoreCargo();
-                currentStore->sell(currentStore->storeCargo.at(0), 1, player);
-                printMenu();
-                break;
+            game_->sellAllCargo();
+            break;
         case MenuItem::travel:
-                std::cout << "Where should we travel now?\n";
-                std::cout << "Set sails!" << '\n';
-                game_->travel();
-                std::cout << "Choose Your next move Captain!" << '\n';
-                printMenu();
-                break;
-        case MenuItem::wrongChoice:
-                std::cout << "Wrong choice, please use 1 - 4" << '\n';
-                printMenu();
-                break;
-    }
-}
-
-MenuItem Menu::menuChoice(){
-    int input;
-    printMenu();
-    std::cin >> input;
-
-    switch(input)
-    {
-        case 1:
-            return MenuItem::buyCargo;
-        case 2:
-            return MenuItem::sellCargo;
-        case 3:
-            return MenuItem::travel;
-        case 4:
-            std::cout << "Get me out of this game, I'm done\n";
-            return MenuItem::Exit;
+            game_->travel();
+            break;
+        case MenuItem::Exit:
+            game_->quitRequested();
+            break;
+        case MenuItem::printPlayerCargo:
+            game_->printPlayerCargo();
+            break;
         default:
-            return MenuItem::wrongChoice;
+            std::cout << "Wrong choice, please use numbers 1-5" << '\n';
+            break;
     }
 }
 
 void Menu::printMenu() {
-    std::cout << "1 - Buy Cargo\n";
-    std::cout << "2 - Sell Cargo\n";
-    std::cout << "3 - Travel\n";
-    std::cout << "4 - Exit\n";
+    std::cout << "==========================\n";
+    std::cout << "1 - Print Cargo\n";
+    std::cout << "2 - Buy Cargo\n";
+    std::cout << "3 - Sell Cargo\n";
+    std::cout << "4 - Travel\n";
+    std::cout << "5 - Exit\n";
+    std::cout << "==========================\n";
 }
 

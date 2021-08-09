@@ -31,6 +31,7 @@ public:
     std::string getName() const { return name_; }
     size_t getId() const        { return id_; }
     std::vector<Cargo *> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
+    void printCargo();
     std::vector<Cargo *> shipCargo; // TODO reserve vector
 
     // std::vector<Cargo *> CargoOnShip;

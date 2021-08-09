@@ -6,24 +6,34 @@
 
 class Game;
 
-enum MenuItem
-{
-    buyCargo,
-    sellCargo,
-    travel,
-    Exit,
-    wrongChoice
-};
+
 class Menu 
 {
 public:
-    Menu(Game*);
+    enum MenuItem
+    {
+        wrongChoice,
+        printPlayerCargo,
+        buyCargo,
+        sellCargo,
+        travel,
+        Exit,
+    };
+
+    Menu(Game* game);
     ~Menu();
     void printMenu();
-    MenuItem menuChoice();
+    void menuChoice(MenuItem);
     void menuHandler(MenuItem item, Store* currentStore, Map* map, Player* player);
-    // int playerChoice();
+    void playerChoice();
+    bool isPlayerChoiceValid(const size_t &playerAnswer);
+
+
 
 private:
+    MenuItem item_;
     Game* game_;
+    Player* player_;
+    Map* map_;
+    Store* currentStore_;
 };

@@ -22,4 +22,6 @@ public:
     Cargo * getCargo(size_t index) const override;
     
     void setCrew(size_t newCrewSize);
+
+    void setStartingCargo();
 };

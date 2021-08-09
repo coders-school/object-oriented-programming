@@ -8,6 +8,7 @@ Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace) : Stor
 {
     ship_ = std::move(ship);
     ship_.get()->setOwner(this);
+
 }
 
 Player::~Player() {}

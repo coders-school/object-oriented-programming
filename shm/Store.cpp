@@ -10,7 +10,7 @@ Store::Store(int money, size_t availableSpace, Time *time)
 {
     storeCargo.push_back(new Fruit("Banany", 10, 20, time, 15, 0)); 
     storeCargo.push_back(new Fruit("Apple", 15, 14, time, 20, 0));
-    storeCargo.push_back(new Alcohol("Vodka", 33, 60, time, 70));        
+    storeCargo.push_back(new Alcohol("Rum", 33, 60, time, 70));        
     storeCargo.push_back(new Item("Hook", 5, 100, time, Rarity::common)); 
 }
 Store::~Store() {}
