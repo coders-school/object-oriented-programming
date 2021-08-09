@@ -40,8 +40,9 @@ void Game::setPlayer()
     std::cout << "Welcome on board captain " << playerOne_->getName() << '\n';
     map_->changeCurrentPosition(&map_->islands_.at(0));
     std::cout << "Your's ship " << playerOne_->getShip()->getName() <<  " is waiting! Good Luck!" << '\n';
-    std::cout << "Yeou are in start point. Current coordinates: ";
+    std::cout << "You are in start point. Current coordinates: ";
     map_->PrintCurrentPosition();
+    std::cout << "You have " << playerOne_->getMoney() << " gold in Your treasure chest!" << '\n';
     std::cout << "Choose Your next move!" << '\n';
 }
 
@@ -67,7 +68,7 @@ void Game::travel()
     }
     else
     {
-        std::cout << "There is no such a island on the map! Choose another destination!" << '\n';
+        std::cout << "There is no such island on the map! Choose another destination!" << '\n';
         Game::travel();
     }
 }
@@ -77,7 +78,11 @@ void Game::buyAllCargo()
     auto storeCargo = currentStore_->storeCargo;
     for(const auto &el : storeCargo)
     {
-        currentStore_->buy(el, el->getAmount(), playerOne_);
+        if(el->getAmount() > 0)
+        {
+            currentStore_->buy(el, el->getAmount(), playerOne_);
+        }
+        std::cout << "This cargo does not exist!" << '\n';
     }
 }
 
@@ -106,4 +111,9 @@ void Game::setStartingCargo()
 void Game::quitRequested()
 {
     quitRequest = true;
+}
+
+void Game::printMoney()
+{
+    std::cout << playerOne_->getMoney() << '\n';
 }

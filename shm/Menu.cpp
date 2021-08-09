@@ -33,6 +33,7 @@ bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
 
 void Menu::menuChoice(MenuItem item)
 {
+    game_->printMoney();
     switch(item)
     {
         case MenuItem::buyCargo:
