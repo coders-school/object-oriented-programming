@@ -128,3 +128,15 @@ void Game::printStoreCargo()
     std::cout << "This store contains: " << '\n';
     currentStore_->printStoreCargo();
 }
+
+void Game::buyCargo()
+{
+    int cargoElement = 0;
+    size_t amount = 0;
+    std::cout << "Chose cargo;";
+    std::cin >> cargoElement;
+    std::cout <<  "Chose amount";
+    std::cin >> amount;
+    
+    currentStore_->buy(currentStore_->storeCargo.at(cargoElement),amount,playerOne_ );
+}

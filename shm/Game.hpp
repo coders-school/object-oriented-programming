@@ -20,6 +20,8 @@ public:
     void travel();
     void buyAllCargo();
     void sellAllCargo();
+    void buyCargo();
+    void sellCargo();
     void setStartingCargo();
     void printPlayerCargo();
     void quitRequested();
