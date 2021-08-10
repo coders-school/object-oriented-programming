@@ -76,8 +76,9 @@ set(TEST_FLAGS -Wall -Wextra)
 
 add_library(${PROJECT_NAME}-lib STATIC ${FILES})
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut Tests/Tests.cpp
+add_executable(${PROJECT_NAME}-ut Tests/catch2/Tests.cpp
     build/Catch2-src/extras/catch_amalgamated.cpp)
+add_executable(${PROJECT_NAME}-ut2 Tests/gtests/main.cpp)
 
 set(DIRECTORIES 
     Cargos 
@@ -88,13 +89,18 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${DIRECTORIES})
 target_include_directories(${PROJECT_NAME}-lib PRIVATE ${DIRECTORIES})
 target_include_directories(${PROJECT_NAME}-ut PRIVATE ${DIRECTORIES} 
     build/Catch2-src/extras)
+target_include_directories(${PROJECT_NAME}-ut2 PRIVATE ${DIRECTORIES} 
+    build/googletest-src/googletest/include)
 
 target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME}-ut PRIVATE ${TEST_FLAGS})
+target_compile_options(${PROJECT_NAME}-ut2 PRIVATE ${TEST_FLAGS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
 target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME}-ut2 ${PROJECT_NAME}-lib -lgtest)
 
 enable_testing()
-add_test(NAME Tests COMMAND ${PROJECT_NAME}-ut)
+add_test(NAME Tests-catch2 COMMAND ${PROJECT_NAME}-ut)
+add_test(NAME Tests-gtest COMMAND ${PROJECT_NAME}-ut2)
