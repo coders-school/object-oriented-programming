@@ -18,7 +18,7 @@ if(result)
     message(FATAL_ERROR "Build step for googletest failed: ${result}")
 endif()
 
-# Download and unpack googletest at configure time
+# Download and unpack catch2 at configure time
 configure_file(CMakeLists2.txt.in catch2-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
     RESULT_VARIABLE result
