@@ -38,10 +38,12 @@ void Menu::menuChoice(MenuItem item)
             game_->printPlayerCargo();
             break;
         case MenuItem::buyCargo:
-            game_->buyAllCargo();
+            game_->printStoreCargo();
+            game_->buyCargo();
             break;
         case MenuItem::sellCargo:
-            game_->sellAllCargo();
+            game_->printPlayerCargo();
+            game_->sellCargo();
             break;
         case MenuItem::travel:
             game_->travel();

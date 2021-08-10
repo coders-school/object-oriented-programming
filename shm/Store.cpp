@@ -104,10 +104,12 @@ void Store::nextDay()
 
 void Store::printStoreCargo()
 {
+    auto i = 0;
     for (auto el : storeCargo)
     {
         std::cout << '\n';
-        el->printCargo();
+        el->printCargo(i);
+        i++;
     }
 }
 

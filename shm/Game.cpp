@@ -133,10 +133,22 @@ void Game::buyCargo()
 {
     int cargoElement = 0;
     size_t amount = 0;
-    std::cout << "Chose cargo;";
+    std::cout << "Choose cargo;";
     std::cin >> cargoElement;
-    std::cout <<  "Chose amount";
+    std::cout <<  "Choose amount";
     std::cin >> amount;
     
     currentStore_->buy(currentStore_->storeCargo.at(cargoElement),amount,playerOne_ );
+}
+
+void Game::sellCargo()
+{
+    int cargoElement = 0;
+    size_t amount = 0;
+    std::cout << "Choose cargo;";
+    std::cin >> cargoElement;
+    std::cout <<  "Choose amount";
+    std::cin >> amount;
+
+    currentStore_->sell(playerOne_->getCargo(cargoElement), amount, playerOne_);
 }

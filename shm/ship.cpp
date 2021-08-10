@@ -95,6 +95,7 @@ void Ship::load(Cargo * loadCargo, size_t amount)
         Cargo* toAdd;
         if(Fruit* f = dynamic_cast<Fruit*>(loadCargo)){
             toAdd = new Fruit(*f);
+            
         }
         if(Item* i = dynamic_cast<Item*>(loadCargo)){
           toAdd = new Item(*i);
@@ -139,11 +140,13 @@ void Ship::nextDay()
 }
 void Ship::printShipCargo()
 {
+    auto i = 0;
     std::cout << "Ship Cargo:" << '\n';
     for (auto &el : shipCargo)
     {
         std::cout << '\n';
-        el->printCargo();
+        el->printCargo(i);
+        i++;
     }
 }
 
