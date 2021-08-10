@@ -130,7 +130,7 @@ void Ship::setCrew(size_t newCrew)
     }
 }
 
-void Ship::nextDay()
+void Ship::nextDay(size_t elapsedTime)
 {
     size_t moneyForCrew = crew_;
     if (owner_)

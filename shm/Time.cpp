@@ -20,18 +20,18 @@ void Time::detach(TimeEffectable* observer)
     list_observer_.remove(observer);
 }
 
-void Time::notify()
+void Time::notify(size_t elapsedDays)
 {
     for(auto el : list_observer_)
     {
-        el->nextDay();
+        el->nextDay(elapsedDays);
     }
 }
 
 void Time::changeTime(size_t elapsedDays)
 {
     currentTime_ += elapsedDays;
-    notify();
+    notify(elapsedDays);
 }
 
 void Time::HowManyObserver() {

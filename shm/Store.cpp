@@ -94,7 +94,7 @@ Cargo * Store::getCargo(size_t index) const
     return nullptr;
 }
 
-void Store::nextDay()
+void Store::nextDay(size_t elapsedTime)
 {
     for (auto el : storeCargo)
     {

@@ -30,7 +30,7 @@ public:
     Cargo &operator-=(size_t amount) override;
     bool operator==(const Cargo &cargo) const override;
 
-    void nextDay() override;
+    void nextDay(size_t) override;
 
 private:
     Rarity rarity_;

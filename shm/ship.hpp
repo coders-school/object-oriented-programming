@@ -38,7 +38,7 @@ public:
     void unload(Cargo * unloadCargo, size_t amount);
     void printShipCargo();
 
-    void nextDay() override;
+    void nextDay(size_t) override;
     void setOwner(Player* newOwner);
     void setCrew(size_t newCrew);
 
