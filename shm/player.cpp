@@ -29,7 +29,7 @@ size_t Player::getSpeed() const
 
 Cargo * Player::getCargo(size_t index) const
 {
-    if (ship_->getCargo().at(index) >= 0)
+    if (ship_->getCargo().at(index) > 0)
     {
         return ship_->getCargo().at(index);
     }

@@ -34,7 +34,7 @@ public:
     Cargo * findMatchCargo(Cargo * cargo);
     std::vector<Cargo *> storeCargo;
 
-    void addStoreCargo(Cargo *, size_t);
+    void addStoreCargo(Cargo *);
     void removeCargo(Cargo *, size_t);    
     void nextDay() override;
     void printStoreCargo();

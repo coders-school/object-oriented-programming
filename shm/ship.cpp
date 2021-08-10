@@ -52,7 +52,8 @@ Ship &Ship::operator+=(size_t num)
 
 void Ship::addCargo(Cargo * item)
 {
-    if(findMatchCargo(item) == item)
+    auto cargoPtr = findMatchCargo(item);
+    if(*cargoPtr == *item)
     {
         findMatchCargo(item)->increaseAmount(item->getAmount());
     }
@@ -95,7 +96,7 @@ void Ship::load(Cargo * loadCargo, size_t amount)
         Cargo* toAdd;
         if(Fruit* f = dynamic_cast<Fruit*>(loadCargo)){
             toAdd = new Fruit(*f);
-            
+
         }
         if(Item* i = dynamic_cast<Item*>(loadCargo)){
           toAdd = new Item(*i);

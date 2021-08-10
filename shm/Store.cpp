@@ -35,14 +35,17 @@ Response Store::buy(Cargo * cargo, size_t amount, Player *player)
 
         if (player->getAvailableSpace() < amount)
         {
+            std::cout << "Lack of space" << '\n';
             return Response::lack_of_space;
         }
         if (cargo->getAmount() < amount)
         {
+            std::cout << "Lack of cargo" << '\n';
             return Response::lack_of_cargo;
         }
         if (player->getMoney() < price)
         {
+            std::cout << "Lack of money" << '\n';
             return Response::lack_of_money;
         }
         
@@ -64,18 +67,21 @@ Response Store::sell(Cargo * cargo, size_t amount, Player *player)
         auto price = amount * cargo->getBasePrice();
         if (getAvailableSpace() < amount)// miejsce sklepu
         {
+            std::cout << "Lack of space" << '\n';
             return Response::lack_of_space;
         }
         if (player->getShip()->findMatchCargo(cargo)->getAmount() < amount)//cargo gracza player->getShip()->findMatchCargo(cargo)->getAmount() < amount
         {
+            std::cout << "Lack of cargo" << '\n';
             return Response::lack_of_cargo;
         }
         if (money_ < amount * cargo->getBasePrice())// pieniądze sklepu
         {
+            std::cout << "Lack of money" << '\n';
             return Response::lack_of_money;
         }
         money_ -= price;
-        addStoreCargo(cargo, amount);
+        addStoreCargo(cargo);
         player->getShip()->unload(cargo, amount);
         player->EarnMoney(price);
 
@@ -126,7 +132,7 @@ void Store::removeCargo(Cargo * item, size_t amount)
         findMatchCargo(item)->reduceAmount(amount);
     }
 }
-void Store::addStoreCargo(Cargo * item, size_t amount)
+void Store::addStoreCargo(Cargo * item)
 {
     auto cargoPtr = findMatchCargo(item);
     if(*cargoPtr == *item)
