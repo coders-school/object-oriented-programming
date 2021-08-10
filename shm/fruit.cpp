@@ -14,7 +14,7 @@ Fruit::~Fruit()
 
 size_t Fruit::getPrice() const
 {
-    return static_cast<size_t>(basePrice_ * ((float)(expiry_date_ - time_elapsed_)) / expiry_date_);
+    return static_cast<size_t>(basePrice_ * ((size_t)(expiry_date_ - time_elapsed_)) / expiry_date_);
 }
 
 Cargo &Fruit::operator+=(size_t amount)
