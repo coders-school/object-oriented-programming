@@ -39,7 +39,7 @@ bool Alcohol::operator==(const Cargo& other) const {
     }
 }
 
-void Alcohol::nextDay()
+void Alcohol::nextDay(size_t elapsedTime)
 {
     basePrice_ += 2;
 }

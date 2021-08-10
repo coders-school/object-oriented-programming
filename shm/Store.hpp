@@ -36,7 +36,7 @@ public:
 
     void addStoreCargo(Cargo *);
     void removeCargo(Cargo *, size_t);    
-    void nextDay() override;
+    void nextDay(size_t) override;
     void printStoreCargo();
 
     friend std::ostream& operator<<(std::ostream& out, const Store& store) {

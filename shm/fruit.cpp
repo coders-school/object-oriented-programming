@@ -46,9 +46,9 @@ bool Fruit::operator==(const Cargo& other) const
     }
 }
 
-void Fruit::nextDay() 
+void Fruit::nextDay(size_t elapsedTime) 
 {
-    time_elapsed_ +=1;
+    time_elapsed_ += elapsedTime;
     if (time_elapsed_ >= expiry_date_)
     {
         basePrice_ = 0;
