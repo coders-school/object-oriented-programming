@@ -8,9 +8,11 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , gameDays_(gameDays)
     , finalGoal_(finalGoal)
     , menu_(std::make_unique<Menu>(this))
-    , map_(new Map())
+    , map_(new Map(time_))
     , playerOne_(new Player(std::make_unique<Ship>(20, 300, 10, "Dar Pomorza", 3, time_), 1000, 1000))
     {}
+
+Game::Game() {}
 
 void Game::startGame()
 {

@@ -53,7 +53,7 @@ Ship &Ship::operator+=(size_t num)
 void Ship::addCargo(Cargo * item)
 {
     auto cargoPtr = findMatchCargo(item);
-    if(*cargoPtr == *item)
+    if(findMatchCargo(item))
     {
         findMatchCargo(item)->increaseAmount(item->getAmount());
     }
