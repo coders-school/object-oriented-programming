@@ -11,18 +11,13 @@ class Map {
 public:
     Map(Time * time);
     void DebugPrintIsland();
-<<<<<<< HEAD
     void PrintCurrentPosition();
-    Island *getIsland(const Coordinates* );
-    void addIsland(Coordinates);
     friend class Game;
     Island* getCurrentPos() {return current_pos_;}
     void changeCurrentPosition(Island* position) {current_pos_ = position;}
     size_t calculateDistance(Island);
-=======
     Island *getIsland(const Coordinates &coordinate);
     void addIsland(Coordinates &coordinate, Time * time);
->>>>>>> shm2_pwiatr3
 
 private:
     Island *current_pos_;

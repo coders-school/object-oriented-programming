@@ -8,14 +8,14 @@
 #include "coordinates.hpp"
 #include "island.hpp"
 #include "Map.hpp"
-
+#
 namespace constVariables{
     constexpr size_t COORDINATE_MIN = 0;
     constexpr size_t COORDINATE_MAX = 99;
     constexpr size_t ISLANDS_COUNT = 10;
 }
 
-Map::Map(Time * time) {
+Map::Map(Time* time) {
     SetUpRandomIsland(time);
 }
 
@@ -67,7 +67,8 @@ size_t Map::calculateDistance(Island island_pos_)
     auto distance = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
     std::cout << "Distance: " << distance <<'\n';
     return distance;
-    
+}
+
 void Map::addIsland(Coordinates &coordinate, Time * time)
 {
     islands_.push_back(Island(coordinate, time));

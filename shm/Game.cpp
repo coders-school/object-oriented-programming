@@ -3,11 +3,11 @@
 class Map;
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
-    : money_(money)
+    : time_(new Time())
+    , money_(money)
     , gameDays_(gameDays)
     , finalGoal_(finalGoal)
-    , time_(new Time())
-    , map_(new Map())
+    , map_(new Map(time_))
     , playerOne_(new Player(std::make_unique<Ship>(20, 300, 10, "Dar Pomorza", 3, time_), 1000, 1000))
     , menu_(std::make_unique<Menu>(this))
     {}

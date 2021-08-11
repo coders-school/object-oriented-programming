@@ -28,6 +28,7 @@ public:
     void printStoreCargo();
     
 private:
+    Time* time_;
     size_t money_;
     size_t gameDays_;
     size_t finalGoal_;
@@ -35,6 +36,5 @@ private:
     std::unique_ptr<Menu> menu_;
     Map* map_;
     Store* currentStore_;
-    Time* time_;
     Player* playerOne_;
 };

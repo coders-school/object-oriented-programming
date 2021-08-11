@@ -187,9 +187,9 @@ void Store::removeCargo(Cargo * item, size_t amount)
 void Store::addStoreCargo(Cargo * item)
 {
     auto cargoPtr = findMatchCargo(item);
-    if(*cargoPtr == *item)
+    if(findMatchCargo(item))
     {
-        cargoPtr->increaseAmount(item->getAmount());
+        findMatchCargo(item)->increaseAmount(item->getAmount());
     }
     else
     {
