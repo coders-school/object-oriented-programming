@@ -31,7 +31,7 @@ public:
     bool operator==(const Cargo &cargo) const override;
 
     void nextDay() override;
-
+    
 private:
     Rarity rarity_;
 };
