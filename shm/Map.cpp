@@ -15,12 +15,11 @@ namespace constVariables{
     constexpr size_t ISLANDS_COUNT = 10;
 }
 
-Map::Map() {
-    islands_.reserve(10);
-    SetUpRandomIsland();
+Map::Map(Time * time) {
+    SetUpRandomIsland(time);
 }
 
-void Map::SetUpRandomIsland(){
+void Map::SetUpRandomIsland(Time * time){
     islands_.reserve(constVariables::ISLANDS_COUNT);
     std::random_device rd;
     std::mt19937 gen(rd());
@@ -37,7 +36,7 @@ void Map::SetUpRandomIsland(){
             c.SetPositionX(distrib(gen));
             c.SetPositionY(distrib(gen));
         }
-        islands_.push_back(Island (c));
+        islands_.push_back(Island (c, time));
         cords.push_back(c);
     } 
 }
@@ -59,11 +58,6 @@ bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
     return std::find(vec.begin(), vec.end(), c) != vec.end();
 }
 
-void Map::addIsland(Coordinates coordinate)
-{
-    islands_.push_back(Island(coordinate));
-}
-
 size_t Map::calculateDistance(Island island_pos_)
 {
     auto distanceX = current_pos_->getPosition().GetPositionX();
@@ -73,5 +67,9 @@ size_t Map::calculateDistance(Island island_pos_)
     auto distance = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
     std::cout << "Distance: " << distance <<'\n';
     return distance;
+    
+void Map::addIsland(Coordinates &coordinate, Time * time)
+{
+    islands_.push_back(Island(coordinate, time));
 }
 

@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include "Storable.hpp"
@@ -7,7 +8,7 @@
 #include "item.hpp"
 #include "TimeEffectable.hpp"
 #include "cargo.hpp"
-
+#include <random>
 
 class Time;
 
@@ -47,4 +48,6 @@ public:
 
         return out;
     }
+private:
+    void SetUpRandomCargo(Time *time);
 };
