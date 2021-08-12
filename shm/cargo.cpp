@@ -1,11 +1,14 @@
 #include <iostream>
 #include "cargo.hpp"
 
-Cargo::Cargo(std::string name, size_t amount, size_t basePrice)
+Cargo::Cargo(std::string name, size_t amount, size_t basePrice, Time *time)
     : name_(name)
     , amount_(amount)
     , basePrice_(basePrice)
-    {}
+    , time_(time)
+    {
+        time->attachObeserver(this);
+    }
 
 Cargo& Cargo::operator+=(size_t amount) {
     amount_ += amount;

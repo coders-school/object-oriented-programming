@@ -6,11 +6,11 @@
 
 
 
-void Time::attachObeserver(std::shared_ptr<IObserver> observer) {
+void Time::attachObeserver(IObserver * observer) {
     observerList_.push_back(observer);
 }
 
-void Time::detachObeserver(std::shared_ptr<IObserver> observer) {
+void Time::detachObeserver(IObserver * observer) {
     observerList_.remove(observer);
 }
 

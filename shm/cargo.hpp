@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
+#include "time.hpp"
+#include "iObserver.hpp"
 
 //Class responsible for managing Cargo in the game.
-class Cargo {
+class Cargo : public IObserver {
 public:
-    Cargo(std::string name, size_t amount, size_t basePrice);
+    Cargo(std::string name, size_t amount, size_t basePrice, Time *time);
 
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
@@ -18,4 +20,5 @@ protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
+    Time* time_;
 };

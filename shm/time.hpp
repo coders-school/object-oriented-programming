@@ -11,15 +11,15 @@ public:
     ~Time() = default;
 
 
-    void attachObeserver(std::shared_ptr<IObserver> );
+    void attachObeserver(IObserver * );
 
-    void detachObeserver(std::shared_ptr<IObserver> );
+    void detachObeserver(IObserver * );
 
     void onTimeChange();
 
 
 private:
-    std::list<std::shared_ptr<IObserver>> observerList_; 
+    std::list<IObserver*> observerList_; 
 
     void notifyAll();
 
