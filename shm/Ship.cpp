@@ -1,6 +1,7 @@
 #include "Ship.hpp"
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <string>
 
 Ship::Ship()
@@ -16,28 +17,29 @@ void Ship::setName(const std::string& name) {
     name_ = name;
 }
 
-std::shared_ptr<Cargo> Ship::findCargo(std::shared_ptr<Cargo> cargo) {
+Cargo* Ship::findCargo(Cargo* cargo) {
     auto it = std::find_if(cargoList_.begin(), cargoList_.end(),
                            [cargo](const auto& product) { return *cargo == *product; });
     if (it != cargoList_.end()) {
-        return *it;
+        return (*it).get();
     } else {
         return nullptr;
     }
 }
 
-void Ship::load(std::shared_ptr<Cargo> cargo) {
-    if (auto ptr = findCargo(cargo)) {
+void Ship::load(std::unique_ptr<Cargo> cargo) {
+    if (auto ptr = findCargo(cargo.get())) {
         *ptr += cargo->getAmount();
         return;
     }
-    cargoList_.push_back(cargo);
+    cargoList_.push_back(std::move(cargo));
+    printCargolist();
 }
-void Ship::unload(std::shared_ptr<Cargo> cargo) {
+void Ship::unload(Cargo* cargo) {
     removeFromStorage(cargo);
 }
 
-void Ship::removeFromStorage(std::shared_ptr<Cargo> cargo) {
+void Ship::removeFromStorage(Cargo* cargo) {
     cargoList_.erase(std::find_if(std::begin(cargoList_), std::end(cargoList_),
                                   [cargo](const auto& el) {
                                       return *el == *cargo;
@@ -54,7 +56,6 @@ Ship& Ship::operator+=(size_t num) {
 }
 
 void Ship::printCargolist() {
-    
     if (cargoList_.empty()) {
         std::cout << "\n"
                   << "Cargo room is empty"
@@ -69,4 +70,12 @@ void Ship::printCargolist() {
         }
     }
     return;
+}
+
+size_t Ship::calculateCargoAmount() {
+    size_t cargoAmount = std::accumulate(cargoList_.begin(),
+                                         cargoList_.end(),
+                                         0,
+                                         [](int amount, std::unique_ptr<Cargo> cargo) { return amount += cargo->getAmount(); });
+    return cargoAmount;
 }

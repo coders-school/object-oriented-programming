@@ -23,12 +23,12 @@ public:
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
 
-    void PurchaseCargo(std::shared_ptr<Cargo> cargo, size_t price);
-    void SellCargo(std::shared_ptr<Cargo> cargo, size_t price);
+    void PurchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
+    void SellCargo(Cargo* cargo, size_t price);
     void printCargo() const;
 
     size_t getSpeed() const { return ship_->getSpeed(); };
-    std::shared_ptr<Cargo> getCargo(size_t index) const;
+    Cargo* getCargo(size_t index) const;
 };
 
 #endif

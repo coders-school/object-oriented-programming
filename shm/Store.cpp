@@ -11,19 +11,19 @@ Store::Store() {
     GenerateGoodsList();
 }
 
-std::shared_ptr<Cargo> Store::findProduct(Cargo* cargo) {
+Cargo* Store::findProduct(Cargo* cargo) {
     auto it = std::find_if(goodsList_.begin(), goodsList_.end(),
                            [cargo](const auto& product) { return *cargo == *product; });
     if (it != goodsList_.end()) {
-        return *it;
+        return (*it).get();
     } else {
         return nullptr;
     }
 }
 
 Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
-    auto product = findProduct(cargo);
-    if (product) {
+    std::cout<< cargo->getAmount()<<"\n";
+        if (cargo) {
         auto price = amount * cargo->getBasePrice();
         if (player->getAvailableSpace() < amount) {
             //std::cout << "lack of space";
@@ -37,13 +37,16 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
             //std::cout << "lack of money";
             return Response::lack_of_money;
         }
-        player->PurchaseCargo(product, price);
-        if (product->getAmount() == amount) {
-            removeProduct(product);
+
+        Cargo product = (*cargo);
+        auto product_ptr = std::make_unique<Cargo>(product); 
+
+        player->PurchaseCargo(product_ptr, price);
+        if (cargo->getAmount() == amount) {
+            removeProduct(cargo);
         } else {
-            *product -= amount;
+            *cargo -= amount;
         }
-        //std::cout << "done!";
         return Response::done;
     } else {
         std::cout << "Product not found";
@@ -59,19 +62,19 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
         player->SellCargo(product, price);
         return Response::done;
     } else {
-        goodsList_.push_back(product);
+        goodsList_.push_back(std::move(product));
         return Response::done;
     }
 }
 
 void Store::GenerateGoodsList() {
-    goodsList_.push_back(std::make_shared<Fruit>("Bananas", 200, 40, 30));
-    goodsList_.push_back(std::make_shared<Fruit>("Apples", 100, 20, 30));
-    goodsList_.push_back(std::make_shared<Alcohol>("Wine", 33, 60, 20));
+    goodsList_.push_back(std::make_unique<Fruit>("Bananas", 200, 40, 30));
+    goodsList_.push_back(std::make_unique<Fruit>("Apples", 100, 20, 30));
+    goodsList_.push_back(std::make_unique<Alcohol>("Wine", 33, 60, 20));
     //goodsList_.push_back(std::make_shared<Item>("Swords", 1, 40, Rarity::common));
 }
 
-void Store::removeProduct(std::shared_ptr<Cargo> cargo) {
+void Store::removeProduct(Cargo* cargo) {
     goodsList_.erase(std::find_if(std::begin(goodsList_), std::end(goodsList_),
                                   [cargo](const auto& product) {
                                       return *product == *cargo;

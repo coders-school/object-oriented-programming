@@ -23,7 +23,7 @@ void Game::startGame() {
         printStats();
         printMenu();
         makeAction(readCharacter());
-        ++(*time_);
+        //++(*time_);
     }
 };
 
@@ -43,6 +43,7 @@ void Game::printStats() {
     std::cout << (*store);
 
     player_-> printCargo();
+    player_->getShip()->printCargolist();
 
 }
 
@@ -83,7 +84,6 @@ void Game::makeAction(const Action& action) {
 void Game::buy() {
     Store* store = map_-> GetCurrentPosition()->getStore();
     Cargo* product = store->GetCargo(1);
-    std::cout<<product->getName();
     store->buy(product, 10, player_.get());
     getchar();
 }

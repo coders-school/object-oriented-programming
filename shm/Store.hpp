@@ -11,10 +11,10 @@ class Store
 {
 
 private:
-    std::vector<std::shared_ptr<Cargo>> goodsList_;
+    std::vector<std::unique_ptr<Cargo>> goodsList_;
 
-    std::shared_ptr<Cargo> findProduct(Cargo * cargo);
-    void removeProduct(std::shared_ptr<Cargo> cargo);
+    Cargo* findProduct(Cargo* cargo);
+    void removeProduct(Cargo* cargo);
     void GenerateGoodsList();
 
 public:
