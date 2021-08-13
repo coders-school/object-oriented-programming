@@ -41,5 +41,5 @@ bool Alcohol::operator==(const Cargo& other) const {
 
 void Alcohol::nextDay(size_t elapsedTime)
 {
-    basePrice_ += 2;
+    basePrice_ += elapsedTime/2;
 }
