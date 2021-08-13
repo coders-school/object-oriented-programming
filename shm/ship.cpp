@@ -149,7 +149,7 @@ void Ship::setCrew(size_t newCrew)
 
 void Ship::nextDay(size_t elapsedTime) //Not working
 {
-    size_t moneyForCrew = crew_;
+    size_t moneyForCrew = crew_ * elapsedTime;
     if (owner_)
     {
         owner_->SpendMoney(moneyForCrew);
