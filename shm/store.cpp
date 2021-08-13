@@ -230,9 +230,16 @@ void Store::nextDay() {
         if(cargo == nullptr) {
             break;
         } else {
-            srand(time(NULL));
-            if(rand() % 2 == 1) {
-                *cargo -= (rand() % 10) + 1;
+            std::random_device rm;
+            std::mt19937 gr(rm());
+            int more_stuff_in_store = 1;
+            int less_stuff_in_store = 0;
+            int adding_taking_max = 10;
+            int adding_taking_min = 1;
+            std::uniform_int_distribution<> in_store_action(less_stuff_in_store, more_stuff_in_store);
+            std::uniform_int_distribution<> to_add_or_take(adding_taking_min, adding_taking_max);
+            if(in_store_action(gr)) {
+                *cargo -= to_add_or_take(gr);
                 if (cargo->getAmount() < 0) {
                     *cargo -= cargo->getAmount();
                 }
@@ -240,7 +247,7 @@ void Store::nextDay() {
                     *cargo -= cargo->getAmount();
                 }
             } else {
-                *cargo += (rand() % 10) + 1;
+                *cargo += to_add_or_take(gr);
             }
         }
     }
