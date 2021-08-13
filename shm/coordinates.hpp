@@ -14,8 +14,8 @@ public:
     Coordinates()
         : Coordinates(0, 0) {}
 
-    const int GetPositionX() { return positionX_; }
-    const int GetPositionY() { return positionY_; }
+    int GetPositionX() const { return positionX_; }
+    int GetPositionY() const { return positionY_; }
 
     void SetPositionX(const int& positionX) { positionX_ = positionX; }
     void SetPositionY(const int& positionY) { positionY_ = positionY; }
