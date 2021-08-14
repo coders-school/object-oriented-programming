@@ -44,5 +44,5 @@ bool Item::operator==(const Cargo& other) const {
 
 void Item::nextDay(size_t elapsedTime) 
 {
-    basePrice_ += 1;    
+    basePrice_ += elapsedTime;    
 }

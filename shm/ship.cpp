@@ -149,8 +149,13 @@ void Ship::setCrew(size_t newCrew)
 
 void Ship::nextDay(size_t elapsedTime) //Not working
 {
+<<<<<<< HEAD
     size_t moneyForCrew = crew_;
     for (auto i = 0; i < elapsedTime; i++)
+=======
+    size_t moneyForCrew = crew_ * elapsedTime;
+    if (owner_)
+>>>>>>> 14596257bb5ecf4ce50fa51bb47765440e1b56ed
     {
         if (owner_)
         {
