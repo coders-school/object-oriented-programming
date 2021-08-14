@@ -13,8 +13,8 @@ Ship::Ship(Time *time)
     time_->attach(this);
 }
 
-Ship::Ship(int capacity, int maxCrew, int speed, const std::string &name, size_t id, Time *time)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id), time_(time)
+Ship::Ship(int capacity, int Crew, int speed, const std::string &name, size_t id, Time *time)
+    : capacity_(capacity), crew_(Crew), speed_(speed), name_(name), id_(id), time_(time)
 {
     time_->attach(this);
     shipCargo.reserve(10);
@@ -147,7 +147,7 @@ void Ship::setCrew(size_t newCrew)
     }
 }
 
-void Ship::nextDay(size_t elapsedTime)
+void Ship::nextDay(size_t elapsedTime) //Not working
 {
     size_t moneyForCrew = crew_;
     if (owner_)

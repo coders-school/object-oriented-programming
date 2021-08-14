@@ -9,7 +9,7 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
     , finalGoal_(finalGoal)
     , menu_(std::make_unique<Menu>(this))
     , map_(new Map(time_))
-    , playerOne_(new Player(std::make_unique<Ship>(20, 300, 10, "Dar Pomorza", 3, time_), 1000, 1000))
+    , playerOne_(new Player(std::make_unique<Ship>(20, 30, 10, "Dar Pomorza", 3, time_), 1000, 1000))
     {}
 
 Game::Game() {}
@@ -102,7 +102,7 @@ void Game::printPlayerCargo()
 
 void Game::setStartingCargo()
 {
-    playerOne_->getShip()->shipCargo.push_back(new Fruit("Banany", 1, 20, time_, 15, 0)); 
+    playerOne_->getShip()->shipCargo.push_back(new Fruit("Banany", 1, 40, time_, 5, 0)); 
     playerOne_->getShip()->shipCargo.push_back(new Fruit("Apple", 1, 14, time_, 20, 0));
     playerOne_->getShip()->shipCargo.push_back(new Alcohol("Rum", 1, 60, time_, 70));        
     playerOne_->getShip()->shipCargo.push_back(new Item("Hook", 1, 100, time_, Rarity::common)); 
