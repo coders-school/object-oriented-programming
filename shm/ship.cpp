@@ -127,11 +127,6 @@ void Ship::unload(Cargo * unloadCargo, size_t amount)
     else {
         std::cout << "Ship: " << this->getName() << "doesn't have cargo: " << unloadCargo->getName() << '\n';
     }
-    // TO jest bez sensu 
-    // if (calculateAvailableSpace() - amount >= 0)
-    // {
-    //     removeCargo(unloadCargo, amount);
-    // }
 }
 
 void Ship::setOwner(Player *newOwner)
@@ -147,15 +142,10 @@ void Ship::setCrew(size_t newCrew)
     }
 }
 
-void Ship::nextDay(size_t elapsedTime) //Not working
+void Ship::nextDay(size_t elapsedTime)
 {
-<<<<<<< HEAD
     size_t moneyForCrew = crew_;
     for (auto i = 0; i < elapsedTime; i++)
-=======
-    size_t moneyForCrew = crew_ * elapsedTime;
-    if (owner_)
->>>>>>> 14596257bb5ecf4ce50fa51bb47765440e1b56ed
     {
         if (owner_)
         {

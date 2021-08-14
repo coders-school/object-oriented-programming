@@ -18,10 +18,6 @@ Store::Store(int money, size_t availableSpace, Time *time)
     storeCargo.reserve(20);
     SetUpRandomCargo(time);
     storeCargo.shrink_to_fit();
-    // storeCargo.push_back(new Fruit("Banany", 10, 20, time, 15, 0)); 
-    // storeCargo.push_back(new Fruit("Apple", 15, 14, time, 20, 0));
-    // storeCargo.push_back(new Alcohol("Vodka", 33, 60, time, 70));        
-    // storeCargo.push_back(new Item("Hook", 5, 100, time, Rarity::common)); 
 }
 Store::~Store() {}
 
@@ -41,7 +37,6 @@ void Store::SetUpRandomCargo(Time *time) {
 
     std::uniform_real_distribution<> itemRarity(0, rarityChoice.size() -1);
     Rarity randomRarity = rarityChoice[itemRarity(gen)];
-    Item itemik ("Item", 1, 1, time, randomRarity);
 
     size_t fruitCargoNumber = fruitCargoDistrib(gen);
     size_t alcoholCargoNumber = alcoholCargoDistrib(gen);
@@ -57,9 +52,6 @@ void Store::SetUpRandomCargo(Time *time) {
     std::string fruitCargoName = possibleFruitCargoNames[fruitCargoNumber];
     std::string alcoholCargoName = possibleAlcoholCargoNames[alcoholCargoNumber];
     std::string itemCargoName = possibleItemCargoNames[itemCargoNumber];
-
-    // std::cout << "alcoholCargo : " << alcoholCargoName  << '\n';
-    // std::cout << "itemCargo : " << itemCargoName  << '\n';
 
     storeCargo.push_back(new Fruit(fruitCargoName, (cargoQuantity+10), fruitPriceX, time, 15, 0)); 
     storeCargo.push_back(new Alcohol(alcoholCargoName, cargoQuantity, alcoholPriceX, time, alcoholPercentage)); 
@@ -134,17 +126,17 @@ Response Store::sell(Cargo * cargo, size_t amount, Player *player)
             auto price = amount * cargo->getBasePrice();
         }
 
-        if (getAvailableSpace() < amount)// miejsce sklepu
+        if (getAvailableSpace() < amount)
         {
             std::cout << "Lack of space" << '\n';
             return Response::lack_of_space;
         }
-        if (player->getShip()->findMatchCargo(cargo)->getAmount() < amount)//cargo gracza player->getShip()->findMatchCargo(cargo)->getAmount() < amount
+        if (player->getShip()->findMatchCargo(cargo)->getAmount() < amount)
         {
             std::cout << "Lack of cargo" << '\n';
             return Response::lack_of_cargo;
         }
-        if (money_ < amount * cargo->getBasePrice())// pieniądze sklepu
+        if (money_ < amount * cargo->getBasePrice())
         {
             std::cout << "Lack of money" << '\n';
             return Response::lack_of_money;
