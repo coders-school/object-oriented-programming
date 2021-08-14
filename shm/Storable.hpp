@@ -30,9 +30,9 @@ public:
 
     int getMoney() {return money_; }
     size_t getAvailableSpace() {return availableSpace_; }
-    virtual Cargo * getCargo(size_t index) const = 0;
-    void SpendMoney(int moneyToSpend);
-    void EarnMoney(int moneyToEarn);
+    virtual Cargo * getCargo(size_t) const = 0;
+    void SpendMoney(int);
+    void EarnMoney(int);
     void removeCargo(std::shared_ptr<Cargo>, size_t);
 
 protected:

@@ -15,9 +15,9 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
 
-    Cargo &operator+=(size_t amount) override;
-    Cargo &operator-=(size_t amount) override;
-    bool operator==(const Cargo &cargo) const override;
+    Cargo &operator+=(size_t) override;
+    Cargo &operator-=(size_t) override;
+    bool operator==(const Cargo &) const override;
     
     size_t getTimeElapsed() const { return time_elapsed_; }
     size_t getExpiryDate() const { return expiry_date_; }

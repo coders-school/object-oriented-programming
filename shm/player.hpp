@@ -19,7 +19,7 @@ public:
     void setName(std::string playerName) {playerName_ = playerName;}
     std::string getName() {return playerName_;}
     
-    Cargo * getCargo(size_t index) const override;
+    Cargo * getCargo(size_t) const override;
     
     void setCrew(size_t newCrewSize);
 

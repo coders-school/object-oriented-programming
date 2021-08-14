@@ -16,12 +16,12 @@ public:
     Island* getCurrentPos() {return current_pos_;}
     void changeCurrentPosition(Island* position) {current_pos_ = position;}
     size_t calculateDistance(Island);
-    Island *getIsland(const Coordinates &coordinate);
-    void addIsland(Coordinates &coordinate, Time * time);
+    Island *getIsland(const Coordinates &);
+    void addIsland(Coordinates &, Time *);
 
 private:
     Island *current_pos_;
     std::vector<Island> islands_;
-    bool contains(const std::vector<Coordinates>& vec, const Coordinates& c);
+    bool contains(const std::vector<Coordinates>&, const Coordinates&);
     void SetUpRandomIsland(Time *);
 };

@@ -31,8 +31,8 @@ public:
     Response buy(Cargo * cargo, size_t amount, Player* player);
     Response sell(Cargo * cargo, size_t amount, Player* player);
 
-    Cargo * getCargo(size_t index) const override;
-    Cargo * findMatchCargo(Cargo * cargo);
+    Cargo * getCargo(size_t) const override;
+    Cargo * findMatchCargo(Cargo *);
     std::vector<Cargo *> storeCargo;
 
     void addStoreCargo(Cargo *);
@@ -49,5 +49,5 @@ public:
         return out;
     }
 private:
-    void SetUpRandomCargo(Time *time);
+    void SetUpRandomCargo(Time *);
 };

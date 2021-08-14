@@ -21,9 +21,9 @@ public:
     size_t getBasePrice() const override { return basePrice_; }
     size_t getPercentage() const { return percentage_; }
 
-    Cargo& operator+=(size_t amount) override;
-    Cargo& operator-=(size_t amount) override;
-    bool operator==(const Cargo &cargo) const override;
+    Cargo& operator+=(size_t) override;
+    Cargo& operator-=(size_t) override;
+    bool operator==(const Cargo &) const override;
     void nextDay(size_t) override;
 
 private:

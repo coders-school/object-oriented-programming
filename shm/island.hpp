@@ -9,7 +9,7 @@ private:
     Store store_;
 
 public:
-    explicit Island(Coordinates position, Time  * time);
+    explicit Island(Coordinates, Time  *);
     Coordinates getPosition() { return position_; }
     void SetPosition(const Coordinates &position) { position_ = position; }
     Store* returnIslandStore();

@@ -18,10 +18,10 @@ public:
     ~Ship();
     void setName(const std::string& name) { name_ = name; }
 
-    Ship& operator-=(size_t num);
-    Ship& operator+=(size_t num);
+    Ship& operator-=(size_t);
+    Ship& operator+=(size_t);
     
-    void addCargo(Cargo * item);
+    void addCargo(Cargo *);
     void removeCargo(Cargo *, size_t);
 
     size_t getCapacity() const  { return capacity_; }
@@ -33,14 +33,14 @@ public:
     std::vector<Cargo *> getCargo() { return shipCargo;} //instead of getcargo we use load atm.
     std::vector<Cargo *> shipCargo; 
 
-    Cargo * findMatchCargo(Cargo * cargo);
-    void load(Cargo *loadCargo, size_t amount);
-    void unload(Cargo * unloadCargo, size_t amount);
+    Cargo * findMatchCargo(Cargo *);
+    void load(Cargo *, size_t);
+    void unload(Cargo *, size_t);
     void printShipCargo();
 
     void nextDay(size_t) override;
-    void setOwner(Player* newOwner);
-    void setCrew(size_t newCrew);
+    void setOwner(Player* );
+    void setCrew(size_t );
 
     size_t calculateAvailableSpace();
 

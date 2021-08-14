@@ -12,7 +12,7 @@ public:
     void attach(TimeEffectable* observer);
     void detach(TimeEffectable* observer);
     void notify(size_t);
-    void changeTime(size_t elapsedDays);
+    void changeTime(size_t);
     void HowManyObserver();
     size_t getCurrentTime() { return currentTime_; }
     
