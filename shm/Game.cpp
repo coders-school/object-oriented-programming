@@ -118,7 +118,7 @@ void Game::displayPlayerStats()
 {
     std::cout << "(Little reminder)" << '\n';
     std::cout << "Available gold: " << playerOne_->getMoney() << '\n';
-    std::cout << "Your position on the map:\n";
+    std::cout << "Your position on the map: \n";
     map_->PrintCurrentPosition();
     std::cout << "Day " << time_->getCurrentTime() << "/" << gameDays_ << '\n';
     std::cout << "==========================\n";
@@ -134,22 +134,37 @@ void Game::buyCargo()
 {
     int cargoElement = 0;
     size_t amount = 0;
-    std::cout << "Choose cargo;";
+    std::cout << "Choose cargo: ";
     std::cin >> cargoElement;
-    std::cout <<  "Choose amount";
-    std::cin >> amount;
+    if (cargoElement > 0 && cargoElement < currentStore_->storeCargo.size())
+    {
+        std::cout <<  "Choose amount: ";
+        std::cin >> amount;
+        currentStore_->buy(currentStore_->storeCargo.at(cargoElement),amount,playerOne_ );
+    }
+    else
+    {
+        std::cout << "There is no such cargo in this store." << '\n';   
+        buyCargo();
+    }
     
-    currentStore_->buy(currentStore_->storeCargo.at(cargoElement),amount,playerOne_ );
 }
 
 void Game::sellCargo()
 {
     int cargoElement = 0;
     size_t amount = 0;
-    std::cout << "Choose cargo;";
+    std::cout << "Choose cargo: ";
     std::cin >> cargoElement;
-    std::cout <<  "Choose amount";
-    std::cin >> amount;
-
-    currentStore_->sell(playerOne_->getCargo(cargoElement), amount, playerOne_);
+    if (cargoElement > 0 && cargoElement < playerOne_->getShip()->shipCargo.size())
+    {
+        std::cout <<  "Choose amount: ";
+        std::cin >> amount;
+        currentStore_->sell(playerOne_->getCargo(cargoElement), amount, playerOne_);
+    }
+    else
+    {
+        std::cout << "There is no such cargo in this ship." << '\n';   
+        sellCargo();
+    }
 }
