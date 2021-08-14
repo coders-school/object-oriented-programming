@@ -13,7 +13,7 @@ class Player;
 class Ship : public TimeEffectable {
 public:
     Ship(Time* time);
-    Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id, Time* time);
+    Ship(int capacity, int Crew, int speed, const std::string& name, size_t id, Time* time);
     Ship(int maxCrew, int speed, size_t id, Time* time);
     ~Ship();
     void setName(const std::string& name) { name_ = name; }
