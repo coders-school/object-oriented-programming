@@ -65,6 +65,7 @@ void Game::travel()
         map_->changeCurrentPosition(&map_->islands_.at(i));
         map_->PrintCurrentPosition();
         time_->changeTime(travelTime);
+        currentStore_ = map_->islands_.at(i).returnIslandStore();
     }
     else
     {
