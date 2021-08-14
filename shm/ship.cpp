@@ -150,10 +150,14 @@ void Ship::setCrew(size_t newCrew)
 void Ship::nextDay(size_t elapsedTime) //Not working
 {
     size_t moneyForCrew = crew_;
-    if (owner_)
+    for (auto i = 0; i < elapsedTime; i++)
     {
-        owner_->SpendMoney(moneyForCrew);
+        if (owner_)
+        {
+            owner_->SpendMoney(moneyForCrew);
+        }
     }
+
 }
 void Ship::printShipCargo()
 {
