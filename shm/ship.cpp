@@ -101,7 +101,7 @@ void Ship::load(Cargo * loadCargo, size_t amount)
 
         }
         if(Item* i = dynamic_cast<Item*>(loadCargo)){
-          toAdd = new Item(*i);
+            toAdd = new Item(*i);
         }
         if(Alcohol* a = dynamic_cast<Alcohol*>(loadCargo)){
             toAdd = new Alcohol(*a);
