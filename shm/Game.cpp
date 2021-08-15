@@ -17,19 +17,22 @@ Game::Game() {}
 void Game::startGame()
 {
     printTitle();
-    setPlayer(); 
-    // currentStore_ = new Store(1000, 1000, time_);   
+    setPlayer();  
     do{
-        // if (playerOne_->getMoney() >= 2000)
-        // {
-        //     endGameWin();
-        //     quitRequest;
-        // }
-        // if (playerOne_->getMoney() < 0 || time_->getCurrentTime() >= gameDays_)
-        // {
-        //     endGameLose();
-        //     quitRequest;
-        // }   
+        if (playerOne_->getMoney() >= 2000)
+        {
+            endGameWin();
+            quitRequested();
+        }
+        if (playerOne_->getMoney() < 0 || time_->getCurrentTime() >= gameDays_)
+        {
+            endGameLose();
+            quitRequested();
+        }
+        if(quitRequest)
+        {
+            break;
+        }
         menu_->printMenu();
         menu_->playerChoice();
 
