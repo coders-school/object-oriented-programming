@@ -115,7 +115,7 @@ void Game::buyCargo()
     size_t amount = 0;
     std::cout << "Choose cargo: ";
     std::cin >> cargoElement;
-    if (cargoElement > 0 && cargoElement < currentStore_->storeCargo.size())
+    if (cargoElement >=0 && cargoElement < currentStore_->storeCargo.size())
     {
         std::cout <<  "Choose amount: ";
         std::cin >> amount;
@@ -135,7 +135,7 @@ void Game::sellCargo()
     size_t amount = 0;
     std::cout << "Choose cargo: ";
     std::cin >> cargoElement;
-    if (cargoElement > 0 && cargoElement < playerOne_->getShip()->shipCargo.size())
+    if (cargoElement >= 0 && cargoElement < playerOne_->getShip()->shipCargo.size())
     {
         std::cout <<  "Choose amount: ";
         std::cin >> amount;

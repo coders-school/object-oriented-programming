@@ -78,13 +78,13 @@ Response Store::buy(Cargo * cargo, size_t amount, Player *player)
         auto price = 0;
         if (Alcohol* a = dynamic_cast<Alcohol*>(cargo))
         {
-          price = amount * a->getPrice();
+            price = amount * a->getPrice();
         }
         else
         {
-            auto price = amount * cargo->getBasePrice();
+            price = amount * cargo->getBasePrice();
         }
-
+        
         if (player->getAvailableSpace() < amount)
         {
             std::cout << "Lack of space" << '\n';
