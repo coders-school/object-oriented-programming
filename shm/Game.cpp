@@ -20,16 +20,19 @@ void Game::startGame()
     setPlayer(); 
     // currentStore_ = new Store(1000, 1000, time_);   
     do{
-        if (playerOne_->getMoney() >= finalGoal_)
-        {
-            endGameWin();
-        }
-        if (playerOne_->getMoney() < 0)
-        {
-            endGameLose();
-        }
+        // if (playerOne_->getMoney() >= 2000)
+        // {
+        //     endGameWin();
+        //     quitRequest;
+        // }
+        // if (playerOne_->getMoney() < 0 || time_->getCurrentTime() >= gameDays_)
+        // {
+        //     endGameLose();
+        //     quitRequest;
+        // }   
         menu_->printMenu();
-        menu_->playerChoice();   
+        menu_->playerChoice();
+
     }while(!quitRequest);
 }
 
@@ -103,6 +106,7 @@ void Game::quitRequested()
 
 void Game::displayPlayerStats()
 {
+    
     std::cout << "(Little reminder)" << '\n';
     std::cout << "Available gold: " << playerOne_->getMoney() << '\n';
     std::cout << "Your position on the map: \n";
@@ -159,10 +163,10 @@ void Game::sellCargo()
 void Game::endGameLose()
 {
     std::cout << "You're time has come Captain! This is sad end!" << '\n';
-    exit;
+    
 }
 void Game::endGameWin()
 {
     std::cout << "Arrr you won" << '\n';
-    exit;
+    
 }

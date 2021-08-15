@@ -76,15 +76,7 @@ Response Store::buy(Cargo * cargo, size_t amount, Player *player)
     if (findMatchCargo(cargo))
     {
         auto price = 0;
-        if (Alcohol* a = dynamic_cast<Alcohol*>(cargo))
-        {
-            price = amount * a->getPrice();
-        }
-        else
-        {
-            price = amount * cargo->getBasePrice();
-        }
-
+        price = amount * cargo->getPrice();
         if (player->getAvailableSpace() < amount)
         {
             std::cout << "Lack of space" << '\n';
@@ -117,14 +109,7 @@ Response Store::sell(Cargo * cargo, size_t amount, Player *player)
     if (player->getShip()->findMatchCargo(cargo))
     {
         auto price = 0;
-        if (Alcohol* a = dynamic_cast<Alcohol*>(cargo))
-        {
-            price = amount * a->getPrice();
-        }
-        else
-        {
-            price = amount * cargo->getBasePrice();
-        }
+        price = amount * cargo->getPrice();
 
         if (getAvailableSpace() < amount)
         {
@@ -142,6 +127,11 @@ Response Store::sell(Cargo * cargo, size_t amount, Player *player)
             return Response::lack_of_money;
         }
 
+        if (money_ < price)
+        {
+            std::cout << "Lack of money" << '\n';
+            return Response::lack_of_money;
+        }
         money_ -= price;
         addStoreCargo(cargo);
         player->getShip()->unload(cargo, amount);
