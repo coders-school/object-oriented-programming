@@ -18,7 +18,7 @@ void Game::startGame()
 {
     printTitle();
     setPlayer(); 
-    currentStore_ = new Store(1000, 1000, time_);   
+    // currentStore_ = new Store(1000, 1000, time_);   
     do{
         menu_->printMenu();
         menu_->playerChoice();   
@@ -39,6 +39,7 @@ void Game::setPlayer()
     setStartingCargo();
     std::cout << "Welcome on board captain " << playerOne_->getName() << '\n';
     map_->changeCurrentPosition(&map_->islands_.at(0));
+    currentStore_ = map_->islands_.at(0).returnIslandStore();
     std::cout << "Your's ship " << playerOne_->getShip()->getName() <<  " is waiting! Good Luck!" << '\n';
     std::cout << "You are in start point. ";
     map_->PrintCurrentPosition();
