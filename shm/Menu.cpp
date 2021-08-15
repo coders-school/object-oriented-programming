@@ -20,11 +20,11 @@ void Menu::playerChoice()
 
 bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
 {
-    if(std::cin.fail() || playerAnswer < 0 || playerAnswer > 6)
+    if(std::cin.fail() || playerAnswer < 0 || playerAnswer > 5)
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Wrong answer, please use numbers 1 - 6" << '\n';
+        std::cout << "Wrong answer, please use numbers 0 - 5" << '\n';
         return false;
     }
     return true;
@@ -36,6 +36,9 @@ void Menu::menuChoice(MenuItem item)
     {
         case MenuItem::printPlayerCargo:
             game_->printPlayerCargo();
+            break;
+        case MenuItem::printStoreCargo:
+            game_->printStoreCargo();
             break;
         case MenuItem::buyCargo:
             game_->printStoreCargo();
@@ -51,9 +54,6 @@ void Menu::menuChoice(MenuItem item)
         case MenuItem::Exit:
             game_->quitRequested();
             break;
-        case MenuItem::printStoreCargo:
-            game_->printStoreCargo();
-            break;
         default:
             std::cout << "Undefined choice" << '\n';
             break;
@@ -64,12 +64,12 @@ void Menu::printMenu()
 {
     std::cout << "What is your choice capt'n? " << '\n';
     std::cout << "==========================\n";
-    std::cout << "1 - Print Cargo\n";
+    std::cout << "0 - Print Cargo\n";
+    std::cout << "1 - Print Store Cargo\n";
     std::cout << "2 - Buy Cargo\n";
     std::cout << "3 - Sell Cargo\n";
     std::cout << "4 - Travel\n";
     std::cout << "5 - Exit\n";
-    std::cout << "6 - Print Store Cargo\n";
     std::cout << "==========================\n";
 
     game_->displayPlayerStats();

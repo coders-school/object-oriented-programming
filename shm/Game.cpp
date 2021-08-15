@@ -29,10 +29,11 @@ void Game::startGame()
             endGameLose();
             quitRequested();
         }
-        if(quitRequest)
+        if (quitRequest)
         {
             break;
         }
+        
         menu_->printMenu();
         menu_->playerChoice();
 

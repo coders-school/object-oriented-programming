@@ -12,13 +12,12 @@ class Menu
 public:
     enum MenuItem
     {
-        wrongChoice,
         printPlayerCargo,
+        printStoreCargo,
         buyCargo,
         sellCargo,
         travel,
         Exit,
-        printStoreCargo,
     };
 
     Menu(Game*);
