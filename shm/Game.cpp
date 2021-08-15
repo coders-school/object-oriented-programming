@@ -75,28 +75,6 @@ void Game::travel()
     }
 }
 
-void Game::buyAllCargo()
-{
-    auto storeCargo = currentStore_->storeCargo;
-    for(const auto &el : storeCargo)
-    {
-        if(el->getAmount() > 0)
-        {
-            currentStore_->buy(el, el->getAmount(), playerOne_);
-        }
-        std::cout << "This cargo does not exist!" << '\n';
-    }
-}
-
-void Game::sellAllCargo()
-{
-    auto playerCargo = playerOne_->getShip()->shipCargo;
-    for(const auto &el : playerCargo)
-    {
-        currentStore_->sell(el, el->getAmount(), playerOne_);
-    }
-}
-
 void Game::printPlayerCargo()
 {
     playerOne_->getShip()->printShipCargo();

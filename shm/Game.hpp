@@ -18,8 +18,6 @@ public:
     void printTitle();
     void printMap(Map &);
     void travel();
-    void buyAllCargo();
-    void sellAllCargo();
     void buyCargo();
     void sellCargo();
     void setStartingCargo();
