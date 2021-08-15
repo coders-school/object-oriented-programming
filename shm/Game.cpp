@@ -20,6 +20,14 @@ void Game::startGame()
     setPlayer(); 
     // currentStore_ = new Store(1000, 1000, time_);   
     do{
+        if (playerOne_->getMoney() >= finalGoal_)
+        {
+            endGameWin();
+        }
+        if (playerOne_->getMoney() < 0)
+        {
+            endGameLose();
+        }
         menu_->printMenu();
         menu_->playerChoice();   
     }while(!quitRequest);
@@ -137,7 +145,7 @@ void Game::buyCargo()
     size_t amount = 0;
     std::cout << "Choose cargo: ";
     std::cin >> cargoElement;
-    if (cargoElement > 0 && cargoElement < currentStore_->storeCargo.size())
+    if (cargoElement >=0 && cargoElement < currentStore_->storeCargo.size())
     {
         std::cout <<  "Choose amount: ";
         std::cin >> amount;
@@ -157,7 +165,7 @@ void Game::sellCargo()
     size_t amount = 0;
     std::cout << "Choose cargo: ";
     std::cin >> cargoElement;
-    if (cargoElement > 0 && cargoElement < playerOne_->getShip()->shipCargo.size())
+    if (cargoElement >= 0 && cargoElement < playerOne_->getShip()->shipCargo.size())
     {
         std::cout <<  "Choose amount: ";
         std::cin >> amount;
@@ -168,4 +176,15 @@ void Game::sellCargo()
         std::cout << "There is no such cargo in this ship." << '\n';   
         sellCargo();
     }
+}
+
+void Game::endGameLose()
+{
+    std::cout << "You're time has come Captain! This is sad end!" << '\n';
+    exit;
+}
+void Game::endGameWin()
+{
+    std::cout << "Arrr you won" << '\n';
+    exit;
 }

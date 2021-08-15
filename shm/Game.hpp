@@ -26,6 +26,8 @@ public:
     void printPlayerCargo();
     void quitRequested();
     void printStoreCargo();
+    void endGameWin();
+    void endGameLose();
     
 private:
     Time* time_;
