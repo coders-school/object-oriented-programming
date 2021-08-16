@@ -6,11 +6,11 @@
 
 
 
-void Time::attachObeserver(IObserver * observer) {
+void Time::attachObserver(IObserver * observer) {
     observerList_.push_back(observer);
 }
 
-void Time::detachObeserver(IObserver * observer) {
+void Time::detachObserver(IObserver * observer) {
     observerList_.remove(observer);
 }
 

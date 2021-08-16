@@ -11,9 +11,9 @@ public:
     ~Time() = default;
 
 
-    void attachObeserver(IObserver * );
+    void attachObserver(IObserver * );
 
-    void detachObeserver(IObserver * );
+    void detachObserver(IObserver * );
 
     void onTimeChange();
 
