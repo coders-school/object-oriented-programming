@@ -81,18 +81,15 @@ add_executable(${PROJECT_NAME} main.cpp)
 add_executable(${PROJECT_NAME}-ut Tests/Tests.cpp
     build/Catch2-src/extras/catch_amalgamated.cpp)
 
-target_include_directories(${PROJECT_NAME} PRIVATE Cargos)
-target_include_directories(${PROJECT_NAME} PRIVATE Commands)
-target_include_directories(${PROJECT_NAME} PRIVATE .)
+set(DIRECTORIES 
+    Cargos 
+    Commands 
+    .)
 
-target_include_directories(${PROJECT_NAME}-lib PRIVATE Cargos)
-target_include_directories(${PROJECT_NAME}-lib PRIVATE Commands)
-target_include_directories(${PROJECT_NAME}-lib PRIVATE .)
-
-target_include_directories(${PROJECT_NAME}-ut PRIVATE Cargos)
-target_include_directories(${PROJECT_NAME}-ut PRIVATE Commands)
-target_include_directories(${PROJECT_NAME}-ut PRIVATE .)
-target_include_directories(${PROJECT_NAME}-ut PRIVATE build/Catch2-src/extras)
+target_include_directories(${PROJECT_NAME} PRIVATE ${DIRECTORIES})
+target_include_directories(${PROJECT_NAME}-lib PRIVATE ${DIRECTORIES})
+target_include_directories(${PROJECT_NAME}-ut PRIVATE ${DIRECTORIES} 
+    build/Catch2-src/extras)
 
 target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
