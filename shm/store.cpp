@@ -224,3 +224,31 @@ void Store::unloadShip(std::shared_ptr<Cargo>& cargo, size_t& amount) {
         }
     }
 }
+
+void Store::nextDay() {
+    for (auto cargo : Store::getCargoOfStore()) {
+        if(cargo == nullptr) {
+            break;
+        } else {
+            std::random_device rm;
+            std::mt19937 gr(rm());
+            int more_stuff_in_store = 1;
+            int less_stuff_in_store = 0;
+            int adding_taking_max = 10;
+            int adding_taking_min = 1;
+            std::uniform_int_distribution<> in_store_action(less_stuff_in_store, more_stuff_in_store);
+            std::uniform_int_distribution<> to_add_or_take(adding_taking_min, adding_taking_max);
+            if(in_store_action(gr)) {
+                *cargo -= to_add_or_take(gr);
+                if (cargo->getAmount() < 0) {
+                    *cargo -= cargo->getAmount();
+                }
+                if (cargo->getAmount() > 500) {
+                    *cargo -= cargo->getAmount();
+                }
+            } else {
+                *cargo += to_add_or_take(gr);
+            }
+        }
+    }
+}

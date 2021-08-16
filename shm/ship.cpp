@@ -143,3 +143,6 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
                                                  item->getRarity()));
     }
 }
+void Ship::nextDay(Player& player) {
+    player.setMoney(player.getMoney() - ((*player.getShip()).getCrew()));
+}

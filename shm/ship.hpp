@@ -5,7 +5,9 @@
 #include "cargo.hpp"
 #include "iObserver.hpp"
 #include "time.hpp"
+#include "player.hpp"
 
+class Cargo;
 // Class responsible for managing Ship in the game.
 class Ship : public IObserver
 {
@@ -53,6 +55,7 @@ public:
     void load(std::shared_ptr<Cargo>& cargo, size_t amount);
 
     friend std::ostream& operator<<(std::ostream& os, const Ship& ship);
+    void nextDay(Player& player);
    
 private:
     size_t capacity_;

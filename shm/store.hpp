@@ -41,4 +41,6 @@ public:
 private:
     std::vector<std::shared_ptr<Cargo>> stock_{};
     void generateDefaultCargo();
+    void nextDay();
+
 };
