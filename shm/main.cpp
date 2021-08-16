@@ -15,7 +15,7 @@
 int main() {
     auto cargo1 = std::make_shared<Fruit>("cebula", 40, 2, 20);
     auto cargo2 = std::make_shared<Item>("drewno", 10, 20, Rarity::epic);
-    auto cargo3 = std::make_shared<Alcohol>(Alcohol("wino", 10, 100, 15));
+    auto cargo3 = std::make_shared<Alcohol>("wino", 10, 100, 15);
     // auto cargo4 = std::make_shared<Cargo>("miedz", 10, 1);
     // auto cargo5 = std::make_shared<Cargo>("rubin", 10, 2);
     // auto cargo6 = std::make_shared<Cargo>("cebula", 3, 10);
