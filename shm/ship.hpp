@@ -12,7 +12,7 @@ class Ship : public IObserver
 public:
     Ship(Time * time)
         : id_(-1) {
-            time ->attachObeserver(this);
+            time ->attachObserver(this);
         }
     Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargos, Time * time)
         :  capacity_(capacity)
@@ -24,11 +24,11 @@ public:
         , cargos_(cargos)
         , time_(time)
      {
-         time->attachObeserver(this);
+         time->attachObserver(this);
      }
     Ship(size_t maxCrew, size_t speed, size_t id, Time * time)
         : Ship(0, maxCrew, 0, speed, "", id, {}, time) {
-            time->attachObeserver(this);
+            time->attachObserver(this);
         }
 
     Ship& operator-=(size_t num);

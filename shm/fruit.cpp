@@ -34,7 +34,7 @@ Fruit& Fruit::operator--() {
     return *this;
 }
 
-Fruit Fruit::operator--(int) {
+Fruit& Fruit::operator--(int) {
     if(purchaseDate_ <= 0) {
         purchaseDate_ = 0;
     }
