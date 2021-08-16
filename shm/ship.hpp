@@ -45,7 +45,7 @@ public:
     std::shared_ptr<Cargo> getCargo(size_t index) const;    
     std::vector<std::shared_ptr<Cargo>> getCargosVector() const;
 
-     std::vector<std::shared_ptr<Cargo>>::iterator findMatchCargo(std::shared_ptr<Cargo> cargo);
+    std::vector<std::shared_ptr<Cargo>>::iterator findMatchCargo(std::shared_ptr<Cargo> cargo);
     
     void setName(const std::string& name);
 

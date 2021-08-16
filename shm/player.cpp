@@ -80,6 +80,8 @@ void Player::buy(std::shared_ptr<Cargo>& cargo,const size_t& amount) {
     getShip()->load(cargo, amount);
     
     money_ -= cargo->getPrice() * amount;
+}
+
 void Player::setMoney(size_t money) {
     money_ = money;
 }
