@@ -1,3 +1,0 @@
-/home/linux/workspace/OOP/SHM/object-oriented-programming/shm/build/CMakeFiles/rebuild_cache.dir
-/home/linux/workspace/OOP/SHM/object-oriented-programming/shm/build/CMakeFiles/edit_cache.dir
-/home/linux/workspace/OOP/SHM/object-oriented-programming/shm/build/CMakeFiles/SHM_2077.dir
