@@ -12,9 +12,6 @@ std::unique_ptr<Cargo> generateCargo();
 
 class Game {
 public:
-    constexpr static size_t startingPlayerCargoNumber{5ul};
-    constexpr static size_t storeCargoNumber{5ul};
-
     Game(size_t startMoney, size_t daysLimit, size_t goal);
 
     void startGame();

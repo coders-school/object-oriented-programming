@@ -20,6 +20,8 @@ public:
 
     size_t getPrice() const override;
 
+    Quality getQuality() const { return quality_; }
+
 protected:
     Quality quality_ = Quality::common;
 

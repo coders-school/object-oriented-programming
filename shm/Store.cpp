@@ -130,7 +130,7 @@ Cargo* Store::findCargo(const Cargo* const exampleCargo) const {
 
 void Store::nextDay() {
     changeAssortment_();
-    std::cout << "Store change asortment.";
+    std::cout << "Store change asortment.\n";
 }
 
 void Store::setChangeAssortmentCallback(std::function<void()> callback){

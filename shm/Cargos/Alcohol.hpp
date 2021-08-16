@@ -14,6 +14,8 @@ public:
 
     size_t getPrice() const override;
 
+    unsigned char getPercentage() const { return percentage_; }
+
 protected:
     unsigned char percentage_ = 0;
 

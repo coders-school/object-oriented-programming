@@ -3,39 +3,39 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(shmProject)
 
-# Download and unpack googletest at configure time
-configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-    RESULT_VARIABLE result
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if(result)
-    message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-    RESULT_VARIABLE result
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-if(result)
-    message(FATAL_ERROR "Build step for googletest failed: ${result}")
-endif()
+# # Download and unpack googletest at configure time
+# configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+# execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+#     RESULT_VARIABLE result
+#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+# if(result)
+#     message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+# endif()
+# execute_process(COMMAND ${CMAKE_COMMAND} --build .
+#     RESULT_VARIABLE result
+#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+# if(result)
+#     message(FATAL_ERROR "Build step for googletest failed: ${result}")
+# endif()
 
-# Download and unpack googletest at configure time
-configure_file(CMakeLists2.txt.in catch2-download/CMakeLists.txt)
-execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-    RESULT_VARIABLE result
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/catch2-download )
-if(result)
-    message(FATAL_ERROR "CMake step for catch2 failed: ${result}")
-endif()
-execute_process(COMMAND ${CMAKE_COMMAND} --build .
-    RESULT_VARIABLE result
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/catch2-download )
-if(result)
-    message(FATAL_ERROR "Build step for catch2 failed: ${result}")
-endif()
+# # Download and unpack googletest at configure time
+# configure_file(CMakeLists2.txt.in catch2-download/CMakeLists.txt)
+# execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+#     RESULT_VARIABLE result
+#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/catch2-download )
+# if(result)
+#     message(FATAL_ERROR "CMake step for catch2 failed: ${result}")
+# endif()
+# execute_process(COMMAND ${CMAKE_COMMAND} --build .
+#     RESULT_VARIABLE result
+#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/catch2-download )
+# if(result)
+#     message(FATAL_ERROR "Build step for catch2 failed: ${result}")
+# endif()
 
-# Prevent overriding the parent project's compiler/linker
-# settings on Windows
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# # Prevent overriding the parent project's compiler/linker
+# # settings on Windows
+# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 find_package(Catch2 REQUIRED)
 
@@ -71,7 +71,9 @@ set(FILES
     Perishable.cpp
     GeneralPrint.cpp)
 
-set(FLAGS -Wall -Wextra -Werror -pedantic -Wconversion)
+set(FLAGS 
+    -Wall -Wextra -Werror -pedantic -Wconversion
+)
 set(TEST_FLAGS -Wall -Wextra)
 
 add_library(${PROJECT_NAME}-lib STATIC ${FILES})

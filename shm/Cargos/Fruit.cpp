@@ -31,7 +31,7 @@ size_t Fruit::getPrice() const {
 
 void Fruit::nextDay() {
     --(*this);
-    std::cout << name_ << " best before: " << getFreshTime() << '\n';
+    //std::cout << name_ << " best before: " << getFreshTime() << '\n';
 }
 
 std::unique_ptr<Cargo> Fruit::createAmountOfEqual(size_t amount) {
