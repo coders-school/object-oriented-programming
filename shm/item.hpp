@@ -25,6 +25,9 @@ public:
     size_t getAmount() const override { return amount_; };
     size_t getBasePrice() const override { return basePrice_; };
 
+    Rarity getRarity() const {return rarity_;};
+
+    void setAmount(const size_t& amount) override { amount_ = amount;};
 private:
     Rarity rarity_;
 };

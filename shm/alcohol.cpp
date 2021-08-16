@@ -16,7 +16,7 @@ Cargo& Alcohol::operator+=(size_t amount) {
 Cargo& Alcohol::operator-=(size_t amount) {
  if (amount <= amount_) {
         amount_ -= amount;
-    } else {
+    } else if(amount_ < 0){
         std::cerr << "Amount of cargo can not be under 0!!!\n";
     }
     return *this;

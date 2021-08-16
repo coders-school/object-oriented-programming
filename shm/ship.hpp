@@ -42,8 +42,17 @@ public:
     size_t getId() const;
     std::shared_ptr<Cargo> getCargo(size_t index) const;    
     std::vector<std::shared_ptr<Cargo>> getCargosVector() const;
+
+     std::vector<std::shared_ptr<Cargo>>::iterator findMatchCargo(std::shared_ptr<Cargo> cargo);
     
     void setName(const std::string& name);
+
+    void addCargo(std::shared_ptr<Cargo>& cargo, size_t amount);
+    
+    void unload(std::shared_ptr<Cargo>& cargo, size_t amount);
+    void load(std::shared_ptr<Cargo>& cargo, size_t amount);
+
+    friend std::ostream& operator<<(std::ostream& os, const Ship& ship);
    
 private:
     size_t capacity_;

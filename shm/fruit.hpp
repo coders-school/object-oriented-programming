@@ -2,7 +2,6 @@
 
 #include "cargo.hpp"
 //Class responsible for managing Fruit in the game.
-
 class Fruit : public Cargo {
 public:
     Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate);
@@ -22,6 +21,7 @@ public:
 
     size_t getExpirationDate() const { return expirationDate_; };
     size_t getPurchaseData() const { return purchaseDate_; };
+    void setAmount(const size_t& amount) override { amount_ = amount;};
 
 protected:
     size_t expirationDate_;
