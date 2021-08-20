@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Alcohol.hpp"
-#include "../DefaultCargo.hpp"
+#include "Alcohol.hpp"
+#include "DefaultCargo.hpp"
 
 constexpr auto maxPercentage = 96;
 constexpr size_t alcoholPriceFor96percent = 100u;

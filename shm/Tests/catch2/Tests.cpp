@@ -1,14 +1,10 @@
 #define CATCH_CONFIG_MAIN
-#include <catch/catch.hpp>
-
+#include "catch_amalgamated.hpp"
 #include <array>
-#include <catch/catch.hpp>
-
-#include "../Alcohol.hpp"
-#include "../DefaultCargo.hpp"
-#include "../Item.hpp"
-#include "../DryFruit.hpp"
-
+#include "Alcohol.hpp"
+#include "DefaultCargo.hpp"
+#include "Item.hpp"
+#include "DryFruit.hpp"
 #include "TestCoordinates.hpp"
 
 constexpr auto singleCargoCost = 10;
@@ -110,7 +106,7 @@ constexpr auto halfQuantity = 50;
 constexpr auto playerMoney = singleCargoCost * fullQuantity * cargoTypes;    //money to buy all Cargo types
 constexpr auto playerMoneyForHalfQuantity = singleCargoCost * halfQuantity;  //money to buy half of single cargo
 
-#include "../Ship.hpp"
+#include "Ship.hpp"
 
 constexpr Capacity shipCapacity = {fullCappacity};
 constexpr Crew shipMaxCrew = {20};

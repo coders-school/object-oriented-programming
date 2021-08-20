@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Island.hpp"
+#include "Island.hpp"
 #include <array>
 
 constexpr std::array position{

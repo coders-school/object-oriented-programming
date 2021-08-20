@@ -24,7 +24,7 @@ bool Alcohol::operator==(const Cargo& other) const {
 }
 
 size_t Alcohol::getPrice() const {
-    return std::max(static_cast<size_t>(static_cast<double>(basePrice_ * static_cast<size_t>(percentage_)) / static_cast<double>(maxPercentage)), 1ul);
+    return std::max<size_t>(static_cast<size_t>(static_cast<double>(basePrice_ * static_cast<size_t>(percentage_)) / static_cast<double>(maxPercentage)), 1ul);
 }
 
 std::unique_ptr<Cargo> Alcohol::createAmountOfEqual(size_t amount) {

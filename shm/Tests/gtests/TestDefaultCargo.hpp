@@ -1,26 +1,26 @@
 #pragma once
 
-#include "../DefaultCargo.hpp"
+#include "DefaultCargo.hpp"
 
 //Cargo types operator== tests
 
-TEST_CASE("Compare same CargoDefault", "[CargoDefault]") {
+TEST(CargoDefault, Compare_same_CargoDefault) {
     auto cargoDefault = generateCargo(cargoDefaultIndex);
     auto samecargoDefault = generateCargo(cargoDefaultIndex);
 
-    REQUIRE(*samecargoDefault == *cargoDefault);
+    EXPECT_TRUE(*samecargoDefault == *cargoDefault);
 }
 
-TEST_CASE("Compare CargoDefault to CargoDefault with same name", "[CargoDefault]") {
+TEST(CargoDefault, Compare_CargoDefault_to_CargoDefault_with_same_name) {
     auto cargoDefault = generateCargo(cargoDefaultIndex, defaultGoodsName);
     auto secondcargoDefault = generateCargo(secondCargoDefaultIndex, defaultGoodsName);
 
-    REQUIRE(*secondcargoDefault == *cargoDefault);  // Unimportant because CargoDefault is temporary
+    EXPECT_TRUE(*secondcargoDefault == *cargoDefault);  // Unimportant because CargoDefault is temporary
 }
 
-TEST_CASE("Compare different CargoDefault", "[CargoDefault]") {
+TEST(CargoDefault, Compare_different_CargoDefault) {
     auto cargoDefault = generateCargo(cargoDefaultIndex);
     auto secondcargoDefault = generateCargo(secondCargoDefaultIndex);
 
-    REQUIRE(!(*secondcargoDefault == *cargoDefault));
+    EXPECT_TRUE(!(*secondcargoDefault == *cargoDefault));
 }

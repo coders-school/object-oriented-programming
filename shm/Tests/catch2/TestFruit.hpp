@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Fruit.hpp"
-#include "../DefaultCargo.hpp"
+#include "Fruit.hpp"
+#include "DefaultCargo.hpp"
 
 TEST_CASE("Compare Fruit to CargoDefault with same name", "[Fruit][CargoDefault]") {
     auto fruit = generateCargo(fruitIndex, defaultGoodsName);
@@ -27,7 +27,7 @@ TEST_CASE("Fruit decrement price over time", "[Fruit]") {
         size_t price = static_cast<size_t>(
             static_cast<double>(singleCargoCost * (fruitBestBefore - daysPassed)) / static_cast<double>(fruitBestBefore));
         if (daysPassed <= fruitBestBefore) {
-            price = std::max(price, 1ul);  //minimal value for not rotten fruit
+            price = std::max<size_t>(price, 1ul);  //minimal value for not rotten fruit
         }
         return price;
     };

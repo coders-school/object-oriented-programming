@@ -27,7 +27,7 @@ size_t DryFruit::getPrice() const {
     if (!getMaxFreshTime() or !getFreshTime()) {
         return 0u;
     }
-    return std::max(static_cast<size_t>(static_cast<double>(priceMultiplier * static_cast<size_t>(basePrice_ * getFreshTime())) / static_cast<double>(getMaxFreshTime())), 1ul);
+    return std::max<size_t>(static_cast<size_t>(static_cast<double>(priceMultiplier * static_cast<size_t>(basePrice_ * getFreshTime())) / static_cast<double>(getMaxFreshTime())), 1ul);
 }
 
 std::unique_ptr<Cargo> DryFruit::createAmountOfEqual(size_t amount) {

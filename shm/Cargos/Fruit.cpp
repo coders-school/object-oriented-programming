@@ -25,7 +25,7 @@ size_t Fruit::getPrice() const {
     if (!getMaxFreshTime() or !getFreshTime()) {
         return 0u;
     }
-    const size_t price = std::max(static_cast<size_t>(static_cast<double>(basePrice_ * getFreshTime()) / static_cast<double>(getMaxFreshTime())), 1ul);
+    const size_t price = std::max<size_t>(static_cast<size_t>(static_cast<double>(basePrice_ * getFreshTime()) / static_cast<double>(getMaxFreshTime())), 1ul);
     return price;
 }
 
