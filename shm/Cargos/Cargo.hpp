@@ -26,8 +26,8 @@ public:
     void addSuffix(const std::string_view suffix);
 
     virtual std::unique_ptr<Cargo> split(size_t amountPart) final;
-  
-    void nextDay()override;
+
+    void nextDay() override;
 
 protected:
     std::string name_{};
