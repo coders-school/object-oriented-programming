@@ -5,22 +5,14 @@ struct Island {
 		int positionX;
 		int positionY;
 
-		Coordinates(const int x, const int y):
-			positionX(x),
-			positionY(y)
-		{}
+		Coordinates(const int x, const int y);
 
-		bool operator==(const Coordinates& coordinates) {
-			return (positionX == coordinates.positionX && positionY == coordinates.positionY);
-		}
+		bool operator==(const Coordinates& coordinates);
 	};
 
-public:
-	Island(const Coordinates& coordinates):
-		position_(coordinates)
-	{}
+	Island(const Coordinates& coordinates);
 
-	Coordinates getPosition() const { return position_; }
+	Coordinates getPosition() const;
 
 private:
 	Coordinates position_;

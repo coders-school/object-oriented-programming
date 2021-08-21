@@ -10,6 +10,7 @@ project(SHM)
 
 # set executables
 set(THIS_PROJECT_SRC_DIRECTORIES
+    source/Island.cpp
     source/Fortune.cpp
     source/Map.cpp
     source/Game.cpp
