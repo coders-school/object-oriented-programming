@@ -111,55 +111,55 @@ struct GoodsData {
 
 std::unique_ptr<Cargo> generateCargo() {
     // https://portroyale3.fandom.com/wiki/Goods
-    constexpr std::array goods{
-        GoodsData{"Wood", 33},
-        GoodsData{"Adobe Bricks", 33, "item"},
-        GoodsData{"Wheat", 33},
-        GoodsData{"Fruits", 50, "fruit"},
-        GoodsData{"Corn", 50},
-        GoodsData{"Sugar", 50},
-        GoodsData{"Hemp", 50, "dry fruit"},
-        GoodsData{"Textiles", 150},
-        GoodsData{"Metal", 83},
-        GoodsData{"Cotton", 50},
-        GoodsData{"Metal Goods", 200, "item"},
-        GoodsData{"Dyes", 100, "dry fruit"},
-        GoodsData{"Coffee", 140, "dry fruit"},
-        GoodsData{"Cocao", 140, "dry fruit"},
-        GoodsData{"Tobacco", 100},
-        GoodsData{"Meat", 300},
-        GoodsData{"Clothing", 450, "item"},
-        GoodsData{"Ropes", 150, "item"},
-        GoodsData{"Rum", 267, "alcohol"},
-        GoodsData{"Bread", 142},
-    };
+    // constexpr std::array goods{
+    //     GoodsData{"Wood", 33},
+    //     GoodsData{"Adobe Bricks", 33, "item"},
+    //     GoodsData{"Wheat", 33},
+    //     GoodsData{"Fruits", 50, "fruit"},
+    //     GoodsData{"Corn", 50},
+    //     GoodsData{"Sugar", 50},
+    //     GoodsData{"Hemp", 50, "dry fruit"},
+    //     GoodsData{"Textiles", 150},
+    //     GoodsData{"Metal", 83},
+    //     GoodsData{"Cotton", 50},
+    //     GoodsData{"Metal Goods", 200, "item"},
+    //     GoodsData{"Dyes", 100, "dry fruit"},
+    //     GoodsData{"Coffee", 140, "dry fruit"},
+    //     GoodsData{"Cocao", 140, "dry fruit"},
+    //     GoodsData{"Tobacco", 100},
+    //     GoodsData{"Meat", 300},
+    //     GoodsData{"Clothing", 450, "item"},
+    //     GoodsData{"Ropes", 150, "item"},
+    //     GoodsData{"Rum", 267, "alcohol"},
+    //     GoodsData{"Bread", 142},
+    // };
 
-    if (j.empty()) {// create json with cargo types
-        constexpr auto fruitType = "fruit";
-        constexpr auto dryfruitType = "dry fruit";
-        constexpr auto alcoholType = "alcohol";
-        constexpr auto itemType = "item";
+    // if (j.empty()) {// create json with cargo types
+    //     constexpr auto fruitType = "fruit";
+    //     constexpr auto dryfruitType = "dry fruit";
+    //     constexpr auto alcoholType = "alcohol";
+    //     constexpr auto itemType = "item";
 
-        for (const auto& good : goods) {
-            auto randomAmount = std::rand() % 99 + 1;
-            if (good.type == fruitType) {
-                auto cargo = std::make_unique<Fruit>(good.name, randomAmount, good.value, 5);
-                JsonLoader::saveCargo("test.json", cargo);
-            } else if (good.type == dryfruitType) {
-                auto cargo = std::make_unique<DryFruit>(good.name, randomAmount, good.value, 5);
-                JsonLoader::saveCargo("test.json", cargo);
-            } else if (good.type == alcoholType) {
-                auto cargo = std::make_unique<Alcohol>(good.name, randomAmount, 40);
-                JsonLoader::saveCargo("test.json", cargo);
-            } else if (good.type == itemType) {
-                auto cargo = std::make_unique<Item>(good.name, randomAmount, good.value, Quality::common);
-                JsonLoader::saveCargo("test.json", cargo);
-            } else {
-                auto cargo = std::make_unique<CargoDefault>(good.name, randomAmount, good.value);
-                JsonLoader::saveCargo("test.json", cargo);
-            }
-        }
-    }
+    //     for (const auto& good : goods) {
+    //         auto randomAmount = std::rand() % 99 + 1;
+    //         if (good.type == fruitType) {
+    //             auto cargo = std::make_unique<Fruit>(good.name, randomAmount, good.value, 5);
+    //             JsonLoader::saveCargo("test.json", cargo);
+    //         } else if (good.type == dryfruitType) {
+    //             auto cargo = std::make_unique<DryFruit>(good.name, randomAmount, good.value, 5);
+    //             JsonLoader::saveCargo("test.json", cargo);
+    //         } else if (good.type == alcoholType) {
+    //             auto cargo = std::make_unique<Alcohol>(good.name, randomAmount, 40);
+    //             JsonLoader::saveCargo("test.json", cargo);
+    //         } else if (good.type == itemType) {
+    //             auto cargo = std::make_unique<Item>(good.name, randomAmount, good.value, Quality::common);
+    //             JsonLoader::saveCargo("test.json", cargo);
+    //         } else {
+    //             auto cargo = std::make_unique<CargoDefault>(good.name, randomAmount, good.value);
+    //             JsonLoader::saveCargo("test.json", cargo);
+    //         }
+    //     }
+    // }
 
     if (j.empty()) {//load types from json
         JsonLoader::loadCargo("test.json");

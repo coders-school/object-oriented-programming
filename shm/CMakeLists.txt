@@ -1,42 +1,29 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.14.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(shmProject)
 
-# # Download and unpack googletest at configure time
-# configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-# execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-#     RESULT_VARIABLE result
-#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-# if(result)
-#     message(FATAL_ERROR "CMake step for googletest failed: ${result}")
-# endif()
-# execute_process(COMMAND ${CMAKE_COMMAND} --build .
-#     RESULT_VARIABLE result
-#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
-# if(result)
-#     message(FATAL_ERROR "Build step for googletest failed: ${result}")
-# endif()
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        master
+)
 
-# # Download and unpack googletest at configure time
-# configure_file(CMakeLists2.txt.in catch2-download/CMakeLists.txt)
-# execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-#     RESULT_VARIABLE result
-#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/catch2-download )
-# if(result)
-#     message(FATAL_ERROR "CMake step for catch2 failed: ${result}")
-# endif()
-# execute_process(COMMAND ${CMAKE_COMMAND} --build .
-#     RESULT_VARIABLE result
-#     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/catch2-download )
-# if(result)
-#     message(FATAL_ERROR "Build step for catch2 failed: ${result}")
-# endif()
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        devel
+)
 
-# # Prevent overriding the parent project's compiler/linker
-# # settings on Windows
-# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+# After the following call, the CMake targets defined by googletest and
+# Catch2 will be defined and available to the rest of the build
 
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest Catch2)
+
+# include(GoogleTest)
 find_package(Catch2 REQUIRED)
 
 set(COMMAND_FILES
@@ -78,8 +65,7 @@ set(TEST_FLAGS -Wall -Wextra)
 
 add_library(${PROJECT_NAME}-lib STATIC ${FILES})
 add_executable(${PROJECT_NAME} main.cpp)
-add_executable(${PROJECT_NAME}-ut Tests/catch2/Tests.cpp
-    build/Catch2-src/extras/catch_amalgamated.cpp)
+add_executable(${PROJECT_NAME}-ut Tests/catch2/Tests.cpp)
 add_executable(${PROJECT_NAME}-ut2 Tests/gtests/main.cpp)
 
 set(DIRECTORIES 
@@ -89,10 +75,8 @@ set(DIRECTORIES
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${DIRECTORIES})
 target_include_directories(${PROJECT_NAME}-lib PRIVATE ${DIRECTORIES})
-target_include_directories(${PROJECT_NAME}-ut PRIVATE ${DIRECTORIES} 
-    build/Catch2-src/extras)
-target_include_directories(${PROJECT_NAME}-ut2 PRIVATE ${DIRECTORIES} 
-    build/googletest-src/googletest/include)
+target_include_directories(${PROJECT_NAME}-ut PRIVATE ${DIRECTORIES})
+target_include_directories(${PROJECT_NAME}-ut2 PRIVATE ${DIRECTORIES})
 
 target_compile_options(${PROJECT_NAME}-lib PRIVATE ${FLAGS})
 target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
@@ -100,8 +84,8 @@ target_compile_options(${PROJECT_NAME}-ut PRIVATE ${TEST_FLAGS})
 target_compile_options(${PROJECT_NAME}-ut2 PRIVATE ${TEST_FLAGS})
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
-target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib)
-target_link_libraries(${PROJECT_NAME}-ut2 ${PROJECT_NAME}-lib -lgtest)
+target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib Catch2::Catch2WithMain)
+target_link_libraries(${PROJECT_NAME}-ut2 ${PROJECT_NAME}-lib gtest_main)
 
 enable_testing()
 add_test(NAME Tests-catch2 COMMAND ${PROJECT_NAME}-ut)
