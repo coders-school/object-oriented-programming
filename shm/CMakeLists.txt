@@ -17,6 +17,7 @@ set(THIS_PROJECT_SRC_DIRECTORIES
     source/Player.cpp
     source/Ship.cpp
     source/Fruit.cpp
+    source/DryFruit.cpp
     source/Alcohol.cpp
     source/Item.cpp
     source/Store.cpp

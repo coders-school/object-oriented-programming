@@ -11,11 +11,11 @@ class Fruit : public Cargo {
 public:
     Fruit(const std::string& name, const size_t amount, const size_t basePrice);
 
-    Fruit& operator--();
+    virtual Fruit& operator--();
     
-    size_t getPrice() const override;
+    virtual size_t getPrice() const override;
 
-    std::string getName() const override;
+    virtual std::string getName() const override;
 
     size_t getAmount() const override;
 
