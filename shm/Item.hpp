@@ -21,6 +21,9 @@ public:
     void nextDay() override{};
 
     Rarity getRarity() const { return rarity_; }
+    std::unique_ptr<Cargo> clone(size_t amount) const {
+        return std::make_unique<Item>(name_, amount, basePrice_, rarity_);
+    }
 };
 
 #endif

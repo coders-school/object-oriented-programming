@@ -1,4 +1,5 @@
 #include "Map.hpp"
+#include "Coordinates.hpp"
 #include <algorithm>
 #include <iostream>
 #include <random>
@@ -44,11 +45,16 @@ Island* Map::getIsland(const Coordinates& coordinates) {
     return nullptr;
 }
 
-std::ostream& operator<<(std::ostream& out, const Map& map) {
+size_t Map::getDistanceToIsland(Island* destination) const {
+    return Coordinates::distance(currentPos_->getPosition(), destination->getPosition());
+}
+
+std::ostream& operator<<(std::ostream& out,const  Map& map) {
     int i{1};
+    out << "Map:" << "\n";
     for (const auto& island : map.islands_) {
         if (island) {
-            out << i++ << island->getPosition()  << '\n';
+            out << i++ << ". Island"<<island->getPosition()  << "Distance: " << map.getDistanceToIsland(island.get()) << "miles" <<'\n';
         }
     }
     std::cout << "\n";

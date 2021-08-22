@@ -6,9 +6,10 @@
 
 #include "Cargo.hpp"
 #include "Ship.hpp"
+#include "Delegate.hpp"
 
 // Class used to represent player
-class Player
+class Player : public Delegate 
 {
 private:
     std::unique_ptr<Ship> ship_;
@@ -23,9 +24,10 @@ public:
     size_t getMoney() const { return money_; };
     size_t getAvailableSpace() const { return availableSpace_; };
 
-    void PurchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
-    void SellCargo(Cargo* cargo, size_t price);
+    void purchaseCargo(std::unique_ptr<Cargo> cargo, size_t price);
+    void sellCargo(Cargo* cargo, size_t price);
     void printCargo() const;
+    void payCrew(size_t money) override;
 
     size_t getSpeed() const { return ship_->getSpeed(); };
     Cargo* getCargo(size_t index) const;

@@ -4,9 +4,10 @@
 #include <string>
 #include <vector>
 #include "Cargo.hpp"
+#include "Delegate.hpp"
 
 // Class used to represent merchant ship in the game
-class Ship
+class Ship : public TimeObserver
 {
 private:
     const size_t id_;
@@ -16,7 +17,7 @@ private:
     size_t capacity_;
     size_t crew_;
     std::vector<std::unique_ptr<Cargo>> cargoList_;
-
+    Delegate* delegate_;
     Cargo* findCargo(Cargo* cargo);
     void removeFromStorage(Cargo* cargo);
 
@@ -30,12 +31,13 @@ public:
     size_t getSpeed() const { return speed_; }
     std::string getName() const { return name_; }
     size_t getId() const { return id_; }
-    Cargo* getCargo(size_t index) const { return cargoList_[index].get(); };
+    Cargo* getCargo(size_t index) const { return cargoList_[index-1].get(); };
     size_t calculateCargoAmount();
     void printCargolist();
     void nextDay();
 
     void setName(const std::string &name);
+    void setDelegate(Delegate* delegate){delegate_=delegate;};
     void load(std::unique_ptr<Cargo> cargo);
     void unload(Cargo* cargo);
 

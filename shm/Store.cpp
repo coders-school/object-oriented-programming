@@ -21,15 +21,14 @@ Cargo* Store::findProduct(Cargo* cargo) {
     }
 }
 
-Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
-    std::cout<< cargo->getAmount()<<"\n";
-        if (cargo) {
-        auto price = amount * cargo->getBasePrice();
+Response Store::buy(Cargo* product, size_t amount, Player* player) {
+        if (product) {
+        auto price = amount * product->getBasePrice();
         if (player->getAvailableSpace() < amount) {
             //std::cout << "lack of space";
             return Response::lack_of_space;
         }
-        if (cargo->getAmount() < amount) {
+        if (product->getAmount() < amount) {
             //std::cout << "lack of cargo";
             return Response::lack_of_cargo;
         }
@@ -38,14 +37,13 @@ Response Store::buy(Cargo* cargo, size_t amount, Player* player) {
             return Response::lack_of_money;
         }
 
-        Cargo product = (*cargo);
-        auto product_ptr = std::make_unique<Cargo>(product); 
+        auto cargo = product->clone(amount);
 
-        player->PurchaseCargo(product_ptr, price);
-        if (cargo->getAmount() == amount) {
-            removeProduct(cargo);
+        player->purchaseCargo(std::move(cargo), price);
+        if (product->getAmount() == amount) {
+            removeProduct(product);
         } else {
-            *cargo -= amount;
+            *product -= amount;
         }
         return Response::done;
     } else {
@@ -59,9 +57,10 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     auto product = findProduct(cargo);
     if (product) {
         *product += amount;
-        player->SellCargo(product, price);
+        player->sellCargo(cargo, price);
         return Response::done;
     } else {
+        auto product = cargo->clone(amount);
         goodsList_.push_back(std::move(product));
         return Response::done;
     }
@@ -71,7 +70,6 @@ void Store::GenerateGoodsList() {
     goodsList_.push_back(std::make_unique<Fruit>("Bananas", 200, 40, 30));
     goodsList_.push_back(std::make_unique<Fruit>("Apples", 100, 20, 30));
     goodsList_.push_back(std::make_unique<Alcohol>("Wine", 33, 60, 20));
-    //goodsList_.push_back(std::make_shared<Item>("Swords", 1, 40, Rarity::common));
 }
 
 void Store::removeProduct(Cargo* cargo) {

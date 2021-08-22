@@ -4,12 +4,12 @@
 Time::Time()
     : timeElapsed_(0) {}
 
-void Time::AddObserver(std::shared_ptr<TimeObserver> obs) {
+void Time::AddObserver(TimeObserver* obs) {
     if (obs) {
         timeObservers_.push_back(obs);
     }
 }
-void Time::RemoveObserver(std::shared_ptr<TimeObserver> obs) {
+void Time::RemoveObserver(TimeObserver* obs) {
     timeObservers_.erase(std::find(std::begin(timeObservers_), std::end(timeObservers_), obs));
 }
 

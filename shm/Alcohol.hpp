@@ -21,6 +21,9 @@ public:
     size_t getStrength() const { return strength_; }
 
     void nextDay() override;
+    std::unique_ptr<Cargo> clone(size_t amount) const {
+        return std::make_unique<Alcohol>(name_, amount, basePrice_, strength_);
+    }
 };
 
 #endif

@@ -29,6 +29,7 @@ private:
     void sell();
     void printCargo();
     Action readCharacter();
+    void elapseTime(size_t days);
 
 public:
     Game(size_t money, size_t days, size_t finalGoal);

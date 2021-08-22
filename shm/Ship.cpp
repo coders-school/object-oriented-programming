@@ -8,7 +8,7 @@ Ship::Ship()
     : id_(-1) {}
 
 Ship::Ship(int capacity, int maxCrew, int speed, const std::string& name, size_t id)
-    : capacity_(capacity), maxCrew_(maxCrew), crew_(0), speed_(speed), name_(name), id_(id) {}
+    : capacity_(capacity), maxCrew_(maxCrew), crew_(10), speed_(speed), name_(name), id_(id) {}
 
 Ship::Ship(int maxCrew, int speed, size_t id)
     : Ship(0, maxCrew, speed, "", id) {}
@@ -76,6 +76,10 @@ size_t Ship::calculateCargoAmount() {
     size_t cargoAmount = std::accumulate(cargoList_.begin(),
                                          cargoList_.end(),
                                          0,
-                                         [](int amount, std::unique_ptr<Cargo> cargo) { return amount += cargo->getAmount(); });
+                                         [](int amount, std::unique_ptr<Cargo>& cargo) { return amount += cargo->getAmount(); });
     return cargoAmount;
 }
+
+void Ship::nextDay(){
+    delegate_ -> payCrew((size_t)crew_ * 0.1);
+};

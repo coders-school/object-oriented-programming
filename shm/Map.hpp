@@ -17,9 +17,12 @@ private:
 
 public:
     Map();
-    Island *getIsland(const Coordinates &coordinate);
+    Island* getIsland(const Coordinates &coordinate);
+    Island* getIsland(const size_t index){return islands_[index - 1].get();};
     Coordinates generateCoordinates();
-    Island* GetCurrentPosition() { return currentPos_; }
+    Island* getCurrentIsland() { return currentPos_; };
+    size_t getDistanceToIsland(Island* destination) const ;
+    void setCurrentPos(Island* destination) {currentPos_ = destination;};
     friend std::ostream &operator<<(std::ostream &, const Map &map);
 
 };
