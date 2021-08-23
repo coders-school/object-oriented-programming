@@ -1,0 +1,62 @@
+#include "Map.hpp"
+#include "Coordinates.hpp"
+#include <algorithm>
+#include <iostream>
+#include <random>
+#include <utility>
+
+constexpr size_t NUMBER_OF_ISLANDS = 10;
+constexpr size_t MAP_SIZE = 100;
+
+Map::Map(Time* time) {
+    islands_.reserve(NUMBER_OF_ISLANDS);
+    fillMapWithIslands(time);
+    currentPos_ = islands_[0].get();
+}
+
+Coordinates Map::generateCoordinates() {
+    std::random_device randomDevice;
+    std::mt19937 gen(randomDevice());
+    std::uniform_real_distribution<> distrib(0, MAP_SIZE);
+    Coordinates coordinates(distrib(gen), distrib(gen));
+    return coordinates;
+}
+
+void Map::fillMapWithIslands(Time* time) {
+    for (int i = 0; i < NUMBER_OF_ISLANDS; i++) {
+        Coordinates coordinates = generateCoordinates();
+        while (getIsland(coordinates)) {
+            Coordinates coordinates = generateCoordinates();
+        }
+        auto island = std::make_unique<Island>(coordinates, time);
+        islands_.push_back(std::move(island));
+    }
+}
+
+Island* Map::getIsland(const Coordinates& coordinates) {
+    auto itr = std::find_if(islands_.begin(), 
+                            islands_.end(),
+                            [&coordinates](const std::unique_ptr<Island>& island) {
+                                return island->getPosition() == coordinates;
+                            });
+    if (itr != islands_.end()) {
+        return (*itr).get();
+    }
+    return nullptr;
+}
+
+size_t Map::getDistanceToIsland(Island* destination) const {
+    return Coordinates::distance(currentPos_->getPosition(), destination->getPosition());
+}
+
+std::ostream& operator<<(std::ostream& out,const  Map& map) {
+    int i{1};
+    out << "Map:" << "\n";
+    for (const auto& island : map.islands_) {
+        if (island) {
+            out << i++ << ". Island"<<island->getPosition()  << "Distance: " << map.getDistanceToIsland(island.get()) << "miles" <<'\n';
+        }
+    }
+    std::cout << "\n";
+    return out;
+}
