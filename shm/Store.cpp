@@ -7,7 +7,7 @@
 #include "Item.hpp"
 #include "Player.hpp"
 
-Store::Store() {
+Store::Store(Time* time) : time_(time) {
     GenerateGoodsList();
 }
 
@@ -22,24 +22,22 @@ Cargo* Store::findProduct(Cargo* cargo) {
 }
 
 Response Store::buy(Cargo* product, size_t amount, Player* player) {
-        if (product) {
+    if (product) {
         auto price = amount * product->getBasePrice();
         if (player->getAvailableSpace() < amount) {
-            //std::cout << "lack of space";
             return Response::lack_of_space;
         }
         if (product->getAmount() < amount) {
-            //std::cout << "lack of cargo";
             return Response::lack_of_cargo;
         }
         if (player->getMoney() < price) {
-            //std::cout << "lack of money";
             return Response::lack_of_money;
         }
 
         auto cargo = product->clone(amount);
-
+        time_->AddObserver(cargo.get());
         player->purchaseCargo(std::move(cargo), price);
+        
         if (product->getAmount() == amount) {
             removeProduct(product);
         } else {
@@ -57,6 +55,7 @@ Response Store::sell(Cargo* cargo, size_t amount, Player* player) {
     auto product = findProduct(cargo);
     if (product) {
         *product += amount;
+        time_->RemoveObserver(cargo);
         player->sellCargo(cargo, price);
         return Response::done;
     } else {
@@ -94,4 +93,8 @@ std::ostream& operator<<(std::ostream& out, const Store& store) {
     }
     std::cout << "\n";
     return out;
+}
+
+void Store::nextDay(){
+    //regenerate goods
 }

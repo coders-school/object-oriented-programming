@@ -7,14 +7,14 @@
 
 Game::Game(size_t money, size_t days, size_t finalGoal)
     : money_(money), days_(days), finalGoal_(finalGoal), currentDay_(1) {
-    std::unique_ptr<Map> map(new Map());
+    std::unique_ptr<Time> time(new Time());
+    time_ = std::move(time);
+    std::unique_ptr<Map> map(new Map(time_.get()));
     map_ = std::move(map);
     std::unique_ptr<Ship> ship(new Ship(1000, 50, 15, "HMS Terror", 1));
     std::unique_ptr<Player> player(new Player(ship, money_));
     player_ = std::move(player);
     player_->getShip()->setDelegate(player_.get());
-    std::unique_ptr<Time> time(new Time());
-    time_ = std::move(time);
     time_->AddObserver(player_->getShip());
 }
 

@@ -15,8 +15,7 @@ public:
     virtual size_t getPrice() const override {
         if (timeInCargoRoom_ >= shelfLife_)
             return 0;
-        return static_cast<size_t>(
-            basePrice_ * ((float)(shelfLife_ - timeInCargoRoom_)) / shelfLife_);
+        return static_cast<size_t>(basePrice_ * ((float)(shelfLife_ - timeInCargoRoom_)) / shelfLife_);
     }
     virtual const std::string& getName() const override { return name_; }
     size_t getAmount() const override { return amount_; };

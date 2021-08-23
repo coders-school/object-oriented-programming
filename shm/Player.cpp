@@ -50,6 +50,5 @@ void Player::sellCargo(Cargo* cargo, size_t price) {
 };
 
 void Player::payCrew(size_t money){
-    std::cout << money;
     money_-= money;
 }

@@ -12,11 +12,11 @@ class Map
 private:
     Island *currentPos_;
     std::vector<std::unique_ptr<Island>> islands_;
-    void fillMapWithIslands();
+    void fillMapWithIslands(Time* time);
     
 
 public:
-    Map();
+    Map(Time* time);
     Island* getIsland(const Coordinates &coordinate);
     Island* getIsland(const size_t index){return islands_[index - 1].get();};
     Coordinates generateCoordinates();

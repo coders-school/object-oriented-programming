@@ -24,12 +24,6 @@ public:
     virtual size_t getAmount() const = 0;
     virtual size_t getBasePrice() const = 0;
     virtual std::unique_ptr<Cargo> clone(size_t amount) const =0;
-
-    //friend size_t operator+(size_t sum, const Cargo& cargo);
 };
-
-/* size_t operator+(size_t sum, const std::shared_ptr<Cargo> & cargo){
-    return sum + cargo->getAmount();
-} */
 
 #endif

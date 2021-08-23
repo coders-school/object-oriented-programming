@@ -8,9 +8,9 @@
 constexpr size_t NUMBER_OF_ISLANDS = 10;
 constexpr size_t MAP_SIZE = 100;
 
-Map::Map() {
+Map::Map(Time* time) {
     islands_.reserve(NUMBER_OF_ISLANDS);
-    fillMapWithIslands();
+    fillMapWithIslands(time);
     currentPos_ = islands_[0].get();
 }
 
@@ -22,13 +22,13 @@ Coordinates Map::generateCoordinates() {
     return coordinates;
 }
 
-void Map::fillMapWithIslands() {
+void Map::fillMapWithIslands(Time* time) {
     for (int i = 0; i < NUMBER_OF_ISLANDS; i++) {
         Coordinates coordinates = generateCoordinates();
         while (getIsland(coordinates)) {
             Coordinates coordinates = generateCoordinates();
         }
-        auto island = std::make_unique<Island>(coordinates);
+        auto island = std::make_unique<Island>(coordinates, time);
         islands_.push_back(std::move(island));
     }
 }
