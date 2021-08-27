@@ -10,154 +10,6 @@
 #include <random>
 #include <typeinfo>
 
-Store::Store() {
-    generateDefaultCargo();
-};
-
-// std::shared_ptr<Cargo> Store::findCargoInStore(const std::string& name) {
-//     auto find = std::find_if(stock_.begin(),
-//                              stock_.end(),
-//                              [&name](const auto& cargo) { return cargo->getName() == name; });
-//     if (find != stock_.end()) {
-//         return find->get()
-//     }
-
-//     return nullptr;
-// }
-
-// std::shared_ptr<Cargo> Store::findCargoInStore(const std::shared_ptr<Cargo> wantedCargo) {
-//     for( const auto el : stock_) {
-//         if(*el == *wantedCargo){
-//             return el;
-//         }
-//     }
-// }
-
-// Response Store::buy(std::shared_ptr<Cargo>& cargo, size_t amount, Player* player) {
-//     if (!cargo || !amount || !player) {
-//         return Response::lack_of_cargo;
-//     }
-
-//     std::shared_ptr<Ship> playerShip = player->getShip();
-//     if (!playerShip) {
-//         return Response::lack_of_cargo;
-//     }
-
-//     auto soldPlayerCargo = playerShip->getCargosVector()[0];
-//     for (const auto el : playerShip->getCargosVector()) {
-//         auto loopCargo = el;
-
-//         if (loopCargo == cargo) {
-//             if (loopCargo->getAmount() < amount) {
-//                 return Response::lack_of_space;
-//             }
-//         }
-//         soldPlayerCargo = loopCargo;
-//     }
-
-//     if (!soldPlayerCargo) {
-//         return Response::lack_of_cargo;
-//     }
-
-//     player->sell(cargo, amount);
-//     unloadShip(cargo,amount);
-
-//     return Response::done;
-
-// }
-
-Response Store::sell(std::shared_ptr<Cargo>& cargo, size_t amount, Player* player) {
-    //lack of an amount of cargo in store
-
-    std::cout << "nazwa ładunku: " << cargo->getName() << " ilosć ładunku: " << amount << " ile miejsc wolnych u zawodnika: " << player->getAvailableSpace() << '\n';
-    if (!cargo || !amount) {
-        std::cout << " lack of cargo !cargo || !amount\n";
-        Response::lack_of_cargo;
-    }
-
-    //lack of space on player's ship
-    if (!player) {
-        std::cout << " I am here !player'\n";
-
-        return Response::lack_of_space;
-    }
-
-    std::shared_ptr<Ship> playerShip = player->getShip();
-    if (!playerShip) {
-        std::cout << " I am here . NO player ship'\n";
-
-        return Response::lack_of_space;
-    }
-
-    // Check if player can take cargo on ship
-    bool playerHaveTheSameCargo = false;
-    auto playerCargo = playerShip->getCargosVector();
-    for (const auto& el : playerCargo) {
-        if (el->getName() == cargo->getName()) {
-            playerHaveTheSameCargo = true;
-            break;
-        }
-    }
-    if (!playerHaveTheSameCargo && !player->getAvailableSpace()) {
-        std::cout << " I am here brak miejsca'\n";
-        ;
-
-        return Response::lack_of_space;
-    }
-
-    // Finding cargo in the store
-    // auto StoredCargo = findCargoInStore(cargo);
-    // std::cout << 
-
-    // std::cout << "nazw stored Cargo: " << StoredCargo->get()->getAmount();
-    // if (StoredCargo != stock_.end()) {
-    //     std::cout << " I am here NIE ma cargo w store'\n" << StoredCargo->get()->getName() << '\n';
-
-    //     return Response::lack_of_cargo;
-    // }
-
-    // // not enough cargo amount in the store
-
-    // if (StoredCargo->get()->getAmount() < amount) {
-    //     std::cout << " I am here'\n";
-
-    //     return Response::lack_of_cargo;
-    // }
-
-    // // Too expenisive for player
-
-    // if (player->getMoney() < amount * (StoredCargo->get()->getPrice())) {
-    //     std::cout << " I am here'\n";
-
-    //     return Response::lack_of_money;
-    // }
-
-    // Dopisać co sie stanie gdy dojedzie do sprzedaży.
-    // Unload ze Statku. Load na statek.
-    // Jak sie zmieni konto gracza.
-    player->buy(cargo, amount);
-    loadShip(cargo, amount);
-    return Response::done;
-    
-}
-
-
-
-
-std::ostream& operator<<(std::ostream& os, const Store& store) {
-    int counter = 1;
-    for (const auto& el : store.stock_) {
-        os << "|" << std::setw(20);
-        os << std::setfill(' ') << std::setw(20) << "ID: " << counter;
-        os << std::setw(20) << " TYPE OF CARGO: " << el->getName();
-        os << std::setw(20) << " AMOUNT: " << el->getAmount();
-        os << std::setw(20) << " PRICE: " << el->getPrice() << '\n';
-        counter++;
-    }
-    os << "|" << std::setfill('*') << std::setw(100) << "|\n";
-
-    return os;
-}
 constexpr size_t AMOUNT_MIN = 5;
 constexpr size_t AMOUNT_MAX = 150;
 constexpr size_t POWER_MIN = 10;
@@ -166,6 +18,94 @@ constexpr size_t DAY_MIN = 5;
 constexpr size_t DAY_MAX = 17;
 constexpr size_t PRICE_MIN = 5;
 constexpr size_t PRICE_MAX = 145;
+
+Store::Store() {
+    generateDefaultCargo();
+}
+
+std::vector<std::shared_ptr<Cargo>>::iterator Store::findMatchCargo(const std::shared_ptr<Cargo> wantedCargo) {
+    auto find = std::find_if(stock_.begin(),
+                             stock_.end(),
+                             [&wantedCargo](const auto& cargo) { return cargo->getName() == wantedCargo->getName(); });
+
+    return find;
+}
+
+Response Store::buy(std::shared_ptr<Cargo>& cargo, size_t amount, Player* player) {
+    if (!cargo || !amount || !player) {
+        return Response::lack_of_cargo;
+    }
+
+    std::shared_ptr<Ship> playerShip = player->getShip();
+    if (!playerShip) {
+        return Response::lack_of_cargo;
+    }
+
+    auto shipCargo = playerShip->findMatchCargo(cargo);
+    auto shipStock = playerShip->getCargosVector();
+    if (shipCargo == shipStock.end()) {
+        return Response::lack_of_cargo;
+    }
+
+    if (shipCargo->get()->getAmount() < amount) {
+        return Response::lack_of_cargo;
+    }
+
+    player->sell(cargo, amount);
+    unloadShip(cargo, amount);
+
+    return Response::done;
+}
+
+Response Store::sell(std::shared_ptr<Cargo>& cargo, size_t amount, Player* player) {
+    if (!cargo || !amount) {
+        Response::lack_of_cargo;
+    }
+
+    if (!player) {
+        return Response::lack_of_space;
+    }
+
+    std::shared_ptr<Ship> playerShip = player->getShip();
+    if (!playerShip) {
+        return Response::lack_of_space;
+    }
+    auto wantedCargo = findMatchCargo(cargo);
+    if (wantedCargo != stock_.end()) {
+        if (wantedCargo->get()->getAmount() < amount) {
+            std::cout << "Not enough cargo in Store \n";
+            return Response::lack_of_cargo;
+        }
+    }
+
+    if (player->getAvailableSpace() < amount) {
+        std::cout << "There is no space on the ship\n";
+        return Response::lack_of_space;
+    }
+
+    if (player->getMoney() <= 0) {
+        std::cout << "NO MONEY\n";
+        return Response::lack_of_money;
+    }
+
+    player->buy(cargo, amount);
+    std::cout << '\n';
+    loadShip(cargo, amount);
+    return Response::done;
+}
+
+std::ostream& operator<<(std::ostream& os, const Store& store) {
+    int counter = 1;
+    os << '\n';
+    os << std::setfill(' ') << "ID" << std::setw(30) << " TYPE OF CARGO" << std::setw(18) << "AMOUNT" << std::setw(27) << "PRICE\n";
+    for (const auto& el : store.stock_) {
+        os << std::left << std::setfill(' ') << std::setw(19) << counter << std::setw(25) << el->getName() << std::setw(27) << el->getAmount() << std::setw(5) << el->getPrice() << '\n';
+        counter++;
+    }
+    os << std::setfill('*') << std::setw(100) << "\n";
+
+    return os;
+}
 
 void Store::generateDefaultCargo() {
     std::random_device rm;
@@ -192,36 +132,53 @@ void Store::generateDefaultCargo() {
     stock_.push_back(std::make_shared<Item>("Ivory", amountR(gr), priceR(gr), Rarity::rare));
 }
 
-
 void Store::loadShip(std::shared_ptr<Cargo>& cargo, size_t& amount) {
-    if(!cargo){
+    if (!cargo) {
         return;
     }
-    bool flag = false;
-    for (const auto& el : stock_) {
-        if( el->getName() == cargo->getName())
-        {
-            el->setAmount(el->getAmount() - amount);
-            flag = true;
-            break;
+
+    auto loadedCargo = findMatchCargo(cargo);
+    if (loadedCargo != stock_.end()) {
+        loadedCargo->get()->setAmount(loadedCargo->get()->getAmount() - amount);
+
+        if (loadedCargo->get()->getAmount() == 0) {
+            stock_.erase(loadedCargo);
         }
     }
-    if(!flag) {
-        std::cout << "dupa: \n";
+    if (loadedCargo == stock_.end()) {
+        std::cout << "There is no cargo!!!\n";
+        return;
     }
 }
 
 void Store::unloadShip(std::shared_ptr<Cargo>& cargo, size_t& amount) {
-    if(!cargo){
+    if (!cargo) {
         return;
     }
-    for (const auto& el : stock_) {
-        if( el->getName() == cargo->getName())
-        {
-            el->setAmount(el->getAmount()  + amount);
-            std::cout << "dodało do store'\n";
-            break;
-        }
+
+    auto unloadCargo = findMatchCargo(cargo);
+    if (unloadCargo != stock_.end()) {
+        unloadCargo->get()->setAmount(unloadCargo->get()->getAmount() + amount);
+    }
+    addCargo(cargo, amount);
+}
+
+void Store::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
+    if (Alcohol* alcohol = dynamic_cast<Alcohol*>(cargo.get())) {
+        stock_.push_back(std::make_shared<Alcohol>(alcohol->getName(),
+                                                   amount,
+                                                   alcohol->getBasePrice(),
+                                                   alcohol->getPercentage()));
+    } else if (Fruit* fruit = dynamic_cast<Fruit*>(cargo.get())) {
+        stock_.push_back(std::make_shared<Fruit>(fruit->getName(),
+                                                 amount,
+                                                 fruit->getBasePrice(),
+                                                 fruit->getExpirationDate()));
+    } else if (Item* item = dynamic_cast<Item*>(cargo.get())) {
+        stock_.push_back(std::make_shared<Item>(item->getName(),
+                                                amount,
+                                                item->getPrice(),
+                                                item->getRarity()));
     }
 }
 
