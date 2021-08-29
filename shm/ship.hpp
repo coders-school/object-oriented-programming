@@ -55,7 +55,9 @@ public:
     void load(std::shared_ptr<Cargo>& cargo, size_t amount);
 
     friend std::ostream& operator<<(std::ostream& os, const Ship& ship);
-    void nextDay(Player& player);
+    void nextDay();
+
+    void setOwner(Player* owner);
    
 private:
     size_t capacity_;
@@ -66,4 +68,5 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargos_;
+    Player* owner_;
 };
