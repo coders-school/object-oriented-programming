@@ -1,3 +1,4 @@
+#include "ship.hpp"
 #include <algorithm>
 #include <iomanip>
 #include <iostream>
@@ -7,7 +8,7 @@
 #include "cargo.hpp"
 #include "fruit.hpp"
 #include "item.hpp"
-#include "ship.hpp"
+
 
 // Class responsible for managing Ships in the game.
 Ship& Ship::operator-=(size_t num) {
@@ -135,7 +136,7 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
         cargos_.push_back(std::make_shared<Fruit>(fruit->getName(),
                                                     amount,
                                                     fruit->getBasePrice(),
-                                                    fruit->getExpirationDate()));
+                                                    fruit->getExpirationDate(), nullptr));
     } else if(Item* item =dynamic_cast<Item*>(cargo.get())) {
         cargos_.push_back(std::make_shared<Item>(item->getName(),
                                                  amount,

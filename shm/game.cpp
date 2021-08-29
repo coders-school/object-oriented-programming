@@ -6,10 +6,7 @@ Game::Game(size_t money, size_t days, size_t goal)
     : money_(money),
       gameDayes_(days),
       finalGoal_(goal) {
-    time_ = std::make_shared<Time>(gameDayes_);
-    map_ = std::make_shared<Map>(time_);
-    ship_ = std::make_shared<Ship>(1000, 40, 10, 20, "Santa Blanca", 1, 40);
-    player_ = std::make_shared<Player>(ship_, money);
+ 
 }
 
 //   ship_(std::make_shared<Ship>(1000, 40, 15, 10, "Babilon", 2, {}, 10))
@@ -38,7 +35,7 @@ void Game::startGame() {
         std::cin.clear();
         std::cin >> choice;
 
-        chooseOption(static_cast<MenuOption>(choice));
+        // chooseOption(static_cast<MenuOption>(choice));
     }
     // printLoseScreen();
     // exit();
@@ -60,7 +57,7 @@ void Game::printMenu() {
 void Game::printHeader() {
     std::cout << "/" << std::setfill('-') << std::setw(100) << "/\n";
     std::cout << "/" << std::setfill(' ') << std::setw(100) << "/\n";
-    std::cout << "/" << std::setfill(' ') << std::setw(62) << "Welcom to the game SHM" << std::setw(38) << "/\n";
+    std::cout << "/" << std::setfill(' ') << std::setw(62) << "Welcome to the game SHM" << std::setw(38) << "/\n";
     std::cout << "/" << std::setfill(' ') << std::setw(100) << "/\n";
     std::cout << "/" << std::setfill(' ') << std::setw(55) << "YOUR MONEY: " << std::setw(4) << money_ << std::setw(41) << "/\n";
     std::cout << "/" << std::setfill(' ') << std::setw(54) << "YOUR GOAL: " << std::setw(5) << finalGoal_ << std::setw(41) << "/\n";
@@ -100,13 +97,13 @@ bool Game::checkLoseCondition() {
     return money_ = 0 || (gameDayes_ >= 0 && money_ < finalGoal_);
 }
 
-void Game::chooseOption(MenuOption option) {
+void Game::chooseOption(Game::MenuOption option) {
     switch (option) {
     case MenuOption::Travel:
         travel();
         break;
     case MenuOption::PrintCargo:
-        printCargo();
+      //  printCargo();
         break;
     case MenuOption::Buy:
         buy();
@@ -131,9 +128,9 @@ void Game::sell() {
     std::cout << "your are sell\n";
 }
 
-void Game::printMap(std::shared_ptr<Map> map) {
-    // map->printCurrentPosition();
-}
+//void Game::printMap(std::shared_ptr<Map> map) {
+//    // map->printCurrentPosition();
+//}
 
 void Game::travel() {
 
@@ -144,14 +141,14 @@ void Game::buy() {
 
 }
 
-void Game::printCargo() {
-    std::cout << "Chuj, dupa i kamienia kupa\n";
-    player_->printCargo();
-}
+// void Game::printCargo() {
+//     std::cout << "Chuj, dupa i kamienia kupa\n";
+//     player_->printCargo();
+// }
 
-void Game::setPlayer() {
-    std::cout << "Set ship name!";
-    std::string shipName;
-    std::cin >> shipName;
-    ship_->setName(shipName);
-}
+// void Game::setPlayer() {
+//     std::cout << "Set ship name!";
+//     std::string shipName;
+//     std::cin >> shipName;
+//     ship_->setName(shipName);
+// }

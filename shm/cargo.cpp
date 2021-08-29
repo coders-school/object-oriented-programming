@@ -1,5 +1,6 @@
-#include <iostream>
 #include "cargo.hpp"
+#include <iostream>
+
 
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, Time *time)
     : name_(name)

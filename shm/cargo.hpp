@@ -8,7 +8,8 @@
 class Cargo : public IObserver {
 public:
     Cargo(const std::string& name, size_t amount, size_t basePrice, Time *time);
-    Cargo(const std::string& name, size_t amount, size_t basePrice);
+    Cargo(const std::string& name, size_t amount, size_t basePrice)
+    :Cargo(name, amount, basePrice, nullptr) {}; // <- Tu jest problem z linkerem!!!!
     virtual ~Cargo() = default;
 
     virtual Cargo& operator+=(size_t amount);

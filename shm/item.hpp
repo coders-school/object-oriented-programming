@@ -28,6 +28,7 @@ public:
     Rarity getRarity() const {return rarity_;};
 
     void setAmount(const size_t& amount) override { amount_ = amount;};
+    void nextDay() override {};
 private:
     Rarity rarity_;
 };

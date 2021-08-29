@@ -21,6 +21,7 @@ public:
     size_t getAmount() const override { return amount_; };
     size_t getBasePrice() const override { return basePrice_; };
     void setAmount(const size_t& amount) override { amount_ = amount;};
+    void nextDay() override {};
 private:
     size_t percentage_;
 };

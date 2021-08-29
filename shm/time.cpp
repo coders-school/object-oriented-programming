@@ -18,6 +18,7 @@ void Time::detachObserver(IObserver *observer)
 void Time::onTimeChange()
 {
     notifyAll();
+    daysNum_++;
 }
 
 void Time::notifyAll()

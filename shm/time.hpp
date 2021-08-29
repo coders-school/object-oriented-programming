@@ -17,12 +17,13 @@ public:
 
     void onTimeChange();
 
-    
+
 
 
 private:
     std::list<IObserver*> observerList_; 
 
     void notifyAll();
+    size_t daysNum_ = 0;
 
 };
