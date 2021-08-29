@@ -17,7 +17,7 @@ public:
             time ->attachObserver(this);
         }
     Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargos, Time * time)
-        :  capacity_(capacity)
+        : capacity_(capacity)
         , maxCrew_(maxCrew)
         , crew_(crew)
         , speed_(speed)

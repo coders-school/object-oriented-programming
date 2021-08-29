@@ -12,7 +12,9 @@ set(FILES
     store.cpp
     alcohol.cpp
     item.cpp 
-    fruit.cpp 
+    fruit.cpp
+    time.cpp
+    game.cpp
     )
 
 set(FLAGS 

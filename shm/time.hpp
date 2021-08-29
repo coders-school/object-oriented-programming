@@ -17,6 +17,8 @@ public:
 
     void onTimeChange();
 
+    
+
 
 private:
     std::list<IObserver*> observerList_; 

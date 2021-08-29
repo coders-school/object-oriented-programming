@@ -31,7 +31,7 @@ std::vector<std::shared_ptr<Cargo>>::iterator Store::findMatchCargo(const std::s
     return find;
 }
 
-Response Store::buy(std::shared_ptr<Cargo>& cargo, size_t amount, Player* player) {
+Response Store::buy(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player) {
     if (!cargo || !amount || !player) {
         return Response::lack_of_cargo;
     }
@@ -57,7 +57,7 @@ Response Store::buy(std::shared_ptr<Cargo>& cargo, size_t amount, Player* player
     return Response::done;
 }
 
-Response Store::sell(std::shared_ptr<Cargo>& cargo, size_t amount, Player* player) {
+Response Store::sell(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player) {
     if (!cargo || !amount) {
         Response::lack_of_cargo;
     }
@@ -117,8 +117,10 @@ void Store::generateDefaultCargo() {
     std::uniform_int_distribution<> priceR(PRICE_MIN, PRICE_MAX);
 
     stock_.reserve(12);
+//,  
 
-    stock_.push_back(std::make_shared<Alcohol>("BUH", amountR(gr), priceR(gr), powerR(gr)));
+    // stock_.push_back(std::make_shared<Alcohol>("BUH", amountR(gr), priceR(gr), powerR(gr)));
+    stock_.push_back(std::make_shared<Alcohol>("BUH", amountR(gr), priceR(gr), powerR(gr)) );
     stock_.push_back(std::make_shared<Alcohol>("Jack Walker", amountR(gr), priceR(gr), powerR(gr)));
     stock_.push_back(std::make_shared<Alcohol>("Johny Daniels", amountR(gr), priceR(gr), powerR(gr)));
     stock_.push_back(std::make_shared<Alcohol>("Żubrówkeczka", amountR(gr), priceR(gr), powerR(gr)));
@@ -132,7 +134,7 @@ void Store::generateDefaultCargo() {
     stock_.push_back(std::make_shared<Item>("Ivory", amountR(gr), priceR(gr), Rarity::rare));
 }
 
-void Store::loadShip(std::shared_ptr<Cargo>& cargo, size_t& amount) {
+void Store::loadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     if (!cargo) {
         return;
     }
@@ -151,7 +153,7 @@ void Store::loadShip(std::shared_ptr<Cargo>& cargo, size_t& amount) {
     }
 }
 
-void Store::unloadShip(std::shared_ptr<Cargo>& cargo, size_t& amount) {
+void Store::unloadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     if (!cargo) {
         return;
     }
@@ -163,7 +165,7 @@ void Store::unloadShip(std::shared_ptr<Cargo>& cargo, size_t& amount) {
     addCargo(cargo, amount);
 }
 
-void Store::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
+void Store::addCargo(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     if (Alcohol* alcohol = dynamic_cast<Alcohol*>(cargo.get())) {
         stock_.push_back(std::make_shared<Alcohol>(alcohol->getName(),
                                                    amount,
