@@ -21,12 +21,10 @@ public:
     virtual size_t getBasePrice() const = 0;
 
     virtual void setAmount(const size_t& amount) = 0; //{ amount_ = amount; };
-    void nextDay();
     
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
     Time* time_;
-    double lifespan_ = 1;
 };

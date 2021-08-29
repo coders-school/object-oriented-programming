@@ -28,8 +28,3 @@ bool Cargo::operator==(const Cargo& cargo) const {
     return cargo.getName() == getName();
 }
 
-void Cargo::nextDay() {
-    if (lifespan_ >= 0.01) {
-        lifespan_ -= 0.01;
-    }
-}
