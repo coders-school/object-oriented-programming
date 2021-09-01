@@ -184,9 +184,9 @@ birds_.push_back(std::make_shared<Goose>());
 birds_.push_back(std::make_shared<Hen>());
 birds_.push_back(std::make_shared<Duck>());
 
-std::cout << birds_[0]->makeSound() << '\n';
-std::cout << birds_[1]->makeSound() << '\n';
-std::cout << birds_[2]->makeSound() << '\n';
+birds_[0]->makeSound();
+birds_[1]->makeSound();
+birds_[2]->makeSound();
 ```
 <!-- .element: class="fragment fade-in" -->
 
