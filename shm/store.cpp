@@ -194,16 +194,21 @@ void Store::nextDay() {
             int adding_taking_min = 1;
             std::uniform_int_distribution<> in_store_action(less_stuff_in_store, more_stuff_in_store);
             std::uniform_int_distribution<> to_add_or_take(adding_taking_min, adding_taking_max);
+            int storeCapacity = 500;
             if(in_store_action(gr)) {
+                *cargo += to_add_or_take(gr);
+                if (cargo->getAmount() > storeCapacity) {
+                    *cargo -= cargo->getAmount() - storeCapacity;
+                }
+            } else {
                 *cargo -= to_add_or_take(gr);
                 if (cargo->getAmount() < 0) {
                     *cargo -= cargo->getAmount();
                 }
-                if (cargo->getAmount() > 500) {
-                    *cargo -= cargo->getAmount() - 500;
+                if (cargo->getAmount() > storeCapacity) {
+                    *cargo -= cargo->getAmount() - storeCapacity;
                 }
-            } else {
-                *cargo += to_add_or_take(gr);
+               
             }
         }
     }
