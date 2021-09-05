@@ -23,10 +23,11 @@ public:
     Menu(Game*);
     ~Menu();
 
-    bool isPlayerChoiceValid(const size_t &playerAnswer);
-    void menuChoice(MenuItem);
-    void printMenu();
     void playerChoice();
+    bool isPlayerChoiceValid(const size_t &playerAnswer) const;
+    void menuChoice(MenuItem) const;
+    void printMenu() const;
+    
 
 private:
     MenuItem item_;

@@ -18,7 +18,7 @@ void Menu::playerChoice()
     menuChoice(item_);
 }
 
-bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
+bool Menu::isPlayerChoiceValid(const size_t &playerAnswer) const
 {
     if(std::cin.fail() || playerAnswer < 0 || playerAnswer > 5)
     {
@@ -30,7 +30,7 @@ bool Menu::isPlayerChoiceValid(const size_t &playerAnswer)
     return true;
 }
 
-void Menu::menuChoice(MenuItem item)
+void Menu::menuChoice(MenuItem item) const
 {
     switch(item)
     {
@@ -60,7 +60,7 @@ void Menu::menuChoice(MenuItem item)
     }
 }
 
-void Menu::printMenu()
+void Menu::printMenu() const
 {
     std::cout << "What is your choice capt'n? " << '\n';
     std::cout << "==========================\n";
