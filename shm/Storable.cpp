@@ -13,6 +13,8 @@ Storable::Storable(int money, size_t availableSpace, Time* time)
         time_->attach(this);
     }
 
+Storable::~Storable(){}
+
 void Storable::SpendMoney(int moneyToSpend)
 {
     if (money_ - moneyToSpend <= 0)
@@ -28,8 +30,4 @@ void Storable::EarnMoney(int moneyToEarn)
         money_ += moneyToEarn;
     }
 }
-void Storable::removeCargo(std::shared_ptr<Cargo>, size_t)
-{
-    
-}
-Storable::~Storable(){}
+
