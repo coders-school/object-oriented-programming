@@ -22,9 +22,7 @@ Ship::Ship(int capacity, int Crew, int speed, const std::string &name, size_t id
 
 Ship::Ship(int maxCrew, int speed, size_t id, Time *time)
     : Ship(0, maxCrew, speed, "", id, time)
-{
-    time_->attach(this);
-}
+{}
 
 Ship::~Ship()
 {
