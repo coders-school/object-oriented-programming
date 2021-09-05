@@ -12,20 +12,11 @@ class Storable : public TimeEffectable
 {
 public:
     // Constructor for objects not subscribed to Time class (i.e. Player)
-    Storable(int money, size_t availableSpace)
-        : money_(money)
-        , availableSpace_(availableSpace)
-        {}
+    Storable(int money, size_t availableSpace);
 
     //Constructor for objects subscribed to Time class (i.e. Store)
-    Storable(int money, size_t availableSpace, Time* time)
-        : money_(money)
-        , availableSpace_(availableSpace)
-        , time_(time)
-        {
-            time_->attach(this);
-        }
-
+    Storable(int money, size_t availableSpace, Time* time);
+    
     virtual ~Storable();
 
     int getMoney() {return money_; }
