@@ -22,7 +22,7 @@ void Time::detach(TimeEffectable* observer)
 
 void Time::notify(size_t & elapsedDays)
 {
-    for(auto el : list_observer_)
+    for(const auto & el : list_observer_)
     {
         el->nextDay(elapsedDays);
     }
