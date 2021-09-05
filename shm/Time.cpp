@@ -20,7 +20,7 @@ void Time::detach(TimeEffectable* observer)
     list_observer_.remove(observer);
 }
 
-void Time::notify(size_t elapsedDays)
+void Time::notify(size_t & elapsedDays)
 {
     for(auto el : list_observer_)
     {
