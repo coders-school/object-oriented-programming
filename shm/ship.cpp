@@ -57,7 +57,7 @@ void Ship::addCargo(Cargo * item)
     }
     else
     {
-        shipCargo.emplace_back(item);
+        shipCargo.push_back(item);
     }
 }
 
