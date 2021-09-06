@@ -63,10 +63,10 @@ void Ship::addCargo(Cargo * item)
 
 void Ship::removeCargo(Cargo * item, size_t amount)
 {
-    auto shipCargoAmount = findMatchCargo(item)->getAmount();
+    const auto shipCargoAmount = findMatchCargo(item)->getAmount();
     if(shipCargoAmount == amount)
     {
-        auto it = std::find_if(begin(shipCargo), end(shipCargo), [item](const auto* el){ return *el == *item; });
+        const auto it = std::find_if(begin(shipCargo), end(shipCargo), [item](const auto* el){ return *el == *item; });
         if(it != end(shipCargo)) {
             shipCargo.erase(it);
         }
@@ -96,7 +96,6 @@ void Ship::load(Cargo * loadCargo, size_t amount)
         Cargo* toAdd;
         if(Fruit* f = dynamic_cast<Fruit*>(loadCargo)){
             toAdd = new Fruit(*f);
-
         }
         if(Item* i = dynamic_cast<Item*>(loadCargo)){
             toAdd = new Item(*i);
