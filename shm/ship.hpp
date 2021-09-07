@@ -16,20 +16,19 @@ public:
         : id_(-1) {
             time ->attachObserver(this);
         }
-    Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::vector<std::shared_ptr<Cargo>> cargos, Time * time)
+    Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, Time * time)
         : capacity_(capacity)
         , maxCrew_(maxCrew)
         , crew_(crew)
         , speed_(speed)
         , name_(name)
         , id_(id)
-        , cargos_(cargos)
         , time_(time)
      {
          time->attachObserver(this);
      }
     Ship(size_t maxCrew, size_t speed, size_t id, Time * time)
-        : Ship(0, maxCrew, 0, speed, "", id, {}, time) {
+        : Ship(0, maxCrew, 0, speed, "", id, time) {
             time->attachObserver(this);
         }
 
@@ -67,6 +66,6 @@ private:
     Time * time_;
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargos_;
+    std::vector<std::shared_ptr<Cargo>> cargos_{};
     Player* owner_;
 };

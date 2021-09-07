@@ -208,7 +208,6 @@ void Store::nextDay() {
                 if (cargo->getAmount() > storeCapacity) {
                     *cargo -= cargo->getAmount() - storeCapacity;
                 }
-               
             }
         }
     }
