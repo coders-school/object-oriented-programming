@@ -1,5 +1,5 @@
 #include "Game.hpp"
-
+#include <limits>
 class Map;
 
 Game::Game(size_t money, size_t gameDays, size_t finalGoal)
@@ -125,12 +125,15 @@ void Game::printStoreCargo()
     currentStore_->printStoreCargo();
 }
 
+
+
 void Game::buyCargo()
 {
     int cargoElement = 0;
     size_t amount = 0;
     std::cout << "Choose cargo: ";
     std::cin >> cargoElement;
+
     if (cargoElement >=0 && cargoElement < currentStore_->storeCargo.size())
     {
         std::cout <<  "Choose amount: ";
@@ -139,7 +142,9 @@ void Game::buyCargo()
     }
     else
     {
-        std::cout << "There is no such cargo in this store." << '\n';   
+        std::cout << "There is no such cargo in this store." << '\n';
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         buyCargo();
     }
     
@@ -159,7 +164,9 @@ void Game::sellCargo()
     }
     else
     {
-        std::cout << "There is no such cargo in this ship." << '\n';   
+        std::cout << "There is no such cargo in this ship." << '\n'; 
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');  
         sellCargo();
     }
 }
