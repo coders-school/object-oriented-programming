@@ -24,12 +24,12 @@ void Game::startGame()
             endGameWin();
             quitRequested();
         }
-        if (playerOne_->getMoney() < 0 || time_->getCurrentTime() >= gameDays_)
+        else if (playerOne_->getMoney() < 0 || time_->getCurrentTime() >= gameDays_)
         {
             endGameLose();
             quitRequested();
         }
-        if (quitRequest)
+        else if(quitRequest)
         {
             break;
         }
