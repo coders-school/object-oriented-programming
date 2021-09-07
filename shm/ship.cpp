@@ -136,7 +136,7 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
         cargos_.push_back(std::make_shared<Fruit>(fruit->getName(),
                                                     amount,
                                                     fruit->getBasePrice(),
-                                                    fruit->getExpirationDate(), nullptr));
+                                                    fruit->getExpirationDate()));
     } else if(Item* item =dynamic_cast<Item*>(cargo.get())) {
         cargos_.push_back(std::make_shared<Item>(item->getName(),
                                                  amount,

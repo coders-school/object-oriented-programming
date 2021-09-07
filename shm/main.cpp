@@ -4,8 +4,6 @@
 
 #include "game.hpp"
 
-
-
 #include "alcohol.hpp"
 #include "cargo.hpp"
 #include "fruit.hpp"
@@ -23,7 +21,7 @@ constexpr size_t final_goal = 2'000;
 
 int main() {
    
-    // Game game(start_money, game_days, final_goal);
+    Game game(start_money, game_days, final_goal);
     // game.startGame();
     
     return 0;

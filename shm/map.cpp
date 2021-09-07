@@ -7,7 +7,7 @@ Map::Map() {
     for (int i = 0; i < islandsQuantity_;) {
         Coordinates tempCoordinates = getRandomCoordinates();
         if (!getIsland(tempCoordinates)) {
-            Island tempIsland(tempCoordinates);
+            Island tempIsland(tempCoordinates, Store());
             islands_.push_back(tempIsland);
             ++i;
         }

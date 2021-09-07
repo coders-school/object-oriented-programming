@@ -2,16 +2,25 @@
 #include <iomanip>
 #include "map.hpp"
 
+constexpr size_t CAPACITY = 1000;
+constexpr size_t MAXCREW = 40;
+constexpr size_t CREW = 10;
+constexpr size_t SPEED = 20;
+constexpr char NAME[] = "Black Widow";
+constexpr size_t ID = 1;
+
 Game::Game(size_t money, size_t days, size_t goal)
     : money_(money),
       gameDayes_(days),
-      finalGoal_(goal) {
- 
-}
-
-//   ship_(std::make_shared<Ship>(1000, 40, 15, 10, "Babilon", 2, {}, 10))
+      finalGoal_(goal),
+       time_(Time()),
+       map_(Map()),
+        ship_(Ship(CAPACITY, MAXCREW, CREW, SPEED, NAME, ID, std::make_shared<Time>(time_))) // <--- Segmentation fault
+    //   player_(Player(std::make_shared<Ship>(ship_), money_))
+    {};
 
 Game::~Game(){};
+
 
 void Game::startGame() {
     printHeader();
@@ -125,7 +134,7 @@ void Game::exit() {
 }
 
 void Game::sell() {
-    std::cout << "your are sell\n";
+    std::cout << "your are selling\n";
 }
 
 //void Game::printMap(std::shared_ptr<Map> map) {

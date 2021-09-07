@@ -7,7 +7,7 @@ class IObserver;
 
 class Time {
 public:
-    Time();
+    Time() {};
     ~Time() = default;
 
 

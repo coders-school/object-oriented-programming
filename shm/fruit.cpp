@@ -1,14 +1,17 @@
 #include "fruit.hpp"
 #include <iostream>
 
-Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate, Time* time)
-         : Cargo(name, amount, basePrice, time), expirationDate_(expirationDate)
-          {
-                      time->attachObserver(this);
-          };
+// Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate, Time* time)
+//          : Cargo(name, amount, basePrice, time), expirationDate_(expirationDate)
+//           {
+//                       time->attachObserver(this);
+//           };
+
+Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate):
+             Cargo(name, amount, basePrice), expirationDate_(expirationDate) {};
 
 size_t Fruit::getPrice() const  {
-    return static_cast<size_t>( basePrice_ * static_cast<float>(purchaseDate_)/ expirationDate_);
+    return static_cast<size_t>( basePrice_ * static_cast<float>(purchaseDate_) / expirationDate_);
 }
 
 Cargo& Fruit::operator+=(size_t amount) {

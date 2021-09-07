@@ -4,8 +4,8 @@
 //Class responsible for managing Fruit in the game.
 class Fruit : public Cargo {
 public:
-    Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate, Time * time);
-        
+  //  Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate, Time * time);
+    Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate);     
     
     ~Fruit() override {};
 
@@ -25,10 +25,10 @@ public:
     size_t getPurchaseData() const { return purchaseDate_; };
     void setAmount(const size_t& amount) override { amount_ = amount;};
 
-    void nextDay();
+    void nextDay() override;
 
 protected:
     size_t expirationDate_;
     size_t purchaseDate_ = expirationDate_;
-    Time * time_;
+    //Time * time_;
 };

@@ -6,8 +6,8 @@
 #include "cargo.hpp"
 #include "ship.hpp"
 
-Player::Player(std::shared_ptr<Ship> ship, const size_t& money, size_t getAvailableSpace)
-    : ship_(std::move(ship)), money_(money) {
+Player::Player(std::shared_ptr<Ship> ship, const size_t& money)
+    : ship_(ship), money_(money) {
     countAvailableSpace();
 }
 
