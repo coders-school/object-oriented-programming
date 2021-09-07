@@ -72,7 +72,7 @@ void Game::travel()
     printMap(*map_);
     std::cout << "Choose Your destination captain!" << '\n';
     std::cin >> i;
-    if (i < map_->islands_.size() && i >= 0)
+    if (isdigit(i) && i < map_->islands_.size() && i >= 0)
     {
         auto travelTime = map_->calculateDistance(map_->islands_.at(i)) / playerOne_->getSpeed();
         std::cout << "Your travel will take " << travelTime << " days." << '\n';
@@ -84,6 +84,8 @@ void Game::travel()
     else
     {
         std::cout << "There is no such island on the map! Choose another destination!" << '\n';
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         Game::travel();
     }
 }
