@@ -18,7 +18,7 @@ void Game::startGame()
 {
     printTitle();
     setPlayer();  
-    do{
+    while(true){
         if (playerOne_->getMoney() >= 2000)
         {
             endGameWin();
@@ -29,15 +29,13 @@ void Game::startGame()
             endGameLose();
             quitRequested();
         }
-        else if(quitRequest)
+        if(quitRequest)
         {
             break;
         }
-        
         menu_->printMenu();
         menu_->playerChoice();
-
-    }while(!quitRequest);
+    }
 }
 
 void Game::printTitle()
