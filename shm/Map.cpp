@@ -8,7 +8,7 @@
 #include "coordinates.hpp"
 #include "island.hpp"
 #include "Map.hpp"
-#
+
 namespace constVariables{
     constexpr size_t COORDINATE_MIN = 0;
     constexpr size_t COORDINATE_MAX = 99;
@@ -29,7 +29,7 @@ void Map::SetUpRandomIsland(Time * time){
     cords.reserve(constVariables::ISLANDS_COUNT);
     for (int i = 0; i < constVariables::ISLANDS_COUNT; i++)
     {   
-        Coordinates c ((float)distrib(gen), (float)distrib(gen));
+        Coordinates c (static_cast<float>(distrib(gen)), static_cast<float>(distrib(gen)));
 
         while (contains(cords, c))
         {
@@ -60,11 +60,11 @@ bool Map::contains(const std::vector<Coordinates>& vec, const Coordinates& c) {
 
 size_t Map::calculateDistance(Island island_pos_)
 {
-    auto distanceX = current_pos_->getPosition().GetPositionX();
-    auto distanceY = current_pos_->getPosition().GetPositionY();
-    auto disX = island_pos_.getPosition().GetPositionX();
-    auto disY = island_pos_.getPosition().GetPositionY();
-    auto distance = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
+    const auto distanceX = current_pos_->getPosition().GetPositionX();
+    const auto distanceY = current_pos_->getPosition().GetPositionY();
+    const auto disX = island_pos_.getPosition().GetPositionX();
+    const auto disY = island_pos_.getPosition().GetPositionY();
+    const auto distance = sqrt(pow((disX-distanceX), 2) + pow((disY - distanceY),2));
     std::cout << "Distance: " << distance <<'\n';
     return distance;
 }
