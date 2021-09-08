@@ -12,18 +12,20 @@ ___
 class A {
     virtual void f();
     virtual void g();
+    virtual ~A();
     int a;
+    double b;
 };
 ```
 
 ```text
-stos:   | *vptr | int a |
+stos:   | *vptr | int a | double b |
             |
             V
-sterta: | void (*f)() | void (*g)() |
-                 |             |
-                 V             V
-               A::f          A::g
+sterta: | void (*f)() | void (*g)() | destructor |
+                 |             |           |
+                 V             V           V
+               A::f          A::g        A::~()
 ```
 
 ___

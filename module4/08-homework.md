@@ -8,9 +8,7 @@ ___
 
 You can work in groups or individually. Fork the Cars repo and submit a Pull Request after you have finished.
 
-1. <!-- .element: class="fragment fade-in" --> (4 XP) Create <code>InvalidGear</code> exception. It should be thrown when someone tries eg. change a gear from 5 to R. It should inherit from one of STL exceptions
-2. <!-- .element: class="fragment fade-in" --> (2 XP per fix) Fix interfaces to be easy to use correctly and hard to use incorrectly (like <code>accelerate(-999)</code>)
-3. <!-- .element: class="fragment fade-in" --> (10 XP - optional) Write a proper unit tests to this code
-4. <!-- .element: class="fragment fade-in" --> Read one of below articles. It will be useful for the next lesson
-
-  * <!-- .element: class="fragment fade-in" --> <a href="https://www.samouczekprogramisty.pl/solid-czyli-dobre-praktyki-w-programowaniu-obiektowym/">SOLID czyli dobre praktyki w programowaniu obiektowym</a>
+1. (5 XP) Utwórz wyjątek <code>InvalidGear</code>. Ma on być rzucany wtedy, gdy ktoś próbuje w niewłaściwy sposób zmienić bieg, np. z 5 na R. Ma on dziedziczyć po `std::logic_error`.
+2. (10 XP) Napisz testy jednostkowe do tego kodu. W szczególności przetestuj rzucanie powyższego wyjątku. Skonfiguruj odpowiednio CMake'a.
+3. (0 XP) Napraw interfejs, aby był łatwy w poprawnym użyciu i trudny do niewłaściwego użycia (np. <code>accelerate(-999)</code>). Bez punktów, bo ciężko zautomatyzować tak ogólne zadanie i każdy wymyśli tutaj coś innego.
+4. Przeczytaj artykuł [SOLID czyli dobre praktyki w programowaniu obiektowym](https://www.samouczekprogramisty.pl/solid-czyli-dobre-praktyki-w-programowaniu-obiektowym/)
