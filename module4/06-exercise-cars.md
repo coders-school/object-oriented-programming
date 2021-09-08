@@ -1,6 +1,6 @@
 <!-- .slide: data-background="#111111" -->
 
-# Exercise
+# Zadanie
 
 ___
 
