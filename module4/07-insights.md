@@ -102,7 +102,7 @@ public:
 ```cpp
 class Ex {
     int a;
-}
+};
 void setA(Ex* this, int aa);
 int getA(const Ex* this);
 ```
