@@ -17,7 +17,7 @@ public:
 
     void onTimeChange();
 
-
+    size_t getDays() const;
 
 
 private:

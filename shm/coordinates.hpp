@@ -19,9 +19,9 @@ public:
     void setPositionY(size_t );
     size_t getPositionY() const;
 
-    bool operator== (const Coordinates ) const;
+    bool operator== (const Coordinates& ) const;
 
-    size_t distance(const Coordinates& , const Coordinates& );
+    size_t distance(const Coordinates&);
 
 private:
     size_t positionX_;

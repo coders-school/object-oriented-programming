@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "coordinates.hpp"
 
 
 class Cargo;
@@ -22,11 +23,14 @@ public:
     void sell( std::shared_ptr<Cargo> cargo, const size_t& amount);
     void buy ( std::shared_ptr<Cargo> cargo, const size_t& amount);
 
+    Coordinates getPlayerPosition() const;
 
+    void setPlayerPosition(const size_t&, const size_t&);
 private:
     std::shared_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
+    Coordinates playerCoordinates_{};
 
     void countAvailableSpace();
 };

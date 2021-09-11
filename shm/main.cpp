@@ -22,7 +22,7 @@ constexpr size_t final_goal = 2'000;
 int main() {
    
     Game game(start_money, game_days, final_goal);
-    // game.startGame();
+    game.startGame();
     
     return 0;
 }

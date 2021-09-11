@@ -28,3 +28,7 @@ void Time::notifyAll()
         (*it)->nextDay();
     }
 }
+
+size_t Time::getDays() const {
+    return daysNum_;
+}

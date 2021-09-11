@@ -6,7 +6,9 @@ class Map {
 public:
     Map();
     Island* const getIsland(const Coordinates& coordinate);
+    std::vector<Island> getEveryIsland() const;
 
+    
 private:
     Coordinates getRandomCoordinates();
     const int maxWidth_ = 99;

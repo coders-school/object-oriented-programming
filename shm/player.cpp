@@ -7,7 +7,7 @@
 #include "ship.hpp"
 
 Player::Player(std::shared_ptr<Ship> ship, const size_t& money)
-    : ship_(ship), money_(money) {
+    : ship_(ship), money_(money), playerCoordinates_(Coordinates(static_cast<size_t>(25), static_cast<size_t>(75))) {
     countAvailableSpace();
 }
 
@@ -32,7 +32,7 @@ void Player::countAvailableSpace() {
     if (!ship_) {
         return;
     };
-    std::cout << " jestem w sumowaniu miejsca\n";
+  //  std::cout << " jestem w sumowaniu miejsca\n";
     auto sum = std::accumulate(ship_->getCargosVector().begin(),
                                   ship_->getCargosVector().end(),
                                   0,
@@ -46,6 +46,7 @@ void Player::countAvailableSpace() {
 
 void Player::printCargo() const {
     if (!ship_) {
+        std::cout << "Ship is no yes" << std::endl;
         return;
     }
 
@@ -84,4 +85,13 @@ void Player::buy(std::shared_ptr<Cargo> cargo, const size_t& amount) {
 
 void Player::setMoney(size_t money) {
     money_ = money;
+}
+
+Coordinates Player::getPlayerPosition() const {
+    return playerCoordinates_;
+}
+
+void Player::setPlayerPosition(const size_t& X, const size_t& Y) {
+    playerCoordinates_.setPositionX(X);
+    playerCoordinates_.setPositionY(Y);
 }

@@ -31,3 +31,7 @@ Coordinates Map::getRandomCoordinates() {
     Coordinates randomCoordinates(widthDistribution(randomGenerator), heightDistribution(randomGenerator));
     return randomCoordinates;
 }
+
+std::vector<Island> Map::getEveryIsland() const {
+    return islands_;
+}

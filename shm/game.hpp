@@ -16,6 +16,7 @@ class Game {
         PrintCargo,
         Buy,
         Sell,
+        Position,
         Exit
     };
 
@@ -38,13 +39,18 @@ public:
     void setPlayer();
 
     void chooseOption(MenuOption option);
-  //  void printMap(std::shared_ptr<Map>);
-   // void printCargo();
+    void printMap(const Player&);
+    void printCargo();
     void travel();
     void sell();
     void exit();
     void buy();
 
+protected:
+    Time time_{};
+    Ship ship_;
+    Map map_;
+    Player player_;
 private:
     size_t money_;
     size_t gameDayes_;
@@ -56,8 +62,9 @@ private:
     // std::shared_ptr<Map> map_{nullptr};
 
     // Player player_;
-     Ship ship_;
-     Map map_{};
-    Time time_{};
+   // Ship ship_;
+   // Map map_{};
+    //Player player_{};
+  //  Time time_{};
     size_t islandNo_;
 };

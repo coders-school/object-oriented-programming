@@ -12,10 +12,6 @@ class Cargo;
 class Ship : public IObserver
 {
 public:
-    Ship(std::shared_ptr<Time> time)
-        : id_(-1) {
-            time ->attachObserver(this);
-        }
     Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::shared_ptr<Time> time)
         : capacity_(capacity)
         , maxCrew_(maxCrew)
@@ -25,12 +21,8 @@ public:
         , id_(id)
         , time_(time)
      {
-         time->attachObserver(this);
+         time_->attachObserver(this);
      }
-    Ship(size_t maxCrew, size_t speed, size_t id, std::shared_ptr<Time> time)
-        : Ship(0, maxCrew, 0, speed, "", id, time) {
-            time->attachObserver(this);
-        }
 
     Ship& operator-=(size_t num);
     Ship& operator+=(size_t num);
@@ -63,9 +55,9 @@ private:
     size_t maxCrew_;
     size_t crew_;
     size_t speed_;
-    std::shared_ptr<Time> time_;
+    std::shared_ptr<Time> time_{ nullptr };
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargos_{};
-    Player* owner_;
+    Player* owner_{ nullptr };
 };
