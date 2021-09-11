@@ -49,6 +49,7 @@ Fruit& Fruit::operator--(int) {
 }
 
 void Fruit::nextDay() {
+    std::cout << "Fruit działa" << std::endl;
     if (purchaseDate_) {
         purchaseDate_--;
     }

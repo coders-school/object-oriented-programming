@@ -47,10 +47,11 @@ public:
     void buy();
 
 protected:
-    Time time_{};
+    Time time_;
     Ship ship_;
     Map map_;
     Player player_;
+
 private:
     size_t money_;
     size_t gameDayes_;

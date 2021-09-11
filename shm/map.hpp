@@ -4,10 +4,12 @@
 #include "island.hpp"
 class Map {
 public:
-    Map();
+    Map(std::shared_ptr<Time> time);
     Island* const getIsland(const Coordinates& coordinate);
     std::vector<Island> getEveryIsland() const;
 
+protected:
+    std::shared_ptr<Time> time_{};
     
 private:
     Coordinates getRandomCoordinates();

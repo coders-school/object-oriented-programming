@@ -19,8 +19,10 @@ constexpr size_t DAY_MAX = 17;
 constexpr size_t PRICE_MIN = 5;
 constexpr size_t PRICE_MAX = 145;
 
-Store::Store() {
+Store::Store(std::shared_ptr<Time> time)
+    : time_(time) {
     generateDefaultCargo();
+    time_->attachObserver(this);
 }
 
 std::vector<std::shared_ptr<Cargo>>::iterator Store::findMatchCargo(const std::shared_ptr<Cargo> wantedCargo) {
@@ -210,4 +212,6 @@ void Store::nextDay() {
             }
         }
     }
+
+    std::cout << "Store działa" << std::endl;
 }

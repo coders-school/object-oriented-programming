@@ -23,6 +23,8 @@ public:
     void sell( std::shared_ptr<Cargo> cargo, const size_t& amount);
     void buy ( std::shared_ptr<Cargo> cargo, const size_t& amount);
 
+    void countAvailableSpace();
+
     Coordinates getPlayerPosition() const;
 
     void setPlayerPosition(const size_t&, const size_t&);
@@ -32,5 +34,5 @@ private:
     size_t availableSpace_;
     Coordinates playerCoordinates_{};
 
-    void countAvailableSpace();
+    //void countAvailableSpace();
 };

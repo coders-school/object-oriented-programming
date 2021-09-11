@@ -9,7 +9,7 @@
 
 class Cargo;
 // Class responsible for managing Ship in the game.
-class Ship : public IObserver
+class Ship : IObserver
 {
 public:
     Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::shared_ptr<Time> time)
@@ -46,9 +46,9 @@ public:
     void load(std::shared_ptr<Cargo>& cargo, size_t amount);
 
     friend std::ostream& operator<<(std::ostream& os, const Ship& ship);
-    void nextDay();
+    void nextDay() override;
 
-    void setOwner(Player* owner);
+    void setOwner(std::shared_ptr<Player> owner);
    
 private:
     size_t capacity_;
@@ -59,5 +59,5 @@ private:
     std::string name_;
     const size_t id_;
     std::vector<std::shared_ptr<Cargo>> cargos_{};
-    Player* owner_{ nullptr };
+    std::shared_ptr<Player> owner_{ nullptr };
 };

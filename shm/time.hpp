@@ -19,10 +19,11 @@ public:
 
     size_t getDays() const;
 
+    std::list<IObserver*> getList() const;
+
 
 private:
-    std::list<IObserver*> observerList_; 
-
+    std::list<IObserver*> observerList_{};
     void notifyAll();
     size_t daysNum_ = 0;
 

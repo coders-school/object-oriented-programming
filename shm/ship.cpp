@@ -99,8 +99,7 @@ void Ship::load(std::shared_ptr<Cargo>& cargo, size_t amount) {
         } else {
             std::cerr << "Not enuogh space on ship!!!!\n";
         }
-    }
-    if (findCargo == cargos_.end()) {
+    } else {
         // cargos_.push_back(cargo);
 
         addCargo(cargo, amount);
@@ -132,22 +131,29 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
                                                     amount,
                                                     alcohol->getBasePrice(),
                                                     alcohol->getPercentage()));
+                                                std::cout << "We are buyin alvohol" << std::endl;
     } else if(Fruit* fruit = dynamic_cast<Fruit*>(cargo.get())){
         cargos_.push_back(std::make_shared<Fruit>(fruit->getName(),
                                                     amount,
                                                     fruit->getBasePrice(),
                                                     fruit->getExpirationDate()));
+                                                    std::cout << "We are buyin fruit" << std::endl;
     } else if(Item* item =dynamic_cast<Item*>(cargo.get())) {
         cargos_.push_back(std::make_shared<Item>(item->getName(),
                                                  amount,
                                                  item->getPrice(),
                                                  item->getRarity()));
+                                                 std::cout << "We are buyin item" << std::endl;
     }
 }
 void Ship::nextDay() {
+    if (!owner_) {
+        std::cout << "Coś jest nie tak" << std::endl;
+    }
+    std::cout << "Albo i nie -afsafasf-sfasf-asf-" << std::endl;
     owner_->setMoney(owner_->getMoney() - crew_);
 }
 
-void Ship::setOwner(Player* owner) {
+void Ship::setOwner(std::shared_ptr<Player> owner) {
     owner_ = owner;
 }

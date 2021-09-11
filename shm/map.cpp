@@ -2,12 +2,13 @@
 #include "map.hpp"
 
 
-Map::Map() {
+Map::Map(std::shared_ptr<Time> time) 
+    : time_(time) {
     islands_.reserve(10);
     for (int i = 0; i < islandsQuantity_;) {
         Coordinates tempCoordinates = getRandomCoordinates();
         if (!getIsland(tempCoordinates)) {
-            Island tempIsland(tempCoordinates, Store());
+            Island tempIsland(tempCoordinates, Store(time_));
             islands_.push_back(tempIsland);
             ++i;
         }

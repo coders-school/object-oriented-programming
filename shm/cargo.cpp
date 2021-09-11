@@ -8,7 +8,7 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, Time *tim
     , basePrice_(basePrice)
     , time_(time)
     {
-        time->attachObserver(this);
+        time_->attachObserver(this);
     }
 
 Cargo& Cargo::operator+=(size_t amount) {
