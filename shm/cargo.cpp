@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, Time *time)
+Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, std::shared_ptr<Time> time)
     : name_(name)
     , amount_(amount)
     , basePrice_(basePrice)

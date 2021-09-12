@@ -39,7 +39,7 @@ public:
     void setPlayer();
 
     void chooseOption(MenuOption option);
-    void printMap(const Player&);
+    void printMap(const std::shared_ptr<Player>);
     void printCargo();
     void travel();
     void sell();
@@ -47,10 +47,10 @@ public:
     void buy();
 
 protected:
-    Time time_;
-    Ship ship_;
+    std::shared_ptr<Time> time_;
+    std::shared_ptr<Ship> ship_;
     Map map_;
-    Player player_;
+    std::shared_ptr<Player> player_;
 
 private:
     size_t money_;

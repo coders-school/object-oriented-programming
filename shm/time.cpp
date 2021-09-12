@@ -1,4 +1,4 @@
-#include "time.hpp"
+ #include "time.hpp"
 #include <iostream>
 #include <list>
 #include <memory>
@@ -7,6 +7,7 @@
 void Time::attachObserver(IObserver *observer)
 {
     observerList_.push_back(observer);
+    std::cout << observerList_.size() << std::endl;
 }
 
 void Time::detachObserver(IObserver *observer)
@@ -22,15 +23,17 @@ void Time::onTimeChange()
 
 void Time::notifyAll()
 {   
-    std::cout << "Is it even working?" << std::endl;
+   // std::cout << "Is it even working?" << std::endl;
    // std::cout << observerList_.size() << std::endl;
-    if (observerList_.begin() == observerList_.end()) {
-        std::cout << "Co jest?????" << std::endl;
-    }
+    // for (auto it = observerList_.begin(); it != observerList_.end(); it++) {
+    //     std::cout << *it << std::endl;
+    // }
     for (auto it = observerList_.begin(); it != observerList_.end(); it++)
     {
-        std::cout << "Is it even working? From the loop" << std::endl;
-        (*it)->nextDay();
+        //std::cout << "Is it even working? From the loop" << std::endl;
+        if (*it) {
+            (*it)->nextDay();
+        }
     }
 }
 

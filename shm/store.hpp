@@ -15,10 +15,14 @@ enum class Response {
     lack_of_space
 };
 // Class responsible for managing a store
-class Store : IObserver {
+class Store : public IObserver {
 public:
     Store() {};
     Store(std::shared_ptr<Time> time);
+    ~Store() {
+        
+    time_->detachObserver(this);
+    };
 
     Response buy(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player);
     Response sell(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player);
@@ -35,11 +39,11 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Store& store);
 
-    void nextDay(); 
+    void nextDay() override; 
 
 private:
     std::vector<std::shared_ptr<Cargo>> stock_{};
     void generateDefaultCargo();
-    std::shared_ptr<Time> time_{};
+    std::shared_ptr<Time> time_{ nullptr };
 
 };

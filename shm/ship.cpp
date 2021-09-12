@@ -136,7 +136,8 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
         cargos_.push_back(std::make_shared<Fruit>(fruit->getName(),
                                                     amount,
                                                     fruit->getBasePrice(),
-                                                    fruit->getExpirationDate()));
+                                                    fruit->getExpirationDate(), 
+                                                    time_));
                                                     std::cout << "We are buyin fruit" << std::endl;
     } else if(Item* item =dynamic_cast<Item*>(cargo.get())) {
         cargos_.push_back(std::make_shared<Item>(item->getName(),
@@ -148,12 +149,16 @@ void Ship::addCargo(std::shared_ptr<Cargo>& cargo, size_t amount) {
 }
 void Ship::nextDay() {
     if (!owner_) {
-        std::cout << "Coś jest nie tak" << std::endl;
+       // std::cout << "Coś jest nie tak" << std::endl;
     }
-    std::cout << "Albo i nie -afsafasf-sfasf-asf-" << std::endl;
+    //std::cout << "Albo i nie -afsafasf-sfasf-asf-" << std::endl;
     owner_->setMoney(owner_->getMoney() - crew_);
 }
 
 void Ship::setOwner(std::shared_ptr<Player> owner) {
     owner_ = owner;
+}
+
+std::shared_ptr<Time> Ship::getTime() const {
+    return time_;
 }

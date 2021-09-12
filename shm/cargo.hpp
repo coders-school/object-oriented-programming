@@ -9,7 +9,7 @@ class Cargo : public IObserver {
 public:
     Cargo() {};
     Cargo(const std::string& name, size_t amount) : name_(name), amount_(amount) {};
-    Cargo(const std::string& name, size_t amount, size_t basePrice, Time *time);
+    Cargo(const std::string& name, size_t amount, size_t basePrice, std::shared_ptr<Time> time);
     Cargo(const std::string& name, size_t amount, size_t basePrice)
     : name_(name), amount_(amount), basePrice_(basePrice) {}; // <- Tu jest problem z linkerem!!!!
     virtual ~Cargo() = default;
@@ -29,5 +29,6 @@ protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
-    Time* time_ {nullptr};
+    //Time* time_ {nullptr};
+    std::shared_ptr<Time> time_ {nullptr};
 };

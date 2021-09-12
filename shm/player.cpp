@@ -7,7 +7,7 @@
 #include "ship.hpp"
 
 Player::Player(std::shared_ptr<Ship> ship, const size_t& money)
-    : ship_(ship), money_(money), playerCoordinates_(Coordinates(static_cast<size_t>(25), static_cast<size_t>(75))) {
+    : ship_(std::move(ship)), money_(money), playerCoordinates_(Coordinates(static_cast<size_t>(25), static_cast<size_t>(75))) {
     countAvailableSpace();
 }
 

@@ -2,7 +2,7 @@
 #include "coordinates.hpp"
 #include "store.hpp"
 
-class Island {    
+class Island{    
 public:
     Island() {
      
@@ -15,10 +15,13 @@ public:
     Coordinates getPosition() const;
     void setPosition(Coordinates);
     std::shared_ptr<Store> getStore();
+
    //int getName() const;
+protected:
+    Store store_;
 
 private:
     Coordinates position_;
-    Store store_;
+    //Store store_;
    // int name_;
 };
