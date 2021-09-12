@@ -58,6 +58,7 @@ void Game::startGame()
 
 void Game::printMenu()
 {
+    std::cout << "/" << std::setfill(' ') << std::setw(40) << "Your money: " << player_->getMoney() << std::setw(40) << "Days gone: " << time_->getDays() << std::endl;
     std::cout << "/" << std::setfill('-') << std::setw(100) << "/\n";
     std::cout << "*" << std::setfill(' ') << std::setw(58) << " CHOOSE ACTION: " << std::setw(42) << "/\n";
     std::cout << "/" << std::setfill('-') << std::setw(100) << "/\n";
@@ -69,7 +70,6 @@ void Game::printMenu()
     std::cout << "/" << std::setfill(' ') << std::setw(59) << " 5. WHERE AM I: " << std::setw(41) << "/\n";
     std::cout << "/" << std::setfill(' ') << std::setw(53) << " 6. EXIT: " << std::setw(47) << "/\n";
     std::cout << "/" << std::setfill('-') << std::setw(100) << "/\n";
-    std::cout << player_->getMoney() << std::endl;
 }
 
 void Game::printHeader()
@@ -118,7 +118,7 @@ bool Game::checkWinCondition()
 
 bool Game::checkLoseCondition()
 {
-    return money_ = 0 || (time_->getDays() >= gameDayes_ && money_ < finalGoal_);
+    return player_->getMoney() == 0 || (time_->getDays() >= gameDayes_ && player_->getMoney() < finalGoal_);
 }
 
 void Game::chooseOption(Game::MenuOption option)
@@ -155,8 +155,39 @@ void Game::exit()
 }
 
 void Game::sell()
-{
+{   
     std::cout << "your are selling\n";
+    if (!map_.getIsland(player_->getPlayerPosition())) {
+        std::cout << "Captain, we are on the sea, you can not sell enything!\n";
+        return;
+    }
+    if (player_->getAvailableSpace() == CAPACITY) {
+        std::cout << "Captain, we have nothing to sell!\n";
+        return;
+    }
+    std::cout << "What you want to sell?" << std::endl;
+    player_->printCargo();
+    int sellOption = 0;
+    std::cin >> sellOption;
+    while (ship_->getCargosVector().size() < sellOption) {
+        std::cout << "We do not own this place, you have to change your decision, Captain!\n";
+        std::cin >> sellOption;
+    }
+    int amountOfCargoToSell = 0;
+    std::cin >> amountOfCargoToSell;
+    auto objectToSell = ship_->getCargosVector()[sellOption - 1];
+    while (objectToSell->getAmount() < amountOfCargoToSell) {
+        std::cout << "Captain, we don't have so many of " << objectToSell->getName() << " What we do now?\n1. Change amount\n2. Exit" << std::endl;
+        std::cin >> sellOption;
+        if (sellOption == 1) {
+            std::cin >> amountOfCargoToSell;
+        } else {
+            return;
+        }
+    }
+    ship_->unload(objectToSell, amountOfCargoToSell);
+    player_->setMoney(player_->getMoney() + objectToSell->getBasePrice() * amountOfCargoToSell);
+    map_.getIsland(player_->getPlayerPosition())->getStore()->addCargo(objectToSell, amountOfCargoToSell);
 }
 
 void Game::printMap(const std::shared_ptr<Player> player)
@@ -197,7 +228,11 @@ void Game::travel()
     }
     std::cout << "Where are we going captain?: ";
     islandCounter = 0;
-    std::cin >> islandCounter;
+    std::cin >> islandCounter; //Zabezpieczenie przed wpisywaniem większej artości od ilości wyspy, do zrobienia
+    while (islandCounter > map_.getEveryIsland().size()) {
+        std::cout << "Captain you have old map! Here is new one, so where we are going?: " << std::endl;
+        std::cin >> islandCounter;
+    }
     player_->setPlayerPosition(map_.getEveryIsland()[islandCounter - 1].getPosition().getPositionX(), map_.getEveryIsland()[islandCounter - 1].getPosition().getPositionY());
     for (int i = 0; i < daysToGo[islandCounter - 1]; i++)
     {
@@ -230,14 +265,15 @@ void Game::buy()
         std::cin >> amountOfCargoToBuy;
         if (amountOfCargoToBuy > amountOfCargo)
         {
-            std::cout << "Captain, they didn't have " << amountOfCargoToBuy << "of " << CargoWeAreBuying->getName() << ". We bought only " << amountOfCargo << std::endl;
+            std::cout << "Captain, they didn't have " << amountOfCargoToBuy << " of " << CargoWeAreBuying->getName() << ". We bought only " << amountOfCargo << std::endl;
             amountOfCargoToBuy = amountOfCargo;
         }
+        int choose = 0;
         if (CargoWeAreBuying->getPrice() * static_cast<size_t>(amountOfCargoToBuy) > player_->getMoney())
         {
             std::cout << "Captain, we does not have enough money! We can only buy " << player_->getMoney() / CargoWeAreBuying->getPrice() << " of " << CargoWeAreBuying->getName();
             std::cout << ". What we do now? \n1. Buy other amount of " << CargoWeAreBuying->getName() << "\n2. Exit\n";
-            int choose = 0;
+            
             std::cin >> choose;
             if (choose == 1)
             {
@@ -249,9 +285,20 @@ void Game::buy()
                 return;
             }
         }
+        while (player_->getAvailableSpace() - amountOfCargoToBuy < 0) {
+            std::cout << "Captain, our cargo is full, we can only buy " << player_->getAvailableSpace() << " of " << CargoWeAreBuying->getName() << ". What we are doing now?\n";
+            std::cout << "1. Set otehr value\n2. Exit\n";
+            std::cin >> choose;
+            if (choose == 1) {
+                std::cout << "New value: \n";
+                std::cin >> amountOfCargoToBuy;
+            } else {
+                return;
+            }
+        }
         IslandWeAreOn->getStore()->loadShip(CargoWeAreBuying, amountOfCargoToBuy);
         ship_->load(CargoWeAreBuying, amountOfCargoToBuy);
-        player_->setMoney(player_->getMoney() - CargoWeAreBuying->getPrice() * static_cast<size_t>(amountOfCargoToBuy));
+        player_->setMoney(player_->getMoney() - CargoWeAreBuying->getPrice() * static_cast<size_t>(amountOfCargoToBuy) < 0 ? 0 : player_->getMoney() - CargoWeAreBuying->getPrice() * static_cast<size_t>(amountOfCargoToBuy));
         std::cout << player_->getMoney() << std::endl;
         player_->countAvailableSpace();
         time_->onTimeChange();

@@ -32,13 +32,15 @@ void Player::countAvailableSpace() {
     if (!ship_) {
         return;
     };
-  //  std::cout << " jestem w sumowaniu miejsca\n";
-    auto sum = std::accumulate(ship_->getCargosVector().begin(),
-                                  ship_->getCargosVector().end(),
+    std::cout << " jestem w sumowaniu miejsca\n";
+    auto vectorOfCargos = ship_->getCargosVector();
+    auto sum = std::accumulate(vectorOfCargos.begin(),
+                                  vectorOfCargos.end(),
                                   0,
                                   [](size_t amount, const auto& cargo)
                                   { return amount += cargo->getAmount();}
                                  );
+    //auto vectorOfCargos = ship_->getCargosVector();
     const auto& cargoVector = ship_->getCapacity();
     
     availableSpace_ = cargoVector - sum;
@@ -57,7 +59,7 @@ void Player::printCargo() const {
     int i = 0;
     std::cout << "Current ship's cargo\n";
     for (const auto& el : ship_->getCargosVector()) {
-        std::cout << i++ << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base price: " << el->getBasePrice() << '\n';
+        std::cout << ++i << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base price: " << el->getBasePrice() << '\n';
     }
 }
 

@@ -52,6 +52,9 @@ public:
     void setOwner(std::shared_ptr<Player> owner);
 
     std::shared_ptr<Time> getTime() const;
+
+protected:
+    std::vector<std::shared_ptr<Cargo>> cargos_{};
    
 private:
     size_t capacity_;
@@ -61,6 +64,6 @@ private:
     std::shared_ptr<Time> time_{ nullptr };
     std::string name_;
     const size_t id_;
-    std::vector<std::shared_ptr<Cargo>> cargos_{};
+    //std::vector<std::shared_ptr<Cargo>> cargos_{};
     std::shared_ptr<Player> owner_{ nullptr };
 };

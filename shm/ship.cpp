@@ -80,6 +80,9 @@ void Ship::unload(std::shared_ptr<Cargo>& cargo, size_t amount) {
     
     if (findCargo != cargos_.end()) {
         findCargo->get()->setAmount(findCargo->get()->getAmount() - amount);
+        if (!(*findCargo)->getAmount()) {
+            cargos_.erase(findCargo);
+        }
         std::cout << "Jestem w po odjeciu towaru ze statku\n";
     }
 
