@@ -23,14 +23,8 @@ void Time::onTimeChange()
 
 void Time::notifyAll()
 {   
-   // std::cout << "Is it even working?" << std::endl;
-   // std::cout << observerList_.size() << std::endl;
-    // for (auto it = observerList_.begin(); it != observerList_.end(); it++) {
-    //     std::cout << *it << std::endl;
-    // }
     for (auto it = observerList_.begin(); it != observerList_.end(); it++)
     {
-        //std::cout << "Is it even working? From the loop" << std::endl;
         if (*it) {
             (*it)->nextDay();
         }

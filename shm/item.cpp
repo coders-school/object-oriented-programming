@@ -13,7 +13,7 @@ Cargo& Item::operator-=(size_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
     } else {
-        std::cerr << "Amount of cargo can not be under 0!!!\n";
+        
     }
     return *this;
 }

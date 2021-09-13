@@ -22,7 +22,6 @@ class Game {
 
 
 public:
-    // Game();
     Game(size_t money, size_t days, size_t goal);
     ~Game();
     void startGame();
@@ -56,16 +55,5 @@ private:
     size_t money_;
     size_t gameDayes_;
     size_t finalGoal_;
-
-    // std::shared_ptr<Player> player_{nullptr};
-    // std::shared_ptr<Ship> ship_{nullptr};
-    // std::shared_ptr<Time> time_{nullptr};
-    // std::shared_ptr<Map> map_{nullptr};
-
-    // Player player_;
-   // Ship ship_;
-   // Map map_{};
-    //Player player_{};
-  //  Time time_{};
     size_t islandNo_;
 };

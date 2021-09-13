@@ -12,7 +12,3 @@ void Island::setPosition(Coordinates position){
 std::shared_ptr<Store> Island::getStore() {
     return store_;
 }
-
-//int Island::getName() const {
-//    return name_;
-//}

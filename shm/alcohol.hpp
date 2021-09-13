@@ -2,7 +2,6 @@
 #include "cargo.hpp"
 
 constexpr size_t MaxPercentage{96};
-//Class responsible for managing Alcohol in the game.
 class Alcohol : public Cargo {
 public:
     Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage);

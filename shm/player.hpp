@@ -33,6 +33,4 @@ private:
     size_t money_;
     size_t availableSpace_;
     Coordinates playerCoordinates_{};
-
-    //void countAvailableSpace();
 };

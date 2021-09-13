@@ -16,12 +16,9 @@ public:
     void setPosition(Coordinates);
     std::shared_ptr<Store> getStore();
 
-   //int getName() const;
 protected:
     std::shared_ptr<Store> store_;
 
 private:
     Coordinates position_;
-    //Store store_;
-   // int name_;
 };

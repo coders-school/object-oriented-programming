@@ -1,12 +1,6 @@
 #include "fruit.hpp"
 #include <iostream>
 
-// Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate, Time* time)
-//          : Cargo(name, amount, basePrice, time), expirationDate_(expirationDate)
-//           {
-//                       time->attachObserver(this);
-//           };
-
 Fruit::Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate, std::shared_ptr<Time> time):
              Cargo(name, amount, basePrice, time), expirationDate_(expirationDate) {
 
@@ -25,7 +19,7 @@ Cargo& Fruit::operator-=(size_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
     } else {
-        std::cerr << "Amount of cargo can not be under 0!!!\n";
+       
     }
     return *this;
 }
@@ -51,7 +45,7 @@ Fruit& Fruit::operator--(int) {
 }
 
 void Fruit::nextDay() {
-  //  std::cout << "Fruit działa" << std::endl;
+    std::cout << "Fruit działa" << std::endl;
     if (purchaseDate_) {
         operator--();
     }

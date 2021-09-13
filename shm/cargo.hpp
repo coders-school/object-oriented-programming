@@ -4,14 +4,13 @@
 #include "time.hpp"
 #include "iObserver.hpp"
 
-//Class responsible for managing Cargo in the game.
 class Cargo : public IObserver {
 public:
     Cargo() {};
     Cargo(const std::string& name, size_t amount) : name_(name), amount_(amount) {};
     Cargo(const std::string& name, size_t amount, size_t basePrice, std::shared_ptr<Time> time);
     Cargo(const std::string& name, size_t amount, size_t basePrice)
-    : name_(name), amount_(amount), basePrice_(basePrice) {}; // <- Tu jest problem z linkerem!!!!
+    : name_(name), amount_(amount), basePrice_(basePrice) {};
     virtual ~Cargo() = default;
 
     virtual Cargo& operator+=(size_t amount);
@@ -23,12 +22,11 @@ public:
     virtual size_t getAmount() const = 0;
     virtual size_t getBasePrice() const = 0;
 
-    virtual void setAmount(const size_t& amount) = 0; //{ amount_ = amount; };
+    virtual void setAmount(const size_t& amount) = 0; 
     
 protected:
     std::string name_;
     size_t amount_;
     size_t basePrice_;
-    //Time* time_ {nullptr};
     std::shared_ptr<Time> time_ {nullptr};
 };

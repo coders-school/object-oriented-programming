@@ -101,9 +101,9 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, const size_t& amount, Player*
 std::ostream& operator<<(std::ostream& os, const Store& store) {
     int counter = 1;
     os << '\n';
-    os << std::setfill(' ') << "ID" << std::setw(30) << " TYPE OF CARGO" << std::setw(18) << "AMOUNT" << std::setw(27) << "PRICE\n";
+    os << std::setfill(' ') << "ID" << std::setw(30) << " TYPE OF CARGO" << std::setw(18) << "AMOUNT" << std::setw(20) << "BASE PRICE" << std::setw(10) << "PRICE\n";
     for (const auto& el : store.stock_) {
-        os << std::left << std::setfill(' ') << std::setw(19) << counter << std::setw(25) << el->getName() << std::setw(27) << el->getAmount() << std::setw(5) << el->getPrice() << '\n';
+        os << std::left << std::setfill(' ') << std::setw(19) << counter << std::setw(25) << el->getName() << std::setw(20) << el->getAmount() << std::setw(5) << el->getBasePrice() << std::setw(40) << el->getPrice() << '\n';
         counter++;
     }
     std::cout << counter << " Exit\n";
@@ -126,10 +126,10 @@ void Store::generateDefaultCargo() {
     stock_.push_back(std::make_shared<Alcohol>("Jack Walker", amountR(gr), priceR(gr), powerR(gr)));
     stock_.push_back(std::make_shared<Alcohol>("Johny Daniels", amountR(gr), priceR(gr), powerR(gr)));
     stock_.push_back(std::make_shared<Alcohol>("Żubrówkeczka", amountR(gr), priceR(gr), powerR(gr)));
-    stock_.push_back(std::make_shared<Fruit>("Peach", amountR(gr), priceR(gr), dayR(gr), time_));
-    stock_.push_back(std::make_shared<Fruit>("Strawbarry", amountR(gr), priceR(gr), dayR(gr), time_));
-    stock_.push_back(std::make_shared<Fruit>("Water melon", amountR(gr), priceR(gr), dayR(gr), time_));
-    stock_.push_back(std::make_shared<Fruit>("Coconat", amountR(gr), priceR(gr), dayR(gr), time_));
+    stock_.push_back(std::make_shared<Fruit>("Peach", amountR(gr), priceR(gr), dayR(gr), nullptr));
+    stock_.push_back(std::make_shared<Fruit>("Strawbarry", amountR(gr), priceR(gr), dayR(gr), nullptr));
+    stock_.push_back(std::make_shared<Fruit>("Water melon", amountR(gr), priceR(gr), dayR(gr), nullptr));
+    stock_.push_back(std::make_shared<Fruit>("Coconat", amountR(gr), priceR(gr), dayR(gr), nullptr));
     stock_.push_back(std::make_shared<Item>("Fork", amountR(gr), priceR(gr), Rarity::common));
     stock_.push_back(std::make_shared<Item>("Philosopher's stone", amountR(gr), priceR(gr), Rarity::legendary));
     stock_.push_back(std::make_shared<Item>("necklace", amountR(gr), priceR(gr), Rarity::rare));
@@ -174,13 +174,12 @@ void Store::addCargo(std::shared_ptr<Cargo> cargo, const size_t& amount) {
                                                    amount,
                                                    alcohol->getBasePrice(),
                                                    alcohol->getPercentage()));
-                                                 //  std::cout << "Kupujemy alko" << std::endl;
     } else if (Fruit* fruit = dynamic_cast<Fruit*>(cargo.get())) {
         stock_.push_back(std::make_shared<Fruit>(fruit->getName(),
                                                  amount,
                                                  fruit->getBasePrice(),
                                                  fruit->getExpirationDate(),
-                                                 time_));
+                                                 nullptr));
     } else if (Item* item = dynamic_cast<Item*>(cargo.get())) {
         stock_.push_back(std::make_shared<Item>(item->getName(),
                                                 amount,
@@ -217,5 +216,5 @@ void Store::nextDay() {
             }
        }
     }
-    std::cout << "Store działa" << std::endl;
+  
 }

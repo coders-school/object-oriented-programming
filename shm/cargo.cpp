@@ -8,7 +8,9 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, std::shar
     , basePrice_(basePrice)
     , time_(time)
     {
-        time_->attachObserver(this);
+        if (time_) {
+            time_->attachObserver(this);
+        }
     }
 
 Cargo& Cargo::operator+=(size_t amount) {
@@ -20,7 +22,7 @@ Cargo& Cargo::operator-=(size_t amount) {
     if (amount <= amount_) {
         amount_ -= amount;
     } else {
-        std::cerr << "Amount of cargo can not be under 0!!!\n";
+        
     }
     return *this;
 }
