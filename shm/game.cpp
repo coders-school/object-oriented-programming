@@ -178,13 +178,15 @@ void Game::sell()
         std::cout << "Segmentation fault Captain, you have to change your decision!\n";
         std::cin >> sellOption;
     }
+    auto objectToSell = ship_->getCargosVector()[sellOption - 1];
+    std::cout << "Amount of " << objectToSell->getName() << " to sell:\n";
     int amountOfCargoToSell = 0;
     std::cin >> amountOfCargoToSell;
-    auto objectToSell = ship_->getCargosVector()[sellOption - 1];
     while (objectToSell->getAmount() < amountOfCargoToSell) {
         std::cout << "Captain, we don't have so many of " << objectToSell->getName() << " What we do now?\n1. Change amount\n2. Exit" << std::endl;
         std::cin >> sellOption;
         if (sellOption == 1) {
+            std::cout << "Amount of " << objectToSell->getName() << " to sell:\n";
             std::cin >> amountOfCargoToSell;
         } else {
             return;
@@ -247,8 +249,7 @@ void Game::travel()
     player_->setPlayerPosition(map_.getEveryIsland()[islandCounter - 1].getPosition().getPositionX(), map_.getEveryIsland()[islandCounter - 1].getPosition().getPositionY());
     for (int i = 0; i < daysToGo[islandCounter - 1]; i++)
     {
-        // time_.onTimeChange();
-        ship_->getTime()->onTimeChange();
+        time_->onTimeChange();
     }
     // std::cout << "Player X: " << player_.getPlayerPosition().getPositionX() << std::endl;
     // std::cout << "Player Y: " << player_.getPlayerPosition().getPositionY() << std::endl;
