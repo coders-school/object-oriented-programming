@@ -2,8 +2,7 @@
 #include "map.hpp"
 
 
-Map::Map(std::shared_ptr<Time> time) 
-    {
+Map::Map(std::shared_ptr<Time> time) {
     islands_.reserve(10);
     for (int i = 0; i < islandsQuantity_;) {
         Coordinates tempCoordinates = getRandomCoordinates();
