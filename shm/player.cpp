@@ -61,6 +61,7 @@ void Player::printCargo() const {
     for (const auto& el : ship_->getCargosVector()) {
         std::cout << ++i << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base price: " << el->getBasePrice() << '\n';
     }
+    std::cout << ++i << " Exit\n";
 }
 
 void Player::sell(std::shared_ptr<Cargo> cargo, const size_t& amount) {

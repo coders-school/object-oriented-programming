@@ -106,6 +106,7 @@ std::ostream& operator<<(std::ostream& os, const Store& store) {
         os << std::left << std::setfill(' ') << std::setw(19) << counter << std::setw(25) << el->getName() << std::setw(27) << el->getAmount() << std::setw(5) << el->getPrice() << '\n';
         counter++;
     }
+    std::cout << counter << " Exit\n";
     os << std::setfill('*') << std::setw(100) << "\n";
 
     return os;

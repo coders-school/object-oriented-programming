@@ -1,6 +1,8 @@
 #include "game.hpp"
-#include <iomanip>
 #include <algorithm>
+#include <iomanip>
+#include <random>
+
 #include "map.hpp"
 
 constexpr size_t CAPACITY = 1000;
@@ -23,8 +25,6 @@ Game::~Game(){};
 
 void Game::startGame()
 {
-    ///// PROBLEM WITH ALCOHOL IN CARGO (VECTOR OF CARGO ALWAYS EMPTY) AND WITH LIST OF OBSERVER (ALSO EMPTY AFTER CONSTRUCTING EVERYTHING)///
-    std::cout << "I co może nagle działa: " << time_->getList().size() << std::endl;
     printHeader();
     //printMenu();
     ship_->setOwner(player_);
@@ -58,7 +58,8 @@ void Game::startGame()
 
 void Game::printMenu()
 {
-    std::cout << "/" << std::setfill(' ') << std::setw(40) << "Your money: " << player_->getMoney() << std::setw(40) << "Days gone: " << time_->getDays() << std::endl;
+    std::cout << "/" << std::setfill('-') << std::setw(100) << "/\n";
+    std::cout << "/" << std::setfill(' ') << std::setw(35) << "Your money: " << player_->getMoney() << std::setw(35) << "Days left: " << gameDayes_ - time_->getDays() << std::setw(22) << "/" << std::endl;
     std::cout << "/" << std::setfill('-') << std::setw(100) << "/\n";
     std::cout << "*" << std::setfill(' ') << std::setw(58) << " CHOOSE ACTION: " << std::setw(42) << "/\n";
     std::cout << "/" << std::setfill('-') << std::setw(100) << "/\n";
@@ -156,7 +157,7 @@ void Game::exit()
 
 void Game::sell()
 {   
-    std::cout << "your are selling\n";
+    std::cout << "your are selling. Remember that selling will take one day!\n";
     if (!map_.getIsland(player_->getPlayerPosition())) {
         std::cout << "Captain, we are on the sea, you can not sell enything!\n";
         return;
@@ -170,7 +171,11 @@ void Game::sell()
     int sellOption = 0;
     std::cin >> sellOption;
     while (ship_->getCargosVector().size() < sellOption) {
-        std::cout << "We do not own this place, you have to change your decision, Captain!\n";
+        if (sellOption == ship_->getCargosVector().size() + 1) {
+            std::cout << "Enough trade for today.\n";
+            return;
+        }
+        std::cout << "Segmentation fault Captain, you have to change your decision!\n";
         std::cin >> sellOption;
     }
     int amountOfCargoToSell = 0;
@@ -188,6 +193,7 @@ void Game::sell()
     ship_->unload(objectToSell, amountOfCargoToSell);
     player_->setMoney(player_->getMoney() + objectToSell->getBasePrice() * amountOfCargoToSell);
     map_.getIsland(player_->getPlayerPosition())->getStore()->addCargo(objectToSell, amountOfCargoToSell);
+    time_->onTimeChange();
 }
 
 void Game::printMap(const std::shared_ptr<Player> player)
@@ -226,12 +232,17 @@ void Game::travel()
         islandCounter++;
         std::cout << "Island " << islandCounter << " Travel time: " << daysToGo[islandCounter - 1] << " days" << std::endl;
     }
+    std::cout << ++islandCounter << ". Exit\n";
     std::cout << "Where are we going captain?: ";
     islandCounter = 0;
     std::cin >> islandCounter; //Zabezpieczenie przed wpisywaniem większej artości od ilości wyspy, do zrobienia
-    while (islandCounter > map_.getEveryIsland().size()) {
+    while (islandCounter > map_.getEveryIsland().size() + 1) {
         std::cout << "Captain you have old map! Here is new one, so where we are going?: " << std::endl;
         std::cin >> islandCounter;
+    }
+    if (islandCounter == map_.getEveryIsland().size() + 1) {
+        std::cout << "I changed my mind, we stay here!\n";
+        return;
     }
     player_->setPlayerPosition(map_.getEveryIsland()[islandCounter - 1].getPosition().getPositionX(), map_.getEveryIsland()[islandCounter - 1].getPosition().getPositionY());
     for (int i = 0; i < daysToGo[islandCounter - 1]; i++)
@@ -250,11 +261,27 @@ void Game::buy()
     {
         std::cout << "Buy. Remember that buying will take one day!" << std::endl;
         std::cout << *IslandWeAreOn->getStore() << std::endl;
+        std::random_device rm;
+        std::mt19937 gr(rm());
+        int EasterEggPossibilities = 20;
+        std::uniform_int_distribution<> EasterEgg(0, EasterEggPossibilities);
+        int whahappen = EasterEgg(gr);
+        if (whahappen == 10) {
+            std::cout << IslandWeAreOn->getStore()->getCargoOfStore().size() + 2 << ". Maybe round of Gwent?\n";
+        }
         std::cout << "What do you want to buy: " << std::endl;
         int storeIndex = 0;
         std::cin >> storeIndex;
         while (storeIndex > IslandWeAreOn->getStore()->getCargoOfStore().size())
-        {
+        {   
+            if (storeIndex == IslandWeAreOn->getStore()->getCargoOfStore().size() + 1) {
+                std::cout << "Get back on the ship, you scums!\n";
+                return;
+            }
+            if (whahappen == 10 && storeIndex == IslandWeAreOn->getStore()->getCargoOfStore().size() + 2) {
+                std::cout << "Winds howling... (O'Dimm theme starts playing...)\n";
+                return;
+            }
             std::cout << "Too much rum, captain?  Choose one more time: ";
             std::cin >> storeIndex;
         }

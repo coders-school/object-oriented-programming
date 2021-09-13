@@ -8,7 +8,7 @@ public:
      
     }
 
-    Island(Coordinates position, Store store)
+    Island(Coordinates position, std::shared_ptr<Store> store)
     : position_(position), store_(store)
     {}
 
@@ -18,7 +18,7 @@ public:
 
    //int getName() const;
 protected:
-    Store store_;
+    std::shared_ptr<Store> store_;
 
 private:
     Coordinates position_;

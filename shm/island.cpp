@@ -10,7 +10,7 @@ void Island::setPosition(Coordinates position){
 }
 
 std::shared_ptr<Store> Island::getStore() {
-    return std::make_shared<Store>(store_);
+    return store_;
 }
 
 //int Island::getName() const {

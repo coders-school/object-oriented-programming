@@ -8,7 +8,7 @@ Map::Map(std::shared_ptr<Time> time)
     for (int i = 0; i < islandsQuantity_;) {
         Coordinates tempCoordinates = getRandomCoordinates();
         if (!getIsland(tempCoordinates)) {
-            Island tempIsland(tempCoordinates, Store(time));
+            Island tempIsland(tempCoordinates, std::make_shared<Store>(time));
             islands_.push_back(tempIsland);
             ++i;
         }
