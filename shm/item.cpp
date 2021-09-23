@@ -21,3 +21,10 @@ Cargo& Item::operator-=(size_t amount) {
 bool Item::operator==(const Cargo& cargo) const {
     return cargo.getName() == getName();
 }
+
+std::shared_ptr<Cargo> Item::clone(const size_t &amount) const {
+    return std::make_shared<Item>(this->getName(),
+                                amount,
+                                this->getBasePrice(),
+                                this->getRarity());
+}

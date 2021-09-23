@@ -23,6 +23,10 @@ public:
     size_t getBasePrice() const override { return basePrice_; };
     void setAmount(const size_t& amount) override { amount_ = amount;};
     void nextDay() override {};
+
+    std::shared_ptr<Cargo> clone(const size_t &) const;
+
+    void setTime(std::shared_ptr<Time>) override {};
 private:
     size_t percentage_;
 };

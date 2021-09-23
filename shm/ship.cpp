@@ -88,7 +88,7 @@ std::vector<std::shared_ptr<Cargo>>::iterator Ship::findMatchCargo(std::shared_p
                         { return searchCargo->getName() == cargo->getName(); });
 }
 
-void Ship::unload(std::shared_ptr<Cargo> &cargo, size_t amount)
+void Ship::unload(const std::shared_ptr<Cargo> &cargo, size_t amount)
 {
     auto findCargo = findMatchCargo(cargo);
     if (findCargo == cargos_.end())
@@ -102,7 +102,7 @@ void Ship::unload(std::shared_ptr<Cargo> &cargo, size_t amount)
         if (!(*findCargo)->getAmount())
         {
             cargos_.erase(findCargo);
-            time_->detachObserver(dynamic_cast<Cargo *>((*findCargo).get()));
+            time_->detachObserver(dynamic_cast<Cargo*>(((*findCargo).get())));
         }
     }
 }
@@ -134,7 +134,7 @@ void Ship::load(std::shared_ptr<Cargo> &cargo, size_t amount)
 
 void Ship::addCargo(std::shared_ptr<Cargo> &cargo, size_t amount)
 {
-    if (Alcohol *alcohol = dynamic_cast<Alcohol *>(cargo.get()))
+   /* if (Alcohol *alcohol = dynamic_cast<Alcohol *>(cargo.get()))
     {
         cargos_.push_back(std::make_shared<Alcohol>(alcohol->getName(),
                                                     amount,
@@ -154,8 +154,11 @@ void Ship::addCargo(std::shared_ptr<Cargo> &cargo, size_t amount)
         cargos_.push_back(std::make_shared<Item>(item->getName(),
                                                  amount,
                                                  item->getBasePrice(),
+             
                                                  item->getRarity()));
-    }
+    }*/
+    cargo->setTime(time_);
+    cargos_.push_back(cargo->clone(amount));
 }
 void Ship::nextDay()
 {

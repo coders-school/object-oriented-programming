@@ -7,7 +7,6 @@
 void Time::attachObserver(IObserver *observer)
 {
     observerList_.push_back(observer);
-    std::cout << observerList_.size() << std::endl;
 }
 
 void Time::detachObserver(IObserver *observer)

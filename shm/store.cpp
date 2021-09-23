@@ -87,7 +87,7 @@ Response Store::sell(std::shared_ptr<Cargo> cargo, const size_t& amount, Player*
         return Response::lack_of_space;
     }
 
-    if (player->getMoney() <= 0) {
+    if (player->getMoney() <= 0 || player->getMoney() < cargo->getPrice() * amount) {
         std::cout << "NO MONEY\n";
         return Response::lack_of_money;
     }
@@ -168,8 +168,8 @@ void Store::unloadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     addCargo(cargo, amount);
 }
 
-void Store::addCargo(std::shared_ptr<Cargo> cargo, const size_t& amount) {
-    if (Alcohol* alcohol = dynamic_cast<Alcohol*>(cargo.get())) {
+void Store::addCargo(std::shared_ptr<Cargo> cargo, size_t amount) {
+   /* if (Alcohol* alcohol = dynamic_cast<Alcohol*>(cargo.get())) {
         stock_.push_back(std::make_shared<Alcohol>(alcohol->getName(),
                                                    amount,
                                                    alcohol->getBasePrice(),
@@ -185,7 +185,9 @@ void Store::addCargo(std::shared_ptr<Cargo> cargo, const size_t& amount) {
                                                 amount,
                                                 item->getPrice(),
                                                 item->getRarity()));
-    }
+    }*/
+    cargo->setTime(nullptr);
+    stock_.push_back(cargo->clone(amount));
 }
 
 void Store::nextDay() {

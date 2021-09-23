@@ -26,6 +26,10 @@ public:
 
     void nextDay() override;
 
+    std::shared_ptr<Cargo> clone(const size_t &) const;
+
+    void setTime(std::shared_ptr<Time>) override;
+
 protected:
     size_t expirationDate_;
     size_t purchaseDate_ = expirationDate_;

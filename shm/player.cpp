@@ -55,18 +55,16 @@ void Player::countAvailableSpace()
 
 void Player::printCargo() const
 {
-    if (!ship_)
-    {
-        std::cout << "Ship is no yes" << std::endl;
-        return;
-    }
-
     std::cout << "Ship name: " << ship_->getName() << '\n'
               << "Ship capacity: " << ship_->getCapacity() << '\n'
               << "Available space: " << availableSpace_ << '\n'
               << '\n';
     int i = 0;
     std::cout << "Current ship's cargo\n";
+    if (ship_->getCargosVector().empty()) {
+        std::cout << "We have nothing captain! NOTHING!\n";
+        return;
+    }
     for (const auto &el : ship_->getCargosVector())
     {
         std::cout << ++i << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base price: " << el->getBasePrice() << ",\t\t Actual price: " << el->getPrice() << '\n';

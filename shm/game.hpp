@@ -10,6 +10,8 @@
 #include "ship.hpp"
 #include "time.hpp"
 
+//template <typename inCheck>
+
 class Game {
     enum class MenuOption {
         Travel = 1,
@@ -44,6 +46,9 @@ public:
     void sell();
     void exit();
     void buy();
+    void travel(int);
+
+    bool onIslandCheck(const Coordinates&);
 
 protected:
     std::shared_ptr<Time> time_;
@@ -57,3 +62,5 @@ private:
     size_t finalGoal_;
     size_t islandNo_;
 };
+
+void responsesFromStore(const Response& res);

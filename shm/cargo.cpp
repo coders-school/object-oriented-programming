@@ -30,4 +30,3 @@ Cargo& Cargo::operator-=(size_t amount) {
 bool Cargo::operator==(const Cargo& cargo) const {
     return cargo.getName() == getName();
 }
-

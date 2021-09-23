@@ -29,7 +29,7 @@ public:
     std::vector<std::shared_ptr<Cargo>> getCargoOfStore() const { return stock_; };
 
     // Function responsible for adding a new cargo to a Store
-    void addCargo(std::shared_ptr<Cargo> cargo, const size_t& amount);
+    void addCargo(std::shared_ptr<Cargo> cargo, size_t amount);
     // Fucntion responsible for subtracting cargo from a Store.
     void loadShip(std::shared_ptr<Cargo> cargo, const size_t& amount);
     // Funcition responsibel for adding amount of cargo to a Store.

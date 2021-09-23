@@ -23,6 +23,10 @@ public:
     virtual size_t getBasePrice() const = 0;
 
     virtual void setAmount(const size_t& amount) = 0; 
+
+    virtual std::shared_ptr<Cargo> clone(const size_t &) const = 0;
+
+    virtual void setTime(std::shared_ptr<Time>) = 0;
     
 protected:
     std::string name_;

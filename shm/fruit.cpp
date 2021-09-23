@@ -59,3 +59,15 @@ void Fruit::nextDay()
         operator--();
     }
 }
+
+std::shared_ptr<Cargo> Fruit::clone(const size_t &amount) const {
+    return std::make_shared<Fruit>(this->getName(),
+                                    amount,
+                                    this->getBasePrice(),
+                                    this->getExpirationDate(),
+                                    time_);
+}
+
+void Fruit::setTime(std::shared_ptr<Time> time) {
+    time_ = time;
+}
