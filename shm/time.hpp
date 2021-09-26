@@ -7,9 +7,8 @@ class IObserver;
 
 class Time {
 public:
-    Time() {};
+    Time() = default;
     ~Time() = default;
-
 
     void attachObserver(IObserver * );
 
@@ -20,8 +19,6 @@ public:
     size_t getDays() const;
 
     std::list<IObserver*> getList() const;
-
-
 private:
     std::list<IObserver*> observerList_{};
     void notifyAll();

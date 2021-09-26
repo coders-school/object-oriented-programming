@@ -10,14 +10,16 @@
 #include <random>
 #include <typeinfo>
 
-constexpr size_t AMOUNT_MIN = 5;
-constexpr size_t AMOUNT_MAX = 150;
-constexpr size_t POWER_MIN = 10;
-constexpr size_t POWER_MAX = 90;
-constexpr size_t DAY_MIN = 5;
-constexpr size_t DAY_MAX = 17;
-constexpr size_t PRICE_MIN = 5;
-constexpr size_t PRICE_MAX = 145;
+namespace {
+    constexpr size_t AMOUNT_MIN = 5;
+    constexpr size_t AMOUNT_MAX = 150;
+    constexpr size_t POWER_MIN = 10;
+    constexpr size_t POWER_MAX = 90;
+    constexpr size_t DAY_MIN = 5;
+    constexpr size_t DAY_MAX = 17;
+    constexpr size_t PRICE_MIN = 5;
+    constexpr size_t PRICE_MAX = 145;
+}
 
 Store::Store(std::shared_ptr<Time> time)
     : time_(time) {
@@ -25,14 +27,15 @@ Store::Store(std::shared_ptr<Time> time)
     time_->attachObserver(this);
 }
 
+Store::~Store() {
+    time_->detachObserver(this);
+}
 
 
 std::vector<std::shared_ptr<Cargo>>::iterator Store::findMatchCargo(const std::shared_ptr<Cargo> wantedCargo) {
-    auto find = std::find_if(stock_.begin(),
-                             stock_.end(),
-                             [&wantedCargo](const auto& cargo) { return cargo->getName() == wantedCargo->getName(); });
-
-    return find;
+    return std::find_if(stock_.begin(),
+                        stock_.end(),
+                        [&wantedCargo](const auto& cargo) { return cargo->getName() == wantedCargo->getName(); });
 }
 
 Response Store::buy(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player) {
@@ -141,11 +144,10 @@ void Store::loadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     if (!cargo) {
         return;
     }
-
     auto loadedCargo = findMatchCargo(cargo);
     if (loadedCargo != stock_.end()) {
-        loadedCargo->get()->setAmount(loadedCargo->get()->getAmount() - amount);
-
+        (**loadedCargo) -= amount;
+        //loadedCargo->get()->setAmount(loadedCargo->get()->getAmount() - amount);
         if (loadedCargo->get()->getAmount() == 0) {
             stock_.erase(loadedCargo);
         }
@@ -160,32 +162,15 @@ void Store::unloadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     if (!cargo) {
         return;
     }
-
     auto unloadCargo = findMatchCargo(cargo);
     if (unloadCargo != stock_.end()) {
-        unloadCargo->get()->setAmount(unloadCargo->get()->getAmount() + amount);
+        (**unloadCargo) += amount;
+    } else {
+        addCargo(cargo, amount);
     }
-    addCargo(cargo, amount);
 }
 
 void Store::addCargo(std::shared_ptr<Cargo> cargo, size_t amount) {
-   /* if (Alcohol* alcohol = dynamic_cast<Alcohol*>(cargo.get())) {
-        stock_.push_back(std::make_shared<Alcohol>(alcohol->getName(),
-                                                   amount,
-                                                   alcohol->getBasePrice(),
-                                                   alcohol->getPercentage()));
-    } else if (Fruit* fruit = dynamic_cast<Fruit*>(cargo.get())) {
-        stock_.push_back(std::make_shared<Fruit>(fruit->getName(),
-                                                 amount,
-                                                 fruit->getBasePrice(),
-                                                 fruit->getExpirationDate(),
-                                                 nullptr));
-    } else if (Item* item = dynamic_cast<Item*>(cargo.get())) {
-        stock_.push_back(std::make_shared<Item>(item->getName(),
-                                                amount,
-                                                item->getPrice(),
-                                                item->getRarity()));
-    }*/
     cargo->setTime(nullptr);
     stock_.push_back(cargo->clone(amount));
 }
@@ -216,7 +201,6 @@ void Store::nextDay() {
                     *cargo -= cargo->getAmount() - storeCapacity;
                 }
             }
-       }
+        }
     }
-  
 }

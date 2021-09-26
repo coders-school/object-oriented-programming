@@ -27,12 +27,14 @@ public:
 
     Rarity getRarity() const {return rarity_;};
 
-    void setAmount(const size_t& amount) override { amount_ = amount;};
+    //void setAmount(const size_t& amount) override { amount_ = amount;};
     void nextDay() override {};
 
     std::shared_ptr<Cargo> clone(const size_t &) const;
 
     void setTime(std::shared_ptr<Time>) override {};
+
+    void detachingObserver() override {};
 private:
     Rarity rarity_;
 };

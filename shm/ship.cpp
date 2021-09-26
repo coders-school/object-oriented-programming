@@ -10,6 +10,23 @@
 #include "item.hpp"
 
 // Class responsible for managing Ships in the game.
+
+Ship::Ship() : id_(-1){};
+
+Ship::Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::shared_ptr<Time> time)
+        : capacity_(capacity)
+        , maxCrew_(maxCrew)
+        , crew_(crew)
+        , speed_(speed)
+        , name_(name)
+        , id_(id)
+        , time_(time)
+     {
+         time_->attachObserver(this);
+     }
+
+Ship::~Ship() { time_->detachObserver(this); }
+
 Ship &Ship::operator-=(size_t num)
 {
     if (crew_ - num <= crew_)
@@ -88,7 +105,7 @@ std::vector<std::shared_ptr<Cargo>>::iterator Ship::findMatchCargo(std::shared_p
                         { return searchCargo->getName() == cargo->getName(); });
 }
 
-void Ship::unload(const std::shared_ptr<Cargo> &cargo, size_t amount)
+void Ship::unload(std::shared_ptr<Cargo> &cargo, size_t amount)
 {
     auto findCargo = findMatchCargo(cargo);
     if (findCargo == cargos_.end())
@@ -98,11 +115,11 @@ void Ship::unload(const std::shared_ptr<Cargo> &cargo, size_t amount)
 
     if (findCargo != cargos_.end())
     {
-        findCargo->get()->setAmount(findCargo->get()->getAmount() - amount);
+        (**findCargo) -= amount;
         if (!(*findCargo)->getAmount())
         {
+            (*findCargo)->detachingObserver();
             cargos_.erase(findCargo);
-            time_->detachObserver(dynamic_cast<Cargo*>(((*findCargo).get())));
         }
     }
 }
@@ -111,52 +128,19 @@ void Ship::load(std::shared_ptr<Cargo> &cargo, size_t amount)
 {
     auto findCargo = findMatchCargo(cargo);
 
-    if (findCargo != cargos_.end())
-    {
-
-        if (capacity_ > cargo->getAmount())
-        {
-
-            /// I just want to know, is the line below  corrected wrote? OR should I write it, in another way?
-            findCargo->get()->setAmount(findCargo->get()->getAmount() + amount);
-        }
-        else
-        {
+    if (findCargo != cargos_.end()) {
+        if (capacity_ > cargo->getAmount()) {
+            (**findCargo) += amount;
+        } else {
             std::cerr << "Not enuogh space on ship!!!!\n";
         }
-    }
-    else
-    {
-
+    } else {
         addCargo(cargo, amount);
     }
 }
 
 void Ship::addCargo(std::shared_ptr<Cargo> &cargo, size_t amount)
 {
-   /* if (Alcohol *alcohol = dynamic_cast<Alcohol *>(cargo.get()))
-    {
-        cargos_.push_back(std::make_shared<Alcohol>(alcohol->getName(),
-                                                    amount,
-                                                    alcohol->getBasePrice(),
-                                                    alcohol->getPercentage()));
-    }
-    else if (Fruit *fruit = dynamic_cast<Fruit *>(cargo.get()))
-    {
-        cargos_.push_back(std::make_shared<Fruit>(fruit->getName(),
-                                                  amount,
-                                                  fruit->getBasePrice(),
-                                                  fruit->getExpirationDate(),
-                                                  time_));
-    }
-    else if (Item *item = dynamic_cast<Item *>(cargo.get()))
-    {
-        cargos_.push_back(std::make_shared<Item>(item->getName(),
-                                                 amount,
-                                                 item->getBasePrice(),
-             
-                                                 item->getRarity()));
-    }*/
     cargo->setTime(time_);
     cargos_.push_back(cargo->clone(amount));
 }

@@ -8,7 +8,7 @@ class Ship;
 // Class responsible for managing Player in the game.
 class Player {
 public:
-    Player() {};
+    Player() = default;
     Player(std::shared_ptr<Ship> ship, const size_t& money);
     ~Player() = default;
     size_t getMoney() const; 

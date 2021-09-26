@@ -5,8 +5,7 @@
 class Fruit : public Cargo {
 public:
    Fruit(const std::string& name, size_t amount, size_t basePrice, size_t expirationDate, std::shared_ptr<Time> time); 
-    
-    ~Fruit() override {};
+    ~Fruit() override;
 
     Cargo& operator+=(size_t amount) override;
     Cargo& operator-=(size_t amount) override;
@@ -22,13 +21,15 @@ public:
 
     size_t getExpirationDate() const { return expirationDate_; };
     size_t getPurchaseData() const { return purchaseDate_; };
-    void setAmount(const size_t& amount) override { amount_ = amount;};
+  //  void setAmount(const size_t& amount) override { amount_ = amount;};
 
     void nextDay() override;
 
     std::shared_ptr<Cargo> clone(const size_t &) const;
 
     void setTime(std::shared_ptr<Time>) override;
+
+    void detachingObserver() override;
 
 protected:
     size_t expirationDate_;

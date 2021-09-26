@@ -13,17 +13,24 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, std::shar
         }
     }
 
+Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
+    : name_(name)
+    , amount_(amount)
+    , basePrice_(basePrice) 
+    {};
+
 Cargo& Cargo::operator+=(size_t amount) {
     amount_ += amount;
     return *this;
 }
 
 Cargo& Cargo::operator-=(size_t amount) {
-    if (amount <= amount_) {
-        amount_ -= amount;
-    } else {
-        
-    }
+    if (amount_ < amount ) {
+        //throw std::invalid_argument("Not allowed! You will be below zero!");
+        std::cout << "Not allowed! You will be below zero!";
+        return *this;
+    } 
+    amount_ -= amount;
     return *this;
 }
 

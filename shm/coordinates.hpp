@@ -3,15 +3,9 @@
 
 class Coordinates {
 public:
-    Coordinates()
-    : positionX_(0)
-    , positionY_(0)
-    {}
+    Coordinates();
 
-    Coordinates(size_t positionX, size_t positionY) 
-    : positionX_(positionX)
-    , positionY_(positionY)
-    {}
+    Coordinates(size_t positionX, size_t positionY);
 
     void setPositionX(size_t );
     size_t getPositionX() const;

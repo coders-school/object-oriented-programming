@@ -4,7 +4,7 @@
 #include "island.hpp"
 class Map {
 public:
-    Map() {};
+    Map() = default;
     Map(std::shared_ptr<Time> time);
     Island* const getIsland(const Coordinates& coordinate);
     std::vector<Island> getEveryIsland() const;

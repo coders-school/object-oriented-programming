@@ -4,13 +4,9 @@
 
 class Island{    
 public:
-    Island() {
-     
-    }
+    Island() = default;
 
-    Island(Coordinates position, std::shared_ptr<Store> store)
-    : position_(position), store_(store)
-    {}
+    Island(Coordinates position, std::shared_ptr<Store> store);
 
     Coordinates getPosition() const;
     void setPosition(Coordinates);

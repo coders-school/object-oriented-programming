@@ -40,15 +40,13 @@ public:
     void setPlayer();
 
     void chooseOption(MenuOption option);
-    void printMap(const std::shared_ptr<Player>);
+    void printMap(const std::shared_ptr<Player>&);
     void printCargo();
     void travel();
     void sell();
     void exit();
     void buy();
     void travel(int);
-
-    bool onIslandCheck(const Coordinates&);
 
 protected:
     std::shared_ptr<Time> time_;

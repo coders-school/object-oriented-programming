@@ -64,10 +64,11 @@ void Player::printCargo() const
     if (ship_->getCargosVector().empty()) {
         std::cout << "We have nothing captain! NOTHING!\n";
         return;
-    }
-    for (const auto &el : ship_->getCargosVector())
-    {
-        std::cout << ++i << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base price: " << el->getBasePrice() << ",\t\t Actual price: " << el->getPrice() << '\n';
+    } else {
+        for (const auto &el : ship_->getCargosVector())
+        {
+            std::cout << ++i << " Name: " << el->getName() << ",\t\t Amount: " << el->getAmount() << ",\t\t Base price: " << el->getBasePrice() << ",\t\t Actual price: " << el->getPrice() << '\n';
+        }
     }
 }
 
@@ -79,6 +80,7 @@ void Player::sell(std::shared_ptr<Cargo> cargo, const size_t &amount)
     }
     ship_->unload(cargo, amount);
     money_ += cargo->getPrice() * amount;
+    countAvailableSpace();
 }
 
 void Player::buy(std::shared_ptr<Cargo> cargo, const size_t &amount)
@@ -90,6 +92,7 @@ void Player::buy(std::shared_ptr<Cargo> cargo, const size_t &amount)
     getShip()->load(cargo, amount);
 
     money_ -= cargo->getPrice() * amount;
+    countAvailableSpace();
 }
 
 void Player::setMoney(size_t money)

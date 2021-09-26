@@ -1,5 +1,15 @@
 #include "coordinates.hpp"
 
+Coordinates::Coordinates()
+    : positionX_(0)
+    , positionY_(0)
+    {}
+
+Coordinates::Coordinates(size_t positionX, size_t positionY)
+    : positionX_(positionX)
+    , positionY_(positionY)
+    {}
+
 void Coordinates::setPositionX(size_t positionX) {
     positionX_ = positionX;
 }
@@ -19,5 +29,6 @@ bool Coordinates::operator== (const Coordinates& n_pos) const {
 }
 
 size_t Coordinates::distance(const Coordinates& rhs) {
-    return std::round(std::sqrt(std::pow((static_cast<int>(positionX_) - static_cast<int>(rhs.getPositionX())),2) + std::pow((static_cast<int>(positionY_) - static_cast<int>(rhs.getPositionY())),2)));
+    return std::round(std::sqrt(std::pow((static_cast<int>(positionX_) - static_cast<int>(rhs.getPositionX())), 2)
+                    + std::pow((static_cast<int>(positionY_) - static_cast<int>(rhs.getPositionY())), 2)));
 }

@@ -17,12 +17,9 @@ enum class Response {
 // Class responsible for managing a store
 class Store : public IObserver {
 public:
-    Store() {};
+    Store() = default;
     Store(std::shared_ptr<Time> time);
-    ~Store() {
-        
-    time_->detachObserver(this);
-    };
+    ~Store();
 
     Response buy(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player);
     Response sell(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player);
