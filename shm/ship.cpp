@@ -129,7 +129,7 @@ void Ship::load(std::shared_ptr<Cargo> &cargo, size_t amount)
     auto findCargo = findMatchCargo(cargo);
 
     if (findCargo != cargos_.end()) {
-        if (capacity_ > cargo->getAmount()) {
+        if (capacity_ >= (*findCargo)->getAmount() + amount) {
             (**findCargo) += amount;
         } else {
             std::cerr << "Not enuogh space on ship!!!!\n";

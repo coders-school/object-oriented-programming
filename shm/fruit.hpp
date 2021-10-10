@@ -11,7 +11,7 @@ public:
     Cargo& operator-=(size_t amount) override;
     bool operator==(const Cargo&) const override;
     Fruit& operator--();
-    Fruit& operator--(int);
+    // Fruit& operator--(int);
 
     //Methods override from Cargo class.
     virtual size_t getPrice() const override;
