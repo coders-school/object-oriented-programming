@@ -13,7 +13,7 @@ class Ship : public IObserver
 {
 public:
     Ship();
-    Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::shared_ptr<Time> time);
+    Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, const std::shared_ptr<Time>& time);
     ~Ship();
 
     Ship& operator-=(size_t num);
@@ -32,15 +32,15 @@ public:
     
     void setName(const std::string& name);
 
-    void addCargo(std::shared_ptr<Cargo>& cargo, size_t amount);
+    void addCargo(const std::shared_ptr<Cargo>& cargo, size_t amount);
     
-    void unload(std::shared_ptr<Cargo>& cargo, size_t amount);
-    void load(std::shared_ptr<Cargo>& cargo, size_t amount);
+    void unload(const std::shared_ptr<Cargo>& cargo, size_t amount);
+    void load(const std::shared_ptr<Cargo>& cargo, size_t amount);
 
     friend std::ostream& operator<<(std::ostream& os, const Ship& ship);
     void nextDay() override;
 
-    void setOwner(std::shared_ptr<Player> owner);
+    void setOwner(const std::shared_ptr<Player>& owner);
 
     std::shared_ptr<Time> getTime() const;
 

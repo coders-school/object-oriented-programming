@@ -21,18 +21,18 @@ public:
     Store(std::shared_ptr<Time> time);
     ~Store();
 
-    Response buy(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player);
-    Response sell(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player);
+    Response buy(const std::shared_ptr<Cargo>& cargo, const size_t& amount, Player* player);
+    Response sell(const std::shared_ptr<Cargo>& cargo, const size_t& amount, Player* player);
     std::vector<std::shared_ptr<Cargo>> getCargoOfStore() const { return stock_; };
 
     // Function responsible for adding a new cargo to a Store
-    void addCargo(std::shared_ptr<Cargo> cargo, size_t amount);
+    void addCargo(const std::shared_ptr<Cargo>& cargo, size_t amount);
     // Fucntion responsible for subtracting cargo from a Store.
-    void loadShip(std::shared_ptr<Cargo> cargo, const size_t& amount);
+    void loadShip(const std::shared_ptr<Cargo>&  cargo, const size_t& amount);
     // Funcition responsibel for adding amount of cargo to a Store.
-    void unloadShip(std::shared_ptr<Cargo> cargo, const size_t& amount);
+    void unloadShip(const std::shared_ptr<Cargo>&  cargo, const size_t& amount);
     // Function responsible for finding proper cargo.
-    std::vector<std::shared_ptr<Cargo>>::iterator findMatchCargo(const std::shared_ptr<Cargo> wantedCargo);
+    std::vector<std::shared_ptr<Cargo>>::iterator findMatchCargo(const std::shared_ptr<Cargo>& wantedCargo);
 
     friend std::ostream& operator<<(std::ostream& os, const Store& store);
 

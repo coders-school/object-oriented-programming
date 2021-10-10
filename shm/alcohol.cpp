@@ -1,5 +1,6 @@
 #include "alcohol.hpp"
 #include <iostream>
+#include <limits>
 
 Alcohol::Alcohol(const std::string& name, size_t amount, size_t basePrice, size_t percentage)
         : Cargo(name, amount, basePrice), percentage_(percentage) {} ;
@@ -9,15 +10,15 @@ size_t Alcohol::getPrice() const {
 }
 
 Cargo& Alcohol::operator+=(size_t amount) {
-    amount_ += amount;
+    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
+        amount_ += amount;
+    }
     return *this;
 }
 
 Cargo& Alcohol::operator-=(size_t amount) {
- if (amount <= amount_) {
+    if (amount_ >= amount ) {
         amount_ -= amount;
-    } else if(amount_ < 0){
-       
     }
     return *this;
 }

@@ -1,19 +1,20 @@
 #include "item.hpp"
+#include <limits>
 
 Item::Item(const std::string& name, size_t amount, size_t basePrice, Rarity rarity)
     : Cargo(name, amount, basePrice), rarity_(rarity){};
 
 
 Cargo& Item::operator+=(size_t amount) {
-    amount_ += amount;
+    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
+        amount_ += amount;
+    }
     return *this;
 }
 
 Cargo& Item::operator-=(size_t amount) {
-    if (amount <= amount_) {
+    if (amount_ >= amount ) {
         amount_ -= amount;
-    } else {
-        
     }
     return *this;
 }

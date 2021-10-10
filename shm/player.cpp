@@ -72,7 +72,7 @@ void Player::printCargo() const
     }
 }
 
-void Player::sell(std::shared_ptr<Cargo> cargo, const size_t &amount)
+void Player::sell(const std::shared_ptr<Cargo>& cargo, const size_t &amount)
 {
     if (!cargo)
     {
@@ -83,7 +83,7 @@ void Player::sell(std::shared_ptr<Cargo> cargo, const size_t &amount)
     countAvailableSpace();
 }
 
-void Player::buy(std::shared_ptr<Cargo> cargo, const size_t &amount)
+void Player::buy(const std::shared_ptr<Cargo>& cargo, const size_t &amount)
 {
     if (!cargo)
     {

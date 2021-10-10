@@ -20,8 +20,8 @@ public:
     void printCargo() const;
     void setMoney(size_t money);
 
-    void sell( std::shared_ptr<Cargo> cargo, const size_t& amount);
-    void buy ( std::shared_ptr<Cargo> cargo, const size_t& amount);
+    void sell( const std::shared_ptr<Cargo>& cargo, const size_t& amount);
+    void buy ( const std::shared_ptr<Cargo>& cargo, const size_t& amount);
 
     void countAvailableSpace();
 

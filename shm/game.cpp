@@ -16,6 +16,7 @@ void inStreamCheck(inCheck& val) {
         std::cin >> val;
     }
 }
+
 namespace {
     constexpr size_t CAPACITY = 10;
     constexpr size_t MAXCREW = 40;

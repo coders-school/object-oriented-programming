@@ -1,7 +1,7 @@
 #include "island.hpp"
 #include <memory>
 
-Island::Island(Coordinates position, std::shared_ptr<Store> store)
+Island::Island(Coordinates position, const std::shared_ptr<Store>& store)
     : position_(position), store_(store)
     {}
 

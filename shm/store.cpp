@@ -32,13 +32,13 @@ Store::~Store() {
 }
 
 
-std::vector<std::shared_ptr<Cargo>>::iterator Store::findMatchCargo(const std::shared_ptr<Cargo> wantedCargo) {
+std::vector<std::shared_ptr<Cargo>>::iterator Store::findMatchCargo(const std::shared_ptr<Cargo>& wantedCargo) {
     return std::find_if(stock_.begin(),
                         stock_.end(),
                         [&wantedCargo](const auto& cargo) { return cargo->getName() == wantedCargo->getName(); });
 }
 
-Response Store::buy(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player) {
+Response Store::buy(const std::shared_ptr<Cargo>& cargo, const size_t& amount, Player* player) {
     if (!cargo || !amount || !player) {
         return Response::lack_of_cargo;
     }
@@ -64,7 +64,7 @@ Response Store::buy(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* 
     return Response::done;
 }
 
-Response Store::sell(std::shared_ptr<Cargo> cargo, const size_t& amount, Player* player) {
+Response Store::sell(const std::shared_ptr<Cargo>& cargo, const size_t& amount, Player* player) {
     if (!cargo || !amount) {
         Response::lack_of_cargo;
     }
@@ -140,7 +140,7 @@ void Store::generateDefaultCargo() {
     stock_.shrink_to_fit();
 }
 
-void Store::loadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
+void Store::loadShip(const std::shared_ptr<Cargo>& cargo, const size_t& amount) {
     if (!cargo) {
         return;
     }
@@ -158,7 +158,7 @@ void Store::loadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     }
 }
 
-void Store::unloadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
+void Store::unloadShip(const std::shared_ptr<Cargo>& cargo, const size_t& amount) {
     if (!cargo) {
         return;
     }
@@ -170,7 +170,7 @@ void Store::unloadShip(std::shared_ptr<Cargo> cargo, const size_t& amount) {
     }
 }
 
-void Store::addCargo(std::shared_ptr<Cargo> cargo, size_t amount) {
+void Store::addCargo(const std::shared_ptr<Cargo>& cargo, size_t amount) {
     cargo->setTime(nullptr);
     stock_.push_back(cargo->clone(amount));
 }

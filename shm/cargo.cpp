@@ -1,5 +1,7 @@
 #include "cargo.hpp"
+
 #include <iostream>
+#include <limits>
 
 
 Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice, std::shared_ptr<Time> time)
@@ -19,21 +21,20 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     , basePrice_(basePrice) 
     {};
 
-Cargo& Cargo::operator+=(size_t amount) {
-    amount_ += amount;
-    return *this;
-}
+//Cargo& Cargo::operator+=(size_t amount) {
+//    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
+//        amount_ += amount;
+//    }
+//    return *this;
+//}
+//
+//Cargo& Cargo::operator-=(size_t amount) {
+//    if (amount_ >= amount ) {
+//        amount_ -= amount;
+//    }
+//    return *this;
+//}
 
-Cargo& Cargo::operator-=(size_t amount) {
-    if (amount_ < amount ) {
-        //throw std::invalid_argument("Not allowed! You will be below zero!");
-        std::cout << "Not allowed! You will be below zero!";
-        return *this;
-    } 
-    amount_ -= amount;
-    return *this;
-}
-
-bool Cargo::operator==(const Cargo& cargo) const {
-    return cargo.getName() == getName();
-}
+//bool Cargo::operator==(const Cargo& cargo) const {
+//    return cargo.getName() == getName();
+//}

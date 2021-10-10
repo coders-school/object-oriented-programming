@@ -1,5 +1,6 @@
 #include "fruit.hpp"
 #include <iostream>
+#include <limits>
 
 Fruit::Fruit(const std::string &name, size_t amount, size_t basePrice, size_t expirationDate, std::shared_ptr<Time> time) : Cargo(name, amount, basePrice, time), expirationDate_(expirationDate){
 };
@@ -11,21 +12,16 @@ size_t Fruit::getPrice() const
     return static_cast<size_t>(basePrice_ * static_cast<float>(purchaseDate_) / expirationDate_);
 }
 
-Cargo &Fruit::operator+=(size_t amount)
-{
-    amount_ += amount;
+Cargo& Fruit::operator+=(size_t amount) {
+    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
+        amount_ += amount;
+    }
     return *this;
 }
 
-Cargo &Fruit::operator-=(size_t amount)
-{
-    if (amount <= amount_)
-    {
+Cargo& Fruit::operator-=(size_t amount) {
+    if (amount_ >= amount ) {
         amount_ -= amount;
-    }
-    else
-    {
-
     }
     return *this;
 }
@@ -71,7 +67,7 @@ std::shared_ptr<Cargo> Fruit::clone(const size_t &amount) const {
                                     time_);
 }
 
-void Fruit::setTime(std::shared_ptr<Time> time) {
+void Fruit::setTime(const std::shared_ptr<Time>& time) {
     time_ = time;
 }
 

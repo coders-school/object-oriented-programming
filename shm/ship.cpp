@@ -13,7 +13,7 @@
 
 Ship::Ship() : id_(-1){};
 
-Ship::Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, std::shared_ptr<Time> time)
+Ship::Ship(size_t capacity, size_t maxCrew, size_t crew, size_t speed, const std::string& name, size_t id, const std::shared_ptr<Time>& time)
         : capacity_(capacity)
         , maxCrew_(maxCrew)
         , crew_(crew)
@@ -105,7 +105,7 @@ std::vector<std::shared_ptr<Cargo>>::iterator Ship::findMatchCargo(std::shared_p
                         { return searchCargo->getName() == cargo->getName(); });
 }
 
-void Ship::unload(std::shared_ptr<Cargo> &cargo, size_t amount)
+void Ship::unload(const std::shared_ptr<Cargo> &cargo, size_t amount)
 {
     auto findCargo = findMatchCargo(cargo);
     if (findCargo == cargos_.end())
@@ -124,7 +124,7 @@ void Ship::unload(std::shared_ptr<Cargo> &cargo, size_t amount)
     }
 }
 
-void Ship::load(std::shared_ptr<Cargo> &cargo, size_t amount)
+void Ship::load(const std::shared_ptr<Cargo> &cargo, size_t amount)
 {
     auto findCargo = findMatchCargo(cargo);
 
@@ -139,7 +139,7 @@ void Ship::load(std::shared_ptr<Cargo> &cargo, size_t amount)
     }
 }
 
-void Ship::addCargo(std::shared_ptr<Cargo> &cargo, size_t amount)
+void Ship::addCargo(const std::shared_ptr<Cargo>& cargo, size_t amount)
 {
     cargo->setTime(time_);
     cargos_.push_back(cargo->clone(amount));
@@ -149,7 +149,7 @@ void Ship::nextDay()
     owner_->setMoney(owner_->getMoney() - crew_);
 }
 
-void Ship::setOwner(std::shared_ptr<Player> owner)
+void Ship::setOwner(const std::shared_ptr<Player>& owner)
 {
     owner_ = owner;
 }

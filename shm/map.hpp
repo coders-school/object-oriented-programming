@@ -5,7 +5,7 @@
 class Map {
 public:
     Map() = default;
-    Map(std::shared_ptr<Time> time);
+    Map(const std::shared_ptr<Time>& time);
     Island* const getIsland(const Coordinates& coordinate);
     std::vector<Island> getEveryIsland() const;
     std::vector<Island> islands_;

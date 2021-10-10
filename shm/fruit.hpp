@@ -27,7 +27,7 @@ public:
 
     std::shared_ptr<Cargo> clone(const size_t &) const;
 
-    void setTime(std::shared_ptr<Time>) override;
+    void setTime(const std::shared_ptr<Time>&) override;
 
     void detachingObserver() override;
 
