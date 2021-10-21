@@ -12,9 +12,6 @@ public:
     Cargo(const std::string& name, size_t amount, size_t basePrice);
     virtual ~Cargo() = default;
 
-    // virtual Cargo& operator+=(size_t amount);
-    // virtual Cargo& operator-=(size_t amount);
-    // virtual bool operator==(const Cargo&) const;
     Cargo& operator+=(size_t amount);
     Cargo& operator-=(size_t amount);
     bool operator==(const Cargo&) const;
@@ -24,8 +21,6 @@ public:
     size_t getBasePrice() const;
 
     virtual size_t getPrice() const = 0;
-
-   // virtual void setAmount(const size_t& amount) = 0; 
 
     virtual std::shared_ptr<Cargo> clone(const size_t &) const = 0;
 

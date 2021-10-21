@@ -19,7 +19,7 @@ void inStreamCheck(inCheck& val) {
 }
 
 namespace {
-    constexpr size_t CAPACITY = 10;
+    constexpr size_t CAPACITY = 1000;
     constexpr size_t MAXCREW = 40;
     constexpr size_t CREW = 10;
     constexpr size_t SPEED = 10;
@@ -174,7 +174,7 @@ void Game::sell() {
     std::cout << "Cargo store and prices:\n" << *actualStore << "\nYour cargo to sell:\n";
     player_->printCargo();
     int choose = 0;
-    std::cout << "What you want to sell?";
+    std::cout << "What you want to sell? ";
     std::cin >> choose;
     inStreamCheck(choose);
     while (choose > vectorOfCargos.size()) {
@@ -183,15 +183,21 @@ void Game::sell() {
         inStreamCheck(choose);
     }
     const auto& cargoToSell = player_->getShip()->getCargo(choose - 1);
-    std::cout << "How much you want to sell?";
+    std::cout << "How much you want to sell? ";
     int amount = 0;
     std::cin >> amount;
     inStreamCheck(amount);
     if (amount > cargoToSell->getAmount()) {
-        std::cout << "We didn't have " << amount << " of " << cargoToSell->getName() << ". We sold only " << cargoToSell->getAmount() << '\n';
-        amount = cargoToSell->getAmount(); 
+        amount = cargoToSell->getAmount();
+        const auto& response = actualStore->buy(cargoToSell, amount, player_.get());
+        if (response == Response::done) {
+            std::cout << "We didn't have " << amount << " of " << cargoToSell->getName() << ". We sold only " << amount << '\n';
+        } else {
+            responsesFromStore(response);
+        }
+    } else {
+        responsesFromStore(actualStore->buy(cargoToSell, amount, player_.get()));
     }
-    responsesFromStore(actualStore->buy(cargoToSell, amount, player_.get()));
 }
 
 void Game::printMap(const std::shared_ptr<Player>& player) {
@@ -254,7 +260,7 @@ void Game::buy() {
     if (IslandWeAreOn) {
         std::cout << *IslandWeAreOn->getStore() << '\n';
         int choose = 0;
-        std::cout << "What you want to buy?";
+        std::cout << "What you want to buy? ";
         std::cin >> choose;
         inStreamCheck(choose);
         const auto& cargoOfStore = IslandWeAreOn->getStore()->getCargoOfStore();
@@ -272,9 +278,16 @@ void Game::buy() {
         inStreamCheck(amount);
         const auto& object = cargoOfStore[choose - 1];
         if (object->getAmount() < amount) {
-            std::cout << "We bought only " << object->getAmount() << " of " << object->getName() << '\n';
+            amount = object->getAmount();
+            const auto& response = IslandWeAreOn->getStore()->sell(object, amount, player_.get());
+            if ( response == Response::done ) {
+                std::cout << "We bought only " << amount << " of " << object->getName() << '\n';
+            } else {
+                responsesFromStore(response);
+            }
+        } else {
+            responsesFromStore(IslandWeAreOn->getStore()->sell(object, amount, player_.get()));
         }
-        responsesFromStore(IslandWeAreOn->getStore()->sell(object, amount, player_.get()));
     } else {
         std::cout << "We are on the sea!";
         return;

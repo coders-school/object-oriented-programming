@@ -2,10 +2,9 @@
 #include <iostream>
 #include <memory>
 
-#include "game.hpp"
-
 #include "alcohol.hpp"
 #include "cargo.hpp"
+#include "game.hpp"
 #include "fruit.hpp"
 #include "island.hpp"
 #include "item.hpp"

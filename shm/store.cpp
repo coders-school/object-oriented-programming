@@ -80,18 +80,15 @@ Response Store::sell(const std::shared_ptr<Cargo>& cargo, const size_t& amount, 
     auto wantedCargo = findMatchCargo(cargo);
     if (wantedCargo != stock_.end()) {
         if (wantedCargo->get()->getAmount() < amount) {
-            std::cout << "Not enough cargo in Store \n";
             return Response::lack_of_cargo;
         }
     }
 
     if (player->getAvailableSpace() < amount) {
-        std::cout << "There is no space on the ship\n";
         return Response::lack_of_space;
     }
 
     if (player->getMoney() <= 0 || player->getMoney() < cargo->getPrice() * amount) {
-        std::cout << "NO MONEY\n";
         return Response::lack_of_money;
     }
 
@@ -147,7 +144,6 @@ void Store::loadShip(const std::shared_ptr<Cargo>& cargo, const size_t& amount) 
     auto loadedCargo = findMatchCargo(cargo);
     if (loadedCargo != stock_.end()) {
         (**loadedCargo) -= amount;
-        //loadedCargo->get()->setAmount(loadedCargo->get()->getAmount() - amount);
         if (loadedCargo->get()->getAmount() == 0) {
             stock_.erase(loadedCargo);
         }

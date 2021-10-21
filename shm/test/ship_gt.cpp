@@ -1,7 +1,7 @@
+#include "../alcohol.hpp"
+#include "../cargo.hpp"
 #include "../ship.hpp"
 #include "../time.hpp"
-#include "../cargo.hpp"
-#include "../alcohol.hpp"
 
 #include "gtest/gtest.h"
 

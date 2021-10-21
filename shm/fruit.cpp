@@ -12,25 +12,6 @@ size_t Fruit::getPrice() const
     return static_cast<size_t>(basePrice_ * static_cast<float>(purchaseDate_) / expirationDate_);
 }
 
-//Cargo& Fruit::operator+=(size_t amount) {
-//    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
-//        amount_ += amount;
-//    }
-//    return *this;
-//}
-//
-//Cargo& Fruit::operator-=(size_t amount) {
-//    if (amount_ >= amount ) {
-//        amount_ -= amount;
-//    }
-//    return *this;
-//}
-//
-//bool Fruit::operator==(const Cargo &cargo) const
-//{
-//    return cargo.getName() == getName();
-//}
-
 Fruit &Fruit::operator--()
 {
     if (purchaseDate_ <= 0)
@@ -40,16 +21,6 @@ Fruit &Fruit::operator--()
     purchaseDate_--;
     return *this;
 }
-
-// Fruit &Fruit::operator--(int)
-// {
-//     if (purchaseDate_ <= 0)
-//     {
-//         purchaseDate_ = 0;
-//     }
-//     purchaseDate_--;
-//     return *this;
-// }
 
 void Fruit::nextDay()
 {
