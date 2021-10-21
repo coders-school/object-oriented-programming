@@ -19,7 +19,6 @@ set(FILES
     map.cpp
     player.cpp
     ship.cpp
-    coordinates.cpp
     cargo.cpp
     store.cpp
     alcohol.cpp

@@ -24,7 +24,7 @@ Cargo& Alcohol::operator-=(size_t amount) {
 }
 
 bool Alcohol::operator==(const Cargo& cargo) const {
-        return cargo.getName() == getName();
+    return cargo.getName() == getName();
 }
 
 std::shared_ptr<Cargo> Alcohol::clone(const size_t &amount) const {

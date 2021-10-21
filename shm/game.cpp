@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <random>
 
+#include "coordinates.hpp"
 #include "map.hpp"
 
 template <typename inCheck>

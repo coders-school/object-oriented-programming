@@ -32,5 +32,5 @@ private:
     std::shared_ptr<Ship> ship_;
     size_t money_;
     size_t availableSpace_;
-    Coordinates playerCoordinates_{};
+    Coordinates playerCoordinates_;
 };
