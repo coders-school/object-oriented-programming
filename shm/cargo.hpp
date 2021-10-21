@@ -15,14 +15,15 @@ public:
     // virtual Cargo& operator+=(size_t amount);
     // virtual Cargo& operator-=(size_t amount);
     // virtual bool operator==(const Cargo&) const;
-    virtual Cargo& operator+=(size_t amount) = 0;
-    virtual Cargo& operator-=(size_t amount) = 0;
-    virtual bool operator==(const Cargo&) const  = 0;
+    Cargo& operator+=(size_t amount);
+    Cargo& operator-=(size_t amount);
+    bool operator==(const Cargo&) const;
+
+    std::string getName() const;
+    size_t getAmount() const;
+    size_t getBasePrice() const;
 
     virtual size_t getPrice() const = 0;
-    virtual std::string getName() const = 0;
-    virtual size_t getAmount() const = 0;
-    virtual size_t getBasePrice() const = 0;
 
    // virtual void setAmount(const size_t& amount) = 0; 
 

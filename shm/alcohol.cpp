@@ -9,23 +9,23 @@ size_t Alcohol::getPrice() const {
     return static_cast<size_t>(basePrice_ * static_cast<float>(percentage_)/static_cast<float>(MaxPercentage));
 }
 
-Cargo& Alcohol::operator+=(size_t amount) {
-    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
-        amount_ += amount;
-    }
-    return *this;
-}
-
-Cargo& Alcohol::operator-=(size_t amount) {
-    if (amount_ >= amount ) {
-        amount_ -= amount;
-    }
-    return *this;
-}
-
-bool Alcohol::operator==(const Cargo& cargo) const {
-    return cargo.getName() == getName();
-}
+//Cargo& Alcohol::operator+=(size_t amount) {
+//    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
+//        amount_ += amount;
+//    }
+//    return *this;
+//}
+//
+//Cargo& Alcohol::operator-=(size_t amount) {
+//    if (amount_ >= amount ) {
+//        amount_ -= amount;
+//    }
+//    return *this;
+//}
+//
+//bool Alcohol::operator==(const Cargo& cargo) const {
+//    return cargo.getName() == getName();
+//}
 
 std::shared_ptr<Cargo> Alcohol::clone(const size_t &amount) const {
     return std::make_shared<Alcohol>(this->getName(),

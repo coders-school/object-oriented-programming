@@ -21,20 +21,32 @@ Cargo::Cargo(const std::string& name, size_t amount, size_t basePrice)
     , basePrice_(basePrice) 
     {};
 
-//Cargo& Cargo::operator+=(size_t amount) {
-//    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
-//        amount_ += amount;
-//    }
-//    return *this;
-//}
-//
-//Cargo& Cargo::operator-=(size_t amount) {
-//    if (amount_ >= amount ) {
-//        amount_ -= amount;
-//    }
-//    return *this;
-//}
+Cargo& Cargo::operator+=(size_t amount) {
+    if (amount_ + amount < std::numeric_limits<size_t>::max()) {
+        amount_ += amount;
+    }
+    return *this;
+}
 
-//bool Cargo::operator==(const Cargo& cargo) const {
-//    return cargo.getName() == getName();
-//}
+Cargo& Cargo::operator-=(size_t amount) {
+    if (amount_ >= amount ) {
+        amount_ -= amount;
+    }
+    return *this;
+}
+
+bool Cargo::operator==(const Cargo& cargo) const {
+    return cargo.getName() == getName();
+}
+
+std::string Cargo::getName() const {
+    return name_;
+}
+
+size_t Cargo::getAmount() const {
+    return amount_;
+}
+
+size_t Cargo::getBasePrice() const {
+    return basePrice_;
+}

@@ -3,15 +3,6 @@
 
 class Coordinates {
 public:
-    // constexpr Coordinates();
-
-    // constexpr Coordinates(size_t positionX, size_t positionY);
-
-    // constexpr Coordinates::Coordinates()
-    // : positionX_(0)
-    // , positionY_(0)
-    // {}
-
     constexpr Coordinates(size_t positionX, size_t positionY)
      : positionX_(positionX)
      , positionY_(positionY)
