@@ -46,3 +46,7 @@ void Item::nextDay(size_t elapsedTime)
 {
     basePrice_ += elapsedTime;    
 }
+Cargo* Item::clone()
+{
+    return new Item(*this);
+}

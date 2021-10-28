@@ -43,3 +43,7 @@ void Alcohol::nextDay(size_t elapsedTime)
 {
     basePrice_ += (elapsedTime * 2);
 }
+Cargo* Alcohol::clone()
+{
+    return new Alcohol(*this);
+}

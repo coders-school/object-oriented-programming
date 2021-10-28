@@ -15,6 +15,7 @@ public:
     size_t getAmount() const override { return amount_; }
     size_t getBasePrice() const override { return basePrice_; }
 
+    Cargo* clone() override;
     Cargo &operator+=(size_t) override;
     Cargo &operator-=(size_t) override;
     bool operator==(const Cargo &) const override;

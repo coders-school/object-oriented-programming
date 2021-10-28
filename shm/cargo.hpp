@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 #include "Time.hpp"
 #include "TimeEffectable.hpp"
 
@@ -16,6 +17,7 @@ public:
     virtual size_t getAmount() const { return amount_; }
     virtual size_t getBasePrice() const { return basePrice_; }
 
+    virtual Cargo* clone(){return this;}
     void printCargo(int) const;
     std::string getCargoInfo();
     void reduceAmount(size_t);

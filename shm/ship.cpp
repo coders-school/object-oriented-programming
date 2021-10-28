@@ -51,9 +51,9 @@ Ship &Ship::operator+=(size_t num)
 void Ship::addCargo(Cargo * item)
 {
     auto cargoPtr = findMatchCargo(item);
-    if(findMatchCargo(item))
+    if(cargoPtr)
     {
-        findMatchCargo(item)->increaseAmount(item->getAmount());
+        cargoPtr->increaseAmount(item->getAmount());
     }
     else
     {
@@ -91,19 +91,19 @@ Cargo * Ship::findMatchCargo(Cargo * cargo)
 void Ship::load(Cargo * loadCargo, size_t amount)
 {
     if (amount <= calculateAvailableSpace())
-    {        
+    {   
+        //Cargo * toAdd;     
         loadCargo->reduceAmount(amount);
-        Cargo* toAdd;
-        if(Fruit* f = dynamic_cast<Fruit*>(loadCargo)){
-            toAdd = new Fruit(*f);
-        }
-        if(Item* i = dynamic_cast<Item*>(loadCargo)){
-            toAdd = new Item(*i);
-        }
-        if(Alcohol* a = dynamic_cast<Alcohol*>(loadCargo)){
-            toAdd = new Alcohol(*a);
-        }        
-
+        // if(Fruit* f = dynamic_cast<Fruit*>(loadCargo)){
+        //     toAdd = new Fruit(*f);
+        // }
+        // if(Item* i = dynamic_cast<Item*>(loadCargo)){
+        //     toAdd = new Item(*i);
+        // }
+        // if(Alcohol* a = dynamic_cast<Alcohol*>(loadCargo)){
+        //     toAdd = new Alcohol(*a);
+        // }        
+        const auto toAdd = loadCargo->clone();
         toAdd->setAmount(amount);
         addCargo(toAdd);
     }

@@ -15,6 +15,7 @@ public:
     ~Alcohol() override;
 
     // override from Cargo
+    Cargo* clone() override;
     size_t getPrice() const override;
     const std::string &getName() const override { return name_; }
     size_t getAmount() const override { return amount_; }

@@ -19,6 +19,10 @@ set(SRC
     
 set(FLAGS -Wall -Wextra -Werror -Wconversion -O3)
 
+add_library(${PROJECT_NAME}-lib STATIC ${SRC})
+
 add_executable(${PROJECT_NAME} main.cpp ${SRC})
+
+#target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
+
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON)
-# target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
