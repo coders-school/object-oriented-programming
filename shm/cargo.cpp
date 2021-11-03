@@ -1,51 +1,34 @@
 #include <limits>
-
 #include <iostream>
-
 #include "cargo.hpp"
 
 Cargo::Cargo(std::string name, size_t amount, size_t basePrice, Time* time)
-
     : name_(name)
-
-      ,
-      amount_(amount)
-
-      ,
-      basePrice_(basePrice)
-
-      ,
-      time_(time)
-
+    , amount_(amount)
+    , basePrice_(basePrice)
+    , time_(time)
 {
     time->attach(this);
 }
 
 Cargo& Cargo::operator+=(size_t amount)
-
 {
     amount_ += amount;
-
     return *this;
 }
 
 Cargo& Cargo::operator-=(size_t amount)
-
 {
     if (amount_ < amount) {
         amount_ = 0;
-
     }
-
     else {
         amount_ -= amount;
     }
-
     return *this;
 }
 
 bool Cargo::operator==(const Cargo& cargo) const
-
 {
     return name_ == cargo.name_ && basePrice_ == cargo.basePrice_;
 }
@@ -62,22 +45,18 @@ std::string Cargo::getCargoInfo() {
 void Cargo::reduceAmount(size_t amount) {
     if ((int)(amount_) - (int)(amount) < 0) {
         amount_ = 0;
-
     }
-
     else {
         amount_ -= amount;
     }
 }
 
 void Cargo::increaseAmount(size_t amount)
-
 {
     amount_ += amount;
 }
 
 void Cargo::setAmount(size_t amount)
-
 {
     amount_ = amount;
 }

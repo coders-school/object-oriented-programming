@@ -1,19 +1,16 @@
 #include "Storable.hpp"
 
 Storable::Storable(int money, size_t availableSpace)
-        : money_(money)
-        , availableSpace_(availableSpace)
-        {}
+    : money_(money), availableSpace_(availableSpace)
+{}
 
-Storable::Storable(int money, size_t availableSpace, Time* time)
-    : money_(money)
-    , availableSpace_(availableSpace)
-    , time_(time)
-    {
-        time_->attach(this);
-    }
+Storable::Storable(int money, size_t availableSpace, Time *time)
+    : money_(money), availableSpace_(availableSpace), time_(time)
+{
+    time_->attach(this);
+}
 
-Storable::~Storable(){}
+Storable::~Storable() {}
 
 void Storable::SpendMoney(int moneyToSpend)
 {
@@ -25,9 +22,8 @@ void Storable::SpendMoney(int moneyToSpend)
 }
 void Storable::EarnMoney(int moneyToEarn)
 {
-    if(moneyToEarn > 0)
+    if (moneyToEarn > 0)
     {
         money_ += moneyToEarn;
     }
 }
-

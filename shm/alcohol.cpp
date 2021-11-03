@@ -17,7 +17,6 @@ Cargo &Alcohol::operator+=(size_t amount)
 
 Cargo &Alcohol::operator-=(size_t amount)
 {
-
     if (amount_ < amount)
     {
         amount_ = 0;

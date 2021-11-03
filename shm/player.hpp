@@ -18,10 +18,8 @@ public:
     size_t getSpeed() const;
     void setName(std::string playerName) {playerName_ = playerName;}
     std::string getName() {return playerName_;}
-    
-    Cargo * getCargo(size_t) const override;
-    
-    void setCrew(size_t newCrewSize);
 
+    Cargo * getCargo(size_t) const override;
+    void setCrew(size_t newCrewSize);
     void setStartingCargo();
 };
