@@ -18,6 +18,7 @@ Ship::Ship(int capacity, int Crew, int speed, const std::string& name, size_t id
 {
     time_->attach(this);
     shipCargo.reserve(10);
+    maxCrew_ = crew_;
 }
 
 Ship::Ship(int maxCrew, int speed, size_t id, Time* time)
