@@ -21,7 +21,14 @@ Store::Store(int money, size_t availableSpace, Time *time) : Storable(money, ava
     storeCargo.shrink_to_fit();
 }
 
-Store::~Store() {}
+Store::~Store()
+{
+    for(auto i : storeCargo)
+    {
+        std::cout << i->getName() << "DESTROYED" << '\n';
+        //delete i;
+    }
+}
 
 void Store::SetUpRandomCargo(Time *time)
 {

@@ -35,6 +35,8 @@ void Game::startGame()
         }
         if (quitRequest)
         {
+            delete map_;
+            delete playerOne_;
             break;
         }
         menu_->printMenu();
@@ -78,7 +80,7 @@ void Game::travel()
     printMap(*map_);
     std::cout << "Choose Your destination captain!" << '\n';
     std::cin >> i;
-    if (isdigit(i) && i < (int)map_->islands_.size() && i >= 0)
+    if (i < (int)map_->islands_.size() && i >= 0)
     {
         auto travelTime = map_->calculateDistance(map_->islands_.at(i)) / playerOne_->getSpeed();
         std::cout << "Your travel will take " << travelTime << " days." << '\n';
