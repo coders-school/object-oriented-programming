@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.16)
 project(shm)
+set(testFile ../test/test.cpp ../test/catch_amalgamated.cpp)
 
 set(SRC 
     alcohol.cpp 
@@ -20,9 +21,21 @@ set(SRC
 set(FLAGS -Wall -Wextra -Werror -Wconversion -O3)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
-
 add_executable(${PROJECT_NAME} main.cpp ${SRC})
+add_executable(${PROJECT_NAME}-ut ${testFile} ${SRC})
 
-#target_compile_options(${PROJECT_NAME} PRIVATE ${FLAGS})
+target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-lib)
+target_link_libraries(${PROJECT_NAME}-ut ${PROJECT_NAME}-lib)
 
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20 CXX_STANDARD_REQUIRED ON)
+set_target_properties(${PROJECT_NAME} PROPERTIES
+                      CXX_STANDARD 17
+                      CXX_STANDARD_REQUIRED ON)                  
+set_target_properties(${PROJECT_NAME}-lib PROPERTIES
+                      CXX_STANDARD 17
+                      CXX_STANDARD_REQUIRED ON)
+set_target_properties(${PROJECT_NAME}-ut PROPERTIES
+                      CXX_STANDARD 17
+                      CXX_STANDARD_REQUIRED ON)
+
+
+

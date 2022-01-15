@@ -2,8 +2,6 @@
 #include <iostream>
 #include "cargo.hpp"
 
-
-
 //Class responsible for representing alcohol in the game
 class Alcohol : public Cargo {
 public:
@@ -12,7 +10,7 @@ public:
         , percentage_ (percentage)
         {}
 
-    ~Alcohol() override;
+    ~Alcohol() override {};
 
     // override from Cargo
     Cargo* clone() override;

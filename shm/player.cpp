@@ -4,11 +4,11 @@
 #include "player.hpp"
 #include "ship.hpp"
 
-Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace) : Storable(money, availableSpace)
+Player::Player(std::unique_ptr<Ship> ship, int money, int availableSpace)
+    : Storable(money, availableSpace)
 {
     ship_ = std::move(ship);
     ship_.get()->setOwner(this);
-
 }
 
 Player::~Player() {}
@@ -27,7 +27,7 @@ size_t Player::getSpeed() const
     return 0;
 }
 
-Cargo * Player::getCargo(size_t index) const
+Cargo *Player::getCargo(size_t index) const
 {
     if (ship_->getCargo().at(index))
     {
@@ -39,17 +39,16 @@ Cargo * Player::getCargo(size_t index) const
 size_t Player::calculateAvailableSpace()
 {
     int cargoAmount = 0;
-    int capacity = ship_->getCapacity();
-    std::vector<Cargo*>  shipCargo = ship_->getCargo();
-
-    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo * c)
-                                  { return i += c->getAmount(); });
+    int capacity = (int)ship_->getCapacity();
+    std::vector<Cargo *> shipCargo = ship_->getCargo();
+    cargoAmount = std::accumulate(shipCargo.begin(), shipCargo.end(), 0, [](int i, Cargo *c)
+                                  { return i += (int)c->getAmount(); });
 
     if (capacity - cargoAmount < 0)
     {
         return 0;
     }
-    return capacity - cargoAmount;
+    return (int)(capacity - cargoAmount);
 }
 
 void Player::setCrew(size_t newCrewSize)

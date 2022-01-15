@@ -1,9 +1,6 @@
 #include "alcohol.hpp"
 #include <iostream>
 
-Alcohol::~Alcohol() {
-    std::cout << "Alcohol " << name_ << " destructor" << '\n';
-}
 size_t Alcohol::getPrice() const
 {
     return basePrice_ * percentage_ / 96;
@@ -17,7 +14,6 @@ Cargo &Alcohol::operator+=(size_t amount)
 
 Cargo &Alcohol::operator-=(size_t amount)
 {
-
     if (amount_ < amount)
     {
         amount_ = 0;

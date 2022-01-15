@@ -1,10 +1,10 @@
-#include<limits>
+#include <limits>
 #include "Menu.hpp"
 #include "Game.hpp"
 
 Menu::Menu(Game* game)
     : game_(game)
-    {}
+{}
 
 Menu::~Menu() {}
 
@@ -18,9 +18,9 @@ void Menu::playerChoice()
     menuChoice(item_);
 }
 
-bool Menu::isPlayerChoiceValid(const size_t &playerAnswer) const
+bool Menu::isPlayerChoiceValid(const size_t& playerAnswer) const
 {
-    if(std::cin.fail() || playerAnswer < 0 || playerAnswer > 5)
+    if (std::cin.fail() || playerAnswer > 5)
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -32,31 +32,31 @@ bool Menu::isPlayerChoiceValid(const size_t &playerAnswer) const
 
 void Menu::menuChoice(MenuItem item) const
 {
-    switch(item)
+    switch (item)
     {
-        case MenuItem::printPlayerCargo:
-            game_->printPlayerCargo();
-            break;
-        case MenuItem::printStoreCargo:
-            game_->printStoreCargo();
-            break;
-        case MenuItem::buyCargo:
-            game_->printStoreCargo();
-            game_->buyCargo();
-            break;
-        case MenuItem::sellCargo:
-            game_->printPlayerCargo();
-            game_->sellCargo();
-            break;
-        case MenuItem::travel:
-            game_->travel();
-            break;
-        case MenuItem::Exit:
-            game_->quitRequested();
-            break;
-        default:
-            std::cout << "Undefined choice" << '\n';
-            break;
+    case MenuItem::printPlayerCargo:
+        game_->printPlayerCargo();
+        break;
+    case MenuItem::printStoreCargo:
+        game_->printStoreCargo();
+        break;
+    case MenuItem::buyCargo:
+        game_->printStoreCargo();
+        game_->buyCargo();
+        break;
+    case MenuItem::sellCargo:
+        game_->printPlayerCargo();
+        game_->sellCargo();
+        break;
+    case MenuItem::travel:
+        game_->travel();
+        break;
+    case MenuItem::Exit:
+        game_->quitRequested();
+        break;
+    default:
+        std::cout << "Undefined choice" << '\n';
+        break;
     }
 }
 
@@ -71,7 +71,5 @@ void Menu::printMenu() const
     std::cout << "4 - Travel\n";
     std::cout << "5 - Exit\n";
     std::cout << "==========================\n";
-
     game_->displayPlayerStats();
 }
-

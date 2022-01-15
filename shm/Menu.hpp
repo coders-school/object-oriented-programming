@@ -6,7 +6,6 @@
 
 class Game;
 
-
 class Menu 
 {
 public:
@@ -26,8 +25,7 @@ public:
     void playerChoice();
     bool isPlayerChoiceValid(const size_t &playerAnswer) const;
     void menuChoice(MenuItem) const;
-    void printMenu() const;
-    
+    void printMenu() const;  
 
 private:
     MenuItem item_;
