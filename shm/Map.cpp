@@ -24,31 +24,28 @@ Map::Map(Time *time)
 
 void Map::SetUpRandomIsland(Time *time)
 {
-    // islands_.reserve(constVariables::ISLANDS_COUNT);
-    // std::random_device rd;
-    // std::mt19937 gen(rd());
-    // std::uniform_real_distribution<> distrib(constVariables::COORDINATE_MIN, constVariables::COORDINATE_MAX);
-    // std::vector<Coordinates> cords;
-    // cords.reserve(constVariables::ISLANDS_COUNT);
-    // for (int i = 0; i < (int)constVariables::ISLANDS_COUNT; i++)
-    // {
-    //     int x = (int)distrib(gen);
-    //     int y = (int)distrib(gen);
-    //     Coordinates c(x, y);
-    //     while (contains(cords, c))
-    //     {
-    //         x = (int)distrib(gen);
-    //         y = (int)distrib(gen);
-    //         c.SetPositionX(x);
-    //         c.SetPositionY(y);
-    //     }
+    islands_.reserve(constVariables::ISLANDS_COUNT);
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> distrib(constVariables::COORDINATE_MIN, constVariables::COORDINATE_MAX);
+    std::vector<Coordinates> cords;
+    cords.reserve(constVariables::ISLANDS_COUNT);
+    for (int i = 0; i < (int)constVariables::ISLANDS_COUNT; i++)
+    {
+        int x = (int)distrib(gen);
+        int y = (int)distrib(gen);
+        Coordinates c(x, y);
+        while (contains(cords, c))
+        {
+            x = (int)distrib(gen);
+            y = (int)distrib(gen);
+            c.SetPositionX(x);
+            c.SetPositionY(y);
+        }
 
-    //     islands_.push_back(Island(c, time));
-    //     cords.push_back(c);
-    // }
-    Coordinates cordy = Coordinates(10, 10);
-    Island kwik = Island(cordy, time);
-    islands_.push_back(kwik);
+        islands_.emplace_back(Island(c, time));
+        cords.push_back(c);
+    }
 }
 
 void Map::DebugPrintIsland()

@@ -27,6 +27,7 @@ Ship::Ship(int maxCrew, int speed, size_t id, Time* time)
 
 Ship::~Ship()
 {
+    std::for_each(shipCargo.begin(), shipCargo.end(), [](Cargo* n){delete n;});
     time_->detach(this);
 }
 

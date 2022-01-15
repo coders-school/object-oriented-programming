@@ -11,10 +11,15 @@ Game::Game(size_t money, size_t gameDays, size_t finalGoal)
       menu_(std::make_unique<Menu>(this)),
       map_(new Map(time_)),
       playerOne_(new Player(std::make_unique<Ship>(20, 30, 10, "Dar Pomorza", 3, time_), 1000, 1000))
-
 {}
 
-Game::Game() {}
+Game::Game(){}
+
+Game::~Game()
+{
+    //std::for_each(currentStore_.storeCargo.begin(), currentStore_.storeCargo.end(),[](Cargo* n){delete n;});
+    delete time_;
+}
 
 void Game::startGame()
 {

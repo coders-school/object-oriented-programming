@@ -26,11 +26,11 @@ enum class Response
 class Store: public Storable {
 public:
     Store(int money, size_t availableSpace, Time* time);
-    
+    Store() = default;
     ~Store();   
     Response buy(Cargo * cargo, size_t amount, Player* player);
     Response sell(Cargo * cargo, size_t amount, Player* player);
-
+    Store(const Store& );
     Cargo * getCargo(size_t) const override;
     Cargo * findMatchCargo(Cargo *);
     std::vector<Cargo *> storeCargo;

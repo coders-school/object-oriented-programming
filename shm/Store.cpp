@@ -14,21 +14,23 @@ std::vector<std::string> possibleItemCargoNames = {"Rope", "Hook", "Screw", "Spo
 std::vector<Rarity> rarityChoice = {Rarity::common, Rarity::rare, Rarity::epic, Rarity::legendary};
 
 Store::Store(int money, size_t availableSpace, Time *time) : Storable(money, availableSpace, time)
-
 {
     storeCargo.reserve(20);
     SetUpRandomCargo(time);
     storeCargo.shrink_to_fit();
 }
-
 Store::~Store()
 {
-    for(auto i : storeCargo)
-    {
-        std::cout << i->getName() << "DESTROYED" << '\n';
-        //delete i;
-    }
+    std::for_each(storeCargo.begin(), storeCargo.end(),[](Cargo* n){delete n;});
+    std::cout << "store capitulation" << '\n';
 }
+
+ Store::Store(const Store& rhs) : Storable(rhs.money_, rhs.availableSpace_) {
+     for(auto cargo_ptr : rhs.storeCargo){
+         storeCargo.push_back(cargo_ptr->clone());
+     }
+     std::cout << "copy constructor" << '\n';
+ }
 
 void Store::SetUpRandomCargo(Time *time)
 {
@@ -58,9 +60,9 @@ void Store::SetUpRandomCargo(Time *time)
     std::string alcoholCargoName = possibleAlcoholCargoNames[alcoholCargoNumber];
     std::string itemCargoName = possibleItemCargoNames[itemCargoNumber];
 
-    storeCargo.push_back(new Fruit(fruitCargoName, (cargoQuantity + 10), fruitPriceX, time, 15, 0));
-    storeCargo.push_back(new Alcohol(alcoholCargoName, cargoQuantity, alcoholPriceX, time, alcoholPercentage));
-    storeCargo.push_back(new Item(itemCargoName, (cargoQuantity / 2), itemPriceX, time, randomRarity));
+    storeCargo.emplace_back(new Fruit(fruitCargoName, (cargoQuantity + 10), fruitPriceX, time, 15, 0));
+    storeCargo.emplace_back(new Alcohol(alcoholCargoName, cargoQuantity, alcoholPriceX, time, alcoholPercentage));
+    storeCargo.emplace_back(new Item(itemCargoName, (cargoQuantity / 2), itemPriceX, time, randomRarity));
 }
 
 Cargo *Store::findMatchCargo(Cargo *cargo)

@@ -23,3 +23,5 @@ public:
     void setCrew(size_t newCrewSize);
     void setStartingCargo();
 };
+
+            
