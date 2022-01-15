@@ -5,10 +5,6 @@ Fruit::Fruit(const std::string &name, size_t amount, size_t basePrice, Time *tim
     : Cargo(name, amount, basePrice, time), time_elapsed_(time_elapsed), expiry_date_(expiry_date)
 {}
 
-Fruit::~Fruit()
-{
-    // this->time_.detach(this);
-}
 
 size_t Fruit::getPrice() const
 {
@@ -31,6 +27,7 @@ Cargo &Fruit::operator-=(size_t amount)
     {
         amount_ -= amount;
     }
+    
     return *this;
 }
 

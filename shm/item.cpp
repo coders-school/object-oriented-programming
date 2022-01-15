@@ -33,7 +33,6 @@ Cargo &Item::operator-=(size_t amount)
 
 bool Item::operator==(const Cargo &other) const
 {
-
     try
     {
         const Item &other_item = dynamic_cast<const Item &>(other);

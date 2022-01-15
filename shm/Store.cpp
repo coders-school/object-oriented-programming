@@ -22,14 +22,12 @@ Store::Store(int money, size_t availableSpace, Time *time) : Storable(money, ava
 Store::~Store()
 {
     std::for_each(storeCargo.begin(), storeCargo.end(),[](Cargo* n){delete n;});
-    std::cout << "store capitulation" << '\n';
 }
 
  Store::Store(const Store& rhs) : Storable(rhs.money_, rhs.availableSpace_) {
      for(auto cargo_ptr : rhs.storeCargo){
          storeCargo.push_back(cargo_ptr->clone());
      }
-     std::cout << "copy constructor" << '\n';
  }
 
 void Store::SetUpRandomCargo(Time *time)

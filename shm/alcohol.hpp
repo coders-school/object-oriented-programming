@@ -10,7 +10,7 @@ public:
         , percentage_ (percentage)
         {}
 
-    ~Alcohol() override;
+    ~Alcohol() override {};
 
     // override from Cargo
     Cargo* clone() override;
